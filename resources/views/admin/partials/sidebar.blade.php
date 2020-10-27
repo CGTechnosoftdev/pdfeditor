@@ -3,9 +3,14 @@
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MAIN NAVIGATION</li>
-			<li class="active treeview">
-				<a href="#">
+			<li class="">
+				<a href="{{ route('dashboard') }}">
 					<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+				</a>
+			</li>
+			<li class="">
+				<a href="{{ route('roles.index') }}">
+					<i class="fa fa-key"></i> <span>Roles and Rights</span>
 				</a>
 			</li>
 			<!-- <li class="treeview">

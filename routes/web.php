@@ -22,6 +22,12 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middleware'=>['auth']], function () {
 	Route::get('/', 'DashboardController@index');
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+	//Change Status Universal
+    Route::post('/change-status','DashboardController@changeStatus')->name('change-status');
+
+	//roles
+    Route::resource('roles', 'RolesController');
 	
 });
 

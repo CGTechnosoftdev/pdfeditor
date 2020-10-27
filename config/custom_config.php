@@ -31,12 +31,7 @@ return [
     ],
     'model_arr'=>[
         'user'=>'User',
-    ],
-    'all_status_arr' => [
-        '0' => 'Pending',
-        '1' => 'Active',
-        '2' => 'Inactive',
-        '3' => 'Blocked',
+        'role'=>'Role',
     ],
     'date_format_arr' => [
         'Y/m/d' => 'Y/m/d',

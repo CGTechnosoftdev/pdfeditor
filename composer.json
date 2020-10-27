@@ -14,6 +14,10 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "laravelcollective/html": "^5.8.0",
+        "proengsoft/laravel-jsvalidation": "^4.4",
+        "spatie/laravel-permission": "^3.17",
+        "yajra/laravel-datatables-oracle": "~9.0",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
