@@ -22,5 +22,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <!-- Toastr -->
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/toastr/toastr.min.css') }}">
+<!-- select -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/select2/dist/css/select2.min.css') }}">
+<!-- checkbox -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/icheck/all.css') }}">
 <!-- Custom -->
 <link rel="stylesheet" href="{{ asset('public/admin/custom.css') }}">

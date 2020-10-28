@@ -19,12 +19,13 @@ return [
     //yes-no constant
     'STATUS_YES' => '1',
     'STATUS_NO' => '0',
+    'USA_PHONECODE' => 226,
 	
 	// User Roles
 	'ADMIN_ROLE' => '2',
 	'USER_ROLE' => '1',
 	
-	'MODEL_TYPE' => 'App\User',
+	'MODEL_TYPE' => 'App\Models\User',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',

@@ -6,6 +6,9 @@ function blockUI(){
 function unblockUI(){
 	$.unblockUI();
 }
+
+  
+
 // jQuery(document).ready(function() {	
 	
 // 	$(document).on('click','.change-status',function(e){

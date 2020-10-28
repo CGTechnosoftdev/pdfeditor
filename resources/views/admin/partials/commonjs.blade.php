@@ -23,6 +23,9 @@
 <script src="{{ asset('public/admin/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <!-- datepicker -->
 <script src="{{ asset('public/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- select -->
+<script src="{{ asset('public/admin/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <!-- Slimscroll -->

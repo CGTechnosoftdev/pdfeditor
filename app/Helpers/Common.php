@@ -64,7 +64,9 @@ function interpretResponse($message,$status_code,$data=[])
  */
 function uploadFile($request,$file_config){
 	$fileConfigData=config('upload_config.'.$file_config);
+
 	$files=$request->file($fileConfigData['file_input']);
+	
 	$files=(is_array($files) ? $files : array($files)); 
 	if(!empty($fileConfigData['file_input_subkey'])){
 		$files = array_column($files, $fileConfigData['file_input_subkey']);    
@@ -111,7 +113,7 @@ function getUploadedFile($files,$file_config){
 	foreach($files as $file){
 		$file=$file?: ($fileConfigData['placeholder']??"");
 		if(!empty($file)){
-			$filesUrl[]=Storage::disk($fileConfigData['disk'])->url($fileConfigData['folder']."/".$file);
+			$filesUrl[]=Storage::disk($fileConfigData['disk'])->url("public/".$fileConfigData['folder']."/".$file);
 		}else{
 			$filesUrl[]='';
 		}
