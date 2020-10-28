@@ -81,6 +81,110 @@ var PDFAnnotate = function(container_id, url, options = {}) {
 		});
 	}
 
+	//toggleitalicid
+
+	$("#toggleitalicid").click(function (event) {
+		inst.toggleitalicbtnClickHandler(event, inst.fabricObjects[0]);
+	});
+
+	$("#toggleunderline").click(function (event) {
+		inst.togglebtnClickHandler(event, inst.fabricObjects[0]);
+	});
+
+
+
+
+this.togglebtnClickHandler = function(event, fabricObj) {
+	
+
+			var o = fabricObj.getActiveObject();
+			//var selob =o.getSelectionStyles("fontStyle");
+			//console.log(selob);
+			var fontStyleOb="";
+			if (o.selectionStart>-1) {
+			//	console.log(getStyle(o,'fontStyle'));
+				fontStyleOb=getStyle(o,'textDecoration');
+			  
+	
+			//alert("selected item style is "+fontStyleOb);
+				if(fontStyleOb === "underline")
+				{
+				//	o["fontStyle"]="";
+				 //alert("we are in if ");
+			
+						var selectionStart = 2,
+						 selectionEnd = 8;
+						o.setSelectionStyles({textDecoration:'' }, selectionStart, selectionEnd);
+						//text.set('fontWeight', 'bold');
+					
+				
+				}
+				else if( fontStyleOb != "underline")
+				{
+					//alert(" text decoration value "+o["textDecoration"]);
+					//o["fontStyle"]="italic";
+				
+						var selectionStart = 2,
+						 selectionEnd = 8;
+						o.setSelectionStyles({textDecoration:'underline' }, selectionStart, selectionEnd);
+						//text.set('fontWeight', 'bold');
+					
+				
+	
+				}
+				o.set({dirty: true});
+				fabricObj.renderAll();
+			  }	
+
+
+
+	}
+	function getStyle(object, styleName) {
+		console.log("get style is ",object.getSelectionStyles())
+		var selecteItemOb=object.getSelectionStyles();
+		return selecteItemOb[styleName];
+	  }
+	this.toggleitalicbtnClickHandler = function(event, fabricObj) {
+		var o = fabricObj.getActiveObject();
+		//var selob =o.getSelectionStyles("fontStyle");
+		//console.log(selob);
+		var fontStyleOb="";
+		if (o.selectionStart>-1) {
+		//	console.log(getStyle(o,'fontStyle'));
+			fontStyleOb=getStyle(o,'fontStyle');
+		  
+
+		//alert("selected item style is "+fontStyleOb);
+			if(fontStyleOb === "italic")
+			{
+			//	o["fontStyle"]="";
+             //alert("we are in if ");
+		
+					var selectionStart = 2,
+					 selectionEnd = 8;
+					o.setSelectionStyles({fontStyle:'' }, selectionStart, selectionEnd);
+					//text.set('fontWeight', 'bold');
+				
+			
+			}
+			else if( fontStyleOb != "italic")
+			{
+				//alert(" text decoration value "+o["textDecoration"]);
+				//o["fontStyle"]="italic";
+			
+					var selectionStart = 2,
+					 selectionEnd = 8;
+					o.setSelectionStyles({fontStyle:'italic' }, selectionStart, selectionEnd);
+					//text.set('fontWeight', 'bold');
+				
+			
+
+			}
+			o.set({dirty: true});
+			fabricObj.renderAll();
+		  }	
+	}
+
 	this.fabricClickHandler = function(event, fabricObj) {
 		var inst = this;
 	    if (inst.active_tool == 2) {
