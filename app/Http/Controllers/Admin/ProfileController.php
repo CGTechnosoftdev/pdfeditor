@@ -1,17 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\MessageBag;
-use App\Http\Requests\ProfileupdateRequest;
-
-
+use App\Http\Requests\ProfileFormRequest;
 use App\Models\User;
 use App\Models\Country;
 //include '../../../Helpers/Common.php';
@@ -27,7 +21,7 @@ class ProfileController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+    	$this->middleware('auth');
     }
 
     /**
@@ -35,191 +29,109 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function update($id="")
+    public function index()
     {     
-       // echo '<br> user id is '.Auth::user()->id;
-       $id=Auth::user()->id;
-        //get file settings fields
-        $fileConfigData=app('config')->get('upload_config');
-        $customConfigData=app('config')->get('custom_config');
-        $gender_arr=$customConfigData["gender_arr"];
-        //get all constaint values from config file
-        $constantDataArray=app('config')->get('constant');
-        //directory and place holder for update view file
-        $directory=$fileConfigData["profile_picture"]["disk"]."/storage/".$fileConfigData["profile_picture"]["folder"];
-        $placeholder=$fileConfigData["profile_picture"]["disk"]."/storage/".$fileConfigData["profile_picture"]["folder"]."/".$fileConfigData["profile_picture"]["placeholder"];     
-        //get user and countary data
-        $user = User::find($id);
-        $Country=Country::all();     
-        $countryArray=array();
-        foreach($Country as $con_index => $countryOb)
-        {
-            $countryArray[$countryOb->id]=$countryOb->phonecode." (".$countryOb->iso3.")";  
-        }   
-          $country_id=$constantDataArray["USA_PHONECODE"];
-          if(!empty($user->country_id))
-          $country_id=$user->country_id;
+    	$user = \Auth::user();
 
-        return view('profile/update',['country_id' => $country_id,'user' => $user,'countryArray' => $countryArray,'directory' => $directory,'placeholder' => $placeholder,'gender_arr' => $gender_arr]);
+    	$data_array = ['title'=>'Update Profile','heading'=>'Update Profile'];
+
+    	$data_array['breadcrumb']= \Breadcrumbs::render('profile'); 
+    	$data_array['gender_arr']=config('custom_config.gender_arr');
+    	$data_array['country_arr'] = Country::getCountryCodeList();
+
+    	$user->country_id = $user->country_id ?? config('constant.DEFAULT_PHONECODE');
+    	$user->profile_picture = getUploadedFile($user->profile_picture,'profile_picture',false);
+    	$data_array['user'] = $user; 
+    	return view('admin/profile/index',$data_array);
     }
-    public function updatesave($id,ProfileupdateRequest $request)
+
+    public function update(ProfileFormRequest $request)
     {
-        //get file settings for profile picture field
-        $fileConfigData=app('config')->get('upload_config');
-        // get user details
-        $user = User::find($id); 
-        // apply and check validation
-        $data=$request->checkvalidate($user->id);
-        $data=$request->all();    
-        // save profile picture and update database field                
-          $field_name="profile_picture" ;         
-          if($file = $request->file($field_name))
-          {        
-            $returnFiles=uploadFile($request,"profile_picture");
-            $fileDetailsArray=getUploadedFile($returnFiles,"profile_picture");      
-            $fileName=$returnFiles["data"];
-            $user::where('id',$id)->update(array('profile_picture' => $fileName));  
-          } 
-       // save data in table
-        $user->fill($data);
-        $user->save();
-
-       set_flash('success','Profile updated successfully!');
-       return back();
-      
-    }
-    public function deleteprofileimage($id=""){
-        // get user details 
-        $id=Auth::user()->id;
-         $user=User::find($id);
-         // get
-         $fileConfigData=app('config')->get('upload_config');
-         $directory=$fileConfigData["profile_picture"]["disk"]."/storage/".$fileConfigData["profile_picture"]["folder"];
-         
-         $filenamewithpath=base_path()."/".$directory."/".$user->profile_picture;
-
- 
-         
-         if(file_exists($filenamewithpath)) 
-         {
-            @unlink($filenamewithpath);
-            User::where('id',$id)->update(array('profile_picture' => ""));
-         }
-
-         set_flash('success','Profile image deleted Successfully!');
-         return redirect(route("profileupdate"));
+    	$user = \Auth::user();
+    	$input_data = $request->input();
+    	if(!empty($request->file('profile_picture'))){
+    		$upload_response = uploadFile($request,'profile_picture');
+    		if(!empty($upload_response['success'])){
+    			$input_data['profile_picture'] = $upload_response['data'];
+    		}
+    	}
+    	$user =  User::saveData($input_data,$user);
+    	set_flash('success','Profile updated successfully!');
+    	return redirect(route('dashboard'));
 
     }
-    public function profilepasschange(ProfileupdateRequest $request){
-        if(Auth::Check())
-        {
-            $requestData = $request->All();
-            $validator = $this->validatePasswords($requestData);
-            if($validator->fails())
-            {
-                $validationObject=$validator->getMessageBag();
-               // $errormessages=$validator->getmes
-               $errormessages=array();
-           $getMessageOb=new GetValidationMesage();
-           $errormessages=$getMessageOb->getvalidationMessage($validationObject);
-             // echo '<pre>';
-              // print_r($errormessages);
-              // echo '</pre>';
+    public function deleteProfilePicture(){
+    	$user=\Auth::user();
+    	$profile_picture = $user->profile_picture;
+    	$user =  User::saveData(['profile_picture'=>''],$user);    	
+    	if($user){
+    		$remove_file = removeUploadedFile($profile_picture,'profile_picture');
+   			$response_type='success';
+   			$response_message='Profile image deleted Successfully';
+   		}else{
+   			$response_type='error';
+   			$response_message='Error occoured, Please try again.';
+   		}
+    	set_flash($response_type,$response_message);
+    	return redirect(route("profile"));
 
-                $errorStr='<div class="alert alert-danger">
-
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            
-                <ul>';
-                foreach($errormessages as $error_index => $message)
-                {
-                    $errorStr.='<li> '.$message."<br/></li>";
-                }
-                $errorStr.='</ul>';
-           
-                return response()->json(['error' => $errormessages], 400);
-            }
-            else
-            {
-                $currentPassword = Auth::User()->password;
-                if(Hash::check($requestData['password'], $currentPassword))
-                {
-                    $userId = Auth::User()->id;
-                    $user = User::find($userId);
-                    $user->password = Hash::make($requestData['new-password']);;
-                    $user->save();
-                    $message='<div class="alert alert-success"> Your password has been updated successfully.</div>';
-                    return response()->json(array('message' => $message));
-                }
-                else
-                {
-                    $message='<div class="alert alert-danger">
-
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                
-                    <ul><li>Sorry, your current password was not recognised. Please try again.</li></ul>';
-                    return response()->json(['error' => ["Sorry, your current password was not recognised. Please try again#1"]],400);
-                }
-            }
-        }
-        else
-        {
-            // Auth check failed - redirect to domain root
-            return redirect()->to('/');
-        }
     }
+    public function profilepasschange(ProfileFormRequest $request){
+    	// if(Auth::Check())
+    	// {
+    	// 	$requestData = $request->All();
+    	// 	$validator = $this->validatePasswords($requestData);
+    	// 	if($validator->fails())
+    	// 	{
+    	// 		$validationObject=$validator->getMessageBag();
+     //           // $errormessages=$validator->getmes
+    	// 		$errormessages=array();
+    	// 		$getMessageOb=new GetValidationMesage();
+    	// 		$errormessages=$getMessageOb->getvalidationMessage($validationObject);
+     //         // echo '<pre>';
+     //          // print_r($errormessages);
+     //          // echo '</pre>';
 
-    public function validatePasswords(array $data)
-{
-    $messages = [
-        'password.required' => 'Please enter your current password',
-        'new-password.required' => 'Please enter a new password',
-        'new-password-confirmation.not_in' => 'Sorry, common passwords are not allowed. Please try a different new password.'
-    ];
+    	// 		$errorStr='<div class="alert alert-danger">
 
-    $validator = Validator::make($data, [
-        'password' => 'required',
-        'new-password' => ['required', 'same:new-password', 'min:8', Rule::notIn($this->bannedPasswords())],
-        'new-password-confirmation' => 'required|same:new-password',
-    ], $messages);
+    	// 		<strong>Whoops!</strong> There were some problems with your input.<br><br>
 
-    return $validator;
-}
-    
-    /**
-     * Get an array of all common passwords which we don't allow
-     *
-     * @return array
-     */
-    public function bannedPasswords(){
-        return [
-            'password', '12345678', '123456789', 'baseball', 'football', 'jennifer', 'iloveyou', '11111111', '222222222', '33333333', 'qwerty123'
-        ];
+    	// 		<ul>';
+    	// 		foreach($errormessages as $error_index => $message)
+    	// 		{
+    	// 			$errorStr.='<li> '.$message."<br/></li>";
+    	// 		}
+    	// 		$errorStr.='</ul>';
+
+    	// 		return response()->json(['error' => $errormessages], 400);
+    	// 	}
+    	// 	else
+    	// 	{
+    	// 		$currentPassword = Auth::User()->password;
+    	// 		if(Hash::check($requestData['password'], $currentPassword))
+    	// 		{
+    	// 			$userId = Auth::User()->id;
+    	// 			$user = User::find($userId);
+    	// 			$user->password = Hash::make($requestData['new-password']);;
+    	// 			$user->save();
+    	// 			$message='<div class="alert alert-success"> Your password has been updated successfully.</div>';
+    	// 			return response()->json(array('message' => $message));
+    	// 		}
+    	// 		else
+    	// 		{
+    	// 			$message='<div class="alert alert-danger">
+
+    	// 			<strong>Whoops!</strong> There were some problems with your input.<br><br>
+
+    	// 			<ul><li>Sorry, your current password was not recognised. Please try again.</li></ul>';
+    	// 			return response()->json(['error' => ["Sorry, your current password was not recognised. Please try again#1"]],400);
+    	// 		}
+    	// 	}
+    	// }
+    	// else
+    	// {
+     //        // Auth check failed - redirect to domain root
+    	// 	return redirect()->to('/');
+    	// }
     }
-
-
-}
-class GetValidationMesage extends MessageBag
-{
-   public function getvalidationMessage($validationMessage)
-   {
-       $NewmessageArray=array();
-        $error_index=0;
-        $messageField="";
-       foreach($validationMessage->messages as $index => $messageArray)
-       {
-           
-      // echo '<br> message is '.$messageArray[0];
-      if($index=="password")
-      $messageField=1;
-      if($index=="new-password")
-      $messageField=2;
-      if($index=="new-password-confirmation")
-      $messageField=3;
-        $NewmessageArray[$error_index]=$messageArray[0].'#'.$messageField;
-        $error_index+=1;
-       }
-       return $NewmessageArray;
-   }
-
 }

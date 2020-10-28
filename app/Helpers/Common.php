@@ -105,13 +105,13 @@ function uploadFile($request,$file_config){
  * @param             [type]        $file_config [requested file type config]
  * @return            [type]                     [url of file's]
  */
-function getUploadedFile($files,$file_config){
+function getUploadedFile($files,$file_config,$default_status=true){
 	$fileConfigData=config('upload_config.'.$file_config);
 	$sendMultiple=(is_array($files) ? true : false);    
 	$files=(is_array($files) ? $files : array($files));    
 	$filesUrl=array();
 	foreach($files as $file){
-		$file=$file?: ($fileConfigData['placeholder']??"");
+		$file=$file ?: ((empty($default_status) ? '' : $fileConfigData['placeholder']));
 		if(!empty($file)){
 			$filesUrl[]=Storage::disk($fileConfigData['disk'])->url("public/".$fileConfigData['folder']."/".$file);
 		}else{

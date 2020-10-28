@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+	use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,8 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','first_name','last_name','gender',
-        'contact_number','country_id'
+    	'email', 'password','first_name','last_name','gender','contact_number','country_id','profile_picture'
     ];
 
     /**
@@ -26,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+    	'password', 'remember_token',
     ];
 
     /**
@@ -35,6 +34,25 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+    	'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * [saveData description]
+     * @author Akash Sharma
+     * @date   2020-10-28
+     * @param  [type]     $dataArray [description]
+     * @param  array      $user      [description]
+     * @return [type]                [description]
+     */
+    public static function saveData($dataArray,$user=array()){
+    	$user = (empty($user) ? new self() : $user);
+    	(!empty($dataArray['password']) ? $dataArray['password'] = bcrypt($dataArray['password']) : '');
+    	$user->fill($dataArray);
+    	if($user->save()){
+    		return $user;
+    	}else{
+    		return false;
+    	}
+    }
 }

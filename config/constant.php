@@ -19,7 +19,6 @@ return [
     //yes-no constant
     'STATUS_YES' => '1',
     'STATUS_NO' => '0',
-    'USA_PHONECODE' => 226,
 	
 	// User Roles
 	'ADMIN_ROLE' => '2',
@@ -37,6 +36,8 @@ return [
     'PUBLIC_DATE_TIME_FORMAT' => "d-m-Y h:i A",
    
     'MODEL_TYPE' => 'App\Models\User',
+
+    'DEFAULT_PHONECODE' => 226,
     
 ];
 
