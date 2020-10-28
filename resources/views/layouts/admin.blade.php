@@ -9,7 +9,8 @@
 	@include('admin.partials.commoncss') 
 	@yield('additionalcss')
 	<script type="text/javascript">
-		var baseurl = "{{url('')}}";
+		var base_url = "{{url('')}}";
+		var admin_url = '{!! url("/admin") !!}';
 		var csrf_token = "{{csrf_token()}}";
 		var blankOption = "<option value=''>{{lang_trans('label.select')}}</option>";
 	</script>

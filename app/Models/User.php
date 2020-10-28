@@ -5,10 +5,16 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\BaseModelTrait;
 
 class User extends Authenticatable
 {
-	use Notifiable;
+    use Notifiable;
+    use HasRoles;
+    use SoftDeletes;
+    use BaseModelTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -16,8 +22,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-    	'email', 'password','first_name','last_name','gender','contact_number','country_id','profile_picture'
+        'parent_id','first_name','last_name','profile_picture','gender','country_id','contact_number','email', 'password','status'
     ];
+    protected $dates = ['deleted_at'];
+    public $timestamps = true;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -25,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-    	'password', 'remember_token',
+        'password', 'remember_token',
     ];
 
     /**
@@ -34,25 +42,27 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-    	'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
+
 
     /**
      * [saveData description]
      * @author Akash Sharma
      * @date   2020-10-28
-     * @param  [type]     $dataArray [description]
-     * @param  array      $user      [description]
-     * @return [type]                [description]
+     * @param  [type]     $data_array [description]
+     * @param  array      $model      [description]
+     * @return [type]                 [description]
      */
-    public static function saveData($dataArray,$user=array()){
-    	$user = (empty($user) ? new self() : $user);
-    	(!empty($dataArray['password']) ? $dataArray['password'] = bcrypt($dataArray['password']) : '');
-    	$user->fill($dataArray);
-    	if($user->save()){
-    		return $user;
-    	}else{
-    		return false;
-    	}
+    public static function saveData($data_array,$model=array())
+    { 
+        $model = (empty($model) ? new self() : $model);
+        (!empty($data_array['password']) ? $data_array['password'] = bcrypt($data_array['password']) : '');
+        $model->fill($data_array);
+        if($model->save()){
+            return $model;
+        }else{
+            return false;
+        }
     }
 }

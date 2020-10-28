@@ -4,93 +4,14 @@
 @section('sub_heading',($sub_heading ?? ''))
 @section('breadcrumb',$breadcrumb)
 @section('content')  
-
 <div class="box ">
 	<div class="box-header with-border">
-		<!--  <h3 class="box-title">Update Profile</h3>-->
-		<style>
-			.example-modal .modal {
-				position: relative;
-				top: auto;
-				bottom: auto;
-				right: auto;
-				left: auto;
-				display: block;
-				z-index: 1;
-			}
-
-			.example-modal .modal {
-				background: transparent !important;
-			}
-		</style>
-
-
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-password-modal">
 			Change Password
-		</button>
-
-
-		<div class="modal fade" id="modal-default">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">Change Password</h4>
-						</div>
-						<form action="{{route('profilepasswordchange')}}" method="POST" enctype="multipart/form-data">
-							@csrf  
-							<div class="modal-body">
-								<div id="messageboxid"></div>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Current Password:</label>
-											<input class="form-control" type="password"  name="password2" id="currentpasswordid" value="" />
-											<div id="currentpasswordid_con"></div>
-										</div>
-									</div> 
-								</div> 
-
-
-
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>New Password:</label>
-											<input class="form-control"   type="password" name="new-password" id="passwordid" value="" />
-											<div id="passwordid_con"></div>
-										</div>
-									</div> 
-								</div> 
-
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Confirm Password:</label>
-											<input class="form-control"  type="password" name="new-password-confirmation" id="confirmpasswordid" value="" />
-											<div id="confirmpasswordid_con"></div>
-										</div>
-									</div> 
-								</div> 
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="savepasswordchange">Save changes</button>
-							</div>
-						</form> 
-
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-		</div>
+		</button>	
 
 		@if(isset($user))
-		{!! Form::model($user,['route' => ['update-profile'],'method' => 'put','enctype'=>"multipart/form-data"]) !!}
+		{!! Form::model($user,['route' => ['update-profile'],'id'=>'profile_form','method' => 'put','enctype'=>"multipart/form-data"]) !!}
 		@endif
 		{!! Form::token() !!}
 		<!-- /.box-header -->
@@ -145,6 +66,7 @@
 			<div class="row">
 				<div class="form-group col-lg-6  {{ $errors->has('gender') ? ' has-error' : '' }}">
 					{!! Form::label('gender', "Gender", ['class'=>'form-control-label']) !!}
+					<span class="required-label">*</span>
 					{!! Form::select('gender',[''=>'Select'] + $gender_arr, old('gender'), ['class'=>'form-control required','data-unit'=>'from']) !!}
 					<div class="{{ ($errors->has('gender') ? 'invalid-feedback' : '') }}">
 						{{ $errors->first('gender') }}
@@ -165,96 +87,74 @@
 				</div>
 			</div>
 			<div class="row">
-
 				<div class="col-xs-12 col-sm-12 col-md-12 ">
-					<button type="submit" class="btn btn-primary">Submit</button>
-
+					{!! Form::submit('Update',['class'=>'btn btn-success']) !!}
 				</div>
-
-
 			</div>
 		</div>
 		<!-- /.box-body -->
-
+		{{ Form::close() }}
 	</div>
-</form>
+</div>
+<div class="modal fade" id="change-password-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Change Password</h4>
+				</div>
+				{{ Form::open(['route' => 'update-password','method'=>'patch','id'=>'update_password_form']) }}
+				@csrf  
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-lg-12 {{ $errors->has('current_password') ? ' has-error' : '' }}">
+							{!! Form::label('current_password', "Current Password",['class'=>'form-control-label']) !!}
+							<span class="required-label">*</span>
+							{!! Form::password('current_password',['class'=>'form-control '.($errors->has("current_password") ? "is-invalid" : ""),'id'=>'current_password']) !!}
+							<div class="{{ ($errors->has('current_password') ? 'invalid-feedback' : '') }}">
+								{{ $errors->first('current_password') }}
+							</div>
+						</div>
+						<div class="form-group col-lg-12 {{ $errors->has('password') ? ' has-error' : '' }}">
+							{!! Form::label('password', "Password",['class'=>'form-control-label']) !!}
+							<span class="required-label">*</span>
+							{!! Form::password('password',['class'=>'form-control '.($errors->has("password") ? "is-invalid" : ""),'id'=>'password']) !!}
+							<div class="{{ ($errors->has('password') ? 'invalid-feedback' : '') }}">
+								{{ $errors->first('password') }}
+							</div>
+						</div>
+						<div class="form-group col-lg-12 {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+							{!! Form::label('password_confirmation', "Confirm Password",['class'=>'form-control-label']) !!}
+							<span class="required-label">*</span>
+							{!! Form::password('password_confirmation',['class'=>'form-control '.($errors->has("password_confirmation") ? "is-invalid" : ""),'id'=>'password_confirmation']) !!}
+							<div class="{{ ($errors->has('password_confirmation') ? 'invalid-feedback' : '') }}">
+								{{ $errors->first('password_confirmation') }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+					{!! Form::submit('Change Password',['class'=>'btn btn-success']) !!}
+				</div>
+				{{ Form::close() }}
 
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</div>
 @endsection
 @section('additionaljs')
+@if($errors->hasAny(['current_password','password','password_confirmation']))
 <script type="text/javascript">
-	$("document").ready(function(){
- //  $("#currentpasswordid").val("");
- $("#modal-default").on("click","#savepasswordchange",function(){
-     // $("#currentpasswordid").val("");
-    //  $("#confirmpasswordid").val("");
-     // $("#passwordid").val("");
-     $("#messageboxid").val("");
-
-     $.ajax({
-     	type: "post",
-     	dataType: 'json',
-     	url: "{{route('profilepasswordchange')}}",
-     	data: "_token={{csrf_token()}}&password="+$("#currentpasswordid").val()+"&new-password="+$("#passwordid").val()+"&new-password-confirmation="+$("#confirmpasswordid").val(), 
-     	error:function(request, status, error){
-     		console.log(request.responseText);
-     		var retdata=jQuery.parseJSON( request.responseText )
-
-     		if(typeof retdata.error != 'undefined')
-     		{
-     			$("#currentpasswordid").removeClass("is-invalid");
-     			$("#passwordid").removeClass("is-invalid");
-     			$("#confirmpasswordid").removeClass("is-invalid");
-     			$("#currentpasswordid_con").html("");
-     			$("#passwordid_con").html('');
-     			$("#confirmpasswordid_con").html('');
-
-     			$.each(retdata.error,function(index,value){
-     				var messageArray=value.split("#");
-
-     				if(parseInt(messageArray[1])==1)
-     				{
-
-     					$("#currentpasswordid_con").html('<span class="is-invalid invalid-feedback"role="alert"><strong>'+messageArray[0]+'</strong></span>');
-     					$("#currentpasswordid").addClass(" is-invalid");
-     				}
-     				if(parseInt(messageArray[1])==2)
-     				{
-     					$("#passwordid_con").html('<span class="is-invalid invalid-feedback"role="alert"><strong>'+messageArray[0]+'</strong></span>');
-     					$("#passwordid").addClass(" is-invalid");
-
-     				}
-     				if(parseInt(messageArray[1])==3)
-     				{
-     					$("#confirmpasswordid_con").html('<span class="is-invalid invalid-feedback"role="alert"><strong>'+messageArray[0]+'</strong></span>');
-     					$("#confirmpasswordid").addClass(" is-invalid");
-     				}
-     			})
-               // $("#messageboxid").html(retdata.error);
-           }
-
-           if(typeof retdata.message != 'undefined')
-           {
-           	$("#messageboxid").html(retdata.message);
-           }
-       }
-   }).done(function( msg ) {
-         // var retdata=jQuery.parseJSON( msg );
-         console.log(msg);
-         $("#currentpasswordid").removeClass("is-invalid");
-         $("#passwordid").removeClass("is-invalid");
-         $("#confirmpasswordid").removeClass("is-invalid");
-         $("#currentpasswordid_con").html("");
-         $("#passwordid_con").html('');
-         $("#confirmpasswordid_con").html('');
-         if(typeof msg.message != 'undefined')
-         {
-         	$("#messageboxid").html(msg.message);
-         }
-     });
-
-
-});
-});
+	$("#change-password-modal").modal();
 </script>
+@endif
+{!! JsValidator::formRequest('App\Http\Requests\ProfileFormRequest','#profile_form') !!}
+{!! JsValidator::formRequest('App\Http\Requests\ChangePasswordFormRequest','#update_password_form') !!}
 @endsection
 

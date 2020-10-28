@@ -31,6 +31,7 @@ class ProfileFormRequest extends FormRequest
             'email'           => 'required|email|unique:users,email,'.$id,
             'country_id'	  => 'required',
             'contact_number'  => 'required|digits:10|max:10|unique:users,contact_number,'.$id,
+            'gender'          => 'required',
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
             
         ];

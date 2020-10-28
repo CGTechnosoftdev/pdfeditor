@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileFormRequest;
+use App\Http\Requests\ChangePasswordFormRequest;
 use App\Models\User;
 use App\Models\Country;
 //include '../../../Helpers/Common.php';
@@ -66,72 +67,39 @@ class ProfileController extends Controller
     	$user =  User::saveData(['profile_picture'=>''],$user);    	
     	if($user){
     		$remove_file = removeUploadedFile($profile_picture,'profile_picture');
-   			$response_type='success';
-   			$response_message='Profile image deleted Successfully';
-   		}else{
-   			$response_type='error';
-   			$response_message='Error occoured, Please try again.';
-   		}
+    		$response_type='success';
+    		$response_message='Profile image deleted Successfully';
+    	}else{
+    		$response_type='error';
+    		$response_message='Error occoured, Please try again.';
+    	}
     	set_flash($response_type,$response_message);
     	return redirect(route("profile"));
 
     }
-    public function profilepasschange(ProfileFormRequest $request){
-    	// if(Auth::Check())
-    	// {
-    	// 	$requestData = $request->All();
-    	// 	$validator = $this->validatePasswords($requestData);
-    	// 	if($validator->fails())
-    	// 	{
-    	// 		$validationObject=$validator->getMessageBag();
-     //           // $errormessages=$validator->getmes
-    	// 		$errormessages=array();
-    	// 		$getMessageOb=new GetValidationMesage();
-    	// 		$errormessages=$getMessageOb->getvalidationMessage($validationObject);
-     //         // echo '<pre>';
-     //          // print_r($errormessages);
-     //          // echo '</pre>';
+    /**
+     * [updatePassword description]
+     * @author Akash Sharma
+     * @date   2020-10-28
+     * @param  ChangePasswordFormRequest $request [description]
+     * @return [type]                         [description]
+     */
+    public function updatePassword(ChangePasswordFormRequest $request)
+    {
+    	$input_data = $request->input();
+    	$user = \Auth::user();
+    	if(!Hash::check($input_data['current_password'], $user->password)){
+    		$response_type='error';
+    		$response_message="Invalid current password";
+    	}elseif(User::saveData($input_data,$user)){
+    		$response_type='success';
+    		$response_message="Password update successfully";
+    	}else{
+    		$response_type='error';
+    		$response_message='Error occoured, Please try again.';
+    	}
 
-    	// 		$errorStr='<div class="alert alert-danger">
-
-    	// 		<strong>Whoops!</strong> There were some problems with your input.<br><br>
-
-    	// 		<ul>';
-    	// 		foreach($errormessages as $error_index => $message)
-    	// 		{
-    	// 			$errorStr.='<li> '.$message."<br/></li>";
-    	// 		}
-    	// 		$errorStr.='</ul>';
-
-    	// 		return response()->json(['error' => $errormessages], 400);
-    	// 	}
-    	// 	else
-    	// 	{
-    	// 		$currentPassword = Auth::User()->password;
-    	// 		if(Hash::check($requestData['password'], $currentPassword))
-    	// 		{
-    	// 			$userId = Auth::User()->id;
-    	// 			$user = User::find($userId);
-    	// 			$user->password = Hash::make($requestData['new-password']);;
-    	// 			$user->save();
-    	// 			$message='<div class="alert alert-success"> Your password has been updated successfully.</div>';
-    	// 			return response()->json(array('message' => $message));
-    	// 		}
-    	// 		else
-    	// 		{
-    	// 			$message='<div class="alert alert-danger">
-
-    	// 			<strong>Whoops!</strong> There were some problems with your input.<br><br>
-
-    	// 			<ul><li>Sorry, your current password was not recognised. Please try again.</li></ul>';
-    	// 			return response()->json(['error' => ["Sorry, your current password was not recognised. Please try again#1"]],400);
-    	// 		}
-    	// 	}
-    	// }
-    	// else
-    	// {
-     //        // Auth check failed - redirect to domain root
-    	// 	return redirect()->to('/');
-    	// }
+    	set_flash($response_type,$response_message);
+    	return redirect()->back();
     }
 }
