@@ -81,6 +81,7 @@ function changeFontSize(event){
 function changeFontWeight(event){
     event.preventDefault();
     var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
+    $('.tool-button.active').not("#bold").removeClass('active');
     if($(element).hasClass('active')){
         $(element).removeClass('active');
         pdf.removeBold();
