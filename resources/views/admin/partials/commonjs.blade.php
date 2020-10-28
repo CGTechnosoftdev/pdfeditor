@@ -10,6 +10,8 @@
 <script src="{{ asset('public/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- BlockUI -->
 <script src="{{ asset('public/admin/bower_components/block-ui/jquery.blockUI.js') }}" type="text/javascript"></script>
+<!-- Admin lte -->
+<script src="{{ asset('public/admin/dist/js/adminlte.js') }}" type="text/javascript"></script>
 <!-- Laravel Javascript Validation -->
 <script type="text/javascript" src="{{ asset('public/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <!-- Toastr -->
