@@ -94,17 +94,13 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 	this.togglebtnClickHandler = function (event, fabricObj) {
 		var o = fabricObj.getActiveObject();
 		var fontStyleOb = "";
-		if (o.selectionStart > -1) {
+		if(o){
 			fontStyleOb = getStyle(o, 'textDecoration');
 			if (fontStyleOb === "underline") {
-				var selectionStart = 2,
-				selectionEnd = 8;
-				o.setSelectionStyles({ textDecoration: '' }, selectionStart, selectionEnd);
+				o.set({ textDecoration: '' });
 			}
 			else if (fontStyleOb != "underline") {
-				var selectionStart = 2,
-				selectionEnd = 8;
-				o.setSelectionStyles({ textDecoration: 'underline' }, selectionStart, selectionEnd);
+				o.set({ textDecoration: 'underline' });
 			}
 			o.set({ dirty: true });
 			fabricObj.renderAll();
@@ -112,24 +108,21 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 	}
 
 	function getStyle(object, styleName) {
-		var selecteItemOb = object.getSelectionStyles();
+		var selecteItemOb = object;
 		return selecteItemOb[styleName];
 	}
 
 	this.toggleitalicbtnClickHandler = function (event, fabricObj) {
 		var o = fabricObj.getActiveObject();
 		var fontStyleOb = "";
-		if (o.selectionStart > -1) {
+		if(o){
 			fontStyleOb = getStyle(o, 'fontStyle');
-			if (fontStyleOb === "italic") {
-				var selectionStart = 2,
-					selectionEnd = 8;
-				o.setSelectionStyles({ fontStyle: '' }, selectionStart, selectionEnd);
+			console.log(fontStyleOb);
+			if (fontStyleOb) {
+				o.set({ fontStyle: '' });
 			}
 			else if (fontStyleOb != "italic") {
-				var selectionStart = 2,
-					selectionEnd = 8;
-				o.setSelectionStyles({ fontStyle: 'italic' }, selectionStart, selectionEnd);
+				o.set({ fontStyle: 'italic' });
 			}
 			o.set({ dirty: true });
 			fabricObj.renderAll();
@@ -227,10 +220,10 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
 PDFAnnotate.prototype.changeFontSize = function (fontSize) {
 	var inst = this;
 	this.font_size = fontSize;
-	var activeObject = inst.fabricObjects[inst.active_canvas].getActiveObject();
-	if (activeObject) {
-		activeObject.fontSize = fontSize;
-	}
+	var fabricObj = inst.fabricObjects[0]
+	var o = inst.fabricObjects[inst.active_canvas].getActiveObject();
+	o.set({ fontSize: fontSize });
+	fabricObj.renderAll().setActiveObject(o);
 }
 
 PDFAnnotate.prototype.savePdf = function () {
@@ -258,19 +251,8 @@ PDFAnnotate.prototype.setColor = function (color) {
 	inst.color = color;
 	var fabricObj = inst.fabricObjects[0]
 	var o = inst.fabricObjects[inst.active_canvas].getActiveObject();
-	if (o.selectionStart > -1) {
-		var selectionStart = 2,
-			selectionEnd = 8;
-		o.setSelectionStyles({ fill: color }, selectionStart, selectionEnd);
-	} else {
-		o.set({ fill: color });
-	}
+	o.set({ fill: color });
 	fabricObj.renderAll().setActiveObject(o);
-}
-
-PDFAnnotate.prototype.setTextColor = function (color) {
-	var inst = this;
-	
 }
 
 PDFAnnotate.prototype.setBorderColor = function (color) {
@@ -291,13 +273,7 @@ PDFAnnotate.prototype.setBold = function () {
 	var inst = this;
 	var fabricObj = inst.fabricObjects[0]
 	var o = inst.fabricObjects[inst.active_canvas].getActiveObject();
-	if (o.selectionStart > -1) {
-		var selectionStart = 2,
-			selectionEnd = 8;
-		o.setSelectionStyles({ fontWeight: 'bold' }, selectionStart, selectionEnd);
-	} else {
-		o.set({ fontWeight: 'bold' });
-	}
+	o.set({ fontWeight: 'bold' });
 	fabricObj.renderAll().setActiveObject(o);
 }
 
@@ -306,13 +282,7 @@ PDFAnnotate.prototype.removeBold = function () {
 	var inst = this;
 	var fabricObj = inst.fabricObjects[0]
 	var o = inst.fabricObjects[inst.active_canvas].getActiveObject();
-	if (o.selectionStart > -1) {
-		var selectionStart = 2,
-			selectionEnd = 8;
-		o.setSelectionStyles({ fontWeight: 'normal' }, selectionStart, selectionEnd);
-	} else {
-		o.set({ fontWeight: 'normal' });
-	}
+	o.set({ fontWeight: 'normal' });
 	fabricObj.renderAll().setActiveObject(o);
 }
 
