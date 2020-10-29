@@ -1,101 +1,106 @@
 @extends('layouts.admin')
 @section('title',($title ?? ''))
 @section('heading',($heading ?? ''))
-@section('sub_heading',($sub_heading ?? ''))
-@section('breadcrumb',$breadcrumb)
-@section('content')  
-<div class="box ">
-	<div class="box-header with-border">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-password-modal">
-			Change Password
-		</button>	
-
-		@if(isset($user))
-		{!! Form::model($user,['route' => ['update-profile'],'id'=>'profile_form','method' => 'put','enctype'=>"multipart/form-data"]) !!}
-		@endif
-		{!! Form::token() !!}
-		<!-- /.box-header -->
-		<div class="box-body">
-			<div class="row">
-				<div class="form-group col-lg-6 {{ $errors->has('first_name') ? ' has-error' : '' }}">
-					{!! Form::label('first_name', 'First Name',['class'=>'form-control-label']) !!}
-					<span class="required-label">*</span>
-					{!! Form::text('first_name',old('first_name'),['class'=>'form-control  '.($errors->has("first_name") ? "is-invalid" : ""),'id'=>'first_name']) !!}
-					<div class="{{ ($errors->has('first_name') ? 'invalid-feedback' : '') }}">
-						{{ $errors->first('first_name') }}
-					</div>
-				</div>
-				<div class="form-group col-lg-6 {{ $errors->has('last_name') ? ' has-error' : '' }}">
-					{!! Form::label('last_name', 'Last Name',['class'=>'form-control-label']) !!}
-					<span class="required-label">*</span>
-					{!! Form::text('last_name',old('last_name'),['class'=>'form-control  '.($errors->has("last_name") ? "is-invalid" : ""),'id'=>'last_name']) !!}
-					<div class="{{ ($errors->has('last_name') ? 'invalid-feedback' : '') }}">
-						{{ $errors->first('last_name') }}
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-lg-6 {{ $errors->has('email') ? ' has-error' : '' }}">
-					{!! Form::label('email', "Email",['class'=>'form-control-label']) !!}
-					<span class="required-label">*</span>
-					{!! Form::text('email',old('email'),['class'=>'form-control  '.($errors->has("email") ? "is-invalid" : ""),'id'=>'email','readonly']) !!}
-					<div class="{{ ($errors->has('email') ? 'invalid-feedback' : '') }}">
-						{{ $errors->first('email') }}
-					</div>
-				</div>
-				<div class="form-group col-lg-6 {{ ($errors->has('country_id') || $errors->has('contact_number')) ? ' has-error' : '' }}">
-					{!! Form::label('contact_number', "Contact Number",['class'=>'form-control-label']) !!}
-					<span class="required-label">*</span>
-					<div class="row">
-						<div class="col-md-6">
-							{!! Form::select('country_id',[''=>'Select Country Code'] + $country_arr, old('country_id'), ['class'=>'form-control required','data-unit'=>'from']) !!}
-							<div class="{{ ($errors->has('country_id') ? 'invalid-feedback' : '') }}">
-								{{ $errors->first('country_id') }}
-							</div>
-						</div> 
-						<div class="col-md-6">
-							{!! Form::text('contact_number',old('contact_number'),['class'=>'form-control  '.($errors->has("contact_number") ? "is-invalid" : ""),'id'=>'contact_number']) !!}
-							<div class="{{ ($errors->has('contact_number') ? 'invalid-feedback' : '') }}">
-								{{ $errors->first('contact_number') }}
-							</div>
-						</div> 
-
-					</div>				
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-lg-6  {{ $errors->has('gender') ? ' has-error' : '' }}">
-					{!! Form::label('gender', "Gender", ['class'=>'form-control-label']) !!}
-					<span class="required-label">*</span>
-					{!! Form::select('gender',[''=>'Select'] + $gender_arr, old('gender'), ['class'=>'form-control required','data-unit'=>'from']) !!}
-					<div class="{{ ($errors->has('gender') ? 'invalid-feedback' : '') }}">
-						{{ $errors->first('gender') }}
-					</div>
-				</div>
-				<div class=" form-group col-md-6">
-					<label>Image</label>
-					<div class="row">
-						<div class="col-md-6"><input type="file" name="profile_picture" class="form-control" /></div>
-						<div class="col-md-6">							
-							<img src='{{$user->profile_picture_url}}' width="50px" />
-							@if(!empty($user->profile_picture))
-							<br><br> 
-							<a href='{{route("delete-profile-picture")}}' onclick="return confirm('Are you sure you want to delete?')">Delete Image</a>
-							@endif 
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 ">
-					{!! Form::submit('Update',['class'=>'btn btn-success']) !!}
-				</div>
-			</div>
+@section('breadcrumb',($breadcrumb ?? ''))
+@section('content')
+<section class="content">
+	<!-- Info boxes -->
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-password-modal">
+				Change Password
+			</button>	
 		</div>
-		<!-- /.box-body -->
-		{{ Form::close() }}
+		<div class="col-xs-8 col-md-8">
+			@if(isset($user))
+			{!! Form::model($user,['route' => ['update-profile'],'id'=>'profile_form','class'=>'form-horizontal','method' => 'put','enctype'=>"multipart/form-data"]) !!}
+			@endif
+			{!! Form::token() !!}
+
+			<div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
+				<label for="first_name" class="control-label col-sm-4 required">First Name<span class="required-label">*</span></label>	
+				<div class="col-sm-8">
+					{{ Form::text('first_name',null,array('placeholder'=>'Enter First Name','class'=>"form-control"))}}
+					@if ($errors->has('first_name'))
+					<span class="help-block"><strong>{{ $errors->first('first_name') }}</strong></span>
+					@endif
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
+				<label for="last_name" class="control-label col-sm-4 required">Last Name<span class="required-label">*</span></label>
+				<div class="col-sm-8" >
+					{{ Form::text('last_name',null,array('placeholder'=>'Enter Last Name','class'=>"form-control"))}}
+					@if ($errors->has('last_name'))
+					<span class="help-block"><strong>{{ $errors->first('last_name') }}</strong></span>
+					@endif
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
+				<label for="gender" class="control-label col-sm-4 required">Gender<span class="required-label">*</span></label>
+				<div class="col-sm-8" >
+					{!! Form::select('gender',[''=>"Select Gender"] + $gender_arr, old('gender'), ['class'=>'form-control required','data-unit'=>'from']) !!}
+					@if ($errors->has('gender'))
+					<span class="help-block"><strong>{{ $errors->first('gender') }}</strong></span>
+					@endif
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+				<label for="email" class="control-label col-sm-4 required">Email<span class="required-label">*</span></label>
+				<div class="col-sm-8" >
+					{{ Form::text('email',null,array('placeholder'=>'Enter Email','class'=>"form-control"))}}
+					@if ($errors->has('email'))
+					<span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+					@endif
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('country_id') || $errors->has('contact_number') ? ' has-error' : '' }}">
+				<label for="contact_number" class="control-label col-sm-4 required">Contact Number</label>
+				<div class="col-md-4">
+					{!! Form::select('country_id', [''=>"Select Code"] + $country_arr, old('country_id'), ['class'=>'form-control required','data-unit'=>'from']) !!}
+					@if ($errors->has('country_id'))
+					<span class="help-block"><strong>{{ $errors->first('country_id') }}</strong></span>
+					@endif
+				</div>
+				<div class="col-md-4">
+					{{ Form::text('contact_number',null,array('placeholder'=>'Enter Contact Number','class'=>"form-control"))}}
+					@if ($errors->has('contact_number'))
+					<span class="help-block"><strong>{{ $errors->first('contact_number') }}</strong></span>
+					@endif
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('profile_picture') ? ' has-error' : '' }}">
+				<label for="profile_picture" class="control-label col-sm-4 required">Profile Picture</label>
+				<div class="col-sm-8" >
+					{{ Form::file('profile_picture', ['class' => 'form-control','placeholder' => 'Enter Confirm Password ','id'=>'profile_picture' ]) }} 
+					@if ($errors->has('profile_picture'))
+					<span class="help-block"><strong>{{ $errors->first('profile_picture') }}</strong></span>
+					@endif
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-8">
+					{!! Form::submit((isset($user)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
+					{!! Html::link(route('sub-admin.index'),'Cancel',['class'=>'btn btn-default']) !!}
+				</div>
+			</div>
+			{{ Form::close() }}
+
+		</div>
+		@if(isset($user))
+		<div class="col-xs-4 col-md-4">			
+			<img src='{{$user->profile_picture_url}}' width="50px" />
+			@if(!empty($user->profile_picture))
+			<br><br> 
+			<a href='{{route("delete-profile-picture")}}' onclick="return confirm('Are you sure you want to delete?')">Delete Image</a>
+			@endif 
+		</div>
+		@endif
+		<!-- /.row -->
 	</div>
-</div>
+
+</section>
+<!-- /.content -->
+
 <div class="modal fade" id="change-password-modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -157,4 +162,3 @@
 {!! JsValidator::formRequest('App\Http\Requests\ProfileFormRequest','#profile_form') !!}
 {!! JsValidator::formRequest('App\Http\Requests\ChangePasswordFormRequest','#update_password_form') !!}
 @endsection
-
