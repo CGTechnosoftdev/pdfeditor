@@ -6,11 +6,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\BaseModelTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use SoftDeletes;
+    use BaseModelTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +22,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'parent_id','first_name','last_name','profile_picture','gender','country_id','contact_number','email', 'password','status'
     ];
+    protected $dates = ['deleted_at'];
+    public $timestamps = true;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -38,4 +44,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * [saveData description]
+     * @author Akash Sharma
+     * @date   2020-10-28
+     * @param  [type]     $data_array [description]
+     * @param  array      $model      [description]
+     * @return [type]                 [description]
+     */
+    public static function saveData($data_array,$model=array())
+    { 
+        $model = (empty($model) ? new self() : $model);
+        (!empty($data_array['password']) ? $data_array['password'] = bcrypt($data_array['password']) : '');
+        $model->fill($data_array);
+        if($model->save()){
+            return $model;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * [modelHasRole description]
+     * @author Akash Sharma
+     * @date   2020-10-28
+     * @return [type]     [description]
+     */
+    public function modelHasRole()
+    {
+        return $this->hasOne(ModelHasRole::class,'model_id','id');
+    }
 }

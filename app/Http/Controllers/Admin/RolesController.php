@@ -51,7 +51,7 @@ class RolesController extends AdminBaseController
     				'type'=>'role',
     				'status'=>$row->status,
     				'action_class' => 'change-status',
-    				'permission'=>'role-edits'
+    				'permission'=>'role-edit'
     			];
     			return view($status_button_template,compact('button_data'));
     		});

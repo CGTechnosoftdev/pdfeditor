@@ -52,7 +52,7 @@ class BusinessCategoryController extends AdminBaseController
 		$data_array = [
 			'title'=>'Business Category',
 			'heading'=>'Manage Business Category',
-			'breadcrumb'=>\Breadcrumbs::render('business_category.index'),
+			'breadcrumb'=>\Breadcrumbs::render('business-category.index'),
 		];
 		$data_array['add_new_button'] = [
 			'label' => 'Add Business-category',
@@ -71,7 +71,7 @@ class BusinessCategoryController extends AdminBaseController
 		$data_array = [
 			'title'=>'Add Business Category',
 			'heading'=>'Add Business Category',
-			'breadcrumb'=>\Breadcrumbs::render('business_category.create'),
+			'breadcrumb'=>\Breadcrumbs::render('business-category.create'),
 		];		
 		return view('admin.businesscategory.form',$data_array);
 
@@ -104,7 +104,7 @@ class BusinessCategoryController extends AdminBaseController
 		$data_array = [
 			'title'=>'Edit Business Category',
 			'heading'=>'Edit Business Category',
-			'breadcrumb'=>\Breadcrumbs::render('business_category.edit',['id'=> $business_category->id]),
+			'breadcrumb'=>\Breadcrumbs::render('business-category.edit',['id'=> $business_category->id]),
 			'business_category'=> $business_category
 		];
 		return view('admin.businesscategory.form',$data_array);

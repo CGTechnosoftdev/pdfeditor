@@ -21,10 +21,10 @@ return [
     'STATUS_NO' => '0',
 	
 	// User Roles
-	'ADMIN_ROLE' => '2',
-	'USER_ROLE' => '1',
+	'ADMIN_ROLE' => '1',
+	'USER_ROLE' => '2',
 	
-	'MODEL_TYPE' => 'App\User',
+	'DEFAULT_MODEL_TYPE' => 'App\Models\User',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',
@@ -36,6 +36,8 @@ return [
     'PUBLIC_DATE_TIME_FORMAT' => "d-m-Y h:i A",
    
     'MODEL_TYPE' => 'App\Models\User',
+
+    'DEFAULT_PHONECODE' => 226,
     
 ];
 

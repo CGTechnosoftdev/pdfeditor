@@ -22,6 +22,13 @@ return [
             'permissions'=>['role-list'],
         ],
         [
+            'label' => 'Sub-Admin',
+            'icon' => 'users',
+            'route_name' => 'sub-admin.index',
+            'active_segments' => ['sub-admin'],
+            'permissions'=>['sub-admin-list'],
+        ],
+        [
             'label' => 'Business Category',
             'icon' => 'building',
             'route_name' => 'business-category.index',

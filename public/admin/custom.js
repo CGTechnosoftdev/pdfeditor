@@ -6,14 +6,31 @@ function blockUI(){
 function unblockUI(){
 	$.unblockUI();
 }
+
+/**
+ * [createSlug description]
+ * @author Akash Sharma
+ * @date   2020-10-29
+ * @param  {[type]}   source [description]
+ * @param  {[type]}   target [description]
+ * @return {[type]}          [description]
+ */
 function createSlug(source,target){
 	var value = $(source).val();
-    var str = value.replace(/[ ]+/g, '-');
-    $(target).val(str.toLowerCase());
+	var str = value.replace(/[ ]+/g, '-');
+	$(target).val(str.toLowerCase());
 
 }
-jQuery(document).ready(function() {	
+jQuery(document).ready(function() {		
 	
+	$(document).on('click','#change-password-checkbox',function(e){
+		if ($(this).is(":checked")) {
+			$(".change-password-elements").removeAttr("disabled");
+		} else {
+			$(".change-password-elements").attr("disabled", "disabled");
+		}
+	});
+
 	$(document).on('click','.change-status',function(e){
 		e.preventDefault();
 		blockUI();
