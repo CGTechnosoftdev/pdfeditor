@@ -45,7 +45,7 @@ class Role extends BaseRole
 	public static function list()
 	{
 		$list = self::where('status',config('constant.STATUS_ACTIVE'))
-		->where('id','!=',2)
+		->where('id','!=',config('constant.USER_ROLE'))
 		->orderBy('name','asc')
 		->pluck('name','id')
 		->toArray();

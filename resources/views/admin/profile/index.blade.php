@@ -76,9 +76,9 @@
 					<label>Image</label>
 					<div class="row">
 						<div class="col-md-6"><input type="file" name="profile_picture" class="form-control" /></div>
-						<div class="col-md-6">
+						<div class="col-md-6">							
+							<img src='{{$user->profile_picture_url}}' width="50px" />
 							@if(!empty($user->profile_picture))
-							<img src='{{$user->profile_picture}}' width="50px" />
 							<br><br> 
 							<a href='{{route("delete-profile-picture")}}' onclick="return confirm('Are you sure you want to delete?')">Delete Image</a>
 							@endif 

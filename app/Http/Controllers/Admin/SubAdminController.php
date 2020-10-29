@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubAdminFormRequest;
+use DB;
 
 class SubAdminController extends AdminBaseController
 {
@@ -30,7 +33,7 @@ class SubAdminController extends AdminBaseController
     		$action_button_template='admin.datatable.actions';
     		$status_button_template = 'admin.datatable.status';
     		$model=User::query()->orderBy('created_at','desc');
-    		$model=User::with('modelHasRole','modelHasRole.role')/*->where('users.id','!=',\Auth::user()->id)*/->orderBy('created_at','desc');
+    		$model=User::with('modelHasRole','modelHasRole.role')->where('users.id','!=',\Auth::user()->id)->orderBy('created_at','desc');
     		$table=Datatables()->of($model);
     		if(!empty($filter_data['statusFilter'])){
     			$model->where(['status'=>$filter_data['statusFilter']]);
@@ -89,34 +92,38 @@ class SubAdminController extends AdminBaseController
   			'heading'=>'Add Sub-Admin',
   			'breadcrumb'=>\Breadcrumbs::render('sub-admin.create'),
   		];
-  		$permissions = Permission::get();
-  		$grouped_permissions = [];
-  		foreach($permissions as $permission){
-  			$grouped_permissions[$permission->module][]=[
-  				'id'=>$permission->id,
-  				'name'=>ucwords(str_replace("-", " ", $permission->name)),
-  			];
-  		}
-  		$data_array['permissions'] = $grouped_permissions;
-  		$data_array['sub-admin_permissions'] = [];
+  		$data_array['gender_arr'] = config('custom_config.gender_arr');
+        $data_array['status_arr'] = config('custom_config.all_status_arr');
+  		$data_array['country_arr'] = Country::getCountryCodeList();
+  		$data_array['role_arr'] = Role::list();
   		return view('admin.sub-admin.form',$data_array);
   	}
 
   	public function store(SubAdminFormRequest $request) 
   	{
+  		DB::beginTransaction();
   		try{
   			$input_data=$request->input(); 
+  			if(!empty($request->file('profile_picture'))){
+  				$uploadedImage = uploadFile($request,'profile_picture');
+  				if(!empty($uploadedImage['success'])){
+  					$inputData['profile_picture'] = $uploadedImage['data'];
+  				}
+  			}
   			$sub_admin = User::saveData($input_data);
-  			$sync_permissions = $sub_admin->syncPermissions($input_data['permission']);
+  			$sub_admin->syncRoles([$input_data['role_id']]);
   			if($sub_admin){
+  				DB::commit();
   				$response_type='success';
   				$response_message='Sub-Admin added successfully';
   			}else{
+  				DB::rollback();
   				$response_type='error';
   				$response_message='Error occoured, Please try again.';
   			}
   		}
   		catch (Exception $e){
+  			DB::rollback();
   			$response_type='error';
   			$response_message=$e->getMessage();
   		}
@@ -137,18 +144,15 @@ class SubAdminController extends AdminBaseController
   			'title'=>'Edit Sub-Admin',
   			'heading'=>'Edit Sub-Admin',
   			'breadcrumb'=>\Breadcrumbs::render('sub-admin.edit',['id'=>$sub_admin->id]),
-  			'sub-admin'=>$sub_admin
   		];
-  		$permissions = Permission::get();
-  		$grouped_permissions = [];
-  		foreach($permissions as $permission){
-  			$grouped_permissions[$permission->module][]=[
-  				'id'=>$permission->id,
-  				'name'=>ucwords(str_replace("-", " ", $permission->name)),
-  			];
-  		}
-  		$data_array['permissions'] = $grouped_permissions;
-  		$data_array['sub-admin_permissions'] = \Arr::pluck($sub_admin->permissions,'id');
+  		$data_array['gender_arr'] = config('custom_config.gender_arr');
+        $data_array['status_arr'] = config('custom_config.all_status_arr');
+  		$data_array['country_arr'] = Country::getCountryCodeList();
+  		$data_array['role_arr'] = Role::list();
+
+  		$sub_admin['role_id'] = $sub_admin->roles->first()->id;
+        $sub_admin['profile_picture_url'] = getUploadedFile($sub_admin->profile_picture,'profile_picture');
+  		$data_array['sub_admin'] = $sub_admin;
   		return view('admin.sub-admin.form',$data_array);
   	}
 
@@ -162,25 +166,35 @@ class SubAdminController extends AdminBaseController
 	 */
 	public function update(SubAdminFormRequest $request,User $sub_admin)
 	{
-		try{
-			$input_data=$request->input(); 
-			$input_data=$request->input(); 
-			$sub_admin = User::saveData($input_data,$sub_admin);
-			$sync_permissions = $sub_admin->syncPermissions($input_data['permission']);
-			if($sub_admin){
-				$response_type='success';
-				$response_message='Sub-Admin edited successfully';
-			}else{
-				$response_type='error';
-				$response_message='Error occoured, Please try again.';
-			}
-		}
-		catch (Exception $e){
-			$response_type='error';
-			$response_message=$e->getMessage();
-		}
-		set_flash($response_type,$response_message);
-		return redirect()->route('sub-admin.index');
+		DB::beginTransaction();
+  		try{
+  			$input_data=$request->input(); 
+  			if(!empty($request->file('profile_picture'))){
+  				$uploadedImage = uploadFile($request,'profile_picture');
+  				if(!empty($uploadedImage['success'])){
+  					$input_data['profile_picture'] = $uploadedImage['data'];
+  				}
+  			}
+  			$sub_admin = User::saveData($input_data,$sub_admin);
+  			$sub_admin->syncRoles([$input_data['role_id']]);
+
+  			if($sub_admin){
+  				DB::commit();
+  				$response_type='success';
+  				$response_message='Sub-Admin edited successfully';
+  			}else{
+  				DB::rollback();
+  				$response_type='error';
+  				$response_message='Error occoured, Please try again.';
+  			}
+  		}
+  		catch (Exception $e){
+  			DB::rollback();
+  			$response_type='error';
+  			$response_message=$e->getMessage();
+  		}
+  		set_flash($response_type,$response_message);
+  		return redirect()->route('sub-admin.index');
 	}
 	
 	/**
@@ -193,7 +207,7 @@ class SubAdminController extends AdminBaseController
 	public function destroy(User $sub_admin)
 	{
 		try{
-			if($sub_admin->is_deletable==config("constant.STATUS_YES") && $sub_admin->delete()){
+			if($sub_admin->delete()){
 				$response_type='success';
 				$response_message='Sub-Admin deleted successfully';
 			}else{

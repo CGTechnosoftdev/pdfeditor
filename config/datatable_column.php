@@ -25,6 +25,7 @@ return [
             ['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'S No.'],
             ['data'=>'first_name', 'name'=> 'first_name','label'=>'First Name','orderBy'=>'asc'],
             ['data'=>'last_name', 'name'=> 'name','label'=>'Last Name','orderBy'=>'asc'],
+            ['data'=>'email', 'name'=> 'email','label'=>'Email','orderBy'=>'asc'],
             ['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
             ['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
         ],
