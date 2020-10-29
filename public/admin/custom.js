@@ -6,14 +6,12 @@ function blockUI(){
 function unblockUI(){
 	$.unblockUI();
 }
-function textchange(obj,anotherField)
-        {
-            var value = $(obj).val();
-            //alert(value);
-			var str = value.replace(/[ ]+/g, '-');
-			$(anotherField).val(str);
-		
-        }
+function createSlug(source,target){
+	var value = $(source).val();
+    var str = value.replace(/[ ]+/g, '-');
+    $(target).val(str.toLowerCase());
+
+}
 jQuery(document).ready(function() {	
 	
 	$(document).on('click','.change-status',function(e){

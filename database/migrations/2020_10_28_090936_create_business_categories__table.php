@@ -22,9 +22,8 @@ class CreateBusinessCategoriesTable extends Migration
             $table->text('description')->nullable();
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
-            $table->timestamp('created_at');  
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
             $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
             
       
@@ -38,6 +37,6 @@ class CreateBusinessCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_categories_');
+        Schema::dropIfExists('business_categories');
     }
 }
