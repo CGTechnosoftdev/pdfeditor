@@ -32,6 +32,7 @@ return [
     'model_arr'=>[
         'user'=>'User',
         'role'=>'Role',
+        'sub-admin'=>'User',
     ],
     'date_format_arr' => [
         'Y/m/d' => 'Y/m/d',

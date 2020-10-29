@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use App\Http\Requests\RolesFormRequest;
+use App\Http\Requests\SubAdminFormRequest;
 
-class RolesController extends AdminBaseController
+class SubAdminController extends AdminBaseController
 {
     /**
      * [__construct description]
@@ -16,10 +15,10 @@ class RolesController extends AdminBaseController
      */
     function __construct()
     {
-    	$this->middleware('permission:role-list|role-create|role-edit|role-delete');
-    	$this->middleware('permission:role-create', ['only' => ['create','store']]);
-    	$this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-    	$this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    	$this->middleware('permission:sub-admin-list|sub-admin-create|sub-admin-edit|sub-admin-delete');
+    	$this->middleware('permission:sub-admin-create', ['only' => ['create','store']]);
+    	$this->middleware('permission:sub-admin-edit', ['only' => ['edit','update']]);
+    	$this->middleware('permission:sub-admin-delete', ['only' => ['destroy']]);
     	// app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
     }
@@ -30,7 +29,8 @@ class RolesController extends AdminBaseController
     	if(request()->ajax()) {
     		$action_button_template='admin.datatable.actions';
     		$status_button_template = 'admin.datatable.status';
-    		$model=Role::query()->where('is_deletable','!=',config('constant.STATUS_NO'))->orderBy('created_at','desc');
+    		$model=User::query()->orderBy('created_at','desc');
+    		$model=User::with('modelHasRole','modelHasRole.role')/*->where('users.id','!=',\Auth::user()->id)*/->orderBy('created_at','desc');
     		$table=Datatables()->of($model);
     		if(!empty($filter_data['statusFilter'])){
     			$model->where(['status'=>$filter_data['statusFilter']]);
@@ -39,19 +39,19 @@ class RolesController extends AdminBaseController
     		$table->addColumn('action','');
     		$table->editColumn('action',function($row) use ($action_button_template){
     			$buttons=[
-    				'edit'=>['route_url'=>'roles.edit', 'route_param'=>[$row->id],'permission'=>'role-edit'],
-    				'delete'=>['route_url'=>'roles.destroy', 'route_param'=>[$row->id],'permission'=>'role-delete'],
+    				'edit'=>['route_url'=>'sub-admin.edit', 'route_param'=>[$row->id],'permission'=>'sub-admin-edit'],
+    				'delete'=>['route_url'=>'sub-admin.destroy', 'route_param'=>[$row->id],'permission'=>'sub-admin-delete'],
     			];
     			return view($action_button_template,compact('buttons'));
     		});
-
+    		
     		$table->editColumn('status',function($row) use ($status_button_template){
     			$button_data=[
     				'id'=>$row->id,
-    				'type'=>'role',
+    				'type'=>'sub-admin',
     				'status'=>$row->status,
     				'action_class' => 'change-status',
-    				'permission'=>'role-edit'
+    				'permission'=>'sub-admin-edit'
     			];
     			return view($status_button_template,compact('button_data'));
     		});
@@ -59,20 +59,20 @@ class RolesController extends AdminBaseController
     		return $table->make(true);
     	}
     	$data_array = [
-    		'title'=>'Roles and Rights',
-    		'heading'=>'Manage Roles and Rights',
-    		'breadcrumb'=>\Breadcrumbs::render('roles.index'),
+    		'title'=>'Sub-Admin',
+    		'heading'=>'Manage Sub-Admin',
+    		'breadcrumb'=>\Breadcrumbs::render('sub-admin.index'),
     	];
     	$data_array['add_new_button'] = [
-    		'label' => 'Add Role and Rights',
-    		'link'	=> route('roles.create'),
-    		'permission'=>'role-create'
+    		'label' => 'Add Sub-Admin',
+    		'link'	=> route('sub-admin.create'),
+    		'permission'=>'sub-admin-create'
     	];
     	$data_array['data_table'] = [
-    		'data_source' => route('roles.index'),
-    		'data_column_config' => config('datatable_column.roles'),
+    		'data_source' => route('sub-admin.index'),
+    		'data_column_config' => config('datatable_column.sub-admin'),
     	];
-    	return view('admin.role.index',$data_array);
+    	return view('admin.sub-admin.index',$data_array);
     }
 
 
@@ -85,9 +85,9 @@ class RolesController extends AdminBaseController
   	public function create()
   	{  
   		$data_array = [
-  			'title'=>'Add Role and Rights',
-  			'heading'=>'Add Role and Rights',
-  			'breadcrumb'=>\Breadcrumbs::render('roles.create'),
+  			'title'=>'Add Sub-Admin',
+  			'heading'=>'Add Sub-Admin',
+  			'breadcrumb'=>\Breadcrumbs::render('sub-admin.create'),
   		];
   		$permissions = Permission::get();
   		$grouped_permissions = [];
@@ -98,19 +98,19 @@ class RolesController extends AdminBaseController
   			];
   		}
   		$data_array['permissions'] = $grouped_permissions;
-  		$data_array['role_permissions'] = [];
-  		return view('admin.role.form',$data_array);
+  		$data_array['sub-admin_permissions'] = [];
+  		return view('admin.sub-admin.form',$data_array);
   	}
 
-  	public function store(RolesFormRequest $request) 
+  	public function store(SubAdminFormRequest $request) 
   	{
   		try{
   			$input_data=$request->input(); 
-  			$role = Role::saveData($input_data);
-  			$sync_permissions = $role->syncPermissions($input_data['permission']);
-  			if($role){
+  			$sub_admin = User::saveData($input_data);
+  			$sync_permissions = $sub_admin->syncPermissions($input_data['permission']);
+  			if($sub_admin){
   				$response_type='success';
-  				$response_message='Role added successfully';
+  				$response_message='Sub-Admin added successfully';
   			}else{
   				$response_type='error';
   				$response_message='Error occoured, Please try again.';
@@ -121,23 +121,23 @@ class RolesController extends AdminBaseController
   			$response_message=$e->getMessage();
   		}
   		set_flash($response_type,$response_message);
-  		return redirect()->route('roles.index');
+  		return redirect()->route('sub-admin.index');
   	}
 
   	/**
   	 * [edit description]
   	 * @author Akash Sharma
   	 * @date   2020-10-27
-  	 * @param  Role       $role [description]
+  	 * @param  User       $sub_admin [description]
   	 * @return [type]           [description]
   	 */
-  	public function edit(Role $role)
+  	public function edit(User $sub_admin)
   	{
   		$data_array = [
-  			'title'=>'Edit Role and Rights',
-  			'heading'=>'Edit Role and Rights',
-  			'breadcrumb'=>\Breadcrumbs::render('roles.edit',['id'=>$role->id]),
-  			'role'=>$role
+  			'title'=>'Edit Sub-Admin',
+  			'heading'=>'Edit Sub-Admin',
+  			'breadcrumb'=>\Breadcrumbs::render('sub-admin.edit',['id'=>$sub_admin->id]),
+  			'sub-admin'=>$sub_admin
   		];
   		$permissions = Permission::get();
   		$grouped_permissions = [];
@@ -148,28 +148,28 @@ class RolesController extends AdminBaseController
   			];
   		}
   		$data_array['permissions'] = $grouped_permissions;
-  		$data_array['role_permissions'] = \Arr::pluck($role->permissions,'id');
-  		return view('admin.role.form',$data_array);
+  		$data_array['sub-admin_permissions'] = \Arr::pluck($sub_admin->permissions,'id');
+  		return view('admin.sub-admin.form',$data_array);
   	}
 
 	/**
 	 * [update description]
 	 * @author Akash Sharma
 	 * @date   2020-10-27
-	 * @param  RolesFormRequest $request [description]
-	 * @param  Role             $role    [description]
+	 * @param  SubAdminFormRequest $request [description]
+	 * @param  User             $sub_admin    [description]
 	 * @return [type]                    [description]
 	 */
-	public function update(RolesFormRequest $request,Role $role)
+	public function update(SubAdminFormRequest $request,User $sub_admin)
 	{
 		try{
 			$input_data=$request->input(); 
 			$input_data=$request->input(); 
-			$role = Role::saveData($input_data,$role);
-			$sync_permissions = $role->syncPermissions($input_data['permission']);
-			if($role){
+			$sub_admin = User::saveData($input_data,$sub_admin);
+			$sync_permissions = $sub_admin->syncPermissions($input_data['permission']);
+			if($sub_admin){
 				$response_type='success';
-				$response_message='Role edited successfully';
+				$response_message='Sub-Admin edited successfully';
 			}else{
 				$response_type='error';
 				$response_message='Error occoured, Please try again.';
@@ -180,22 +180,22 @@ class RolesController extends AdminBaseController
 			$response_message=$e->getMessage();
 		}
 		set_flash($response_type,$response_message);
-		return redirect()->route('roles.index');
+		return redirect()->route('sub-admin.index');
 	}
 	
 	/**
 	 * [destroy description]
 	 * @author Akash Sharma
 	 * @date   2020-10-27
-	 * @param  Role       $role [description]
+	 * @param  User       $sub_admin [description]
 	 * @return [type]           [description]
 	 */
-	public function destroy(Role $role)
+	public function destroy(User $sub_admin)
 	{
 		try{
-			if($role->is_deletable==config("constant.STATUS_YES") && $role->delete()){
+			if($sub_admin->is_deletable==config("constant.STATUS_YES") && $sub_admin->delete()){
 				$response_type='success';
-				$response_message='Role deleted successfully';
+				$response_message='Sub-Admin deleted successfully';
 			}else{
 				$response_type='error';
 				$response_message='Error occoured, Please try again';
@@ -206,6 +206,6 @@ class RolesController extends AdminBaseController
 			$response_message=$e->getMessage();
 		}
 		set_flash($response_type,$response_message);
-		return redirect()->route('roles.index');
+		return redirect()->route('sub-admin.index');
 	}
 }

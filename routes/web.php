@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
 
 	//roles
     Route::resource('roles', 'RolesController');
+
+    //subadmin
+    Route::resource('sub-admin', 'SubAdminController');
 	
 });
 

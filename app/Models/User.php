@@ -65,4 +65,15 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    /**
+     * [modelHasRole description]
+     * @author Akash Sharma
+     * @date   2020-10-28
+     * @return [type]     [description]
+     */
+    public function modelHasRole()
+    {
+        return $this->hasOne(ModelHasRole::class,'model_id','id');
+    }
 }

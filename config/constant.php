@@ -21,10 +21,10 @@ return [
     'STATUS_NO' => '0',
 	
 	// User Roles
-	'ADMIN_ROLE' => '2',
-	'USER_ROLE' => '1',
+	'ADMIN_ROLE' => '1',
+	'USER_ROLE' => '2',
 	
-	'MODEL_TYPE' => 'App\Models\User',
+	'DEFAULT_MODEL_TYPE' => 'App\Models\User',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',
