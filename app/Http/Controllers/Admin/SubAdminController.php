@@ -93,7 +93,7 @@ class SubAdminController extends AdminBaseController
   			'breadcrumb'=>\Breadcrumbs::render('sub-admin.create'),
   		];
   		$data_array['gender_arr'] = config('custom_config.gender_arr');
-        $data_array['status_arr'] = config('custom_config.all_status_arr');
+  		$data_array['status_arr'] = config('custom_config.all_status_arr');
   		$data_array['country_arr'] = Country::getCountryCodeList();
   		$data_array['role_arr'] = Role::list();
   		return view('admin.sub-admin.form',$data_array);
@@ -146,12 +146,12 @@ class SubAdminController extends AdminBaseController
   			'breadcrumb'=>\Breadcrumbs::render('sub-admin.edit',['id'=>$sub_admin->id]),
   		];
   		$data_array['gender_arr'] = config('custom_config.gender_arr');
-        $data_array['status_arr'] = config('custom_config.all_status_arr');
+  		$data_array['status_arr'] = config('custom_config.all_status_arr');
   		$data_array['country_arr'] = Country::getCountryCodeList();
   		$data_array['role_arr'] = Role::list();
 
   		$sub_admin['role_id'] = $sub_admin->roles->first()->id;
-        $sub_admin['profile_picture_url'] = getUploadedFile($sub_admin->profile_picture,'profile_picture');
+  		$sub_admin['profile_picture_url'] = getUploadedFile($sub_admin->profile_picture,'profile_picture');
   		$data_array['sub_admin'] = $sub_admin;
   		return view('admin.sub-admin.form',$data_array);
   	}
@@ -167,36 +167,36 @@ class SubAdminController extends AdminBaseController
 	public function update(SubAdminFormRequest $request,User $sub_admin)
 	{
 		DB::beginTransaction();
-  		try{
-  			$input_data=$request->input(); 
-  			if(!empty($request->file('profile_picture'))){
-  				$uploadedImage = uploadFile($request,'profile_picture');
-  				if(!empty($uploadedImage['success'])){
-  					$input_data['profile_picture'] = $uploadedImage['data'];
-  				}
-  			}
-  			$sub_admin = User::saveData($input_data,$sub_admin);
-  			$sub_admin->syncRoles([$input_data['role_id']]);
+		try{
+			$input_data=$request->input(); 
+			if(!empty($request->file('profile_picture'))){
+				$uploadedImage = uploadFile($request,'profile_picture');
+				if(!empty($uploadedImage['success'])){
+					$input_data['profile_picture'] = $uploadedImage['data'];
+				}
+			}
+			$sub_admin = User::saveData($input_data,$sub_admin);
+			$sub_admin->syncRoles([$input_data['role_id']]);
 
-  			if($sub_admin){
-  				DB::commit();
-  				$response_type='success';
-  				$response_message='Sub-Admin edited successfully';
-  			}else{
-  				DB::rollback();
-  				$response_type='error';
-  				$response_message='Error occoured, Please try again.';
-  			}
-  		}
-  		catch (Exception $e){
-  			DB::rollback();
-  			$response_type='error';
-  			$response_message=$e->getMessage();
-  		}
-  		set_flash($response_type,$response_message);
-  		return redirect()->route('sub-admin.index');
+			if($sub_admin){
+				DB::commit();
+				$response_type='success';
+				$response_message='Sub-Admin edited successfully';
+			}else{
+				DB::rollback();
+				$response_type='error';
+				$response_message='Error occoured, Please try again.';
+			}
+		}
+		catch (Exception $e){
+			DB::rollback();
+			$response_type='error';
+			$response_message=$e->getMessage();
+		}
+		set_flash($response_type,$response_message);
+		return redirect()->route('sub-admin.index');
 	}
-	
+
 	/**
 	 * [destroy description]
 	 * @author Akash Sharma

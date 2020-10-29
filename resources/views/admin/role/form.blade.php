@@ -67,5 +67,5 @@
 
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\RolesFormRequest') !!}
+<!-- {!! JsValidator::formRequest('App\Http\Requests\RolesFormRequest') !!} -->
 @endsection

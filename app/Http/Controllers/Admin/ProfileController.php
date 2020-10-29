@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileFormRequest;
-use App\Http\Requests\ChangePasswordFormRequest;
 use App\Models\User;
 use App\Models\Country;
 //include '../../../Helpers/Common.php';
@@ -56,9 +55,18 @@ class ProfileController extends Controller
     			$input_data['profile_picture'] = $upload_response['data'];
     		}
     	}
-    	$user =  User::saveData($input_data,$user);
-    	set_flash('success','Profile updated successfully!');
-    	return redirect(route('dashboard'));
+        if(!empty($input_data['current_password']) && !Hash::check($input_data['current_password'], $user->password)){
+            $response_type='error';
+            $response_message="Invalid current password";
+        }elseif(User::saveData($input_data,$user)){
+            $response_type='success';
+            $response_message="Password update successfully";
+        }else{
+            $response_type='error';
+            $response_message='Error occoured, Please try again.';
+        };
+        set_flash($response_type,$response_message);
+        return redirect(route('dashboard'));
 
     }
     public function deleteProfilePicture(){
@@ -76,30 +84,5 @@ class ProfileController extends Controller
     	set_flash($response_type,$response_message);
     	return redirect(route("profile"));
 
-    }
-    /**
-     * [updatePassword description]
-     * @author Akash Sharma
-     * @date   2020-10-28
-     * @param  ChangePasswordFormRequest $request [description]
-     * @return [type]                         [description]
-     */
-    public function updatePassword(ChangePasswordFormRequest $request)
-    {
-    	$input_data = $request->input();
-    	$user = \Auth::user();
-    	if(!Hash::check($input_data['current_password'], $user->password)){
-    		$response_type='error';
-    		$response_message="Invalid current password";
-    	}elseif(User::saveData($input_data,$user)){
-    		$response_type='success';
-    		$response_message="Password update successfully";
-    	}else{
-    		$response_type='error';
-    		$response_message='Error occoured, Please try again.';
-    	}
-
-    	set_flash($response_type,$response_message);
-    	return redirect()->back();
     }
 }

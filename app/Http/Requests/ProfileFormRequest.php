@@ -33,6 +33,10 @@ class ProfileFormRequest extends FormRequest
             'contact_number'  => 'required|digits:10|max:10|unique:users,contact_number,'.$id,
             'gender'          => 'required',
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
+            'change_password' => 'sometimes',
+            'current_password'=> 'required_with:change_password|different:password|nullable',
+            'password'        =>  'required_with:change_password|confirmed|min:8|nullable',
+            'password_confirmation'  => 'required_with:password',
             
         ];
         return $rules;

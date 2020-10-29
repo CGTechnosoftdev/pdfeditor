@@ -6,11 +6,6 @@
 <section class="content">
 	<!-- Info boxes -->
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-password-modal">
-				Change Password
-			</button>	
-		</div>
 		<div class="col-xs-8 col-md-8">
 			@if(isset($user))
 			{!! Form::model($user,['route' => ['update-profile'],'id'=>'profile_form','class'=>'form-horizontal','method' => 'put','enctype'=>"multipart/form-data"]) !!}
@@ -77,6 +72,42 @@
 					@endif
 				</div>
 			</div>
+			<div class="form-group {{ $errors->has('profile_picture') ? ' has-error' : '' }}">
+				<div class="col-sm-offset-4 col-sm-8" >
+					<label class="control-label">
+						{{ Form::checkbox('change_password',1,old('change_password'),['id'=>'change-password-checkbox']) }} Change Password
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group {{ $errors->has('current_password') ? ' has-error' : '' }}">
+				<label for="current_password" class="control-label col-sm-4 required">Current Password</label>
+				<div class="col-sm-8" >
+					{!! Form::password('current_password',['class'=>'form-control change-password-elements '.($errors->has("current_password") ? "is-invalid" : ""),'id'=>'current_password','disabled'=>(empty(old('change_password')) ? true : false)]) !!}
+					<div class="{{ ($errors->has('current_password') ? 'invalid-feedback' : '') }}">
+						{{ $errors->first('current_password') }}
+					</div>
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+				<label for="password" class="control-label col-sm-4 required">Password</label>
+				<div class="col-sm-8" >
+					{!! Form::password('password',['class'=>'form-control change-password-elements '.($errors->has("password") ? "is-invalid" : ""),'id'=>'password','disabled'=>(empty(old('change_password')) ? true : false)]) !!}
+					<div class="{{ ($errors->has('password') ? 'invalid-feedback' : '') }}">
+						{{ $errors->first('password') }}
+					</div>
+				</div>
+			</div>
+			<div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+				<label for="password_confirmation" class="control-label col-sm-4 required">Confirm Password</label>
+				<div class="col-sm-8" >
+					{!! Form::password('password_confirmation',['class'=>'form-control change-password-elements '.($errors->has("password_confirmation") ? "is-invalid" : ""),'id'=>'password_confirmation','disabled'=>(empty(old('change_password')) ? true : false)]) !!}
+					<div class="{{ ($errors->has('password_confirmation') ? 'invalid-feedback' : '') }}">
+						{{ $errors->first('password_confirmation') }}
+					</div>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="col-sm-offset-4 col-sm-8">
 					{!! Form::submit((isset($user)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
@@ -100,65 +131,7 @@
 
 </section>
 <!-- /.content -->
-
-<div class="modal fade" id="change-password-modal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Change Password</h4>
-				</div>
-				{{ Form::open(['route' => 'update-password','method'=>'patch','id'=>'update_password_form']) }}
-				@csrf  
-				<div class="modal-body">
-					<div class="row">
-						<div class="form-group col-lg-12 {{ $errors->has('current_password') ? ' has-error' : '' }}">
-							{!! Form::label('current_password', "Current Password",['class'=>'form-control-label']) !!}
-							<span class="required-label">*</span>
-							{!! Form::password('current_password',['class'=>'form-control '.($errors->has("current_password") ? "is-invalid" : ""),'id'=>'current_password']) !!}
-							<div class="{{ ($errors->has('current_password') ? 'invalid-feedback' : '') }}">
-								{{ $errors->first('current_password') }}
-							</div>
-						</div>
-						<div class="form-group col-lg-12 {{ $errors->has('password') ? ' has-error' : '' }}">
-							{!! Form::label('password', "Password",['class'=>'form-control-label']) !!}
-							<span class="required-label">*</span>
-							{!! Form::password('password',['class'=>'form-control '.($errors->has("password") ? "is-invalid" : ""),'id'=>'password']) !!}
-							<div class="{{ ($errors->has('password') ? 'invalid-feedback' : '') }}">
-								{{ $errors->first('password') }}
-							</div>
-						</div>
-						<div class="form-group col-lg-12 {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-							{!! Form::label('password_confirmation', "Confirm Password",['class'=>'form-control-label']) !!}
-							<span class="required-label">*</span>
-							{!! Form::password('password_confirmation',['class'=>'form-control '.($errors->has("password_confirmation") ? "is-invalid" : ""),'id'=>'password_confirmation']) !!}
-							<div class="{{ ($errors->has('password_confirmation') ? 'invalid-feedback' : '') }}">
-								{{ $errors->first('password_confirmation') }}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-					{!! Form::submit('Change Password',['class'=>'btn btn-success']) !!}
-				</div>
-				{{ Form::close() }}
-
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-</div>
 @endsection
 @section('additionaljs')
-@if($errors->hasAny(['current_password','password','password_confirmation']))
-<script type="text/javascript">
-	$("#change-password-modal").modal();
-</script>
-@endif
 {!! JsValidator::formRequest('App\Http\Requests\ProfileFormRequest','#profile_form') !!}
-{!! JsValidator::formRequest('App\Http\Requests\ChangePasswordFormRequest','#update_password_form') !!}
 @endsection
