@@ -21,6 +21,13 @@ return [
             'active_segments' => ['roles'],
             'permissions'=>['role-list'],
         ],
+        [
+            'label' => 'Business Category',
+            'icon' => 'building',
+            'route_name' => 'business-category.index',
+            'active_segments' => ['business-category'],
+            'permissions'=>['business-category-list'],
+        ],
         // [
         //     'label' => 'User',
         //     'icon' => 'user',

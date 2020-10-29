@@ -24,3 +24,25 @@ Breadcrumbs::for('roles.edit', function ($trail,$id) {
 	$trail->push('Roles and Rights', route('roles.index'));
 	$trail->push('Edit Role and Rights', route('roles.edit',$id));
 });
+
+
+
+// Home > Business Category
+Breadcrumbs::for('business_category.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Business Category', route('business-category.index'));
+});
+
+// Home > roles > add
+Breadcrumbs::for('business_category.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Business Category', route('business-category.index'));
+	$trail->push('Add Business Category', route('business-category.create'));
+});
+
+// Home > roles > updated
+Breadcrumbs::for('business_category.edit', function ($trail,$id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Business Category', route('business-category.index'));
+	$trail->push('Edit Business Category', route('business-category.edit',$id));
+});

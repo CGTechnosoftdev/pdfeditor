@@ -6,6 +6,14 @@ function blockUI(){
 function unblockUI(){
 	$.unblockUI();
 }
+function textchange(obj,anotherField)
+        {
+            var value = $(obj).val();
+            //alert(value);
+			var str = value.replace(/[ ]+/g, '-');
+			$(anotherField).val(str);
+		
+        }
 jQuery(document).ready(function() {	
 	
 	$(document).on('click','.change-status',function(e){
