@@ -16,14 +16,14 @@ return [
         ],
         [
             'label' => 'Roles and Rights',
-            'icon' => 'key',
+            'icon_image' => 'role-and-rights.svg',
             'route_name' => 'roles.index',
             'active_segments' => ['roles'],
             'permissions'=>['role-list'],
         ],
         [
             'label' => 'Sub-Admin',
-            'icon' => 'users',
+            'icon_image' => 'admin.svg',
             'route_name' => 'sub-admin.index',
             'active_segments' => ['sub-admin'],
             'permissions'=>['sub-admin-list'],

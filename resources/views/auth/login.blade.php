@@ -2,19 +2,19 @@
 
 @section('content')
 <div class="login-box">
+	<!-- /.login-logo -->
+	<div class="login-box-body">
 	<div class="login-logo">
 		<a href="#"><b>{{ config('app.name') }}</b></a>
 	</div>
-	<!-- /.login-logo -->
-	<div class="login-box-body">
-		<p class="login-box-msg">Admin Login</p>
+		<p class="login-box-msg">Sign In</p>
 		<form method="POST" action="{{ route('login') }}">
 			@csrf
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group has-feedback">
-						<label for="email" class="col-form-label">{{ __('E-Mail') }}</label>
-						<input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+						<label for="email" class="col-form-label">{{ __('Email Address') }}</label>
+						<input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
 						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 						@error('email')
 						<span class="invalid-feedback" role="alert">
@@ -26,7 +26,7 @@
 				<div class="col-md-12">
 					<div class="form-group has-feedback">
 						<label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
-						<input type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Password">
+						<input type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
 						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 						@error('password')
 						<span class="invalid-feedback" role="alert">
@@ -37,9 +37,11 @@
 				</div>
 				<div class="col-md-12">
 					<div class="checkbox">
-						<label>
+						<!-- <label>
 							<input type="checkbox"> Remember Me
-						</label>
+						</label> -->
+						<input class="styled-checkbox" id="remember-me" type="checkbox" value="value1">
+    					<label for="remember-me">Remember Me</label>
 					</div>
 				</div>
 				<!-- /.col -->
@@ -48,7 +50,7 @@
 				</div>
 				<div class="col-md-8 text-right">
 					<a class="btn btn-link" href="{{ route('password.request') }}">
-						{{ __('Forgot Your Password?') }}
+						{{ __('Forgot Password?') }}
 					</a>
 				</div>
 				<!-- /.col -->

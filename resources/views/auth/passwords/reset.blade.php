@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="login-box-body">
     <div class="login-logo">
         <a href="#"><b>{{ config('app.name') }}</b></a>
     </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Reset Password</p>
+        <p class="login-box-msg">Forgot Pasword</p>
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
@@ -15,7 +15,7 @@
                 <div class="col-md-12">
                     <div class="form-group has-feedback">
                         <label for="email" class="col-form-label">{{ __('E-Mail') }}</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email"  value="{{ $email ?? old('email') }}" autocomplete="email" autofocus>
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email"  value="{{ $email ?? old('email') }}" autocomplete="email" autofocus>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         @error('email')
                         <span class="invalid-feedback" role="alert">

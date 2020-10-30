@@ -19,7 +19,12 @@ $user = auth()->user();
 			@if(!empty($permission_status))
 			<li class="{{in_array($segment2,$menu['active_segments']) ? 'active' : ''}} {{empty($menu['child']) ? '' : 'treeview'}} ">
 				<a href="{{ empty($menu['child']) ? route($menu['route_name']) : '#'  }}">
-					<i class="fa fa-{{ $menu['icon'] }}"></i><span>{{ $menu['label'] }}</span>
+					@if(!empty($menu['icon_image']))
+					<img src="{{ asset('public/admin/dist/img/'.$menu['icon_image']) }}">
+					@else
+					<i class="fa fa-{{ $menu['icon'] ?? 'list' }}"></i>
+					@endif
+					<span>{{ $menu['label'] }}</span>
 					@if(!empty($menu['child']))
 					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
@@ -32,7 +37,12 @@ $user = auth()->user();
 					@if(empty($submenu['permission']) || $user->can($submenu['permission']))
 					<li class="{{in_array($segment2,$submenu['active_segments']) ? 'active' : ''}}">
 						<a href="{{ route($submenu['route_name']) }}">
-							<i class="fa fa-{{ $submenu['icon'] }}"></i>{{$submenu['label']}}
+							@if(!empty($submenu['icon_image']))
+							<img src="{{ asset('public/admin/dist/img/'.$submenu['icon_image']) }}">
+							@else
+							<i class="fa fa-{{ $submenu['icon'] ?? 'list' }}"></i>
+							@endif
+							{{$submenu['label']}}
 						</a>
 					</li>
 					@endif
