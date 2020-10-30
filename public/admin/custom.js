@@ -6,8 +6,15 @@ function blockUI(){
 function unblockUI(){
 	$.unblockUI();
 }
-jQuery(document).ready(function() {	
-	
+jQuery(document).ready(function() {		
+	$(document).on('click','#change-password-checkbox',function(e){
+		if ($(this).is(":checked")) {
+			$(".change-password-elements").removeAttr("disabled");
+		} else {
+			$(".change-password-elements").attr("disabled", "disabled");
+		}
+	});
+
 	$(document).on('click','.change-status',function(e){
 		e.preventDefault();
 		blockUI();

@@ -43,6 +43,7 @@
 	<!-- ./wrapper -->
 	@include('admin.partials.commonjs') 
 	@yield('additionaljs')
+	
 </body>
 </html>
 

@@ -15,7 +15,7 @@
 </a>
 @endif
 @if(array_key_exists('delete',$buttons) && (empty($buttons['delete']['permission']) || auth()->user()->can($buttons['delete']['permission'])))
-{!! Form::open(['url' => route($buttons['delete']['route_url'],$buttons['delete']['route_param']),'method' => 'post','class'=>'delete-form']) !!}
+{!! Form::open(['url' => route($buttons['delete']['route_url'],$buttons['delete']['route_param']),'method' => 'post','class'=>'delete-form',"onSubmit"=>"return confirm('Are you sure you want to delete?') "]) !!}
 {{method_field('DELETE')}}
 {!! Form::token() !!}
 {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'delete_button','title'=>'Delete'] ) !!}

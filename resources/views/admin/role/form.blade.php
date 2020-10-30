@@ -45,12 +45,12 @@
 						@endforeach
 						
 					</div>
-
-					<div class="box-footer">
-						{!! Form::submit((isset($role)) ? 'Update' : 'Save',['class'=>'btn btn-info']) !!}
-						{!! Html::link(route('roles.index'),'Cancel',['class'=>'btn btn-default']) !!}
-					</div>  <!-- /.box-footer -->
-
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 ">
+							{!! Form::submit((isset($role)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
+							{!! Html::link(route('roles.index'),'Cancel',['class'=>'btn btn-default']) !!}
+						</div>
+					</div>
 					{{ Form::close() }}
 
 				</div>
@@ -67,5 +67,5 @@
 
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\RolesFormRequest') !!}
+<!-- {!! JsValidator::formRequest('App\Http\Requests\RolesFormRequest') !!} -->
 @endsection
