@@ -37,7 +37,6 @@ class ProfileController extends Controller
 
     	$data_array['breadcrumb']= \Breadcrumbs::render('profile'); 
     	$data_array['gender_arr']=config('custom_config.gender_arr');
-    	$data_array['country_arr'] = Country::getCountryCodeList();
 
     	$user->country_id = $user->country_id ?? config('constant.DEFAULT_PHONECODE');
     	$user->profile_picture_url = getUploadedFile($user->profile_picture,'profile_picture');

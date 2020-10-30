@@ -33,7 +33,7 @@ class SubAdminController extends AdminBaseController
     		$action_button_template='admin.datatable.actions';
     		$status_button_template = 'admin.datatable.status';
     		$model=User::query()->orderBy('created_at','desc');
-    		$model=User::with('modelHasRole','modelHasRole.role')->where('users.id','!=',\Auth::user()->id)->orderBy('created_at','desc');
+    		$model=User::with('modelHasRole','modelHasRole.role')->where('users.id','!=',\Auth::user()->id)->orderBy('created_at','desc')->get();
     		$table=Datatables()->of($model);
     		if(!empty($filter_data['statusFilter'])){
     			$model->where(['status'=>$filter_data['statusFilter']]);
@@ -62,12 +62,12 @@ class SubAdminController extends AdminBaseController
     		return $table->make(true);
     	}
     	$data_array = [
-    		'title'=>'Sub-Admin',
-    		'heading'=>'Manage Sub-Admin',
+    		'title'=>'Sub Admin',
+    		'heading'=>'Manage Sub Admin',
     		'breadcrumb'=>\Breadcrumbs::render('sub-admin.index'),
     	];
     	$data_array['add_new_button'] = [
-    		'label' => 'Add Sub-Admin',
+    		'label' => 'Add Sub Admin',
     		'link'	=> route('sub-admin.create'),
     		'permission'=>'sub-admin-create'
     	];
@@ -88,13 +88,12 @@ class SubAdminController extends AdminBaseController
   	public function create()
   	{  
   		$data_array = [
-  			'title'=>'Add Sub-Admin',
-  			'heading'=>'Add Sub-Admin',
+  			'title'=>'Add Sub Admin',
+  			'heading'=>'Add Sub Admin',
   			'breadcrumb'=>\Breadcrumbs::render('sub-admin.create'),
   		];
   		$data_array['gender_arr'] = config('custom_config.gender_arr');
   		$data_array['status_arr'] = config('custom_config.all_status_arr');
-  		$data_array['country_arr'] = Country::getCountryCodeList();
   		$data_array['role_arr'] = Role::list();
   		return view('admin.sub-admin.form',$data_array);
   	}
@@ -107,7 +106,7 @@ class SubAdminController extends AdminBaseController
   			if(!empty($request->file('profile_picture'))){
   				$uploadedImage = uploadFile($request,'profile_picture');
   				if(!empty($uploadedImage['success'])){
-  					$inputData['profile_picture'] = $uploadedImage['data'];
+  					$input_data['profile_picture'] = $uploadedImage['data'];
   				}
   			}
   			$sub_admin = User::saveData($input_data);
@@ -115,7 +114,7 @@ class SubAdminController extends AdminBaseController
   			if($sub_admin){
   				DB::commit();
   				$response_type='success';
-  				$response_message='Sub-Admin added successfully';
+  				$response_message='Sub Admin added successfully';
   			}else{
   				DB::rollback();
   				$response_type='error';
@@ -141,13 +140,12 @@ class SubAdminController extends AdminBaseController
   	public function edit(User $sub_admin)
   	{
   		$data_array = [
-  			'title'=>'Edit Sub-Admin',
-  			'heading'=>'Edit Sub-Admin',
+  			'title'=>'Edit Sub Admin',
+  			'heading'=>'Edit Sub Admin',
   			'breadcrumb'=>\Breadcrumbs::render('sub-admin.edit',['id'=>$sub_admin->id]),
   		];
   		$data_array['gender_arr'] = config('custom_config.gender_arr');
   		$data_array['status_arr'] = config('custom_config.all_status_arr');
-  		$data_array['country_arr'] = Country::getCountryCodeList();
   		$data_array['role_arr'] = Role::list();
 
   		$sub_admin['role_id'] = $sub_admin->roles->first()->id;
@@ -181,7 +179,7 @@ class SubAdminController extends AdminBaseController
 			if($sub_admin){
 				DB::commit();
 				$response_type='success';
-				$response_message='Sub-Admin edited successfully';
+				$response_message='Sub Admin edited successfully';
 			}else{
 				DB::rollback();
 				$response_type='error';
@@ -209,7 +207,7 @@ class SubAdminController extends AdminBaseController
 		try{
 			if($sub_admin->delete()){
 				$response_type='success';
-				$response_message='Sub-Admin deleted successfully';
+				$response_message='Sub Admin deleted successfully';
 			}else{
 				$response_type='error';
 				$response_message='Error occoured, Please try again';

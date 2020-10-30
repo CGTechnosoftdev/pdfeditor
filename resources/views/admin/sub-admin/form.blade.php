@@ -60,15 +60,9 @@
 				</div>
 			</div>
 			<div class="form-group {{ $errors->has('country_id') || $errors->has('contact_number') ? ' has-error' : '' }}">
-				<label for="contact_number" class="control-label col-sm-4 required">Contact Number</label>
-				<div class="col-md-4">
-					{!! Form::select('country_id', [''=>"Select Code"] + $country_arr, old('country_id'), ['class'=>'form-control required','data-unit'=>'from']) !!}
-					@if ($errors->has('country_id'))
-					<span class="help-block"><strong>{{ $errors->first('country_id') }}</strong></span>
-					@endif
-				</div>
-				<div class="col-md-4">
-					{{ Form::text('contact_number',old('contact_number'),array('placeholder'=>'Enter Contact Number','class'=>"form-control"))}}
+				<label for="contact_number" class="control-label col-sm-4 required">Phone Number</label>
+				<div class="col-md-8">
+					{{ Form::text('contact_number',old('contact_number'),array('placeholder'=>'Enter Phone Number','class'=>"form-control"))}}
 					@if ($errors->has('contact_number'))
 					<span class="help-block"><strong>{{ $errors->first('contact_number') }}</strong></span>
 					@endif
