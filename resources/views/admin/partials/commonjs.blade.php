@@ -18,3 +18,4 @@
 <script src="{{ asset('public/admin/bower_components/toastr/toastr.min.js') }}"></script>
 @toastr_render
 <script src="{{ asset('public/admin/custom.js') }}"></script>
+<script src="{{ asset('public/admin/new-custom.js') }}"></script>

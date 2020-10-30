@@ -18,5 +18,7 @@
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/select2/dist/css/select2.min.css') }}">
 <!-- checkbox -->
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/icheck/all.css') }}">
+<!-- Style -->
+<link rel="stylesheet" href="{{ asset('public/admin/style.css') }}">
 <!-- Custom -->
 <link rel="stylesheet" href="{{ asset('public/admin/custom.css') }}">

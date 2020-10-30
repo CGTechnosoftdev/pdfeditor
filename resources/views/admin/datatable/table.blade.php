@@ -12,17 +12,19 @@
 						<div class="row">
 							<div class="form-group validated col-lg-12">
 								<div class="kt-portlet__body">
-									<table class="table table-bordered table-striped" id="laravel_datatable">
-										<thead>
-											<tr>
-												@foreach($data_table['data_column_config']['columns'] as $column)
-												<th>
-													{{ (array_key_exists('label',$column) ? $column['label'] : '') }}
-												</th>
-												@endforeach
-											</tr>
-										</thead>
-									</table>
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped" id="laravel_datatable">
+											<thead>
+												<tr>
+													@foreach($data_table['data_column_config']['columns'] as $column)
+													<th>
+														{{ (array_key_exists('label',$column) ? $column['label'] : '') }}
+													</th>
+													@endforeach
+												</tr>
+											</thead>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
