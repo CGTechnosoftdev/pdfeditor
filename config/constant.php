@@ -38,6 +38,7 @@ return [
     'MODEL_TYPE' => 'App\Models\User',
 
     'DEFAULT_PHONECODE' => 226,
+    'PASSWORD_REGEX' => '/(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$)/u',
     
 ];
 

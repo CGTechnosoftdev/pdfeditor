@@ -26,7 +26,7 @@ class SubAdminFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
-        $password_requred = 'required|min:8';
+        $password_requred = 'required';
         if($this->sub_admin){
             $id=$this->sub_admin->id;
             $password_requred = 'sometimes';
@@ -39,7 +39,7 @@ class SubAdminFormRequest extends FormRequest
             'gender' => 'required',
             'role_id' => 'required',            
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
-            'password' => $password_requred,
+            'password' => $password_requred.'|nullable|min:8|max:32|regex:'.config('constant.PASSWORD_REGEX'),
             'confirm_password' => 'sometimes|same:password|required_with:password'
         ];
         return $rules;
