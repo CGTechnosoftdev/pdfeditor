@@ -19,7 +19,7 @@
 					<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 						<label for="name" class="control-label text-left col-sm-4 required">Name<span class="required-label">*</span></label>	
 						<div class="col-sm-8">
-							{{ Form::text('name',old('name'),['placeholder'=>'Enter Name','class'=>"form-control","onKeyup" => "createSlug('#name','#slug')"]) }}
+							{{ Form::text('name',old('name'),['placeholder'=>'Enter Name','class'=>"form-control",'id'=>'name',"onKeyup" => "createSlug('#name','#slug')"]) }}
 							@if ($errors->has('name'))
 							<span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
 							@endif
@@ -28,7 +28,7 @@
 					<div class="form-group {{ $errors->has('slug') ? ' has-error' : '' }}">
 						<label for="slug" class="control-label text-left col-sm-4 required">Slug<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::text('slug',old('slug'),['placeholder'=>'Enter Slug','class'=>"form-control"])}}
+							{{ Form::text('slug',old('slug'),['placeholder'=>'Enter Slug','class'=>"form-control",'id'=>'slug'])}}
 							@if ($errors->has('slug'))
 							<span class="help-block"><strong>{{ $errors->first('slug') }}</strong></span>
 							@endif

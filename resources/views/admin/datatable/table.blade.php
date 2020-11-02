@@ -72,9 +72,9 @@
 			$(statusFilterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
 		}
 
-		// $(document).on('change','#status_dropdown',function(){
-		// 	table.draw();
-		// });
+		$(document).on('change','#status_dropdown',function(){
+			table.draw();
+		});
 
 		// $('#searchForm').on('submit', function(e) {
 		// 	e.preventDefault();
