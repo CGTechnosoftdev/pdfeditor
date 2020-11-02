@@ -70,3 +70,10 @@ Breadcrumbs::for('sub-admin.edit', function ($trail,$id) {
 	$trail->push('Sub-Admin', route('sub-admin.index'));
 	$trail->push('Edit Sub-Admin', route('sub-admin.edit',$id));
 });
+
+// Home > sub-admin > show
+Breadcrumbs::for('sub-admin.show', function ($trail,$id,$name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Sub-Admin', route('sub-admin.index'));
+	$trail->push($name.' Detail', route('sub-admin.edit',$id));
+});

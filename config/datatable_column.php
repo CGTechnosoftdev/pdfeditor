@@ -25,7 +25,8 @@ return [
             ['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'#'],
             ['data'=>'first_name', 'name'=> 'first_name','label'=>'First Name','orderBy'=>'asc'],
             ['data'=>'last_name', 'name'=> 'last_name','label'=>'Last Name','orderBy'=>'asc'],
-            ['data'=>'model_has_role.role.name', 'name'=> 'model_has_role.role.name','label'=>'Role','orderBy'=>'asc'],
+            ['data'=>'role_name', 'name'=> 'role_name','label'=>'Role','orderBy'=>'asc'],
+            ['data'=>'gender_name', 'name'=> 'gender_name','label'=>'Gender','orderBy'=>'asc'],
             ['data'=>'contact_number', 'name'=> 'contact_number','label'=>'Phone Number','orderBy'=>'asc'],
             ['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
             ['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']

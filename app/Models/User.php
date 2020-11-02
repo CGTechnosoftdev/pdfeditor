@@ -24,6 +24,11 @@ class User extends Authenticatable
     protected $fillable = [
         'parent_id','first_name','last_name','profile_picture','gender','country_id','contact_number','email', 'password','status'
     ];
+
+    protected $appends = [
+        'full_name','profile_picture_url','gender_name','role_name','status_name'
+    ];
+
     protected $dates = ['deleted_at'];
     public $timestamps = true;
 
@@ -44,6 +49,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function getFullNameAttribute(){
+        return $this->first_name." ".$this->last_name;
+    }    
+
+    public function getProfilePictureUrlAttribute(){
+        return  getUploadedFile($this->profile_picture,'profile_picture');
+    }    
+
+    public function getGenderNameAttribute(){
+        $gender_arr = config('custom_config.gender_arr');
+        return  $gender_arr[$this->gender] ?? '';
+    }
+
+    public function getRoleNameAttribute(){
+        $roles = $this->getRoleNames()->toArray();
+        return  (empty($roles) ? '' : (is_array($roles) ? implode(',',$roles) : $roles));
+    }
+
+    public function getStatusNameAttribute(){
+        $status_arr = config('custom_config.all_status_arr');
+        return  $status_arr[$this->status] ?? '';
+    }
 
 
     /**

@@ -22,7 +22,7 @@ return [
             'permissions'=>['role-list'],
         ],
         [
-            'label' => 'Sub-Admin',
+            'label' => 'Sub-Admins',
             'icon_image' => 'admin.svg',
             'route_name' => 'sub-admin.index',
             'active_segments' => ['sub-admin'],

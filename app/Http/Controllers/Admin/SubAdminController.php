@@ -42,6 +42,7 @@ class SubAdminController extends AdminBaseController
     		$table->addColumn('action','');
     		$table->editColumn('action',function($row) use ($action_button_template){
     			$buttons=[
+    				'view'=>['route_url'=>'sub-admin.show', 'route_param'=>[$row->id]],
     				'edit'=>['route_url'=>'sub-admin.edit', 'route_param'=>[$row->id],'permission'=>'sub-admin-edit'],
     				'delete'=>['route_url'=>'sub-admin.destroy', 'route_param'=>[$row->id],'permission'=>'sub-admin-delete'],
     			];
@@ -149,7 +150,6 @@ class SubAdminController extends AdminBaseController
   		$data_array['role_arr'] = Role::list();
 
   		$sub_admin['role_id'] = $sub_admin->roles->first()->id;
-  		$sub_admin['profile_picture_url'] = getUploadedFile($sub_admin->profile_picture,'profile_picture');
   		$data_array['sub_admin'] = $sub_admin;
   		return view('admin.sub-admin.form',$data_array);
   	}
@@ -193,6 +193,23 @@ class SubAdminController extends AdminBaseController
 		}
 		set_flash($response_type,$response_message);
 		return redirect()->route('sub-admin.index');
+	}
+
+	/**
+	 * [show description]
+	 * @author Akash Sharma
+	 * @date   2020-11-02
+	 * @param  User       $sub_admin [description]
+	 * @return [type]                [description]
+	 */
+	public function show(User $sub_admin){
+		$data_array = [
+  			'title'=>$sub_admin->full_name." Detail",
+  			'heading'=>$sub_admin->full_name." Detail",
+  			'breadcrumb'=>\Breadcrumbs::render('sub-admin.show',$sub_admin->id,$sub_admin->full_name),
+  			'sub_admin' => $sub_admin
+  		];
+  		return view('admin.sub-admin.view',$data_array);
 	}
 
 	/**
