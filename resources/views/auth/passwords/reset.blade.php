@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group has-feedback">
-                        <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
+                        <label for="password" class="col-form-label text-md-right">{{ __('Password') }} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ config('constant.PASSWORD_REGEX_INSTRUCTION') }}"></i></label>
                         <input type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Password">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         @error('password')

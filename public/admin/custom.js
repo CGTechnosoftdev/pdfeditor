@@ -7,22 +7,18 @@ function unblockUI(){
 	$.unblockUI();
 }
 
-/**
- * [createSlug description]
- * @author Akash Sharma
- * @date   2020-10-29
- * @param  {[type]}   source [description]
- * @param  {[type]}   target [description]
- * @return {[type]}          [description]
- */
+/** [create slug function] */
 function createSlug(source,target){
 	var value = $(source).val();
 	var str = value.replace(/[ ]+/g, '-');
 	$(target).val(str.toLowerCase());
 
 }
+
 jQuery(document).ready(function() {		
-	
+	/*** Tool Tip ***/
+	$('[data-toggle="tooltip"]').tooltip();
+
 	$(document).on('click','#change-password-checkbox',function(e){
 		if ($(this).is(":checked")) {
 			$(".change-password-elements").removeAttr("disabled");
@@ -70,3 +66,15 @@ jQuery(document).ready(function() {
 	});
 });
 
+/*** Upload and preview image ***/
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('#blah')
+			.attr('src', e.target.result);
+		};
+		reader.readAsDataURL(input.files[0]);
+	}
+}

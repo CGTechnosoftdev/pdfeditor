@@ -80,7 +80,7 @@
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-						<label for="password" class="control-label text-left col-sm-4 required">Password</label>
+						<label for="password" class="control-label text-left col-sm-4 required">Password <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ config('constant.PASSWORD_REGEX_INSTRUCTION') }}"></i></label>
 						<div class="col-sm-8" >
 							{!! Form::password('password',['class'=>'form-control change-password-elements '.($errors->has("password") ? "is-invalid" : ""),'id'=>'password','disabled'=>(empty(old('change_password')) ? true : false)]) !!}
 							<div class="{{ ($errors->has('password') ? 'invalid-feedback' : '') }}">

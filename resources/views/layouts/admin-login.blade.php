@@ -37,5 +37,11 @@
 	<script src="{{ asset('public/admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="{{ asset('public/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript">
+		/*** Tool Tip ***/
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </body>
 </html>
