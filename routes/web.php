@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();	
 });
 
-Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middleware'=>['auth']], function () {
+Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middleware'=>['auth','preventBackHistory']], function () {
 	Route::get('/', 'DashboardController@index');
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
