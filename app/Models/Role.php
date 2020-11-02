@@ -19,7 +19,7 @@ class Role extends BaseRole
 	/**
 	 * [saveData description]
 	 * @author Akash Sharma
-	 * @date   2020-10-27
+	 * @date   2020-10-28
 	 * @param  [type]     $dataArray [description]
 	 * @param  array      $model     [description]
 	 * @return [type]                [description]
@@ -27,7 +27,7 @@ class Role extends BaseRole
 	public static function saveData($dataArray,$model=array())
 	{ 
 		$model = (empty($model) ? new self() : $model);
-		$dataArray['guard_name'] = config('auth.defaults.guard');;
+		$dataArray['guard_name'] = config('auth.defaults.guard');
 		$model->fill($dataArray);
 		if($model->save()){
 			return $model;
@@ -45,7 +45,7 @@ class Role extends BaseRole
 	public static function list()
 	{
 		$list = self::where('status',config('constant.STATUS_ACTIVE'))
-		->where('id','!=',2)
+		->where('id','!=',config('constant.USER_ROLE'))
 		->orderBy('name','asc')
 		->pluck('name','id')
 		->toArray();

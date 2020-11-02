@@ -22,12 +22,18 @@
 		@include('admin.partials.sidebar')
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
-			<section class="content-header">
+			<!-- <section class="content-header">
 				<h1>
 					@yield('heading')
 					<small>@yield('sub_heading')</small>
 				</h1>
 				@yield('breadcrumb')
+			</section> -->
+			<section class="content-header">
+				<div class="head-title">
+					<h1 class="pull-left">@yield('heading')</h1>
+					@include('admin.partials.add-new-button')
+				</div>
 			</section>
 			<!-- Main content -->
 			<section class="content">
@@ -43,6 +49,7 @@
 	<!-- ./wrapper -->
 	@include('admin.partials.commonjs') 
 	@yield('additionaljs')
+	
 </body>
 </html>
 

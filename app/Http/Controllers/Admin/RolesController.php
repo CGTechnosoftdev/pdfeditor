@@ -30,7 +30,7 @@ class RolesController extends AdminBaseController
     	if(request()->ajax()) {
     		$action_button_template='admin.datatable.actions';
     		$status_button_template = 'admin.datatable.status';
-    		$model=Role::query()->where('is_deletable','!=',config('constant.STATUS_NO'))->orderBy('created_at','desc');
+    		$model=Role::query()->where('is_deletable','!=',config('constant.STATUS_NO'));
     		$table=Datatables()->of($model);
     		if(!empty($filter_data['statusFilter'])){
     			$model->where(['status'=>$filter_data['statusFilter']]);
@@ -51,13 +51,14 @@ class RolesController extends AdminBaseController
     				'type'=>'role',
     				'status'=>$row->status,
     				'action_class' => 'change-status',
-    				'permission'=>'role-edits'
+    				'permission'=>'role-edit'
     			];
     			return view($status_button_template,compact('button_data'));
     		});
 
     		return $table->make(true);
     	}
+
     	$data_array = [
     		'title'=>'Roles and Rights',
     		'heading'=>'Manage Roles and Rights',

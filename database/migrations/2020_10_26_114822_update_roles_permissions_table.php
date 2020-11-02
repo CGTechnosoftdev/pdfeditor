@@ -18,8 +18,7 @@ class UpdateRolesPermissionsTable extends Migration
             $table->bigInteger('created_by')->unsigned()->after('is_deletable');
             $table->bigInteger('updated_by')->unsigned()->nullable()->after('created_by');
             $table->tinyInteger('status')->default(1)->comment('0=>inactive,1=>active')->after('updated_at');          
-            $table->softDeletes()->after('updated_at');      
-            
+            $table->softDeletes()->after('updated_at');                  
         });
 
         Schema::table('permissions', function (Blueprint $table) {

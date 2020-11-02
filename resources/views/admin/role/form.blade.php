@@ -18,36 +18,52 @@
 					{!! Form::token() !!}
 					<div class="row">
 						<!-- role name -->
-						<div class="col-md-6">
-							<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-								{!! Form::label('name', 'Name',['class'=>'control-label']) !!}
-								<span class="required-label">*</span>
-								{{ Form::text('name',null,array('placeholder'=>'Enter name','class'=>"form-control"))}}
-								@if ($errors->has('name'))
-								<span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
-								@endif
+						<div class="col-lg-6 col-md-9 col-sm-12">
+							<div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">								
+								<div class="col-md-4 col-sm-4">
+									{!! Form::label('name', 'Name',['class'=>'control-label']) !!}
+									<span class="required-label">*</span>
+								</div>																
+								<div class="col-md-8 col-sm-8">
+									{{ Form::text('name',null,array('placeholder'=>'Enter name','class'=>"form-control"))}}
+									@if ($errors->has('name'))
+									<span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
+									@endif
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">						
-						@foreach($permissions as $module => $sub_permission)
-						<div class="col-md-12 text-bold">
-							{{$module}}
-						</div>
-						<div class="col-md-12">
-							@foreach($sub_permission as $data)
-							<label style="padding-left:10px; font-weight: 500;">
-								{{ Form::checkbox('permission[]', $data['id'],in_array($data['id'],$role_permissions) ? true : false) }}
-								{{ $data['name']  }}
-							</label>
-							@endforeach
-						</div>
-						@endforeach
-						
+					<div class="row role-and-rights">	
+						<div class="col-lg-6 col-md-9 col-sm-12">	
+							<div class="row">				
+								@foreach($permissions as $module => $sub_permission)
+								<div class="col-md-4 col-sm-4 text-bold">
+									{{$module}}
+								</div>
+								<div class="col-md-8 col-sm-8">
+									<!-- @foreach($sub_permission as $data)
+									<label style="padding-left:10px; font-weight: 500;">
+										{{ Form::checkbox('permission[]', $data['id'],in_array($data['id'],$role_permissions) ? true : false) }}
+										{{ $data['name']  }}
+									</label>
+									@endforeach -->
+									<ul>
+										@foreach($sub_permission as $data)
+										<li>
+											{{ Form::checkbox('permission[]', $data['id'],(in_array($data['id'],$role_permissions) ? true : false),['class'=>'styled-checkbox','id'=>'permission_'.$data['id']]) }}
+											<label for="{{ 'permission_'.$data['id'] }}">{{ $data['name']  }}</label>
+										</li>
+										@endforeach
+									</ul>
+
+								</div>
+								@endforeach
+							</div>
+						</div>						
 					</div>
 
 					<div class="box-footer">
-						{!! Form::submit((isset($role)) ? 'Update' : 'Save',['class'=>'btn btn-info']) !!}
+						{!! Form::submit((isset($role)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
 						{!! Html::link(route('roles.index'),'Cancel',['class'=>'btn btn-default']) !!}
 					</div>  <!-- /.box-footer -->
 
@@ -67,5 +83,5 @@
 
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\RolesFormRequest') !!}
+<!-- {!! JsValidator::formRequest('App\Http\Requests\RolesFormRequest') !!} -->
 @endsection

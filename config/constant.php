@@ -21,11 +21,12 @@ return [
     'STATUS_NO' => '0',
 	
 	// User Roles
-	'ADMIN_ROLE' => '2',
-	'USER_ROLE' => '1',
+	'ADMIN_ROLE' => '1',
+	'USER_ROLE' => '2',
 	
     'MODEL_TYPE' => 'App\User',
-    'TOP_100_FORM' => 'TOP_100_FORM44',
+    'TOP_100_FORM' => 'TOP_100_FORM',
+	'DEFAULT_MODEL_TYPE' => 'App\Models\User',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',
@@ -37,6 +38,10 @@ return [
     'PUBLIC_DATE_TIME_FORMAT' => "d-m-Y h:i A",
    
     'MODEL_TYPE' => 'App\Models\User',
+
+    'DEFAULT_PHONECODE' => 226,
+    'PASSWORD_REGEX_INSTRUCTION' => "Your password must contain 1 uppercase,1 lowercase, 1 digit and 1 special character",
+    'PASSWORD_REGEX' => '/(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$)/u',
     
 ];
 

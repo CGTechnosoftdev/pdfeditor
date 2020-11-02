@@ -249,7 +249,7 @@ class Top100FormController extends AdminBaseController
 			   'data_source' => route('top100form.form.list'),
 			   'data_column_config' => config('datatable_column.forms'),
 		   ];
-		   return view('admin.form.index',$data_array);
+		   return view('admin.top100form.form.index',$data_array);
 
 	}
 
@@ -268,7 +268,7 @@ class Top100FormController extends AdminBaseController
 				'top_100_form' => $top_100_form,
 			];      
 		
-			return view('admin.form.form',$data_array); 
+			return view('admin.top100form.form.form',$data_array); 
 
 	}
 
@@ -332,7 +332,7 @@ class Top100FormController extends AdminBaseController
 	
 	
 
-		return view('admin.form.form',$data_array);
+		return view('admin.top100form.form.form',$data_array);
 
 	}
 
@@ -455,7 +455,7 @@ public function listFaq(Request $request){
 		   'data_source' => route('top100form.faq.list'),
 		   'data_column_config' => config('datatable_column.faq'),
 	   ];
-	   return view('admin.form.index',$data_array);
+	   return view('admin.top100form.form.index',$data_array);
 
 }
 
@@ -474,7 +474,7 @@ public function createFaq(){
 			'top_100_form' => $top_100_form,
 		];      
 	
-		return view('admin.faq.form',$data_array); 
+		return view('admin.top100form.faq.form',$data_array); 
 
 }
 
@@ -535,7 +535,7 @@ public function editFaq($id){
 
 
 
-	return view('admin.faq.form',$data_array);
+	return view('admin.top100form.faq.form',$data_array);
 
 }
 
@@ -544,11 +544,10 @@ public function updateFaq(FaqFormRequest $request){
 	try{				
 		$input_data=$request->input(); 
 		
-		if(empty($Form->id))
-		{
-			//$Form->id=$input_data["id"];
-			$faq=Faq::find($input_data["id"]);
-		}
+	
+		//$Form->id=$input_data["id"];
+		$faq=Faq::find($input_data["id"]);
+	
 		
 		$faq= Form::saveData($input_data,$faq);
 

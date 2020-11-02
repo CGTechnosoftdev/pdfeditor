@@ -14,11 +14,11 @@ return [
         '2' => 'Inactive',
 
     ],
-	'all_status_arr' => [
+    'all_status_arr' => [
         '0' => 'Pending',
         '1' => 'Active',
-		'2' => 'Inactive',
-		'3' => 'Blocked',
+        '2' => 'Inactive',
+        '3' => 'Blocked',
     ],
     'yes_no_arr' => [
         '1' => 'Yes',
@@ -35,6 +35,8 @@ return [
         'top-100-form' => 'Top100Form',
         'form' => 'Form',
         'faq' => 'Faq',
+        'business_category' =>'BusinessCategory',
+        'sub-admin'=>'User',
     ],
     'date_format_arr' => [
         'Y/m/d' => 'Y/m/d',

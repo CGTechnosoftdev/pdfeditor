@@ -6,14 +6,29 @@ function blockUI(){
 function unblockUI(){
 	$.unblockUI();
 }
+
+/** [create slug function] */
 function createSlug(source,target){
 	var value = $(source).val();
 	var str = value.replace(/[ ]+/g, '-');
 	$(target).val(str.toLowerCase());
 
 }
-jQuery(document).ready(function() {	
+
 	
+
+jQuery(document).ready(function() {		
+	/*** Tool Tip ***/
+	$('[data-toggle="tooltip"]').tooltip();
+
+	$(document).on('click','#change-password-checkbox',function(e){
+		if ($(this).is(":checked")) {
+			$(".change-password-elements").removeAttr("disabled");
+		} else {
+			$(".change-password-elements").attr("disabled", "disabled");
+		}
+	});
+
 	$(document).on('click','.change-status',function(e){
 		e.preventDefault();
 		blockUI();
@@ -53,3 +68,15 @@ jQuery(document).ready(function() {
 	});
 });
 
+/*** Upload and preview image ***/
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('#blah')
+			.attr('src', e.target.result);
+		};
+		reader.readAsDataURL(input.files[0]);
+	}
+}

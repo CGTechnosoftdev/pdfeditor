@@ -19,9 +19,14 @@ Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();	
 });
 
-Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middleware'=>['auth']], function () {
+Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middleware'=>['auth','preventBackHistory']], function () {
 	Route::get('/', 'DashboardController@index');
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+	//User Profile
+	Route::get('/profile', 'ProfileController@index')->name('profile');
+	Route::put('/update-profile', 'ProfileController@update')->name('update-profile');
+	Route::get('/delete-profile-picture', 'ProfileController@deleteProfilePicture')->name('delete-profile-picture');
 
 	//Change Status Universal
     Route::post('/change-status','DashboardController@changeStatus')->name('change-status');
@@ -49,6 +54,12 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
 	//manage form
 	//Route::resource('form', 'FormController');
 	//Route::get('/delete-form-file/{id}','FormController@deleteFormFile')->name('delete-form-file');
+
+	//business-categories
+	Route::resource('business-category', 'BusinessCategoryController');
+
+    //subadmin
+    Route::resource('sub-admin', 'SubAdminController');
 	
 });
 

@@ -31,13 +31,12 @@ function set_flash($type,$message,$toastr=true){
 
 /**
  * [interpretResponse description]
- * @Author            Veer  Singh
- * @date              2019-07-12
- * @MethodDescription [return response]
- * @param             [type]        $message     [description]
- * @param             [type]        $status_code [description]
- * @param             [type]        $data        [description]
- * @return            [type]                     [description]
+ * @author Akash Sharma
+ * @date   2020-10-29
+ * @param  [type]     $message     [description]
+ * @param  [type]     $status_code [description]
+ * @param  array      $data        [description]
+ * @return [type]                  [description]
  */
 function interpretResponse($message,$status_code,$data=[])
 {
@@ -64,7 +63,9 @@ function interpretResponse($message,$status_code,$data=[])
  */
 function uploadFile($request,$file_config){
 	$fileConfigData=config('upload_config.'.$file_config);
+
 	$files=$request->file($fileConfigData['file_input']);
+	
 	$files=(is_array($files) ? $files : array($files)); 
 	if(!empty($fileConfigData['file_input_subkey'])){
 		$files = array_column($files, $fileConfigData['file_input_subkey']);    
@@ -104,15 +105,15 @@ function uploadFile($request,$file_config){
  * @param             [type]        $file_config [requested file type config]
  * @return            [type]                     [url of file's]
  */
-function getUploadedFile($files,$file_config){
+function getUploadedFile($files,$file_config,$default_status=true){
 	$fileConfigData=config('upload_config.'.$file_config);
 	$sendMultiple=(is_array($files) ? true : false);    
 	$files=(is_array($files) ? $files : array($files));    
 	$filesUrl=array();
 	foreach($files as $file){
-		$file=$file?: ($fileConfigData['placeholder']??"");
+		$file=$file ?: ((empty($default_status) ? '' : $fileConfigData['placeholder']));
 		if(!empty($file)){
-			$filesUrl[]=Storage::disk($fileConfigData['disk'])->url($fileConfigData['folder']."/".$file);
+			$filesUrl[]=Storage::disk($fileConfigData['disk'])->url("public/".$fileConfigData['folder']."/".$file);
 		}else{
 			$filesUrl[]='';
 		}
@@ -123,10 +124,12 @@ function getUploadedFile($files,$file_config){
 
 /**
  * [moveUploadedFile description]
- * @Author            TavikshaAkar
- * @date              2019-09-11
- * @MethodDescription [To move the uploaded file from temporary folder to destination folder]
- * @return            [type]
+ * @author Akash Sharma
+ * @date   2020-10-29
+ * @param  [type]     $file               [description]
+ * @param  [type]     $destination_config [description]
+ * @param  string     $source_config      [description]
+ * @return [type]                         [description]
  */
 function moveUploadedFile($file,$destination_config,$source_config='temporary'){
 	$destinationConfigData=config('upload_config.'.$destination_config);
@@ -141,11 +144,12 @@ function moveUploadedFile($file,$destination_config,$source_config='temporary'){
 	}    
 }
 /**
- * [moveUploadedFile description]
- * @Author            TavikshaAkar
- * @date              2019-09-11
- * @MethodDescription [To remove the uploaded file from destination folder]
- * @return            [type]
+ * [removeUploadedFile description]
+ * @author Akash Sharma
+ * @date   2020-10-29
+ * @param  [type]     $files       [description]
+ * @param  [type]     $file_config [description]
+ * @return [type]                  [description]
  */
 function removeUploadedFile($files,$file_config){
 	$fileConfigData=config('upload_config.'.$file_config);
@@ -281,11 +285,4 @@ function myCurrencyFormat($amount,$symbol='$'){
 		$return=number_format($amount,2);
 	}
 	return $symbol." ".$return;
-}
-
-function filterDatatableExternalSearch($requestData){
-	$dataArray = array_filter(Arr::pluck($requestData,'value','name'));
-	unset($dataArray['_token']);
-	return $dataArray;
-
 }

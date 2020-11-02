@@ -16,10 +16,24 @@ return [
         ],
         [
             'label' => 'Roles and Rights',
-            'icon' => 'key',
+            'icon_image' => 'role-and-rights.svg',
             'route_name' => 'roles.index',
             'active_segments' => ['roles'],
             'permissions'=>['role-list'],
+        ],
+        [
+            'label' => 'Sub-Admins',
+            'icon_image' => 'admin.svg',
+            'route_name' => 'sub-admin.index',
+            'active_segments' => ['sub-admin'],
+            'permissions'=>['sub-admin-list'],
+        ],
+        [
+            'label' => 'Business Category',
+            'icon' => 'building',
+            'route_name' => 'business-category.index',
+            'active_segments' => ['business-category'],
+            'permissions'=>['business-category-list'],
         ],
         [
             'label' => 'Top 100 Form',
@@ -27,7 +41,7 @@ return [
             'route_name' => 'top-100-form.index',
             'active_segments' => ['top-100-form'],
             'permissions'=>['role-list'],
-        ],
+        ]
         // [
         //     'label' => 'User',
         //     'icon' => 'user',

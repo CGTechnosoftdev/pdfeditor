@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="login-box-body">
     <div class="login-logo">
         <a href="#"><b>{{ config('app.name') }}</b></a>
     </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Reset Password</p>
+        <p class="login-box-msg">Forgot Pasword</p>
         @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group has-feedback">
-                        <label for="email" class="col-form-label">{{ __('E-Mail') }}</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+                        <label for="email" class="col-form-label">{{ __('Email Address') }}</label>
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -28,10 +28,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <button type="submit" class="btn btn-success  btn-block btn-flat"> {{ __('Send Password Reset Link') }}</button>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-success  btn-block btn-flat"> {{ __('Submit') }}</button>
                 </div>
-                <div class="col-md-4 text-right">
+                <div class="col-md-8 text-right">
                     <a class="btn btn-link" href="{{ route('login') }}">
                         {{ __('Login Now') }}
                     </a>

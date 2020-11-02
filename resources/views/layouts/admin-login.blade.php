@@ -18,6 +18,8 @@
 	<link rel="stylesheet" href="{{ asset('public/admin/bower_components/Ionicons/css/ionicons.min.css') }}">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{ asset('public/admin/dist/css/AdminLTE.min.css') }}">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="{{ asset('public/admin/style.css') }}">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,8 +34,14 @@
 <body class="hold-transition login-page">
 	@yield('content')
 	<!-- jQuery 3 -->
-	<script src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
+	<script src="{{ asset('public/admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="{{ asset('public/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('public/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript">
+		/*** Tool Tip ***/
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </body>
 </html>
