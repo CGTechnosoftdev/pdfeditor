@@ -87,6 +87,7 @@ function uploadFile($request,$file_config){
 			$randomString=generateRandomString(5);
 			$newFileName=$randomString.time().'.'.$extension;
 		}
+		//dd($fileConfigData['disk'].$fileConfigData['folder']."/".$newFileName);
 		Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder']."/".$newFileName,fopen($file,'r+'));
 		$uploadedFiles[]=$newFileName;
 	}

@@ -32,6 +32,9 @@ return [
     'model_arr'=>[
         'user'=>'User',
         'role'=>'Role',
+        'top-100-form' => 'Top100Form',
+        'form' => 'Form',
+        'faq' => 'Faq',
     ],
     'date_format_arr' => [
         'Y/m/d' => 'Y/m/d',

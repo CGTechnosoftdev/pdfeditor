@@ -21,6 +21,13 @@ return [
             'active_segments' => ['roles'],
             'permissions'=>['role-list'],
         ],
+        [
+            'label' => 'Top 100 Form',
+            'icon' => 'key',
+            'route_name' => 'top-100-form.index',
+            'active_segments' => ['top-100-form'],
+            'permissions'=>['role-list'],
+        ],
         // [
         //     'label' => 'User',
         //     'icon' => 'user',

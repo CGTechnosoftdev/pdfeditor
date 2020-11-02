@@ -9,6 +9,11 @@
 	<i class="{{($buttons['manage']['icon'] ?? 'fa fa-gear')}}"></i>{{ lang_trans(($buttons['manage']['label'] ?? 'label.manage')) }}
 </a>
 @endif
+@if(array_key_exists('manage2',$buttons) && (empty($buttons['manage2']['permission']) || auth()->user()->can($buttons['manage2']['permission'])))
+<a class="dropdown-item" href="{{ route($buttons['manage2']['route_url'],$buttons['manage2']['route_param']) }}" title="Manage">
+	<i class="{{($buttons['manage2']['icon'] ?? 'fa fa-question-circle')}}"></i>{{ lang_trans(($buttons['manage']['label'] ?? 'label.manage')) }}
+</a>
+@endif
 @if(array_key_exists('view',$buttons))
 <a class="dropdown-item" href="{{ route($buttons['view']['route_url'],$buttons['view']['route_param']) }}" title="View">
 	<i class="fa fa-eye"></i>

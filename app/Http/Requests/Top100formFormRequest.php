@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Models\Role;
-
-
+use App\Models\Top100Form;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RolesFormRequest extends FormRequest
-{
+class Top100formFormRequest extends FormRequest
+{ 
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,14 +24,12 @@ class RolesFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
-        if($this->role){
-            $id=$this->role->id;
+        if($this->Top100Form){
+            $id=$this->Top100Form->id;
         }
-        $rules=[
-            'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:roles,name,'.$id.',id,deleted_at,NULL',
+
+        return [
+            'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:business_categories,name,'.$id.',id,deleted_at,NULL',
         ];
-        return $rules;
-
     }
-
 }

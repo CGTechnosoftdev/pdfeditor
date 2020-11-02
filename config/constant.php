@@ -24,7 +24,8 @@ return [
 	'ADMIN_ROLE' => '2',
 	'USER_ROLE' => '1',
 	
-	'MODEL_TYPE' => 'App\User',
+    'MODEL_TYPE' => 'App\User',
+    'TOP_100_FORM' => 'TOP_100_FORM44',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',
