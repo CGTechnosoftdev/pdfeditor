@@ -34,8 +34,8 @@
 <body class="hold-transition login-page">
 	@yield('content')
 	<!-- jQuery 3 -->
-	<script src="{{ asset('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
+	<script src="{{ asset('public/admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="{{ asset('public/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('public/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

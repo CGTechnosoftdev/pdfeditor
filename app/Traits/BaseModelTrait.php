@@ -14,15 +14,17 @@ trait BaseModelTrait {
 	{
 		// parent::boot();
 		$user = Auth::user();
-		static::creating(function($model) use ($user)
-		{                       
-            $model->created_by = $user->id;
-            $model->updated_by = $user->id;
-        });
-		static::updating(function($model) use ($user)
-		{
-            $model->updated_by = $user->id;
-        });       
+		if(!empty($user)){
+			static::creating(function($model) use ($user)
+			{                       
+				$model->created_by = $user->id;
+				$model->updated_by = $user->id;
+			});
+			static::updating(function($model) use ($user)
+			{
+				$model->updated_by = $user->id;
+			});       
+		}
 	}
 
 
