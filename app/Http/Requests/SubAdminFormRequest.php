@@ -36,7 +36,7 @@ class SubAdminFormRequest extends FormRequest
             'last_name' => 'required|max:50|min:2|regex:/(^[a-zA-Z0-9 ]+$)/u',
             'email' => 'required|email|unique:users,email,'.$id.',id,deleted_at,NULL',
             'contact_number' => 'sometimes|nullable|digits:10|max:10|unique:users,contact_number,'.$id.',id,deleted_at,NULL',
-            'gender' => 'required',
+            'gender' => 'required|in:1,2,3',
             'role_id' => 'required',            
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
             'password' => $password_requred.'|nullable|min:8|max:32|regex:'.config('constant.PASSWORD_REGEX'),

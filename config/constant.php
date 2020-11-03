@@ -25,6 +25,8 @@ return [
 	'USER_ROLE' => '2',
 	
 	'DEFAULT_MODEL_TYPE' => 'App\Models\User',
+
+    'DEFAULT_GENDER' => '1',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',

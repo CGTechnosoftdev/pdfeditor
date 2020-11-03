@@ -33,6 +33,7 @@
 				<div class="head-title">
 					<h1 class="pull-left">@yield('heading')</h1>
 					@include('admin.partials.add-new-button')
+					@include('admin.partials.back-button')
 				</div>
 			</section>
 			<!-- Main content -->

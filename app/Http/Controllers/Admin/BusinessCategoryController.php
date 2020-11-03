@@ -57,7 +57,7 @@ class BusinessCategoryController extends AdminBaseController
 		$data_array['add_new_button'] = [
 			'label' => 'Add Business-category',
 			'link'	=> route('business-category.create'),
-			'permission'=>'role-create'
+			'permission'=>'business-category-create'
 		];
 		$data_array['data_table'] = [
 			'data_source' => route('business-category.index'),

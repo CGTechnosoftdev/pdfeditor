@@ -46,9 +46,10 @@
 					<div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
 						<label for="gender" class="control-label text-left col-sm-4 required">Gender<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
+							@php $selected_gender = old('gender') ?? config('constant.DEFAULT_GENDER') @endphp
 							@foreach($gender_arr as $key => $gender)
 							<div class="my-radio">
-								{!! Form::radio('gender', $key, (old('gender') ==  $key), ['id'=>'gender-'.$key]) !!}
+								{!! Form::radio('gender', $key, ($selected_gender ==  $key), ['id'=>'gender-'.$key]) !!}
 								<label for="{{'gender-'.$key}}">{{$gender}}</label>
 							</div>
 							@endforeach							
