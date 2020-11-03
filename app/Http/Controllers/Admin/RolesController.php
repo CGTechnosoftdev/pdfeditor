@@ -108,7 +108,7 @@ class RolesController extends AdminBaseController
   		try{
   			$input_data=$request->input(); 
   			$role = Role::saveData($input_data);
-  			$sync_permissions = $role->syncPermissions($input_data['permission']);
+  			$sync_permissions = $role->syncPermissions(($input_data['permission'] ?? []));
   			if($role){
   				$response_type='success';
   				$response_message='Role added successfully';
@@ -167,7 +167,7 @@ class RolesController extends AdminBaseController
 			$input_data=$request->input(); 
 			$input_data=$request->input(); 
 			$role = Role::saveData($input_data,$role);
-			$sync_permissions = $role->syncPermissions($input_data['permission']);
+			$sync_permissions = $role->syncPermissions(($input_data['permission'] ?? []));
 			if($role){
 				$response_type='success';
 				$response_message='Role edited successfully';
