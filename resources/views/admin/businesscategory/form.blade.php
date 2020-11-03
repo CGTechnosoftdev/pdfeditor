@@ -53,9 +53,9 @@
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
-						<label for="description" class="control-label text-left col-sm-4 required">Description<span class="required-label">*</span></label>
+						<label for="description" class="control-label text-left col-sm-4 required">Description</label>
 						<div class="col-sm-8" >
-							{{ Form::textarea('description',old('description'),['placeholder'=>'Enter Description','class'=>"form-control ckeditor"])}}
+							{{ Form::textarea('description',old('description'),['placeholder'=>'Enter Description','class'=>"form-control"])}}
 							@if ($errors->has('description'))
 							<span class="help-block"><strong>{{ $errors->first('description') }}</strong></span>
 							@endif

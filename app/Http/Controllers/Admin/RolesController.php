@@ -60,12 +60,12 @@ class RolesController extends AdminBaseController
     	}
 
     	$data_array = [
-    		'title'=>'Roles and Rights',
-    		'heading'=>'Manage Roles and Rights',
+    		'title'=>'Roles and Permissions',
+    		'heading'=>'Manage Roles and Permissions',
     		'breadcrumb'=>\Breadcrumbs::render('roles.index'),
     	];
     	$data_array['add_new_button'] = [
-    		'label' => 'Add Role and Rights',
+    		'label' => 'Add Role and Permissions',
     		'link'	=> route('roles.create'),
     		'permission'=>'role-create'
     	];
@@ -86,8 +86,8 @@ class RolesController extends AdminBaseController
   	public function create()
   	{  
   		$data_array = [
-  			'title'=>'Add Role and Rights',
-  			'heading'=>'Add Role and Rights',
+  			'title'=>'Add Role and Permissions',
+  			'heading'=>'Add Role and Permissions',
   			'breadcrumb'=>\Breadcrumbs::render('roles.create'),
   		];
   		$permissions = Permission::get();
@@ -135,8 +135,8 @@ class RolesController extends AdminBaseController
   	public function edit(Role $role)
   	{
   		$data_array = [
-  			'title'=>'Edit Role and Rights',
-  			'heading'=>'Edit Role and Rights',
+  			'title'=>'Edit Role and Permissions',
+  			'heading'=>'Edit Role and Permissions',
   			'breadcrumb'=>\Breadcrumbs::render('roles.edit',['id'=>$role->id]),
   			'role'=>$role
   		];
