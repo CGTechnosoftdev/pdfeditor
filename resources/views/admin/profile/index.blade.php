@@ -48,7 +48,7 @@
 					<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
 						<label for="email" class="control-label text-left col-sm-4 required">Email<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::text('email',old('email'),array('placeholder'=>'Enter Email','class'=>"form-control"))}}
+							<div class="form-control">{{ $user->email }}</div> 
 							@if ($errors->has('email'))
 							<span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
 							@endif
