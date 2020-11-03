@@ -24,16 +24,21 @@ class ProfileFormRequest extends FormRequest
      */
     public function rules()
     {
-        $id=Auth::user()->id;
+        $user = Auth::user();
+        $id=$user->id;
         $rules=[                
             'first_name'      => 'required|max:255|min:2',
             'last_name'       => 'max:255|min:2', 
             'email'           => 'required|email|unique:users,email,'.$id,
-            'contact_number'  => 'required|digits:10|max:10|unique:users,contact_number,'.$id,
+            'contact_number'  => 'sometimes|nullable|digits:10|max:10|unique:users,contact_number,'.$id.',id,deleted_at,NULL',
             'gender'          => 'required',
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
             'change_password' => 'sometimes',
-            'current_password'=> 'required_with:change_password|min:8||max:32|nullable',
+            'current_password'=> ['required_with:change_password','min:8','max:32','nullable',function ($attribute, $value, $fail) use ($user) {
+                if (!\Hash::check($value, $user->password)) {
+                    return $fail(__('The current password is incorrect.'));
+                }
+            }],
             'password'        =>  'required_with:change_password|different:current_password|confirmed|min:8||max:32|nullable|regex:'.config('constant.PASSWORD_REGEX'),
             'password_confirmation'  => 'required_with:password',
             

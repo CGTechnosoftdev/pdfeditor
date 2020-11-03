@@ -16,7 +16,7 @@
 					<div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
 						<label for="first_name" class="control-label text-left col-sm-4 required">First Name<span class="required-label">*</span></label>	
 						<div class="col-sm-8">
-							{{ Form::text('first_name',null,array('placeholder'=>'Enter First Name','class'=>"form-control"))}}
+							{{ Form::text('first_name',old('first_name'),array('placeholder'=>'Enter First Name','class'=>"form-control"))}}
 							@if ($errors->has('first_name'))
 							<span class="help-block"><strong>{{ $errors->first('first_name') }}</strong></span>
 							@endif
@@ -25,7 +25,7 @@
 					<div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
 						<label for="last_name" class="control-label text-left col-sm-4 required">Last Name<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::text('last_name',null,array('placeholder'=>'Enter Last Name','class'=>"form-control"))}}
+							{{ Form::text('last_name',old('last_name'),array('placeholder'=>'Enter Last Name','class'=>"form-control"))}}
 							@if ($errors->has('last_name'))
 							<span class="help-block"><strong>{{ $errors->first('last_name') }}</strong></span>
 							@endif
@@ -48,7 +48,7 @@
 					<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
 						<label for="email" class="control-label text-left col-sm-4 required">Email<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::text('email',null,array('placeholder'=>'Enter Email','class'=>"form-control"))}}
+							{{ Form::text('email',old('email'),array('placeholder'=>'Enter Email','class'=>"form-control"))}}
 							@if ($errors->has('email'))
 							<span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
 							@endif
@@ -57,7 +57,7 @@
 					<div class="form-group {{ $errors->has('contact_number') ? ' has-error' : '' }}">
 						<label for="contact_number" class="control-label text-left col-sm-4 required">Contact Number</label>
 						<div class="col-sm-8">
-							{{ Form::text('contact_number',null,array('placeholder'=>'Enter Contact Number','class'=>"form-control"))}}
+							{{ Form::text('contact_number',old('contact_number'),array('placeholder'=>'Enter Contact Number','class'=>"form-control"))}}
 							@if ($errors->has('contact_number'))
 							<span class="help-block"><strong>{{ $errors->first('contact_number') }}</strong></span>
 							@endif
