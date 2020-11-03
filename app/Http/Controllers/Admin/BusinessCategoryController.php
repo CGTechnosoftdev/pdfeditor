@@ -21,7 +21,7 @@ class BusinessCategoryController extends AdminBaseController
 		if(request()->ajax()) {
 			$action_button_template='admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
-			$model=BusinessCategory::query();
+			$model=BusinessCategory::query()->get();
 			$table=Datatables()->of($model);
 			if(!empty($filter_data['statusFilter'])){
 				$model->where(['status'=>$filter_data['statusFilter']]);
@@ -55,7 +55,7 @@ class BusinessCategoryController extends AdminBaseController
 			'breadcrumb'=>\Breadcrumbs::render('business-category.index'),
 		];
 		$data_array['add_new_button'] = [
-			'label' => 'Add Business-category',
+			'label' => 'Add Business Category',
 			'link'	=> route('business-category.create'),
 			'permission'=>'business-category-create'
 		];

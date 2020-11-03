@@ -7,6 +7,8 @@ use App\Models\Role;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubAdminFormRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CommonMail;
 use DB;
 
 class SubAdminController extends AdminBaseController
@@ -113,6 +115,17 @@ class SubAdminController extends AdminBaseController
   			$sub_admin->syncRoles([$input_data['role_id']]);
   			if($sub_admin){
   				DB::commit();
+  				//Send Welcome Email
+  				$email_config = [
+  					'config_param' => 'welcome_email',
+  					'content_data' => [
+  						'name' => $sub_admin->full_name,
+  						'email' => $sub_admin->email,
+  						'password' => $input_data['password'],
+  					],
+  				];
+  				Mail::to($sub_admin->email)->send(new CommonMail($email_config));
+
   				$response_type='success';
   				$response_message='Sub Admin added successfully';
   			}else{
@@ -208,12 +221,12 @@ class SubAdminController extends AdminBaseController
 			'breadcrumb'=>\Breadcrumbs::render('sub-admin.show',$sub_admin->id,$sub_admin->full_name),
 			'sub_admin' => $sub_admin
 		];
-    $data_array['back_button'] = [
-      'label' => 'Back',
-      'link'  => route('sub-admin.index'),
-    ];
-    return view('admin.sub-admin.view',$data_array);
-  }
+		$data_array['back_button'] = [
+			'label' => 'Back',
+			'link'  => route('sub-admin.index'),
+		];
+		return view('admin.sub-admin.view',$data_array);
+	}
 
 	/**
 	 * [destroy description]
