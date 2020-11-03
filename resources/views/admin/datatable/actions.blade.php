@@ -10,12 +10,12 @@
 </a>
 @endif
 @if(array_key_exists('manage',$buttons) && (empty($buttons['manage']['permission']) || auth()->user()->can($buttons['manage']['permission'])))
-<a class="dropdown-item" href="{{ route($buttons['manage']['route_url'],$buttons['manage']['route_param']) }}" title="Manage">
+<a class="dropdown-item" href="{{ route($buttons['manage']['route_url'],$buttons['manage']['route_param']) }}" title="Manage Version">
 	<i class="{{($buttons['manage']['icon'] ?? 'fa fa-gear')}}"></i>{{ lang_trans(($buttons['manage']['label'] ?? 'label.manage')) }}
 </a>
 @endif
 @if(array_key_exists('manage2',$buttons) && (empty($buttons['manage2']['permission']) || auth()->user()->can($buttons['manage2']['permission'])))
-<a class="dropdown-item" href="{{ route($buttons['manage2']['route_url'],$buttons['manage2']['route_param']) }}" title="Manage">
+<a class="dropdown-item" href="{{ route($buttons['manage2']['route_url'],$buttons['manage2']['route_param']) }}" title="Manage Faq">
 	<i class="{{($buttons['manage2']['icon'] ?? 'fa fa-question-circle')}}"></i>{{ lang_trans(($buttons['manage']['label'] ?? 'label.manage')) }}
 </a>
 @endif

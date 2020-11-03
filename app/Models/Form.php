@@ -13,7 +13,7 @@ class Form extends Model
     use SoftDeletes;
     use BaseModelTrait;
     
-    protected $fillable = ['form_type' ,'type_id','name','form_file'];
+    protected $fillable = ['form_type' ,'type_id','name','form_file','fillable_printable_status'];
 	protected $dates = ['deleted_at'];
     public $timestamps = true;
 

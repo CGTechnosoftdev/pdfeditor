@@ -24,12 +24,16 @@ class Top100formFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
-        if($this->Top100Form){
-            $id=$this->Top100Form->id;
+        if($this->top_100_form){
+            $id=$this->top_100_form->id;
         }
 
+
         return [
-            'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:business_categories,name,'.$id.',id,deleted_at,NULL',
+            'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:top100_forms,name,'.$id.',id,deleted_at,NULL',
+            'slug' => 'required|regex:/(^[a-zA-Z0-9,\- ]+$)/u|max:255|min:2|unique:top100_forms,name,'.$id.',id,deleted_at,NULL',
+            'relevent_keywords' => 'required',
+  
         ];
     }
 }

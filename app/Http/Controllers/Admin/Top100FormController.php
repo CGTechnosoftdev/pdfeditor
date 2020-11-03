@@ -128,7 +128,7 @@ class Top100FormController extends AdminBaseController
   			'top100Form'=> $top_100_form
   		];
 
-        // dd($businessCategory);
+        
        // $data_array["business_category"]=$businessCategory;
   		return view('admin.top100form.form',$data_array);
   	} 
@@ -188,55 +188,51 @@ class Top100FormController extends AdminBaseController
 	}
 
 	public function listForm(Request $request){
-	   
+			$top_id="";
+			
+			if(!empty($request->frm_id))
+			$top_id=$request->frm_id;		
+		    $filter_data = $request->input();		   
+			if(request()->ajax()) {
+				$top_id="";
+					if(!empty($request->frm_id))
+					$top_id=$request->frm_id;
+				$action_button_template='admin.datatable.actions';
+				$status_button_template = 'admin.datatable.status';
+				$model=Form::query()->where("type_id","=",$top_id)->orderBy('created_at','desc');
+				$table=Datatables()->of($model);
+				if(!empty($filter_data['statusFilter'])){
+					$model->where(['status'=>$filter_data['statusFilter']]);
+				}
+				$table->addIndexColumn();
+				$table->addColumn('action','');
+				$table->editColumn('action',function($row) use ($action_button_template){
+					if(!empty($_GET["frm_id"]))
+					$top_id=$_GET["frm_id"];
+					$buttons=[
+						'edit'=>['route_url'=>'top100form.form.edit', 'route_param'=>[$row->id,"frm_id=".$top_id],'permission'=>'form-edit'],
+						'delete'=>['route_url'=>'top100form.form.destroy', 'route_param'=>[$row->id,"frm_id=".$top_id],'permission'=>'form-delete'],
+					];
+					return view($action_button_template,compact('buttons'));
+				});
 	
-
-		$top_id="11";
-		if(!empty($_GET["frm_id"]))
-		$top_id=$_GET["frm_id"];
-   
-		
-		   $filter_data = $request->input();
-		   
-		   if(request()->ajax()) {
-			   $top_id="1";
-		if(!empty($_GET["frm_id"]))
-		$top_id=$_GET["frm_id"];
-			   $action_button_template='admin.datatable.actions';
-			   $status_button_template = 'admin.datatable.status';
-			   $model=Form::query()->where("type_id","=",$top_id)->orderBy('created_at','desc');
-			   $table=Datatables()->of($model);
-			   if(!empty($filter_data['statusFilter'])){
-				   $model->where(['status'=>$filter_data['statusFilter']]);
-			   }
-			   $table->addIndexColumn();
-			   $table->addColumn('action','');
-			   $table->editColumn('action',function($row) use ($action_button_template){
-				   if(!empty($_GET["frm_id"]))
-				   $top_id=$_GET["frm_id"];
-				   $buttons=[
-					   'edit'=>['route_url'=>'top100form.form.edit', 'route_param'=>[$row->id,"frm_id=".$top_id],'permission'=>'form-edit'],
-					   'delete'=>['route_url'=>'top100form.form.destroy', 'route_param'=>[$row->id,"frm_id=".$top_id],'permission'=>'form-delete'],
-				   ];
-				   return view($action_button_template,compact('buttons'));
-			   });
-   
-			   $table->editColumn('status',function($row) use ($status_button_template){
-				   $button_data=[
-					   'id'=>$row->id,
-					   'type'=>'form',
-					   'status'=>$row->status,
-					   'action_class' => 'change-status',
-					   'permission'=>'form-edit'
-				   ];
-				   return view($status_button_template,compact('button_data'));
-			   });
-   
-			   return $table->make(true);
-		   }
+				$table->editColumn('status',function($row) use ($status_button_template){
+					$button_data=[
+						'id'=>$row->id,
+						'type'=>'form',
+						'status'=>$row->status,
+						'action_class' => 'change-status',
+						'permission'=>'form-edit'
+					];
+					return view($status_button_template,compact('button_data'));
+				});
+	
+				return $table->make(true);
+			}
+			$top_100_form=Top100Form::find($top_id);
 		   $data_array = [
-			   'title'=>'Manage Form Verion',
-			   'heading'=>'Manage Form Verion',
+			   'title'=>'Manage Form Version ',
+			   'heading'=>'Manage Form Version ('.$top_100_form->name.')',
 			   'breadcrumb'=>\Breadcrumbs::render('top100form.form.list'),
 			   'top_id' => $top_id,
 		   ];
@@ -253,19 +249,21 @@ class Top100FormController extends AdminBaseController
 
 	}
 
-	public function createForm(){
-			//
-			$top_id="11";
+	public function createForm(Request $request){			
+			$top_id="";
 			$top_100_form=config("constant.TOP_100_FORM");
+			$yes_no_arr=config("custom_config.yes_no_arr");
 			
-			if(!empty($_GET["frm_id"]))
-			$top_id=$_GET["frm_id"];
+			
+			if(!empty($request->frm_id))
+			$top_id=$request->frm_id;
 			$data_array = [
 				'title'=>'Add Form Version',
 				'heading'=>'Add Form Version',
 				'breadcrumb'=>\Breadcrumbs::render('top100form.form.create'),
 				'frm_id' => $top_id,
 				'top_100_form' => $top_100_form,
+				'yes_no_arr' => $yes_no_arr,
 			];      
 		
 			return view('admin.top100form.form.form',$data_array); 
@@ -275,8 +273,13 @@ class Top100FormController extends AdminBaseController
 	public function storeForm(FormFormRequest $request) {
 
 		try{
+			$input_data=$request->validate([
+				'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2',
+				'form_file' => 'required'
+			
+			]);
 			$input_data=$request->input(); 
-		//	dd($input_data);
+		
 		if(!empty($request->file('form_file'))){
     		$upload_response = uploadFile($request,'form_file');
     		if(!empty($upload_response['success'])){
@@ -284,7 +287,13 @@ class Top100FormController extends AdminBaseController
     		}
 		}
 		
-            $businessCategory = Form::saveData($input_data);
+			$businessCategory = Form::saveData($input_data);
+			
+			if($input_data["lastest_version_id"])
+			{
+				$top_100_form=Top100Form::find($input_data["type_id"]);
+				Top100Form::where('id',$input_data["type_id"])->update(['lastest_version_id' => $businessCategory->id]);
+			}
           
             if($businessCategory){
                 $response_type='success';
@@ -303,35 +312,52 @@ class Top100FormController extends AdminBaseController
 
 	}
 
-	public function editForm($id,Form $Form){
+	public function editForm($id,Form $Form,Request $request){
 		$Form=Form::find($id);
 		$top_100_form=config("constant.TOP_100_FORM");
-	
+		$yes_no_arr=config("custom_config.yes_no_arr");
+
+		
+		if(!empty($Form->form_file))
 		$Form->form_file_url = getUploadedFile($Form->form_file,'form_file');
 
 		$fileConfig=config("upload_config.form_file");
-		//dd($fileConfig);
-		$top_id="11";
-		if(!empty($_GET["frm_id"]))
-		$top_id=$_GET["frm_id"];
+		
+		$top_id="";
+		if(!empty($request->frm_id))
+		$top_id=$request->frm_id;
+		$placeholder="";
+		$form_file_url="";
+
+	
+
+
 
 		if(!empty($Form->form_file_url))
 		{
-			$Form->form_file_url=preg_replace("/form_file/","app/public/form_file",$Form->form_file_url);
+			$placeholder="/storage/app/public/form_file/".$fileConfig["placeholder"];
+			$form_file_url=$Form->form_file_url;
 		}
-		//
+		$top_100_formObject=Top100Form::find($top_id);
+
+		$is_latest_version=0;
+		if($Form->id==$top_100_formObject["lastest_version_id"])
+		$is_latest_version=1;
+
+	
 		$data_array = [
 			'title'=>'Edit Form Version',
 			'heading'=>'Edit Form Version',
 			'breadcrumb'=>\Breadcrumbs::render('top100form.form.edit',['id'=> $Form->id]),
 			'form'=> $Form,
-			'fileConfig' => $fileConfig,
+			'form_file_url' => $form_file_url,
+			'placeholder' => $placeholder,
 			'frm_id' => $top_id,
 			'top_100_form' => $top_100_form,
+			'yes_no_arr' => $yes_no_arr,
+			'is_latest_version' => $is_latest_version,
+			
 		];
-	
-	
-
 		return view('admin.top100form.form.form',$data_array);
 
 	}
@@ -339,7 +365,26 @@ class Top100FormController extends AdminBaseController
 	public function updateForm(FormFormRequest $request,Form $Form){
 
 		try{				
+	
+			$input_data=$request->validate([
+				'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2',					
+			]);
 			$input_data=$request->input(); 
+			
+			
+			if($input_data["lastest_version_id"])
+			{
+				$top_100_form=Top100Form::find($input_data["type_id"]);
+				Top100Form::where('id',$input_data["type_id"])->update(['lastest_version_id' => $input_data["id"]]);
+			}
+	         
+
+			if(!empty($request->file('form_file'))){
+				$upload_response = uploadFile($request,'form_file');
+				if(!empty($upload_response['success'])){
+					$input_data['form_file'] = $upload_response['data'];
+				}
+			}
 			
 			if(empty($Form->id))
 			{
@@ -368,16 +413,14 @@ class Top100FormController extends AdminBaseController
 
 	}
 
-	public function destroyForm($id){
+	public function destroyForm($id,Request $request){
 		$Form=Form::find($id);
 
-		$top_id="11";
-		if(!empty($_GET["frm_id"]))
-		$top_id=$_GET["frm_id"];
+		$top_id="";
+		if(!empty($request->frm_id))
+		$top_id=$request->frm_id;
 		
 		try{
-           // dd($business_category);
-          
             $Form->delete();
             $response_type='success';
             $response_message='Form deleted successfully';
@@ -391,30 +434,30 @@ class Top100FormController extends AdminBaseController
 
 	}
 
-//for faqs
 
 public function listFaq(Request $request){
 	   
 	
 
-	$top_id="11";
-	if(!empty($_GET["frm_id"]))
-	$top_id=$_GET["frm_id"];
+	$top_id="";
+	if(!empty($request->frm_id))
+	$top_id=$request->frm_id;
 
 	
 	   $filter_data = $request->input();
 	   
 	   if(request()->ajax()) {
 		   $top_id="1";
-	if(!empty($_GET["frm_id"]))
-	$top_id=$_GET["frm_id"];
-		   $action_button_template='admin.datatable.actions';
-		   $status_button_template = 'admin.datatable.status';
-		   $model=Faq::query()->where("type_id","=",$top_id)->orderBy('created_at','desc');
-		   $table=Datatables()->of($model);
-		   if(!empty($filter_data['statusFilter'])){
-			   $model->where(['status'=>$filter_data['statusFilter']]);
-		   }
+			if(!empty($request->frm_id))
+			$top_id=$request->frm_id;
+			$action_button_template='admin.datatable.actions';
+			$status_button_template = 'admin.datatable.status';
+			$model=Faq::query()->where("type_id","=",$top_id)->orderBy('created_at','desc');
+			$table=Datatables()->of($model);
+
+			if(!empty($filter_data['statusFilter'])){
+				$model->where(['status'=>$filter_data['statusFilter']]);
+			}
 		   $table->addIndexColumn();
 		   $table->addColumn('action','');
 		   $table->editColumn('action',function($row) use ($action_button_template){
@@ -440,9 +483,10 @@ public function listFaq(Request $request){
 
 		   return $table->make(true);
 	   }
+	   $top_100_form=Top100Form::find($top_id);
 	   $data_array = [
 		   'title'=>'Manage Faq ',
-		   'heading'=>'Manage Faq',
+		   'heading'=>'Manage Faq ('.$top_100_form->name.')',
 		   'breadcrumb'=>\Breadcrumbs::render('top100form.faq.list'),
 		   'top_id' => $top_id,
 	   ];
@@ -455,17 +499,17 @@ public function listFaq(Request $request){
 		   'data_source' => route('top100form.faq.list'),
 		   'data_column_config' => config('datatable_column.faq'),
 	   ];
-	   return view('admin.top100form.form.index',$data_array);
+	   return view('admin.top100form.faq.index',$data_array);
 
 }
 
-public function createFaq(){
+public function createFaq(Request $request){
 		//
-		$top_id="11";
+		$top_id="";
 		$top_100_form=config("constant.TOP_100_FORM");
 		
-		if(!empty($_GET["frm_id"]))
-		$top_id=$_GET["frm_id"];
+		if(!empty($request->frm_id))
+		$top_id=$request->frm_id;
 		$data_array = [
 			'title'=>'Add Faq',
 			'heading'=>'Add Faq',
@@ -482,7 +526,7 @@ public function storeFaq(FaqFormRequest $request) {
 
 	try{
 		$input_data=$request->input(); 
-	//	dd($input_data);
+	
 	if(!empty($request->file('form_file'))){
 		$upload_response = uploadFile($request,'form_file');
 		if(!empty($upload_response['success'])){
@@ -509,26 +553,21 @@ public function storeFaq(FaqFormRequest $request) {
 
 }
 
-public function editFaq($id){
+public function editFaq($id,Request $request){
 	$faq=Faq::find($id);
 	$top_100_form=config("constant.TOP_100_FORM");
 
+	$top_id="";
+	if(!empty($request->frm_id))
+	$top_id=$request->frm_id;
 
 
-
-	//dd($fileConfig);
-	$top_id="11";
-	if(!empty($_GET["frm_id"]))
-	$top_id=$_GET["frm_id"];
-
-
-	//
+	
 	$data_array = [
 		'title'=>'Edit Faq',
 		'heading'=>'Edit Faq',
 		'breadcrumb'=>\Breadcrumbs::render('top100form.faq.edit',['id'=> $faq->id]),
 		'form'=> $faq,
-	
 		'frm_id' => $top_id,
 		'top_100_form' => $top_100_form,
 	];
@@ -570,15 +609,15 @@ public function updateFaq(FaqFormRequest $request){
 
 }
 
-public function destroyFaq($id){
+public function destroyFaq($id,Request $request){
 	$faq=Faq::find($id);
 
-	$top_id="11";
-	if(!empty($_GET["frm_id"]))
-	$top_id=$_GET["frm_id"];
+	$top_id="";
+	if(!empty($request->frm_id))
+	$top_id=$request->frm_id;
 	
 	try{
-	   // dd($business_category);
+	   
 	  
 	   $faq->delete();
 		$response_type='success';

@@ -24,13 +24,12 @@ class FormFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
-        if($this->Form){
-            $id=$this->Form->id;
+        if($this->form){
+            $id=$this->form->id;
         }
+     
         //|unique:form,name,'.$id.',id,deleted_at,NULL
 
-        return [
-            'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2',
-        ];
+        return [];
     }
 }

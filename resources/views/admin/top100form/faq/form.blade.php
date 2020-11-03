@@ -37,18 +37,19 @@
 				<div class="form-group {{ $errors->has('answer') ? ' has-error' : '' }}">
 					<label for="answer" class="control-label text-left col-sm-4 required">Answer<span class="required-label">*</span></label>	
 					<div class="col-sm-8">
-						{{ Form::text('answer',null,array('placeholder'=>'Enter Answer','class'=>"form-control"))}}
+						{{ Form::textarea('answer',null,array('placeholder'=>'Enter Answer','class'=>"form-control ckeditor"))}}
 						@if ($errors->has('answer '))
 						<span class="help-block"><strong>{{ $errors->first('answer') }}</strong></span>
 						@endif
 					</div>
+					
 				</div>
 
 				
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-8">
 						{!! Form::submit((isset($form)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
-						{!! Html::link(route('top100form.form.list'),'Cancel',['class'=>'btn btn-default']) !!}
+						{!! Html::link(route('top100form.faq.list'),'Cancel',['class'=>'btn btn-default']) !!}
 					</div>
 				</div>
 				{{ Form::close() }}
@@ -66,5 +67,6 @@
 
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\FormFormRequest') !!}
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+{!! JsValidator::formRequest('App\Http\Requests\FaqFormRequest') !!}
 @endsection

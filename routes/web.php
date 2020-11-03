@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
 	Route::get('/top-100-form/edit-form/{id}', 'Top100FormController@editForm')->name('top100form.form.edit');
 	Route::put('/top-100-form/update-form', 'Top100FormController@updateForm')->name('top100form.form.update');
 	Route::delete('/top-100-form/destroy-form/{id}', 'Top100FormController@destroyForm')->name('top100form.form.destroy');
+	
 
 
 	Route::get('/top-100-form/faq', 'Top100FormController@listFaq')->name('top100form.faq.list');

@@ -12,6 +12,7 @@
 				<div class="box-body">
 					<!-- begin:: Content -->
 					<input type="hidden" name="top_id" id="top_id" value="{{$top_id}}" />
+					<a class="btn btn-success pull-right" href="{{route('top-100-form.index')}}">Back</a>
 					@include('admin.top100form.faq.table')
 					<!-- end:: Content -->
 
