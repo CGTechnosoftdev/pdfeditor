@@ -3,25 +3,28 @@ body {
 }
 
 canvas, .canvas-container {
-    -webkit-box-shadow: 2px 5px 8px 6px lightgrey;
-    -moz-box-shadow: 2px 5px 8px 6px lightgrey;
-    box-shadow: 2px 5px 8px 6px lightgrey;
+    -webkit-box-shadow: 3px 1px 5px 2px #010204;
+    -moz-box-shadow: 3px 1px 5px 2px #010204;
+    box-shadow: 3px 1px 5px 2px #010204;
 }
 
 .toolbar {
     width: 100%;
-    background-color: #f4d2ce;
-    height: 70px;
+    background-color: #fff;
+    height: 105px;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 10;
+    display: block;
 }
 
 #pdf-container {
-    margin-top: 90px;
+    margin-top: 105px;
     padding-left: 10px;
     text-align: center;
+    background: #7f7f7f;
+    padding-top: 20px;
 }
 
 button:focus {
@@ -31,11 +34,9 @@ button:focus {
 .toolbar .tool {
     display: inline-block;
     color: #000;
-    height: 100%;
-    padding-top: 10px;
-    padding-left: 10px;
-    margin-right: 5px;
-    margin-top: 8px;
+    height: auto;
+    border: 1px solid lightgray;
+    margin-right: 4px;
 }
 
 .toolbar .tool label,
@@ -43,7 +44,7 @@ button:focus {
 .toolbar .tool input {
     display: inline-block;
     width: auto;
-    height: auto !important;
+    height: auto;
     padding: 0;
 
 }
@@ -73,17 +74,45 @@ button:focus {
 } */
 
 .toolbar .tool .tool-button {
-    background-color: rgb(234 151 141);
-    border: 1px solid rgb(234 151 141);
-    color: #fff;
+    border: rgba(0, 0, 0, 0.15);
     cursor: pointer;
+    background: #fff;
 }
 
 .toolbar .tool .tool-button:hover,
 .toolbar .tool .tool-button.active {
-    background-color: rgb(220 53 69);
-    border-color: rgb(220 53 69);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.15);
 }
 .heading h4{
     color: #dc3545;
+}
+.toolbar .logo {
+    color: #e48778;
+    width: 160px;
+    position: absolute;
+    padding-top: 30px;
+    padding-left: 10px;
+    border-right: 1px solid lightgray;
+    padding-bottom: 34px;
+}
+.logo h3{
+    color: darksalmon;
+}
+.toolbar-top {
+    width: auto;
+    margin-left: 180px;
+    padding-top: 15px;
+}
+.toolbar-bottom {
+    margin-left: 180px;
+    width: auto;
+    padding-top: 10px;
+    border-top: 1px solid lightgray;
+}
+button.tool-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
