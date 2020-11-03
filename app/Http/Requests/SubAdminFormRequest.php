@@ -40,7 +40,8 @@ class SubAdminFormRequest extends FormRequest
             'role_id' => 'required',            
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
             'password' => $password_requred.'|nullable|min:8|max:32|regex:'.config('constant.PASSWORD_REGEX'),
-            'confirm_password' => 'sometimes|same:password|required_with:password'
+            'confirm_password' => 'sometimes|same:password|required_with:password',
+            'status' => 'required'
         ];
         return $rules;
 

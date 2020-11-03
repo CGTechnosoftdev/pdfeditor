@@ -203,12 +203,12 @@ class SubAdminController extends AdminBaseController
 	 */
 	public function show(User $sub_admin){
 		$data_array = [
-  			'title'=>$sub_admin->full_name." Detail",
-  			'heading'=>$sub_admin->full_name." Detail",
-  			'breadcrumb'=>\Breadcrumbs::render('sub-admin.show',$sub_admin->id,$sub_admin->full_name),
-  			'sub_admin' => $sub_admin
-  		];
-  		return view('admin.sub-admin.view',$data_array);
+			'title'=>$sub_admin->full_name." Detail",
+			'heading'=>$sub_admin->full_name." Detail",
+			'breadcrumb'=>\Breadcrumbs::render('sub-admin.show',$sub_admin->id,$sub_admin->full_name),
+			'sub_admin' => $sub_admin
+		];
+		return view('admin.sub-admin.view',$data_array);
 	}
 
 	/**
