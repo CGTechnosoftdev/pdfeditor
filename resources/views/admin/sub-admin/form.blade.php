@@ -97,7 +97,7 @@
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('status') ? ' has-error' : '' }}">
-						<label for="status" class="control-label text-left col-sm-4 required">Status</label>
+						<label for="status" class="control-label text-left col-sm-4 required">Status<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
 							{!! Form::select('status',[''=>"Select Status"] + $status_arr, old('status'), ['class'=>'form-control required','data-unit'=>'from']) !!}
 							@if ($errors->has('status'))
