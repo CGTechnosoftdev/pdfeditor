@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Models\Form;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FaqFormRequest extends FormRequest
@@ -24,8 +23,8 @@ class FaqFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
-        if($this->Form){
-            $id=$this->Form->id;
+        if($this->faq){
+            $id=$this->faq->id;
         }
         //|unique:form,name,'.$id.',id,deleted_at,NULL
 

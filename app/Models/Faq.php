@@ -21,7 +21,6 @@ class Faq extends Model
     public static function saveData($dataArray,$model=array())
 	{ 
 		$model = (empty($model) ? new self() : $model);
-	//	$dataArray['guard_name'] = config('auth.defaults.guard');;
 		$model->fill($dataArray);
 		if($model->save()){
 			return $model;

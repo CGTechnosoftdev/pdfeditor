@@ -44,17 +44,14 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
 	
 
 
-	Route::get('/top-100-form/faq', 'Top100FormController@listFaq')->name('top100form.faq.list');
-	Route::get('/top-100-form/create-faq', 'Top100FormController@createFaq')->name('top100form.faq.create');
-	Route::post('/top-100-form/store-faq', 'Top100FormController@storeFaq')->name('top100form.faq.store');
-	Route::get('/top-100-form/edit-faq/{id}', 'Top100FormController@editFaq')->name('top100form.faq.edit');
-	Route::put('/top-100-form/update-faq', 'Top100FormController@updateFaq')->name('top100form.faq.update');
-	Route::delete('/top-100-form/destroy-faq/{id}', 'Top100FormController@destroyFaq')->name('top100form.faq.destroy');
+	Route::get('/top-100-form/faq/{top_100_form}', 'Top100FormController@listFaq')->name('top100form.faq.list');
+	Route::get('/top-100-form/create-faq/{top_100_form}', 'Top100FormController@createFaq')->name('top100form.faq.create');
+	Route::post('/top-100-form/store-faq/{top_100_form}', 'Top100FormController@storeFaq')->name('top100form.faq.store');
+	Route::get('/top-100-form/edit-faq/{top_100_form}/{faq}', 'Top100FormController@editFaq')->name('top100form.faq.edit');
+	Route::put('/top-100-form/update-faq/{top_100_form}/{faq}', 'Top100FormController@updateFaq')->name('top100form.faq.update');
+	Route::delete('/top-100-form/destroy-faq/{top_100_form}/{faq}', 'Top100FormController@destroyFaq')->name('top100form.faq.destroy');
 
 	Route::resource('top-100-form', 'Top100FormController');
-	//manage form
-	//Route::resource('form', 'FormController');
-	//Route::get('/delete-form-file/{id}','FormController@deleteFormFile')->name('delete-form-file');
 
 	//business-categories
 	Route::resource('business-category', 'BusinessCategoryController');

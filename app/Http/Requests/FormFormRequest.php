@@ -24,8 +24,10 @@ class FormFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
+        $file_required = 'required';
         if($this->form){
             $id=$this->form->id;
+            $file_required = 'nullable|sometimes';
         }
      
         //|unique:form,name,'.$id.',id,deleted_at,NULL
