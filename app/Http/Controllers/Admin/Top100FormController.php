@@ -90,8 +90,7 @@ class Top100FormController extends AdminBaseController
 	{
 		try{
 
-			$input_data=$request->input(); 
-
+			$input_data=$request->input();
 
 			$businessCategory = Top100Form::saveData($input_data);
 
@@ -190,9 +189,6 @@ class Top100FormController extends AdminBaseController
 	public function listForm(Request $request,Top100Form $top_100_form){
 		$filter_data = $request->input();		   
 		if(request()->ajax()) {
-			$top_id="";
-			if(!empty($request->frm_id))
-				$top_id=$request->frm_id;
 			$action_button_template='admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
 			$model=Form::query()->where("type_id","=",$top_100_form->id)->orderBy('created_at','desc');
@@ -244,21 +240,13 @@ class Top100FormController extends AdminBaseController
 
 	}
 
-	public function createForm(Request $request,Top100Form $top_100_form){			
-	
-		
-
-		$yes_no_arr=config("custom_config.yes_no_arr");
-
-
-		if(!empty($request->frm_id))
-			$top_id=$request->frm_id;
+	public function createForm(Request $request,Top100Form $top_100_form){	
 		$data_array = [
 			'title'=>'Add Form Version',
 			'heading'=>'Add Form Version',
 			'breadcrumb'=>\Breadcrumbs::render('top100form.form.create',$top_100_form->id),
 			'top_100_form' => $top_100_form,			
-			'yes_no_arr' => $yes_no_arr,
+			'yes_no_arr' =>config("custom_config.yes_no_arr"),
 		];      
 
 		return view('admin.top100form.form.form',$data_array); 
@@ -266,13 +254,10 @@ class Top100FormController extends AdminBaseController
 	}
 
 	public function storeForm(Top100formVersionFormRequest $request,Top100Form $top_100_form) {
-
 		try{
-		
 			$input_data=$request->input(); 
 			$input_data["type_id"]=$top_100_form->id;
 			$input_data["form_type"]=config("constant.TOP_100_FORM");
-
 
 			if(!empty($request->file('form_file'))){
 				$upload_response = uploadFile($request,'form_file');
@@ -282,13 +267,9 @@ class Top100FormController extends AdminBaseController
 			}
 
 			$form = Form::saveData($input_data);
-
-			if(!empty($input_data["lastest_version_id"]))
-			{
-			
-				Top100Form::where('id',$input_data["type_id"])->update(['lastest_version_id' => $form->id]);
+			if(!empty($input_data["is_latest_version"])){
+				$top_100_form = Top100Form::saveData(['lastest_version_id'=>$form->id],$top_100_form);
 			}
-
 			if($form){
 				$response_type='success';
 				$response_message='Form added successfully';
@@ -306,51 +287,19 @@ class Top100FormController extends AdminBaseController
 
 	}
 
-	public function editForm(Top100Form $top_100_form,Form $form,Request $request){
-	
-		
-	
-		$yes_no_arr=config("custom_config.yes_no_arr");
-
-
-		if(!empty($form->form_file))
+	public function editForm(Top100Form $top_100_form,Form $form,Request $request){	
+		if(!empty($form->form_file)){
 			$form->form_file_url = getUploadedFile($form->form_file,'form_file');
-
-		$fileConfig=config("upload_config.form_file");
-
-		$top_id="";
-		if(!empty($request->frm_id))
-			$top_id=$request->frm_id;
-		$placeholder="";
-		$form_file_url="";
-
-
-
-
-
-		if(!empty($form->form_file_url))
-		{
-			$placeholder="/storage/app/public/form_file/".$fileConfig["placeholder"];
-			$form_file_url=$form->form_file_url;
 		}
-
-
-		$is_latest_version=0;
-		if($form->id==$top_100_form->lastest_version_id)
-			$is_latest_version=1;
-
+		$form->is_latest_version = ($top_100_form->lastest_version_id == $form->id);
 
 		$data_array = [
 			'title'=>'Edit Form Version',
 			'heading'=>'Edit Form Version',
-	    	'breadcrumb'=>\Breadcrumbs::render('top100form.form.edit',$top_100_form->id,$form->id),
+			'breadcrumb'=>\Breadcrumbs::render('top100form.form.edit',$top_100_form->id,$form->id),
 			'form'=> $form,
-			'form_file_url' => $form_file_url,
-			'placeholder' => $placeholder,
 			'top_100_form' => $top_100_form,	
-			'yes_no_arr' => $yes_no_arr,
-			'is_latest_version' => $is_latest_version,
-
+			'yes_no_arr' => config("custom_config.yes_no_arr")
 		];
 		return view('admin.top100form.form.form',$data_array);
 
@@ -358,23 +307,8 @@ class Top100FormController extends AdminBaseController
 
 	public function updateForm(Top100formVersionFormRequest $request,Top100Form $top_100_form,Form $form){
 
-		try{				
-
-		
+		try{
 			$input_data=$request->input(); 
-			$input_data["type_id"]=$top_100_form->id;
-			$input_data["form_type"]=config("constant.TOP_100_FORM");
-			
-            $lastest_version_id=0;
-			if(!empty($input_data["lastest_version_id"]))
-			{
-				$lastest_version_id=$input_data["id"];
-			}
-				
-				Top100Form::where('id',$top_100_form->id)->update(['lastest_version_id' => $lastest_version_id]);
-			
-
-
 			if(!empty($request->file('form_file'))){
 				$upload_response = uploadFile($request,'form_file');
 				if(!empty($upload_response['success'])){
@@ -382,11 +316,12 @@ class Top100FormController extends AdminBaseController
 				}
 			}
 
-	
+			$form = Form::saveData($input_data,$form);
+			if(!empty($input_data["is_latest_version"])){
+				$top_100_form = Top100Form::saveData(['lastest_version_id'=>$form->id],$top_100_form);
+			}
 
-			$Form = Form::saveData($input_data,$form);
-
-			if($Form){
+			if($form){
 				$response_type='success';
 				$response_message='Form edited successfully';
 			}else{
@@ -476,7 +411,7 @@ class Top100FormController extends AdminBaseController
 	} 
 
 	public function createFaq(Top100Form $top_100_form,Request $request){
-	
+
 		if(!empty($request->frm_id))
 			$top_id=$request->frm_id;
 		$data_array = [
@@ -517,7 +452,7 @@ class Top100FormController extends AdminBaseController
 		$data_array = [
 			'title'=>'Edit Faq',
 			'heading'=>'Edit Faq',
-			 'breadcrumb'=>\Breadcrumbs::render('top100form.faq.edit',$top_100_form->id,$faq->id),
+			'breadcrumb'=>\Breadcrumbs::render('top100form.faq.edit',$top_100_form->id,$faq->id),
 			'faq'=> $faq,
 			'top_100_form' => $top_100_form,
 		];
