@@ -11,8 +11,6 @@
 			<div class="box">
 				<div class="box-body">
 					<!-- begin:: Content -->
-
-					<a class="btn btn-success pull-right" href="{{route('top-100-form.index')}}">Back</a>
 					@include('admin.top100form.form.table')
 					<!-- end:: Content -->
 

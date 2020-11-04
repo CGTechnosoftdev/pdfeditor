@@ -232,6 +232,10 @@ class Top100FormController extends AdminBaseController
 			'link'	=> route('top100form.form.create',$top_100_form->id),
 			'permission'=>'role-create'
 		];
+		$data_array['back_button'] = [
+			'label' => 'Back',
+			'link'  => route('top-100-form.index'),
+		];
 		$data_array['data_table'] = [
 			'data_source' => route('top100form.form.list',$top_100_form->id),
 			'data_column_config' => config('datatable_column.forms'),
@@ -401,6 +405,10 @@ class Top100FormController extends AdminBaseController
 			'label' => 'Add Faq ',
 			'link'	=> route('top100form.faq.create',$top_100_form->id),
 			'permission'=>'role-create'
+		];
+		$data_array['back_button'] = [
+			'label' => 'Back',
+			'link'  => route('top-100-form.index'),
 		];
 		$data_array['data_table'] = [
 			'data_source' => route('top100form.faq.list',$top_100_form->id),
