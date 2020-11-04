@@ -28,7 +28,7 @@ class Top100FormController extends AdminBaseController
 		if(request()->ajax()) {
 			$action_button_template='admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
-			$model=Top100Form::query()->orderBy('created_at','desc');
+			$model=Top100Form::query();
 			$table=Datatables()->of($model);
 			if(!empty($filter_data['statusFilter'])){
 				$model->where(['status'=>$filter_data['statusFilter']]);
@@ -191,7 +191,7 @@ class Top100FormController extends AdminBaseController
 		if(request()->ajax()) {
 			$action_button_template='admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
-			$model=Form::query()->where("type_id","=",$top_100_form->id)->orderBy('created_at','desc');
+			$model=Form::query()->where("type_id","=",$top_100_form->id);
 			$table=Datatables()->of($model);
 			if(!empty($filter_data['statusFilter'])){
 				$model->where(['status'=>$filter_data['statusFilter']]);
@@ -367,7 +367,7 @@ class Top100FormController extends AdminBaseController
 		if(request()->ajax()) {
 			$action_button_template='admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
-			$model=Faq::query()->where("type_id","=",$top_100_form->id)->orderBy('created_at','desc');
+			$model=Faq::query()->where("type_id","=",$top_100_form->id);
 			$table=Datatables()->of($model);
 
 			if(!empty($filter_data['statusFilter'])){
