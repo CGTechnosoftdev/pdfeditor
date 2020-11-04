@@ -10,15 +10,15 @@
 		<div class="row">
 		<div class="col-xs-12 col-lg-6 col-md-9">
 				@if(isset($form))
-				{{ Form::model($form,['route' => ['top100form.form.update',$form->id],'class'=>'form-horizontal','method'=>'put','enctype'=>"multipart/form-data"]) }}
+				{{ Form::model($form,['route' => ['top100form.form.update',$top_100_form->id,$form->id],'class'=>'form-horizontal','method'=>'put','enctype'=>"multipart/form-data"]) }}
 				{{ Form::hidden('id',$form->id,array())}}
 				@else
-				{{ Form::open(['route' => 'top100form.form.store','method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
+				{{ Form::open(['route' => ['top100form.form.store',$top_100_form->id],'method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
 				@endif
 				{!! Form::token() !!}
 			
-				{{ Form::hidden('type_id',$frm_id,array())}}
-				{{ Form::hidden('form_type',$top_100_form,array())}}
+			
+			
 				
 			
 
@@ -64,7 +64,7 @@
 					<div class="form-group {{ $errors->has('fillable_printable_status') ? ' has-error' : '' }}">
 						<label for="fillable_printable_status" class="control-label text-left col-sm-4 required">Is latest version?</label>
 						<div class="col-sm-8" >							
-							{!! Form::checkbox('lastest_version_id',$frm_id,(!empty($is_latest_version)?1:false)) !!}
+							{!! Form::checkbox('lastest_version_id',$top_100_form->id,(!empty($is_latest_version)?1:false)) !!}
 							@if ($errors->has('fillable_printable_status'))
 							 <span class="help-block"><strong>{{ $errors->first('fillable_printable_status') }}</strong></span>
 							@endif		
@@ -75,7 +75,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-8">
 						{!! Form::submit((isset($form)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
-						{!! Html::link(route('top100form.form.list',"frm_id=".$frm_id),'Cancel',['class'=>'btn btn-default']) !!}
+						{!! Html::link(route('top100form.form.list',$top_100_form->id),'Cancel',['class'=>'btn btn-default']) !!}
 					</div>
 				</div>
 				{{ Form::close() }}
@@ -94,5 +94,5 @@
 @endsection
 @section('additionaljs')
 
-{!! JsValidator::formRequest('App\Http\Requests\FormFormRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Top100formVersionFormRequest') !!}
 @endsection

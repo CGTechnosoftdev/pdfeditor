@@ -35,12 +35,12 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
 	Route::resource('roles', 'RolesController');
 	//top-100-form
 
-	Route::get('/top-100-form/form', 'Top100FormController@listForm')->name('top100form.form.list');
-	Route::get('/top-100-form/create-form', 'Top100FormController@createForm')->name('top100form.form.create');
-	Route::post('/top-100-form/store-form', 'Top100FormController@storeForm')->name('top100form.form.store');
-	Route::get('/top-100-form/edit-form/{id}', 'Top100FormController@editForm')->name('top100form.form.edit');
-	Route::put('/top-100-form/update-form', 'Top100FormController@updateForm')->name('top100form.form.update');
-	Route::delete('/top-100-form/destroy-form/{id}', 'Top100FormController@destroyForm')->name('top100form.form.destroy');
+	Route::get('/top-100-form/form/{top_100_form}', 'Top100FormController@listForm')->name('top100form.form.list');
+	Route::get('/top-100-form/create-form/{top_100_form}', 'Top100FormController@createForm')->name('top100form.form.create');
+	Route::post('/top-100-form/store-form/{top_100_form}', 'Top100FormController@storeForm')->name('top100form.form.store');
+	Route::get('/top-100-form/edit-form/{top_100_form}/{form}', 'Top100FormController@editForm')->name('top100form.form.edit');
+	Route::put('/top-100-form/update-form/{top_100_form}/{form}', 'Top100FormController@updateForm')->name('top100form.form.update');
+	Route::delete('/top-100-form/destroy-form/{top_100_form}/{form}', 'Top100FormController@destroyForm')->name('top100form.form.destroy');
 	
 
 

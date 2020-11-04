@@ -61,5 +61,5 @@
 @endsection
 @section('additionaljs')
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-{!! JsValidator::formRequest('App\Http\Requests\FaqFormRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Top100formFaqFormRequest') !!}
 @endsection

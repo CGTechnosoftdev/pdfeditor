@@ -100,44 +100,44 @@ Breadcrumbs::for('top-100-form.edit', function ($trail,$id) {
 
 
 
-// Home > top-100-form
-Breadcrumbs::for('top100form.form.list', function ($trail) {
+// Home > top-100-form > version
+Breadcrumbs::for('top100form.form.list', function ($trail,$id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Form', route('top100form.form.list'));
+	$trail->push('Form', route('top100form.form.list',$id));
 });
 
-// Home > roles > add
-Breadcrumbs::for('top100form.form.create', function ($trail) {
+// Home > top-100-form > version > add
+Breadcrumbs::for('top100form.form.create', function ($trail,$id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Form', route('top100form.form.list'));
-	$trail->push('Add Form', route('top100form.form.create'));
+	$trail->push('Form', route('top100form.form.list',$id));
+	$trail->push('Add Form', route('top100form.form.create',$id));
 });
 
-// Home > roles > updated
-Breadcrumbs::for('top100form.form.edit', function ($trail,$id) {
+// Home > top-100-form > version > updated
+Breadcrumbs::for('top100form.form.edit', function ($trail,$top_id,$id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Form', route('top100form.form.list'));
-	$trail->push('Edit Form', route('top100form.form.edit',$id));
+	$trail->push('Form', route('top100form.form.list',$id));
+	$trail->push('Edit Form', route('top100form.form.edit',[$top_id,$id]));
 });
 
 
-// Home > top-100-form
-Breadcrumbs::for('top100form.faq.list', function ($trail) {
+// Home > top-100-form > faq > list
+Breadcrumbs::for('top100form.faq.list', function ($trail,$id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Faq', route('top100form.faq.list'));
+	$trail->push('Faq', route('top100form.faq.list',$id));
 });
 
-// Home > roles > add
-Breadcrumbs::for('top100form.faq.create', function ($trail) {
+// Home > top-100-form > faq > add
+Breadcrumbs::for('top100form.faq.create', function ($trail,$id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Faq', route('top100form.faq.list'));
-	$trail->push('Add Faq', route('top100form.faq.create'));
+	$trail->push('Faq', route('top100form.faq.list',$id));
+	$trail->push('Add Faq', route('top100form.faq.create',$id));
 
 });
-// Home > roles > updated
-Breadcrumbs::for('top100form.faq.edit', function ($trail,$id) {
+// Home > top-100-form > faq > edit
+Breadcrumbs::for('top100form.faq.edit', function ($trail,$top_id,$id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Faq', route('top100form.faq.list'));
-	$trail->push('Edit Faq', route('top100form.faq.edit',$id));
+	$trail->push('Faq', route('top100form.faq.list',$id));
+	$trail->push('Edit Faq', route('top100form.faq.edit',[$top_id,$id]));
 
 });

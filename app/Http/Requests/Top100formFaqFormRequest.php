@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
-class FaqFormRequest extends FormRequest
+class Top100formFaqFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,9 @@ class FaqFormRequest extends FormRequest
         if($this->faq){
             $id=$this->faq->id;
         }
-        //|unique:form,name,'.$id.',id,deleted_at,NULL
 
         return [
-            'question' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2',
+            'question' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:faqs,question,'.$id.',id,deleted_at,NULL',
             'answer' => 'required',
         ];
     }

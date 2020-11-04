@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 use App\Models\Form;
 use Illuminate\Foundation\Http\FormRequest;
 
-class FormFormRequest extends FormRequest
+class Top100formVersionFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,17 @@ class FormFormRequest extends FormRequest
     public function rules()
     {
         $id=NULL;
-        $file_required = 'required';
+        $file_required = 'required|mimes:pdf';
         if($this->form){
             $id=$this->form->id;
-            $file_required = 'nullable|sometimes';
+            $file_required = 'nullable|sometimes|mimes:pdf';
         }
      
         //|unique:form,name,'.$id.',id,deleted_at,NULL
 
-        return [];
+        return [
+            'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:forms,name,'.$id.',id,deleted_at,NULL',
+            'form_file' => $file_required
+        ];
     }
 }
