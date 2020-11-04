@@ -37,7 +37,7 @@ return [
     	'columns'=>[
     		['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
     		['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'#'],
-    		['data'=>'name', 'name'=> 'name','label'=>'Name','orderable'=> true,'searchable'=> false,],
+    		['data'=>'name', 'name'=> 'name','label'=>'Name','orderBy'=>'asc'],
     		['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
     		['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
     	],

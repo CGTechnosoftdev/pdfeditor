@@ -21,7 +21,7 @@ class BusinessCategoryController extends AdminBaseController
 		if(request()->ajax()) {
 			$action_button_template='admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
-			$model=BusinessCategory::query()->get();
+			$model=BusinessCategory::query();
 			$table=Datatables()->of($model);
 			if(!empty($filter_data['statusFilter'])){
 				$model->where(['status'=>$filter_data['statusFilter']]);

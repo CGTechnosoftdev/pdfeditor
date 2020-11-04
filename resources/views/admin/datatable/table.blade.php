@@ -65,6 +65,9 @@
 					unblockUI();
 				}
 			},
+			search: {
+				"regex": true
+			},
 			columns: JSON.parse(columnsList),
 			order: JSON.parse(order)
 		});
