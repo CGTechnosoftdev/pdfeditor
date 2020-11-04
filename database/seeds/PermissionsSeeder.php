@@ -96,7 +96,93 @@ class PermissionsSeeder extends Seeder
                 'module'=>'Business Category',
                 'created_at'=>date("Y-m-d H:i:s"),
                 'updated_at'=>date("Y-m-d H:i:s"),
+            ],           
+            [
+        		'name'=>'top-100-form-list',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
             ],
+            [
+        		'name'=>'top-100-form-create',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-edit',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-delete',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-version-list',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-version-create',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-version-edit',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-version-delete',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-faq-list',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-faq-create',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-faq-edit',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'top-100-form-faq-delete',
+                'guard_name'=>'web',
+        		'module'=>'Top 100 Form',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+
+
         ];
         DB::table('permissions')->insert($initialData);
     }
