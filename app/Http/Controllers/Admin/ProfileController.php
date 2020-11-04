@@ -59,7 +59,7 @@ class ProfileController extends Controller
             $response_message="Invalid current password";
         }elseif(User::saveData($input_data,$user)){
             $response_type='success';
-            $response_message="Password update successfully";
+            $response_message="Profile update successfully";
         }else{
             $response_type='error';
             $response_message='Error occoured, Please try again.';

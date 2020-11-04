@@ -27,6 +27,8 @@ return [
     'MODEL_TYPE' => 'App\User',
     'TOP_100_FORM' => 'TOP_100_FORM',
 	'DEFAULT_MODEL_TYPE' => 'App\Models\User',
+
+    'DEFAULT_GENDER' => '1',
 	
     //Payment Status constant
     'PAYMENT_STATUS_PENDING'=>'0',

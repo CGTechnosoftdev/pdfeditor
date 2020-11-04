@@ -86,7 +86,11 @@ class User extends Authenticatable
     public static function saveData($data_array,$model=array())
     { 
         $model = (empty($model) ? new self() : $model);
-        (!empty($data_array['password']) ? $data_array['password'] = bcrypt($data_array['password']) : '');
+        if(empty($data_array['password'])){
+            unset($data_array['password']);
+        }else{
+            $data_array['password'] = bcrypt($data_array['password']);
+        }
         $model->fill($data_array);
         if($model->save()){
             return $model;

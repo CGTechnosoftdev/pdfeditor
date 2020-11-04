@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-	Auth::routes();	
+	Auth::routes(['register' => false]);	
 });
 
 Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middleware'=>['auth','preventBackHistory']], function () {

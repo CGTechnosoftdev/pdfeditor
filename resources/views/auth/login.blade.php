@@ -8,6 +8,7 @@
 			<a href="#"><b>{{ config('app.name') }}</b></a>
 		</div>
 		<p class="login-box-msg">Sign In</p>
+		@include('admin.partials.flash-messages')
 		<form method="POST" action="{{ route('login') }}">
 			@csrf
 			<div class="row">
