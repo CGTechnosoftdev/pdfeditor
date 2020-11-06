@@ -43,7 +43,6 @@ return [
     	],
     	'order'=>[[0,'desc']]
     ],
-
     'top100_forms' => [
     	'columns'=>[
     		['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
@@ -53,9 +52,9 @@ return [
     		['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
     	],
     	'order'=>[[0,'desc']]
-	],
-	
-	'forms' => [
+    ],
+    
+    'forms' => [
     	'columns'=>[
     		['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
     		['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'S No.'],
@@ -64,9 +63,9 @@ return [
     		['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
     	],
     	'order'=>[[0,'desc']]
-	],
-	
-	'faq' => [
+    ],
+    
+    'faq' => [
     	'columns'=>[
     		['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
     		['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'S No.'],

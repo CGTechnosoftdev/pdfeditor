@@ -34,7 +34,9 @@ class SubAdminController extends AdminBaseController
     	if(request()->ajax()) {
     		$action_button_template='admin.datatable.actions';
     		$status_button_template = 'admin.datatable.status';
-    		$model=User::query()->where('users.id','!=',\Auth::user()->id)->get();
+    		$model=User::with('modelHasRole')->whereHas('modelHasRole', function($q){
+    			$q->where('role_id', '!=', config('constant.ADMIN_ROLE'));
+    		})->where('users.id','!=',\Auth::user()->id)->get();
     		$table=Datatables()->of($model);
     		if(!empty($filter_data['statusFilter'])){
     			$model->where(['status'=>$filter_data['statusFilter']]);

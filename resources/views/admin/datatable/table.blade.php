@@ -65,8 +65,12 @@
 					unblockUI();
 				}
 			},
+			search: {
+				"regex": true
+			},
 			columns: JSON.parse(columnsList),
-			order: JSON.parse(order)
+			order: JSON.parse(order),
+			pageLength: "{{ Auth::user()->general_setting['paging_limit'] }}"
 		});
 		if(statusFilterView.length > 0){
 			$(statusFilterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");

@@ -1,5 +1,5 @@
 <?php
-
+use Carbon\Carbon;
 /**
  * [lang_trans description]
  * @Author            AkashSharma
@@ -195,18 +195,13 @@ function changeDateFormat($date,$format=""){
 	if(!empty($date)){
 		switch ($format) {
 			case 'db':
-			$dateFormat='Y-m-d';
+			$new_format='Y-m-d';
 			break;
 			default:
-			$dateFormat=config('constant.PUBLIC_DATE_FORMAT');
+			$new_format=auth()->user()->general_setting['date_format'] ?? config('constant.PUBLIC_DATE_FORMAT');
 			break;
 		}    
-		if(is_object($date)){
-			$return = date_format($date,$dateFormat);
-		}else{			
-			$date = str_replace('/', '-', $date);
-			$return = date($dateFormat, strtotime($date));    
-		}        
+		return Carbon::parse($date)->format($new_format);
 	}
 	return $return;
 }
@@ -225,18 +220,13 @@ function changeTimeFormat($time,$format=""){
 	if(!empty($time)){
 		switch ($format) {
 			case 'db':
-			$dateFormat='H:i:s';
+			$new_format='H:i:s';
 			break;
 			default:
-			$dateFormat=config('constant.PUBLIC_TIME_FORMAT');;
+			$new_format=auth()->user()->general_setting['time_format'] ?? config('constant.PUBLIC_TIME_FORMAT');
 			break;
-		}   
-		if(is_object($time)){
-			$return = date_format($time,$dateFormat);
-		}else{
-			$return = date($dateFormat, strtotime($time));
-		}    
-
+		}  
+		return Carbon::parse($time)->format($new_format); 
 	}
 	return $return;
 }
@@ -255,18 +245,13 @@ function changeDateTimeFormat($datetime,$format=""){
 	if(!empty($datetime)){
 		switch ($format) {
 			case 'db':
-			$dateFormat='Y-m-d H:i:s';
+			$new_format='Y-m-d H:i:s';
 			break;
 			default:
-			$dateFormat=config('constant.PUBLIC_DATE_TIME_FORMAT');;
+			$new_format=(auth()->user()->general_setting['date_format'] ?? config('constant.PUBLIC_DATE_FORMAT'))." ".(auth()->user()->general_setting['time_format'] ?? config('constant.PUBLIC_TIME_FORMAT'));
 			break;
 		}    
-		if(is_object($datetime)){
-			$return = date_format($datetime,$dateFormat);
-		}else{			
-			$datetime = str_replace('/', '-', $datetime);
-			$return = date($dateFormat, strtotime($datetime));
-		}    		
+		return Carbon::parse($datetime)->format($new_format);   		
 	}
 	return $return;
 }
@@ -279,10 +264,12 @@ function changeDateTimeFormat($datetime,$format=""){
  * @param             string        $suffix [description]
  * @return            [type]                [description]
  */
-function myCurrencyFormat($amount,$symbol='$'){
+function myCurrencyFormat($amount){
 	$return="0.00";
 	if(!is_nan($amount)){
 		$return=number_format($amount,2);
 	}
-	return $symbol." ".$return;
+	$currency_attribute = auth()->user()->general_setting['currency'] ?? config('constant.DEFAULT_CURRNCY');
+	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'),'symbol','key');
+	return $currency_arr[$currency_attribute].$return;
 }

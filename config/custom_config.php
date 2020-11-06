@@ -39,13 +39,47 @@ return [
         'sub-admin'=>'User',
     ],
     'date_format_arr' => [
-        'Y/m/d' => 'Y/m/d',
+        'd-m-Y' => 'd-m-Y',
+        'm/d/Y' => 'm/d/Y',
         'Y-m-d' => 'Y-m-d',
     ],
     'time_format_arr' => [
         'h:i:s' => 'h:i:s',
         'H:i:s' => 'H:i:s',
         'h:i A' => 'h:i A'
-    ]
+    ],
+    'paging_limit_arr' => [
+        '10' => '10',
+        '25' => '25',
+        '50' => '50',
+        '100' => '100'
+    ],
+    'currency_arr' => [
+        [
+            'key' => 'CAD',
+            'label' => 'CAD',
+            'symbol' => '$',
+        ],
+        [
+            'key' => 'EUR',
+            'label' => 'EUR',
+            'symbol' => '€',
+        ],
+        [
+            'key' => 'GBP',
+            'label' => 'GBP',
+            'symbol' => '£',
+        ],
+        [
+            'key' => 'JPY',
+            'label' => 'JPY',
+            'symbol' => '¥',
+        ],
+        [
+            'key' => 'USD',
+            'label' => 'USD',
+            'symbol' => '$',
+        ],
+    ],
     
 ];
