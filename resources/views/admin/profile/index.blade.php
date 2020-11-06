@@ -63,7 +63,7 @@
 							@endif
 						</div>
 					</div>
-					<div class="form-group {{ $errors->has('profile_picture') ? ' has-error' : '' }}">
+					<div class="form-group">
 						<div class="col-sm-offset-4 col-sm-8" >
 							{{ Form::checkbox('change_password',1,old('change_password'),['id'=>'change-password-checkbox','class'=>'styled-checkbox']) }}
 							<label for="change-password-checkbox">Change Password</label>
@@ -101,7 +101,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-4 col-sm-8">
 							{!! Form::submit((isset($user)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
-							{!! Html::link(route('sub-admin.index'),'Cancel',['class'=>'btn btn-default']) !!}
+							{!! Html::link(route('dashboard'),'Cancel',['class'=>'btn btn-default']) !!}
 						</div>
 					</div>
 					

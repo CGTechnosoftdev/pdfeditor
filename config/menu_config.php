@@ -35,6 +35,13 @@ return [
             'active_segments' => ['business-category'],
             'permissions'=>['business-category-list'],
         ],
+        [
+            'label' => 'General Settings',
+            'icon' => 'gears',
+            'route_name' => 'general-setting.index',
+            'active_segments' => ['general-setting'],
+            'permissions'=>['general-setting-list'],
+        ],
         // [
         //     'label' => 'User',
         //     'icon' => 'user',

@@ -32,13 +32,17 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
     Route::post('/change-status','DashboardController@changeStatus')->name('change-status');
 
 	//roles
-	Route::resource('roles', 'RolesController');
+	Route::resource('roles', 'RolesController',['except' => ['show']]);
 
 	//business-categories
-	Route::resource('business-category', 'BusinessCategoryController');
+	Route::resource('business-category', 'BusinessCategoryController',['except' => ['show']]);
 
     //subadmin
     Route::resource('sub-admin', 'SubAdminController');
+
+    //subadmin
+    Route::resource('general-setting', 'GeneralSettingsController',['only' => ['index']]);
+    Route::put('general-setting/update-setting','GeneralSettingsController@updateSetting')->name('general-setting.update');
 	
 });
 

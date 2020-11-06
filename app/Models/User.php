@@ -26,7 +26,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name','profile_picture_url','gender_name','role_name','status_name'
+        'full_name','profile_picture_url','gender_name','role_name','status_name','general_setting'
     ];
 
     protected $dates = ['deleted_at'];
@@ -72,6 +72,11 @@ class User extends Authenticatable
     public function getStatusNameAttribute(){
         $status_arr = config('custom_config.all_status_arr');
         return  $status_arr[$this->status] ?? '';
+    }
+
+    public function getGeneralSettingAttribute(){
+        $user_id = (in_array(config('constant.USER_ROLE'),$this->roles->pluck('id')->toArray())) ? $this->id : NULL;
+        return GeneralSetting::getRow($user_id); 
     }
 
 
