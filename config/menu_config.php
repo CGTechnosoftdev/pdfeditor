@@ -40,7 +40,7 @@ return [
             'icon' => 'file',
             'route_name' => 'top-100-form.index',
             'active_segments' => ['top-100-form'],
-            'permissions'=>['role-list'],
+            'permissions'=>['top-100-form-list'],
         ],
         [
             'label' => 'General Settings',

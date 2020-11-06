@@ -19,7 +19,20 @@ class Top100FormController extends AdminBaseController
 		$this->middleware('permission:top-100-form-list|top-100-form-create|top-100-form-edit|top-100-form-delete');
 		$this->middleware('permission:top-100-form-create', ['only' => ['create','store']]);
 		$this->middleware('permission:top-100-form-edit', ['only' => ['edit','update']]);
-		$this->middleware('permission:top-100-form-delete', ['only' => ['destroy']]);    	
+		$this->middleware('permission:top-100-form-delete', ['only' => ['destroy']]);    
+
+
+		$this->middleware('permission:top-100-form-version-list|top-100-form-version-create|top-100-form-version-edit|top-100-form-version-delete');
+		$this->middleware('permission:top-100-form-version-create', ['only' => ['createForm','storeForm']]);
+		$this->middleware('permission:top-100-form-version-edit', ['only' => ['editForm','updateForm']]);
+		$this->middleware('permission:top-100-form-version-delete', ['only' => ['destroyForm']]);    
+
+
+		$this->middleware('permission:top-100-form-faq-list|top-100-form-faq-create|top-100-form-faq-edit|top-100-form-faq-delete');
+		$this->middleware('permission:top-100-form-faq-create', ['only' => ['createFaq','storeFaq']]);
+		$this->middleware('permission:top-100-form-faq-edit', ['only' => ['editFaq','updateFaq']]);
+		$this->middleware('permission:top-100-form-faq-delete', ['only' => ['destroyFaq']]);    
+
 	}
 
 	public function index(Request $request)
@@ -39,8 +52,8 @@ class Top100FormController extends AdminBaseController
 				$buttons=[
 					'edit'=>['route_url'=>'top-100-form.edit', 'route_param'=>[$row->id],'permission'=>'top-100-form-edit'],
 					'delete'=>['route_url'=>'top-100-form.destroy', 'route_param'=>[$row->id],'permission'=>'top-100-form-delete'],
-					'manage' =>['route_url'=>'top100form.form.list','label' => '', 'route_param'=>[$row->id],'permission'=>'top100form.form.list'],
-					'manage2' =>['route_url'=>'top100form.faq.list','label' => '', 'route_param'=>[$row->id],'permission'=>'top100form.faq.list'],
+					'manage' =>['route_url'=>'top100form.form.list','label' => '', 'route_param'=>[$row->id],'permission'=>'top-100-form-version-list'],
+					'manage2' =>['route_url'=>'top100form.faq.list','label' => '', 'route_param'=>[$row->id],'permission'=>'top-100-form-faq-list'],
 				];
 				return view($action_button_template,compact('buttons'));
 			});
@@ -51,7 +64,7 @@ class Top100FormController extends AdminBaseController
 					'type'=>'top-100-form',
 					'status'=>$row->status,
 					'action_class' => 'change-status',
-					'permission'=>'top-100-form-edits'
+					'permission'=>'top-100-form-edit'
 				];
 				return view($status_button_template,compact('button_data'));
 			});
@@ -66,7 +79,7 @@ class Top100FormController extends AdminBaseController
 		$data_array['add_new_button'] = [
 			'label' => 'Add Top 100 Form',
 			'link'	=> route('top-100-form.create'),
-			'permission'=>'role-create'
+			'permission'=>'top-100-form-create'
 		];
 		$data_array['data_table'] = [
 			'data_source' => route('top-100-form.index'),
@@ -201,8 +214,8 @@ class Top100FormController extends AdminBaseController
 			$table->editColumn('action',function($row) use ($action_button_template,$top_100_form){
 
 				$buttons=[
-					'edit'=>['route_url'=>'top100form.form.edit', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'form-edit'],
-					'delete'=>['route_url'=>'top100form.form.destroy', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'form-delete'],
+					'edit'=>['route_url'=>'top100form.form.edit', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'top-100-form-version-edit'],
+					'delete'=>['route_url'=>'top100form.form.destroy', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'top-100-form-version-delete'],
 				];
 				return view($action_button_template,compact('buttons'));
 			});
@@ -213,7 +226,7 @@ class Top100FormController extends AdminBaseController
 					'type'=>'form',
 					'status'=>$row->status,
 					'action_class' => 'change-status',
-					'permission'=>'form-edit'
+					'permission'=>'top-100-form-version-edit'
 				];
 				return view($status_button_template,compact('button_data'));
 			});
@@ -230,7 +243,7 @@ class Top100FormController extends AdminBaseController
 		$data_array['add_new_button'] = [
 			'label' => 'Add Manage Form',
 			'link'	=> route('top100form.form.create',$top_100_form->id),
-			'permission'=>'role-create'
+			'permission'=>'top-100-form-version-create'
 		];
 		$data_array['back_button'] = [
 			'label' => 'Back',
@@ -377,8 +390,8 @@ class Top100FormController extends AdminBaseController
 			$table->addColumn('action','');
 			$table->editColumn('action',function($row) use ($action_button_template,$top_100_form){				
 				$buttons=[
-					'edit'=>['route_url'=>'top100form.faq.edit', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'form-edit'],
-					'delete'=>['route_url'=>'top100form.faq.destroy', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'form-delete'],
+					'edit'=>['route_url'=>'top100form.faq.edit', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'top-100-form-faq-edit'],
+					'delete'=>['route_url'=>'top100form.faq.destroy', 'route_param'=>[$top_100_form->id,$row->id],'permission'=>'top-100-form-faq-delete'],
 				];
 				return view($action_button_template,compact('buttons'));
 			});
@@ -389,7 +402,7 @@ class Top100FormController extends AdminBaseController
 					'type'=>'faq',
 					'status'=>$row->status,
 					'action_class' => 'change-status',
-					'permission'=>'form-edit'
+					'permission'=>'top-100-form-faq-edit'
 				];
 				return view($status_button_template,compact('button_data'));
 			});
@@ -404,7 +417,7 @@ class Top100FormController extends AdminBaseController
 		$data_array['add_new_button'] = [
 			'label' => 'Add Faq ',
 			'link'	=> route('top100form.faq.create',$top_100_form->id),
-			'permission'=>'role-create'
+			'permission'=>'top-100-form-version-create'
 		];
 		$data_array['back_button'] = [
 			'label' => 'Back',
