@@ -58,7 +58,10 @@ Route::group(['prefix' => 'admin','name'=>'admin.','namespace'=>'Admin','middlew
 
     //subadmin
     Route::resource('general-setting', 'GeneralSettingsController',['only' => ['index']]);
-    Route::put('general-setting/update-setting','GeneralSettingsController@updateSetting')->name('general-setting.update');
+	Route::put('general-setting/update-setting','GeneralSettingsController@updateSetting')->name('general-setting.update');
+	
+	//subscription-plan
+	Route::resource('subscription-plan', 'SubscriptionPlanController');
 	
 });
 
