@@ -181,6 +181,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         // Yajra Datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
+        //Passport
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

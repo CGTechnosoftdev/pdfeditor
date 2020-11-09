@@ -24,6 +24,7 @@ Route::group(['as'=>'front.','middleware'=>[]], function () {
 	});
 });
 
+
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes(['register' => false]);	
 	
