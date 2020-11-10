@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class APIBaseController extends Controller
+class ApiBaseController extends Controller
 {
     /**
      * success response method.
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result, $message)
+    public function sendSuccess($result, $message)
     {
     	$response = [
     		'success' => true,
