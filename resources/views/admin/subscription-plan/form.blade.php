@@ -28,7 +28,7 @@
 					<div class="form-group {{ $errors->has('yearly_amount') ? ' has-error' : '' }}">
 						<label for="yearly_amount" class="control-label text-left col-sm-4 required">Yearly Amount<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::text('yearly_amount',old('yearly_amount'),['placeholder'=>'Enter yearly_amount','class'=>"form-control"])}}
+							{{ Form::number('yearly_amount',old('yearly_amount'),['placeholder'=>'Enter yearly_amount','class'=>"form-control",'min'=>0, 'step'=>0.50])}}
 							@if ($errors->has('yearly_amount'))
 							<span class="help-block"><strong>{{ $errors->first('yearly_amount') }}</strong></span>
 							@endif
@@ -37,7 +37,7 @@
                     <div class="form-group {{ $errors->has('monthly_amount') ? ' has-error' : '' }}">
 						<label for="monthly_amount" class="control-label text-left col-sm-4 required">Monthly Amount<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::text('monthly_amount',old('monthly_amount'),['placeholder'=>'Enter Monthly Amount','class'=>"form-control"])}}
+							{{ Form::number('monthly_amount',old('monthly_amount'),['placeholder'=>'Enter Monthly Amount','class'=>"form-control",'min'=>0, 'step'=>0.50])}}
 							@if ($errors->has('monthly_amount'))
 							<span class="help-block"><strong>{{ $errors->first('monthly_amount') }}</strong></span>
 							@endif
@@ -46,7 +46,7 @@
                     <div class="form-group {{ $errors->has('discount_percent') ? ' has-error' : '' }}">
 						<label for="discount_percent" class="control-label text-left col-sm-4 required">Discount Percent</label>
 						<div class="col-sm-8" >
-							{{ Form::text('discount_percent',old('discount_percent'),['placeholder'=>'Enter Discount Percent','class'=>"form-control"])}}
+							{{ Form::number('discount_percent',old('discount_percent'),['placeholder'=>'Enter Discount Percent','class'=>"form-control",'min'=>0,'max'=>100, 'step'=>1])}}
 							@if ($errors->has('discount_percent'))
 							<span class="help-block"><strong>{{ $errors->first('discount_percent') }}</strong></span>
 							@endif
@@ -57,7 +57,7 @@
                     <div class="form-group {{ $errors->has('max_team_member') ? ' has-error' : '' }}">
 						<label for="max_team_member " class="control-label text-left col-sm-4 required">Max Team Member<span class="required-label">*</span></label>
 						<div class="col-sm-8" >
-							{{ Form::number('max_team_member',old('max_team_member'),['placeholder'=>'Enter Max Team Member','class'=>"form-control"])}}
+							{{ Form::number('max_team_member',old('max_team_member'),['placeholder'=>'Enter Max Team Member','class'=>"form-control",'min'=>0,'step'=>1])}}
 							@if ($errors->has('max_team_member'))
 							<span class="help-block"><strong>{{ $errors->first('max_team_member') }}</strong></span>
 							@endif

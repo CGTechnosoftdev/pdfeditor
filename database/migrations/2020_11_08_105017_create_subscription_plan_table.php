@@ -16,10 +16,10 @@ class CreateSubscriptionPlanTable extends Migration
         Schema::create('subscription_plans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255);            
-            $table->decimal('yearly_amount', 8, 2);
-            $table->decimal('mothly_amount', 8, 2);
-            $table->decimal('discount_percent', 8, 2)->nullable();       
-            $table->string('max_team_member', 255);
+            $table->decimal('yearly_amount', 8, 2)->default(0.00)->nullable();
+            $table->decimal('monthly_amount', 8, 2)->default(0.00)->nullable();
+            $table->decimal('discount_percent', 8, 2)->default(0.00)->nullable();       
+            $table->integer('max_team_member')->default(0)->nullable();
             $table->text('description')->nullable();
             $table->text('feature_list')->nullable();
             $table->bigInteger('created_by')->unsigned();

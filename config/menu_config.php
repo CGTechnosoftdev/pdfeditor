@@ -29,8 +29,8 @@ return [
             'permissions'=>['sub-admin-list'],
         ],
         [
-            'label' => 'Subscription Plan',
-            'icon_image' => 'admin.svg',
+            'label' => 'Subscription Plans',
+            'icon' => 'money',
             'route_name' => 'subscription-plan.index',
             'active_segments' => ['subscription-plan'],
             'permissions'=>['subscription-plan-list'],

@@ -31,8 +31,8 @@ class SubscriptionPlanFormRequest extends FormRequest
         //
         return [
             'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:subscription_plans,name,'.$id.',id,deleted_at,NULL',            
-            'yearly_amount'   => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'monthly_amount'   => 'required|regex:/^\d*(\.\d{1,2})?$/',            
+            'yearly_amount'   => 'required|numeric',
+            'monthly_amount'   => 'required|numeric',            
             'max_team_member'   => 'required|numeric',
     
         ];

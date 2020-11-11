@@ -80,6 +80,10 @@ return [
     		['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
     		['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'#'],
     		['data'=>'name', 'name'=> 'name','label'=>'Name','orderBy'=>'asc'],
+            ['data'=>'yearly_amount', 'name'=> 'yearly_amount','label'=>'Yearly Amount','orderBy'=>'asc'],
+            ['data'=>'monthly_amount', 'name'=> 'monthly_amount','label'=>'Monthly Amount','orderBy'=>'asc'],
+            ['data'=>'discount_percent', 'name'=> 'discount_percent','label'=>'Discount Percent','orderBy'=>'asc'],
+            ['data'=>'max_team_member', 'name'=> 'max_team_member','label'=>'Max Team Member','orderBy'=>'asc'],
     		['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
     		['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
     	],
