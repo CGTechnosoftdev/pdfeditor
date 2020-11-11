@@ -16,6 +16,11 @@ Route::get('/', function () {
 });
 Route::group(['as'=>'front.','middleware'=>[]], function () {
 	Route::get('/login','Auth\FrontLoginController@showLoginForm')->name('login');
+	Route::get('/forgot-password','Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
+	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
+	Route::get('/user-reset-password/{token}','Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
+	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
+
 	Route::post('/login','Auth\FrontLoginController@login')->name('login');
 	Route::post('/logout','Auth\FrontLoginController@logout')->name('logout');
 

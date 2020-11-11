@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 
+
 class FrontLoginController extends Controller
 {
     /*
@@ -40,13 +41,14 @@ class FrontLoginController extends Controller
     }
 
 
-    /**
+   
+      /**
      * Show the application's login form.
      *
      * @return \Illuminate\Http\Response
      */
     public function showLoginForm()
-    {
+    {   
     	return view('auth.front-login');
     }
 
@@ -58,6 +60,7 @@ class FrontLoginController extends Controller
      * @return [type]              [description]
      */
     public function login(Request $request){
+     
     	$this->validateLogin($request);
     	// If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
