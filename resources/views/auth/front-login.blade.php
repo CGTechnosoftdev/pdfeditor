@@ -47,7 +47,7 @@
 					<button type="submit" class="btn btn-success  btn-block btn-flat">{{ __('Login') }}</button>
 				</div>
 				<div class="col-md-8 text-right">
-					<a class="btn btn-link" href="{{ route('password.request') }}">
+					<a class="btn btn-link" href="{{ route('front.forgot.password') }}">
 						{{ __('Forgot Password?') }}
 					</a>
 				</div>

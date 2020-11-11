@@ -19,4 +19,15 @@ return [
     		"{[password]}"
     	],
     ],
+    'reset_password' => [
+    	'source' => 'file',
+    	'key' => 'reset-password',
+    	'subject'=>'Reset Password',
+    	'keywords' => [
+    		"{[name]}",
+    		"{[email]}",
+    		"{[reset_button]}"
+        ],
+        
+    ],
 ];
