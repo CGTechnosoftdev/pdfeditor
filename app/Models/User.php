@@ -6,13 +6,16 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
+use League\OAuth2\Server\Exception\OAuthServerException;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use HasApiTokens;
     use SoftDeletes;
     use BaseModelTrait;
 
@@ -113,5 +116,33 @@ class User extends Authenticatable
     public function modelHasRole()
     {
         return $this->hasOne(ModelHasRole::class,'model_id','id');
+    }
+
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string  $username
+     * @return \App\User
+     */
+    public function findForPassport($username)
+    {
+        $user = $this->where('email', $username)->first();
+        $user_roles = $user->roles->pluck('id')->toArray();
+        if(!in_array(config('constant.USER_ROLE'),$user_roles)){
+            return false;
+        }
+        if($user->status == config('constant.STATUS_INACTIVE')){
+            throw new OAuthServerException('Your account is Inactive. Please contact to Administrator', 6, 'account_inactive', 401);
+        }
+
+        if($user->status == config('constant.STATUS_BLOCKED')){
+            throw new OAuthServerException('Your account is Blocked. Please contact to Administrator', 6, 'account_blocked', 401);
+        }
+
+        if($user->status ==  config('constant.STATUS_PENDING')){
+            throw new OAuthServerException('Your account is Pending. Please contact to Administrator', 6, 'account_pending', 401);
+        }
+
+        return $user;
     }
 }

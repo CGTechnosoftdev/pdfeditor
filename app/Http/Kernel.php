@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'preventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
+        'guard' => \App\Http\Middleware\setGuard::class,
     ];
 
     /**

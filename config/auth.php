@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'front_web',
+        'passwords' => 'front_users',
     ],
 
     /*
@@ -42,9 +42,14 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
             'hash' => false,
+        ],
+
+        'front_web' => [
+            'driver' => 'session',
+            'provider' => 'front_users',
         ],
     ],
 
@@ -67,6 +72,10 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'front_users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
@@ -95,6 +104,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'front_users' => [
+            'provider' => 'front_users',
             'table' => 'password_resets',
             'expire' => 60,
         ],

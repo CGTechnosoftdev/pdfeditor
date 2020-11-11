@@ -12,19 +12,21 @@ trait BaseModelTrait {
 	 */
 	public static function bootBaseModelTrait()
 	{
-		// parent::boot();
-		$user = Auth::user();
-		if(!empty($user)){
-			static::creating(function($model) use ($user)
-			{                       
-				$model->created_by = $user->id;
-				$model->updated_by = $user->id;
-			});
-			static::updating(function($model) use ($user)
-			{
-				$model->updated_by = $user->id;
-			});       
+		$prefix_name = request()->route()->getPrefix();
+		$guard_name = Auth::getDefaultDriver();
+		if($prefix_name == "/admin"){
+			$guard_name = 'web';
 		}
+		$user = Auth::guard($guard_name)->user();
+		static::creating(function($model) use ($user)
+		{                       
+			$model->created_by = $user->id ?? 0;
+			$model->updated_by = $user->id ?? 0;
+		});
+		static::updating(function($model) use ($user)
+		{
+			$model->updated_by = $user->id ?? 0;
+		});       
 	}
 
 

@@ -19,7 +19,6 @@
 	<i class="{{($buttons['manage2']['icon'] ?? 'fa fa-question-circle')}}"></i>{{ lang_trans(($buttons['manage']['label'] ?? 'label.manage')) }}
 </a>
 @endif
-
 @if(array_key_exists('delete',$buttons) && (empty($buttons['delete']['permission']) || auth()->user()->can($buttons['delete']['permission'])))
 {!! Form::open(['url' => route($buttons['delete']['route_url'],$buttons['delete']['route_param']),'method' => 'post','class'=>'delete-form',"onSubmit"=>"return confirm('Are you sure you want to delete?') "]) !!}
 {{method_field('DELETE')}}
