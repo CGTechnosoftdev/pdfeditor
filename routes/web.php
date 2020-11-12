@@ -20,6 +20,11 @@ Route::group(['as'=>'front.','middleware'=>[]], function () {
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
 	Route::get('/user-reset-password/{token}','Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
 	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
+	Route::get('/front-user-registration','Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
+	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
+	Route::get('/front-user-email-verification/{token}', 'Auth\FrontUserRegistrationController@newUserVerification')->name('user.verification.save');
+
+	
 
 	Route::post('/login','Auth\FrontLoginController@login')->name('login');
 	Route::post('/logout','Auth\FrontLoginController@logout')->name('logout');

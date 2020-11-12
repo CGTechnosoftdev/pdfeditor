@@ -9,6 +9,9 @@ use App\Mail\CommonMail;
 use DB;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Http\Requests\FrontForgotPasswordFormRequest;
+use Illuminate\Support\Facades\Password;
 
 
 class FrontForgotPasswordController extends Controller
@@ -41,61 +44,69 @@ class FrontForgotPasswordController extends Controller
     {
         return view('auth.passwords.front-email');
     }
-    public function resetPassword(Request $request)
+    protected function credentials(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'email' => 'required|email',
-      ]);
-         
+        return $request->only('email');
+    }
+      public function broker()
+    {
+        return Password::broker();
+    }
+    
+    public function resetPassword(FrontForgotPasswordFormRequest $request)
+    {    
+      $input_data=$request->input(); 
+      $credentails=$this->credentials($request);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors(['email' => 'Please enter valid email address!']);
-        }
+      $user=$this->broker()->getUser($credentails);
 
-        $user = \DB::table('users')->where('email', '=', $request->email)->first();//Check if the user exists
-        //dd($user);
-        //model_has_roles
-   
+       $token = Str::random(60);
+       $token=hash('sha256', $token); 
+                       
     
             if (!isset($user)) {
-                return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
+               // return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
+               $arr["error"]="User does not exist";
+               $arr["status"]=false;
+               return Response()->json($arr);
             }
+            $userRole=config('constant.USER_ROLE');
 
             $modeInRole=\DB::table('model_has_roles')->where("model_id",'=',$user->id)->first();
-            $role=\DB::table('roles')->where([["id",'=',$modeInRole->role_id],["name",'<>','user']])->first();
-            if(!empty($role))
+            
+            if($modeInRole->role_id!=$userRole)
             {
-                return redirect()->back()->withErrors(['error' => trans('User not allow to change password!')]);
-    
+                $arr["error"]="User not allow to change password!";
+                $arr["status"]=false;
+                return Response()->json($arr);
+             
             }
 
-     
+
             \DB::table('password_resets')->insert([
                 'email' => $request->email,
-                'token' => preg_replace("/\//","P",str_random(60)),
+                'token' => $token,
                 'created_at' => now()
             ]);
 
-            $tokenDatas = \DB::table('password_resets')
-                ->where('email', $request->email)->get();
-                foreach($tokenDatas as $tok_index => $okenOb)
-                $tokenData=$okenOb;
-
-
-
-            if ($this->sendResetEmail($request->email, $tokenData->token)) {
+            
+            if ($this->sendResetEmail($request->email, $token)) {
+           
+                $arr["status"]=true;
                 $response_type='success';
-                $response_message='A reset link has been sent to your email address.';
-                set_flash($response_type,$response_message);
-                return redirect()->back()->with('status', trans('A reset link has been sent to your email address.'));
+                $response_message='A reset link has been sent to your email address.';              
             } else {
+    
+                $arr["status"]=false;
                 $response_type='error';
-                $response_message='A Network Error occurred. Please try again.';
-                set_flash($response_type,$response_message);
-                return redirect()->back()->withErrors(['error' => trans('A Network Error occurred. Please try again.')]);
+                $response_message='A Network Error occurred. Please try again.';              
             }
+            $arr[$response_type]=$response_message;
+            return Response()->json($arr);
 
     }
+
+ 
 
 
     private function sendResetEmail($email, $token)

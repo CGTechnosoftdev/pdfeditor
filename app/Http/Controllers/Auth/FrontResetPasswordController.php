@@ -9,6 +9,7 @@ use App\Mail\CommonMail;
 use DB;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\FrontResetPasswordFormRequest;
 
 class FrontResetPasswordController extends Controller
 {
@@ -51,14 +52,9 @@ class FrontResetPasswordController extends Controller
      return view('auth.passwords.front-reset',['email' => $email,'token' => $token]);
  }
 
- public function resetPasswordSave(Request $request){
+ public function resetPasswordSave(FrontResetPasswordFormRequest $request){
 
-
-         $validator = \Validator::make($request->all(), [
-             'email' => 'required|email|exists:users,email',
-             'password' => 'required|confirmed|min:8|max:32|regex:'.config('constant.PASSWORD_REGEX'),
-             'token' => 'required' ]);
-
+    $validator=$request->validate($this->rules(), $this->validationErrorMessages());
 
          if ($validator->fails()) {
             $fieldsWithErrorMessagesArray = $validator->messages()->get('*');
@@ -91,11 +87,5 @@ class FrontResetPasswordController extends Controller
 
 
 
-    public function rules(){
-        return [
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:8|max:32|regex:'.config('constant.PASSWORD_REGEX'),
-        ];
-    }
+
 }

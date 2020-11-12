@@ -29,5 +29,17 @@ return [
     		"{[reset_button]}"
         ],
         
-    ],
+	],
+	'email_verification' => [
+    	'source' => 'file',
+    	'key' => 'email-verification',
+    	'subject'=>'Registration verification',
+    	'keywords' => [
+    		"{[name]}",
+    		"{[email]}",
+    		"{[link]}"
+        ],
+        
+	],
+	
 ];

@@ -43,5 +43,6 @@
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
+		@yield('additionaljs')
 </body>
 </html>
