@@ -20,16 +20,13 @@ use Illuminate\Support\Facades\Hash;
 class FrontUserRegistrationController extends Controller{
     function __construct()
     {
-  
-    	// app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+
 
     }
 
     public function registerUserFrm(){
      
-        $data_array['gender_arr'] = config('custom_config.gender_arr');
-        $data_array['status_arr'] = config('custom_config.all_status_arr');
-        return view('auth.front-user-registration',$data_array);
+        return view('auth.front-user-registration');
 	}
 	public function validator(array $data)
     {
@@ -123,8 +120,7 @@ class FrontUserRegistrationController extends Controller{
 			$response_type='error';
 			$response_message=$e->getMessage();
 		}
-		//set_flash($response_type,$response_message,false);
-		//return redirect()->route('front.user.registration');  
+
 		$arr[$response_type]=$response_message;
 		return Response()->json($arr);
 	}
