@@ -16,6 +16,9 @@ class UpdateUserAlterTable extends Migration
         Schema::table('users', function (Blueprint $table) {
         $table->string('first_name',50)->nullable()->change();
         $table->string('last_name',50)->nullable()->change();
+        $table->string('image');
+        $table->string('provider');
+        $table->string('provider_id');
         });
     }
 

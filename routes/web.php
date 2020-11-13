@@ -23,6 +23,8 @@ Route::group(['as'=>'front.','middleware'=>[]], function () {
 	Route::get('/front-user-registration','Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
 	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
 	Route::get('/front-user-email-verification/{token}', 'Auth\FrontUserRegistrationController@newUserVerification')->name('user.verification.save');
+	Route::get('login/{provider}', 'SocialController@redirect');
+	Route::get('login/{provider}/callback','SocialController@Callback');
 
 	
 
