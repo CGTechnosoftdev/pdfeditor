@@ -36,6 +36,13 @@ return [
             'permissions'=>['subscription-plan-list'],
         ],
         [
+            'label' => 'Promo URL',
+            'icon' => 'tag',
+            'route_name' => 'promo-url.index',
+            'active_segments' => ['promo-url'],
+            'permissions'=>['promo-url-list'],
+        ],
+        [
             'label' => 'Business Category',
             'icon' => 'building',
             'route_name' => 'business-category.index',

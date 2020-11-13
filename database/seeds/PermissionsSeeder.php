@@ -210,6 +210,41 @@ class PermissionsSeeder extends Seeder
         		'created_at'=>date("Y-m-d H:i:s"),
         		'updated_at'=>date("Y-m-d H:i:s"),
             ],
+            [
+                'name'=>'promo-url-list',
+                'guard_name'=>'web',
+                'module'=>'Promo Url',
+                'created_at'=>date("Y-m-d H:i:s"),
+                'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+                'name'=>'promo-url-create',
+                'guard_name'=>'web',
+                'module'=>'Promo Url',
+                'created_at'=>date("Y-m-d H:i:s"),
+                'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+                'name'=>'promo-url-edit',
+                'guard_name'=>'web',
+                'module'=>'Promo Url',
+                'created_at'=>date("Y-m-d H:i:s"),
+                'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+                'name'=>'promo-url-delete',
+                'guard_name'=>'web',
+                'module'=>'Promo Url',
+                'created_at'=>date("Y-m-d H:i:s"),
+                'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+                'name'=>'general-settings-edit',
+                'guard_name'=>'web',
+                'module'=>'General Setting',
+                'created_at'=>date("Y-m-d H:i:s"),
+                'updated_at'=>date("Y-m-d H:i:s"),
+            ],
 
 
         ];

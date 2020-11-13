@@ -65,12 +65,15 @@ Route::group(['prefix' => 'admin'], function () {
     	//subadmin
 		Route::resource('sub-admin', 'SubAdminController');
 
-    	//subadmin
+    	//general-setting
 		Route::resource('general-setting', 'GeneralSettingsController',['only' => ['index']]);
 		Route::put('general-setting/update-setting','GeneralSettingsController@updateSetting')->name('general-setting.update');
 
 		//subscription-plan
 		Route::resource('subscription-plan', 'SubscriptionPlanController');
+
+		//promo-url
+		Route::resource('promo-url', 'PromoUrlController');
 	});
 
 });
