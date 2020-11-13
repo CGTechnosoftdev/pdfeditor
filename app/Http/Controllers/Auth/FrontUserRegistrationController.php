@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
-use App\Models\Country;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\FrontUserRegistrationFormRequest;
 use Illuminate\Support\Facades\Mail; 
@@ -44,7 +44,7 @@ class FrontUserRegistrationController extends Controller{
 		 if (!$tokenData) 
 		 {
 			$response_type='error';
-			$response_message='Invalid operaion!';
+			$response_message='Invalid operation!';
 		 }
 		 else
 		 {		 
@@ -62,7 +62,7 @@ class FrontUserRegistrationController extends Controller{
 			else
 			{
 				$response_type='success';
-				$response_message='User is actived,Thank You!';
+				$response_message='User is activated,Thank You!';
 			}
 		}
 		 $data_array = [

@@ -3,7 +3,6 @@
 @section('content')
 
 
-
 <section class="content">
 	<!-- Info boxes -->
 	<div class="box">
@@ -65,9 +64,11 @@
 		</div>
 	</div>
 </section>
+
 <!-- /.content -->
 
 @endsection
 @section('additionaljs')
+
 {!! JsValidator::formRequest('App\Http\Requests\FrontUserRegistrationFormRequest') !!}
 @endsection
