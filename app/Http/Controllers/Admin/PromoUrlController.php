@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PromoUrl;
+use App\Models\SubscriptionPlan;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use App\Http\Requests\PromoUrlFormRequest;
 
 class PromoUrlController extends AdminBaseController
@@ -90,16 +90,10 @@ class PromoUrlController extends AdminBaseController
   			'heading'=>'Add Promo URL',
   			'breadcrumb'=>\Breadcrumbs::render('promo-url.create'),
   		];
-  		$permissions = Permission::get();
-  		$grouped_permissions = [];
-  		foreach($permissions as $permission){
-  			$grouped_permissions[$permission->module][]=[
-  				'id'=>$permission->id,
-  				'name'=>ucwords(str_replace("-", " ", $permission->name)),
-  			];
-  		}
-  		$data_array['permissions'] = $grouped_permissions;
-  		$data_array['promo-url_permissions'] = [];
+  		$data_array['subscription_plan_arr'] = SubscriptionPlan::dataList()->pluck('name','id')->toArray();
+  		$data_array['amount_type_arr'] = config('custom_config.amount_type_arr');
+  		$data_array['valid_for_months_arr'] = array_combine(range(1,12),array_map(function($val) { return $val." month";},range(1,12)));
+  		$data_array['valid_for_years_arr'] = array_combine(range(1,10),array_map(function($val) { return $val." year";},range(1,10)));
   		return view('admin.promo-url.form',$data_array);
   	}
 
@@ -108,7 +102,6 @@ class PromoUrlController extends AdminBaseController
   		try{
   			$input_data=$request->input(); 
   			$promo_url = PromoUrl::saveData($input_data);
-  			$sync_permissions = $promo_url->syncPermissions(($input_data['permission'] ?? []));
   			if($promo_url){
   				$response_type='success';
   				$response_message='Promo Url added successfully';
@@ -138,18 +131,13 @@ class PromoUrlController extends AdminBaseController
   			'title'=>'Edit Promo URL',
   			'heading'=>'Edit Promo URL',
   			'breadcrumb'=>\Breadcrumbs::render('promo-url.edit',['id'=>$promo_url->id]),
-  			'promo-url'=>$promo_url
+  			'promo_url'=>$promo_url
   		];
-  		$permissions = Permission::get();
-  		$grouped_permissions = [];
-  		foreach($permissions as $permission){
-  			$grouped_permissions[$permission->module][]=[
-  				'id'=>$permission->id,
-  				'name'=>ucwords(str_replace("-", " ", $permission->name)),
-  			];
-  		}
-  		$data_array['permissions'] = $grouped_permissions;
-  		$data_array['promo-url_permissions'] = \Arr::pluck($promo_url->permissions,'id');
+  		$data_array['subscription_plan_arr'] = SubscriptionPlan::dataList()->pluck('name','id')->toArray();
+  		$data_array['amount_type_arr'] = config('custom_config.amount_type_arr');
+  		$data_array['valid_for_months_arr'] = array_combine(range(1,12),array_map(function($val) { return $val." month";},range(1,12)));
+  		// dd($promo_url->expiration_date);
+  		$data_array['valid_for_years_arr'] = array_combine(range(1,10),array_map(function($val) { return $val." year";},range(1,10)));
   		return view('admin.promo-url.form',$data_array);
   	}
 
@@ -165,9 +153,7 @@ class PromoUrlController extends AdminBaseController
 	{
 		try{
 			$input_data=$request->input(); 
-			$input_data=$request->input(); 
 			$promo_url = PromoUrl::saveData($input_data,$promo_url);
-			$sync_permissions = $promo_url->syncPermissions(($input_data['permission'] ?? []));
 			if($promo_url){
 				$response_type='success';
 				$response_message='Promo Url edited successfully';

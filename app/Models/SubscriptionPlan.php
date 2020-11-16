@@ -13,10 +13,22 @@ class SubscriptionPlan extends Model
 
 	protected $fillable = ['name','slug', 'yearly_amount' ,'monthly_amount','discount_percent','max_team_member','description','feature_list']
 	;
+
+	protected $appends = [
+		'formated_monthly_amount','formated_yearly_amount'
+	];
+
 	protected $dates = ['deleted_at'];
 	
 	public $timestamps = true;
 
+	public function getFormatedMonthlyAmountAttribute(){
+		return myCurrencyFormat($this->monthly_amount);
+	} 
+
+	public function getFormatedYearlyAmountAttribute(){
+		return myCurrencyFormat($this->yearly_amount);
+	} 
 	
 	public static function saveData($dataArray,$model=array())
 	{ 

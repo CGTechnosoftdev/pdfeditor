@@ -38,6 +38,7 @@ return [
         'business_category' =>'BusinessCategory',
         'sub-admin'=>'User',
         'subscription_plan' => 'SubscriptionPlan',
+        'promo-url' => 'PromoUrl',
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',
@@ -81,6 +82,10 @@ return [
             'label' => 'USD',
             'symbol' => '$',
         ],
+    ],
+    'amount_type_arr' => [
+        '0' => 'Default',
+        '1' => 'Custom',
     ],
     
 ];
