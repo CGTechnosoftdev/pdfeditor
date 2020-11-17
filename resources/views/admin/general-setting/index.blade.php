@@ -22,6 +22,15 @@
 							@endif
 						</div>
 					</div>
+					<div class="form-group {{ $errors->has('trail_days') ? ' has-error' : '' }}">
+						<label for="trail_days" class="control-label text-left col-sm-4 required">Trail Days</label>
+						<div class="col-sm-8" >
+							{{ Form::number('trail_days',old('trail_days'),array('placeholder'=>'Enter Trail Days','class'=>"form-control",'min'=>0,'step'=>1))}}
+							@if ($errors->has('trail_days'))
+							<span class="help-block"><strong>{{ $errors->first('trail_days') }}</strong></span>
+							@endif
+						</div>
+					</div>
 					<div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
 						<label for="currency" class="control-label text-left col-sm-4 required">Currency<span class="required-label">*</span></label>
 						<div class="col-sm-8" >

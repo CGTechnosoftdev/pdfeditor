@@ -37,6 +37,7 @@ return [
         'faq' => 'Faq',
         'business_category' =>'BusinessCategory',
         'sub-admin'=>'User',
+        'subscription_plan' => 'SubscriptionPlan',
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',
