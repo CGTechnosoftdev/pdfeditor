@@ -27,7 +27,7 @@ class PaymentFormRequest extends FormRequest
     {		
         $rules=[
 			'subscription_plan_id' => 'required',
-            'subscription_plan_type_id' => 'required',
+            'subscription_plan_type' => 'required',
             'name_on_card' => 'required',
 			'card_number' => 'required|max:16',
 			'cvv' => 'required|min:3|max:3',

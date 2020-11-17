@@ -45,6 +45,14 @@ return [
     'DEFAULT_PHONECODE' => 226,
     'PASSWORD_REGEX_INSTRUCTION' => "Your password must contain 1 uppercase,1 lowercase, 1 digit and 1 special character",
     'PASSWORD_REGEX' => '/(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$)/u',
+
+    'SUBSCRIPTION_PLAN_TYPE_TRAIL' => 0,
+    'SUBSCRIPTION_PLAN_TYPE_MONTHLY' => 1,
+    'SUBSCRIPTION_PLAN_TYPE_YEARLY' => 2,
+
+    'SUBSCRIPTION_STATUS_NO' => 0,
+    'SUBSCRIPTION_STATUS_YES' => 1,
+    'SUBSCRIPTION_STATUS_TRAIL' => 2,
     
 ];
 

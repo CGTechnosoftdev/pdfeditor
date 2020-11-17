@@ -16,10 +16,10 @@ class CreateUserSubscriptionsTable extends Migration
         Schema::create('user_subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('subscription_plan_id')->unsigned();
-            $table->tinyInteger('subscription_plan_type')->nullable()->comment('1=>Monthly,2=>Yearly');
+            $table->tinyInteger('subscription_plan_type')->nullable()->comment('0=>Trail,1=>Monthly,2=>Yearly');
             $table->bigInteger('user_id')->unsigned();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->bigInteger('transaction_id')->nullable();
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();

@@ -85,6 +85,11 @@ return [
             'label' => 'USD',
             'symbol' => '$',
         ],
+        [
+            'key' => 'INR',
+            'label' => 'INR',
+            'symbol' => '₹',
+        ],
     ],
     'stripe_config'=>[
         'publishable_key' => 'pk_test_51HmGOzDCwgb6dlp7EiX42eI63FYyMYCDlM8BnMNPNGInZ8mRvZRjbmOKyFwraspS0YWqJzv25YCjOGOdswUoSbHH00N8GQ6qkD',

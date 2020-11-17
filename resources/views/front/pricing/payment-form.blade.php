@@ -80,6 +80,9 @@
 		</div>
 		@endif
 		<div class="container">
+			<div>
+				@include('admin.partials.flash-messages')
+			</div>
 			<div class="row">
 				<div class="col-xs-12 col-lg-12 col-md-12">
 					{{ Form::open(['route' => 'front.checkout','method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
@@ -93,12 +96,12 @@
 							@endif
 						</div>
 					</div>
-					<div class="form-group {{ $errors->has('subscription_plan_type_id') ? ' has-error' : '' }}">
-						<label for="subscription_plan_type_id" class="control-label text-left col-sm-4 required">Subscription Plan Type<span class="required-label">*</span></label>	
+					<div class="form-group {{ $errors->has('subscription_plan_type') ? ' has-error' : '' }}">
+						<label for="subscription_plan_type" class="control-label text-left col-sm-4 required">Subscription Plan Type<span class="required-label">*</span></label>	
 						<div class="col-sm-8">
-							{!! Form::select('subscription_plan_type_id',[''=>"Select"] + $subscription_plan_type_arr, old('subscription_plan_type_id'), ['class'=>'form-control required','data-unit'=>'from']) !!}
-							@if ($errors->has('subscription_plan_type_id'))
-							<span class="help-block"><strong>{{ $errors->first('subscription_plan_type_id') }}</strong></span>
+							{!! Form::select('subscription_plan_type',[''=>"Select"] + $subscription_plan_type_arr, old('subscription_plan_type'), ['class'=>'form-control required','data-unit'=>'from']) !!}
+							@if ($errors->has('subscription_plan_type'))
+							<span class="help-block"><strong>{{ $errors->first('subscription_plan_type') }}</strong></span>
 							@endif
 						</div>
 					</div>
