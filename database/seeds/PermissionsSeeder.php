@@ -182,6 +182,35 @@ class PermissionsSeeder extends Seeder
         		'updated_at'=>date("Y-m-d H:i:s"),
             ],
 
+            [
+        		'name'=>'subscription-plan-list',
+                'guard_name'=>'web',
+        		'module'=>'Subscription Plan',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'subscription-plan-create',
+                'guard_name'=>'web',
+        		'module'=>'Subscription Plan',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'subscription-plan-edit',
+                'guard_name'=>'web',
+        		'module'=>'Subscription Plan',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+            [
+        		'name'=>'subscription-plan-delete',
+                'guard_name'=>'web',
+        		'module'=>'Subscription Plan',
+        		'created_at'=>date("Y-m-d H:i:s"),
+        		'updated_at'=>date("Y-m-d H:i:s"),
+            ],
+
 
         ];
         DB::table('permissions')->insert($initialData);

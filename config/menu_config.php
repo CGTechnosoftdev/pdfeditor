@@ -29,6 +29,13 @@ return [
             'permissions'=>['sub-admin-list'],
         ],
         [
+            'label' => 'Subscription Plans',
+            'icon' => 'money',
+            'route_name' => 'subscription-plan.index',
+            'active_segments' => ['subscription-plan'],
+            'permissions'=>['subscription-plan-list'],
+        ],
+        [
             'label' => 'Business Category',
             'icon' => 'building',
             'route_name' => 'business-category.index',

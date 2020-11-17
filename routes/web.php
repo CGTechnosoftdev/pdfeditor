@@ -83,7 +83,10 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::resource('general-setting', 'GeneralSettingsController',['only' => ['index']]);
 		Route::put('general-setting/update-setting','GeneralSettingsController@updateSetting')->name('general-setting.update');
 
+		//subscription-plan
+		Route::resource('subscription-plan', 'SubscriptionPlanController');
 	});
+
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');

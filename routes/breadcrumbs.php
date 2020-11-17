@@ -84,18 +84,25 @@ Breadcrumbs::for('top-100-form.index', function ($trail) {
 	$trail->push('Top 100 Form', route('top-100-form.index'));
 });
 
-// Home > roles > add
+// Home > top100form > add
 Breadcrumbs::for('top-100-form.create', function ($trail) {
 	$trail->push('Dashboard', route('dashboard'));
 	$trail->push('Top 100 Form', route('top-100-form.index'));
 	$trail->push('Add Top 100 Form', route('top-100-form.create'));
 });
 
-// Home > roles > updated
+// Home > top100form > updated
 Breadcrumbs::for('top-100-form.edit', function ($trail,$id) {
 	$trail->push('Dashboard', route('dashboard'));
 	$trail->push('Top 100 Form', route('top-100-form.index'));
 	$trail->push('Edit Top 100 Form', route('top-100-form.edit',$id));
+});
+
+// Home > subscription-plan > show
+Breadcrumbs::for('top-100-form.show', function ($trail,$id,$name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Top100Form', route('top-100-form.index'));
+	$trail->push($name.' Detail', route('top-100-form.edit',$id));
 });
 
 
@@ -140,4 +147,31 @@ Breadcrumbs::for('top100form.faq.edit', function ($trail,$top_id,$id) {
 	$trail->push('Faq', route('top100form.faq.list',$id));
 	$trail->push('Edit Faq', route('top100form.faq.edit',[$top_id,$id]));
 
+});
+
+// Home > subscription-plan
+Breadcrumbs::for('subscription-plan.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Subscription Plan', route('subscription-plan.index'));
+});
+
+// Home > subscription-plan > add
+Breadcrumbs::for('subscription-plan.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Subscription Plan', route('subscription-plan.index'));
+	$trail->push('Subscription Category', route('subscription-plan.create'));
+});
+
+// Home > subscription-plan > updated
+Breadcrumbs::for('subscription-plan.edit', function ($trail,$id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Subscription Plan', route('subscription-plan.index'));
+	$trail->push('Edit Subscription Plan', route('subscription-plan.edit',$id));
+});
+
+// Home > subscription-plan > show
+Breadcrumbs::for('subscription-plan.show', function ($trail,$id,$name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Subscription Plan', route('subscription-plan.index'));
+	$trail->push($name.' Detail', route('subscription-plan.edit',$id));
 });
