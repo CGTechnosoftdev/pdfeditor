@@ -30,7 +30,7 @@ class PromoUrlController extends AdminBaseController
     	if(request()->ajax()) {
     		$action_button_template='admin.datatable.actions';
     		$status_button_template = 'admin.datatable.status';
-    		$model=PromoUrl::query();
+    		$model=PromoUrl::query()->get();
     		$table=Datatables()->of($model);
     		if(!empty($filter_data['statusFilter'])){
     			$model->where(['status'=>$filter_data['statusFilter']]);

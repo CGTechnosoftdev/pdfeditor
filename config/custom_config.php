@@ -39,6 +39,7 @@ return [
         'sub-admin'=>'User',
         'subscription_plan' => 'SubscriptionPlan',
         'promo-url' => 'PromoUrl',
+        'email-template' => 'EmailTemplate',
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',

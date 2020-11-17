@@ -57,6 +57,13 @@ return [
             'permissions'=>['top-100-form-list'],
         ],
         [
+            'label' => 'Email Template',
+            'icon' => 'envelope',
+            'route_name' => 'email-template.index',
+            'active_segments' => ['email-template'],
+            'permissions'=>['email-template-list'],
+        ],
+        [
             'label' => 'General Settings',
             'icon' => 'gears',
             'route_name' => 'general-setting.index',

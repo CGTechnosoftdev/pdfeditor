@@ -102,4 +102,15 @@ return [
         ],
         'order'=>[[0,'desc']]
     ],
+    'email_template' => [
+        'columns'=>[
+            ['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
+            ['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'#'],
+            ['data'=>'title', 'name'=> 'title','label'=>'Title','orderBy'=>'asc'],
+            ['data'=>'subject', 'name'=> 'subject','label'=>'Subject','orderBy'=>'asc'],
+            ['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
+            ['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
+        ],
+        'order'=>[[0,'desc']]
+    ],
 ];

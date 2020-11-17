@@ -196,3 +196,15 @@ Breadcrumbs::for('promo-url.edit', function ($trail,$id) {
 	$trail->push('Promo URL', route('promo-url.index'));
 	$trail->push('Edit Promo URL', route('promo-url.edit',$id));
 });
+
+// Home > email-template
+Breadcrumbs::for('email-template.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Email Template', route('email-template.index'));
+});
+// Home > email-template > updated
+Breadcrumbs::for('email-template.edit', function ($trail,$id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Email Template', route('email-template.index'));
+	$trail->push('Edit Email Template', route('email-template.edit',$id));
+});
