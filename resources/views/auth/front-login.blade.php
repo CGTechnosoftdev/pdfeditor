@@ -45,16 +45,7 @@
 				<!-- /.col -->
 				<div class="col-md-4">
 					<button type="submit" class="btn btn-success  btn-block btn-flat">{{ __('Login') }}</button>
-				</div>
-				<div class="col-md-8 text-right">
-					<a class="btn btn-link" href="#" id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"> 
-						{{ __('Forgot Password?') }}
-					</a>
-
-				   <a class="btn btn-link load-ajax-modal" href="#"  data-path="{{ route('front.user.registration') }}"   role="button"  data-target="#exampleModal">
-						{{ __('New User') }}
-					</a>
-
+					<br/>
 					<form>
 <div class="form-group row">
     <div class="col-md-6 offset-md-4">
@@ -63,7 +54,16 @@
     </div>
 </div>
 </form>
-
+<a href="{{ url('/login/google') }}" class="btn btn-google"> Google</a>
+				</div>
+				<div class="col-md-8 text-right">
+					<a class="btn btn-link" href="#" id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"> 
+						{{ __('Forgot Password?') }}
+					</a>
+           
+				   <a class="btn btn-link load-ajax-modal" href="#"  data-path="{{ route('front.user.registration') }}"   role="button"  data-target="#exampleModal">
+						{{ __('New User') }}
+				   </a>                    					
 
 				</div>
 				<!-- /.col -->
@@ -108,7 +108,64 @@
     }
 });
 
+$('body').on("click","#reverificationemailId",function(){
+
+
+	$("#exampleModalLabel").text("Email Verification");
+ $("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="emailverificationid">Submit</a>');
+$.ajax({
+	type : 'GET',
+	url : $(this).data('path'),
+
+	success: function(result) {
+		$('#exampleModal div.modal-body').html(result);
+
+		$('#exampleModal').modal()
+
+		$("#emailverificationid").click(function(){
+
+			$('#email-error').text("");
+              $('#password-error').text("");
+
+			  $("#success_msg_id_container").removeClass("visible");
+			$("#success_msg_id_container").addClass("invisible");
+
+			$.ajax({
+        type: "POST",
+        url: "{{ route('front.reverification.account.submit') }}",
+       /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
+	   data: $('#reverificationfrm_id').serialize(),
+        success: function( msg ) {
+          if(msg.success){
+			//  alert(msg.success);
+			$("#success_msg_id").html(msg.success);
+			$("#success_msg_id_container").removeClass("invisible");
+			$("#success_msg_id_container").addClass("visible");
+		  }
+        },
+		error: function(response) {
+              
+              $('#email-error').text(response.responseJSON.errors.email);
+              $('#password-error').text(response.responseJSON.errors.password);
+              
+          }
+    });
+
+//	alert("submit the form!");
+});
+	}
+});
+
+
+
+	//$("#forgotpasswordid").trigger("click");
+
+});
+
+
 $('body').on("click",".load-ajax-modal",function(){
+
+
  $("#exampleModalLabel").text("User Registration");
  $("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="newregisterid">Submit</a>');
 $.ajax({
@@ -153,6 +210,8 @@ $.ajax({
 });
 	}
 });
+
+
 });
 
 $("body").on("click","#forgotpasswordid",function(){

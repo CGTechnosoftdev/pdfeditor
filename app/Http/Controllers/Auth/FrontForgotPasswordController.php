@@ -42,7 +42,98 @@ class FrontForgotPasswordController extends Controller
 
     public function forgotpassword()
     {
-        return view('auth.passwords.front-email');
+       $dataArray["action"]="front.resetpassword.email";
+        return view('auth.passwords.front-email',$dataArray);
+    }
+    public function reVerificationAccount()
+    {
+        $dataArray["action"]="front.reverification.account.submit";
+        return view('auth.passwords.front-email-verification-form',$dataArray);
+    }
+    public function reVerificaitonACcountSubmit(FrontForgotPasswordFormRequest $request){
+        $input_data=$request->input(); 
+        $credentails=$this->credentials($request);  
+        $user=$this->broker()->getUser($credentails);
+
+        if (!isset($user)) {
+            // return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
+            $arr["error"]="User does not exist";
+            $arr["status"]=false;
+            return Response()->json($arr);
+         }
+         $userRole=config('constant.USER_ROLE');
+    
+
+         $modeInRole=\DB::table('model_has_roles')->where("model_id",'=',$user->id)->first();
+         
+         if($modeInRole->role_id!=$userRole)
+         {
+             $arr["error"]="User not allow to verify your account!";
+             $arr["status"]=false;
+             return Response()->json($arr);
+          
+         }
+
+
+         //generate token
+
+         $passwordToken=\DB::table('password_resets')->where("email",'=',$user->email)->first();
+
+         if(!empty($passwordToken))
+         {
+             $token=$passwordToken->token;
+
+      
+          }
+          else             
+          {
+             $token = Str::random(60);
+             $token=hash('sha256', $token); 
+             \DB::table('password_resets')->insert([
+                 'email' => $request->email,
+                 'token' => $token,
+                 'created_at' => now()
+             ]);
+
+          }  
+          //send email for verification
+          DB::beginTransaction();
+          try{      
+
+
+          $link = config('base_url') . 'front-user-email-verification/' . $token . '?email=' . urlencode($user->email);
+
+            if($user){
+                DB::commit();
+                $email_config = [
+                    'config_param' => 'email_verification',
+                    'content_data' => [ 
+                                        'name' => $user->first_name,
+                                        'email' => $user->email,
+                                        'link' => $link,
+                                    ],
+                ];
+                Mail::to($user->email)->send(new CommonMail($email_config));
+                $response_type='success';
+                $response_message='Email verification email send successfully,please check your email account.';
+            }else{
+                DB::rollback();
+                $response_type='error';
+                $response_message='Error occoured, Please try again.';
+            }
+
+        }catch (Exception $e){
+			DB::rollback();
+			$response_type='error';
+			$response_message=$e->getMessage();
+		}
+
+		$arr[$response_type]=$response_message;
+		return Response()->json($arr);
+
+
+  
+
     }
     protected function credentials(Request $request)
     {
@@ -60,8 +151,7 @@ class FrontForgotPasswordController extends Controller
 
       $user=$this->broker()->getUser($credentails);
 
-       $token = Str::random(60);
-       $token=hash('sha256', $token); 
+
                        
     
             if (!isset($user)) {
@@ -82,12 +172,27 @@ class FrontForgotPasswordController extends Controller
              
             }
 
+            $passwordToken=\DB::table('password_resets')->where("email",'=',$user->email)->first();
 
-            \DB::table('password_resets')->insert([
-                'email' => $request->email,
-                'token' => $token,
-                'created_at' => now()
-            ]);
+            if(!empty($passwordToken))
+            {
+                $token=$passwordToken->token;
+
+         
+             }
+             else             
+             {
+                $token = Str::random(60);
+                $token=hash('sha256', $token); 
+                \DB::table('password_resets')->insert([
+                    'email' => $request->email,
+                    'token' => $token,
+                    'created_at' => now()
+                ]);
+
+             }  
+             
+          
 
             
             if ($this->sendResetEmail($request->email, $token)) {
@@ -105,6 +210,7 @@ class FrontForgotPasswordController extends Controller
             return Response()->json($arr);
 
     }
+  
 
  
 

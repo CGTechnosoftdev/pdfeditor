@@ -19,8 +19,10 @@ class SocialController extends Controller
         $users       =   User::where(['email' => $userSocial->getEmail()])->first();
         if($users){
             Auth::login($users);
+            set_flash("success","Login Successfully",false);
             return redirect('/');
         }else{
+            
                   $user = User::create([
                 'first_name'          => $userSocial->getName(),
                 'email'         => $userSocial->getEmail(),
@@ -28,7 +30,11 @@ class SocialController extends Controller
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
                                      ]);         
-             return redirect()->route('dashboard');
+                                     $user->syncRoles(config('constant.USER_ROLE'));                        
+            // return redirect()->route('dashboard');
+            set_flash("success","Login Successfully",false);
+            Auth::login($user);
+            return redirect('/');
          }
     }
 }

@@ -7,12 +7,12 @@
     <div class="login-logo">
         <a href="#"><b>{{ config('app.name') }}</b></a>
     </div>
-        <p class="login-box-msg">Front Forgot Pasword</p>
+        <p class="login-box-msg">Email Verification Form</p>
         <div class="alert alert-success alert-block invisible" id="success_msg_id_container"> 			
  			<strong id="success_msg_id"></strong>
  			<button type="button" class="close" data-dismiss="alert">×</button>
  		</div>
-        <form method="POST" action="{{ route($action) }}" id="forgotpasswordfrm_id">
+        <form method="POST" action="{{ route($action) }}" id="reverificationfrm_id">
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">     
             @csrf
             <div class="row">

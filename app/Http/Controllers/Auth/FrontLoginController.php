@@ -117,9 +117,14 @@ class FrontLoginController extends Controller
     	}
 
     	if($user->status ==  config('constant.STATUS_PENDING')){
-    		Auth::logout();
-    		set_flash('error', 'Your account is Pending. Please contact to Administrator',false);
-    		return redirect()->route('login');
+            Auth::logout();
+            //id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"
+
+     
+            $link = config('base_url').route('front.reverification.account');
+            $appendMessage="<br/>Please click on bellow link for email verification.<br/><a data-path='".$link."' href='#' id='reverificationemailId' class='btn btn-primary' targe='_blank'>Click Here</a>";
+    		set_flash('error', 'Your account is Pending.'.$appendMessage,false);
+    		return redirect()->route('front.login');
     	}
     }
 
