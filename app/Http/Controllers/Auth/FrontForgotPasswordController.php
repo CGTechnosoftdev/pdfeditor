@@ -42,16 +42,17 @@ class FrontForgotPasswordController extends Controller
 
     public function forgotpassword()
     {
-       $dataArray["action"]="front.resetpassword.email";
-        return view('auth.passwords.front-email',$dataArray);
+       //$dataArray["action"]="front.resetpassword.email";
+        return view('auth.passwords.front-email');
     }
-    public function reVerificationAccount()
+    public function reSendVerificationAccount()
     {
         $dataArray["action"]="front.reverification.account.submit";
         return view('auth.passwords.front-email-verification-form',$dataArray);
     }
-    public function reVerificaitonACcountSubmit(FrontForgotPasswordFormRequest $request){
+    public function reSendVerificaitonAccountSubmit(FrontForgotPasswordFormRequest $request){
         $input_data=$request->input(); 
+       
         $credentails=$this->credentials($request);  
         $user=$this->broker()->getUser($credentails);
 
@@ -101,7 +102,7 @@ class FrontForgotPasswordController extends Controller
           try{      
 
 
-          $link = config('base_url') . 'front-user-email-verification/' . $token . '?email=' . urlencode($user->email);
+          $link = config('base_url') . route('user.verification.save')."/". $token . '?email=' . urlencode($user->email);
 
             if($user){
                 DB::commit();

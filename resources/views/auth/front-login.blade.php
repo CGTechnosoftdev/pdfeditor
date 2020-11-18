@@ -109,7 +109,7 @@
 });
 
 $('body').on("click","#reverificationemailId",function(){
-
+    alert("hellow here!");
 
 	$("#exampleModalLabel").text("Email Verification");
  $("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="emailverificationid">Submit</a>');
@@ -132,7 +132,7 @@ $.ajax({
 
 			$.ajax({
         type: "POST",
-        url: "{{ route('front.reverification.account.submit') }}",
+        url: "{{ route('front.resend.verification.account.submit') }}",
        /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
 	   data: $('#reverificationfrm_id').serialize(),
         success: function( msg ) {

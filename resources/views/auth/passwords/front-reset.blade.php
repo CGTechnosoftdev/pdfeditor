@@ -1,84 +1,79 @@
-@extends('layouts.admin-login')
+@extends('layouts.front-home')
 
 @section('content')
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+
+<div class="account-popup modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+     <!-- <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> -->
       <div class="modal-body">
 
-<div class="login-box">
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-    <div class="login-logo">
-        <a href="#"><b>{{ config('app.name') }}</b></a>
-    </div>
-        <p class="login-box-msg">Forgot Pasword</p>
-        <div class="alert alert-success alert-block invisible" id="success_msg_id_container"> 			
+      <div class="login-popup login-form ">
+                        <div class="row">
+                            <div class="col-md-5">
+                            <div class="alert alert-success alert-block invisible" id="success_msg_id_container"> 			
  			<strong id="success_msg_id"></strong>
  			<button type="button" class="close" data-dismiss="alert">×</button>
  		</div>
-        <form method="POST" action="{{ route('front.resetpassword.save') }}" id="resetPasswordFrm">
-         
-         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                            <div class="d-table ">
+                                        <div class="d-table-cell align-middle">
+                                            <div class="heading">
+                                                <h3>Reset Password</h3>
+                                                <p>Please enter the following details</p>
+                                            </div>
+                                            <div class="row">
+                                                
+                                            
+                                            {{ Form::open(['route' => 'front.resetpassword.save','method'=>'post','class'=>'','id' => 'resetPasswordFrm','enctype'=>"multipart/form-data"]) }}  
+                                            {{ Form::hidden("_token", csrf_token())}}
+                                            {{ Form::hidden("token", $token)}}
+                                                <div class="col-md-12 input-group mb-3">
+                                                    {{ Form::text('email',$email,array('placeholder'=>'Email address','class'=>"form-control email",'id' => "email-address"))}}
+                                                    <span class="required-value text-danger" id="email-error"></span>
+                                                </div>
+                                                <div class="col-md-12 input-group mb-3">
+                                                    {{ Form::password('password', ['class' => 'form-control password','placeholder' => 'Password','id'=>'password' ]) }} 
+                                                    <span class="required-value"><i class="fas fa-lock"></i> 6 Character minimum with no space</span>
+                                                    <span class="text-danger" id="password-error"></span>
+                                                </div>
+                                                 <div class="col-md-12 input-group mb-3">
+                                                 {{ Form::password('password_confirmation', ['class' => 'form-control password','placeholder' => 'Password','id'=>'password' ]) }}                                                                                                        
+                                                 </div>
 
-            <input type="hidden" name="token" value="{{ $token }}">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group has-feedback">
-                        <label for="email" class="col-form-label">{{ __('E-Mail') }}</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email"  value="{{ $email ?? old('email') }}" autocomplete="email" autofocus>
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                  
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="email-error"></strong>
-                        </span>
-                       
+                                                 <div class="col-sm-6">
+                                                    <a href="#" id="resetpasswordId"  class="w-100 btn btn-outline-secondary">Login</a>
+                                                </div>
+
+                                                {{ Form::close() }} 
+                                            </div>
+
+                                        </div>
+                                    </div>
+  
+
+
+    </div>
+                            <div class="col-md-7 pl-md-4">
+                                <div class="account-img">
+                                    <img src="{{ asset('public/front/images/login-bg.png')}}">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group has-feedback">
-                        <label for="password" class="col-form-label text-md-right">{{ __('Password') }} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ config('constant.PASSWORD_REGEX_INSTRUCTION') }}"></i></label>
-                        <input type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Password">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                       
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="password-error"></strong>
-                        </span>
-                   
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group has-feedback">
-                        <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <a class="btn btn-success  btn-block btn-flat" id="resetpasswordId" href="#">Reset Password</a>
-                </div>
-                <!-- /.col -->
-            </div>
-        </form>
-        
-    </div> 
-    <!-- /.login-box-body -->
-</div>
 
 </div>
-      <div class="modal-footer">
+     <!-- <div class="modal-footer">
 		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		 <span id="ButtonContainerId"></span>
 		
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

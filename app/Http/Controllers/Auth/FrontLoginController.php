@@ -71,9 +71,20 @@ class FrontLoginController extends Controller
     	}
 
 
-    	if ($this->attemptLogin($request)) {
-    		return $this->sendLoginResponse($request);
-    	}
+        if ($this->attemptLogin($request)) {
+
+            $request->session()->regenerate();
+
+            $this->clearLoginAttempts($request);
+
+            if ($request->ajax()) {
+                $response_array=$this->authenticated($request, $this->guard()->user());                
+                return response()->json([$response_array["return_type"] => true,'message' => $response_array["message"]]);
+            } else {
+                return $this->authenticated($request, $this->guard()->user())
+                    ?: redirect()->intended($this->redirectPath());
+            }
+        }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
@@ -98,22 +109,35 @@ class FrontLoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-    	$user_roles = $user->roles->pluck('id')->toArray();
+        $user_roles = $user->roles->pluck('id')->toArray();
+        $dataArray["return_type"]="success";
+        $dataArray["message"]="Login successfully!";
+
     	if(!in_array(config('constant.USER_ROLE'),$user_roles)){
-    		Auth::logout();
-    		return $this->sendFailedLoginResponse($request);
+            Auth::logout();
+            $message='User not found!';
+            $dataArray["return_type"]="error";
+            $dataArray["message"]=$message;
+
     	}
 
     	if($user->status == config('constant.STATUS_INACTIVE')){
-    		Auth::logout();
-    		set_flash('error', 'Your account is Inactive. Please contact to Administrator',false);
-    		return redirect()->route('login');
+            Auth::logout();
+            $message='Your account is Inactive. Please contact to Administrator';
+            $dataArray["return_type"]="error";
+            $dataArray["message"]=$message;
+    		set_flash('error', $message,false);
+     
+           
     	}
 
     	if($user->status == config('constant.STATUS_BLOCKED')){
-    		Auth::logout();
-    		set_flash('error', 'Your account is Blocked. Please contact to Administrator',false);
-    		return redirect()->route('login');
+            Auth::logout();
+            $message='Your account is Blocked. Please contact to Administrator';
+            $dataArray["return_type"]="error";
+            $dataArray["message"]=$message;
+            set_flash('error',$message,false);
+   
     	}
 
     	if($user->status ==  config('constant.STATUS_PENDING')){
@@ -121,11 +145,17 @@ class FrontLoginController extends Controller
             //id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"
 
      
-            $link = config('base_url').route('front.reverification.account');
-            $appendMessage="<br/>Please click on bellow link for email verification.<br/><a data-path='".$link."' href='#' id='reverificationemailId' class='btn btn-primary' targe='_blank'>Click Here</a>";
-    		set_flash('error', 'Your account is Pending.'.$appendMessage,false);
-    		return redirect()->route('front.login');
-    	}
+            //$link = config('base_url').route('front.resend.verification.account');
+            $appendMessage="<br/>Please click on bellow link for email verification.<br/><a  href='#' onclick='toggleVisibility(\"re_send_verification_form_id\")' id='resend_email_verification_trigger_id' class='btn btn-primary' targe='_blank'>Click Here</a>";
+            $message='Your account is Pending.'.$appendMessage;
+
+            set_flash('error', $message,false);
+                    
+            $dataArray["return_type"]="error";
+            $dataArray["message"]=$message;
+            
+        }
+        return $dataArray;
     }
 
     /**

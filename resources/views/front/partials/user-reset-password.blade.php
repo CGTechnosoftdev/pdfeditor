@@ -1,10 +1,10 @@
 
-{{ Form::open(['route' => 'front.user.registration.save','method'=>'post','class'=>'login-form display_none','id' => 'user_registration_id','enctype'=>"multipart/form-data"]) }}
+{{ Form::open(['route' => 'front.resetpassword.save','method'=>'post','class'=>'login-form display_none','id' => 'resetPasswordFrm','enctype'=>"multipart/form-data"]) }}
 {{ Form::hidden("_token", csrf_token())}}
                                     <div class="d-table">
                                         <div class="d-table-cell align-middle">
                                             <div class="heading">
-                                                <h3>Register</h3>
+                                                <h3>Reset Password</h3>
                                                 <p>Please enter the following details</p>
                                             </div>
 
@@ -26,7 +26,7 @@
                                                     <a href="#" id="newregisterid"  class="w-100 btn btn-secondary">Register</a>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <a href="#login" onclick="toggleVisibility('user_login_form_id');" class="w-100 btn btn-outline-secondary">Login</a>
+                                                    <a href="#login" onclick="toggleVisibility('Menu1');" class="w-100 btn btn-outline-secondary">Login</a>
                                                 </div>
                                                 <div class="col-md-12 mt-3">
                                                     <div class="login-terms">

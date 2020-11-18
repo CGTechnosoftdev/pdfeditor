@@ -54,7 +54,7 @@ $('.counting').each(function() {
 
 /************************************ */
 
-var divs = ["Menu1", "user_registration_id", "Menu3", "Menu4"];
+var divs = ["user_login_form_id", "user_registration_id", "forgotpasswordfrm_id", "re_send_verification_form_id"];
 var visibleDivId = null;
 
 function toggleVisibility(divId) {
@@ -63,6 +63,7 @@ function toggleVisibility(divId) {
     } else {
         visibleDivId = divId;
     }
+
     hideNonVisibleDivs();
 }
 
@@ -70,11 +71,17 @@ function hideNonVisibleDivs() {
     var i, divId, div;
     for (i = 0; i < divs.length; i++) {
         divId = divs[i];
+   
         div = document.getElementById(divId);
+
         if (visibleDivId === divId) {
+          
             div.style.display = "block";
+        
         } else {
+       
             div.style.display = "none";
+       
         }
     }
 }
