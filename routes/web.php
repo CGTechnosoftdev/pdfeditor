@@ -15,6 +15,7 @@ Route::get('/', function () {
 	return view('welcome');
 });
 Route::group(['as'=>'front.','middleware'=>[]], function () {
+	Route::get("/",'Front\FrontHomeController@index')->name('home');
 	Route::get('/login','Auth\FrontLoginController@showLoginForm')->name('login');
 	Route::get('/forgot-password','Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
