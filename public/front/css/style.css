@@ -1218,4 +1218,12 @@ li {
         width: 90%;
         font-size: 14px;
         font-family: 'Poppins-Light';
-}    
+}
+
+.verify-email-part {
+    width: 100%;
+    height: auto;
+    float: left;
+    min-height: 50vh;
+    padding-top: 150px;
+}

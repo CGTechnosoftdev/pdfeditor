@@ -254,7 +254,7 @@
 
                             @include('front.partials.forgot-password')
 
-                            @include('front.partials.front-resend-verification')
+                           
 
 
                         </div>
@@ -276,54 +276,17 @@
 <script>
     jQuery("document").ready(function($) {
 
+        $("#login_btn_id").click(function(){
+            toggleVisibility("user_login_form_id");
+        });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="_token"]').attr('content')
             }
         });
 
-        $('#resend_verificationemailId').click(function() {
-
-
-            $('#email-error').text("");
-                        $('#password-error').text("");
-
-                        $("#success_msg_id_container").removeClass("visible");
-                        $("#success_msg_id_container").addClass("invisible");
-
-                  
-                        $.ajax({
-                            type: "POST",
-                            url: "{{ route('front.resend.verification.account.submit') }}",
-                            /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
-                            data: $('#re_send_verification_form_id').serialize(),
-                            
-                            success: function(response) {
-                                console.log(response);
-                                if (response.success) {
-                                    //  alert(msg.success);
-                                    $("#success_msg_id").html(response.success);
-                                    $("#success_msg_id_container").removeClass("invisible");
-                                    $("#success_msg_id_container").addClass("visible");
-                                }
-                            },
-                            error: function(response) {
-                                console.log(response);
-                          
-                                    $("#error_msg_id").html(response.message);
-                                    $("#error_msg_id_container").removeClass("invisible");
-                                    $("#error_msg_id_container").addClass("visible");
-
-
-
-                            }
-                        });
-
-
-
-            //$("#forgotpasswordid").trigger("click");
-
-        });
+       
 
         //for login
         $("#LoginBtnId").click(function() {
@@ -359,7 +322,7 @@
                 error: function(response) {
                     console.log(response);
                     if (response.error == true) {
-                        alert("error here");
+                       // alert("error here");
                         $("#error_msg_id").html(response.message);
                         $("#error_msg_id_container").removeClass("invisible");
                         $("#error_msg_id_container").addClass("visible");

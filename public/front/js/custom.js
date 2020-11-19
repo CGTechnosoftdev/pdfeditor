@@ -73,7 +73,7 @@ function hideNonVisibleDivs() {
         divId = divs[i];
    
         div = document.getElementById(divId);
-
+        
         if (visibleDivId === divId) {
           
             div.style.display = "block";

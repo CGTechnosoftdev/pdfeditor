@@ -3,7 +3,7 @@
     <div class="d-table">
         <div class="d-table-cell align-middle">
             <div class="heading">
-                <h3>Log in11</h3>
+                <h3>Log in</h3>
                 <p>Please enter your credential to continue</p>
             </div>
             <div class="row">

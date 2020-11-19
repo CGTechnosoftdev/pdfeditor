@@ -42,7 +42,7 @@
                             </ul>
                             <ul class="navbar-nav ml-auto login_signup">
                                 <li class="nav-item">
-                                    <a class="nav-link login" href="#" data-remote="myRemoteURL.do" data-toggle="modal" data-target="#exampleModal">Log in</a>
+                                    <a class="nav-link login" href="#" data-remote="myRemoteURL.do" data-toggle="modal" data-target="#exampleModal" id="login_btn_id" >Log in</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link start-trial" href="#">Start Free Trial</a>

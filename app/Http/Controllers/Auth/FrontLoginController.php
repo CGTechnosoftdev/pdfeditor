@@ -145,8 +145,8 @@ class FrontLoginController extends Controller
             //id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"
 
      
-            //$link = config('base_url').route('front.resend.verification.account');
-            $appendMessage="<br/>Please click on bellow link for email verification.<br/><a  href='#' onclick='toggleVisibility(\"re_send_verification_form_id\")' id='resend_email_verification_trigger_id' class='btn btn-primary' targe='_blank'>Click Here</a>";
+            $link = route('front.resend.verification.account');
+            $appendMessage="<br/>Please click on bellow link for email verification.<br/><a  href='".$link."'  id='resend_email_verification_trigger_id' class='btn w-100 btn btn-secondary' targe='_blank'>Click Here</a>";
             $message='Your account is Pending.'.$appendMessage;
 
             set_flash('error', $message,false);
