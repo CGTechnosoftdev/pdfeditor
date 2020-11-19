@@ -343,28 +343,31 @@
         // for new registeration
         $("#newregisterid").click(function() {
 
-            $('#email-error').text("");
-            $('#password-error').text("");
-            $("#success_msg_id_container").removeClass("visible");
-            $("#success_msg_id_container").addClass("invisible");
+            $('#user_registration_id  #email-error').text("");
+            $('#user_registration_id  #password-error').text("");
+            $("#user_registration_id #success_msg_id_container").removeClass("visible");
+            $("#user_registration_id #success_msg_id_container").addClass("invisible");
 
             $.ajax({
                 type: "POST",
+                dataType: 'JSON',
                 url: "{{ route('front.user.registration.save') }}",
                 /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
                 data: $('#user_registration_id').serialize(),
                 success: function(msg) {
+              
                     if (msg.success) {
 
-                        $("#success_msg_id").html(msg.success);
-                        $("#success_msg_id_container").removeClass("invisible");
-                        $("#success_msg_id_container").addClass("visible");
+                        $("#user_registration_id #success_msg_id").html(msg.success);
+                        $("#user_registration_id #success_msg_id_container").removeClass("invisible");
+                        $("#user_registration_id #success_msg_id_container").addClass("visible");
                     }
                 },
                 error: function(response) {
-
-                    $('#email-error').text(response.responseJSON.errors.email);
-                    $('#password-error').text(response.responseJSON.errors.password);
+                 
+                    console.log(response);
+                    $('#user_registration_id #email-error').text(response.responseJSON.errors.email);
+                    $('#user_registration_id #password-error').text(response.responseJSON.errors.password);
 
                 }
             });

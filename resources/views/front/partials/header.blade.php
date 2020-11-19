@@ -41,9 +41,18 @@
                                 </li> -->
                             </ul>
                             <ul class="navbar-nav ml-auto login_signup">
+                            @if(!Auth::user())
                                 <li class="nav-item">
                                     <a class="nav-link login" href="#" data-remote="myRemoteURL.do" data-toggle="modal" data-target="#exampleModal" id="login_btn_id" >Log in</a>
                                 </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link login" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();" data-remote="myRemoteURL.do"  >Logout</a>
+                                    <form id="logout-form" action="{{ route('front.logout') }}" method="POST" style="display: none;">
+								@csrf
+							</form>
+                                </li>
+                                @endif   
                                 <li class="nav-item">
                                     <a class="nav-link start-trial" href="#">Start Free Trial</a>
                                 </li>
