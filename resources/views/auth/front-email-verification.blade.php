@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.front-home')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<section class="verify-email-part">
+        <div class="container">
+            <div class="alert alert-success alert-block text-center" id="success_msg_id_container">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{$title}}</div>
@@ -13,6 +14,8 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+</section>
 @endsection

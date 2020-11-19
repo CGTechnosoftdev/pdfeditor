@@ -20,7 +20,7 @@ class SocialController extends Controller
         if($users){
             Auth::login($users);
             set_flash("success","Login Successfully",false);
-            return redirect('/');
+            return redirect('/dashboard');
         }else{
             
                   $user = User::create([
@@ -34,7 +34,7 @@ class SocialController extends Controller
             // return redirect()->route('dashboard');
             set_flash("success","Login Successfully",false);
             Auth::login($user);
-            return redirect('/');
+            return redirect('/dashboard');
          }
     }
 }

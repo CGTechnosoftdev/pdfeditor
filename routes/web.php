@@ -63,7 +63,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::group(['as'=>'front.','middleware'=>[]], function () {
-	
+
 	Route::get("/",'Front\FrontHomeController@index')->name('home');
 	Route::get('/login','Auth\FrontLoginController@showLoginForm')->name('login');
 	Route::get('/forgot-password','Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
@@ -75,8 +75,8 @@ Route::group(['as'=>'front.','middleware'=>[]], function () {
 	Route::get('/front-user-email-verification/{token}', 'Auth\FrontUserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
 	Route::get('login/{provider}/callback','SocialController@Callback');
-	Route::get('/re-verification-account','Auth\FrontForgotPasswordController@reVerificationAccount')->name('reverification.account');
-	Route::post('/re-verification-account-submit', 'Auth\FrontForgotPasswordController@reVerificaitonACcountSubmit')->name('reverification.account.submit');
+	Route::get('/re-verification-account','Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
+	Route::post('/re-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
 	
 

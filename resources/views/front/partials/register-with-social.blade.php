@@ -7,10 +7,10 @@
                                                     <div class="login-with">
                                                         <ul>
                                                             <li>
-                                                                <a href="#"><img src="{{ asset('public/front/images/f-logo.svg')}}"></a>
+                                                                <a href="{{ url('/login/facebook') }}"><img src="{{ asset('public/front/images/f-logo.svg')}}"></a>
                                                             </li>
                                                             <li>
-                                                                <a href="#"><img src="{{ asset('public/front/images/g-logo.svg')}}"></a>
+                                                                <a href="{{ url('/login/google') }}"><img src="{{ asset('public/front/images/g-logo.svg')}}"></a>
                                                             </li>
                                                         </ul>
                                                     </div>

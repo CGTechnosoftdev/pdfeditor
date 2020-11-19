@@ -110,7 +110,6 @@
 
 		$('body').on("click","#reverificationemailId",function(){
 
-
 			$("#exampleModalLabel").text("Email Verification");
 			$("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="emailverificationid">Submit</a>');
 			$.ajax({
@@ -132,35 +131,30 @@
 
 						$.ajax({
 							type: "POST",
-							url: "{{ route('front.reverification.account.submit') }}",
-							/* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
+							url: "{{ route('front.resend.verification.account.submit') }}",
 							data: $('#reverificationfrm_id').serialize(),
 							success: function( msg ) {
 								if(msg.success){
-			//  alert(msg.success);
-			$("#success_msg_id").html(msg.success);
-			$("#success_msg_id_container").removeClass("invisible");
-			$("#success_msg_id_container").addClass("visible");
-		}
-	},
-	error: function(response) {
-		
-		$('#email-error').text(response.responseJSON.errors.email);
-		$('#password-error').text(response.responseJSON.errors.password);
-		
-	}
-});
 
-//	alert("submit the form!");
-});
+									$("#success_msg_id").html(msg.success);
+									$("#success_msg_id_container").removeClass("invisible");
+									$("#success_msg_id_container").addClass("visible");
+								}
+							},
+							error: function(response) {
+
+								$('#email-error').text(response.responseJSON.errors.email);
+								$('#password-error').text(response.responseJSON.errors.password);
+
+							}
+						});
+
+					});
 				}
 			});
 
 
-
-	//$("#forgotpasswordid").trigger("click");
-
-});
+		});
 
 
 		$('body').on("click",".load-ajax-modal",function(){
@@ -188,26 +182,23 @@
 						$.ajax({
 							type: "POST",
 							url: "{{ route('front.user.registration.save') }}",
-							/* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
 							data: $('#user_registration_id').serialize(),
 							success: function( msg ) {
 								if(msg.success){
-			//  alert(msg.success);
-			$("#success_msg_id").html(msg.success);
-			$("#success_msg_id_container").removeClass("invisible");
-			$("#success_msg_id_container").addClass("visible");
-		}
-	},
-	error: function(response) {
-		
-		$('#email-error').text(response.responseJSON.errors.email);
-		$('#password-error').text(response.responseJSON.errors.password);
-		
-	}
-});
+									$("#success_msg_id").html(msg.success);
+									$("#success_msg_id_container").removeClass("invisible");
+									$("#success_msg_id_container").addClass("visible");
+								}
+							},
+							error: function(response) {
 
-//	alert("submit the form!");
-});
+								$('#email-error').text(response.responseJSON.errors.email);
+								$('#password-error').text(response.responseJSON.errors.password);
+
+							}
+						});
+
+					});
 				}
 			});
 
@@ -236,43 +227,31 @@
 						$.ajax({
 							type: "POST",
 							url: "{{ route('front.resetpassword.email') }}",
-							/* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
 							data: $('#forgotpasswordfrm_id').serialize(),
 							success: function( msg ) {
 								if(msg.status){
-						//  alert(msg.success);
-						$("#success_msg_id").html(msg.success);
-						$("#success_msg_id_container").removeClass("invisible");
-						$("#success_msg_id_container").addClass("visible");
-					}
-					else{
-						$('#email-error-txt').text(msg.error);
-					}
-					
-					
-				},
-				error: function(response) {
-					
-					$('#email-error-txt').text(response.responseJSON.errors.email);
-					
-					
+									$("#success_msg_id").html(msg.success);
+									$("#success_msg_id_container").removeClass("invisible");
+									$("#success_msg_id_container").addClass("visible");
+								}
+								else{
+									$('#email-error-txt').text(msg.error);
+								}
+							},
+							error: function(response) {
+
+								$('#email-error-txt').text(response.responseJSON.errors.email);
+
+
+							}
+						});
+
+					});
 				}
-			});
+			});			
 
-
-//	alert("submit the form!");
-});
-				}
-			});
-
-			
-
-		});
-
-
-
-		
+		});		
 	});
 </script>
 
-@endsection
+@append

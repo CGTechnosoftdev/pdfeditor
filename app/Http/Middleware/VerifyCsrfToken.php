@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'payment-form'
+        'payment-form',
+        'front.resend.verification.account.submit'
     ];
 }
