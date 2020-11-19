@@ -29,6 +29,10 @@ return [
         '2' => 'Female',
         '3' => 'Other'
     ],
+    'plan_type_arr' => [
+        '2' => 'Yearly',
+        '1' => 'Monthly',
+    ],
     'model_arr'=>[
         'user'=>'User',
         'role'=>'Role',
@@ -81,6 +85,15 @@ return [
             'label' => 'USD',
             'symbol' => '$',
         ],
+        [
+            'key' => 'INR',
+            'label' => 'INR',
+            'symbol' => '₹',
+        ],
     ],
+    'stripe_config'=>[
+        'publishable_key' => 'pk_test_51HmGOzDCwgb6dlp7EiX42eI63FYyMYCDlM8BnMNPNGInZ8mRvZRjbmOKyFwraspS0YWqJzv25YCjOGOdswUoSbHH00N8GQ6qkD',
+        'secret_key' => 'sk_test_51HmGOzDCwgb6dlp7THIZBQBOnOloJbFSUi9PLqqYh6lWBZrBxhsijlXlVkvzD8bIbZMdiGmUqukuR7KqZkR8MJD000Vs0iqVep',
+    ]
     
 ];

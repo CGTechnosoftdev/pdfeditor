@@ -81,6 +81,9 @@
 		@endif
 
 		<div class="content">
+			<div>
+				@include('admin.partials.flash-messages')
+			</div>
 			<div class="title m-b-md">
 				{{ config('app.name') }} User Dashboard
 			</div>

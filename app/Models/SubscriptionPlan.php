@@ -21,7 +21,6 @@ class SubscriptionPlan extends Model
 	public static function saveData($dataArray,$model=array())
 	{ 
 		$model = (empty($model) ? new self() : $model);
-
 		$model->fill($dataArray);
 		if($model->save()){
 			return $model;

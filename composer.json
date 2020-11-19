@@ -19,6 +19,7 @@
         "laravelcollective/html": "^5.8.0",
         "proengsoft/laravel-jsvalidation": "^4.4",
         "spatie/laravel-permission": "^3.17",
+        "stripe/stripe-php": "^7.62",
         "yajra/laravel-datatables-oracle": "~9.0",
         "yoeunes/toastr": "^1.2"
     },

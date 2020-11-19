@@ -255,6 +255,19 @@ function changeDateTimeFormat($datetime,$format=""){
 	}
 	return $return;
 }
+
+/**
+ * [addDaysToDate description]
+ * @author Akash Sharma
+ * @date   2020-11-17
+ * @param  [type]     $days [description]
+ * @param  string     $date [description]
+ */
+function addDaysToDate($days,$date=''){
+	$date = $date ?? date('Y-m-d H:i:s');
+	return Carbon::parse($date)->addDays($days)->format('Y-m-d H:i:s');
+}
+
 /**
  * [myCurrencyFormat description]
  * @Author            AkashSharma

@@ -25,8 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'parent_id','first_name','last_name','profile_picture','gender','country_id','contact_number','email', 'password','status',
-        'image', 'provider', 'provider_id'
+        'parent_id','first_name','last_name','profile_picture','gender','country_id','contact_number','email', 'password','status','image', 'provider', 'provider_id','subscription_status','subscription_plan_id','subscription_plan_amount','subscription_plan_type','stripe_customer_id'
     ];
 
     protected $appends = [
@@ -80,7 +79,7 @@ class User extends Authenticatable
 
     public function getGeneralSettingAttribute(){
         $user_id = (in_array(config('constant.USER_ROLE'),$this->roles->pluck('id')->toArray())) ? $this->id : NULL;
-        return GeneralSetting::getRow($user_id); 
+        return GeneralSetting::dataRow($user_id); 
     }
 
 

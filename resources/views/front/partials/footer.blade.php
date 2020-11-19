@@ -422,4 +422,4 @@
     });
 </script>
 
-@endsection
+@append

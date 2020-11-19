@@ -29,21 +29,21 @@
 
 $('.counting').each(function() {
     var $this = $(this),
-        countTo = $this.attr('data-count');
+    countTo = $this.attr('data-count');
 
     $({ countNum: $this.text() }).animate({
-            countNum: countTo
+        countNum: countTo
+    },
+
+    {
+
+        duration: 3000,
+        easing: 'linear',
+        step: function() {
+            $this.text(Math.floor(this.countNum));
         },
-
-        {
-
-            duration: 3000,
-            easing: 'linear',
-            step: function() {
-                $this.text(Math.floor(this.countNum));
-            },
-            complete: function() {
-                $this.text(this.countNum);
+        complete: function() {
+            $this.text(this.countNum);
                 //alert('finished');
             }
 
@@ -71,17 +71,56 @@ function hideNonVisibleDivs() {
     var i, divId, div;
     for (i = 0; i < divs.length; i++) {
         divId = divs[i];
-   
+        
         div = document.getElementById(divId);
         
         if (visibleDivId === divId) {
-          
+            
             div.style.display = "block";
-        
+            
         } else {
-       
+            
             div.style.display = "none";
-       
+            
         }
     }
 }
+
+/********** Match Height ***********/
+$(function() {
+    $('.pricing-plans .plan-ul').matchHeight();
+    $('.pricing-plans .plan-price').matchHeight();
+});
+
+
+/****** Onlick add and remove class ******/
+
+$('.pricing-plans .col-md-4').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});
+
+
+
+
+/********* FAQ *********/
+
+(function($) {
+    $('.faq-accordion > li:eq(0) a').addClass('active').next().slideDown();
+
+    $('.faq-accordion a').click(function(j) {
+        var dropDown = $(this).closest('li').find('p');
+
+        $(this).closest('.faq-accordion').find('p').not(dropDown).slideUp();
+
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).closest('.faq-accordion').find('a.active').removeClass('active');
+            $(this).addClass('active');
+        }
+
+        dropDown.stop(false, true).slideToggle();
+
+        j.preventDefault();
+    });
+})(jQuery);
