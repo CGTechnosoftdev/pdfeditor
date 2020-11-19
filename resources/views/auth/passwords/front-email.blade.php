@@ -1,44 +1,26 @@
-@extends('layouts.admin-login')
+<!--<form id="Menu3" class="login-form" style="display: none;"> -->
+{{ Form::open(['route' => 'front.resetpassword.email','method'=>'post','class'=>'login-form ','id' => 'forgotpasswordfrm_id','enctype'=>"multipart/form-data"]) }}    
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">   
+                                    <div class="d-table">
+                                        <div class="d-table-cell align-middle">
+                                            <div class="heading">
+                                                <h3>Forgot Password</h3>
+                                                <p>Please enter email address</p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="email-address">Email address</label>
+                                                    <!--<input id="email-address" type="text" class="form-control email" placeholder="Email address"> -->
+                                                    {{ Form::text('email',null,array('placeholder'=>'Email address','class'=>"form-control email",'id' => 'email-address'))}}                                                    
+                                                    <strong class="required-value text-danger" id="email-error" ></strong>
+                                                    
 
-@section('content')
-<div class="login-box">
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-    <div class="login-logo">
-        <a href="#"><b>{{ config('app.name') }}</b></a>
-    </div>
-        <p class="login-box-msg">Front Forgot Pasword</p>
-        <div class="alert alert-success alert-block invisible" id="success_msg_id_container"> 			
- 			<strong id="success_msg_id"></strong>
- 			<button type="button" class="close" data-dismiss="alert">×</button>
- 		</div>
-        <form method="POST" action="{{ route($action) }}" id="forgotpasswordfrm_id">
-        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">     
-            @csrf
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group has-feedback">
-                        <label for="email" class="col-form-label">{{ __('Email Address') }}</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                        
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="email-error-txt" ></strong>
-                        </span>
-                        
-                    </div>
-                </div>
-                
-                <div class="col-md-8 text-right">
-                   <!-- <a class="btn btn-link" href="{{ route('front.login') }}">
-                        {{ __('Login Now') }}
-                    </a> -->
-                </div>
-                <!-- /.col -->
-            </div>
-        </form>
-        
-    </div> 
-    <!-- /.login-box-body -->
-</div>
-@endsection
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a  href="#" class="w-100 btn btn-secondary" id="forgot_password_submit_id">Submit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+@include('front.partials.register-with-social')                                   
+{{ Form::close() }}

@@ -48,7 +48,7 @@ class FrontLoginController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showLoginForm()
-    {   
+    {         
     	return view('auth.front-login');
     }
 
@@ -59,6 +59,16 @@ class FrontLoginController extends Controller
      * @param  Request    $request [description]
      * @return [type]              [description]
      */
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'email' => 'required|email',
+        ]);
+    }
+
     public function login(Request $request){
      
     	$this->validateLogin($request);

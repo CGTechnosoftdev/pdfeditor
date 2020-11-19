@@ -70,13 +70,15 @@ Route::group(['as'=>'front.','middleware'=>[]], function () {
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
 	Route::get('/user-reset-password/{token}','Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
 	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
+
 	Route::get('/front-user-registration','Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
 	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
+	
 	Route::get('/front-user-email-verification/{token}', 'Auth\FrontUserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
 	Route::get('login/{provider}/callback','SocialController@Callback');
-	Route::get('/re-verification-account','Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
-	Route::post('/re-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
+	Route::get('/resend-verification-account','Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
+	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
 	
 

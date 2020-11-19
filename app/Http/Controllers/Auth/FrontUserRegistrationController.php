@@ -85,7 +85,7 @@ class FrontUserRegistrationController extends Controller
 
 			$token = Str::random(60);
 			$token = hash('sha256', $token);
-			$link = route('user.verification.save', [$token]) . '/' .  '?email=' . urlencode($user->email);
+			$link = route('front.user.verification.save', [$token]) . '/' .  '?email=' . urlencode($user->email);
 
 			\DB::table('password_resets')->insert([
 				'email' => $request->email,
@@ -106,7 +106,7 @@ class FrontUserRegistrationController extends Controller
 				];
 				Mail::to($user->email)->send(new CommonMail($email_config));
 				$response_type = 'success';
-				$response_message = 'User Registration complete successfully';
+				$response_message = 'Thank you for Registration,you will get one email for account verification.';
 			} else {
 				DB::rollback();
 				$response_type = 'error';

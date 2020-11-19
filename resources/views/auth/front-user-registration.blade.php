@@ -1,74 +1,45 @@
-@extends('layouts.admin-login')
 
-@section('content')
+{{ Form::open(['route' => 'front.user.registration.save','method'=>'post','class'=>'login-form ','id' => 'user_registration_id','enctype'=>"multipart/form-data"]) }}
+{{ Form::hidden("_token", csrf_token())}}
+                                    <div class="d-table">
+                                        <div class="d-table-cell align-middle">
+                                            <div class="heading">
+                                                <h3>Register</h3>
+                                                <p>Please enter the following details</p>
+                                            </div>
 
+                                            <div class="row">
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="email-address">Email address</label>
+                                                    <!--<input id="email-address" type="text" class="form-control email" placeholder="Email address"> -->
+                                                    {{ Form::text('email',null,array('placeholder'=>'Email address','class'=>"form-control email",'id' => "email-address"))}}
+                                                    <span class="required-value text-danger" id="email-error"></span>
+                                                </div>
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="password">Password</label>
+                                                    <!--<input id="password" type="text" class="form-control password" placeholder="Password">-->
+                                                    {{ Form::password('password', ['class' => 'form-control password','placeholder' => 'Password','id'=>'password' ]) }} 
+                                                    <span class="required-value"><i class="fas fa-lock"></i> 6 Character minimum with no space</span>
+                                                    <span class="text-danger" id="password-error"></span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#" id="newregisterid"  class="w-100 btn btn-secondary">Register</a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#" id="login_btn_id" class="w-100 btn btn-outline-secondary">Login</a>
+                                                </div>
+                                                <div class="col-md-12 mt-3">
+                                                    <div class="login-terms">
+                                                        <p>By clicking Login in, you agree to the <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a>, Including receipt of emails from us about our service.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-<section class="content">
-	<!-- Info boxes -->
-	<div class="box">
-		<div class="box-body">
-            
-			<div class="row">
-			<div class="alert alert-success alert-block invisible" id="success_msg_id_container"> 			
- 			<strong id="success_msg_id"></strong>
- 			<button type="button" class="close" data-dismiss="alert">×</button>
- 		</div>
-		
-				{{ Form::open(['route' => 'front.user.registration.save','method'=>'post','class'=>'form-horizontal','id' => 'user_registration_id','enctype'=>"multipart/form-data"]) }}
-				
-				{{ Form::hidden("_token", csrf_token())}}
-		
-				<div class="col-xs-12 col-lg-12 col-md-12">			
-
-				
-			
-			
-					<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-						<label for="email" class="control-label text-left col-sm-4 required">Email<span class="required-label">*</span></label>
-						<div class="col-sm-8" >
-							{{ Form::text('email',null,array('placeholder'=>'Enter Email','class'=>"form-control"))}}
-							<span class="text-danger" id="email-error"></span>
-						</div>
-					</div>
-				
-					<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-						<label for="password" class="control-label text-left col-sm-4 required">
-							Password
-							<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ config('constant.PASSWORD_REGEX_INSTRUCTION') }}"></i>
-						</label>
-						<div class="col-sm-8" >
-							{{ Form::password('password', ['class' => 'form-control','placeholder' => 'Enter Password ','id'=>'password' ]) }}   
-							<span class="text-danger" id="password-error"></span>
-						</div>
-					</div>
-					
-                                        
-					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-8">
-							
-						</div>
-					</div>
-				</div>
-				<!-- /.row -->
-			
-                
-     
-
-                {{ Form::close() }}
-                
-                
-            </div>
-            
+                                        </div>
+                                    </div>
+                                  
 
 
-		</div>
-	</div>
-</section>
+                                    @include('front.partials.register-with-social')
 
-<!-- /.content -->
-
-@endsection
-@section('additionaljs')
-
-{!! JsValidator::formRequest('App\Http\Requests\FrontUserRegistrationFormRequest') !!}
-@endsection
+                                    {{ Form::close() }}

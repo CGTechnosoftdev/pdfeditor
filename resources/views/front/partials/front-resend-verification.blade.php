@@ -4,7 +4,7 @@
 
 <!-- Modal -->
 
-<div class="account-popup modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="account-popup modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" role="document">
         <div class="modal-content">
             <!-- <div class="modal-header">
@@ -75,7 +75,7 @@
 @endsection
 @section('additionaljs')
 <script type="text/javascript">
-    $('#exampleModal').modal();
+    $('#exampleModal2').modal();
 
     jQuery("document").ready(function($) {
 
@@ -85,7 +85,9 @@
             }
         });
 
-        $('#resend_verificationemailId').click(function() {
+        $('#resend_verificationemailId').click(function(e) {
+            e.preventDefault();
+		blockUI();
 
 
             $('#email-error').text("");
@@ -119,7 +121,10 @@
 
 
 
-                }
+                },
+                complete:function(){
+	        	$.unblockUI();
+	            }
             });
 
 

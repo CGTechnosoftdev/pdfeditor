@@ -1,257 +1,53 @@
-@extends('layouts.admin-login')
-
-@section('content')
-<div class="login-box">
-	<!-- /.login-logo -->
-	<div class="login-box-body">
-		<div class="login-logo">
-			<a href="#"><b>{{ config('app.name') }}</b></a>
-		</div>
-		<p class="login-box-msg">Front Sign In</p>
-		@include('admin.partials.flash-messages')
-		<form method="POST" action="{{ route('front.login') }}">
-			@csrf
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group has-feedback">
-						<label for="email" class="col-form-label">{{ __('Email Address') }}</label>
-						<input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email Address" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
-						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-						@error('email')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="form-group has-feedback">
-						<label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
-						<input type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
-						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-						@error('password')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="checkbox">
-						<input class="styled-checkbox" id="remember-me" type="checkbox" value="1">
-						<label for="remember-me">Remember Me</label>
-					</div>
-				</div>
-				<!-- /.col -->
-				<div class="col-md-4">
-					<button type="submit" class="btn btn-success  btn-block btn-flat">{{ __('Login') }}</button>
-					<br/>
-					<form>
-						<div class="form-group row">
-							<div class="col-md-6 offset-md-4">
-								<a href="{{ url('/login/facebook') }}" class="btn btn-facebook"> Facebook</a>
-								
-							</div>
-						</div>
-					</form>
-					<a href="{{ url('/login/google') }}" class="btn btn-google"> Google</a>
-				</div>
-				<div class="col-md-8 text-right">
-					<a class="btn btn-link" href="#" id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"> 
-						{{ __('Forgot Password?') }}
-					</a>
-					
-					<a class="btn btn-link load-ajax-modal" href="#"  data-path="{{ route('front.user.registration') }}"   role="button"  data-target="#exampleModal">
-						{{ __('New User') }}
-					</a>                    					
-
-				</div>
-				<!-- /.col -->
-			</div>
-		</form>
-		
-	</div> 
-	<!-- /.login-box-body -->
+{{ Form::open(['route' => 'front.login','method'=>'post','class'=>'login-form','id' => 'user_newlogin_form_id','enctype'=>"multipart/form-data"]) }}
+<input type="hidden" name="_token" value="{{csrf_token()}}" />
+    <div class="d-table">
+        <div class="d-table-cell align-middle">
+            <div class="heading">
+                <h3>Log in</h3>
+                <p>Please enter your credential to continue</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12 input-group mb-3">
+                    <label class="w-100" for="email-address">Email address</label>                    
+                    {{ Form::text('email',null,array('placeholder'=>'Enter Email','class'=>"form-control email"))}}
+                    <span class="required-value text-danger" id="email-error"></span>
+                </div>
+                <div class="col-md-12 input-group mb-3">
+                    <label class="w-100" for="password">Password</label>                    
+                    {{ Form::password('password', ['class' => 'form-control password','placeholder' => 'Password ','id'=>'password' ]) }} 
+                    <span class="required-value text-danger" id="password-error"></span>
+                </div>
+                <div class="col-md-12">
+                    <div class="d-flex w-100 mb-3 justify-content-between">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                            
+                            <input class="custom-control-input" id="remember-me" type="checkbox" value="1">
+                            <label for="remember-me">Remember Me</label>
+                        </div>
+                        <div>
+                            <a href="#" id="forgotpasswordid" class="forgot"> Forgot Password?</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <a href="#" id="LoginBtnId" class="w-100 btn btn-secondary">{{ __('Login') }}</a>
+                
+                </div>
+                <div class="col-sm-6">
+                    <a href="#" id="register_button_id" class="w-100 btn btn-outline-secondary">Register</a>
+                </div>
+                <div class="col-md-12">
+                    <div class="login-with-phone py-3 text-center">
+                        <a href="#"><i class="fas fa-mobile-alt"></i> Login with your phone</a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="login-terms">
+                        <p>By clicking Login in, you agree to the <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a>, Including receipt of emails from us about our service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">User Registration</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				...
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<span id="ButtonContainerId"></span>
-				
-			</div>
-		</div>
-	</div>
-</div>
-@endsection
-@section('additionaljs')
-<script>
-	jQuery("document").ready(function($){
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-			}
-		});
-
-		$('body').on("click","#reverificationemailId",function(){
-
-			$("#exampleModalLabel").text("Email Verification");
-			$("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="emailverificationid">Submit</a>');
-			$.ajax({
-				type : 'GET',
-				url : $(this).data('path'),
-
-				success: function(result) {
-					$('#exampleModal div.modal-body').html(result);
-
-					$('#exampleModal').modal()
-
-					$("#emailverificationid").click(function(){
-
-						$('#email-error').text("");
-						$('#password-error').text("");
-
-						$("#success_msg_id_container").removeClass("visible");
-						$("#success_msg_id_container").addClass("invisible");
-
-						$.ajax({
-							type: "POST",
-							url: "{{ route('front.resend.verification.account.submit') }}",
-							data: $('#reverificationfrm_id').serialize(),
-							success: function( msg ) {
-								if(msg.success){
-
-									$("#success_msg_id").html(msg.success);
-									$("#success_msg_id_container").removeClass("invisible");
-									$("#success_msg_id_container").addClass("visible");
-								}
-							},
-							error: function(response) {
-
-								$('#email-error').text(response.responseJSON.errors.email);
-								$('#password-error').text(response.responseJSON.errors.password);
-
-							}
-						});
-
-					});
-				}
-			});
-
-
-		});
-
-
-		$('body').on("click",".load-ajax-modal",function(){
-
-
-			$("#exampleModalLabel").text("User Registration");
-			$("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="newregisterid">Submit</a>');
-			$.ajax({
-				type : 'GET',
-				url : $(this).data('path'),
-
-				success: function(result) {
-					$('#exampleModal div.modal-body').html(result);
-
-					$('#exampleModal').modal()
-
-					$("#newregisterid").click(function(){
-
-						$('#email-error').text("");
-						$('#password-error').text("");
-
-						$("#success_msg_id_container").removeClass("visible");
-						$("#success_msg_id_container").addClass("invisible");
-
-						$.ajax({
-							type: "POST",
-							url: "{{ route('front.user.registration.save') }}",
-							data: $('#user_registration_id').serialize(),
-							success: function( msg ) {
-								if(msg.success){
-									$("#success_msg_id").html(msg.success);
-									$("#success_msg_id_container").removeClass("invisible");
-									$("#success_msg_id_container").addClass("visible");
-								}
-							},
-							error: function(response) {
-
-								$('#email-error').text(response.responseJSON.errors.email);
-								$('#password-error').text(response.responseJSON.errors.password);
-
-							}
-						});
-
-					});
-				}
-			});
-
-
-		});
-
-		$("body").on("click","#forgotpasswordid",function(){
-			$("#exampleModalLabel").text("Forgot Password");
-			$("#ButtonContainerId").html('<a href="#" class="btn btn-success" id="forgot_password_submit_id">Submit</a>');
-			$.ajax({
-				type : 'GET',
-				url : $(this).data('path'),
-
-				success: function(result) {
-					$('#exampleModal div.modal-body').html(result);
-
-					$('#exampleModal').modal()
-
-					$("#forgot_password_submit_id").click(function(){
-
-						$('#email-error').text("");
-						
-						$("#success_msg_id_container").removeClass("visible");
-						$("#success_msg_id_container").addClass("invisible");
-
-						$.ajax({
-							type: "POST",
-							url: "{{ route('front.resetpassword.email') }}",
-							data: $('#forgotpasswordfrm_id').serialize(),
-							success: function( msg ) {
-								if(msg.status){
-									$("#success_msg_id").html(msg.success);
-									$("#success_msg_id_container").removeClass("invisible");
-									$("#success_msg_id_container").addClass("visible");
-								}
-								else{
-									$('#email-error-txt').text(msg.error);
-								}
-							},
-							error: function(response) {
-
-								$('#email-error-txt').text(response.responseJSON.errors.email);
-
-
-							}
-						});
-
-					});
-				}
-			});			
-
-		});		
-	});
-</script>
-
-@append
+ @include('front.partials.register-with-social')
+ {{ Form::close() }}

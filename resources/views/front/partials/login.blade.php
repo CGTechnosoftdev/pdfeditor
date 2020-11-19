@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'front.login','method'=>'post','class'=>'login-form','id' => 'user_login_form_id','enctype'=>"multipart/form-data"]) }}
+{{ Form::open(['route' => 'front.login','method'=>'post','class'=>'login-form','id' => 'user_newlogin_form_id','enctype'=>"multipart/form-data"]) }}
 <input type="hidden" name="_token" value="{{csrf_token()}}" />
     <div class="d-table">
         <div class="d-table-cell align-middle">
@@ -34,7 +34,7 @@
                 
                 </div>
                 <div class="col-sm-6">
-                    <a href="#register" onclick="toggleVisibility('user_registration_id');" class="w-100 btn btn-outline-secondary">Register</a>
+                    <a href="#" id="register_button_id" class="w-100 btn btn-outline-secondary">Register</a>
                 </div>
                 <div class="col-md-12">
                     <div class="login-with-phone py-3 text-center">

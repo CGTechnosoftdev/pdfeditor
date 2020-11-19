@@ -41,7 +41,7 @@
                         <ul class="navbar-nav ml-auto login_signup">
                             @if(!Auth::user())
                             <li class="nav-item">
-                                <a class="nav-link login" href="#" data-remote="myRemoteURL.do" data-toggle="modal" data-target="#exampleModal" id="login_btn_id">Log in</a>
+                                <a class="nav-link login" href="#" data-remote="myRemoteURL.do"  id="login_btn_id">Log in</a>
                             </li>
                             @else
                             <li class="nav-item">

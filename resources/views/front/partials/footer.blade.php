@@ -233,7 +233,7 @@
             <div class="modal-body">
                 <div class="login-popup">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5" >
 
                             <div class="row">
                                 <div class="alert alert-success alert-block invisible" id="success_msg_id_container">
@@ -247,14 +247,11 @@
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
 
-                            @include('front.partials.login')
-
-
-                            @include('front.partials.register')
-
-                            @include('front.partials.forgot-password')
-
                            
+                            <span id="ModelContainerId"></span>
+
+
+
 
 
                         </div>
@@ -276,20 +273,13 @@
 <script>
     jQuery("document").ready(function($) {
 
-        $("#login_btn_id").click(function(){
-            toggleVisibility("user_login_form_id");
-        });
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="_token"]').attr('content')
             }
         });
 
-       
-
-        //for login
-        $("#LoginBtnId").click(function() {
+        function clearMessagesContainers() {
 
             $('#email-error').text("");
             $('#password-error').text("");
@@ -298,121 +288,197 @@
             $("#error_msg_id_container").removeClass("visible");
             $("#error_msg_id_container").addClass("invisible");
 
-            $.ajax({
-                type: "POST",
-                url: "{{ route('front.login') }}",
-                dataType: 'JSON',
-                /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
-                data: $('#user_login_form_id').serialize(),
-                success: function(response) {
-                    // console.log(response);
-                 
-                    if (response.error == true) {
-                    
-                        $("#error_msg_id").html(response.message);
-                        $("#error_msg_id_container").removeClass("invisible");
-                        $("#error_msg_id_container").addClass("visible");
+        }
 
-                    } else {
-                    if (response.success) {
-                        location.reload();
-                    }
-                     }
+        $("body").on("click", "#login_btn_id", function() {
+            //toggleVisibility("user_login_form_id");
+            clearMessagesContainers();
+            $.ajax({
+                type: "GET",
+                url: "{{ route('front.login') }}",
+
+                success: function(response) {
+                    $("#ModelContainerId").html(response);
+
+                    $('#exampleModal').modal();
+                    //for login
+                    $("#LoginBtnId").click(function(e) {
+                    	e.preventDefault();
+		                blockUI()
+                        clearMessagesContainers();
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ route('front.login') }}",
+                            dataType: 'JSON',
+                            /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
+                            data: $('#user_newlogin_form_id').serialize(),
+                            success: function(response) {
+
+                                console.log(response);
+
+                                if (response.error == true) {
+
+                                    $("#error_msg_id").html(response.message);
+                                    $("#error_msg_id_container").removeClass("invisible");
+                                    $("#error_msg_id_container").addClass("visible");
+
+                                } else {
+                                    if (response.success) {
+                                        location.reload();
+                                    }
+                                }
+                            },
+                            error: function(response) {
+
+                                console.log(response);
+                                clearMessagesContainers();
+                                if (response.error == true) {
+
+                                    $("#error_msg_id").html(response.message);
+                                    $("#error_msg_id_container").removeClass("invisible");
+                                    $("#error_msg_id_container").addClass("visible");
+
+                                } else {
+
+
+                                    $('#email-error').text(response.responseJSON.errors.email);
+                                    $('#password-error').text(response.responseJSON.errors.password);
+
+                                }
+
+                            },
+                            complete:function(){
+                                        $.unblockUI();
+                                    }
+
+                        });
+
+                        //	alert("submit the form!");
+                    });
+
+
+
                 },
                 error: function(response) {
-                    console.log(response);
-                    if (response.error == true) {
-                       // alert("error here");
-                        $("#error_msg_id").html(response.message);
-                        $("#error_msg_id_container").removeClass("invisible");
-                        $("#error_msg_id_container").addClass("visible");
-
-                    } else {
-
-                        $('#email-error').text(response.responseJSON.errors.email);
-                        $('#password-error').text(response.responseJSON.errors.password);
-
-                    }
 
                 }
             });
 
-            //	alert("submit the form!");
+        });
+
+        //New Registration
+
+        $("body").on("click", "#register_button_id", function() {
+
+            $.ajax({
+                type: "get",
+
+                url: "{{ route('front.user.registration') }}",
+                success: function(msg) {
+                    clearMessagesContainers();
+                    $("#ModelContainerId").html(msg);
+
+                    $("#newregisterid").click(function(e) {
+
+                        e.preventDefault();
+		                blockUI()
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: 'JSON',
+                            url: "{{ route('front.user.registration.save') }}",
+                            /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
+                            data: $('#user_registration_id').serialize(),
+                            success: function(msg) {
+
+                                if (msg.success) {
+
+                                    $("#success_msg_id").html(msg.success);
+                                    $("#success_msg_id_container").removeClass("invisible");
+                                    $("#success_msg_id_container").addClass("visible");
+                                }
+                            },
+                            error: function(response) {
+
+                                console.log(response);
+                                $('#email-error').text(response.responseJSON.errors.email);
+                                $('#password-error').text(response.responseJSON.errors.password);
+
+                            },
+                            complete:function(){
+                                    $.unblockUI();
+                                }
+                        });
+
+                        //	alert("submit the form!");
+                    });
+
+                },
+                error: function(response) {}
+            });
+
         });
 
         // for new registeration
-        $("#newregisterid").click(function() {
 
-            $('#user_registration_id  #email-error').text("");
-            $('#user_registration_id  #password-error').text("");
-            $("#user_registration_id #success_msg_id_container").removeClass("visible");
-            $("#user_registration_id #success_msg_id_container").addClass("invisible");
-
-            $.ajax({
-                type: "POST",
-                dataType: 'JSON',
-                url: "{{ route('front.user.registration.save') }}",
-                /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
-                data: $('#user_registration_id').serialize(),
-                success: function(msg) {
-              
-                    if (msg.success) {
-
-                        $("#user_registration_id #success_msg_id").html(msg.success);
-                        $("#user_registration_id #success_msg_id_container").removeClass("invisible");
-                        $("#user_registration_id #success_msg_id_container").addClass("visible");
-                    }
-                },
-                error: function(response) {
-                 
-                    console.log(response);
-                    $('#user_registration_id #email-error').text(response.responseJSON.errors.email);
-                    $('#user_registration_id #password-error').text(response.responseJSON.errors.password);
-
-                }
-            });
-
-            //	alert("submit the form!");
-        });
 
 
         /*Forgot Password  Form*/
-
-        $("#forgot_password_submit_id").click(function() {
-
-            $('#email-error').text("");
-
-            $("#success_msg_id_container").removeClass("visible");
-            $("#success_msg_id_container").addClass("invisible");
-
+        $("body").on("click", "#forgotpasswordid", function() {
             $.ajax({
-                type: "POST",
-                url: "{{ route('front.resetpassword.email') }}",
+                type: "GET",
+                url: "{{ route('front.forgot.password') }}",
                 /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
                 data: $('#forgotpasswordfrm_id').serialize(),
-                success: function(msg) {
-                    if (msg.status) {
-                        //  alert(msg.success);
-                        $("#success_msg_id").html(msg.success);
-                        $("#success_msg_id_container").removeClass("invisible");
-                        $("#success_msg_id_container").addClass("visible");
-                    } else {
-                        $('#email-error-txt').text(msg.error);
-                    }
+                success: function(response) {
+                    $("#ModelContainerId").html(response);
+                    $("#forgot_password_submit_id").click(function(e) {
+                        e.preventDefault();
+		               blockUI()
 
+                        clearMessagesContainers();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ route('front.resetpassword.email') }}",
+                            /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
+                            data: $('#forgotpasswordfrm_id').serialize(),
+                            success: function(msg) {
+                                if (msg.status) {
+                                    //  alert(msg.success);
+                                    $("#success_msg_id").html(msg.success);
+                                    $("#success_msg_id_container").removeClass("invisible");
+                                    $("#success_msg_id_container").addClass("visible");
+                                } else {
+                                    $('#email-error').text(msg.error);
+                                }
+
+
+                            },
+                            error: function(response) {
+
+                                $('#email-error').text(response.responseJSON.errors.email);
+
+
+                            },
+                            complete:function(){
+                                    $.unblockUI();
+                                }
+                        });
+
+
+                        //	alert("submit the form!");
+                    });
 
                 },
                 error: function(response) {
-
                     $('#email-error-txt').text(response.responseJSON.errors.email);
-
-
                 }
             });
 
-
-            //	alert("submit the form!");
         });
+
+
 
 
 
