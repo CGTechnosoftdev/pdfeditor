@@ -54,7 +54,7 @@ $('.counting').each(function() {
 
 /************************************ */
 
-var divs = ["Menu1", "user_registration_id", "Menu3", "Menu4"];
+var divs = ["Menu1", "Menu2", "Menu3", "Menu4"];
 var visibleDivId = null;
 
 function toggleVisibility(divId) {
@@ -78,3 +78,42 @@ function hideNonVisibleDivs() {
         }
     }
 }
+
+/********** Match Height ***********/
+$(function() {
+    $('.pricing-plans .plan-ul').matchHeight();
+    $('.pricing-plans .plan-price').matchHeight();
+});
+
+
+/****** Onlick add and remove class ******/
+
+$('.pricing-plans .col-md-4').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});
+
+
+
+
+/********* FAQ *********/
+
+(function($) {
+    $('.faq-accordion > li:eq(0) a').addClass('active').next().slideDown();
+
+    $('.faq-accordion a').click(function(j) {
+        var dropDown = $(this).closest('li').find('p');
+
+        $(this).closest('.faq-accordion').find('p').not(dropDown).slideUp();
+
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+        } else {
+            $(this).closest('.faq-accordion').find('a.active').removeClass('active');
+            $(this).addClass('active');
+        }
+
+        dropDown.stop(false, true).slideToggle();
+
+        j.preventDefault();
+    });
+})(jQuery);

@@ -184,6 +184,8 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         //Passport
         Laravel\Passport\PassportServiceProvider::class,
+        //General setting service provider
+        App\Providers\SettingsServiceProvider::class,
 
     ],
 
@@ -239,6 +241,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
     ],
 
 ];

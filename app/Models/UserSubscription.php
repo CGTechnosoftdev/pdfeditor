@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BaseModelTrait;
 
-class GeneralSetting extends Model
+class UserSubscription extends Model
 {
     use BaseModelTrait;
-	protected $fillable = ['user_id','site_title','trail_days', 'date_format' ,'time_format', 'paging_limit', 'currency', 'facebook_url', 'twitter_url', 'instagram_url' , 'linked_in_url','ios_app_url','android_app_url'];
-	public $timestamps = true;
+    protected $fillable = ['subscription_plan_id','subscription_plan_type','user_id', 'start' ,'end','transaction_id','status'];
 
     /**
      * [saveData description]
@@ -27,9 +26,5 @@ class GeneralSetting extends Model
     	}else{
     		return false;
     	}
-    }
-
-    public static function dataRow($user_id=null){
-        return self::where('user_id',$user_id)->first();
     }
 }

@@ -416,4 +416,4 @@ $("#forgot_password_submit_id").click(function(){
 });
 </script>
 
-@endsection
+@append

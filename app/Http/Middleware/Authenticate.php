@@ -14,6 +14,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
@@ -25,17 +26,6 @@ class Authenticate extends Middleware
                 list($mid, $guard) = explode(":",$m);
             }
         }
-        switch($guard) {
-            case 'front_web':
-            $login = 'front.login';
-            break;
-            case 'web':
-            $login = 'login';
-            break;
-            default:
-            $login = 'front.login';
-            break;
-        }
-        return route($login);
+        return route($guard == 'web' ? 'login' : 'front.login');
     }
 }

@@ -108,7 +108,7 @@ li {
 .my-radio-btn [type="radio"]:checked+label,
 .my-radio-btn [type="radio"]:not(:checked)+label {
     position: relative;
-    padding-left: 28px;
+    padding-left: 25px;
     cursor: pointer;
     line-height: 20px;
     display: inline-block;
@@ -128,7 +128,7 @@ li {
 }
 
 .my-radio-btn [type="radio"]:checked+label:before {
-    border: 1px solid #0F449C;
+    border: 1px solid #1FCB5D;
 }
 
 .my-radio-btn [type="radio"]:not(:checked)+label:before {
@@ -140,7 +140,7 @@ li {
     content: '';
     width: 10px;
     height: 10px;
-    background: #0F449C;
+    background: #1FCB5D;
     position: absolute;
     top: 5px;
     left: 5px;
@@ -1024,12 +1024,26 @@ li {
 
 /***** Account Popup *****/
 
+.login-popup .alert {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'Poppins-Light';
+}
+
 .account-popup .modal-dialog {
     max-width: 1170px;
 }
 
 .account-popup .modal-body {
     padding: 0px;
+}
+
+.account-popup .modal-content {
+    border-radius: 0.6rem;
+    overflow: hidden;
 }
 
 .account-img {
@@ -1041,12 +1055,14 @@ li {
 .account-img img {
     max-width: 100%;
     height: 100%;
-    object-fit: cover
+    max-height: 700px;
+    object-fit: cover;
 }
 
 .account-popup .login-form {
     padding: 25px 0px 25px 40px;
     height: 100%;
+    max-height: 700px;
 }
 
 .login-form .d-table {
@@ -1132,6 +1148,16 @@ li {
     color: #fff!important;
 }
 
+.btn-default,
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus,
+.btn-default:not(:disabled):not(.disabled).active,
+.btn-default:not(:disabled):not(.disabled):active {
+    background: #656565;
+    color: #fff;
+}
+
 .login-form .btn {
     font-size: 16px;
     font-family: Poppins-Bold;
@@ -1202,6 +1228,566 @@ li {
 .login-with-social {
     border-top: solid 1px #ddd;
 }
-.display_none{
-    display:none;
+
+
+/************ Pricing Page *************/
+
+.pricing-banner {
+    width: 100%;
+    height: auto;
+    float: left;
+    background-position: 50% -40px !important;
+    background-size: 104% !important;
+    background-repeat: no-repeat!important;
 }
+
+.pricing-banner::before {
+    content: "";
+    width: 100%;
+    height: 70%;
+    background: #1fcb5d !important;
+    position: absolute;
+    z-index: -1;
+}
+
+.pricing-banner h1 {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 40px;
+}
+
+.pricing-banner .banner-img {
+    width: 100%;
+    height: auto;
+    float: left;
+    overflow: hidden;
+}
+
+.pricing-banner .banner-img img {
+    width: 104%;
+    margin-left: -2%;
+    margin-top: -50px;
+}
+
+.pricing-banner .banner-content {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 140px auto 0 auto;
+    position: relative;
+    max-width: unset;
+}
+
+.pricing-plans .card {
+    box-shadow: 0px 3px 39px #00000014;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pricing-plans .card .card-header {
+    padding: 30px 20px;
+}
+
+.pricing-plans .card .card-header .card-title {
+    font-size: 26px;
+}
+
+.pricing-plans .card .card-header .plan-type {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.pricing-plans .card .card-header .plan-type i {
+    font-size: 12px;
+    color: #24cf62;
+}
+
+.pricing-plans .card .document-type {
+    font-size: 16px;
+    color: #707070;
+}
+
+.pricing-plans .card .card-body ul {
+    padding-right: 15px;
+}
+
+.pricing-plans .card .card-body ul li {
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+
+.pricing-plans .card .card-body ul li i {
+    color: #1FCB5D;
+    font-size: 14px;
+}
+
+.view-more {
+    width: 100%;
+    height: auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.view-more a {
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0px 3px 22px #00000017;
+    border-radius: 91px;
+    padding: 10px 40px;
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    font-size: 15px;
+    color: #2D49D5;
+}
+
+.view-more::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #e6e6e6;
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.plan-price {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 20px 20px 0px 20px;
+    text-align: center;
+}
+
+.plan-price h2 {
+    font-size: 60px;
+    color: #656565;
+    font-family: Poppins-Bold;
+}
+
+.plan-price h2 sup {
+    font-size: 30px;
+    color: #656565;
+    font-family: Poppins-Light;
+    top: -0.9em;
+}
+
+.plan-price h3 {
+    width: 100%;
+    height: auto;
+    display: block;
+    font-size: 18px;
+    font-family: Poppins-Bold;
+}
+
+.plan-price h3 span {
+    display: block;
+    font-family: Poppins-Light;
+}
+
+.annual-commitment {
+    display: block;
+    font-size: 14px;
+    color: #C4C4C4;
+    margin-bottom: 20px;
+}
+
+.payment-schedule {
+    display: block;
+    font-size: 16px;
+    color: #707070;
+    line-height: 26px;
+    margin-bottom: 10px;
+}
+
+.my-dropdown {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 5px 25px 5px 15px;
+    background-image: url("../images/down-arrow.svg");
+    background-position: right 15px center;
+    background-repeat: no-repeat;
+    background-size: auto 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.select-plan .my-dropdown {
+    box-shadow: 0px 3px 18px #00000017;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    position: relative;
+}
+
+.pricing-plans .card-footer {
+    padding-top: 50px;
+    margin-top: -22px;
+    padding-bottom: 30px;
+}
+
+.pricing-plans .card-footer .btn {
+    line-height: 36px;
+    box-shadow: 0px 3px 18px #00000017;
+}
+
+.best-value {
+    width: 100%;
+    background: #ffa155;
+    transform: rotate(-33deg);
+    color: #fff;
+    padding: 7px;
+    font-size: 14px;
+    position: absolute;
+    left: -37%;
+    top: 14px;
+}
+
+.view-more a.no-shadow {
+    box-shadow: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #333333;
+}
+
+.choose-payment-schedule {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 20px 20px 0px 20px;
+    text-align: center;
+}
+
+.contactno {
+    font-size: 18px;
+    color: #333;
+    font-family: Poppins-Bold;
+}
+
+.pricing-plans .active .card .card-title,
+.pricing-plans .active .card .plan-price h2,
+.pricing-plans .active .card .plan-price h2 sup {
+    color: #2cd468 !important;
+}
+
+.pricing-plans .active .card .card-footer .btn {
+    background: #1fcb5d;
+}
+
+.online-solution .sign-card {
+    padding: 30px 5px;
+}
+
+.online-solution .sign-card h3 {
+    font-size: 17px;
+    font-family: Poppins-SemiBold;
+    color: #333;
+}
+
+.online-solution .sign-card p {
+    font-size: 14px;
+    font-family: Poppins-Medium;
+    line-height: 22px;
+}
+
+.online-solution .sign-card .sign-card-img {
+    width: 100%;
+    height: 65px;
+    margin: 0px auto 25px auto;
+}
+
+.online-solution .sign-card .sign-card-img img {
+    max-width: 100%;
+    max-height: 65px;
+}
+
+.faq-section-part {
+    width: 100%;
+    height: auto;
+    float: left;
+    background: #F8F8F8;
+    padding: 50px 0px;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-section-part::after {
+    content: "";
+    position: absolute;
+    height: 280px;
+    width: 280px;
+    border-radius: 100%;
+    top: -70px;
+    right: -110px;
+    border: 60px solid #eee;
+}
+
+.faq-section-part .faq-dots {
+    position: absolute;
+    left: -50px;
+    top: 45%;
+}
+
+.faq-width {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.faq-faq-accordion {
+    max-width: 100%;
+    margin: 0 auto 100px;
+    border-top: 1px solid #d9e5e8;
+}
+
+.faq-accordion li {
+    border-bottom: 1px solid #d9e5e8;
+    position: relative;
+}
+
+.faq-accordion li p {
+    display: none;
+    padding: 5px 30px 4px;
+    color: #7E898E;
+    font-size: 16px;
+}
+
+.faq-accordion a {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    font-family: Poppins-SemiBold;
+    padding: 20px 0px;
+    font-size: 18px;
+    line-height: 22px;
+    text-indent: 30px;
+    user-select: none;
+    color: #333!important;
+    position: relative;
+}
+
+.faq-accordion a::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    background: #1fcb5d;
+    border-radius: 50%;
+    transform: translate(0px, -50%);
+}
+
+.faq-accordion a:after {
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid #4a6e78;
+    border-bottom: 1px solid #4a6e78;
+    position: absolute;
+    right: 10px;
+    content: " ";
+    top: 17px;
+    transform: rotate(-45deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    top: 50%;
+}
+
+.faq-accordion p {
+    font-size: 13px;
+    font-size: 0.8125rem;
+    line-height: 2;
+    padding: 10px;
+}
+
+.faq-accordion a.active:after {
+    transform: rotate(45deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.first-charging {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.charging-text {
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: Poppins-Bold;
+    background: #27be5d;
+    padding: 10px 25px;
+    border-radius: 7px;
+    letter-spacing: 2px;
+}
+
+.charging-text .dark-text {
+    color: #000;
+}
+
+.question-icon {
+    width: 50px;
+    height: 50px;
+    background: #ffa155;
+    height: auto;
+    line-height: 46px;
+    color: #fff;
+    font-size: 18px;
+    margin-left: 13px;
+    border-radius: 8px;
+    border: solid 2px #fff;
+}
+
+.payment-banner:before {
+    display: none;
+}
+
+.payment-banner .banner-content {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 140px auto 0 auto;
+    position: relative;
+    max-width: unset;
+    min-height: 530px;
+}
+
+.purchase-summary {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.purchase-summary .purchase-heading h3 {
+    font-size: 36px;
+    font-family: Poppins-Bold;
+    color: #000000;
+}
+
+.heading-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-box {
+    display: flex;
+    width: 100%;
+    border: dashed 1px #999;
+    padding: 20px;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.left-part {
+    width: 100%;
+}
+
+.left-part strong {
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.left-part b {
+    color: #ffa155;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 7px;
+}
+
+.left-part span {
+    display: inline-block;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.annual {
+    display: flex;
+    width: 100%;
+}
+
+.annual li {
+    padding-right: 10px
+}
+
+.annual li:last-child {
+    padding-right: 0px
+}
+
+.right-part {
+    width: 100%;
+}
+
+.right-part ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-part ul li {
+    background: #E8E8E8;
+    width: 32%;
+    height: 93px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.right-part ul li.active {
+    background: #000;
+}
+
+.right-part ul li img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100px;
+}
+
+.credit-card-info {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.credit-card-info label {
+    font-size: 13px;
+}
+
+.credit-card-info input {
+    font-size: 14px !important;
+    background: #F3F3F3;
+    color: #666;
+}
+
+.credit-card-info input::placeholder {
+    color: #C4C4C4;
+}
+
+.credit-card-part {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 60px 60px 0px 60px;
+    box-shadow: 0px 3px 28px #00000017;
+    border-radius: 21px;
+    background: #fff;
+    position: relative;
+}
+.d-content {
+     display: contents;
+ }
