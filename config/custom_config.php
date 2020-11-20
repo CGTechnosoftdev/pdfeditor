@@ -42,6 +42,8 @@ return [
         'business_category' =>'BusinessCategory',
         'sub-admin'=>'User',
         'subscription_plan' => 'SubscriptionPlan',
+        'promo-url' => 'PromoUrl',
+        'email-template' => 'EmailTemplate',
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',
@@ -95,5 +97,9 @@ return [
         'publishable_key' => 'pk_test_51HmGOzDCwgb6dlp7EiX42eI63FYyMYCDlM8BnMNPNGInZ8mRvZRjbmOKyFwraspS0YWqJzv25YCjOGOdswUoSbHH00N8GQ6qkD',
         'secret_key' => 'sk_test_51HmGOzDCwgb6dlp7THIZBQBOnOloJbFSUi9PLqqYh6lWBZrBxhsijlXlVkvzD8bIbZMdiGmUqukuR7KqZkR8MJD000Vs0iqVep',
     ]
+    'amount_type_arr' => [
+        '0' => 'Default',
+        '1' => 'Custom',
+    ],
     
 ];

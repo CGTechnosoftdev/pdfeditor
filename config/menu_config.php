@@ -36,6 +36,13 @@ return [
             'permissions'=>['subscription-plan-list'],
         ],
         [
+            'label' => 'Promo URL',
+            'icon' => 'tag',
+            'route_name' => 'promo-url.index',
+            'active_segments' => ['promo-url'],
+            'permissions'=>['promo-url-list'],
+        ],
+        [
             'label' => 'Business Category',
             'icon' => 'building',
             'route_name' => 'business-category.index',
@@ -48,6 +55,13 @@ return [
             'route_name' => 'top-100-form.index',
             'active_segments' => ['top-100-form'],
             'permissions'=>['top-100-form-list'],
+        ],
+        [
+            'label' => 'Email Template',
+            'icon' => 'envelope',
+            'route_name' => 'email-template.index',
+            'active_segments' => ['email-template'],
+            'permissions'=>['email-template-list'],
         ],
         [
             'label' => 'General Settings',

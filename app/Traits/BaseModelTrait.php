@@ -103,22 +103,22 @@ trait BaseModelTrait {
     	if(!empty($condition)){
     		$model->where($condition);
     	}
-    	return $model->get();                
+    	return $model->get();  
     }
 
-   /**
+    /**
     * [dataRow description]
     * @author Akash Sharma
     * @date   2020-11-12
     * @return [type]     [description]
     */
-   public static function dataRow()
-   {
-   	$model = self::where('status',config('constant.STATUS_ACTIVE'));
-   	if(!empty($condition)){
-   		$model->where($condition);
-   	}
-   	return $model->first();                
-   }
+    public static function dataRow()
+    {
+    	$model = self::where('status',config('constant.STATUS_ACTIVE'));
+    	if(!empty($condition)){
+    		$model->where($condition);
+    	}
+    	return $model->first();                
+    }
 
 }
