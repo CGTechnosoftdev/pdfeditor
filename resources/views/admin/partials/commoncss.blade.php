@@ -18,6 +18,9 @@
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/select2/dist/css/select2.min.css') }}">
 <!-- checkbox -->
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/icheck/all.css') }}">
+<!-- datepicker -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+
 <!-- Style -->
 <link rel="stylesheet" href="{{ asset('public/admin/style.css') }}">
 <!-- Custom -->

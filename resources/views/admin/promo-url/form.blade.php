@@ -116,12 +116,21 @@
 							<div class="form-group {{ $errors->has('expiration_date') ? ' has-error' : '' }}">
 								<label for="expiration_date" class="control-label text-left col-sm-4">Expiration Date</label>	
 								<div class="col-sm-8">
-									{{ Form::text('expiration_date',old('expiration_date'),['placeholder'=>'Expiration Date','class'=>"form-control",'id'=>'expiration_date']) }}
+									{{ Form::text('expiration_date',old('expiration_date'),['placeholder'=>'Expiration Date','class'=>"form-control datepicker",'id'=>'expiration_date']) }}
 									@if ($errors->has('expiration_date'))
 									<span class="help-block"><strong>{{ $errors->first('expiration_date') }}</strong></span>
 									@endif
 								</div>
 							</div>		
+							<div class="form-group {{ $errors->has('status') ? ' has-error' : '' }}">
+								<label for="status" class="control-label text-left col-sm-4 required">Status<span class="required-label">*</span></label>
+								<div class="col-sm-8" >
+									{!! Form::select('status',[''=>"Select Status"] + $status_arr, old('status'), ['class'=>'form-control required','data-unit'=>'from']) !!}
+									@if ($errors->has('status'))
+									<span class="help-block"><strong>{{ $errors->first('status') }}</strong></span>
+									@endif
+								</div>
+							</div>
 							<h4>UTM Parameters</h4>		
 
 							<div class="form-group {{ $errors->has('campaign_source') ? ' has-error' : '' }}">
@@ -195,6 +204,10 @@
 @endsection
 @section('additionaljs')
 <script type="text/javascript">
+	//Date picker
+	$('.datepicker').datepicker({
+		autoclose: true
+	});
 	$(document).ready(function() {
 		$(".amount_type_checkbox").click(function() {
 			var plan_type = $(this).attr('data-plan_type');

@@ -43,6 +43,9 @@ class PromoUrlController extends AdminBaseController
     				'delete'=>['route_url'=>'promo-url.destroy', 'route_param'=>[$row->id],'permission'=>'promo-url-delete'],
     			];
     			return view($action_button_template,compact('buttons'));
+			});
+			$table->editColumn('promo_url',function($row){
+    			return '<a href="#" class="show_promo_url" data-link="'.$row->promo_url.'" title="View"><i class="fa fa-eye"></i></a>';
     		});
 
     		$table->editColumn('status',function($row) use ($status_button_template){
@@ -89,7 +92,8 @@ class PromoUrlController extends AdminBaseController
   			'title'=>'Add Promo URL',
   			'heading'=>'Add Promo URL',
   			'breadcrumb'=>\Breadcrumbs::render('promo-url.create'),
-  		];
+		];
+		$data_array['status_arr'] = config('custom_config.all_status_arr');
   		$data_array['subscription_plan_arr'] = SubscriptionPlan::dataList()->pluck('name','id')->toArray();
   		$data_array['amount_type_arr'] = config('custom_config.amount_type_arr');
   		$data_array['valid_for_months_arr'] = array_combine(range(1,12),array_map(function($val) { return $val." month";},range(1,12)));
@@ -132,7 +136,8 @@ class PromoUrlController extends AdminBaseController
   			'heading'=>'Edit Promo URL',
   			'breadcrumb'=>\Breadcrumbs::render('promo-url.edit',['id'=>$promo_url->id]),
   			'promo_url'=>$promo_url
-  		];
+		];
+		$data_array['status_arr'] = config('custom_config.all_status_arr');
   		$data_array['subscription_plan_arr'] = SubscriptionPlan::dataList()->pluck('name','id')->toArray();
   		$data_array['amount_type_arr'] = config('custom_config.amount_type_arr');
   		$data_array['valid_for_months_arr'] = array_combine(range(1,12),array_map(function($val) { return $val." month";},range(1,12)));

@@ -27,13 +27,13 @@ class PromoUrl extends Model
 		return $this->subscription_plan->name;
 	} 
 
-	public function getMonthlyAmountAttribute(){
-		return ($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount;
-	} 
+	// public function getMonthlyAmountAttribute(){
+	// 	return ($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount;
+	// } 
 
-	public function getYearlyAmountAttribute(){
-		return ($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount;
-	}
+	// public function getYearlyAmountAttribute(){
+	// 	return ($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount;
+	// }
 
 	public function getFormatedMonthlyAmountAttribute(){
 		return myCurrencyFormat(($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount);
@@ -45,7 +45,7 @@ class PromoUrl extends Model
 
 	public function getPromoUrlAttribute(){
 		$campaign_attr  = ['campaign_source','campaign_medium','campaign_name','campaign_term','campaign_content'];
-		$url = \URL::to('/promo-url');
+		$url = \URL::to('/promo-url/'.$this->id);
 		$append_arr = [];
 		foreach($campaign_attr as $attr){
 			if(!empty($this->$attr)){

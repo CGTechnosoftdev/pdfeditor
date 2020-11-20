@@ -82,7 +82,7 @@ return [
     		['data'=>'name', 'name'=> 'name','label'=>'Name','orderBy'=>'asc'],
             ['data'=>'formated_yearly_amount', 'name'=> 'formated_yearly_amount','label'=>'Yearly Amount','orderBy'=>'asc'],
             ['data'=>'formated_monthly_amount', 'name'=> 'formated_monthly_amount','label'=>'Monthly Amount','orderBy'=>'asc'],
-            ['data'=>'discount_percent', 'name'=> 'discount_percent','label'=>'Discount Percent','orderBy'=>'asc'],
+            ['data'=>'formated_discount_percent', 'name'=> 'formated_discount_percent','label'=>'Discount Percent','orderBy'=>'asc'],
             ['data'=>'max_team_member', 'name'=> 'max_team_member','label'=>'Max Team Member','orderBy'=>'asc'],
     		['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
     		['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
@@ -93,10 +93,11 @@ return [
         'columns'=>[
             ['data'=>'id', 'name'=> 'id', 'visible'=> false,'searchable'=> false],
             ['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'#'],
-            ['data'=>'subscription_plan_name', 'name'=> 'subscription_plan_name','label'=>'Subscription Plan Name','orderBy'=>'asc'],
+            ['data'=>'subscription_plan_name', 'name'=> 'subscription_plan_name','label'=>'Plan Name','orderBy'=>'asc'],
             ['data'=>'promotion_name', 'name'=> 'promotion_name','label'=>'Promotion Name','orderBy'=>'asc'],
             ['data'=>'formated_yearly_amount', 'name'=> 'formated_yearly_amount','label'=>'Yearly Amount','orderBy'=>'asc'],
             ['data'=>'formated_monthly_amount', 'name'=> 'formated_monthly_amount','label'=>'Monthly Amount','orderBy'=>'asc'],
+            ['data'=>'promo_url', 'name'=> 'promo_url','label'=>'Promo URL','orderable'=> false,'searchable'=> false],
             ['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
             ['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
         ],
@@ -108,7 +109,6 @@ return [
             ['data'=>'DT_RowIndex', 'name'=> 'DT_RowIndex', 'orderable'=> false,'searchable'=> false,'label'=>'#'],
             ['data'=>'title', 'name'=> 'title','label'=>'Title','orderBy'=>'asc'],
             ['data'=>'subject', 'name'=> 'subject','label'=>'Subject','orderBy'=>'asc'],
-            ['data'=>'status', 'name'=> 'status','label'=>'Status','orderable'=> false],
             ['data'=>'action', 'name'=> 'action', 'orderable'=> false,'label'=>'Action']
         ],
         'order'=>[[0,'desc']]

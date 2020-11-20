@@ -198,7 +198,7 @@ function changeDateFormat($date,$format=""){
 			$new_format='Y-m-d';
 			break;
 			default:
-			$new_format=auth()->user()->general_setting['date_format'] ?? config('constant.PUBLIC_DATE_FORMAT');
+			$new_format=config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT');
 			break;
 		}    
 		return Carbon::parse($date)->format($new_format);
@@ -223,7 +223,7 @@ function changeTimeFormat($time,$format=""){
 			$new_format='H:i:s';
 			break;
 			default:
-			$new_format=auth()->user()->general_setting['time_format'] ?? config('constant.PUBLIC_TIME_FORMAT');
+			$new_format=config('general_settings.time_format') ?? config('constant.PUBLIC_TIME_FORMAT');
 			break;
 		}  
 		return Carbon::parse($time)->format($new_format); 
@@ -248,7 +248,7 @@ function changeDateTimeFormat($datetime,$format=""){
 			$new_format='Y-m-d H:i:s';
 			break;
 			default:
-			$new_format=(auth()->user()->general_setting['date_format'] ?? config('constant.PUBLIC_DATE_FORMAT'))." ".(auth()->user()->general_setting['time_format'] ?? config('constant.PUBLIC_TIME_FORMAT'));
+			$new_format=(config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT'))." ".(config('general_settings.time_format') ?? config('constant.PUBLIC_TIME_FORMAT'));
 			break;
 		}    
 		return Carbon::parse($datetime)->format($new_format);   		
@@ -282,7 +282,7 @@ function myCurrencyFormat($amount){
 	if(!is_nan($amount)){
 		$return=number_format($amount,2);
 	}
-	$currency_attribute = auth()->user()->general_setting['currency'] ?? config('constant.DEFAULT_CURRNCY');
+	$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
 	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'),'symbol','key');
 	return $currency_arr[$currency_attribute].$return;
 }

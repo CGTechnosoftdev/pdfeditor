@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="form-group col-md-12">
-						<label for="place_holders" class="control-label text-left col-sm-3 required">Email Place Holders <small> (These place holders can be used in content)</small></label>	
+						<label for="place_holders" class="control-label text-left col-sm-3 required">Email Place Holders <br> <small> (These place holders can be used in content)</small></label>	
 						<div class="col-sm-9">
 							{!! $email_template->place_holders !!}
 						</div>

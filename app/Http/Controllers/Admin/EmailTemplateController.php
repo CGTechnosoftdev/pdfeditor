@@ -43,17 +43,6 @@ class EmailTemplateController extends AdminBaseController
                 return view($action_button_template,compact('buttons'));
             });
 
-            $table->editColumn('status',function($row) use ($status_button_template){
-                $button_data=[
-                    'id'=>$row->id,
-                    'type'=>'email-template',
-                    'status'=>$row->status,
-                    'action_class' => 'change-status',
-                    'permission'=>'email-template-edit'
-                ];
-                return view($status_button_template,compact('button_data'));
-            });
-
             return $table->make(true);
         }
 
