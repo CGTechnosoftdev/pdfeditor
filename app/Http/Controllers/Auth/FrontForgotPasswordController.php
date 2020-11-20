@@ -176,9 +176,12 @@ class FrontForgotPasswordController extends Controller
         }
 
 
+        $this->sendResetEmail($request->email, $token);
+        $arr["status"] = true;
+        $response_type = 'success';
+        $response_message = 'A reset link has been sent to your email address.';
 
-
-        if ($this->sendResetEmail($request->email, $token)) {
+       /* if ($this->sendResetEmail($request->email, $token)) {
 
             $arr["status"] = true;
             $response_type = 'success';
@@ -188,7 +191,7 @@ class FrontForgotPasswordController extends Controller
             $arr["status"] = false;
             $response_type = 'error';
             $response_message = 'A Network Error occurred. Please try again.';
-        }
+        } */
         $arr[$response_type] = $response_message;
         return Response()->json($arr);
     }
