@@ -208,3 +208,10 @@ Breadcrumbs::for('email-template.edit', function ($trail,$id) {
 	$trail->push('Email Template', route('email-template.index'));
 	$trail->push('Edit Email Template', route('email-template.edit',$id));
 });
+
+// Home > email-template > show
+Breadcrumbs::for('email-template.show', function ($trail,$id,$name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Email Template', route('email-template.index'));
+	$trail->push($name.' Detail', route('email-template.edit',$id));
+});

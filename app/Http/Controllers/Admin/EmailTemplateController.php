@@ -16,7 +16,7 @@ class EmailTemplateController extends AdminBaseController
      */
     function __construct()
     {
-        $this->middleware('permission:email-template-list|email-template-create|email-template-edit|email-template-delete');
+        $this->middleware('permission:email-template-list|email-template-edit');
         $this->middleware('permission:email-template-edit', ['only' => ['edit','update']]);
         // app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
@@ -37,6 +37,7 @@ class EmailTemplateController extends AdminBaseController
             $table->addColumn('action','');
             $table->editColumn('action',function($row) use ($action_button_template){
                 $buttons=[
+                    'view'=>['route_url'=>'email-template.show', 'route_param'=>[$row->id]],
                     'edit'=>['route_url'=>'email-template.edit', 'route_param'=>[$row->id],'permission'=>'email-template-edit'],
                 ];
                 return view($action_button_template,compact('buttons'));
@@ -113,5 +114,26 @@ class EmailTemplateController extends AdminBaseController
         }
         set_flash($response_type,$response_message);
         return redirect()->route('email-template.index');
+    }
+
+    /**
+     * [show description]
+     * @author Akash Sharma
+     * @date   2020-11-02
+     * @param  User       $sub_admin [description]
+     * @return [type]                [description]
+     */
+    public function show(EmailTemplate $email_template){
+        $data_array = [
+            'title'=>$email_template->title." Detail",
+            'heading'=>$email_template->title." Detail",
+            'breadcrumb'=>\Breadcrumbs::render('email-template.show',$email_template->id,$email_template->title),
+            'email_template' => $email_template
+        ];
+        $data_array['back_button'] = [
+            'label' => 'Back',
+            'link'  => route('email-template.index'),
+        ];
+        return view('admin.email-template.view',$data_array);
     }
 }
