@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneralSetting extends Model
 {
-	protected $fillable = ['user_id','site_title', 'date_format' ,'time_format', 'paging_limit', 'currency', 'facebook_url', 'twitter_url', 'instagram_url' , 'linked_in_url','ios_app_url','android_app_url'];
+	protected $fillable = ['user_id','site_title','trail_days', 'date_format' ,'time_format', 'paging_limit', 'currency', 'facebook_url', 'twitter_url', 'instagram_url' , 'linked_in_url','ios_app_url','android_app_url'];
 	public $timestamps = true;
 
     /**

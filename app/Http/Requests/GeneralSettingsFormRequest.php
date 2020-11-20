@@ -24,7 +24,8 @@ class GeneralSettingsFormRequest extends FormRequest
     { 
     	$rules=[                
     		'site_title'     => 'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2',
-    		'currency'    => 'required', 
+    		'trail_days'    => 'nullable|integer', 
+            'currency'    => 'required', 
     		'date_format'    => 'required', 
     		'time_format'    => 'required',        
     	];
