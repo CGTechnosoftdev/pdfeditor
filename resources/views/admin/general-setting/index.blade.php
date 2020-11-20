@@ -76,12 +76,12 @@
 							@endif
 						</div>
 					</div>
-					<div class="form-group {{ $errors->has('twitter') ? ' has-error' : '' }}">
-						<label for="twitter" class="control-label text-left col-sm-4 required">Twitter Url</label>
+					<div class="form-group {{ $errors->has('twitter_url') ? ' has-error' : '' }}">
+						<label for="twitter_url" class="control-label text-left col-sm-4 required">Twitter Url</label>
 						<div class="col-sm-8">
-							{{ Form::text('twitter',old('twitter'),array('placeholder'=>'Enter Twitter Url','class'=>"form-control"))}}
-							@if ($errors->has('twitter'))
-							<span class="help-block"><strong>{{ $errors->first('twitter') }}</strong></span>
+							{{ Form::text('twitter_url',old('twitter_url'),array('placeholder'=>'Enter Twitter Url','class'=>"form-control"))}}
+							@if ($errors->has('twitter_url'))
+							<span class="help-block"><strong>{{ $errors->first('twitter_url') }}</strong></span>
 							@endif
 						</div>
 					</div>
