@@ -50,6 +50,7 @@ class Top100FormController extends AdminBaseController
 			$table->addColumn('action','');
 			$table->editColumn('action',function($row) use ($action_button_template){
 				$buttons=[
+					'view'=>['route_url'=>'top-100-form.show', 'route_param'=>[$row->id]],
 					'edit'=>['route_url'=>'top-100-form.edit', 'route_param'=>[$row->id],'permission'=>'top-100-form-edit'],
 					'delete'=>['route_url'=>'top-100-form.destroy', 'route_param'=>[$row->id],'permission'=>'top-100-form-delete'],
 					'manage' =>['route_url'=>'top100form.form.list','label' => '', 'route_param'=>[$row->id],'permission'=>'top-100-form-version-list'],
@@ -199,6 +200,20 @@ class Top100FormController extends AdminBaseController
 		return redirect()->route('top-100-form.index');
 	}
 
+	public function show(Top100Form $top_100_form){
+		$data_array = [
+			'title'=>$top_100_form->name." Detail",
+			'heading'=>$top_100_form->name." Detail",
+			'breadcrumb'=>\Breadcrumbs::render('top-100-form.show',$top_100_form->id,$top_100_form->name),
+			'top_100_form' => $top_100_form
+		];
+		$data_array['back_button'] = [
+			'label' => 'Back',
+			'link'  => route('top-100-form.index'),
+		];
+		return view('admin.top100form.view',$data_array);
+	}
+
 	public function listForm(Request $request,Top100Form $top_100_form){
 		$filter_data = $request->input();		   
 		if(request()->ajax()) {
@@ -241,7 +256,7 @@ class Top100FormController extends AdminBaseController
 			'id' => $top_100_form->id,
 		];
 		$data_array['add_new_button'] = [
-			'label' => 'Add Manage Form',
+			'label' => 'Add Form Version',
 			'link'	=> route('top100form.form.create',$top_100_form->id),
 			'permission'=>'top-100-form-version-create'
 		];
