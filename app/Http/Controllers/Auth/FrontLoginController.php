@@ -29,7 +29,7 @@ class FrontLoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/dashboard';
-
+    protected $redirectToAfterLogout = '/';
     /**
      * Create a new controller instance.
      *
@@ -107,7 +107,7 @@ class FrontLoginController extends Controller
     public function logout(Request $request)
     {
     	$this->guard()->logout();
-    	return redirect($this->redirectTo);
+    	return redirect($this->redirectToAfterLogout);
     }
 
     /**
