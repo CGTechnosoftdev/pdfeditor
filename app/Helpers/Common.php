@@ -273,3 +273,23 @@ function myCurrencyFormat($amount){
 	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'),'symbol','key');
 	return $currency_arr[$currency_attribute].$return;
 }
+/**
+ * [encryptData description]
+ * @author Akash Sharma
+ * @date   2020-11-20
+ * @param  [type]     $data [description]
+ * @return [type]           [description]
+ */
+function encryptData($data){
+	return $data;
+}
+/**
+ * [decryptData description]
+ * @author Akash Sharma
+ * @date   2020-11-20
+ * @param  [type]     $data [description]
+ * @return [type]           [description]
+ */
+function decryptData($data){
+	return $data;
+}

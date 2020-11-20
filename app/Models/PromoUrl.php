@@ -16,7 +16,7 @@ class PromoUrl extends Model
 	protected $fillable = ['promotion_name', 'subscription_plan_id', 'trail_days','monthly_amount_type', 'monthly_amount', 'valid_for_months', 'yearly_amount_type', 'yearly_amount', 'valid_for_years', 'expiration_date','campaign_source','campaign_medium','campaign_name','campaign_term','campaign_content','status'];
 
 	protected $appends = [
-		'subscription_plan_name','formated_monthly_amount','formated_yearly_amount'
+		'subscription_plan_name','formated_monthly_amount','formated_yearly_amount','promo_url'
 	];
 
 	protected $dates = ['deleted_at'];
@@ -41,6 +41,21 @@ class PromoUrl extends Model
 
 	public function getFormatedYearlyAmountAttribute(){
 		return myCurrencyFormat(($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount);
+	} 
+
+	public function getPromoUrlAttribute(){
+		$campaign_attr  = ['campaign_source','campaign_medium','campaign_name','campaign_term','campaign_content'];
+		$url = \URL::to('/promo-url');
+		$append_arr = [];
+		foreach($campaign_attr as $attr){
+			if(!empty($this->$attr)){
+				$append_arr[]=$attr."=".$this->$attr;
+			}
+		}
+		if(!empty($append_arr)){
+			$url.="?".implode("&", $append_arr);
+		}
+		return $url;
 	} 
 
 	/**
