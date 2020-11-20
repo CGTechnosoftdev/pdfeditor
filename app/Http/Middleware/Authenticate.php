@@ -26,6 +26,6 @@ class Authenticate extends Middleware
                 list($mid, $guard) = explode(":",$m);
             }
         }
-        return route($guard == 'web' ? 'login' : 'front.login');
+        return route($guard == 'web' ? 'login' : 'front.home.login');
     }
 }
