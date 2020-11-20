@@ -64,7 +64,7 @@
 									@endif
 								</div>
 							</div>
-							<div class="form-group {{ $errors->has('monthly_amount') ? ' has-error' : '' }} Custom_monthly_amount {{ $promo_url->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE') ? 'hidden' : '' }}">
+							<div class="form-group {{ $errors->has('monthly_amount') ? ' has-error' : '' }} Custom_monthly_amount {{ (empty($promo_url) || $promo_url->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? 'hidden' : '' }}">
 								<div class="col-sm-offset-4 col-sm-8" >
 									{{ Form::number('monthly_amount',old('monthly_amount'),['placeholder'=>'Enter Custom Monthly Amount','class'=>"form-control",'min'=>0, 'step'=>0.50])}}
 									@if ($errors->has('monthly_amount'))
@@ -96,7 +96,7 @@
 									@endif
 								</div>
 							</div>
-							<div class="form-group {{ $errors->has('yearly_amount') ? ' has-error' : '' }} Custom_yearly_amount {{ $promo_url->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE') ? 'hidden' : '' }}">
+							<div class="form-group {{ $errors->has('yearly_amount') ? ' has-error' : '' }} Custom_yearly_amount {{ (empty($promo_url) || $promo_url->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? 'hidden' : '' }}">
 								<div class="col-sm-offset-4 col-sm-8" >
 									{{ Form::number('yearly_amount',old('yearly_amount'),['placeholder'=>'Enter Custom Yearly Amount','class'=>"form-control",'min'=>0, 'step'=>0.50])}}
 									@if ($errors->has('yearly_amount'))
