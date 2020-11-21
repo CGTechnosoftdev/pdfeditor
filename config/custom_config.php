@@ -22,7 +22,7 @@ return [
     ],
     'yes_no_arr' => [
         '1' => 'Yes',
-        '2' => 'No'
+        '0' => 'No'
     ],
     'gender_arr' => [
         '1' => 'Male',

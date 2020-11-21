@@ -42,32 +42,31 @@ class FrontUserRegistrationController extends Controller
 	{
 		$email = $request->email;
 
-		$tokenData = \DB::table('password_resets')
-			->where('token', $token)->first();
-		if (!$tokenData) {
+		$token_data = \DB::table('password_resets')->where('token', $token)->first();
+		if (!$token_data) {
 			$response_type = 'error';
 			$response_message = 'Invalid operation!';
 		} else {
 			$user = User::where('email', $email)->first();
-			\DB::table('password_resets')->where('email', $user->email)
-				->delete();
-			$user->status = 1;
-			$user->save();
-
-			if (!$user) {
+			if (empty($user) || $token_data->email != $user->email) {
 				$response_type = 'error';
-				$response_message = 'Email not found!';
+				$response_message = 'User not found!';
 			} else {
+				$user->status = config('constant.STATUS_ACTIVE');
+				$user->email_verified_at = now();
+				$user->save();
+				\DB::table('password_resets')->where('token', $token)->delete();
 				$response_type = 'success';
-				$response_message = 'User is activated,Thank You!';
+				$response_message = 'Email verified successfully, You can login now!';
 			}
 		}
 		$data_array = [
 			'title' => 'Email Verification',
 			'heading' => 'Email Verification',
 			'page_content' => "Thank you for verification process!",
+			'verification_status' => $response_type,
+			'verification_message' => $response_message
 		];
-		set_flash($response_type, $response_message, false);
 		return view('auth.front-email-verification', $data_array);
 	}
 
@@ -106,7 +105,7 @@ class FrontUserRegistrationController extends Controller
 				];
 				Mail::to($user->email)->send(new CommonMail($email_config));
 				$response_type = 'success';
-				$response_message = 'Thank you for Registration,you will get one email for account verification.';
+				$response_message = 'Registration completed, Please check your registered email for email verification';
 			} else {
 				DB::rollback();
 				$response_type = 'error';

@@ -1,4 +1,6 @@
 <!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/font-awesome/css/font-awesome.min.css') }}">
+
 <link rel="stylesheet" href="{{ asset('public/front/css/all.css') }}">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{ asset('public/front/css/bootstrap.min.css') }}">

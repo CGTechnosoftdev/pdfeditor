@@ -181,7 +181,7 @@ class FrontForgotPasswordController extends Controller
         $response_type = 'success';
         $response_message = 'A reset link has been sent to your email address.';
 
-       /* if ($this->sendResetEmail($request->email, $token)) {
+        /* if ($this->sendResetEmail($request->email, $token)) {
 
             $arr["status"] = true;
             $response_type = 'success';
