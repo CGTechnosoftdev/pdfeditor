@@ -33,14 +33,14 @@ return [
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
-    'model_arr'=>[
-        'user'=>'User',
-        'role'=>'Role',
+    'model_arr' => [
+        'user' => 'User',
+        'role' => 'Role',
         'top-100-form' => 'Top100Form',
         'form' => 'Form',
         'faq' => 'Faq',
-        'business_category' =>'BusinessCategory',
-        'sub-admin'=>'User',
+        'business_category' => 'BusinessCategory',
+        'sub-admin' => 'User',
         'subscription_plan' => 'SubscriptionPlan',
         'promo-url' => 'PromoUrl',
         'email-template' => 'EmailTemplate',
@@ -49,6 +49,11 @@ return [
         'd-m-Y' => 'd-m-Y',
         'm/d/Y' => 'm/d/Y',
         'Y-m-d' => 'Y-m-d',
+    ],
+    'js_date_format_arr' => [
+        'd-m-Y' => 'dd-mm-yyyy',
+        'm/d/Y' => 'dd/mm/yyyy',
+        'Y-m-d' => 'yyyy/mm/dd',
     ],
     'time_format_arr' => [
         'h:i:s' => 'h:i:s',
@@ -93,7 +98,7 @@ return [
             'symbol' => '₹',
         ],
     ],
-    'stripe_config'=>[
+    'stripe_config' => [
         'publishable_key' => 'pk_test_51HmGOzDCwgb6dlp7EiX42eI63FYyMYCDlM8BnMNPNGInZ8mRvZRjbmOKyFwraspS0YWqJzv25YCjOGOdswUoSbHH00N8GQ6qkD',
         'secret_key' => 'sk_test_51HmGOzDCwgb6dlp7THIZBQBOnOloJbFSUi9PLqqYh6lWBZrBxhsijlXlVkvzD8bIbZMdiGmUqukuR7KqZkR8MJD000Vs0iqVep',
     ],
@@ -101,5 +106,5 @@ return [
         '0' => 'Default',
         '1' => 'Custom',
     ],
-    
+
 ];
