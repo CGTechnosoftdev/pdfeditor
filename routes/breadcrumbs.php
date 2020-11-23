@@ -175,3 +175,43 @@ Breadcrumbs::for('subscription-plan.show', function ($trail,$id,$name) {
 	$trail->push('Subscription Plan', route('subscription-plan.index'));
 	$trail->push($name.' Detail', route('subscription-plan.edit',$id));
 });
+
+
+// Home > promo-url
+Breadcrumbs::for('promo-url.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Promo URL', route('promo-url.index'));
+});
+
+// Home > promo-url > add
+Breadcrumbs::for('promo-url.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Promo URL', route('promo-url.index'));
+	$trail->push('Add Promo URL', route('promo-url.create'));
+});
+
+// Home > promo-url > updated
+Breadcrumbs::for('promo-url.edit', function ($trail,$id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Promo URL', route('promo-url.index'));
+	$trail->push('Edit Promo URL', route('promo-url.edit',$id));
+});
+
+// Home > email-template
+Breadcrumbs::for('email-template.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Email Template', route('email-template.index'));
+});
+// Home > email-template > updated
+Breadcrumbs::for('email-template.edit', function ($trail,$id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Email Template', route('email-template.index'));
+	$trail->push('Edit Email Template', route('email-template.edit',$id));
+});
+
+// Home > email-template > show
+Breadcrumbs::for('email-template.show', function ($trail,$id,$name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Email Template', route('email-template.index'));
+	$trail->push($name.' Detail', route('email-template.edit',$id));
+});

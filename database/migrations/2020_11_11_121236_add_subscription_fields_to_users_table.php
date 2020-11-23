@@ -18,7 +18,7 @@ class AddSubscriptionFieldsToUsersTable extends Migration
     		$table->bigInteger('subscription_plan_id')->unsigned()->nullable()->after('subscription_status');
     		$table->decimal('subscription_plan_amount', 8, 2)->default(0.00)->nullable()->after('subscription_plan_id');
     		$table->tinyInteger('subscription_plan_type')->nullable()->comment('1=>Monthly,2=>Yearly')->after('subscription_plan_amount');
-    		$table->string('stripe_customer_id',50)->after('subscription_plan_type');
+    		$table->string('stripe_customer_id',50)->nullable()->after('subscription_plan_type');
             $table->foreign('subscription_plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
     	});
     }

@@ -146,7 +146,8 @@ return [
     */
 
     'attributes' => [
-        'contact_number' => 'phone number'
+        'contact_number' => 'phone number',
+        'subscription_plan_id' => 'subscription plan',
     ],
 
 ];

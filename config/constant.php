@@ -54,5 +54,7 @@ return [
     'SUBSCRIPTION_STATUS_YES' => 1,
     'SUBSCRIPTION_STATUS_TRAIL' => 2,
     
+    'DEFAULT_AMOUNT_TYPE' => 0,
+    
 ];
 
