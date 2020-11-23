@@ -25,29 +25,30 @@
 				<h3>Purchase <span class="green-color">Summary</span></h3>
 				@foreach($subscription_plan_type_arr as $plan_type_id => $plan_type)
 				<p class="{{strtolower($plan_type)}}-element {{$subscription_plan_type==$plan_type_id ? '' : 'd-none'}}">
-					{{$subscription_plan->name}} ({{$plan_type}}) <!-- + <small class="green-color">Free SignNow {{$subscription_plan->name}}</small> --> & Free 360Legal Forms
+					{{$subscription_plan->name}} ({{$plan_type}})
+					<!-- + <small class="green-color">Free SignNow {{$subscription_plan->name}}</small> --> & Free 360Legal Forms
 				</p>
 				@endforeach
 			</div>
 		</div>
-		
-		<div class="row">			
+
+		<div class="row">
 			<div class="col-md-6">
 				<div class="heading-top">
 					<div class="left-box">
 						<div class="left-part">
 							@if(!empty($trail_days))
-							<strong>Today's charge:<b>$0.00</b></strong>
+							<strong>Today's charge:<b>{{myCurrencyFormat('0.00')}}</b></strong>
 							@foreach($subscription_plan_type_arr as $plan_type_id => $plan_type)
 							@php $type = strtolower($plan_type)."_amount"; @endphp
 							<span class="{{strtolower($plan_type)}}-element {{$subscription_plan_type==$plan_type_id ? '' : 'd-none'}}">
-								After {{$trail_days}} days {{$subscription_plan->$type }} {{strtolower($plan_type)}}
+								After {{$trail_days}} days {{myCurrencyFormat($subscription_plan->$type)}} {{strtolower($plan_type)}}
 							</span>
 							@endforeach
 							@else
 							@foreach($subscription_plan_type_arr as $plan_type_id => $plan_type)
 							@php $type = strtolower($plan_type)."_amount"; @endphp
-							<strong class="{{strtolower($plan_type)}}-element {{$subscription_plan_type==$plan_type_id ? '' : 'd-none'}}" >
+							<strong class="{{strtolower($plan_type)}}-element {{$subscription_plan_type==$plan_type_id ? '' : 'd-none'}}">
 								Today's charge:<b>{{myCurrencyFormat($subscription_plan->$type)}}</b>
 							</strong>
 							@endforeach
@@ -58,8 +59,7 @@
 							@foreach($subscription_plan_type_arr as $plan_type_id => $plan_type)
 							<li>
 								<div class="my-radio-btn">
-									<input id="radio-{{$plan_type_id}}" name="subscription_plan_type" value="{{$plan_type_id}}" type="radio" 
-									{{$subscription_plan_type==$plan_type_id ? 'checked=true' : ''}} class="subscription_plan_type" data-id='{{$subscription_plan->id}}' data-type='{{strtolower($plan_type)}}'>
+									<input id="radio-{{$plan_type_id}}" name="subscription_plan_type" value="{{$plan_type_id}}" type="radio" {{$subscription_plan_type==$plan_type_id ? 'checked=true' : ''}} class="subscription_plan_type" data-id='{{$subscription_plan->id}}' data-type='{{strtolower($plan_type)}}'>
 									<label for="radio-{{$plan_type_id}}" class="radio-label">{{$plan_type}}</label>
 								</div>
 							</li>
@@ -109,7 +109,7 @@
 							@if ($errors->has('last_name'))
 							<span class="help-block"><strong>{{ $errors->first('last_name') }}</strong></span>
 							@endif
-						</div>						
+						</div>
 						<div class="col-md-6 form-group mb-3 {{ $errors->has('card_number') ? ' has-error' : '' }}">
 							<label for="card_number" class="control-label w-100 required">
 								Card Number<span class="required-label">*</span>
@@ -123,7 +123,7 @@
 							<div class="visamastercard pt-4 mt-2">
 								<img src="{{ asset('public/front/images/visa-mastercard.png') }}">
 							</div>
-						</div>	
+						</div>
 						<div class="col-md-5 form-group mb-3 {{ $errors->has('expiry_date') ? ' has-error' : '' }}">
 							<label for="expiry_date" class="control-label w-100 required">
 								Expiry Date<span class="required-label">*</span>
@@ -132,7 +132,7 @@
 							@if ($errors->has('expiry_date'))
 							<span class="help-block"><strong>{{ $errors->first('expiry_date') }}</strong></span>
 							@endif
-						</div>												
+						</div>
 						<div class="col-md-3 form-group mb-3 {{ $errors->has('cvv') ? ' has-error' : '' }}">
 							<label for="cvv" class="w-100 d-flex justify-content-between">
 								CVV/CVC<span class="required-label d-content">*</span>
@@ -187,13 +187,13 @@
 <script src="{{ asset('public/admin/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
 <script type="text/javascript">
 	$('[data-mask]').inputmask();
-	$(document).on('change','.subscription_plan_type',function(e){
+	$(document).on('change', '.subscription_plan_type', function(e) {
 		e.preventDefault();
-		var plan_type = $(this).attr('data-type');//$(this).attr('data-type');
-		var current_plan = ((plan_type == 'yearly') ? 'monthly' : 'yearly'); 
-		var target_plan = plan_type; 
-		$('.'+target_plan+'-element').removeClass('d-none');
-		$('.'+current_plan+'-element').addClass('d-none');
+		var plan_type = $(this).attr('data-type'); //$(this).attr('data-type');
+		var current_plan = ((plan_type == 'yearly') ? 'monthly' : 'yearly');
+		var target_plan = plan_type;
+		$('.' + target_plan + '-element').removeClass('d-none');
+		$('.' + current_plan + '-element').addClass('d-none');
 	})
 </script>
 @append
