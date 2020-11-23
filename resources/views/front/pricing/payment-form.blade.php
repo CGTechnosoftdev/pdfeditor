@@ -136,7 +136,7 @@
 						<div class="col-md-3 form-group mb-3 {{ $errors->has('cvv') ? ' has-error' : '' }}">
 							<label for="cvv" class="w-100 d-flex justify-content-between">
 								CVV/CVC<span class="required-label d-content">*</span>
-								<span class="green-color"><i class="fas fa-question-circle"></i></span>
+								<span class="green-color"><i class="fas fa-question-circle" data-toggle="tooltip" data-placement="top" title="{{ config('constant.CVV_INSTRUCTION') }}"></i></span>
 							</label>
 							{{ Form::password('cvv',['placeholder'=>'XXX','class'=>"form-control",'id'=>'cvv'])}}
 							@if ($errors->has('cvv'))
@@ -156,7 +156,7 @@
 						<div class="col-md-12">
 							<div class="w-100 mb-4 mt-2 justify-content-between text-center">
 								<div class="custom-control custom-checkbox mr-sm-2">
-									<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+									<input type="checkbox" name="terms_and_conditions" class="custom-control-input" id="customControlAutosizing">
 									<label class="custom-control-label" for="customControlAutosizing">I have agree to the <a href="">Terms & Conditions</a></label>
 								</div>
 							</div>
