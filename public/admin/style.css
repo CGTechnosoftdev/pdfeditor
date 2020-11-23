@@ -524,3 +524,45 @@ table tr td button {
     max-height: 15px;
     margin-right: 5px;
 }
+
+.promo-url .modal-title {
+    font-size: 20px;
+    color: #000;
+}
+
+.promo-url .modal-body .input-group {
+    width: 100%;
+}
+
+.promo-url .modal-body .input-group input {
+    width: calc(100% - 60px);
+    height: 40px !important;
+    border-radius: 5px !important;
+    padding: 0px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px !important;
+}
+
+.promo-url .modal-body .input-group .input-group-button .btn {
+    width: 40px;
+    height: 40px;
+    float: right;
+    background: #1FCB5D;
+    color: #fff;
+}
+
+.promo-url .modal-content {
+    border-radius: 8px;
+    border: none;
+}
+
+.promo-url .modal-content .modal-header {
+    border: none;
+    padding-bottom: 15px;
+}
+
+.promo-url .modal-content .modal-body {
+    padding-bottom: 30px;
+}

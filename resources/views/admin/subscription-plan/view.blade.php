@@ -21,13 +21,13 @@
 					<div class="form-group col-md-12">
 						<label for="first_name" class="control-label text-left col-sm-3 required">Yearly Amount</label>	
 						<div class="col-sm-9">
-							{{ $subscription_plan->yearly_amount }}
+							{{ myCurrencyFormat($subscription_plan->yearly_amount) }}
 						</div>
 					</div>
 					<div class="form-group col-md-12">
 						<label for="first_name" class="control-label text-left col-sm-3 required">Monthly Amount</label>	
 						<div class="col-sm-9">
-							{{ $subscription_plan->monthly_amount }}
+							{{ myCurrencyFormat($subscription_plan->monthly_amount) }}
 						</div>
 					</div>
 					<div class="form-group col-md-12">

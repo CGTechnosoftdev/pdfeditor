@@ -15,7 +15,7 @@ class SubscriptionPlan extends Model
 	;
 
 	protected $appends = [
-		'formated_monthly_amount','formated_yearly_amount'
+		'formated_monthly_amount','formated_yearly_amount','formated_discount_percent'
 	];
 
 	protected $dates = ['deleted_at'];
@@ -29,6 +29,10 @@ class SubscriptionPlan extends Model
 	public function getFormatedYearlyAmountAttribute(){
 		return myCurrencyFormat($this->yearly_amount);
 	} 
+
+	public function getFormatedDiscountPercentAttribute(){
+		return $this->discount_percent."%";
+	}
 	
 	public static function saveData($dataArray,$model=array())
 	{ 

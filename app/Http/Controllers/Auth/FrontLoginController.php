@@ -37,19 +37,19 @@ class FrontLoginController extends Controller
      */
     public function __construct()
     {
-    	$this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
 
-   
-      /**
+
+    /**
      * Show the application's login form.
      *
      * @return \Illuminate\Http\Response
      */
     public function showLoginForm()
-    {         
-    	return view('auth.front-login');
+    {
+        return view('auth.front-login');
     }
 
     /**
@@ -69,16 +69,17 @@ class FrontLoginController extends Controller
         ]);
     }
 
-    public function login(Request $request){
-     
-    	$this->validateLogin($request);
-    	// If the class is using the ThrottlesLogins trait, we can automatically throttle
+    public function login(Request $request)
+    {
+
+        $this->validateLogin($request);
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-    	if (method_exists($this, 'hasTooManyLoginAttempts') && $this->hasTooManyLoginAttempts($request)) {
-    		$this->fireLockoutEvent($request);
-    		return $this->sendLockoutResponse($request);
-    	}
+        if (method_exists($this, 'hasTooManyLoginAttempts') && $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
+        }
 
 
         if ($this->attemptLogin($request)) {
@@ -88,8 +89,8 @@ class FrontLoginController extends Controller
             $this->clearLoginAttempts($request);
 
             if ($request->ajax()) {
-                $response_array=$this->authenticated($request, $this->guard()->user());                
-                return response()->json([$response_array["return_type"] => true,'message' => $response_array["message"]]);
+                $response_array = $this->authenticated($request, $this->guard()->user());
+                return response()->json([$response_array["return_type"] => true, 'message' => $response_array["message"]]);
             } else {
                 return $this->authenticated($request, $this->guard()->user())
                     ?: redirect()->intended($this->redirectPath());
@@ -99,15 +100,15 @@ class FrontLoginController extends Controller
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
-    	$this->incrementLoginAttempts($request);
-    	
-    	return $this->sendFailedLoginResponse($request);
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
-    
+
     public function logout(Request $request)
     {
-    	$this->guard()->logout();
-    	return redirect($this->redirectToAfterLogout);
+        $this->guard()->logout();
+        return redirect($this->redirectToAfterLogout);
     }
 
     /**
@@ -120,50 +121,40 @@ class FrontLoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $user_roles = $user->roles->pluck('id')->toArray();
-        $dataArray["return_type"]="success";
-        $dataArray["message"]="Login successfully!";
+        $dataArray["return_type"] = "success";
+        $dataArray["message"] = "Login successfully!";
 
-    	if(!in_array(config('constant.USER_ROLE'),$user_roles)){
+        if (!in_array(config('constant.USER_ROLE'), $user_roles)) {
             Auth::logout();
-            $message='User not found!';
-            $dataArray["return_type"]="error";
-            $dataArray["message"]=$message;
+            $message = 'User not found!';
+            $dataArray["return_type"] = "error";
+            $dataArray["message"] = $message;
+        }
 
-    	}
-
-    	if($user->status == config('constant.STATUS_INACTIVE')){
+        if ($user->status == config('constant.STATUS_INACTIVE')) {
             Auth::logout();
-            $message='Your account is Inactive. Please contact to Administrator';
-            $dataArray["return_type"]="error";
-            $dataArray["message"]=$message;
-    		set_flash('error', $message,false);
-     
-           
-    	}
+            $message = 'Your account is Inactive. Please contact to Administrator';
+            $dataArray["return_type"] = "error";
+            $dataArray["message"] = $message;
+            set_flash('error', $message, false);
+        }
 
-    	if($user->status == config('constant.STATUS_BLOCKED')){
+        if ($user->status == config('constant.STATUS_BLOCKED')) {
             Auth::logout();
-            $message='Your account is Blocked. Please contact to Administrator';
-            $dataArray["return_type"]="error";
-            $dataArray["message"]=$message;
-            set_flash('error',$message,false);
-   
-    	}
+            $message = 'Your account is Blocked. Please contact to Administrator';
+            $dataArray["return_type"] = "error";
+            $dataArray["message"] = $message;
+            set_flash('error', $message, false);
+        }
 
-    	if($user->status ==  config('constant.STATUS_PENDING')){
+        if ($user->status ==  config('constant.STATUS_PENDING')) {
             Auth::logout();
-            //id="forgotpasswordid" data-path="{{ route('front.forgot.password') }}"
 
-     
             $link = route('front.resend.verification.account');
-            $appendMessage="<br/>Please click on bellow link for email verification.<br/><a  href='".$link."'  id='resend_email_verification_trigger_id' class='btn w-100 btn btn-secondary' targe='_blank'>Click Here</a>";
-            $message='Your account is Pending.'.$appendMessage;
-
-            set_flash('error', $message,false);
-                    
-            $dataArray["return_type"]="error";
-            $dataArray["message"]=$message;
-            
+            $message = "Email verification pending, If not recieve verification email <a  href='" . $link . "'>click here</a> to resend";
+            set_flash('error', $message, false);
+            $dataArray["return_type"] = "error";
+            $dataArray["message"] = $message;
         }
         return $dataArray;
     }
@@ -175,6 +166,6 @@ class FrontLoginController extends Controller
      */
     protected function guard()
     {
-    	return Auth::guard('front_web');
+        return Auth::guard('front_web');
     }
 }
