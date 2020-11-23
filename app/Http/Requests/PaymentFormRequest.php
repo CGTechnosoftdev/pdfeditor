@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
@@ -24,8 +25,8 @@ class PaymentFormRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {		
-        $rules=[
+    {
+        $rules = [
             'subscription_plan_type' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -33,6 +34,7 @@ class PaymentFormRequest extends FormRequest
 			'cvv' => 'required|min:3|max:4',
 			'expiry_date' => 'required|regex:^((0[1-9])|(1[0-2]))\/(\d{4})$',
             'zip_code' => 'required',
+            'terms_and_conditions' => 'required',
         ];
         return $rules;
     }
