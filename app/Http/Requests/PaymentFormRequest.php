@@ -30,9 +30,9 @@ class PaymentFormRequest extends FormRequest
             'subscription_plan_type' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-			'card_number' => 'required|max:19',
-			'cvv' => 'required|min:3|max:4',
-			'expiry_date' => 'required|regex:^((0[1-9])|(1[0-2]))\/(\d{4})$',
+            'card_number' => 'required|max:19',
+            'cvv' => 'required|min:3|max:4',
+            'expiry_date' => 'required|regex:/^([0-1][0-9])\/(\d{4})$/u', //'required|regex:/((0[1-9])|(1[0-2]))\/(\d{4})$/u',
             'zip_code' => 'required',
             'terms_and_conditions' => 'required',
         ];
@@ -41,7 +41,7 @@ class PaymentFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'expiry_date.regex' => 'Your card\'s expire date is incomplete.'
+            'expiry_date.regex' => 'Expiry date must be in MM/YYYY format.'
         ];
     }
 }

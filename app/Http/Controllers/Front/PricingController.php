@@ -49,11 +49,10 @@ class PricingController extends FrontBaseController
 	{
 		$input_data = $request->input();
 		$user = \Auth::user();
-		if($user->subscription_status != config('constant.SUBSCRIPTION_STATUS_NO') )
-		{
-			$response_type='success';
-			$response_message="you are already subscribed,thank you!";
-			set_flash($response_type,$response_message,false);
+		if ($user->subscription_status != config('constant.SUBSCRIPTION_STATUS_NO')) {
+			$response_type = 'success';
+			$response_message = "you are already subscribed,thank you!";
+			set_flash($response_type, $response_message, false);
 			return redirect()->route('front.dashboard');
 		}
 		$data_array['subscription_plan'] = $subscription_plan;
@@ -74,6 +73,7 @@ class PricingController extends FrontBaseController
 	{
 		$user = \Auth::user();
 		$input_data = $request->input();
+		dd($input_data);
 		DB::beginTransaction();
 		try {
 			$general_setting = GeneralSetting::dataRow();
