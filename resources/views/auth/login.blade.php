@@ -38,7 +38,7 @@
 				</div>
 				<div class="col-md-12">
 					<div class="checkbox">
-						<input class="styled-checkbox" id="remember-me" type="checkbox" value="1">
+						<input class="styled-checkbox" id="remember-me" name="remember" type="checkbox" value="1">
 						<label for="remember-me">Remember Me</label>
 					</div>
 				</div>

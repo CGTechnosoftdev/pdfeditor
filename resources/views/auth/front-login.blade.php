@@ -21,7 +21,7 @@
                     <div class="d-flex w-100 mb-3 justify-content-between">
                         <div class="custom-control custom-checkbox mr-sm-2">
                             
-                            <input class="custom-control-input" id="remember-me" type="checkbox" value="1">
+                            <input class="styled-checkbox" id="remember-me" name="remember" type="checkbox" value="1">
                             <label for="remember-me">Remember Me</label>
                         </div>
                         <div>
