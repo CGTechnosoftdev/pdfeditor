@@ -47,6 +47,18 @@ class FrontResetPasswordController extends Controller
 
     public function resetPasswordFrm($token,Request $request){
         $email=$request->email;
+
+        $tokenData = \DB::table('password_resets')
+        ->where('token', $token)->first();
+        if (!$tokenData) 
+        {
+            $response_type='error';
+            $response_message='Pasword Reset link is expired,Thank You!'; 
+            set_flash($response_type,$response_message,false);
+         return view('auth.passwords.front-modal-message');
+        } 
+
+   
      return view('auth.passwords.front-reset',['email' => $email,'token' => $token]);
  }
 

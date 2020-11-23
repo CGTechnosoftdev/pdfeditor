@@ -35,7 +35,7 @@ class FrontUserRegistrationController extends Controller
 		return Validator::make($data, [
 
 			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-			'password' => ['required', 'string', 'min:8'],
+			'password' => ['required', 'string', 'min:8','regex:'.config('constant.PASSWORD_REGEX')],
 		]);
 	}
 	public function newUserVerification($token, FrontUserRegistrationFormRequest $request)

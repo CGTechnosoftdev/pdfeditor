@@ -566,3 +566,10 @@ table tr td button {
 .promo-url .modal-content .modal-body {
     padding-bottom: 30px;
 }
+.add_custom_button_heading a.btn{
+	min-width: 90px;
+    background-color: #1fcb5d;
+	border-color: #17c455;
+	float:right;
+	color:#fff;
+}

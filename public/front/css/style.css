@@ -1652,7 +1652,7 @@ li {
 	margin: 140px auto 0 auto;
 	position: relative;
 	max-width: unset;
-	min-height: 530px;
+	min-height: 55vh;  
 }
 
 .purchase-summary {
@@ -1803,4 +1803,7 @@ li {
 	float: left;
 	min-height: 50vh;
 	padding-top: 150px;
+}
+.error-help-block{
+	color:#dc3545 !important;
 }

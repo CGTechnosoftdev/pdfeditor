@@ -23,7 +23,7 @@
                             
                             <input class="custom-control-input" id="customControlAutosizing" name="remember" type="checkbox" value="1">
                             <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
-                        </div>
+                        </div> 
                         <div>
                             <a href="#" id="forgotpasswordid" class="forgot"> Forgot Password?</a>
                         </div>

@@ -31,9 +31,15 @@ class PaymentFormRequest extends FormRequest
             'last_name' => 'required',
 			'card_number' => 'required|max:19',
 			'cvv' => 'required|min:3|max:4',
-			'expiry_date' => 'required',
+			'expiry_date' => 'required|regex:^((0[1-9])|(1[0-2]))\/(\d{4})$',
             'zip_code' => 'required',
         ];
         return $rules;
+    }
+    public function messages()
+    {
+        return [
+            'expiry_date.regex' => 'Your card\'s expire date is incomplete.'
+        ];
     }
 }

@@ -386,7 +386,7 @@
         			$("#ModelContainerId").html(msg);
 
         			$("#newregisterid").click(function(e) {
-
+						clearMessagesContainers();
         				e.preventDefault();
         				blockUI()
 

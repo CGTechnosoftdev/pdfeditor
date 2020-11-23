@@ -32,7 +32,8 @@ class PricingController extends FrontBaseController
      */
     public function index()
     {
-        $data_array['subscription_plan_arr'] = SubscriptionPlan::dataList();
+		$data_array['subscription_plan_arr'] = SubscriptionPlan::dataList();
+		
         $currency_arr = \Arr::pluck(config('custom_config.currency_arr'),'symbol','key');
         $data_array['currency_symbol'] = $currency_arr[config('general_settings.currency')];
         $data_array['subscription_plan_type_arr'] = config('custom_config.plan_type_arr');
@@ -47,7 +48,16 @@ class PricingController extends FrontBaseController
      */
     public function showPaymentForm(SubscriptionPlan $subscription_plan,Request $request)
     {
-        $input_data = $request->input();
+		$input_data = $request->input();
+		$user = \Auth::user();
+		if($user->subscription_status != config('constant.SUBSCRIPTION_STATUS_NO') )
+		{
+			$response_type='success';
+			$response_message="you are already subscribed,thank you!";
+			set_flash($response_type,$response_message,false);
+			return redirect()->route('front.dashboard');
+		}
+		
     	$data_array['subscription_plan'] = $subscription_plan;
         $data_array['subscription_plan_type'] = $input_data['subscription_plan_type'] ?? 2;
     	$data_array['subscription_plan_type_arr'] = config('custom_config.plan_type_arr');

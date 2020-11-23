@@ -2,6 +2,7 @@
 @section('title',($title ?? ''))
 @section('heading',($heading ?? ''))
 @section('breadcrumb',($breadcrumb ?? ''))
+@section('add_css_heading',($add_css_heading ?? ''))
 @section('content')
 <!-- Main content -->
 <section class="content">

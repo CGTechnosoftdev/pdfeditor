@@ -30,7 +30,7 @@
 				@yield('breadcrumb')
 			</section> -->
 			<section class="content-header">
-				<div class="head-title">
+				<div class="head-title @yield('add_css_heading')">
 					<h1 class="pull-left">@yield('heading')</h1>
 					@include('admin.partials.back-button')
 					@include('admin.partials.add-new-button')
