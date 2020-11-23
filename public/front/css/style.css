@@ -63,6 +63,7 @@ select {
 
 .custom-control-label {
 	line-height: 25px;
+	position: relative;
 }
 
 .custom-control-label::before {
