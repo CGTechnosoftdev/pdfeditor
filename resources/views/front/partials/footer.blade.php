@@ -233,7 +233,7 @@
             <div class="modal-body">
                 <div class="login-popup">
                     <div class="row">
-                        <div class="col-md-5" >
+                        <div class="col-md-5">
 
                             <div class="row">
                                 <div class="alert alert-success alert-block invisible" id="success_msg_id_container">
@@ -247,7 +247,7 @@
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
 
-                           
+
                             <span id="ModelContainerId"></span>
 
 
@@ -303,8 +303,8 @@
                     $('#exampleModal').modal();
                     //for login
                     $("#LoginBtnId").click(function(e) {
-                    	e.preventDefault();
-		                blockUI()
+                        e.preventDefault();
+                        blockUI()
                         clearMessagesContainers();
                         $.ajax({
                             type: "POST",
@@ -347,9 +347,9 @@
                                 }
 
                             },
-                            complete:function(){
-                                        $.unblockUI();
-                                    }
+                            complete: function() {
+                                $.unblockUI();
+                            }
 
                         });
 
@@ -381,7 +381,7 @@
                     $("#newregisterid").click(function(e) {
 
                         e.preventDefault();
-		                blockUI()
+                        blockUI()
 
                         $.ajax({
                             type: "POST",
@@ -390,9 +390,7 @@
                             /* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
                             data: $('#user_registration_id').serialize(),
                             success: function(msg) {
-
                                 if (msg.success) {
-
                                     $("#success_msg_id").html(msg.success);
                                     $("#success_msg_id_container").removeClass("invisible");
                                     $("#success_msg_id_container").addClass("visible");
@@ -405,9 +403,9 @@
                                 $('#password-error').text(response.responseJSON.errors.password);
 
                             },
-                            complete:function(){
-                                    $.unblockUI();
-                                }
+                            complete: function() {
+                                $.unblockUI();
+                            }
                         });
 
                         //	alert("submit the form!");
@@ -434,7 +432,7 @@
                     $("#ModelContainerId").html(response);
                     $("#forgot_password_submit_id").click(function(e) {
                         e.preventDefault();
-		               blockUI()
+                        blockUI()
 
                         clearMessagesContainers();
 
@@ -461,9 +459,9 @@
 
 
                             },
-                            complete:function(){
-                                    $.unblockUI();
-                                }
+                            complete: function() {
+                                $.unblockUI();
+                            }
                         });
 
 

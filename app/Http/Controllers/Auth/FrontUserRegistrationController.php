@@ -122,6 +122,35 @@ class FrontUserRegistrationController extends Controller
 		return Response()->json($arr);
 	}
 
+	public function registerUserSaveApi(FrontUserRegistrationFormRequest $request)
+	{
+		DB::beginTransaction();
+		try {
+			$input_data = $this->validator($request->all())->validate();
+			$input_data["status"] = 0;
+			event(new Registered($user = $this->create($input_data)));
+
+			$user->syncRoles(config('constant.USER_ROLE'));
+
+			$token = Str::random(60);
+			$token = hash('sha256', $token);
+			$link = route('front.user.verification.save', [$token]) . '/' .  '?email=' . urlencode($user->email);
+
+			\DB::table('password_resets')->insert([
+				'email' => $request->email,
+				'token' => $token,
+				'created_at' => now()
+			]);
+
+		} catch (Exception $e) {
+			DB::rollback();
+			$response_type = 'error';
+			$response_message = $e->getMessage();
+		}
+		$arr[$response_type] = $response_message;
+		return Response()->json($arr);
+	}
+
 	protected function create(array $data)
 	{
 		return User::create([
