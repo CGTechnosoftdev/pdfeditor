@@ -98,7 +98,7 @@
 							</label>
 							{{ Form::text('first_name',old('first_name'),['placeholder'=>'Enter First Name','class'=>"form-control",'id'=>'first_name'])}}
 							@if ($errors->has('first_name'))
-							<span class="help-block"><strong class="text-danger">{{ $errors->first('first_name') }}</strong></span>
+							<span class="help-block"><strong>{{ $errors->first('first_name') }}</strong></span>
 							@endif
 						</div>
 						<div class="col-md-6 form-group mb-3 {{ $errors->has('last_name') ? ' has-error' : '' }}">
@@ -107,7 +107,7 @@
 							</label>
 							{{ Form::text('last_name',old('last_name'),['placeholder'=>'Enter Last Name','class'=>"form-control",'id'=>'last_name'])}}
 							@if ($errors->has('last_name'))
-							<span class="help-block"><strong class="text-danger">{{ $errors->first('last_name') }}</strong></span>
+							<span class="help-block"><strong>{{ $errors->first('last_name') }}</strong></span>
 							@endif
 						</div>
 						<div class="col-md-6 form-group mb-3 {{ $errors->has('card_number') ? ' has-error' : '' }}">
@@ -116,7 +116,7 @@
 							</label>
 							{{ Form::text('card_number',old('card_number'),['placeholder'=>'Enter Card Number','class'=>"form-control",'id'=>'card_number','data-inputmask'=>'"mask": "9999-9999-9999-9999"','data-mask'])}}
 							@if ($errors->has('card_number'))
-							<span class="help-block text-danger"><strong class="text-danger">{{ $errors->first('card_number') }}</strong></span>
+							<span class="help-block"><strong>{{ $errors->first('card_number') }}</strong></span>
 							@endif
 						</div>
 						<div class="col-md-6 form-group mb-3">
@@ -130,7 +130,7 @@
 							</label>
 							{{ Form::text('expiry_date',old('expiry_date'),['placeholder'=>'MM/YYYY','class'=>"form-control",'id'=>'expiry_date','data-inputmask'=>'"alias": "mm/yyyy"','data-mask'])}}
 							@if ($errors->has('expiry_date'))
-							<span class="help-block"><strong class="text-danger">{{ $errors->first('expiry_date') }}</strong></span>
+							<span class="help-block"><strong>{{ $errors->first('expiry_date') }}</strong></span>
 							@endif
 						</div>
 						<div class="col-md-3 form-group mb-3 {{ $errors->has('cvv') ? ' has-error' : '' }}">
@@ -140,7 +140,7 @@
 							</label>
 							{{ Form::password('cvv',['placeholder'=>'XXX','class'=>"form-control",'id'=>'cvv'])}}
 							@if ($errors->has('cvv'))
-							<span class="help-block"><strong class="text-danger">{{ $errors->first('cvv') }}</strong></span>
+							<span class="help-block"><strong>{{ $errors->first('cvv') }}</strong></span>
 							@endif
 						</div>
 						<div class="col-md-4 form-group mb-3 {{ $errors->has('zip_code') ? ' has-error' : '' }}">
@@ -149,15 +149,20 @@
 							</label>
 							{{ Form::text('zip_code',old('zip_code'),['placeholder'=>'Enter Zip Code','class'=>"form-control",'id'=>'zip_code'])}}
 							@if ($errors->has('zip_code'))
-							 <span class="help-block text-danger"><strong class="text-danger">{{ $errors->first('zip_code') }}</strong></span>
+							<span class="help-block"><strong>{{ $errors->first('zip_code') }}</strong></span>
 							@endif
 						</div>
 
 						<div class="col-md-12">
 							<div class="w-100 mb-4 mt-2 justify-content-between text-center">
-								<div class="custom-control custom-checkbox mr-sm-2">
+								<div class="form-group custom-control custom-checkbox mr-sm-2 ">
 									<input type="checkbox" name="terms_and_conditions" class="custom-control-input" id="customControlAutosizing">
 									<label class="custom-control-label" for="customControlAutosizing">I have agree to the <a href="">Terms & Conditions</a></label>
+									<br>
+									@if ($errors->has('terms_and_conditions'))
+									<span class="help-block"><strong>{{ $errors->first('terms_and_conditions') }}</strong></span>
+
+									@endif
 								</div>
 							</div>
 						</div>
