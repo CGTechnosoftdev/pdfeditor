@@ -35,7 +35,7 @@ class FrontUserRegistrationController extends Controller
 		return Validator::make($data, [
 
 			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-			'password' => ['required', 'string', 'min:8','regex:'.config('constant.PASSWORD_REGEX')],
+			'password' => ['required', 'string', 'min:8', 'regex:' . config('constant.PASSWORD_REGEX')],
 		]);
 	}
 	public function newUserVerification($token, FrontUserRegistrationFormRequest $request)
@@ -140,7 +140,6 @@ class FrontUserRegistrationController extends Controller
 				'token' => $token,
 				'created_at' => now()
 			]);
-
 		} catch (Exception $e) {
 			DB::rollback();
 			$response_type = 'error';

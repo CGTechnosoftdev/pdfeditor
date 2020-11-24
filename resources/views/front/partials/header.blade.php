@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-md navbar-light">
-                    <a class="navbar-brand" href="" target="_blank"><img src="{{ asset('public/front/images/logo.png')}}" alt=""></a>
+                    <a class="navbar-brand" href=""><img src="{{ asset('public/front/images/logo.png')}}" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -41,7 +41,7 @@
                         <ul class="navbar-nav ml-auto login_signup">
                             @if(!Auth::user())
                             <li class="nav-item">
-                                <a class="nav-link login" href="#" data-remote="myRemoteURL.do"  id="login_btn_id">Log in</a>
+                                <a class="nav-link login" href="#" data-remote="myRemoteURL.do" id="login_btn_id">Log in</a>
                             </li>
                             @else
                             <li class="nav-item">
