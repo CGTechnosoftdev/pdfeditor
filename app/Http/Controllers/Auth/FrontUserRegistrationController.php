@@ -17,12 +17,15 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Api\ApiBaseController;
 
 
 class FrontUserRegistrationController extends Controller
 {
+	protected $base_api_object;
 	function __construct()
 	{
+		$this->base_api_object = new ApiBaseController();
 	}
 
 	public function registerUserFrm()
@@ -35,7 +38,7 @@ class FrontUserRegistrationController extends Controller
 		return Validator::make($data, [
 
 			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-			'password' => ['required', 'string', 'min:8','regex:'.config('constant.PASSWORD_REGEX')],
+			'password' => ['required', 'string', 'min:8', 'regex:' . config('constant.PASSWORD_REGEX')],
 		]);
 	}
 	public function newUserVerification($token, FrontUserRegistrationFormRequest $request)
@@ -70,8 +73,9 @@ class FrontUserRegistrationController extends Controller
 		return view('auth.front-email-verification', $data_array);
 	}
 
-	public function registerUserSave(FrontUserRegistrationFormRequest $request)
+	protected function userRegisterProcess(FrontUserRegistrationFormRequest $request)
 	{
+
 		DB::beginTransaction();
 		try {
 			$input_data = $this->validator($request->all())->validate();
@@ -116,38 +120,25 @@ class FrontUserRegistrationController extends Controller
 			$response_type = 'error';
 			$response_message = $e->getMessage();
 		}
+		$message_data_array[$response_type] = $response_message;
+		return $message_data_array;
+	}
 
-		$arr[$response_type] = $response_message;
-		return Response()->json($arr);
+	public function registerUserSave(FrontUserRegistrationFormRequest $request)
+	{
+		$message_data_array = $this->userRegisterProcess($request);
+		return Response()->json($message_data_array);
 	}
 
 	public function registerUserSaveApi(FrontUserRegistrationFormRequest $request)
 	{
-		DB::beginTransaction();
-		try {
-			$input_data = $this->validator($request->all())->validate();
-			$input_data["status"] = 0;
-			event(new Registered($user = $this->create($input_data)));
-
-			$user->syncRoles(config('constant.USER_ROLE'));
-
-			$token = Str::random(60);
-			$token = hash('sha256', $token);
-			$link = route('front.user.verification.save', [$token]) . '/' .  '?email=' . urlencode($user->email);
-
-			\DB::table('password_resets')->insert([
-				'email' => $request->email,
-				'token' => $token,
-				'created_at' => now()
-			]);
-
-		} catch (Exception $e) {
-			DB::rollback();
-			$response_type = 'error';
-			$response_message = $e->getMessage();
+		$message_data_array = $this->userRegisterProcess($request);
+		list($message_type, $message) = each($message_data_array);
+		if ($message_type == "success") {
+			return	$this->base_api_object->sendSuccess([], $message);
+		} elseif ($message_type == "error") {
+			return	$this->base_api_object->sendError($message);
 		}
-		$arr[$response_type] = $response_message;
-		return Response()->json($arr);
 	}
 
 	protected function create(array $data)

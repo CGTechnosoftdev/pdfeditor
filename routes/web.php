@@ -15,8 +15,8 @@ Route::get('/', function () {
 	return view('welcome');
 });
 Route::group(['prefix' => 'admin'], function () {
-	Auth::routes(['register' => false]);		
-	Route::group(['namespace'=>'Admin','middleware'=>['auth:web','preventBackHistory']], function () {
+	Auth::routes(['register' => false]);
+	Route::group(['namespace' => 'Admin', 'middleware' => ['auth:web', 'preventBackHistory']], function () {
 		Route::get('/', 'DashboardController@index');
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
@@ -26,10 +26,10 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::get('/delete-profile-picture', 'ProfileController@deleteProfilePicture')->name('delete-profile-picture');
 
 		//Change Status Universal
-		Route::post('/change-status','DashboardController@changeStatus')->name('change-status');
+		Route::post('/change-status', 'DashboardController@changeStatus')->name('change-status');
 
 		//roles	
-		Route::resource('roles', 'RolesController',['except' => ['show']]);
+		Route::resource('roles', 'RolesController', ['except' => ['show']]);
 		//top-100-form
 		Route::get('/top-100-form/form/{top_100_form}', 'Top100FormController@listForm')->name('top100form.form.list');
 		Route::get('/top-100-form/create-form/{top_100_form}', 'Top100FormController@createForm')->name('top100form.form.create');
@@ -48,14 +48,14 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::resource('top-100-form', 'Top100FormController');
 
 		//business-categories
-		Route::resource('business-category', 'BusinessCategoryController',['except' => ['show']]);
+		Route::resource('business-category', 'BusinessCategoryController', ['except' => ['show']]);
 
-    	//subadmin
+		//subadmin
 		Route::resource('sub-admin', 'SubAdminController');
 
-    	//general-setting
-		Route::resource('general-setting', 'GeneralSettingsController',['only' => ['index']]);
-		Route::put('general-setting/update-setting','GeneralSettingsController@updateSetting')->name('general-setting.update');
+		//general-setting
+		Route::resource('general-setting', 'GeneralSettingsController', ['only' => ['index']]);
+		Route::put('general-setting/update-setting', 'GeneralSettingsController@updateSetting')->name('general-setting.update');
 
 		//subscription-plan
 		Route::resource('subscription-plan', 'SubscriptionPlanController');
@@ -68,32 +68,35 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 });
 
-Route::group(['as'=>'front.','middleware'=>[]], function () {
+Route::group(['as' => 'front.', 'middleware' => []], function () {
 
-	Route::get("/",'Front\FrontHomeController@index')->name('home');
-	Route::get("/#login",'Front\FrontHomeController@index')->name('home.login');
-	Route::get('/login','Auth\FrontLoginController@showLoginForm')->name('login');
-	Route::get('/forgot-password','Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
+	Route::get("/", 'Front\FrontHomeController@index')->name('home');
+	Route::get("/#login", 'Front\FrontHomeController@index')->name('home.login');
+	Route::get('/login', 'Auth\FrontLoginController@showLoginForm')->name('login');
+	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
-	Route::get('/user-reset-password/{token}','Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
+	Route::get('/user-reset-password/{token}', 'Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
 	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
 
-	Route::get('/front-user-registration','Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
+	Route::get('/front-user-registration', 'Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
 	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
-	
+
+	//User API	
+	Route::post('/front-user-registration-api-save', 'Auth\FrontUserRegistrationController@registerUserSaveApi')->name('user.registration.api.save');
+
 	Route::get('/front-user-email-verification/{token}', 'Auth\FrontUserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
-	Route::get('login/{provider}/callback','SocialController@Callback');
-	Route::get('/resend-verification-account','Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
+	Route::get('login/{provider}/callback', 'SocialController@Callback');
+	Route::get('/resend-verification-account', 'Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
 	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
-	
 
-	Route::post('/login','Auth\FrontLoginController@login')->name('login');
-	Route::post('/logout','Auth\FrontLoginController@logout')->name('logout');
+
+	Route::post('/login', 'Auth\FrontLoginController@login')->name('login');
+	Route::post('/logout', 'Auth\FrontLoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 
-	Route::group(['namespace'=>'Front','middleware'=>['auth:front_web','preventBackHistory']], function () {
+	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
