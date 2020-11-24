@@ -73,7 +73,6 @@ class PricingController extends FrontBaseController
 	{
 		$user = \Auth::user();
 		$input_data = $request->input();
-		dd($input_data);
 		DB::beginTransaction();
 		try {
 			$general_setting = GeneralSetting::dataRow();

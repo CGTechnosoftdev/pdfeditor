@@ -1,3 +1,15 @@
+@media(max-width: 1600px) and (min-width: 1500px) {
+    .payment-banner .banner-content {
+        min-height: 45vh;
+    }
+}
+
+@media(max-width: 1499px) and (min-width: 1200px) {
+    .payment-banner .banner-content {
+        min-height: 40vh;
+    }
+}
+
 @media(max-width: 1300px) {}
 
 @media(max-width: 1266px) {
