@@ -1,0 +1,575 @@
+/**** Custom Checkbox ****/
+
+.styled-checkbox {
+    position: absolute;
+    opacity: 0;
+}
+
+.styled-checkbox+label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+
+.styled-checkbox+label:before {
+    content: '';
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+}
+
+.styled-checkbox:hover+label:before {
+    background: #1fcb5d;
+}
+
+.styled-checkbox:focus+label:before {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.styled-checkbox:checked+label:before {
+    background: #1fcb5d;
+    border: none;
+}
+
+.styled-checkbox:disabled+label {
+    color: #b8b8b8;
+    cursor: auto;
+}
+
+.styled-checkbox:disabled+label:before {
+    box-shadow: none;
+    background: #ddd;
+}
+
+.styled-checkbox:checked+label:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.btn-success {
+    min-width: 90px;
+    background-color: #1fcb5d;
+    border-color: #17c455;
+}
+
+.btn.btn-default {
+    min-width: 90px;
+    color: #000;
+}
+
+.btn+.btn {
+    margin-left: 15px;
+}
+
+.login-page,
+.register-page {
+    background: #ECF0F5;
+}
+
+.login-box-body,
+.register-box-body {
+    padding: 35px;
+    border-radius: 8px
+}
+
+.login-logo,
+.register-logo {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.login-logo a,
+.register-logo a {
+    color: #1FCB5D;
+}
+
+label {
+    font-weight: 600;
+    color: #000000;
+}
+
+.login-box-body .form-control-feedback,
+.register-box-body .form-control-feedback {
+    color: #A2A2A2;
+}
+
+.form-control {
+    height: 40px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.login-box,
+.register-box {
+    max-width: 390px;
+    width: 100%;
+}
+
+.login-box-msg,
+.register-box-msg {
+    font-size: 18px;
+    color: #000;
+}
+
+.has-feedback label~.form-control-feedback {
+    top: 28px;
+}
+
+.invalid-feedback strong {
+    font-weight: 400;
+    font-size: 13px;
+    color: #f00;
+}
+
+.btn {
+    border-radius: 5px !important;
+}
+
+.login-box-body .checkbox,
+.register-box-body .checkbox {
+    margin-bottom: 25px;
+}
+
+.bg-green,
+.callout.callout-success,
+.alert-success,
+.label-success,
+.modal-success .modal-body {
+    background-color: #1fcb5d !important;
+    border-color: #17c455;
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success.hover {
+    background-color: #10b94d;
+    border-color: #0cae46;
+}
+
+.skin-green-light .main-header .navbar {
+    background-color: #1FCB5D;
+}
+
+.skin-green-light .main-header .logo {
+    background-color: #1fcb5d;
+}
+
+.main-header .logo {
+    height: 60px;
+    font-size: 30px;
+}
+
+.main-header .navbar {
+    min-height: 60px;
+}
+
+.main-header .sidebar-toggle {
+    padding: 20px 20px;
+}
+
+.skin-green-light .wrapper,
+.skin-green-light .main-sidebar,
+.skin-green-light .left-side {
+    background-color: #393A3E;
+}
+
+.skin-green-light .sidebar-menu>li.header {
+    font-size: 15px;
+    background: #393A3E;
+}
+
+.main-sidebar {
+    padding-top: 60px;
+}
+
+.navbar-nav>li>a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.content-wrapper {
+    background-color: #F2F2F2;
+}
+
+.skin-green-light .sidebar-menu>li:hover>a,
+.skin-green-light .sidebar-menu>li.active>a {
+    color: #fff;
+    background: #1fcb5d;
+}
+
+.skin-green-light .sidebar a {
+    color: #fff;
+}
+
+.box {
+    border: 1px solid #EEEFF2;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+.box-body {
+    padding: 25px;
+}
+
+.box-footer {
+    border-top: 0px;
+}
+
+.dataTables_length label {
+    text-transform: capitalize;
+}
+
+.dataTables_length select {
+    width: 65px;
+    height: 35px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    /*appearance: none;*/
+    /*-moz-appearance: none;*/
+    margin: 0px 7px;
+}
+
+.dataTables_filter input {
+    height: 35px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    text-indent: 15px;
+}
+
+.dataTables_wrapper table {
+    margin-top: 20px;
+    float: left;
+}
+
+.role-and-rights ul {
+    padding-left: 0px;
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.role-and-rights ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.role-and-rights ul li .styled-checkbox+label::before {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+}
+
+.role-and-rights ul li .styled-checkbox:checked+label::after {
+    left: 3px;
+}
+
+.slider {
+    background: #fff!important;
+    border: solid 1px #999;
+}
+
+.switch[title="Inactive"] .slider::before {
+    left: 2px !important;
+    bottom: 2px !important;
+    background: #999 !important;
+}
+
+.slider::before {
+    height: 14px!important;
+    width: 14px!important;
+    left: -1px!important;
+    bottom: 2px!important;
+    background-color: #1fcb5d!important;
+}
+
+.switch {
+    width: 42px!important;
+    height: 20px!important;
+}
+
+.switch[title="Inactive"] .slider::before {
+    left: 2px !important;
+    bottom: 2px !important;
+    background: #999 !important;
+}
+
+input:checked+.slider {
+    background-color: transparent!important;
+    border: solid 1px #1fcb5d!important;
+}
+
+.switch[title="Inactive"] .slider::before {
+    left: 2px !important;
+}
+
+.content-header {
+    position: relative;
+    padding: 30px 35px 0 35px;
+}
+
+.head-title {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.head-title h1 {
+    font-size: 22px;
+    color: #000;
+    font-weight: 600;
+    margin-top: 0px;
+}
+
+.table.dataTable.no-footer {
+    border-bottom: 1px solid #f4f4f4!important;
+}
+
+.dataTables_paginate {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 0px !important;
+}
+
+.dataTables_paginate a {
+    padding: 8px 15px !important;
+}
+
+.dataTables_paginate a.paginate_button.current,
+.dataTables_paginate a.paginate_button:hover,
+.dataTables_paginate a.paginate_button:active,
+.dataTables_paginate a.paginate_button:focus {
+    background: #1FCB5D !important;
+    color: #fff !important;
+    box-shadow: none!important;
+}
+
+.dataTables_paginate a.paginate_button {
+    border: 0px !important;
+    border-left-color: currentcolor;
+    border-left-style: none;
+    border-left-width: 0px;
+    border-left: solid 1px #ccc !important;
+    margin-left: 0px !important;
+    border-radius: 0px !important;
+}
+
+.dataTables_paginate a.paginate_button:first-child {
+    border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff!important;
+}
+
+table tr td a i,
+table tr td button {
+    color: #0994FF !important;
+    font-size: 16px;
+    margin: 0px 8px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: 25px;
+}
+
+.control-label.text-left {
+    text-align: left;
+}
+
+.upload-img {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.upload-img .img-preview {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #EEEFF2;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #EFEFEF;
+}
+
+.upload-img .img-preview img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.upload-img-btn {
+    position: relative;
+    float: left;
+    width: 120px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.upload-img-btn span {
+    width: 100%;
+    text-align: center;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+.upload-img-btn input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 40px;
+}
+
+.upload-img-btn span {
+    width: 100%;
+    text-align: center;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+}
+
+
+/***** Radio Btn *****/
+
+.my-radio {
+    width: auto;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.my-radio input[type="radio"] {
+    display: none;
+}
+
+.my-radio label {
+    position: relative;
+    display: inline-block;
+    padding: 3px 3px 3px 30px;
+    cursor: pointer;
+}
+
+.my-radio label::before,
+.my-radio label::after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    border-radius: 100%;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.my-radio label::before {
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: -9px;
+    background: #fff;
+    border: 2px solid #ccc;
+}
+
+.my-radio label:hover::before {
+    background: #fff;
+}
+
+.my-radio label::after {
+    opacity: 0;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    margin-top: -4px;
+    background: #1FCB5D;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+}
+
+.my-radio input[type="radio"]:checked+label::before {
+    background: #fff;
+    border: 2px solid #1FCB5D;
+}
+
+.my-radio input[type="radio"]:checked+label::after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.skin-green-light .main-header li.user-header {
+    background-color: #1fcb5d;
+}
+
+.sidebar .sidebar-menu li img {
+    width: 15px;
+    max-height: 15px;
+    margin-right: 5px;
+}
+
+.promo-url .modal-title {
+    font-size: 20px;
+    color: #000;
+}
+
+.promo-url .modal-body .input-group {
+    width: 100%;
+}
+
+.promo-url .modal-body .input-group input {
+    width: calc(100% - 60px);
+    height: 40px !important;
+    border-radius: 5px !important;
+    padding: 0px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px !important;
+}
+
+.promo-url .modal-body .input-group .input-group-button .btn {
+    width: 40px;
+    height: 40px;
+    float: right;
+    background: #1FCB5D;
+    color: #fff;
+}
+
+.promo-url .modal-content {
+    border-radius: 8px;
+    border: none;
+}
+
+.promo-url .modal-content .modal-header {
+    border: none;
+    padding-bottom: 15px;
+}
+
+.promo-url .modal-content .modal-body {
+    padding-bottom: 30px;
+}
+.add_custom_button_heading a.btn{
+	min-width: 90px;
+    background-color: #1fcb5d;
+	border-color: #17c455;
+	float:right;
+	color:#fff;
+}

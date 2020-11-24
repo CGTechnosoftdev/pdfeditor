@@ -1,0 +1,196 @@
+@media(max-width: 1300px) {}
+
+@media(max-width: 1266px) {
+    .signnow-part .dots-right,
+    .signnow-part .dots-left {
+        display: none;
+    }
+}
+
+@media(max-width: 1024px) {
+    .navbar-expand-md .navbar-toggler {
+        display: block;
+    }
+    /* .collapse:not(.show) {
+display: none;
+} */
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-collapse.collapsing,
+    .navbar-collapse.collapse.show {
+        display: block !important;
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+    .navbar {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: .5rem 1rem;
+        width: 100%;
+    }
+    .nav-item {
+        display: block !important;
+    }
+    .navbar-expand-md .navbar-nav {
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    .start-header {
+        padding: 0px 0;
+    }
+    .nav-link {
+        padding-left: 0px !important;
+    }
+    .login_signup .nav-item {
+        margin-bottom: 10px;
+    }
+    .navbar-nav.ml-auto.login_signup {
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+    .banner-content {
+        margin: 100px auto 0 auto;
+    }
+    .desktop-img img {
+        max-width: 60%;
+    }
+}
+
+@media(min-width: 992px) {}
+
+@media(max-width: 991px) {}
+
+@media(min-width: 768px) {}
+
+@media(max-width: 767px) {
+    .dropdown-menu {
+        padding: 0 !important;
+        background-color: transparent;
+        box-shadow: none;
+        transition: all 200ms linear;
+    }
+    .dropdown-toggle[aria-expanded="true"]+.dropdown-menu {
+        margin-top: 10px !important;
+        margin-bottom: 20px !important;
+    }
+    body.dark .nav-item::before {
+        background-color: #fff;
+    }
+    body.dark .dropdown-toggle::after {
+        background-color: #fff;
+    }
+    body.dark .dropdown-menu {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .banner-content h1 {
+        font-size: 40px;
+    }
+    .main-banner {
+        background-position: bottom !important;
+    }
+    .countdown-part {
+        background: #ffa155 !important;
+    }
+    .stats {
+        margin-top: 15px;
+    }
+    .drive-icons {
+        max-width: 100%;
+    }
+    .drive-icons li.nav-item {
+        width: 100%;
+        display: inline-block !important;
+        max-width: 82px;
+    }
+    .upload-doc-tabs .tab-content {
+        width: 100%;
+        padding-left: 0;
+    }
+    #duck2 {
+        border-radius: 15px;
+        padding: 20px;
+    }
+    .brows-btn {
+        white-space: normal;
+    }
+    .dropzone-box h4 {
+        padding: 30px 0px;
+        font-size: 15px;
+    }
+    .signnow-part {
+        padding: 60px 10px 0px 10px;
+    }
+    .signnow-heading h3 {
+        font-size: 32px;
+    }
+    .documents-upload ul li a.nav-link {
+        margin-bottom: 15px;
+    }
+    .account-img {
+        display: none;
+    }
+    .account-popup form {
+        padding: 25px!important;
+    }
+    .login-popup .btn {
+        margin-bottom: 15px;
+    }
+    .account-popup .modal-dialog {
+        margin: 0px;
+        border-radius: 0px;
+    }
+}
+
+@media(max-width: 640px) {
+    .documents-upload .nav-link {
+        padding: 5px 15px !important;
+    }
+    .documents-upload ul li a.nav-link {
+        font-size: 15px;
+    }
+    .drives-section .card h3 {
+        font-size: 26px;
+    }
+    .drives-section .card a {
+        font-size: 16px;
+    }
+    .drives-section .card a i {
+        font-size: 14px;
+    }
+    .solve-pdf-problems h2 {
+        font-size: 32px;
+    }
+    .solve-pdf-problems .nav-link {
+        padding: 15px 15px !important;
+    }
+    .signnow-heading h3 {
+        font-size: 24px;
+    }
+    .dropzone .dz-message {
+        font-size: 18px;
+    }
+    .drives-section .card {
+        padding: 20px;
+    }
+}
+
+@media(max-width:575px) {
+    .banner-content h1 {
+        font-size: 30px;
+    }
+    .stats {
+        justify-content: left;
+    }
+}
+
+@media(max-width: 480px) {}
