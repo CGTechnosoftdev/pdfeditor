@@ -15,7 +15,6 @@ class ApiAuthController extends ApiBaseController
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -25,35 +24,35 @@ class ApiAuthController extends ApiBaseController
      * @param  Request    $request [description]
      * @return [type]              [description]
      */
-    public function logout (Request $request) {
-        try{
+    public function logout(Request $request)
+    {
+        try {
             $input_data = $request->input();
             $logout_type = $input_data['logout_devices'] ?? 'current';
             switch ($logout_type) {
                 case 'all':
-                auth('api')->user()->tokens->each(function ($token, $key) {
-                    $token->revoke();
-                });
-                break;
-                case 'other':
-                $current_token = $request->user()->token();
-                auth('api')->user()->tokens->each(function ($token, $key) use ($current_token) {
-                    if($token->id != $current_token->id){
+                    auth('api')->user()->tokens->each(function ($token, $key) {
                         $token->revoke();
-                    }
-                });
-                break;
+                    });
+                    break;
+                case 'other':
+                    $current_token = $request->user()->token();
+                    auth('api')->user()->tokens->each(function ($token, $key) use ($current_token) {
+                        if ($token->id != $current_token->id) {
+                            $token->revoke();
+                        }
+                    });
+                    break;
                 case 'current':
                 default:
-                $current_token = $request->user()->token();
-                $current_token->revoke();
-                break;
+                    $current_token = $request->user()->token();
+                    $current_token->revoke();
+                    break;
             }
 
-            return $this->sendSuccess([],'Logged out successfully!');
-
-        }catch(\Exception $e){
-            return $this->sendError($e->getMessage(),[],401);
+            return $this->sendSuccess([], 'Logged out successfully!');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), [], 401);
         }
     }
 }
