@@ -24,26 +24,36 @@
 
 })(jQuery);
 
+// $("#menu-toggle").click(function(e) {
+//     e.preventDefault();
+//     $("#wrapper").toggleClass("active");
+// });
+
+$(document).ready(function() {
+    $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+    });
+});
 
 // number count for stats, using jQuery animate
 
 $('.counting').each(function() {
     var $this = $(this),
-    countTo = $this.attr('data-count');
+        countTo = $this.attr('data-count');
 
     $({ countNum: $this.text() }).animate({
-        countNum: countTo
-    },
-
-    {
-
-        duration: 3000,
-        easing: 'linear',
-        step: function() {
-            $this.text(Math.floor(this.countNum));
+            countNum: countTo
         },
-        complete: function() {
-            $this.text(this.countNum);
+
+        {
+
+            duration: 3000,
+            easing: 'linear',
+            step: function() {
+                $this.text(Math.floor(this.countNum));
+            },
+            complete: function() {
+                $this.text(this.countNum);
                 //alert('finished');
             }
 
@@ -71,17 +81,17 @@ function hideNonVisibleDivs() {
     var i, divId, div;
     for (i = 0; i < divs.length; i++) {
         divId = divs[i];
-        
+
         div = document.getElementById(divId);
-        
+
         if (visibleDivId === divId) {
-            
+
             div.style.display = "block";
-            
+
         } else {
-            
+
             div.style.display = "none";
-            
+
         }
     }
 }
