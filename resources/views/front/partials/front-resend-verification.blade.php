@@ -33,19 +33,19 @@
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                             </div>
                             {{ Form::open(['route' => 'front.resend.verification.account.submit','method'=>'post','class'=>'login-form','id' => 're_send_verification_form_id','enctype'=>"multipart/form-data"]) }}
-                                        {{ Form::hidden("_token", csrf_token())}}
+                            {{ Form::hidden("_token", csrf_token())}}
                             <div class="d-table ">
-                        
+
                                 <div class="d-table-cell align-middle">
-                                <div class="heading">
+                                    <div class="heading">
                                         <h3>Email Verification </h3>
                                         <p>Please enter the following details</p>
                                     </div>
-                              
+
                                     <div class="row">
 
 
-                            
+
 
 
                                         <div class="col-md-12 input-group mb-3">
@@ -59,7 +59,7 @@
 
                                         </div>
 
-                                  
+
                                     </div>
 
                                 </div>
@@ -101,7 +101,7 @@
 
         $('#resend_verificationemailId').click(function(e) {
             e.preventDefault();
-		blockUI();
+            blockUI();
 
 
             $('#email-error').text("");
@@ -124,27 +124,26 @@
                         $("#success_msg_id").html(response.success);
                         $("#success_msg_id_container").removeClass("invisible");
                         $("#success_msg_id_container").addClass("visible");
-                    }
-                    else{
+                    } else {
                         $("#error_msg_id").html(response.error);
-                    $("#error_msg_id_container").removeClass("invisible");
-                    $("#error_msg_id_container").addClass("visible");
+                        $("#error_msg_id_container").removeClass("invisible");
+                        $("#error_msg_id_container").addClass("visible");
                     }
                 },
                 error: function(response) {
-                    
+
                     console.log(response);
                     $('#email-error').text(response.responseJSON.errors.email);
                     $("#error_msg_id").html(response.message);
-                  //  $("#error_msg_id_container").removeClass("invisible");
-                  //  $("#error_msg_id_container").addClass("visible");
+                    //  $("#error_msg_id_container").removeClass("invisible");
+                    //  $("#error_msg_id_container").addClass("visible");
 
 
 
                 },
-                complete:function(){
-	        	$.unblockUI();
-	            }
+                complete: function() {
+                    $.unblockUI();
+                }
             });
 
 
