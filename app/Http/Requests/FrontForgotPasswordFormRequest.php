@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class FrontForgotPasswordFormRequest extends FormRequest
         return true;
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'email' => 'required|email',
         ];
@@ -28,5 +30,4 @@ class FrontForgotPasswordFormRequest extends FormRequest
     {
         return [];
     }
-
 }

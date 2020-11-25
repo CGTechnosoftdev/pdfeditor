@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -11,6 +11,7 @@ use App\Http\Requests\FrontUserRegistrationFormRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommonMail;
 use DB;
+use Auth;
 use Illuminate\Support\Str;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -20,9 +21,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Api\ApiBaseController;
 
 
-class FrontUserRegistrationController extends Controller
+class UserRegistrationController extends Controller
 {
-	protected $base_api_object;
+	public $base_api_object;
 	function __construct()
 	{
 		$this->base_api_object = new ApiBaseController();
@@ -35,6 +36,7 @@ class FrontUserRegistrationController extends Controller
 	}
 	public function validator(array $data)
 	{
+
 		return Validator::make($data, [
 
 			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -73,12 +75,11 @@ class FrontUserRegistrationController extends Controller
 		return view('auth.front-email-verification', $data_array);
 	}
 
-	protected function userRegisterProcess(FrontUserRegistrationFormRequest $request)
+	protected function userRegisterProcess($input_data)
 	{
 
 		DB::beginTransaction();
 		try {
-			$input_data = $this->validator($request->all())->validate();
 			$input_data["status"] = 0;
 			event(new Registered($user = $this->create($input_data)));
 
@@ -91,7 +92,7 @@ class FrontUserRegistrationController extends Controller
 			$link = route('front.user.verification.save', [$token]) . '/' .  '?email=' . urlencode($user->email);
 
 			\DB::table('password_resets')->insert([
-				'email' => $request->email,
+				'email' => $input_data["email"],
 				'token' => $token,
 				'created_at' => now()
 			]);
@@ -126,18 +127,40 @@ class FrontUserRegistrationController extends Controller
 
 	public function registerUserSave(FrontUserRegistrationFormRequest $request)
 	{
-		$message_data_array = $this->userRegisterProcess($request);
+
+		$input_data = $this->validator($request->all())->validate();
+
+		$message_data_array = $this->userRegisterProcess($input_data);
 		return Response()->json($message_data_array);
 	}
 
 	public function registerUserSaveApi(FrontUserRegistrationFormRequest $request)
 	{
-		$message_data_array = $this->userRegisterProcess($request);
-		list($message_type, $message) = each($message_data_array);
+		$validator = $this->validator($request->all());
+		$message_type = "success";
+		$error_messages = array();
+		$message = "";
+		if ($validator->fails()) {
+
+			foreach ($validator->getMessageBag()->getMessages() as $field_name => $messages) {
+
+				$error_messages[$field_name] = $messages;
+			}
+
+			$message_type = "error";
+		} else {
+			$input_data = $validator->validate();
+			$message_data_array = $this->userRegisterProcess($input_data);
+			foreach ($message_data_array as $message_type => $message_val)
+				$message = $message_val;
+		}
+
 		if ($message_type == "success") {
+
 			return	$this->base_api_object->sendSuccess([], $message);
 		} elseif ($message_type == "error") {
-			return	$this->base_api_object->sendError($message);
+
+			return	$this->base_api_object->sendError($message, $error_messages);
 		}
 	}
 
