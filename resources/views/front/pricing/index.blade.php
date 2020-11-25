@@ -7,7 +7,7 @@
 
 			<div class="pricing-plans pt-5 mt-5">
 				<div class="row">
-					@foreach($subscription_plan_arr as $subscription_plan)	
+					@foreach($subscription_plan_arr as $subscription_plan)
 					<div class="col-md-4 col-sm-6">
 						{{ Form::open(['route' => ['front.payment-form',$subscription_plan->id],'method'=>'get']) }}
 						<div class="card mb-5 mb-md-0">
@@ -22,18 +22,21 @@
 							<div class="card-body text-left px-0 pb-0">
 								<div class="plan-ul">
 									<ul class="fa-ul">
+										{!! $subscription_plan->feature_list !!}
+									</ul>
+									<!-- <ul class="fa-ul">
 										<li><span class="fa-li"><i class="fas fa-check"></i></span>Edit, Fill, draw, print, save, or fax </li>
 										<li><span class="fa-li"><i class="fas fa-check"></i></span>Convert PDF's to edittable word documents</li>
 										<li><span class="fa-li"><i class="fas fa-check"></i></span>Erase, highlight & re-write PDF's</li>
 										<li><span class="fa-li"><i class="fas fa-check"></i></span>Access documents from anywhere</li>
 										<li><span class="fa-li"><i class="fas fa-check"></i></span>highlight & annotate documents</li>
 										<li><span class="fa-li"><i class="fas fa-check"></i></span>Customer support within a day</li>
-									</ul>
+									</ul> -->
 								</div>
 
-								<div class="view-more">
+								<!-- <div class="view-more">
 									<a href="#">View More</a>
-								</div>
+								</div> -->
 								@if(!empty($subscription_plan->yearly_amount))
 								<div class="plan-price yearly-element-{{$subscription_plan->id}}">
 									<h2><sup>{{$currency_symbol}}</sup><span>{{$subscription_plan->yearly_amount}}</span></h2>
@@ -168,7 +171,7 @@
 						<li>
 							<a>Do i have to use a credit card or can i pay by check?</a>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas tempora maxime rerum neque deserunt suscipit provident cumque
-							et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
+								et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
 						</li>
 						<li>
 							<a>What if I want to cancel my account during the trual period?</a>
@@ -181,7 +184,7 @@
 						<li>
 							<a>Do i have to use a credit card or can i pay by check?</a>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas tempora maxime rerum neque deserunt suscipit provident cumque
-							et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
+								et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
 						</li>
 					</ul>
 					<!-- / faq-accordion -->
@@ -195,14 +198,14 @@
 @endsection
 @section('additionaljs')
 <script type="text/javascript">
-	$(document).on('change','.subscription_plan_type',function(e){
+	$(document).on('change', '.subscription_plan_type', function(e) {
 		e.preventDefault();
-		var plan_id = $('option:selected', this).attr('data-id');//$(this).attr('data-id');
-		var plan_type = $('option:selected', this).attr('data-type');//$(this).attr('data-type');
-		var current_plan = ((plan_type == 'yearly') ? 'monthly' : 'yearly'); 
-		var target_plan = plan_type; 
-		$('.'+target_plan+'-element-'+plan_id).removeClass('d-none');
-		$('.'+current_plan+'-element-'+plan_id).addClass('d-none');
+		var plan_id = $('option:selected', this).attr('data-id'); //$(this).attr('data-id');
+		var plan_type = $('option:selected', this).attr('data-type'); //$(this).attr('data-type');
+		var current_plan = ((plan_type == 'yearly') ? 'monthly' : 'yearly');
+		var target_plan = plan_type;
+		$('.' + target_plan + '-element-' + plan_id).removeClass('d-none');
+		$('.' + current_plan + '-element-' + plan_id).addClass('d-none');
 	})
 </script>
 @append
