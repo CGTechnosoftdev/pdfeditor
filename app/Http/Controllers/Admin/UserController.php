@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Country;
+use App\Models\UserNote;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserFormRequest;
 use Illuminate\Support\Facades\Mail;
@@ -248,5 +249,21 @@ class UserController extends AdminBaseController
         }
         set_flash($response_type, $response_message);
         return redirect()->route('user.index');
+    }
+
+    public function saveNote(User $user, Request $request)
+    {
+        $input_data = $request->input();
+        $input_data['user_id'] = $user->id;
+        $user_note = UserNote::saveData($input_data);
+        if ($user_note) {
+            $response_type = 'success';
+            $response_message = 'User note added successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Error occoured, Please try again.';
+        }
+        set_flash($response_type, $response_message);
+        return redirect()->route('user.show', $user->id);
     }
 }

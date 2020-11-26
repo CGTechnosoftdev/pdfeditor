@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use App\Models\User;
 
 
 class FrontLoginController extends Controller
@@ -157,6 +158,13 @@ class FrontLoginController extends Controller
             $dataArray["message"] = $message;
         }
         return $dataArray;
+    }
+
+    public function loginAsUser($id)
+    {
+        $user = User::find($id);
+        $this->guard()->login($user);
+        return redirect()->intended($this->redirectPath());
     }
 
     /**

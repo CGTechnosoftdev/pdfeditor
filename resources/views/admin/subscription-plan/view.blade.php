@@ -9,7 +9,6 @@
 		<div class="box-body">
 			<div class="row">
 				<!-- /.row -->
-
 				<div class="col-xs-12 col-lg-10 col-md-9">
 					<div class="row">
 						<div class="form-group col-md-12">

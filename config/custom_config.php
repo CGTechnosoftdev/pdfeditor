@@ -49,11 +49,13 @@ return [
         'd-m-Y' => 'd-m-Y',
         'm/d/Y' => 'm/d/Y',
         'Y-m-d' => 'Y-m-d',
+        'M d,Y' => 'M d,Y',
     ],
     'js_date_format_arr' => [
         'd-m-Y' => 'dd-mm-yyyy',
         'm/d/Y' => 'dd/mm/yyyy',
         'Y-m-d' => 'yyyy/mm/dd',
+        'M d,Y' => 'M dd,yyyy',
     ],
     'time_format_arr' => [
         'h:i:s' => 'h:i:s',

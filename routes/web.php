@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 		//user
 		Route::resource('user', 'UserController');
+		Route::post('user/save-note/{user}', 'UserController@saveNote')->name('user.save-note');
 	});
 });
 
@@ -90,6 +91,8 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/resend-verification-account', 'Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
 	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
+
+	Route::get('/login-as-user/{id}', 'Auth\FrontLoginController@loginAsUser')->name('login-as-user');
 
 
 	Route::post('/login', 'Auth\FrontLoginController@login')->name('login');
