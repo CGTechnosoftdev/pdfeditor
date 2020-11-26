@@ -136,24 +136,11 @@ class UserRegistrationController extends Controller
 
 	public function registerUserSaveApi(FrontUserRegistrationFormRequest $request)
 	{
-		$validator = $this->validator($request->all());
-		$message_type = "success";
-		$error_messages = array();
-		$message = "";
-		if ($validator->fails()) {
 
-			foreach ($validator->getMessageBag()->getMessages() as $field_name => $messages) {
-
-				$error_messages[$field_name] = $messages;
-			}
-
-			$message_type = "error";
-		} else {
-			$input_data = $validator->validate();
-			$message_data_array = $this->userRegisterProcess($input_data);
-			foreach ($message_data_array as $message_type => $message_val)
-				$message = $message_val;
-		}
+		$input_data = $this->validator($request->all())->validate();
+		$message_data_array = $this->userRegisterProcess($input_data);
+		foreach ($message_data_array as $message_type => $message_val)
+			$message = $message_val;
 
 		if ($message_type == "success") {
 

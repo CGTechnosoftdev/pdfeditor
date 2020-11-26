@@ -125,36 +125,15 @@ class ResetPasswordController extends Controller
         return route('front.dashboard');
     }
 
-    public function resetPasswordSaveApi(Request $request)
+    public function resetPasswordSaveApi(FrontResetPasswordFormRequest $request)
     {
-
-        $validateRequest = new FrontResetPasswordFormRequest();
-
-        $validator = $this->validator($request->all(), $validateRequest->rules());
-        $message_type = "success";
-        $error_messages = array();
-        $message = "";
-        if ($validator->fails()) {
-
-            foreach ($validator->getMessageBag()->getMessages() as $field_name => $messages) {
-
-                $error_messages[$field_name] = $messages;
-            }
-
-            $message_type = "error";
-        } else {
-            $input_data = $validator->validate();
-            $message_data_array = $this->resetPasswordProcess($input_data, "api");
-
-            $message_type = $message_data_array["status"];
-            $message = $message_data_array["message"];
-        }
-
+        $input_data = $this->validator($request->all(), $request->rules())->validate();
+        $message_data_array = $this->resetPasswordProcess($input_data, "api");
+        $message_type = $message_data_array["status"];
+        $message = $message_data_array["message"];
         if ($message_type == "success") {
-
             return    $this->base_api_object->sendSuccess([], $message);
         } elseif ($message_type == "error") {
-
             return    $this->base_api_object->sendError($message, $error_messages);
         }
     }

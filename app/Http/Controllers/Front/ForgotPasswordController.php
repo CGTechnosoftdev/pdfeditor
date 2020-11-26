@@ -231,30 +231,15 @@ class ForgotPasswordController extends Controller
         return Response()->json($msg_data_array);
     }
 
-    public function resetPasswordNewApi(Request $request)
+    public function resetPasswordNewApi(FrontForgotPasswordFormRequest $request)
     {
-        $validateRequest = new FrontForgotPasswordFormRequest();
+        $input_data = $this->validator($request->all(), $request->rules())->validate();
 
-        $validator = $this->validator($request->all(), $validateRequest->rules());
-        $message_type = "success";
-        $error_messages = array();
-        $message = "";
-        if ($validator->fails()) {
-
-            foreach ($validator->getMessageBag()->getMessages() as $field_name => $messages) {
-
-                $error_messages[$field_name] = $messages;
-            }
-
-            $message_type = "error";
-        } else {
-            $input_data = $validator->validate();
-            $credentails = $this->credentials($request);
-            $user = $this->broker()->getUser($credentails);
-            $message_data_array = $this->forgotPasswordProcess($user, "api");
-            $message_type = $message_data_array["status"];
-            $message = $message_data_array["message"];
-        }
+        $credentails = $this->credentials($request);
+        $user = $this->broker()->getUser($credentails);
+        $message_data_array = $this->forgotPasswordProcess($user, "api");
+        $message_type = $message_data_array["status"];
+        $message = $message_data_array["message"];
 
 
 

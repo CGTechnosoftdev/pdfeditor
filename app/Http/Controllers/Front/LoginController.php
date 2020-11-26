@@ -123,7 +123,7 @@ class LoginController extends Controller
             'social_name' => ['required'],
             'provider_id' => ['required'],
             'provider' => ['required'],
-            'profile_picture' => ['required'],
+            'profile_picture' => [],
 
         ]);
         if ($validator->fails()) {

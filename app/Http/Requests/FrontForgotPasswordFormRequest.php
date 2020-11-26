@@ -19,7 +19,6 @@ class FrontForgotPasswordFormRequest extends FormRequest
     {
         return true;
     }
-
     public function rules()
     {
         return [
@@ -28,6 +27,8 @@ class FrontForgotPasswordFormRequest extends FormRequest
     }
     public function messages()
     {
-        return [];
+        return [
+            'email.required' => 'Hello Akash!'
+        ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -20,10 +21,7 @@ class FrontUserRegistrationFormRequest extends FormRequest
     }
     protected function validateLogin(Request $request)
     {
-        $request->validate([
-
-         
-        ]);
+        $request->validate([]);
     }
 
     /**
@@ -33,16 +31,15 @@ class FrontUserRegistrationFormRequest extends FormRequest
      */
     public function rules()
     {
-     
-       
-        $rules=[
-            
-            
-       
-  
+
+
+        $rules = [
+
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'regex:' . config('constant.PASSWORD_REGEX')],
+
+
         ];
         return $rules;
-
     }
-
 }
