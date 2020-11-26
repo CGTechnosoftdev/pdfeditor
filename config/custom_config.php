@@ -44,6 +44,9 @@ return [
         'subscription_plan' => 'SubscriptionPlan',
         'promo-url' => 'PromoUrl',
         'email-template' => 'EmailTemplate',
+        'document_type' => 'DocumentType',
+        'document_template' => 'DocumentTemplate',
+
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',
