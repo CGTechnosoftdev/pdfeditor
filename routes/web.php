@@ -50,6 +50,12 @@ Route::group(['prefix' => 'admin'], function () {
 		//business-categories
 		Route::resource('business-category', 'BusinessCategoryController', ['except' => ['show']]);
 
+		//document-type
+		Route::resource('document-type', 'DocumentTypeController', ['except' => ['show']]);
+
+		//document-template
+		Route::resource('document-template', 'DocumentTemplateController', ['except' => ['show']]);
+
 		//subadmin
 		Route::resource('sub-admin', 'SubAdminController');
 
@@ -87,10 +93,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/resend-verification-account', 'Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
 	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
-
-
 	Route::post('/login', 'Auth\FrontLoginController@login')->name('login');
 	Route::post('/logout', 'Auth\FrontLoginController@logout')->name('logout');
+
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
