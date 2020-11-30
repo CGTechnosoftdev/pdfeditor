@@ -15,7 +15,7 @@ class CreateDocumentTemplateTable extends Migration
     {
         Schema::create('document_templates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('document_category_id')->unsigned();
+            $table->integer('document_type_id')->unsigned();
             $table->string('name', 255);
             $table->string('template_file', 255);
             $table->text('keywords')->nullable();

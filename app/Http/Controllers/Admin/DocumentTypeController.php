@@ -24,12 +24,15 @@ class DocumentTypeController extends AdminBaseController
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
-            $model = DocumentType::query();
+            $model = DocumentType::query()->with('documentTemplates')->get();
             $table = Datatables()->of($model);
             if (!empty($filter_data['statusFilter'])) {
                 $model->where(['status' => $filter_data['statusFilter']]);
             }
             $table->addIndexColumn();
+            $table->editColumn('uploaded_documents_count', function ($row) {
+                return $row->documentTemplates->count() ?? 0;
+            });
             $table->addColumn('action', '');
             $table->editColumn('action', function ($row) use ($action_button_template) {
                 $buttons = [

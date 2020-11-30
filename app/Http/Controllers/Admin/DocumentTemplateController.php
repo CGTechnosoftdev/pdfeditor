@@ -25,12 +25,15 @@ class DocumentTemplateController extends AdminBaseController
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
-            $model = DocumentTemplate::query();
+            $model = DocumentTemplate::query()->get();
             $table = Datatables()->of($model);
             if (!empty($filter_data['statusFilter'])) {
                 $model->where(['status' => $filter_data['statusFilter']]);
             }
             $table->addIndexColumn();
+            $table->editColumn('template_file_url', function ($row) {
+                return "<a href='" . $row->template_file_url . "' target='_blank'><i class='fa fa-file-pdf-o'></i></a>";
+            });
             $table->addColumn('action', '');
             $table->editColumn('action', function ($row) use ($action_button_template) {
                 $buttons = [
@@ -100,10 +103,10 @@ class DocumentTemplateController extends AdminBaseController
         try {
             $input_data = $request->input();
 
-            if (!empty($request->file('template_form'))) {
-                $upload_response = uploadFile($request, 'template_form');
+            if (!empty($request->file('template_file'))) {
+                $upload_response = uploadFile($request, 'template_file');
                 if (!empty($upload_response['success'])) {
-                    $input_data['template_form'] = $upload_response['data'];
+                    $input_data['template_file'] = $upload_response['data'];
                 }
             }
 
@@ -125,10 +128,6 @@ class DocumentTemplateController extends AdminBaseController
 
     public function edit(DocumentTemplate $document_template)
     {
-        if (!empty($document_template->template_file)) {
-            $document_template->template_file_url = getUploadedFile($document_template->template_file, 'template_file');
-        }
-
         $document_row_results = DocumentType::select('id', 'name')
             ->where(['status' => config("constant.STATUS_ACTIVE")])
             ->get()->toArray();
@@ -139,9 +138,6 @@ class DocumentTemplateController extends AdminBaseController
             }
             $document_type_list = $document_type_list;
         }
-
-
-
 
         $data_array = [
             'title' => 'Edit Document Template',

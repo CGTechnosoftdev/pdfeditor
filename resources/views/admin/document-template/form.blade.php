@@ -17,8 +17,10 @@
                     {!! Form::token() !!}
 
 
-                    <div class="form-group {{ $errors->has('fillable_printable_status') ? ' has-error' : '' }}">
-                        <label for="fillable_printable_status" class="control-label text-left col-sm-4 required">Fillable Printable Status</label>
+                    <div class="form-group {{ $errors->has('document_type_id') ? ' has-error' : '' }}">
+                        <label for="document_type_id" class="control-label text-left col-sm-4 required">
+                            Document Type<span class="required-label">*</span>
+                        </label>
                         <div class="col-sm-8">
                             {!! Form::select('document_type_id',$document_type_list, old('document_type_id'), ['class'=>'form-control required','data-unit'=>'from']) !!}
                             @if ($errors->has('document_type_id'))
@@ -38,8 +40,8 @@
                     </div>
 
                     <div class="form-group {{ $errors->has('template_file') ? ' has-error' : '' }}">
-                        <label for="name" class="control-label text-left control-label col-sm-4 required">Template File
-
+                        <label for="name" class="control-label text-left control-label col-sm-4 required">
+                            Template File
                         </label>
                         <div class="col-sm-8">
                             {{ Form::file('template_file',old('template_file'),array('class'=>"form-control"))}}
@@ -68,8 +70,6 @@
                             @endif
                         </div>
                     </div>
-
-
 
                     <div class="form-group {{ $errors->has('is_popular') ? ' has-error' : '' }}">
                         <label for="is_popular" class="control-label text-left col-sm-4 required">Is Popular?</label>

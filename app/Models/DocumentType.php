@@ -16,7 +16,6 @@ class DocumentType extends Model
     protected $dates = ['deleted_at'];
     public $timestamps = true;
 
-
     public static function saveData($dataArray, $model = array())
     {
         $model = (empty($model) ? new self() : $model);
@@ -26,5 +25,10 @@ class DocumentType extends Model
         } else {
             return false;
         }
+    }
+
+    public function documentTemplates()
+    {
+        return $this->hasMany(DocumentTemplate::class, 'document_type_id', 'id');
     }
 }

@@ -26,13 +26,16 @@ class DocumentTemplateFormRequest extends FormRequest
     public function rules()
     {
         $id = NULL;
+        $file_required = 'required';
         if ($this->document_template) {
             $id = $this->document_template->id;
+            $file_required = 'nullable|sometimes';
         }
 
         return [
             'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:document_templates,name,' . $id . ',id,deleted_at,NULL',
             'document_type_id' => 'required',
+            'template_file' => $file_required . '|mimes:pdf',
         ];
     }
 }
