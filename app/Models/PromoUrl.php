@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
+use Illuminate\Support\Facades\Crypt;
 
 class PromoUrl extends Model
 {
@@ -54,7 +55,7 @@ class PromoUrl extends Model
 	public function getPromoUrlAttribute()
 	{
 		$campaign_attr  = ['campaign_source', 'campaign_medium', 'campaign_name', 'campaign_term', 'campaign_content'];
-		$url = \URL::to('/promo-url/' . $this->id);
+		$url = route('front.promo-pricing', encryptData($this->id));
 		$append_arr = [];
 		foreach ($campaign_attr as $attr) {
 			if (!empty($this->$attr)) {
@@ -98,5 +99,15 @@ class PromoUrl extends Model
 	public function subscription_plan()
 	{
 		return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
+	}
+
+	public static function getPromoForRedeem($id)
+	{
+		return self::where(['id' => $id])
+			->where(function ($query) {
+				$query->whereNull('expiration_date')
+					->orWhere('expiration_date', '>=', date('Y-m-d'));
+			})
+			->firstOrFail();
 	}
 }

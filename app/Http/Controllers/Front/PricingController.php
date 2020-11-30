@@ -8,9 +8,12 @@ use App\Models\SubscriptionPlan;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserSubscription;
+use App\Models\PromoUrl;
+use App\Models\UserPromo;
 use App\Models\GeneralSetting;
 use App\Http\Requests\PaymentFormRequest;
 use DB;
+use Session;
 use Illuminate\Support\Facades\Crypt;
 
 class PricingController extends FrontBaseController
@@ -55,10 +58,12 @@ class PricingController extends FrontBaseController
 			set_flash($response_type, $response_message, false);
 			return redirect()->route('front.dashboard');
 		}
+		$promo_data = Session::get('promo_data') ?? [];
 		$data_array['subscription_plan'] = $subscription_plan;
 		$data_array['subscription_plan_type'] = $input_data['subscription_plan_type'] ?? 2;
 		$data_array['subscription_plan_type_arr'] = config('custom_config.plan_type_arr');
-		$data_array['trail_days'] = config('general_settings.trail_days');
+		$data_array['trail_days'] = $promo_data->trail_days ?? config('general_settings.trail_days');
+		$data_array['promo_data'] = $promo_data;
 		return view('front.pricing.payment-form', $data_array);
 	}
 
@@ -75,14 +80,16 @@ class PricingController extends FrontBaseController
 		$input_data = $request->input();
 		DB::beginTransaction();
 		try {
+			$promo_data = Session::get('promo_data') ?? [];
 			$general_setting = GeneralSetting::dataRow();
 			if ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_MONTHLY')) {
-				$input_data['amount'] = $subscription_plan['monthly_amount'];
+				$input_data['amount'] = $promo_data['monthly_amount'] ?? $subscription_plan['monthly_amount'];
 			} elseif ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_YEARLY')) {
-				$input_data['amount'] = $subscription_plan['yearly_amount'];
+				$input_data['amount'] = $promo_data['yearly_amount'] ??  $subscription_plan['yearly_amount'];
 			}
-			$input_data['trail_days'] = $trail_days = $general_setting->trail_days;
+			$input_data['trail_days'] = $trail_days = $promo_data['trail_days'] ?? $general_setting->trail_days;
 			$input_data['currency'] = $general_setting->currency;
+
 			$payment_response = $this->chargePayment($input_data);
 			if (!empty($payment_response['success'])) {
 				if (!empty($payment_response['data'])) {
@@ -106,17 +113,30 @@ class PricingController extends FrontBaseController
 				];
 				User::saveData($user_data, $user);
 				//User Subscription
-				$increase_days = empty($trail_days) ? ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_YEARLY') ? 365 : 30) : $trail_days;
+				$end = empty($trail_days) ? ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_YEARLY') ? addYearsToDate(1) : addMonthsToDate(1)) : addDaysToDate($trail_days);
 				$user_subscription_data = [
 					'subscription_plan_type' => empty($trail_days) ?  $input_data['subscription_plan_type'] : config('constant.SUBSCRIPTION_PLAN_TYPE_TRAIL'),
 					'subscription_plan_id' => $subscription_plan->id,
 					'user_id' => $user->id,
 					'start' => date('Y-m-d H:i:s'),
-					'end' => addDaysToDate($increase_days),
+					'end' => $end,
 					'transaction_id' => $transaction_data['id'] ?? null,
 					'status' => config('constant.STATUS_ACTIVE')
 				];
 				UserSubscription::saveData($user_subscription_data);
+				if (!empty($promo_data)) {
+					$promo_start_from = addDaysToDate($trail_days);
+					$valid_till = ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_YEARLY') ? addYearsToDate($promo_data['valid_for_years'], $promo_start_from) : addMonthsToDate($promo_data['valid_for_months'], $promo_start_from));
+					//User Promos
+					$user_promo_data = [
+						'user_id' => $user->id,
+						'subscription_plan_type' => $input_data['subscription_plan_type'],
+						'subscription_plan_id' => $subscription_plan->id,
+						'subscription_plan_amount' => $input_data['amount'],
+						'valid_till' => changeDateFormat($valid_till, 'db')
+					];
+					UserPromo::saveData($user_promo_data);
+				}
 				DB::commit();
 				$response_type = 'success';
 				$response_message = "Plan subscribed successfully, Enjoy our services";
@@ -132,5 +152,25 @@ class PricingController extends FrontBaseController
 		}
 		set_flash($response_type, $response_message, false);
 		return ($response_type == 'success') ? redirect()->route('front.dashboard') : redirect()->route('front.payment-form', [$subscription_plan->id]);
+	}
+
+	public function promoPricing($id)
+	{
+		$id = decryptData($id);
+		$promo_data = PromoUrl::getPromoForRedeem($id);
+		Session::put('promo_data', $promo_data);
+
+		$subscription_plan_arr = SubscriptionPlan::dataList(['id' => $promo_data['subscription_plan_id']]);
+		if (count($subscription_plan_arr) == 0) {
+			return abort(404);
+		}
+		$data_array['subscription_plan_arr'] = $subscription_plan_arr;
+		$data_array['promo_data'] = $promo_data;
+		$currency_arr = \Arr::pluck(config('custom_config.currency_arr'), 'symbol', 'key');
+		$data_array['currency_symbol'] = $currency_arr[config('general_settings.currency')];
+		$data_array['subscription_plan_type_arr'] = config('custom_config.plan_type_arr');
+		$data_array['default_plan_type'] = config('constant.DEFAULT_SUBSCRIPTION_PLAN_TYPE');
+		$data_array['active_plan'] = $promo_data['subscription_plan_id'];
+		return view('front.pricing.index', $data_array);
 	}
 }
