@@ -254,3 +254,30 @@ Breadcrumbs::for('document-template.edit', function ($trail, $id) {
 	$trail->push('Document Template', route('document-template.index'));
 	$trail->push('Edit Document Template', route('document-template.edit', $id));
 });
+
+// Home > 360-legal-form
+Breadcrumbs::for('legal-form.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('360 Legal Forms', route('legal-form.index'));
+});
+
+// Home > 360-legal-form > add
+Breadcrumbs::for('legal-form.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('360 Legal Forms', route('legal-form.index'));
+	$trail->push('Add 360 Legal Form', route('legal-form.create'));
+});
+
+// Home > 360-legal-form > updated
+Breadcrumbs::for('legal-form.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('360 Legal Forms', route('legal-form.index'));
+	$trail->push('Edit 360 Legal Form', route('legal-form.edit', $id));
+});
+
+// Home > 360-legal-form  > show
+Breadcrumbs::for('legal-form.show', function ($trail, $id, $name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Legal Form', route('legal-form.index'));
+	$trail->push($name . ' Detail', route('legal-form.edit', $id));
+});

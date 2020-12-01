@@ -6,32 +6,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class DocumentTemplate extends Model
+class LegalForm extends Model
 {
 
     use SoftDeletes;
     use BaseModelTrait;
 
-    protected $fillable = ['document_type_id', 'name', 'template_file', 'keywords', 'is_popular'];
+    protected $table = '360_legal_forms';
+
+    protected $fillable = ['name', 'form', 'description', 'keywords'];
     protected $appends = [
-        'template_file_url', 'document_type_name', 'keywords_arr', 'is_popular_status'
+        'form_url', 'keywords_arr'
     ];
     protected $dates = ['deleted_at'];
     public $timestamps = true;
 
-    public function getTemplateFileUrlAttribute()
+    public function getFormUrlAttribute()
     {
-        return  getUploadedFile($this->template_file, 'template_file');
+        return  getUploadedFile($this->form, '360_legal_form');
     }
-    public function getDocumentTypeNameAttribute()
-    {
-        return  $this->documentType->name;
-    }
-    public function getIsPopularStatusAttribute()
-    {
-        $yes_no_arr = config('custom_config.yes_no_arr');
-        return  $yes_no_arr[$this->is_popular];
-    }
+
     public function getKeywordsArrAttribute()
     {
         $keywords_arr = explode(", ", $this->keywords);
@@ -48,10 +42,5 @@ class DocumentTemplate extends Model
         } else {
             return false;
         }
-    }
-
-    public function documentType()
-    {
-        return $this->belongsTo(DocumentType::class, 'document_type_id', 'id');
     }
 }

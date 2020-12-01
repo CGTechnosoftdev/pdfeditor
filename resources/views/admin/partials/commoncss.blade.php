@@ -5,7 +5,7 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/Ionicons/css/ionicons.min.css') }}">
 <!-- jQueryDatatable -->
-<link  href="{{ asset('public/admin/plugins/jQueryDatatable/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('public/admin/plugins/jQueryDatatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('public/admin/dist/css/AdminLTE.min.css') }}">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
@@ -20,7 +20,8 @@
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/icheck/all.css') }}">
 <!-- datepicker -->
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
-
+<!-- Select 2 -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/select2/dist/css/select2.min.css') }}">
 <!-- Style -->
 <link rel="stylesheet" href="{{ asset('public/admin/style.css') }}">
 <!-- Custom -->

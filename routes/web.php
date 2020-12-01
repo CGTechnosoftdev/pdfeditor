@@ -71,6 +71,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 		//email-template
 		Route::resource('email-template', 'EmailTemplateController');
+
+		//email-template
+		Route::resource('legal-form', 'LegalFormController');
 	});
 });
 

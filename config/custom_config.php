@@ -46,6 +46,7 @@ return [
         'email-template' => 'EmailTemplate',
         'document_type' => 'DocumentType',
         'document_template' => 'DocumentTemplate',
+        'legal_form' => 'LegalForm',
 
     ],
     'date_format_arr' => [

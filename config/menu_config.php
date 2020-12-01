@@ -57,6 +57,13 @@ return [
             'permissions' => ['top-100-form-list'],
         ],
         [
+            'label' => '360 Legal Forms',
+            'icon' => 'file',
+            'route_name' => 'legal-form.index',
+            'active_segments' => ['legal-form'],
+            'permissions' => ['360-legal-form-list'],
+        ],
+        [
             'label' => 'Email Template',
             'icon' => 'envelope',
             'route_name' => 'email-template.index',
