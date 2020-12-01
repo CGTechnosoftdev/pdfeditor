@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Paystub Creator</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../public/front/css/all.css">
+    <!-- Bootstrap CSS -->
+    <link href="../public/front/css/bootstrap.min.css" rel="stylesheet">
+    <!-- OWL carousel CSS -->
+    <link rel='stylesheet' href='../public/front/css/owl.carousel.min.css'>
+
+    <!-- upload Multi Files -->
+    <link rel="stylesheet" href="../public/front/css/dropzone.css">
+
+    <!-- Custom CSS -->
+    <link href="../public/front/css/style.css" rel="stylesheet">
+    <!-- Responsive CSS -->
+    <link href="../public/front/css/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class="navigation-wrap start-header white-bg-nav start-style">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md navbar-light">
+
+                        <a class="navbar-brand" href="" target="_blank"><img src="../public/front/images/logo-green.png" alt=""></a>
+                        <button type="button" id="sidebarCollapse" class="btn text-sidebar bg-turbo-yellow">
+                            <i class="fas fa-align-left"></i>
+                            <span></span>
+                        </button>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Docs</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">For Business</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Developers</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Features</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item more">
+                                    <a class="nav-link" href="#"><i class="fas fa-th-large"></i></a>
+                                </li>
+                                <li class="nav-item notifications">
+                                    <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                                </li>
+                                <li class="dropdown user user-menu">
+                                    <a href="##" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                        <span><img src="../public/admin/dist/img/avatar.png" class="user-image" alt="PDFWriter Admin Image"></span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- <ul class="navbar-nav ml-auto">
+                                <li class="dropdown user user-menu">
+                                    <a href="##" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span><img src="../public/admin/dist/img/avatar.png" class="user-image" alt="PDFWriter Admin Image"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li>
+                            </ul> -->
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="user-panel">
+                <div class="image">
+                    <img src="../public/front/images/user.jpg" class="rounded-circle" alt="User Image">
+                </div>
+                <div class="info">
+                    <p>bootstrap develop</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <a href="#" class="free-trial">Sign Up Free Trial</a>
+
+            <ul class="list-unstyled components">
+                <!-- <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li>
+                    <a href="#"><span><img src="../public/front/images/account-card-details.svg"></span>Account Information</a>
+                </li>
+                <li class="active">
+                    <a href="#"><span><img src="../public/front/images/payment.svg"></span>Subscription & Payment</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/settings.svg"></span>Settings</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/integrations.svg"></span>Integrations</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/user-circle.svg"></span>Personal Information</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/audit-trial.svg"></span>Audit Trail</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/custom-branding.svg"></span>Custom Branding</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/address-book.svg"></span>Address Book</a>
+                </li>
+                <li>
+                    <a href="#"><span><img src="../public/front/images/api.svg"></span>API</a>
+                </li>
+            </ul>
+
+            <!-- <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="#" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul> -->
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="main-title">
+                <h2>Subscription & Payment</h2>
+            </div>
+            <div class="card">
+                <div class="subscript-and-payment">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Plan Subscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Payment Method</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Payment History</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 mb-3">
+                                    <div class="plan-card">
+                                        <h4>Your Plan</h4>
+                                        <div class="plan-status account-plan">
+                                            <h2>$20.00</h2>
+                                            <p>Per Month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 mb-3">
+                                    <div class="plan-card">
+                                        <h4>Your Plan</h4>
+                                        <div class="plan-status plan-paid">
+                                            <h2>Paid</h2>
+                                            <p>Subscribed on 08-08-2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="plan-pricing">
+                                        <h5>Your Plan Pricing</h5>
+                                        <ul>
+                                            <li><span class="title">Price per user per month</span> - <strong>$20.00</strong></li>
+                                            <li><span class="title">Account minimum charge</span> - <strong>$20.00</strong></li>
+                                        </ul>
+                                        <button class="btn btn-cancel">Cancel Subscription</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="create-new-card">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="account-discription ">Billing Account Description</label>
+                                                <input type="text" class="form-control" id="account-discription" placeholder="Billing Account Description">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="invoice-email">Invoice Email</label>
+                                                <input type="email" class="form-control" id="invoice-email" placeholder="Invoice Email">
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-7 offset-md-1">
+                                        <div class="user-card">
+                                            <div class="name-and-type">
+                                                <span class="card-holder-name">Card Holder Name</span>
+                                                <span class="card-type-logo">Visa</span>
+                                            </div>
+                                            <div class="card-number">XXXX-XXXX-XXXX-2589</div>
+                                            <div class="expiry-date">03/22</div>
+                                        </div>
+                                        <button class="btn edit-card">Edit Card</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="payment-history-table">
+                                <div class="table-responsive">
+                                    <table class="table table-layout-fixed">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Date Billed</th>
+                                                <th scope="col">Date Paid</th>
+                                                <th class="billing-peroid" scope="col">Billing Peroid</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Oct 25, 2020</td>
+                                                <td>Sep 28, 2020 - Oct 28, 2020</td>
+                                                <td>$60.00</td>
+                                                <td>Paid</td>
+                                                <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="../public/front/js/jquery-3.5.1.min.js"></script>
+    <script src="../public/front/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../public/front/js/bootstrap.min.js"></script>
+    <!-- OWL carousel JS -->
+    <script src='../public/front/js/owl.carousel.min.js'></script>
+
+    <!-- MatchHeight JavaScript -->
+    <script type="text/javascript" src="../public/front/js/jquery.matchHeight.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script type="text/javascript" src="../public/front/js/custom.js"></script>
+
+</body>
+
+</html>
