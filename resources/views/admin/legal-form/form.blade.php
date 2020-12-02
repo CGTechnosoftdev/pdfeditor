@@ -29,6 +29,9 @@
                     <div class="form-group {{ $errors->has('form') ? ' has-error' : '' }}">
                         <label for="name" class="control-label text-left control-label col-sm-4 required">
                             Form
+                            @if(empty($legal_form->form))
+                            <span class="required-label">*</span>
+                            @endif
                         </label>
                         <div class="col-sm-8">
                             {{ Form::file('form',old('form'),array('class'=>"form-control"))}}

@@ -26,15 +26,15 @@ class LegalFormFormRequest extends FormRequest
     public function rules()
     {
         $id = NULL;
-        $file_required = 'required';
+        $form_required = 'required';
         if ($this->legal_form) {
             $id = $this->legal_form->id;
-            $file_required = 'nullable|sometimes';
+            $form_required = 'nullable|sometimes';
         }
 
         return [
             'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:360_legal_forms,name,' . $id . ',id,deleted_at,NULL',
-            'file' => $file_required . '|mimes:pdf',
+            'form' => $form_required . '|mimes:pdf',
             'description' => 'sometimes|nullable',
             'keywords' => 'sometimes|nullable',
         ];
