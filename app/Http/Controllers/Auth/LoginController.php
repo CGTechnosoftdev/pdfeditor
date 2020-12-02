@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-    	$this->middleware('guest:web')->except('logout');
+        $this->middleware('guest:web')->except('logout');
     }
 
     /**
@@ -48,35 +48,35 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-    	$user_roles = $user->roles->pluck('id')->toArray();
-    	if(in_array(config('constant.USER_ROLE'),$user_roles)){
-    		Auth::logout();
-    		return $this->sendFailedLoginResponse($request);
-    	}
+        $user_roles = $user->roles->pluck('id')->toArray();
+        if (in_array(config('constant.USER_ROLE'), $user_roles)) {
+            $this->guard()->logout();
+            return $this->sendFailedLoginResponse($request);
+        }
 
-    	if($user->status == config('constant.STATUS_INACTIVE')){
-    		Auth::logout();
-    		set_flash('error', 'Your account is Inactive. Please contact to Administrator',false);
-    		return redirect()->route('login');
-    	}
+        if ($user->status == config('constant.STATUS_INACTIVE')) {
+            $this->guard()->logout();
+            set_flash('error', 'Your account is Inactive. Please contact to Administrator', false);
+            return redirect()->route('login');
+        }
 
-    	if($user->status == config('constant.STATUS_BLOCKED')){
-    		Auth::logout();
-    		set_flash('error', 'Your account is Blocked. Please contact to Administrator',false);
-    		return redirect()->route('login');
-    	}
+        if ($user->status == config('constant.STATUS_BLOCKED')) {
+            $this->guard()->logout();
+            set_flash('error', 'Your account is Blocked. Please contact to Administrator', false);
+            return redirect()->route('login');
+        }
 
-    	if($user->status ==  config('constant.STATUS_PENDING')){
-    		Auth::logout();
-    		set_flash('error', 'Your account is Pending. Please contact to Administrator',false);
-    		return redirect()->route('login');
-    	}
+        if ($user->status ==  config('constant.STATUS_PENDING')) {
+            $this->guard()->logout();
+            set_flash('error', 'Your account is Pending. Please contact to Administrator', false);
+            return redirect()->route('login');
+        }
     }
 
     public function logout(Request $request)
     {
-    	$this->guard()->logout();
-    	return redirect($this->redirectTo);
+        $this->guard()->logout();
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -86,6 +86,6 @@ class LoginController extends Controller
      */
     protected function guard()
     {
-    	return Auth::guard('web');
+        return Auth::guard('web');
     }
 }
