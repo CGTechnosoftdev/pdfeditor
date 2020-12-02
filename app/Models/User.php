@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'first_name', 'last_name', 'profile_picture', 'gender', 'country_id', 'contact_number', 'email', 'password', 'status', 'image', 'provider', 'provider_id', 'subscription_status', 'subscription_plan_id', 'subscription_plan_amount', 'subscription_plan_type', 'stripe_customer_id'
+        'parent_id', 'first_name', 'last_name', 'profile_picture', 'gender', 'country_id', 'contact_number', 'email', 'password', 'status', 'image', 'provider', 'provider_id', 'subscription_status', 'subscription_plan_id', 'subscription_plan_amount', 'subscription_plan_type', 'stripe_customer_id', 'social_name'
     ];
 
     protected $appends = [

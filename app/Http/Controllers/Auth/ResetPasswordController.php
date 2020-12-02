@@ -18,7 +18,7 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords{
+    use ResetsPasswords {
         rules as presetRules;
     }
 
@@ -39,11 +39,12 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8|max:32|regex:'.config('constant.PASSWORD_REGEX'),
+            'password' => 'required|confirmed|min:8|max:32|regex:' . config('constant.PASSWORD_REGEX'),
         ];
     }
 }

@@ -77,16 +77,10 @@ class DocumentTemplateController extends AdminBaseController
 
     public function create()
     {
-        $document_row_results = DocumentType::select('id', 'name')
-            ->where(['status' => config("constant.STATUS_ACTIVE")])
-            ->get()->toArray();
-        $document_type_list = array("" => "--Select--");
-        if (!empty($document_row_results)) {
-            foreach ($document_row_results as $index => $result_data_array) {
-                $document_type_list[$result_data_array["id"]] = $result_data_array["name"];
-            }
-            $document_type_list = $document_type_list;
-        }
+        $document_row_results = DocumentType::dataList()
+            ->pluck('name', 'id')->toArray();
+        $document_type_list = array("" => "--Select--") + $document_row_results;
+
 
         $data_array = [
             'title' => 'Add Document Template',

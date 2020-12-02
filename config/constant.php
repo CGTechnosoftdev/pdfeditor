@@ -36,6 +36,7 @@ return [
     'PAYMENT_STATUS_FAILED' => '2',
 
     'DEFAULT_CURRNCY' => "USD",
+    'USD_SYMBOL' => "$",
     'PUBLIC_DATE_FORMAT' => "d-m-Y",
     'PUBLIC_TIME_FORMAT' => "h:i A",
     'PUBLIC_DATE_TIME_FORMAT' => "d-m-Y h:i A",
