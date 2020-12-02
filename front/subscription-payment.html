@@ -275,7 +275,7 @@
                                             <div class="card-number">XXXX-XXXX-XXXX-2589</div>
                                             <div class="expiry-date">03/22</div>
                                         </div>
-                                        <button class="btn edit-card">Edit Card</button>
+                                        <button class="btn edit-card" data-toggle="modal" data-target="#edit_card">Edit Card</button>
                                     </div>
                                 </div>
                             </div>
@@ -387,6 +387,88 @@
         </div>
     </div>
 
+    <div class="modal fade more-options payment-info-modal" id="edit_card" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Payment Info</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name_on_card">Name On Card</label>
+                                        <input type="text" class="form-control" id="name_on_card" placeholder="Name On Card">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="card_number">Card Number</label>
+                                        <input type="text" class="form-control" id="card_number" placeholder="Card Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="card_number">Expiry</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <select class="my-dropdown form-control">
+                                                <option disabled="disabled" value="0">Month</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="my-dropdown form-control">
+                                                <option disabled="disabled" value="0">Year</option>
+                                                <option value="1">2010</option>
+                                                <option value="2">2011</option>
+                                                <option value="3">2012</option>
+                                                <option value="4">2013</option>
+                                                <option value="5">2014</option>
+                                                <option value="6">2015</option>
+                                                <option value="7">2016</option>
+                                                <option value="8">2017</option>
+                                                <option value="9">2018</option>
+                                                <option value="10">2019</option>
+                                                <option value="11">2020</option>
+                                                <option value="12">2021</option>
+                                              </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="card_number">CVV</label>
+                                        <input type="password" class="form-control" id="cvv" placeholder="CVV">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+    </div>
     <!-- JQuery -->
     <script type="text/javascript" src="../public/front/js/jquery-3.5.1.min.js"></script>
     <script src="../public/front/js/popper.min.js"></script>
