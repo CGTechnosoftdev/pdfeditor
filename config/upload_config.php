@@ -45,8 +45,8 @@ return [
         'max_allowed_size' => '2000'
     ],
     '360_legal_form' => [
-        'label' => 'File',
-        'file_input' => 'file',
+        'label' => 'Form',
+        'file_input' => 'form',
         'disk' => 'public',
         'folder' => '360_legal_form',
         'delete_previous' => true,
