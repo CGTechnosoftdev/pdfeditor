@@ -126,4 +126,39 @@ return [
         ],
         'order' => [[0, 'desc']]
     ],
+    'document-type' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'uploaded_documents_count', 'name' => 'uploaded_documents_count', 'label' => 'Uploaded Documents', 'searchable' => false, 'orderable' => false],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    'document-template' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'document_type_name', 'name' => 'document_type_name', 'label' => 'Document Type', 'orderBy' => 'asc'],
+            ['data' => 'template_file_url', 'name' => 'template_file_url', 'label' => 'File', 'searchable' => false, 'orderable' => false],
+            ['data' => 'is_popular_status', 'name' => 'is_popular_status', 'label' => 'Is Popular', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    '360-legal-form' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'form_url', 'name' => 'form_url', 'label' => 'Form', 'searchable' => false, 'orderable' => false],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+        ],
+        'order' => [[0, 'desc']]
+    ],
 ];

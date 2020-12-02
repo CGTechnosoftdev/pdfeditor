@@ -148,6 +148,8 @@ return [
     'attributes' => [
         'contact_number' => 'phone number',
         'subscription_plan_id' => 'subscription plan',
+        'document_type_id' => 'document type',
+        'template_file' => 'file',
     ],
 
 ];

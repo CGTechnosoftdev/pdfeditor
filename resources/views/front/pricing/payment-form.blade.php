@@ -42,14 +42,19 @@
 							@foreach($subscription_plan_type_arr as $plan_type_id => $plan_type)
 							@php $type = strtolower($plan_type)."_amount"; @endphp
 							<span class="{{strtolower($plan_type)}}-element {{$subscription_plan_type==$plan_type_id ? '' : 'd-none'}}">
-								After {{$trail_days}} days {{myCurrencyFormat($subscription_plan->$type)}} {{strtolower($plan_type)}}
+								After {{$trail_days}} days
+								{{myCurrencyFormat($promo_data->$type ?? $subscription_plan->$type)}}
+								{{strtolower($plan_type)}}
 							</span>
 							@endforeach
 							@else
 							@foreach($subscription_plan_type_arr as $plan_type_id => $plan_type)
 							@php $type = strtolower($plan_type)."_amount"; @endphp
 							<strong class="{{strtolower($plan_type)}}-element {{$subscription_plan_type==$plan_type_id ? '' : 'd-none'}}">
-								Today's charge:<b>{{myCurrencyFormat($subscription_plan->$type)}}</b>
+								Today's charge:
+								<b>
+									{{myCurrencyFormat($promo_data->$type ?? $subscription_plan->$type)}}
+								</b>
 							</strong>
 							@endforeach
 							@endif

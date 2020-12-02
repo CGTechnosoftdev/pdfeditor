@@ -50,6 +50,12 @@ Route::group(['prefix' => 'admin'], function () {
 		//business-categories
 		Route::resource('business-category', 'BusinessCategoryController', ['except' => ['show']]);
 
+		//document-type
+		Route::resource('document-type', 'DocumentTypeController', ['except' => ['show']]);
+
+		//document-template
+		Route::resource('document-template', 'DocumentTemplateController', ['except' => ['show']]);
+
 		//subadmin
 		Route::resource('sub-admin', 'SubAdminController');
 
@@ -69,6 +75,9 @@ Route::group(['prefix' => 'admin'], function () {
 		//user
 		Route::resource('user', 'UserController');
 		Route::post('user/save-note/{user}', 'UserController@saveNote')->name('user.save-note');
+
+		//email-template
+		Route::resource('legal-form', 'LegalFormController');
 	});
 });
 
@@ -98,6 +107,8 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::post('/login', 'Auth\FrontLoginController@login')->name('login');
 	Route::post('/logout', 'Auth\FrontLoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
+	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
+
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

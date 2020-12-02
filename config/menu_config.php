@@ -64,6 +64,13 @@ return [
             'permissions' => ['top-100-form-list'],
         ],
         [
+            'label' => '360 Legal Forms',
+            'icon' => 'file',
+            'route_name' => 'legal-form.index',
+            'active_segments' => ['legal-form'],
+            'permissions' => ['360-legal-form-list'],
+        ],
+        [
             'label' => 'Email Template',
             'icon' => 'envelope',
             'route_name' => 'email-template.index',
@@ -76,6 +83,20 @@ return [
             'route_name' => 'general-setting.index',
             'active_segments' => ['general-setting'],
             'permissions' => ['general-setting-list'],
+        ],
+        [
+            'label' => 'Document Type',
+            'icon' => 'building',
+            'route_name' => 'document-type.index',
+            'active_segments' => ['document-type'],
+            'permissions' => ['document-type-list'],
+        ],
+        [
+            'label' => 'Document Template',
+            'icon' => 'building',
+            'route_name' => 'document-template.index',
+            'active_segments' => ['document-template'],
+            'permissions' => ['document-template-list'],
         ],
         // [
         //     'label' => 'User',

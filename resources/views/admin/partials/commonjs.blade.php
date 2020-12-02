@@ -11,6 +11,8 @@
 <script src="{{ asset('public/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- datepicker -->
 <script src="{{ asset('public/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- select 2 -->
+<script src="{{ asset('public/admin/bower_components/select2/dist/js/select2.min.js') }}"></script>
 <!-- BlockUI -->
 <script src="{{ asset('public/admin/bower_components/block-ui/jquery.blockUI.js') }}" type="text/javascript"></script>
 <!-- Admin lte -->
