@@ -27,11 +27,12 @@ function copyToClipboard(element) {
 
 
 jQuery(document).ready(function() {
-
+    //Select2
     $(".select2-token").select2({
         tags: true,
         tokenSeparators: [',']
     });
+
     /*** Tool Tip ***/
     $('[data-toggle="tooltip"]').tooltip();
 

@@ -26,37 +26,67 @@
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="first_name" class="control-label text-left col-sm-6 required">Last Name</label>
+								<label for="last_name" class="control-label text-left col-sm-6 required">Last Name</label>
 								<div class="col-sm-6">
 									{{ $user->last_name }}
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="first_name" class="control-label text-left col-sm-6 required">Role</label>
+								<label for="role_name" class="control-label text-left col-sm-6 required">Role</label>
 								<div class="col-sm-6">
 									{{ $user->role_name }}
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="first_name" class="control-label text-left col-sm-6 required">Email</label>
+								<label for="email" class="control-label text-left col-sm-6 required">Email</label>
 								<div class="col-sm-6">
 									{{ $user->email }}
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="first_name" class="control-label text-left col-sm-6 required">Gender</label>
+								<label for="gender_name" class="control-label text-left col-sm-6 required">Gender</label>
 								<div class="col-sm-6">
 									{{ $user->gender_name }}
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="first_name" class="control-label text-left col-sm-6 required">Phone Number</label>
+								<label for="contact_number" class="control-label text-left col-sm-6 required">Phone Number</label>
 								<div class="col-sm-6">
 									{{ $user->contact_number }}
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="first_name" class="control-label text-left col-sm-6 required">Status</label>
+								<label for="subscription_status" class="control-label text-left col-sm-6 required">Subscription Status</label>
+								<div class="col-sm-6">
+									{{ $user->subscription_status_name }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="plan_name" class="control-label text-left col-sm-6 required">Current Plan</label>
+								<div class="col-sm-6">
+									{{ $user->plan_name }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="plan_expiry" class="control-label text-left col-sm-6 required">Plan Expiry</label>
+								<div class="col-sm-6">
+									{{ $user->plan_expiry }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="upcoming_renewal_plan" class="control-label text-left col-sm-6 required">Upcoming Renewal Plan</label>
+								<div class="col-sm-6">
+									{{ $user->getUpcomingRenewalPlan() }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="upcoming_renewal_amount" class="control-label text-left col-sm-6 required">Upcoming Renewal Amount</label>
+								<div class="col-sm-6">
+									{{ $user->getUpcomingRenewalAmount() }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="status_name" class="control-label text-left col-sm-6 required">Status</label>
 								<div class="col-sm-6">
 									{{ $user->status_name }}
 								</div>
@@ -69,12 +99,15 @@
 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#notes-modal">
 							Add Note
 						</button>
-						<button class="btn btn-success">Billing History</button>
+						<a href="{{route('user.billing-history',$user->id)}}">
+							<button class="btn btn-success">Billing History</button>
+						</a>
 						<button class="btn btn-success" data-toggle="modal" data-target="#update-plan-modal">
 							Update Plan
 						</button>
-						<a href="{{route('front.login-as-user',$user->id)}}" target="_blank" class="btn btn-success">
-							Login as User
+						<a href="{{route('front.login-as-user',$user->id)}}" target="_blank">
+							<button class="btn btn-success">Login as User</button>
+
 						</a>
 					</div>
 				</div>
@@ -109,34 +142,46 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Update Plan</h4>
+				<h4 class="modal-title">Update Renewal Plan</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="">
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="current_plan">Current Plan</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="current_plan" placeholder="Current Plan">
+				{{ Form::open(['route' => ['user.update-plan',$user->id],'method'=>'post','class'=>'form-horizontal','id' => 'plan-form']) }}
+				{{ Form::hidden("_token", csrf_token())}}
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="plan_name">Plan Name<span class="required-label">*</span></label>
+					<div class="col-sm-8">
+						{!! Form::select('plan_name',$subscription_plan_arr, $user->subscription_plan_id, ['class'=>'form-control']) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="play_type">Plan Type<span class="required-label">*</span></label>
+					<div class="col-sm-8">
+						{!! Form::select('play_type',$plan_type_arr, $user->subscription_plan_type, ['class'=>'form-control']) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="plan_amount">Plan Amount<span class="required-label">*</span></label>
+					<div class="col-sm-8">
+						{{ Form::number('plan_amount',$user->subscription_plan_amount,['class'=>"form-control",'min'=>0, 'step'=>0.50])}}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="date">Renewal Date<span class="required-label">*</span></label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							{{ Form::text('renewal_date',$user->plan_expiry,['class'=>"form-control datepicker"]) }}
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="plan_amount">Plan Amount</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="plan_amount" placeholder="Plan Amount">
-						</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-8">
+						<button type="submit" class="btn btn-success">Submit</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="date">Date</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control date" id="date" placeholder="Select">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-8">
-							<button type="submit" class="btn btn-success">Submit</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
+				</div>
 				</form>
 			</div>
 		</div>
@@ -178,8 +223,15 @@
 <!-- /.content -->
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\UserNoteFormRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserNoteFormRequest','#note-form') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UserPlanUpdateFormRequest','#plan-form') !!}
 <script>
+	$('.datepicker').datepicker({
+		autoclose: true,
+		format: "{{ (config('custom_config.js_date_format_arr')[config('general_settings.date_format')]) }}",
+		startDate: "-1",
+		todayHighlight: true,
+	});
 	$(document).ready(function($) {
 
 	});

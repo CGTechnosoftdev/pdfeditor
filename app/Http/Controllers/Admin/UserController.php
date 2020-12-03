@@ -8,8 +8,12 @@ use App\Models\Country;
 use App\Models\UserNote;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserFormRequest;
+use App\Http\Requests\UserNoteFormRequest;
+use App\Http\Requests\UserPlanUpdateFormRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommonMail;
+use App\Models\UserSubscription;
+use App\Models\SubscriptionPlan;
 use DB;
 
 class UserController extends AdminBaseController
@@ -223,6 +227,12 @@ class UserController extends AdminBaseController
             'label' => 'Back',
             'link'  => route('user.index'),
         ];
+        $subscription_plan_arr = SubscriptionPlan::dataList()->pluck('name', 'id')->toArray();
+        if (!array_key_exists($user->subscription_plan_id, $subscription_plan_arr)) {
+            $subscription_plan_arr[$user->subscription_plan_id] = $user->subscriptionPlan->name;
+        }
+        $data_array['subscription_plan_arr'] = $subscription_plan_arr;
+        $data_array['plan_type_arr'] = config('custom_config.plan_type_arr');
         return view('admin.user.view', $data_array);
     }
 
@@ -251,7 +261,7 @@ class UserController extends AdminBaseController
         return redirect()->route('user.index');
     }
 
-    public function saveNote(User $user, Request $request)
+    public function saveNote(User $user, UserNoteFormRequest $request)
     {
         $input_data = $request->input();
         $input_data['user_id'] = $user->id;
@@ -262,6 +272,63 @@ class UserController extends AdminBaseController
         } else {
             $response_type = 'error';
             $response_message = 'Error occoured, Please try again.';
+        }
+        set_flash($response_type, $response_message);
+        return redirect()->route('user.show', $user->id);
+    }
+
+    public function billingHistory(User $user, Request $request)
+    {
+        $filter_data = $request->input();
+        if (request()->ajax()) {
+            $model = UserSubscription::where('user_id', $user->id);
+            if (!empty($filter_data['rangeFilter'])) {
+                list($start, $end) = explode(' to ', $filter_data['rangeFilter']);
+                $model->whereBetween(\DB::raw('DATE(created_at)'), [changeDateFormat($start, 'db'), changeDateFormat($end, 'db')]);
+            }
+            $table = Datatables()->of($model->get());
+            $table->addIndexColumn();
+            return $table->make(true);
+        }
+        $data_array = [
+            'title' => "Billing History for " . $user->full_name,
+            'heading' => "Billing History for " . $user->full_name,
+            'user' => $user
+        ];
+        $data_array['data_table'] = [
+            'data_source' => route('user.billing-history', $user->id),
+            'data_column_config' => config('datatable_column.user-billing-history'),
+            'filter_view' => view("admin.datatable.filter")->render(),
+        ];
+        $data_array['back_button'] = [
+            'label' => "Back to the user's details",
+            'link'  => route('user.show', $user->id),
+        ];
+        return view('admin.user.billing-history', $data_array);
+    }
+
+    public function updatePlan(User $user, UserPlanUpdateFormRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $input_data = $request->all();
+            $user_data = [
+                'subscription_plan_id' => $input_data['plan_name'],
+                'subscription_plan_type' => $input_data['play_type'],
+                'subscription_plan_amount' => $input_data['plan_amount'],
+            ];
+            $user_subscription_data = [
+                'end' => $input_data['renewal_date'] . " " . date("H:i:s")
+            ];
+            $user = User::saveData($user_data, $user);
+            $user->lastSubscriptionDetail = UserSubscription::saveData($user_subscription_data, $user->lastSubscriptionDetail);
+            DB::commit();
+            $response_type = 'success';
+            $response_message = "Plan Update successfully";
+        } catch (Exception $e) {
+            DB::rollback();
+            $response_type = 'error';
+            $response_message = $e->getMessage() ?? 'Error occoured, Please try again.';
         }
         set_flash($response_type, $response_message);
         return redirect()->route('user.show', $user->id);

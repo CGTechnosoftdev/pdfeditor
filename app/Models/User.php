@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name', 'profile_picture_url', 'gender_name', 'role_name', 'status_name', 'general_setting'
+        'full_name', 'profile_picture_url', 'gender_name', 'role_name', 'status_name', 'general_setting', 'plan_name', 'plan_expiry', 'subscription_status_name'
     ];
 
     protected $dates = ['deleted_at'];
@@ -88,6 +88,32 @@ class User extends Authenticatable
         return GeneralSetting::dataRow($user_id);
     }
 
+    public function getPlanNameAttribute()
+    {
+        return $this->lastSubscriptionDetail->plan_name;
+    }
+    public function getPlanExpiryAttribute()
+    {
+        return $this->lastSubscriptionDetail->plan_expiry;
+    }
+
+    public function getUpcomingRenewalPlan()
+    {
+        $plan_type_arr = config('custom_config.plan_type_arr');
+        return $this->subscriptionPlan->name . " (" . $plan_type_arr[$this->subscription_plan_type] . ")";
+    }
+
+    public function getUpcomingRenewalAmount()
+    {
+        return myCurrencyFormat($this->subscription_plan_amount);
+    }
+
+    public function getSubscriptionStatusNameAttribute()
+    {
+        $subscrption_status_arr = config('custom_config.subscription_status_arr');
+        return  $subscrption_status_arr[$this->subscription_status] ?? '';
+    }
+
 
     /**
      * [saveData description]
@@ -133,6 +159,16 @@ class User extends Authenticatable
     public function notes()
     {
         return $this->hasMany(UserNote::class, 'user_id', 'id');
+    }
+
+    public function subscriptionPlan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
+    }
+
+    public function lastSubscriptionDetail()
+    {
+        return $this->hasOne(UserSubscription::class, 'user_id', 'id')->latest();
     }
 
     /**

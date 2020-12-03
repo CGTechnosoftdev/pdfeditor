@@ -33,6 +33,19 @@ return [
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
+    'payment_status_arr' => [
+        '0' => 'Pending',
+        '1' => 'Success',
+        '2' => 'Failed',
+    ],
+    'subscription_status_arr' => [
+        '0' => 'Inactive',
+        '1' => 'Active',
+        '2' => 'Expired',
+        '3' => 'In Trail',
+        '4' => 'Cancelled',
+
+    ],
     'model_arr' => [
         'user' => 'User',
         'role' => 'Role',
@@ -61,6 +74,12 @@ return [
         'Y-m-d' => 'yyyy/mm/dd',
         'M d,Y' => 'M dd, yyyy',
     ],
+    'daterangepicker_date_format_arr' => [
+        'd-m-Y' => 'DD-MM-YYYY',
+        'm/d/Y' => 'DD/MM/YYYY',
+        'Y-m-d' => 'YYYY/MM/DD',
+        'M d,Y' => 'MMM DD, YYYY',
+    ],
     'time_format_arr' => [
         'h:i:s' => 'h:i:s',
         'H:i:s' => 'H:i:s',
@@ -70,7 +89,8 @@ return [
         '10' => '10',
         '25' => '25',
         '50' => '50',
-        '100' => '100'
+        '100' => '100',
+        '-1' => 'All'
     ],
     'currency_arr' => [
         [

@@ -119,8 +119,9 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
             ['data' => 'first_name', 'name' => 'first_name', 'label' => 'First Name', 'orderBy' => 'asc'],
             ['data' => 'last_name', 'name' => 'last_name', 'label' => 'Last Name', 'orderBy' => 'asc'],
-            ['data' => 'email', 'name' => 'email', 'label' => 'Email', 'orderBy' => 'asc'],
             ['data' => 'contact_number', 'name' => 'contact_number', 'label' => 'Phone Number', 'orderBy' => 'asc'],
+            ['data' => 'plan_name', 'name' => 'plan_name', 'label' => 'Plan Name', 'orderBy' => 'asc'],
+            ['data' => 'subscription_status_name', 'name' => 'subscription_status_name', 'label' => 'Subscription Status', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
             ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
         ],
@@ -158,6 +159,19 @@ return [
             ['data' => 'form_url', 'name' => 'form_url', 'label' => 'Form', 'searchable' => false, 'orderable' => false],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
             ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    'user-billing-history' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'reference_id', 'name' => 'reference_id', 'label' => 'Transaction ID', 'orderBy' => 'asc'],
+            ['data' => 'transaction_date_time', 'name' => 'transaction_date_time', 'label' => 'Transaction Date/Time', 'orderBy' => 'asc'],
+            ['data' => 'payment_method', 'name' => 'payment_method', 'label' => 'Payment Method', 'orderBy' => 'asc'],
+            ['data' => 'plan_name', 'name' => 'plan_name', 'label' => 'Plan Name', 'orderBy' => 'asc'],
+            ['data' => 'plan_amount', 'name' => 'plan_amount', 'label' => 'Plan Amount', 'orderBy' => 'asc'],
+            ['data' => 'payment_status', 'name' => 'payment_status', 'label' => 'Payment Status', 'orderBy' => 'asc'],
         ],
         'order' => [[0, 'desc']]
     ],

@@ -316,13 +316,15 @@ function addYearsToDate($years, $date = '')
  * @param             string        $suffix [description]
  * @return            [type]                [description]
  */
-function myCurrencyFormat($amount)
+function myCurrencyFormat($amount, $currency_attribute = '')
 {
 	$return = "0.00";
 	if (!is_nan($amount)) {
 		$return = number_format($amount, 2);
 	}
-	$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	if (empty($currency_attribute)) {
+		$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	}
 	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'), 'symbol', 'key');
 	return $currency_arr[$currency_attribute] . $return;
 }

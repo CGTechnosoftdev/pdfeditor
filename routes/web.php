@@ -75,6 +75,8 @@ Route::group(['prefix' => 'admin'], function () {
 		//user
 		Route::resource('user', 'UserController');
 		Route::post('user/save-note/{user}', 'UserController@saveNote')->name('user.save-note');
+		Route::post('user/update-plan/{user}', 'UserController@updatePlan')->name('user.update-plan');
+		Route::get('user/billing-history/{user}', 'UserController@billingHistory')->name('user.billing-history');
 
 		//email-template
 		Route::resource('legal-form', 'LegalFormController');
