@@ -74,7 +74,9 @@ $paggingArray = config('custom_config.paging_limit_arr');
 				complete: function(response) {
 					if (init_data == 1) {
 						$('#daterange').daterangepicker({
+							opens: 'left',
 							locale: {
+								cancelLabel: 'Clear',
 								separator: " to ",
 								format: "{{ (config('custom_config.daterangepicker_date_format_arr')[config('general_settings.date_format')]) }}",
 							}
@@ -89,7 +91,11 @@ $paggingArray = config('custom_config.paging_limit_arr');
 				"regex": true
 			},
 			columns: JSON.parse(columnsList),
-			dom: 'lBfrtip',
+			language: {
+				search: '',
+				searchPlaceholder: "Search"
+			},
+			dom: 'lfBrtip',
 			buttons: [{
 				"extend": "excel",
 				exportOptions: {
@@ -115,7 +121,10 @@ $paggingArray = config('custom_config.paging_limit_arr');
 			$(filterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
 		}
 		$('#daterange').on('apply.daterangepicker', function(ev, picker) {
-			console.log("Hello");
+			table.draw();
+		});
+		$('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+			$(this).val('');
 			table.draw();
 		});
 	});

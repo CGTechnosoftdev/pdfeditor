@@ -65,8 +65,8 @@ class PromoUrlController extends AdminBaseController
 		}
 
 		$data_array = [
-			'title' => 'Promo URL',
-			'heading' => 'Manage Promo URL',
+			'title' => 'Promo URLs',
+			'heading' => 'Promo URLs',
 			'breadcrumb' => \Breadcrumbs::render('promo-url.index'),
 			'add_css_heading' => ' add_custom_button_heading',
 		];

@@ -688,3 +688,63 @@ table tr td button {
     background-repeat: no-repeat;
     background-position: 96% center;
 }
+
+
+/*** Date 2/12/2020 ***/
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #F1F1F1;
+    border: 1px solid #F1F1F1;
+    color: #BEBEBE;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    margin-right: 0px;
+    float: right;
+    margin-left: 4px;
+}
+
+.button-wrap {
+    position: relative;
+}
+
+.button-wrap input[type="file"] {
+    position: absolute;
+    z-index: 199;
+    top: 0px;
+    left: 0px;
+    font-size: 15px;
+    color: #ccc;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+}
+
+.new-button {
+    display: inline-block;
+    padding: 10px 28px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #C9F3D8;
+    font-size: 14px;
+    color: #000;
+    font-weight: normal;
+    z-index: 999999;
+    position: relative;
+    min-width: 105px;
+    text-align: center;
+}
+
+.dataTables_filter {
+    display: flex;
+}
+
+.datatable-btn {
+    margin-left: 5px;
+    height: 35px;
+}
+
+.main-sidebar .sidebar .sidebar-menu li {
+    white-space: normal;
+}

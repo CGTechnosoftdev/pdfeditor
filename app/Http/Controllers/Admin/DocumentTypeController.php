@@ -57,8 +57,8 @@ class DocumentTypeController extends AdminBaseController
         }
 
         $data_array = [
-            'title' => 'Document Type',
-            'heading' => 'Manage Document Type',
+            'title' => 'Document Template Types',
+            'heading' => 'Manage Document Template Types',
             'breadcrumb' => \Breadcrumbs::render('document-type.index'),
         ];
         $data_array['add_new_button'] = [

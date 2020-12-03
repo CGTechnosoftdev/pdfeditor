@@ -117,7 +117,7 @@
 								<label for="expiration_date" class="control-label text-left col-sm-4">Expiration Date</label>
 								<div class="col-sm-8">
 									<div class="input-group">
-										{{ Form::text('expiration_date',old('expiration_date'),['placeholder'=>'Expiration Date','class'=>"form-control datepicker",'id'=>'expiration_date']) }}
+										{{ Form::text('expiration_date',old('expiration_date'),['placeholder'=>'Expiration Date','class'=>"form-control datepicker",'id'=>'expiration_date','autocomplete'=>'off']) }}
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>

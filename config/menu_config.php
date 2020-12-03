@@ -43,7 +43,7 @@ return [
             'permissions' => ['subscription-plan-list'],
         ],
         [
-            'label' => 'Promo URL',
+            'label' => 'Promo URLs',
             'icon' => 'tag',
             'route_name' => 'promo-url.index',
             'active_segments' => ['promo-url'],
@@ -64,7 +64,7 @@ return [
             'permissions' => ['top-100-form-list'],
         ],
         [
-            'label' => '360 Legal Forms',
+            'label' => 'Manage 360 Legal Forms',
             'icon' => 'file',
             'route_name' => 'legal-form.index',
             'active_segments' => ['legal-form'],
@@ -85,14 +85,14 @@ return [
             'permissions' => ['general-setting-list'],
         ],
         [
-            'label' => 'Document Type',
+            'label' => 'Manage Document Template Types',
             'icon' => 'building',
             'route_name' => 'document-type.index',
             'active_segments' => ['document-type'],
             'permissions' => ['document-type-list'],
         ],
         [
-            'label' => 'Document Template',
+            'label' => 'Manage Document Templates',
             'icon' => 'building',
             'route_name' => 'document-template.index',
             'active_segments' => ['document-template'],

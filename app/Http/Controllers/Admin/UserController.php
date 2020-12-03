@@ -52,6 +52,7 @@ class UserController extends AdminBaseController
             $table->editColumn('action', function ($row) use ($action_button_template) {
                 $buttons = [
                     'view' => ['route_url' => 'user.show', 'route_param' => [$row->id]],
+                    'billing-history' => ['route_url' => 'user.billing-history', 'route_param' => [$row->id]],
                     'edit' => ['route_url' => 'user.edit', 'route_param' => [$row->id], 'permission' => 'user-edit'],
                     'delete' => ['route_url' => 'user.destroy', 'route_param' => [$row->id], 'permission' => 'user-delete'],
                 ];
@@ -73,7 +74,7 @@ class UserController extends AdminBaseController
         }
         $data_array = [
             'title' => 'User',
-            'heading' => 'Manage User',
+            'heading' => 'User Management',
             'breadcrumb' => \Breadcrumbs::render('user.index'),
         ];
         $data_array['add_new_button'] = [

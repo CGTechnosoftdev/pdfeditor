@@ -34,10 +34,13 @@
                             @endif
                         </label>
                         <div class="col-sm-8">
-                            {{ Form::file('form',old('form'),array('class'=>"form-control"))}}
-                            @if($errors->has('form'))
-                            <span class="help-block"><strong>{{ $errors->first('form') }}</strong></span>
-                            @endif
+                            <div class="button-wrap">
+                                <label class="new-button" for="form"> Browse</label>
+                                {{ Form::file('form',array('class'=>"form-control",'id'=>'form'))}}
+                                @if($errors->has('form'))
+                                <span class="help-block"><strong>{{ $errors->first('form') }}</strong></span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     @if(!empty($legal_form->form))
@@ -49,16 +52,6 @@
                         </div>
                     </div>
                     @endif
-                    <div class="form-group {{ $errors->has('keywords') ? ' has-error' : '' }}">
-                        <label for="keywords" class="control-label text-left col-sm-4 required">Keywords</label>
-                        <div class="col-sm-8">
-                            {!! Form::select('keywords[]',($legal_form->keywords_arr ?? []), ($legal_form->keywords_arr ?? old('keywords_arr')), ['class'=>'form-control select2-token','multiple'=>true]) !!}
-                            @if ($errors->has('keywords'))
-                            <span class="help-block"><strong>{{ $errors->first('keywords') }}</strong></span>
-                            @endif
-                        </div>
-                    </div>
-
 
                     <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="description" class="control-label text-left col-sm-4 required">Description</label>
@@ -69,7 +62,15 @@
                             @endif
                         </div>
                     </div>
-
+                    <div class="form-group {{ $errors->has('keywords') ? ' has-error' : '' }}">
+                        <label for="keywords" class="control-label text-left col-sm-4 required">Keywords</label>
+                        <div class="col-sm-8">
+                            {!! Form::select('keywords[]',($legal_form->keywords_arr ?? []), ($legal_form->keywords_arr ?? old('keywords_arr')), ['class'=>'form-control select2-token','multiple'=>true]) !!}
+                            @if ($errors->has('keywords'))
+                            <span class="help-block"><strong>{{ $errors->first('keywords') }}</strong></span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
                             {!! Form::submit((isset($legal_form)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}

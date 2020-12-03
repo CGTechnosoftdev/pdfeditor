@@ -44,10 +44,13 @@
                             File
                         </label>
                         <div class="col-sm-8">
-                            {{ Form::file('template_file',old('template_file'),array('class'=>"form-control"))}}
-                            @if($errors->has('template_file'))
-                            <span class="help-block"><strong>{{ $errors->first('template_file') }}</strong></span>
-                            @endif
+                            <div class="button-wrap">
+                                <label class="new-button" for="template_file"> Browse</label>
+                                {{ Form::file('template_file',array('class'=>"form-control",'id'=>'form'))}}
+                                @if($errors->has('template_file'))
+                                <span class="help-block"><strong>{{ $errors->first('template_file') }}</strong></span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     @if(!empty($document_template->template_file))
