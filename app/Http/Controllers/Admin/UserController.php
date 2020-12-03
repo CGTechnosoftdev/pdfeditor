@@ -228,7 +228,7 @@ class UserController extends AdminBaseController
             'link'  => route('user.index'),
         ];
         $subscription_plan_arr = SubscriptionPlan::dataList()->pluck('name', 'id')->toArray();
-        if (!array_key_exists($user->subscription_plan_id, $subscription_plan_arr)) {
+        if (!empty($user->subscription_plan_id) && !array_key_exists($user->subscription_plan_id, $subscription_plan_arr)) {
             $subscription_plan_arr[$user->subscription_plan_id] = $user->subscriptionPlan->name;
         }
         $data_array['subscription_plan_arr'] = $subscription_plan_arr;
