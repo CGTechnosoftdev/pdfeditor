@@ -136,4 +136,14 @@ return [
         ],
         'order' => [[0, 'desc']]
     ],
+
+    'subscription-payment' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'start', 'name' => 'start', 'label' => 'Start', 'orderBy' => 'asc'],
+
+        ],
+        'order' => [[0, 'desc']]
+    ],
 ];

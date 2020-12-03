@@ -5,6 +5,7 @@
 <script src="{{ asset('public/front/js/bootstrap.min.js') }}"></script>
 <!-- BlockUI -->
 <script src="{{ asset('public/admin/bower_components/block-ui/jquery.blockUI.js') }}" type="text/javascript"></script>
+
 <!-- OWL carousel JS -->
 <script src="{{ asset('public/front/js/owl.carousel.min.js') }}"></script>
 

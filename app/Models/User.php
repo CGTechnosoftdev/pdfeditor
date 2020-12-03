@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
+use App\Models\UserSubscription;
 use League\OAuth2\Server\Exception\OAuthServerException;
 
 class User extends Authenticatable
@@ -52,6 +53,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function userSubscription()
+    {
+        return $this->hasMany(UserSubscription::class, "user_id", "id");
+    }
 
 
     public function getFullNameAttribute()

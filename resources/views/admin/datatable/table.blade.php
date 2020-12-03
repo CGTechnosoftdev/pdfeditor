@@ -33,6 +33,7 @@
 				<!--end::Form-->
 			</div>
 			<!--end::Portlet-->
+
 		</div>
 	</div>
 </div>
@@ -43,7 +44,7 @@
 	var sourceUrl = '{{ $data_table["data_source"] }}';
 	var columnsList = '{!! json_encode($data_table["data_column_config"]["columns"]) !!}';
 	var order = '{!! json_encode($data_table["data_column_config"]["order"]) !!}';
-	$(document).ready( function () {
+	$(document).ready(function() {
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -55,7 +56,7 @@
 			ajax: {
 				url: sourceUrl,
 				type: 'GET',
-				data: function (d){
+				data: function(d) {
 					d.statusFilter = $("#status_dropdown").val()
 				},
 				beforeSend: function() {
@@ -72,11 +73,11 @@
 			order: JSON.parse(order),
 			pageLength: "{{ Auth::user()->general_setting['paging_limit'] }}"
 		});
-		if(statusFilterView.length > 0){
+		if (statusFilterView.length > 0) {
 			$(statusFilterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
 		}
 
-		$(document).on('change','#status_dropdown',function(){
+		$(document).on('change', '#status_dropdown', function() {
 			table.draw();
 		});
 
@@ -84,6 +85,6 @@
 		// 	e.preventDefault();
 		// 	table.draw();
 		// });
-	});	
+	});
 </script>
 @append

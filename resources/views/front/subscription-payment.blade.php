@@ -87,6 +87,8 @@
                         <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Payment History</a>
                     </li>
                 </ul>
+
+
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -95,8 +97,8 @@
                                 <div class="plan-card">
                                     <h4>Your Plan</h4>
                                     <div class="plan-status account-plan">
-                                        <h2>{{$your_plan_amount}}</h2>
-                                        <p>{{$plan_type}}</p>
+                                        <h2></h2>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
@@ -104,8 +106,8 @@
                                 <div class="plan-card">
                                     <h4>Your Account Status</h4>
                                     <div class="plan-status plan-paid">
-                                        <h2>{{$subscription_status}}</h2>
-                                        <p>{{$subscribed_on}}</p>
+                                        <h2></h2>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
@@ -154,47 +156,46 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tabs-3" role="tabpanel">
-                        <div class="payment-history-table">
-                            <div class="table-responsive">
-                                <table id="dtBasicExample" class="table table-layout-fixed">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Date Billed</th>
-                                            <th scope="col">Date Paid</th>
-                                            <th class="billing-peroid" scope="col">Billing Peroid</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($user_subscription_list as $sub_index => $subscription_object)
-                                        <tr>
-                                            <td>{{ !empty($subscription_object->start)?date('M d,Y',strtotime($subscription_object->start)):"-"}}</td>
-                                            <td>{{!empty($subscription_object->end)?date('M d,Y',strtotime($subscription_object->end)):"-"}}</td>
-                                            <td>{{!empty($subscription_object->start)?date('M d,Y',strtotime($subscription_object->start)):""}} - {{!empty($subscription_object->end)?date('M d,Y',strtotime($subscription_object->end)):""}}</td>
-                                            <td>{{ !empty($subscription_object->subscription_plan_amount)?$DEFAULT_CURRNCY.$subscription_object->subscription_plan_amount:"-"}}</td>
-                                            <td>
-                                                @switch($subscription_object->subscription_status)
-                                                @case($SUBSCRIPTION_STATUS_YES)
-                                                Paid
-                                                @break
-                                                @case($SUBSCRIPTION_STATUS_TRAIL)
-                                                Trial
-                                                @break
-                                                @default
-                                                No-Payment
-                                                @endswitch
-                                            </td>
-                                            <td><a href="#"><i class="fas fa-eye"></i></a> <a href="#"><i class="fas fa-eye"></i></a></td>
-                                        </tr>
 
-                                        @endforeach
+                        <!--Begin::Dashboard 3-->
 
-                                    </tbody>
-                                </table>
+                        <!--Begin::Section-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!--begin::Portlet-->
+                                <div class="kt-portlet">
+                                    <!--begin::Form-->
+                                    <form class="kt-form">
+                                        <div class="kt-portlet">
+                                            <div class="row">
+                                                <div class="form-group validated col-lg-12">
+                                                    <div class="kt-portlet__body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered table-striped" id="laravel_datatable">
+                                                                <thead>
+                                                                    <tr>
+                                                                        @foreach($data_table['data_column_config']['columns'] as $column)
+                                                                        <th>
+                                                                            {{ (array_key_exists('label',$column) ? $column['label'] : '') }}
+                                                                        </th>
+                                                                        @endforeach
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                                <!--end::Portlet-->
+
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -204,18 +205,54 @@
 </div>
 @endsection
 @section("additionaljs")
-<script src="{{asset('public/front/dataTable/jquery.dataTables.min.js')}}"></script>
 
+<script src="{{ asset('public/admin/plugins/jQueryDatatable/jquery.dataTables.min.js') }}"></script>
 <script>
+    var statusFilterView = '{!! $data_table["status_filter_view"] ?? "" !!}';
+    var sourceUrl = '{{ $data_table["data_source"] }}';
+    var columnsList = '{!! json_encode($data_table["data_column_config"]["columns"]) !!}';
+    var order = '{!! json_encode($data_table["data_column_config"]["order"]) !!}';
     $(document).ready(function() {
-        // alert("heelo");
-        $('#dtBasicExample').DataTable({
-            "searching": false,
-            "bInfo": false,
-            "sPaginationType": "full_numbers",
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var table = $('#laravel_datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: sourceUrl,
+                type: 'GET',
+                data: function(d) {
+                    d.statusFilter = $("#status_dropdown").val()
+                },
+                beforeSend: function() {
+                    // blockUI();
+                },
+                complete: function(response) {
+                    //  unblockUI();
+                }
+            },
+            search: {
+                "regex": true
+            },
+            columns: JSON.parse(columnsList),
+            order: JSON.parse(order),
+            pageLength: "{{ Auth::user()->general_setting['paging_limit'] }}"
+        });
+        if (statusFilterView.length > 0) {
+            $(statusFilterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
+        }
+
+        $(document).on('change', '#status_dropdown', function() {
+            table.draw();
         });
 
-
+        // $('#searchForm').on('submit', function(e) {
+        // 	e.preventDefault();
+        // 	table.draw();
+        // });
     });
 </script>
 @endsection

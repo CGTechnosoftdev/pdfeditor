@@ -21,8 +21,58 @@ class SubscriptionPaymentController extends FrontBaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $filter_data = $request->input();
+        if (request()->ajax()) {
+            $action_button_template = 'admin.datatable.actions';
+            $status_button_template = 'admin.datatable.status';
+            $model = UserSubscription::query();
+            $table = Datatables()->of($model);
+            if (!empty($filter_data['statusFilter'])) {
+                $model->where(['status' => $filter_data['statusFilter']]);
+            }
+            $table->addIndexColumn();
+            $table->addColumn('action', '');
+            $table->editColumn('action', function ($row) use ($action_button_template) {
+                $buttons = [
+                    'edit' => ['route_url' => 'business-category.edit', 'route_param' => [$row->id], 'permission' => 'business-category-edit'],
+                ];
+                return view($action_button_template, compact('buttons'));
+            });
+
+            $table->editColumn('status', function ($row) use ($status_button_template) {
+                $button_data = [
+                    'id' => $row->id,
+                    'type' => 'business_category',
+                    'status' => $row->status,
+                    'action_class' => 'change-status',
+                    'permission' => 'business-category-edit'
+                ];
+                return view($status_button_template, compact('button_data'));
+            });
+
+            return $table->make(true);
+        }
+        //  'breadcrumb' => \Breadcrumbs::render('business-category.index'),
+        $data_array = [
+            'title' => 'Subscription Payment',
+            'heading' => 'Manage Business Category',
+
+        ];
+
+        $data_array['data_table'] = [
+            'data_source' => route('front.subscription-payment'),
+            'data_column_config' => config('datatable_column.subscription-payment'),
+        ];
+        return view('front.subscription-payment', $data_array);
+
+
+
+
+        $userSubscriptionList = UserSubscription::query()->get();
+        dd($userSubscriptionList[0]->user);
 
         $user_subscription_list = \DB::table('user_subscriptions')
             ->join('users', 'user_subscriptions.user_id', '=', 'users.id')

@@ -2,7 +2,7 @@
 <script src="{{ asset('public/admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('public/admin/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
-</script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 	$.widget.bridge('uibutton', $.ui.button);
