@@ -88,16 +88,15 @@ class SubscriptionPaymentController extends FrontBaseController
         }
         $current_status = "";
         $account_expired = "plan-paid";
+        $subscription_status_arr = config("custom_config.subscription_status_arr");
 
-        if ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_PENDING")) {
-            $current_status = "Pending";
-        } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_ACTIVE")) {
-            $current_status = "Active";
-        } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_EXPIRED")) {
-            $current_status = "Expired";
+        if (!empty($subscription_user->status)) {
+            $current_status = $subscription_status_arr[$subscription_user->status];
+        }
+
+        if ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_EXPIRED")) {
+
             $account_expired = "account-expired";
-        } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_CANCELLED")) {
-            $current_status = "Cancelled";
         }
         $expireDate = "Expire On " . changeDateFormat($subscription_user->end, "M d,Y");
 

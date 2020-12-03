@@ -33,6 +33,14 @@ return [
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
+    'subscription_status_arr' => [
+        0 => 'Pending',
+        1 => 'Active',
+        2 => 'Expired',
+        3 => 'Expired',
+        4 => 'Cancelled',
+
+    ],
     'model_arr' => [
         'user' => 'User',
         'role' => 'Role',

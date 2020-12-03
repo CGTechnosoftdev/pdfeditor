@@ -16,9 +16,14 @@ class UserSubscription extends Model
     {
         return  changeDateFormat($this->start, 'M d,Y') . "-" . changeDateFormat($this->end, 'M d,Y');
     }
+
     public function getAmountAttribute()
     {
-        return $this->transaction->amount ?? 0.00;
+        $myAmount = 0.00;
+        if (!empty($this->transaction->amount)) {
+            $myAmount = myCurrencyFormat($this->transaction->amount);
+        }
+        return  $myAmount;
     }
     public function getPaymentStatusAttribute()
     {
