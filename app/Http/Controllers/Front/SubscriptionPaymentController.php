@@ -93,6 +93,7 @@ class SubscriptionPaymentController extends FrontBaseController
         }
         $current_status = "";
         $account_expired = "plan-paid";
+
         if ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_PENDING")) {
             $current_status = "Pending";
         } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_ACTIVE")) {

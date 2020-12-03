@@ -199,7 +199,7 @@
                 type: "post",
                 data: "user_subscribe_id={{$user_current_subscribe_id}}&_token={{ csrf_token()}}",
                 success: function(response) {
-                    alert(response);
+                    //  alert(response);
                     // console.log(response);
                     $("#upcomming_renewal_containerid").html("Subscription Cancel successfully!");
 
