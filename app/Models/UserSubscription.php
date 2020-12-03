@@ -19,7 +19,7 @@ class UserSubscription extends Model
     }
     public function subscriptionPlan()
     {
-        return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
+        return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id')->withTrashed();
     }
 
     public function getReferenceIdAttribute()

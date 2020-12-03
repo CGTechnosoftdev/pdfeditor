@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\CommonMail;
 use App\Models\UserSubscription;
 use App\Models\SubscriptionPlan;
+use App\Models\UserPromo;
 use DB;
 
 class UserController extends AdminBaseController
@@ -312,6 +313,9 @@ class UserController extends AdminBaseController
         DB::beginTransaction();
         try {
             $input_data = $request->all();
+            if (!empty($user->userPromo)) {
+                UserPromo::saveData(['status' => config('constant.STATUS_INACTIVE')], $user->userPromo);
+            }
             $user_data = [
                 'subscription_plan_id' => $input_data['plan_name'],
                 'subscription_plan_type' => $input_data['play_type'],

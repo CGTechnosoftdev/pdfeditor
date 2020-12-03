@@ -84,8 +84,10 @@ class PricingController extends FrontBaseController
 			$general_setting = GeneralSetting::dataRow();
 			if ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_MONTHLY')) {
 				$input_data['amount'] = $promo_data['monthly_amount'] ?? $subscription_plan['monthly_amount'];
+				$input_data['subscription_amount'] = $subscription_plan['monthly_amount'];
 			} elseif ($input_data['subscription_plan_type'] == config('constant.SUBSCRIPTION_PLAN_TYPE_YEARLY')) {
 				$input_data['amount'] = $promo_data['yearly_amount'] ??  $subscription_plan['yearly_amount'];
+				$input_data['subscription_amount'] = $subscription_plan['yearly_amount'];
 			}
 			$input_data['trail_days'] = $trail_days = $promo_data['trail_days'] ?? $general_setting->trail_days;
 			$input_data['currency'] = $general_setting->currency;
@@ -117,7 +119,7 @@ class PricingController extends FrontBaseController
 					'subscription_status' => empty($trail_days) ? config('constant.SUBSCRIPTION_STATUS_ACTIVE') : config('constant.SUBSCRIPTION_STATUS_TRAIL'),
 					'subscription_plan_type' => $input_data['subscription_plan_type'],
 					'subscription_plan_id' => $subscription_plan->id,
-					'subscription_plan_amount' => $input_data['amount'],
+					'subscription_plan_amount' => $input_data['subscription_amount'],
 				];
 				User::saveData($user_data, $user);
 				//User Subscription
@@ -138,6 +140,7 @@ class PricingController extends FrontBaseController
 					//User Promos
 					$user_promo_data = [
 						'user_id' => $user->id,
+						'promo_url_id' => $promo_data['id'],
 						'subscription_plan_type' => $input_data['subscription_plan_type'],
 						'subscription_plan_id' => $subscription_plan->id,
 						'subscription_plan_amount' => $input_data['amount'],

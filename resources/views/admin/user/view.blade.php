@@ -80,12 +80,33 @@
 									{{ $user->getUpcomingRenewalPlan() }}
 								</div>
 							</div>
+							@if(!empty($user->userPromo))
+							<div class="form-group col-md-12">
+								<label for="promo_name" class="control-label text-left col-sm-6 required">Applied Promotion</label>
+								<div class="col-sm-6">
+									{{ $user->userPromo->promoUrl->promotion_name }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="upcoming_renewal_amount" class="control-label text-left col-sm-6 required">Upcoming Renewal Amount</label>
+								<div class="col-sm-6">
+									{{ myCurrencyFormat($user->userPromo->subscription_plan_amount) }}
+								</div>
+							</div>
+							<div class="form-group col-md-12">
+								<label for="promo_expiry" class="control-label text-left col-sm-6 required">Promotion Expiry</label>
+								<div class="col-sm-6">
+									{{ changeDateFormat($user->userPromo->valid_till) }}
+								</div>
+							</div>
+							@else
 							<div class="form-group col-md-12">
 								<label for="upcoming_renewal_amount" class="control-label text-left col-sm-6 required">Upcoming Renewal Amount</label>
 								<div class="col-sm-6">
 									{{ $user->getUpcomingRenewalAmount() }}
 								</div>
 							</div>
+							@endif
 							@endif
 							<div class="form-group col-md-12">
 								<label for="status_name" class="control-label text-left col-sm-6 required">Status</label>
@@ -137,7 +158,6 @@
 			</div>
 		</div>
 	</div>
-	</div>
 </section>
 <!-- Modal -->
 <div id="update-plan-modal" class="modal fade new-modal" role="dialog">
@@ -149,6 +169,9 @@
 				<h4 class="modal-title">Update Renewal Plan</h4>
 			</div>
 			<div class="modal-body">
+				@if(!empty($user->userPromo))
+				<h5><b>Note : </b>Update in plan remove the applied promotion </h5>
+				@endif
 				{{ Form::open(['route' => ['user.update-plan',$user->id],'method'=>'post','class'=>'form-horizontal','id' => 'plan-form']) }}
 				{{ Form::hidden("_token", csrf_token())}}
 				<div class="form-group">

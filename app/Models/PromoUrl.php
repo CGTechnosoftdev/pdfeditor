@@ -26,16 +26,8 @@ class PromoUrl extends Model
 
 	public function getSubscriptionPlanNameAttribute()
 	{
-		return $this->subscription_plan->name;
+		return $this->subscriptionPlan->name;
 	}
-
-	// public function getMonthlyAmountAttribute(){
-	// 	return ($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount;
-	// } 
-
-	// public function getYearlyAmountAttribute(){
-	// 	return ($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount;
-	// }
 
 	public function getExpirationDateAttribute()
 	{
@@ -44,12 +36,12 @@ class PromoUrl extends Model
 
 	public function getFormatedMonthlyAmountAttribute()
 	{
-		return myCurrencyFormat(($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount);
+		return myCurrencyFormat(($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscriptionPlan->monthly_amount : $this->monthly_amount);
 	}
 
 	public function getFormatedYearlyAmountAttribute()
 	{
-		return myCurrencyFormat(($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount);
+		return myCurrencyFormat(($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscriptionPlan->yearly_amount : $this->yearly_amount);
 	}
 
 	public function getPromoUrlAttribute()
@@ -96,7 +88,7 @@ class PromoUrl extends Model
 	 * @date   2020-11-16
 	 * @return [type]     [description]
 	 */
-	public function subscription_plan()
+	public function subscriptionPlan()
 	{
 		return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
 	}

@@ -30,7 +30,9 @@ class PromoUrlController extends AdminBaseController
 		if (request()->ajax()) {
 			$action_button_template = 'admin.datatable.actions';
 			$status_button_template = 'admin.datatable.status';
-			$model = PromoUrl::query()->get();
+			$model = PromoUrl::with('subscriptionPlan')->whereHas('subscriptionPlan', function ($q) {
+				$q->whereIn('status', [config('constant.STATUS_ACTIVE')]);
+			})->get();
 			$table = Datatables()->of($model);
 			if (!empty($filter_data['statusFilter'])) {
 				$model->where(['status' => $filter_data['statusFilter']]);
@@ -191,7 +193,7 @@ class PromoUrlController extends AdminBaseController
 	public function destroy(PromoUrl $promo_url)
 	{
 		try {
-			if ($promo_url->is_deletable == config("constant.STATUS_YES") && $promo_url->delete()) {
+			if ($promo_url->delete()) {
 				$response_type = 'success';
 				$response_message = 'Promo Url deleted successfully';
 			} else {

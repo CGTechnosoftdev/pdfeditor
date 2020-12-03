@@ -168,6 +168,11 @@ class User extends Authenticatable
         return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
     }
 
+    public function userPromo()
+    {
+        return $this->hasOne(UserPromo::class, 'user_id', 'id')->where(['status' => config('constant.STATUS_ACTIVE')]);
+    }
+
     public function lastSubscriptionDetail()
     {
         return $this->hasOne(UserSubscription::class, 'user_id', 'id')->latest();
