@@ -90,11 +90,11 @@ class User extends Authenticatable
 
     public function getPlanNameAttribute()
     {
-        return $this->lastSubscriptionDetail->plan_name;
+        return $this->lastSubscriptionDetail->plan_name ?? '';
     }
     public function getPlanExpiryAttribute()
     {
-        return $this->lastSubscriptionDetail->plan_expiry;
+        return $this->lastSubscriptionDetail->plan_expiry ?? '';
     }
 
     public function getUpcomingRenewalPlan()

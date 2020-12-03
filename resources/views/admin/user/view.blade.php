@@ -102,9 +102,11 @@
 						<a href="{{route('user.billing-history',$user->id)}}">
 							<button class="btn btn-success">Billing History</button>
 						</a>
+						@if(empty($user->lastSubscriptionDetail))
 						<button class="btn btn-success" data-toggle="modal" data-target="#update-plan-modal">
 							Update Plan
 						</button>
+						@endif
 						<a href="{{route('front.login-as-user',$user->id)}}" target="_blank">
 							<button class="btn btn-success">Login as User</button>
 
