@@ -99,8 +99,10 @@ class User extends Authenticatable
 
     public function getUpcomingRenewalPlan()
     {
-        $plan_type_arr = config('custom_config.plan_type_arr');
-        return $this->subscriptionPlan->name . " (" . $plan_type_arr[$this->subscription_plan_type] . ")";
+        if (!empty($this->subscriptionPlan)) {
+            $plan_type_arr = config('custom_config.plan_type_arr');
+            return $this->subscriptionPlan->name . " (" . $plan_type_arr[$this->subscription_plan_type] . ")";
+        }
     }
 
     public function getUpcomingRenewalAmount()
