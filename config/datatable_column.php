@@ -140,8 +140,13 @@ return [
     'subscription-payment' => [
         'columns' => [
             ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
-            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
-            ['data' => 'start', 'name' => 'start', 'label' => 'Start', 'orderBy' => 'asc'],
+            ['data' => 'start', 'name' => 'start', 'label' => 'Date Billed', 'orderBy' => 'asc'],
+            ['data' => 'end', 'name' => 'end', 'label' => 'Date Paid', 'orderBy' => 'asc'],
+            ['data' => 'billing_period', 'name' => 'billing_period', 'label' => 'Billing Period', 'orderable' => false, 'orderBy' => 'asc'],
+            ['data' => 'amount', 'name' => 'amount', 'label' => 'Amount', 'orderable' => false, 'orderBy' => 'asc'],
+            ['data' => 'payment_status', 'name' => 'payment_status', 'label' => 'Payment Status', 'orderable' => false, 'orderBy' => 'asc'],
+            // ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action'],
+
 
         ],
         'order' => [[0, 'desc']]

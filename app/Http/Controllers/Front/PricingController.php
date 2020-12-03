@@ -71,6 +71,7 @@ class PricingController extends FrontBaseController
 	 */
 	public function checkout(SubscriptionPlan $subscription_plan, PaymentFormRequest $request)
 	{
+
 		$user = \Auth::user();
 		$input_data = $request->input();
 		DB::beginTransaction();
@@ -116,6 +117,7 @@ class PricingController extends FrontBaseController
 					'transaction_id' => $transaction_data['id'] ?? null,
 					'status' => config('constant.STATUS_ACTIVE')
 				];
+				//	dd($user_subscription_data);
 				UserSubscription::saveData($user_subscription_data);
 				DB::commit();
 				$response_type = 'success';

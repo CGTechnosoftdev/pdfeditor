@@ -1,72 +1,7 @@
 @extends('layouts.user-account')
 @section("content")
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="user-panel">
-            <div class="image">
-                <img src="{{asset('public/front/images/user.jpg')}}" class="rounded-circle" alt="User Image">
-            </div>
-            <div class="info">
-                <p>bootstrap develop</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-        </div>
-        <a href="#" class="free-trial">Sign Up Free Trial</a>
-
-        <ul class="list-unstyled components">
-            <!-- <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li> -->
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/account-card-details.svg')}}"></span>Account Information</a>
-            </li>
-            <li class="active">
-                <a href="#"><span><img src="{{asset('public/front/images/payment.svg')}}"></span>Subscription & Payment</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/settings.svg')}}"></span>Settings</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/integrations.svg')}}"></span>Integrations</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/user-circle.svg')}}"></span>Personal Information</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/audit-trial.svg')}}"></span>Audit Trail</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/custom-branding.svg')}}"></span>Custom Branding</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/address-book.svg')}}"></span>Address Book</a>
-            </li>
-            <li>
-                <a href="#"><span><img src="{{asset('public/front/images/api.svg')}}"></span>API</a>
-            </li>
-        </ul>
-
-        <!-- <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul> -->
-    </nav>
+    @include('front.partials.user-account-sidebar')
 
     <!-- Page Content  -->
     <div id="content">
@@ -95,33 +30,38 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4 mb-3">
                                 <div class="plan-card">
-                                    <h4>Your Plan</h4>
+                                    <h4>Current Plan</h4>
                                     <div class="plan-status account-plan">
-                                        <h2></h2>
-                                        <p></p>
+                                        <h2>{{$subscription_amount}}</h2>
+                                        <p>{{$subscription_period}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-4 mb-3">
                                 <div class="plan-card">
-                                    <h4>Your Account Status</h4>
-                                    <div class="plan-status plan-paid">
-                                        <h2></h2>
-                                        <p></p>
+                                    <h4>Current Account Status</h4>
+                                    <div class="plan-status {{$account_expired}}">
+                                        <h2>{{$current_status}}</h2>
+                                        <p>{{$expireDate}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="plan-pricing">
-                                    <h5>Your Plan Pricing</h5>
+                                @if(empty($cancel_subscription_message))
+                                <div class="plan-pricing" id="upcomming_renewal_containerid">
+                                    <h5>Upcomming Renewal</h5>
                                     <ul>
-                                        <li><span class="title">Price per user per month</span> - <strong>$20.00</strong></li>
-                                        <li><span class="title">Account minimum charge</span> - <strong>$20.00</strong></li>
+                                        <li><span class="title">Plan Name</span> - <strong>{{$plan_name}}</strong></li>
+                                        <li><span class="title">Price</span> - <strong>{{$renewel_price}}</strong></li>
+                                        <li><span class="title">Renewal On</span> - <strong>{{$upcomming_renewel}}</strong></li>
                                     </ul>
-                                    <button class="btn btn-cancel">Cancel Subscription</button>
+                                    <button class="btn btn-cancel" id="cancel_subscription_btnid">Cancel Subscription</button>
                                 </div>
+                                @else
+                                <div class="plan-pricing">{{$cancel_subscription_message}}</div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -228,9 +168,10 @@
                     d.statusFilter = $("#status_dropdown").val()
                 },
                 beforeSend: function() {
-                    // blockUI();
+                    //    blockUI();
                 },
                 complete: function(response) {
+                    console.log(response);
                     //  unblockUI();
                 }
             },
@@ -239,7 +180,7 @@
             },
             columns: JSON.parse(columnsList),
             order: JSON.parse(order),
-            pageLength: "{{ Auth::user()->general_setting['paging_limit'] }}"
+            pageLength: "{{ !empty(Auth::user()->general_setting['paging_limit'])?Auth::user()->general_setting['paging_limit']:10 }}"
         });
         if (statusFilterView.length > 0) {
             $(statusFilterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
@@ -247,6 +188,23 @@
 
         $(document).on('change', '#status_dropdown', function() {
             table.draw();
+        });
+
+        $(document).on("click", "#cancel_subscription_btnid", function() {
+            if (!confirm('Are you sure you want to cancel?'))
+                return false;
+
+            $.ajax({
+                url: "{{route('front.subscription-payment-cancel',[$user_id])}}",
+                type: "post",
+                data: "user_subscribe_id={{$user_current_subscribe_id}}&_token={{ csrf_token()}}",
+                success: function(response) {
+                    alert(response);
+                    // console.log(response);
+                    $("#upcomming_renewal_containerid").html("Subscription Cancel successfully!");
+
+                }
+            });
         });
 
         // $('#searchForm').on('submit', function(e) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Models\UserSubscription;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class SubscriptionPaymentController extends FrontBaseController
 {
@@ -14,7 +16,9 @@ class SubscriptionPaymentController extends FrontBaseController
      */
     public function __construct()
     {
+        $this->middleware('auth');
     }
+
 
     /**
      * Show the application dashboard.
@@ -28,8 +32,15 @@ class SubscriptionPaymentController extends FrontBaseController
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
-            $model = UserSubscription::query();
+            $model = UserSubscription::query()->get();
+            if (!empty($model)) {
+                foreach ($model as $mod_index => $modelObject) {
+                    $modelObject->start = $modelObject->start;
+                }
+            }
+
             $table = Datatables()->of($model);
+
             if (!empty($filter_data['statusFilter'])) {
                 $model->where(['status' => $filter_data['statusFilter']]);
             }
@@ -37,28 +48,77 @@ class SubscriptionPaymentController extends FrontBaseController
             $table->addColumn('action', '');
             $table->editColumn('action', function ($row) use ($action_button_template) {
                 $buttons = [
-                    'edit' => ['route_url' => 'business-category.edit', 'route_param' => [$row->id], 'permission' => 'business-category-edit'],
+                    'view' => ['route_url' => 'front.subscription-payment.view', 'route_param' => [$row->id], 'permission' => 'subscription-payment-view'],
+
                 ];
                 return view($action_button_template, compact('buttons'));
             });
 
-            $table->editColumn('status', function ($row) use ($status_button_template) {
-                $button_data = [
-                    'id' => $row->id,
-                    'type' => 'business_category',
-                    'status' => $row->status,
-                    'action_class' => 'change-status',
-                    'permission' => 'business-category-edit'
-                ];
-                return view($status_button_template, compact('button_data'));
-            });
+
+
 
             return $table->make(true);
         }
-        //  'breadcrumb' => \Breadcrumbs::render('business-category.index'),
+
+        $subscription_user = UserSubscription::query()->where("user_id", "=", Auth::user()->id)->orderBy('id', 'DESC')->first();
+        $subscription_amount = "";
+        $subscription_period = "";
+        $upcomming_renewel = "";
+        $renewel_price = "";
+        if ($subscription_user->subscription_plan_type == config("constant.SUBSCRIPTION_PLAN_TYPE_TRAIL")) {
+            $subscription_amount = "Trial";
+        } elseif ($subscription_user->subscription_plan_type == config("constant.SUBSCRIPTION_PLAN_TYPE_MONTHLY")) {
+            $subscription_amount = $subscription_user->transaction->amount;
+            $renewel_date = date("d", strtotime($subscription_user->start));
+            $renwel_month = date("M", strtotime("+1 month", time()));
+            $renwel_year = date("Y", strtotime("+1 month", time()));
+            $upcomming_renewel = $renwel_month . "," . $renewel_date . " " . $renwel_year;
+            $renewel_price = $subscription_user->transaction->amount;
+            $subscription_period = "Per Month";
+        } elseif ($subscription_user->subscription_plan_type == config("constant.SUBSCRIPTION_PLAN_TYPE_YEARLY")) {
+            $subscription_amount = $subscription_user->transaction->amount;
+            $renewel_price = $subscription_user->transaction->amount;
+            $subscription_period = "Per Year";
+            $renewel_date = date("d", strtotime($subscription_user->start));
+            $renwel_month = date("M", strtotime($subscription_user->start));
+            $renwel_year = date("Y", strtotime("+1 year", time()));
+            $upcomming_renewel = $renwel_month . "," . $renewel_date . " " . $renwel_year;
+        }
+        $user_current_subscribe_id = $subscription_user->id;
+
+        $cancel_subscription_message = "";
+        if ($subscription_user->user->subscription_status == config("constant.SUBSCRIPTION_STATUS_NO")) {
+
+            $cancel_subscription_message = "Subscription Cancelled";
+        }
+        $current_status = "";
+        $account_expired = "plan-paid";
+        if ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_PENDING")) {
+            $current_status = "Pending";
+        } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_ACTIVE")) {
+            $current_status = "Active";
+        } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_EXPIRED")) {
+            $current_status = "Expired";
+            $account_expired = "account-expired";
+        } elseif ($subscription_user->status == config("constant.SUBSCRIPTION_STATUS_CANCELLED")) {
+            $current_status = "Cancelled";
+        }
+        $expireDate = "Expire On " . changeDateFormat($subscription_user->end, "M d,Y");
+
         $data_array = [
             'title' => 'Subscription Payment',
             'heading' => 'Manage Business Category',
+            'subscription_amount' => myCurrencyFormat($subscription_amount),
+            'subscription_period' => $subscription_period,
+            'plan_name' => $subscription_user->SubscriptionPlan->name,
+            'upcomming_renewel' => $upcomming_renewel,
+            'renewel_price' => myCurrencyFormat($renewel_price),
+            'user_current_subscribe_id' => $user_current_subscribe_id,
+            'user_id' => $subscription_user->user_id,
+            'cancel_subscription_message' => $cancel_subscription_message,
+            'expireDate' => $expireDate,
+            'current_status' => $current_status,
+            'account_expired' => $account_expired,
 
         ];
 
@@ -67,88 +127,33 @@ class SubscriptionPaymentController extends FrontBaseController
             'data_column_config' => config('datatable_column.subscription-payment'),
         ];
         return view('front.subscription-payment', $data_array);
-
-
-
-
-        $userSubscriptionList = UserSubscription::query()->get();
-        dd($userSubscriptionList[0]->user);
-
-        $user_subscription_list = \DB::table('user_subscriptions')
-            ->join('users', 'user_subscriptions.user_id', '=', 'users.id')
-            ->select(
-                'user_subscriptions.id',
-                'user_subscriptions.start',
-                'user_subscriptions.end',
-                'user_subscriptions.subscription_plan_type',
-                'users.subscription_plan_amount',
-                'users.subscription_status',
-                'user_subscriptions.user_id',
-                'user_subscriptions.status',
-            )->where("user_id", "=", "8")
-            ->get()->toArray();
-        $user_active_subscription = null;
-        foreach ($user_subscription_list as $user_list_index => $user_Sub_ob) {
-            if ($user_Sub_ob->status == config("constant.STATUS_ACTIVE"))
-                $user_active_subscription = $user_Sub_ob;
-        }
-        $default_currency = config('constant.DEFAULT_CURRNCY');
-        if ($default_currency == "USD")
-            $default_currency = "$";
-
-        if (!empty($user_active_subscription)) {
-            $your_plan_amount = $default_currency . $user_active_subscription->subscription_plan_amount;
-            $plan_type = "";
-            switch ($user_active_subscription->subscription_plan_type) {
-                case config("constant.SUBSCRIPTION_PLAN_TYPE_TRAIL"):
-                    $plan_type = "Trial";
-                    break;
-                case config("constant.SUBSCRIPTION_PLAN_TYPE_MONTHLY"):
-                    $plan_type = "Per Month";
-                    break;
-                case config("constant.SUBSCRIPTION_PLAN_TYPE_YEARLY"):
-                    $plan_type = "Per Year";
-                    break;
-            }
-            //subscription_status
-            $subscription_status = "";
-            switch ($user_active_subscription->subscription_status) {
-                case config("constant.SUBSCRIPTION_STATUS_YES"):
-                    $subscription_status = "Paid";
-                    break;
-                case config("constant.SUBSCRIPTION_STATUS_TRIAL"):
-                    $subscription_status = "Trial";
-                    break;
-            }
-            $subscribed_on = "";
-            if (!empty($user_active_subscription->start))
-                $subscribed_on = "Subscribed on " . date("m-d-Y", strtotime($user_active_subscription->start));
+    }
+    function view(UserSubscription $user_subscription)
+    {
+        if ($user_subscription->user_id != Auth::user()->id) {
+            return abort(404);
         }
 
+        $transactionFields = $user_subscription->transaction ?? null;
+        //  dd($transactionFields);
+        $data_array = ["title" => "Subscription Payment Detail"];
+        return view('front.subscription-payment-view', $data_array);
+    }
+    function cancelSubscription(Request $request, User $user)
+    {
 
-        $dataArray = [
-            'title' => "Subscription & Payment",
-            'user_subscription_list'   => $user_subscription_list,
-            'SUBSCRIPTION_STATUS_NO' => config("constant.SUBSCRIPTION_STATUS_NO"),
-            'SUBSCRIPTION_STATUS_YES' => config("constant.SUBSCRIPTION_STATUS_YES"),
-            'SUBSCRIPTION_STATUS_TRAIL' => config("constat.SUBSCRIPTION_STATUS_TRAIL"),
-            'user_active_subscription' => $user_active_subscription,
-            'your_plan_amount' => $your_plan_amount,
-            'plan_type' => $plan_type,
-            'DEFAULT_CURRNCY' => $default_currency,
-            'subscribed_on' => $subscribed_on,
-            'subscription_status' => $subscription_status,
-
-
+        $data_array = [
+            'subscription_status' => 0,
+            'subscription_plan_id' => null,
+            'subscription_plan_amount' => 0.00,
+            'subscription_plan_type' => null,
         ];
 
-        return view('front.subscription-payment', $dataArray);
-    }
-    function cancelSubscription(Request $request)
-    {
-        echo '<pre>';
-        print_r($request);
-        echo '</pre>';
-        exit();
+        $user_subscription = User::saveData($data_array, $user);
+        if ($user_subscription) {
+            echo '<br> User cancel successfully!';
+        } else {
+            echo '<br> user not canelled!';
+        }
     }
 }

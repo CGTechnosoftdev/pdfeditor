@@ -327,6 +327,89 @@ li {
     font-size: 14px;
 }
 
+/*dataTable style*/
+.dataTables_length label {
+    text-transform: capitalize;
+}
+
+
+.dataTables_length select {
+    width: 65px;
+    height: 35px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    /*appearance: none;*/
+    /*-moz-appearance: none;*/
+    margin: 0px 7px;
+}
+
+.dataTables_filter input {
+    height: 35px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    text-indent: 15px;
+}
+
+.dataTables_wrapper table {
+    margin-top: 20px;
+    float: left;
+}
+
+.table.dataTable.no-footer {
+    border-bottom: 1px solid #f4f4f4!important;
+}
+
+.dataTables_paginate {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 0px !important;
+}
+
+.dataTables_paginate a {
+    padding: 8px 15px !important;
+}
+
+.dataTables_paginate a.paginate_button.current,
+.dataTables_paginate a.paginate_button:hover,
+.dataTables_paginate a.paginate_button:active,
+.dataTables_paginate a.paginate_button:focus {
+    background: #F3926B !important;
+    color: #fff !important;
+    box-shadow: none!important;
+}
+
+.dataTables_paginate a.paginate_button {
+    border: 0px !important;
+    border-left-color: currentcolor;
+    border-left-style: none;
+    border-left-width: 0px;
+    border-left: solid 1px #ccc !important;
+    margin-left: 0px !important;
+    border-radius: 0px !important;
+}
+
+.dataTables_paginate a.paginate_button:first-child {
+    border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff!important;
+}
+
+table tr td a i,
+table tr td button {
+    color: #0994FF !important;
+    font-size: 16px;
+    margin: 0px 8px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: 25px;
+}
+/**/
+
 
 /******************** Banner Section *****************/
 
@@ -3964,4 +4047,25 @@ li {
 
 .payment-history-table table td a i {
     color: #1FCB5D;
+}
+
+/*** Date 3/12/2020 ***/
+
+#laravel_datatable {
+    width: 100% !important;
+}
+
+.dataTables_paginate {
+    border: none !important;
+}
+.kt-form .paginate_button.current {
+    border-radius: 20px !important;
+    border: none !important;
+    background: #f00 !important;
+}
+.kt-form .paginate_button.next.disabled {
+    border: none !important;
+}
+.account-expired{
+    background: #f00 !important;
 }

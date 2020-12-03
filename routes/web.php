@@ -102,7 +102,8 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 
 	Route::get('/subscription-payment', 'Front\SubscriptionPaymentController@index')->name('subscription-payment');
-	Route::post('/subscription-payment-cancel', 'Front\SubscriptionPaymentController@cancelSubscription')->name('subscription-payment-cancel');
+	Route::get('/subscription-payment-view/{user_subscription}', 'Front\SubscriptionPaymentController@view')->name('subscription-payment.view');
+	Route::post('/subscription-payment-cancel/{user}', 'Front\SubscriptionPaymentController@cancelSubscription')->name('subscription-payment-cancel');
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
