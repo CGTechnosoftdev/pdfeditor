@@ -25,7 +25,7 @@ class UserNoteFormRequest extends FormRequest
     {
         $id = NULL;
         $rules = [
-            'content' => 'required',
+            'note' => 'required',
         ];
         return $rules;
     }
