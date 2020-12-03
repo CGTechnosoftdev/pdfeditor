@@ -73,6 +73,7 @@
 									{{ $user->plan_expiry }}
 								</div>
 							</div>
+							@if(!empty($user->lastSubscriptionDetail))
 							<div class="form-group col-md-12">
 								<label for="upcoming_renewal_plan" class="control-label text-left col-sm-6 required">Upcoming Renewal Plan</label>
 								<div class="col-sm-6">
@@ -85,6 +86,7 @@
 									{{ $user->getUpcomingRenewalAmount() }}
 								</div>
 							</div>
+							@endif
 							<div class="form-group col-md-12">
 								<label for="status_name" class="control-label text-left col-sm-6 required">Status</label>
 								<div class="col-sm-6">
@@ -102,7 +104,7 @@
 						<a href="{{route('user.billing-history',$user->id)}}">
 							<button class="btn btn-success">Billing History</button>
 						</a>
-						@if(empty($user->lastSubscriptionDetail))
+						@if(!empty($user->lastSubscriptionDetail))
 						<button class="btn btn-success" data-toggle="modal" data-target="#update-plan-modal">
 							Update Plan
 						</button>
@@ -231,8 +233,7 @@
 	$('.datepicker').datepicker({
 		autoclose: true,
 		format: "{{ (config('custom_config.js_date_format_arr')[config('general_settings.date_format')]) }}",
-		startDate: "-1",
-		todayHighlight: true,
+		startDate: "+1d",
 	});
 	$(document).ready(function($) {
 
