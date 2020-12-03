@@ -69,20 +69,15 @@ class SubscriptionPaymentController extends FrontBaseController
             $subscription_amount = "Trial";
         } elseif ($subscription_user->subscription_plan_type == config("constant.SUBSCRIPTION_PLAN_TYPE_MONTHLY")) {
             $subscription_amount = $subscription_user->transaction->amount;
-            $renewel_date = date("d", strtotime($subscription_user->start));
-            $renwel_month = date("M", strtotime("+1 month", time()));
-            $renwel_year = date("Y", strtotime("+1 month", time()));
-            $upcomming_renewel = $renwel_month . "," . $renewel_date . " " . $renwel_year;
             $renewel_price = $subscription_user->transaction->amount;
+            $upcomming_renewel = changeDateFormat($subscription_user->end, "M d,Y");
             $subscription_period = "Per Month";
         } elseif ($subscription_user->subscription_plan_type == config("constant.SUBSCRIPTION_PLAN_TYPE_YEARLY")) {
             $subscription_amount = $subscription_user->transaction->amount;
             $renewel_price = $subscription_user->transaction->amount;
             $subscription_period = "Per Year";
-            $renewel_date = date("d", strtotime($subscription_user->start));
-            $renwel_month = date("M", strtotime($subscription_user->start));
-            $renwel_year = date("Y", strtotime("+1 year", time()));
-            $upcomming_renewel = $renwel_month . "," . $renewel_date . " " . $renwel_year;
+
+            $upcomming_renewel = changeDateFormat($subscription_user->end, "M d,Y");
         }
         $user_current_subscribe_id = $subscription_user->id;
 

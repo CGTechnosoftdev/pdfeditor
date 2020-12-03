@@ -28,7 +28,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4 mb-3">
+                            <div class="col-lg-4 col-md-5 mb-3">
                                 <div class="plan-card">
                                     <h4>Current Plan</h4>
                                     <div class="plan-status account-plan">
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 mb-3">
+                            <div class="col-lg-4 col-md-5 mb-3">
                                 <div class="plan-card">
                                     <h4>Current Account Status</h4>
                                     <div class="plan-status {{$account_expired}}">
@@ -111,7 +111,7 @@
                                                 <div class="form-group validated col-lg-12">
                                                     <div class="kt-portlet__body">
                                                         <div class="table-responsive">
-                                                            <table class="table table-bordered table-striped" id="laravel_datatable">
+                                                            <table class="table " id="laravel_datatable">
                                                                 <thead>
                                                                     <tr>
                                                                         @foreach($data_table['data_column_config']['columns'] as $column)
@@ -119,7 +119,10 @@
                                                                             {{ (array_key_exists('label',$column) ? $column['label'] : '') }}
                                                                         </th>
                                                                         @endforeach
+
                                                                     </tr>
+
+
                                                                 </thead>
                                                             </table>
                                                         </div>

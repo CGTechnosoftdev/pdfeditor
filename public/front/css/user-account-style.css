@@ -377,6 +377,7 @@ li {
     background: #F3926B !important;
     color: #fff !important;
     box-shadow: none!important;
+    border-radius: 20px !important;
 }
 
 .dataTables_paginate a.paginate_button {
@@ -4066,6 +4067,48 @@ table tr td button {
 .kt-form .paginate_button.next.disabled {
     border: none !important;
 }
-.account-expired{
-    background: #f00 !important;
+.kt-form  #laravel_datatable_previous:hover, .kt-form  #laravel_datatable_next:hover {
+    background: transparent !important;
+    color:#F3926B!important;
 }
+.kt-form  #laravel_datatable_previous, .kt-form #laravel_datatable_next{position: relative;}
+.kt-form #laravel_datatable_previous::before {
+    content: "\f30a";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    padding-right: 10px;
+    font-size: 16px;
+}
+.kt-form #laravel_datatable_next::after {
+    content: "\f30b";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    padding-left: 10px;
+    font-size: 16px;
+}
+.kt-form .dataTables_paginate a.paginate_button {
+    border: none !important;
+    font-size: 13px;
+}
+.kt-form table tr th, .kt-form table tr td, .kt-form .dataTables_info{
+    font-size: 13px; color:#333;
+}
+.kt-form .dataTables_length label {
+    font-size: 13px;
+}
+.kt-form .dataTables_length label select {
+    height: 35px !important;
+    border-radius: 4px !important;
+}
+.kt-form .dataTables_filter label {
+    font-size: 13px;
+}
+.kt-form .dataTables_filter label input{
+    height: 35px !important;
+    border-radius: 4px !important;
+    max-width: 220px;
+}
+.account-expired{
+    background: #FF8787 !important;
+}
+
