@@ -44,13 +44,18 @@
                             File
                         </label>
                         <div class="col-sm-8">
-                            <div class="button-wrap">
-                                <label class="new-button" for="template_file"> Browse</label>
-                                {{ Form::file('template_file',array('class'=>"form-control",'id'=>'form'))}}
-                                @if($errors->has('template_file'))
-                                <span class="help-block"><strong>{{ $errors->first('template_file') }}</strong></span>
-                                @endif
+                            <div class="browse-file">
+                                <!-- actual upload which is hidden -->
+                                <!-- <input type="file" id="actual-btn" /> -->
+                                <!-- our custom upload button -->
+                                <label for="actual-btn">Choose File</label>
+                                <!-- name of file chosen -->
+                                <span id="file-chosen">No file chosen</span>
                             </div>
+                            {{ Form::file('template_file',array('class'=>"form-control",'id'=>'actual-btn','style'=>"display:none;"))}}
+                            @if($errors->has('template_file'))
+                            <span class="help-block"><strong>{{ $errors->first('template_file') }}</strong></span>
+                            @endif
                         </div>
                     </div>
                     @if(!empty($document_template->template_file))
@@ -105,5 +110,5 @@
 @endsection
 @section('additionaljs')
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-{!! JsValidator::formRequest('App\Http\Requests\DocumentTemplateFormRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\DocumentTemplateFormRequest')->ignore('') !!}
 @endsection

@@ -109,7 +109,7 @@ class User extends Authenticatable
 
     public function getSubscriptionStatusNameAttribute()
     {
-        return $this->lastSubscriptionDetail->status_name ?? '';
+        return $this->lastSubscriptionDetail->status_name ?? 'Inactive';
     }
 
     public function getUpcomingRenewalPlan()
