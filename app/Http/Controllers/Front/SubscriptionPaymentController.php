@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserPromo;
 use App\Traits\StripePaymentTrait;
 
 class SubscriptionPaymentController extends FrontBaseController
@@ -97,6 +98,9 @@ class SubscriptionPaymentController extends FrontBaseController
             'subscription_plan_type' => null,
         ];
         $user_subscription = User::saveData($user_data, $user);
+        if (!empty($user->userPromo)) {
+            $user->userPromo = UserPromo::saveData(['status' => config('constant.STATUS_INACTIVE')], $user->userPromo);
+        }
 
         if ($user_subscription) {
             $response_type = 'success';

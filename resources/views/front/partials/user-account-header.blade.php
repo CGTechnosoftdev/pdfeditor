@@ -66,7 +66,7 @@
                             </li>
                             <li class="dropdown user user-menu">
                                 <a href="##" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                                    <span><img src="{{Auth::user()->profile_picture_url}}" class="rounded-circle" alt="User Image"></span>
+                                    <span class="header-avatar"><img src="{{Auth::user()->profile_picture_url}}" class="rounded-circle" alt="User Image"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();" data-remote="myRemoteURL.do">Logout</a>
@@ -77,9 +77,7 @@
                             </li>
                         </ul>
                     </div>
-
                 </nav>
-
             </div>
         </div>
     </div>

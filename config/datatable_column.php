@@ -119,7 +119,7 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
             ['data' => 'first_name', 'name' => 'first_name', 'label' => 'First Name', 'orderBy' => 'asc'],
             ['data' => 'last_name', 'name' => 'last_name', 'label' => 'Last Name', 'orderBy' => 'asc'],
-            ['data' => 'contact_number', 'name' => 'contact_number', 'label' => 'Phone Number', 'orderBy' => 'asc'],
+            ['data' => 'email', 'name' => 'email', 'label' => 'Email', 'orderBy' => 'asc'],
             ['data' => 'plan_name', 'name' => 'plan_name', 'label' => 'Plan Name', 'orderBy' => 'asc'],
             ['data' => 'subscription_status_name', 'name' => 'subscription_status_name', 'label' => 'Subscription Status', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],

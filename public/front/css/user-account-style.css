@@ -327,11 +327,12 @@ li {
     font-size: 14px;
 }
 
+
 /*dataTable style*/
+
 .dataTables_length label {
     text-transform: capitalize;
 }
-
 
 .dataTables_length select {
     width: 65px;
@@ -409,6 +410,8 @@ table tr td button {
 .dataTables_wrapper .dataTables_info {
     padding-top: 25px;
 }
+
+
 /**/
 
 
@@ -1981,7 +1984,7 @@ table tr td button {
     background: #fff;
     padding: 10px 0px;
     box-shadow: 0px 0px 15px #ddd;
-    z-index: 11111;
+    z-index: 999;
     position: relative;
 }
 
@@ -2293,7 +2296,7 @@ table tr td button {
     background: #fff;
     color: #6b6b6b;
     transition: all 0.3s;
-    z-index: 9999;
+    z-index: 999;
     box-shadow: 0px 3px 27px #0000000D;
     border-radius: 10px;
     margin-top: 20px;
@@ -4050,6 +4053,7 @@ table tr td button {
     color: #1FCB5D;
 }
 
+
 /*** Date 3/12/2020 ***/
 
 #laravel_datatable {
@@ -4059,19 +4063,28 @@ table tr td button {
 .dataTables_paginate {
     border: none !important;
 }
+
 .kt-form .paginate_button.current {
     border-radius: 20px !important;
     border: none !important;
     background: #f00 !important;
 }
+
 .kt-form .paginate_button.next.disabled {
     border: none !important;
 }
-.kt-form  #laravel_datatable_previous:hover, .kt-form  #laravel_datatable_next:hover {
+
+.kt-form #laravel_datatable_previous:hover,
+.kt-form #laravel_datatable_next:hover {
     background: transparent !important;
-    color:#F3926B!important;
+    color: #F3926B!important;
 }
-.kt-form  #laravel_datatable_previous, .kt-form #laravel_datatable_next{position: relative;}
+
+.kt-form #laravel_datatable_previous,
+.kt-form #laravel_datatable_next {
+    position: relative;
+}
+
 .kt-form #laravel_datatable_previous::before {
     content: "\f30a";
     font-family: 'Font Awesome 5 Free';
@@ -4079,6 +4092,7 @@ table tr td button {
     padding-right: 10px;
     font-size: 16px;
 }
+
 .kt-form #laravel_datatable_next::after {
     content: "\f30b";
     font-family: 'Font Awesome 5 Free';
@@ -4086,29 +4100,71 @@ table tr td button {
     padding-left: 10px;
     font-size: 16px;
 }
+
 .kt-form .dataTables_paginate a.paginate_button {
     border: none !important;
     font-size: 13px;
 }
-.kt-form table tr th, .kt-form table tr td, .kt-form .dataTables_info{
-    font-size: 13px; color:#333;
+
+.kt-form table tr th,
+.kt-form table tr td,
+.kt-form .dataTables_info {
+    font-size: 13px;
+    color: #333;
 }
+
 .kt-form .dataTables_length label {
     font-size: 13px;
 }
+
 .kt-form .dataTables_length label select {
     height: 35px !important;
     border-radius: 4px !important;
 }
+
 .kt-form .dataTables_filter label {
     font-size: 13px;
 }
-.kt-form .dataTables_filter label input{
+
+.kt-form .dataTables_filter label input {
     height: 35px !important;
     border-radius: 4px !important;
     max-width: 220px;
 }
-.account-expired{
+
+.account-expired {
     background: #FF8787 !important;
 }
 
+.payment-info-modal .modal-dialog .modal-content .modal-body {
+    max-height: unset;
+}
+
+.payment-info-modal .modal-content {
+    padding: 20px !important;
+}
+
+.payment-info-modal .modal-content h4 {
+    color: #1fcb5d;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.payment-info-modal .modal-content label {
+    font-size: 14px;
+}
+
+.payment-info-modal .modal-content input {
+    font-size: 13px !important;
+}
+
+.header-avatar {
+    width: 30px;
+    height: 30px;
+}
+
+.header-avatar img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
