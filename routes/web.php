@@ -85,8 +85,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['as' => 'front.', 'middleware' => []], function () {
 
-	Route::get("/", 'Front\HomeController@index')->name('home');
-	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
+	// Route::get("/", 'Front\HomeController@index')->name('home');
+	Route::get("home", 'Front\HomeController@index')->name('home');
+	Route::get("home/#login", 'Front\HomeController@index')->name('home.login');
 	Route::get('/login', 'Front\LoginController@showLoginForm')->name('login');
 	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
@@ -114,6 +115,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
+		Route::get('/', 'DashboardController@index')->name('dashboard');
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
@@ -121,6 +123,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/subscription-payment', 'SubscriptionPaymentController@index')->name('subscription-payment');
 		Route::get('/subscription-payment-view/{user_subscription}', 'SubscriptionPaymentController@view')->name('subscription-payment.view');
 		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
+		Route::post('/update-card', 'SubscriptionPaymentController@updateCard')->name('update-card');
 	});
 });
 

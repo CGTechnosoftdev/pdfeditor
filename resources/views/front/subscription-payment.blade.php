@@ -15,9 +15,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Plan Subscription</a>
                     </li>
+                    @if(!empty($card_detail))
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Payment Method</a>
                     </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Payment History</a>
                     </li>
@@ -77,36 +79,35 @@
                         </div>
                         @endif
                     </div>
+                    @if(!empty($card_detail))
                     <div class="tab-pane" id="tabs-2" role="tabpanel">
                         <div class="create-new-card">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="account-discription ">Billing Account Description</label>
-                                            <input type="text" class="form-control" id="account-discription" placeholder="Billing Account Description">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="invoice-email">Invoice Email</label>
-                                            <input type="email" class="form-control" id="invoice-email" placeholder="Invoice Email">
-                                        </div>
-                                        <button type="submit" class="btn btn-success">Save</button>
-                                    </form>
+                                    <div class="form-group">
+                                        <label for="account-discription ">Billing Account Description</label>
+                                        <div class="form-control">{{$user->full_name}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="invoice-email">Invoice Email</label>
+                                        <div class="form-control">{{$user->email}}</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-7 offset-md-1">
                                     <div class="user-card">
                                         <div class="name-and-type">
-                                            <span class="card-holder-name">Card Holder Name</span>
-                                            <span class="card-type-logo">Visa</span>
+                                            <span class="card-holder-name">{{$card_detail['name']}}</span>
+                                            <span class="card-type-logo">{{$card_detail['brand']}}</span>
                                         </div>
-                                        <div class="card-number">XXXX-XXXX-XXXX-2589</div>
-                                        <div class="expiry-date">03/22</div>
+                                        <div class="card-number">XXXX-XXXX-XXXX-{{$card_detail['last4']}}</div>
+                                        <div class="expiry-date">{{$card_detail['exp_month']}}/{{$card_detail['exp_year']}}</div>
                                     </div>
-                                    <button class="btn edit-card">Edit Card</button>
+                                    <button class="btn edit-card" data-toggle="modal" data-target="#edit_card">Edit Card</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="tab-pane" id="tabs-3" role="tabpanel">
 
                         <!--Begin::Dashboard 3-->
@@ -156,6 +157,75 @@
             </div>
         </div>
 
+    </div>
+</div>
+<div class="modal fade more-options payment-info-modal" id="edit_card" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                {{ Form::open(['route' => ['front.update-card'],'method'=>'post','enctype'=>"multipart/form-data","id"=>'card-form']) }}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Payment Info</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group  {{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label for="name">Name On Card<span class="required-label">*</span></label>
+                                {{ Form::text('name',old('name'),['placeholder'=>'Enter Name on Card','class'=>"form-control",'id'=>'name'])}}
+                                @if ($errors->has('name'))
+                                <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group {{ $errors->has('card_number') ? ' has-error' : '' }}">
+                                <label for="card_number">Card Number<span class="required-label">*</span></label>
+                                {{ Form::text('card_number',old('card_number'),['placeholder'=>'Enter Card Number','class'=>"form-control",'id'=>'card_number','data-inputmask'=>'"mask": "9999-9999-9999-9999"','data-mask'])}}
+                                @if ($errors->has('card_number'))
+                                <span class="help-block"><strong>{{ $errors->first('card_number') }}</strong></span>
+                                @endif
+                                <!-- <input type="text" class="form-control" id="card_number" placeholder="Card Number"> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group {{ $errors->has('expiry_date') ? ' has-error' : '' }}">
+                                <label for="card_number">Expiry Date<span class="required-label">*</span></label>
+                                {{ Form::text('expiry_date',old('expiry_date'),['placeholder'=>'MM/YYYY','class'=>"form-control",'id'=>'expiry_date','data-inputmask'=>'"alias": "mm/yyyy"','data-mask'])}}
+                                @if ($errors->has('expiry_date'))
+                                <span class="help-block"><strong>{{ $errors->first('expiry_date') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group {{ $errors->has('cvv') ? ' has-error' : '' }}">
+                                <label for="card_number">CVV/CVC<span class="required-label d-content">*</span></label>
+                                {{ Form::password('cvv',['placeholder'=>'XXX','class'=>"form-control",'id'=>'cvv'])}}
+                                @if ($errors->has('cvv'))
+                                <span class="help-block"><strong>{{ $errors->first('cvv') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group {{ $errors->has('zip_code') ? ' has-error' : '' }}">
+                                <label for="card_number">Zip Code<span class="required-label d-content">*</span></label>
+                                {{ Form::text('zip_code',old('zip_code'),['placeholder'=>'Enter Zip Code','class'=>"form-control",'id'=>'zip_code'])}}
+                                @if ($errors->has('zip_code'))
+                                <span class="help-block"><strong>{{ $errors->first('zip_code') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 </div>
 @endsection
@@ -208,3 +278,13 @@
     });
 </script>
 @endsection
+
+@section('additionaljs')
+{!! JsValidator::formRequest('App\Http\Requests\EditCardFormRequest','#card-form') !!}
+<script src="{{ asset('public/admin/plugins/input-mask/jquery.inputmask.js') }}"></script>
+<script src="{{ asset('public/admin/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
+<script src="{{ asset('public/admin/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
+<script type="text/javascript">
+    $('[data-mask]').inputmask();
+</script>
+@append

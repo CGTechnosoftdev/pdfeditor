@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Traits\StripePaymentTrait;
 
 class SubscriptionPaymentController extends FrontBaseController
 {
+    use StripePaymentTrait;
     /**
      * Create a new controller instance.
      *
@@ -28,7 +30,7 @@ class SubscriptionPaymentController extends FrontBaseController
     public function index(Request $request)
     {
         $user = Auth::user();
-        $filter_data = $request->input();
+        $card_detail = $this->getCardDetail($user->stripe_customer_id);
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
@@ -45,9 +47,9 @@ class SubscriptionPaymentController extends FrontBaseController
         $data_array = [
             'title' => 'Subscription & Payment',
             'heading' => 'Manage Business Category',
-            'user' => $user
+            'user' => $user,
+            'card_detail' => $card_detail
         ];
-
         $user_promo = $user->userPromo;
         if (!empty($user->lastSubscriptionDetail)) {
             $data_array['current_plan_data'] = [
@@ -72,7 +74,8 @@ class SubscriptionPaymentController extends FrontBaseController
         ];
         return view('front.subscription-payment', $data_array);
     }
-    function view(UserSubscription $user_subscription)
+
+    public function view(UserSubscription $user_subscription)
     {
         if ($user_subscription->user_id != Auth::user()->id) {
             return abort(404);
@@ -84,7 +87,7 @@ class SubscriptionPaymentController extends FrontBaseController
         return view('front.subscription-payment-view', $data_array);
     }
 
-    function cancelSubscription()
+    public function cancelSubscription()
     {
         $user = Auth::user();
         $user_data = [
@@ -101,6 +104,35 @@ class SubscriptionPaymentController extends FrontBaseController
         } else {
             $response_type = 'error';
             $response_message = 'Error occoured, Please try again.';
+        }
+        set_flash($response_type, $response_message);
+        return redirect()->route('front.subscription-payment');
+    }
+
+    public function updateCard(Request $request)
+    {
+        $user = \Auth::user();
+        $input_data = $request->input();
+        \DB::beginTransaction();
+        try {
+            $card_token = $this->createCardToken($input_data);
+            if (!empty($card_token['success'])) {
+                $customer_update = $this->linkCardToCustomer($card_token['data']);
+                if (!empty($customer_update['success'])) {
+                    $response_type = 'success';
+                    $response_message = 'Card update successfully';
+                } else {
+                    $response_type = 'error';
+                    $response_message = $customer_update['message'];
+                }
+            } else {
+                $response_type = 'error';
+                $response_message = $card_token['message'];
+            }
+        } catch (Exception $e) {
+            \DB::rollback();
+            $response_type = 'error';
+            $response_message = $e->getMessage();
         }
         set_flash($response_type, $response_message);
         return redirect()->route('front.subscription-payment');

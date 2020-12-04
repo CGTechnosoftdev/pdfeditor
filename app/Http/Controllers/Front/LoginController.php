@@ -35,8 +35,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
-    protected $redirectToAfterLogout = '/';
+    protected $redirectTo = '/';
+    protected $redirectToAfterLogout = '/home';
     /**
      * Create a new controller instance.
      *
