@@ -15,6 +15,14 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('front.pricing') }}">Pricing</a>
     </li>
+
+</ul>
+<ul class="navbar-nav ml-auto login_signup">
+    @if(!Auth::user())
+    <li class="nav-item">
+        <a class="nav-link login" href="#" data-remote="myRemoteURL.do" id="login_btn_id">Log in</a>
+    </li>
+    @else
     <li class="nav-item">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
         <div class="dropdown-menu">
@@ -24,13 +32,6 @@
             <a class="dropdown-item" href="#">Another action</a>
         </div>
     </li>
-</ul>
-<ul class="navbar-nav ml-auto login_signup">
-    @if(!Auth::user())
-    <li class="nav-item">
-        <a class="nav-link login" href="#" data-remote="myRemoteURL.do" id="login_btn_id">Log in</a>
-    </li>
-    @else
     <li class="nav-item">
         <a class="nav-link login" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();" data-remote="myRemoteURL.do">Logout</a>
         <form id="logout-form" action="{{ route('front.logout') }}" method="POST" style="display: none;">

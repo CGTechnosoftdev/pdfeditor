@@ -44,12 +44,6 @@
 								</div>
 							</div>
 							<div class="form-group col-md-12">
-								<label for="gender_name" class="control-label text-left col-sm-6 required">Gender</label>
-								<div class="col-sm-6">
-									{{ $user->gender_name }}
-								</div>
-							</div>
-							<div class="form-group col-md-12">
 								<label for="contact_number" class="control-label text-left col-sm-6 required">Phone Number</label>
 								<div class="col-sm-6">
 									{{ $user->contact_number }}

@@ -87,7 +87,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 	Route::get("/", 'Front\HomeController@index')->name('home');
 	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
-	Route::get('/login', 'Auth\FrontLoginController@showLoginForm')->name('login');
+	Route::get('/login', 'Front\LoginController@showLoginForm')->name('login');
 	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
 	Route::get('/user-reset-password/{token}', 'Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
@@ -105,8 +105,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
 
-	Route::get('/login-as-user/{id}', 'Auth\FrontLoginController@loginAsUser')->name('login-as-user');
+	Route::get('/login-as-user/{id}', 'Front\LoginController@loginAsUser')->name('login-as-user');
 
+
+	Route::post('/login', 'Front\LoginController@login')->name('login');
 	Route::post('/logout', 'Front\LoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
