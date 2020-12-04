@@ -76,6 +76,7 @@ class PricingController extends FrontBaseController
 	 */
 	public function checkout(SubscriptionPlan $subscription_plan, PaymentFormRequest $request)
 	{
+
 		$user = \Auth::user();
 		$input_data = $request->input();
 		DB::beginTransaction();
@@ -133,6 +134,7 @@ class PricingController extends FrontBaseController
 					'transaction_id' => $transaction_data['id'] ?? null,
 					'status' => empty($trail_days) ? config('constant.SUBSCRIPTION_STATUS_ACTIVE') : config('constant.SUBSCRIPTION_STATUS_TRAIL')
 				];
+				//	dd($user_subscription_data);
 				UserSubscription::saveData($user_subscription_data);
 				if (!empty($promo_data)) {
 					$promo_start_from = addDaysToDate($trail_days);

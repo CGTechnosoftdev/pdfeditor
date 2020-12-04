@@ -8,7 +8,7 @@ use App\Traits\BaseModelTrait;
 class Transaction extends Model
 {
     use BaseModelTrait;
-    protected $fillable = ['user_id', 'reference_id', 'payment_method', 'currency', 'amount', 'payment_log', 'payment_status'];
+    protected $fillable = ['user_id', 'reference_id', 'amount', 'payment_log', 'payment_status'];
 
     /**
      * [saveData description]

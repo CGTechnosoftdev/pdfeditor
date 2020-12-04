@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
+use App\Models\UserSubscription;
 use League\OAuth2\Server\Exception\OAuthServerException;
 
 class User extends Authenticatable
@@ -25,12 +26,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'first_name', 'last_name', 'profile_picture', 'gender', 'country_id', 'contact_number', 'email', 'password', 'status', 'image', 'provider', 'provider_id', 'subscription_status', 'subscription_plan_id', 'subscription_plan_amount', 'subscription_plan_type', 'stripe_customer_id'
+        'parent_id', 'first_name', 'last_name', 'profile_picture', 'gender', 'country_id', 'contact_number', 'email', 'password', 'status', 'image', 'provider', 'provider_id', 'subscription_status', 'subscription_plan_id', 'subscription_plan_amount', 'subscription_plan_type', 'stripe_customer_id', 'social_name'
     ];
 
     protected $appends = [
         'full_name', 'profile_picture_url', 'gender_name', 'role_name', 'status_name', 'general_setting', 'plan_name', 'plan_expiry', 'subscription_status_name'
-                   ];
+    ];
 
     protected $dates = ['deleted_at'];
     public $timestamps = true;
@@ -52,6 +53,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function userSubscription()
+    {
+        return $this->hasMany(UserSubscription::class, "user_id", "id");
+    }
 
 
     public function getFullNameAttribute()
@@ -150,35 +156,6 @@ class User extends Authenticatable
     public function modelHasRole()
     {
         return $this->hasOne(ModelHasRole::class, 'model_id', 'id');
-<<<<<<< HEAD
-    }
-
-    /**
-     * [notes description]
-     * @author Akash Sharma
-     * @date   2020-11-285
-     * @return [type]     [description]
-     */
-    public function notes()
-    {
-        return $this->hasMany(UserNote::class, 'user_id', 'id');
-    }
-
-    public function subscriptionPlan()
-    {
-        return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
-    }
-
-    public function userPromo()
-    {
-        return $this->hasOne(UserPromo::class, 'user_id', 'id')->where(['status' => config('constant.STATUS_ACTIVE')]);
-    }
-
-    public function lastSubscriptionDetail()
-    {
-        return $this->hasOne(UserSubscription::class, 'user_id', 'id')->latest();
-=======
->>>>>>> 84dff887b163fc9de975ea45b7002585e1b48a1c
     }
 
     /**

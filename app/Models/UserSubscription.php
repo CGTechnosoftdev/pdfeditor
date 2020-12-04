@@ -9,50 +9,35 @@ class UserSubscription extends Model
 {
     use BaseModelTrait;
     protected $fillable = ['subscription_plan_id', 'subscription_plan_type', 'user_id', 'start', 'end', 'transaction_id', 'status'];
-    protected $appends = [
-        'reference_id', 'transaction_date_time', 'payment_method', 'plan_name', 'plan_amount', 'plan_expiry', 'payment_status'
-    ];
+    protected $appends = ['billing_period', 'amount', 'payment_status'];
 
-    public function transaction()
+
+    public function getBillingPeriodAttribute()
     {
-        return $this->belongsTo(Transaction::class, 'transaction_id', 'id');
-    }
-    public function subscriptionPlan()
-    {
-        return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id')->withTrashed();
+        return  changeDateFormat($this->start, 'M d,Y') . "-" . changeDateFormat($this->end, 'M d,Y');
     }
 
-    public function getReferenceIdAttribute()
+    public function getAmountAttribute()
     {
-        return $this->transaction->reference_id ?? '-';
-    }
-
-    public function getTransactionDateTimeAttribute()
-    {
-        return changeDateTimeFormat($this->created_at);
-    }
-
-    public function getPaymentMethodAttribute()
-    {
-        return $this->transaction->payment_method ?? '-';
-    }
-    public function getPlanNameAttribute()
-    {
-        $plan_type_arr = config('custom_config.plan_type_arr');
-        return $this->subscriptionPlan->name . " (" . $plan_type_arr[$this->subscription_plan_type] . ")";
-    }
-    public function getPlanAmountAttribute()
-    {
-        return myCurrencyFormat($this->transaction->amount ?? '0.00', $this->transaction->currency ?? '');
+        $myAmount = 0.00;
+        if (!empty($this->transaction->amount)) {
+            $myAmount = myCurrencyFormat($this->transaction->amount);
+        }
+        return  $myAmount;
     }
     public function getPaymentStatusAttribute()
     {
-        $payment_status =  $this->transaction->payment_status ?? '';
-        return (empty($payment_status) ? '' : config('custom_config.payment_status_arr.' . $payment_status));
-    }
-    public function getPlanExpiryAttribute()
-    {
-        return changeDateFormat($this->end);
+        $status = null;
+        if (!empty($this->transaction_id)) {
+            if ($this->transaction->payment_status == config("constant.PAYMENT_STATUS_PENDING"))
+                $status = "Pending";
+            elseif ($this->transaction->payment_status == config("constant.PAYMENT_STATUS_SUCCESS"))
+                $status = "Success";
+            elseif ($this->transaction->payment_status == config("constant.PAYMENT_STATUS_FAILED"))
+                $status = "Fail";
+        }
+
+        return $status;
     }
 
     /**
@@ -64,12 +49,6 @@ class UserSubscription extends Model
      */
     public static function saveData($dataArray, $model = array())
     {
-        if (!empty($dataArray['start'])) {
-            $dataArray['start'] = changeDateTimeFormat($dataArray['start'], 'db');
-        }
-        if (!empty($dataArray['end'])) {
-            $dataArray['end'] = changeDateTimeFormat($dataArray['end'], 'db');
-        }
         $model = (empty($model) ? new self() : $model);
         $model->fill($dataArray);
         if ($model->save()) {
@@ -77,5 +56,17 @@ class UserSubscription extends Model
         } else {
             return false;
         }
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, "transaction_id", "id");
+    }
+    public function SubscriptionPlan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class, "subscription_plan_id", "id");
     }
 }

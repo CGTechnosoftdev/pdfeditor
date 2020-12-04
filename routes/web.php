@@ -96,10 +96,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/front-user-registration', 'Front\UserRegistrationController@registerUserFrm')->name('user.registration');
 	Route::post('/front-user-registration-save', 'Front\UserRegistrationController@registerUserSave')->name('user.registration.save');
 
-	//User API	
-	//Route::post('/front-user-registration-api-save', 'Auth\FrontUserRegistrationController@registerUserSaveApi')->name('user.registration.api.save');
-	//Route::post('/reset-password-api-save', 'Auth\FrontResetPasswordController@resetPasswordSaveApi')->name('resetpassword.api.save');
-	//Route::post('reset-password-with-token-api', 'Auth\FrontForgotPasswordController@resetPasswordApi')->name('resetpassword.api.email');
+
 
 	Route::get('/front-user-email-verification/{token}', 'Front\UserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
@@ -114,6 +111,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
+
+	Route::get('/subscription-payment', 'Front\SubscriptionPaymentController@index')->name('subscription-payment');
+	Route::get('/subscription-payment-view/{user_subscription}', 'Front\SubscriptionPaymentController@view')->name('subscription-payment.view');
+	Route::post('/subscription-payment-cancel/{user}', 'Front\SubscriptionPaymentController@cancelSubscription')->name('subscription-payment-cancel');
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

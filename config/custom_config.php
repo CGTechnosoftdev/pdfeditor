@@ -33,17 +33,12 @@ return [
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
-    'payment_status_arr' => [
-        '0' => 'Pending',
-        '1' => 'Success',
-        '2' => 'Failed',
-    ],
     'subscription_status_arr' => [
-        '0' => 'Inactive',
-        '1' => 'Active',
-        '2' => 'Expired',
-        '3' => 'In Trail',
-        '4' => 'Cancelled',
+        0 => 'Pending',
+        1 => 'Active',
+        2 => 'Expired',
+        3 => 'Expired',
+        4 => 'Cancelled',
 
     ],
     'model_arr' => [
