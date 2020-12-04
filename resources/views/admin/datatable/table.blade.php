@@ -100,7 +100,7 @@ $paggingArray = config('custom_config.paging_limit_arr');
 					}
 				},
 				search: {
-					"regex": true
+					"regex": false
 				},
 				columns: JSON.parse(columnsList),
 				language: {
