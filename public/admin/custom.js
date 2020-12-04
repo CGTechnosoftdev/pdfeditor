@@ -1,90 +1,97 @@
-function blockUI(){
-	$.blockUI({
-		baseZ: 2000
-	});
+function blockUI() {
+    $.blockUI({
+        baseZ: 2000
+    });
 }
-function unblockUI(){
-	$.unblockUI();
+
+function unblockUI() {
+    $.unblockUI();
 }
 
 /** [create slug function] */
-function createSlug(source,target){
-	var value = $(source).val();
-	var str = value.replace(/[ ]+/g, '-');
-	$(target).val(str.toLowerCase());
+function createSlug(source, target) {
+    var value = $(source).val();
+    var str = value.replace(/[ ]+/g, '-');
+    $(target).val(str.toLowerCase());
 
 }
 /** [copy clipboard function] */
 function copyToClipboard(element) {
-	var $temp = $("<input>");
-	$("body").append($temp);
-	$temp.val($(element).html()).select();
-	document.execCommand("copy");
-	$temp.remove();
-   }
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).html()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
 
-	
 
-jQuery(document).ready(function() {		
-	/*** Tool Tip ***/
-	$('[data-toggle="tooltip"]').tooltip();
 
-	$(document).on('click','#change-password-checkbox',function(e){
-		if ($(this).is(":checked")) {
-			$(".change-password-elements").removeAttr("disabled");
-		} else {
-			$(".change-password-elements").attr("disabled", "disabled");
-		}
-	});
+jQuery(document).ready(function() {
+    //Select2
+    $(".select2-token").select2({
+        tags: true,
+        tokenSeparators: [',']
+    });
 
-	$(document).on('click','.change-status',function(e){
-		e.preventDefault();
-		blockUI();
-		var activeClass = true;
-		var inactiveClass = false;
-		var statusElement=$(this);
-		var statusCheckbox=$(this).find('.status_checkbox');
-		var type = statusElement.attr('data-type');
-		var id = statusElement.attr('data-id');
-		var status = statusElement.attr('data-status');
-		$.ajax({
-	        url: admin_url+"/change-status", //the page containing php script
-	        type: "post", //request type,
-	        dataType: 'json',
-	        data: { "_token": csrf_token,type:type,id:id,status:status},
-	        success:function(result){        	
-	        	if(result.success){
-	        		toastr.success(result.message);
-	        		if(result.data=="1"){
-	        			statusCheckbox.prop("checked", true);
-	        			statusElement.attr("title", 'Active');
-	        		}else if(result.data=="2"){
-	        			statusCheckbox.prop("checked", false);
-	        			statusElement.attr("title", 'Inactive');
-	        		}else{
+    /*** Tool Tip ***/
+    $('[data-toggle="tooltip"]').tooltip();
 
-	        		}
-	        		statusElement.attr('data-status',result.data);
-	        	}else{
-	        		toastr.error(result.message);
-	        	}
-	        },
-	        complete:function(){
-	        	$.unblockUI();
-	        }
-	    });
-	});
+    $(document).on('click', '#change-password-checkbox', function(e) {
+        if ($(this).is(":checked")) {
+            $(".change-password-elements").removeAttr("disabled");
+        } else {
+            $(".change-password-elements").attr("disabled", "disabled");
+        }
+    });
+
+    $(document).on('click', '.change-status', function(e) {
+        e.preventDefault();
+        blockUI();
+        var activeClass = true;
+        var inactiveClass = false;
+        var statusElement = $(this);
+        var statusCheckbox = $(this).find('.status_checkbox');
+        var type = statusElement.attr('data-type');
+        var id = statusElement.attr('data-id');
+        var status = statusElement.attr('data-status');
+        $.ajax({
+            url: admin_url + "/change-status", //the page containing php script
+            type: "post", //request type,
+            dataType: 'json',
+            data: { "_token": csrf_token, type: type, id: id, status: status },
+            success: function(result) {
+                if (result.success) {
+                    toastr.success(result.message);
+                    if (result.data == "1") {
+                        statusCheckbox.prop("checked", true);
+                        statusElement.attr("title", 'Active');
+                    } else if (result.data == "2") {
+                        statusCheckbox.prop("checked", false);
+                        statusElement.attr("title", 'Inactive');
+                    } else {
+
+                    }
+                    statusElement.attr('data-status', result.data);
+                } else {
+                    toastr.error(result.message);
+                }
+            },
+            complete: function() {
+                $.unblockUI();
+            }
+        });
+    });
 });
 
 /*** Upload and preview image ***/
 function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-		reader.onload = function(e) {
-			$('#blah')
-			.attr('src', e.target.result);
-		};
-		reader.readAsDataURL(input.files[0]);
-	}
+        reader.onload = function(e) {
+            $('#blah')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }

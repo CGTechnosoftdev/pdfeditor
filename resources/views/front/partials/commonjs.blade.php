@@ -11,8 +11,9 @@
 <script src="{{ asset('public/front/js/upload-multi-files.js') }}"></script>
 <!-- Laravel Javascript Validation -->
 <script type="text/javascript" src="{{ asset('public/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-
+<!-- Toastr -->
+<script src="{{ asset('public/admin/bower_components/toastr/toastr.min.js') }}"></script>
+@toastr_render
 <!-- Custom JavaScript -->
 <script src="{{ asset('public/admin/custom.js') }}"></script>
 <script src="{{ asset('public/front/js/custom.js') }}"></script>
-

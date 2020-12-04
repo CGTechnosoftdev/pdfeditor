@@ -27,43 +27,55 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                        @if(!empty($current_plan_data))
                         <div class="row">
                             <div class="col-lg-4 col-md-5 mb-3">
                                 <div class="plan-card">
                                     <h4>Current Plan</h4>
                                     <div class="plan-status account-plan">
-                                        <h2>{{$subscription_amount}}</h2>
-                                        <p>{{$subscription_period}}</p>
+                                        <h2>{{$current_plan_data['plan_amount']}}</h2>
+                                        <p>{{$current_plan_data['plan_name']}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-5 mb-3">
                                 <div class="plan-card">
                                     <h4>Current Account Status</h4>
-                                    <div class="plan-status {{$account_expired}}">
-                                        <h2>{{$current_status}}</h2>
-                                        <p>{{$expireDate}}</p>
+                                    <div class="plan-status {{$current_plan_data['plan_class']}}">
+                                        <h2>{{$current_plan_data['plan_status']}}</h2>
+                                        <p>Expires on {{$current_plan_data['plan_expiry']}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                @if(empty($cancel_subscription_message))
+                                @if(!empty($renewal_data))
                                 <div class="plan-pricing" id="upcomming_renewal_containerid">
                                     <h5>Upcomming Renewal</h5>
                                     <ul>
-                                        <li><span class="title">Plan Name</span> - <strong>{{$plan_name}}</strong></li>
-                                        <li><span class="title">Price</span> - <strong>{{$renewel_price}}</strong></li>
-                                        <li><span class="title">Renewal On</span> - <strong>{{$upcomming_renewel}}</strong></li>
+                                        <li><span class="title">Plan Name</span> - <strong>{{$renewal_data['plan_name']}}</strong></li>
+                                        <li><span class="title">Price</span> - <strong>{{$renewal_data['plan_amount']}}</strong></li>
+                                        <li><span class="title">Renewal On</span> - <strong>{{$renewal_data['renewal_date']}}</strong></li>
                                     </ul>
-                                    <button class="btn btn-cancel" id="cancel_subscription_btnid">Cancel Subscription</button>
+                                    {!! Form::open(['url' => route('front.cancel-subscription'),'method' => 'post','class'=>'delete-form',"onSubmit"=>"return confirm('Are you sure you want to cancel subscription?') "]) !!}
+                                    {{method_field('DELETE')}}
+                                    {!! Form::token() !!}
+                                    {!! Form::button('Cancel Subscription', ['type' => 'submit', 'class' => 'btn btn-cancel','title'=>'Cancel Subscription'] ) !!}
+                                    {!! Form::close() !!}
                                 </div>
                                 @else
-                                <div class="plan-pricing">{{$cancel_subscription_message}}</div>
+                                <div class="plan-pricing">Subscription Cancelled</div>
                                 @endif
                             </div>
                         </div>
+                        @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{route('front.pricing')}}"><button class="btn btn-success">Subscribe now</button></a>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <div class="tab-pane" id="tabs-2" role="tabpanel">
                         <div class="create-new-card">
@@ -181,6 +193,7 @@
             search: {
                 "regex": true
             },
+            dom: 'Brtip',
             columns: JSON.parse(columnsList),
             order: JSON.parse(order),
             pageLength: "{{ !empty(Auth::user()->general_setting['paging_limit'])?Auth::user()->general_setting['paging_limit']:10 }}"
@@ -192,28 +205,6 @@
         $(document).on('change', '#status_dropdown', function() {
             table.draw();
         });
-
-        $(document).on("click", "#cancel_subscription_btnid", function() {
-            if (!confirm('Are you sure you want to cancel?'))
-                return false;
-
-            $.ajax({
-                url: "{{route('front.subscription-payment-cancel',[$user_id])}}",
-                type: "post",
-                data: "user_subscribe_id={{$user_current_subscribe_id}}&_token={{ csrf_token()}}",
-                success: function(response) {
-                    //  alert(response);
-                    // console.log(response);
-                    $("#upcomming_renewal_containerid").html("Subscription Cancel successfully!");
-
-                }
-            });
-        });
-
-        // $('#searchForm').on('submit', function(e) {
-        // 	e.preventDefault();
-        // 	table.draw();
-        // });
     });
 </script>
 @endsection

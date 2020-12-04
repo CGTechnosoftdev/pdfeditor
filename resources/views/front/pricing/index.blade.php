@@ -6,9 +6,9 @@
 			<h1><strong>Choose a plan</strong> to try out PDF Writer risk free You can switch plans or cancel anytime</h1>
 
 			<div class="pricing-plans pt-5 mt-5">
-				<div class="row">
+				<div class="row justify-content-center">
 					@foreach($subscription_plan_arr as $subscription_plan)
-					<div class="col-md-4 col-sm-6">
+					<div class="col-md-4 col-sm-6 {{ (!empty($active_plan) && $active_plan == $subscription_plan->id) ? 'active' : '' }}">
 						{{ Form::open(['route' => ['front.payment-form',$subscription_plan->id],'method'=>'get']) }}
 						<div class="card mb-5 mb-md-0">
 							<!-- <div class="best-value">Best Value</div> -->
@@ -37,16 +37,34 @@
 								<!-- <div class="view-more">
 									<a href="#">View More</a>
 								</div> -->
+
 								@if(!empty($subscription_plan->yearly_amount))
+								@php $yearly_amount = $promo_data->yearly_amount ?? $subscription_plan->yearly_amount; @endphp
+								@if(!empty($promo_data->yearly_amount))
+								<div class="discount-price yearly-element-{{$subscription_plan->id}}">
+									<h3><span>{{$currency_symbol}}</span>{{$subscription_plan->yearly_amount}}</h3>
+								</div>
+								@endif
 								<div class="plan-price yearly-element-{{$subscription_plan->id}}">
-									<h2><sup>{{$currency_symbol}}</sup><span>{{$subscription_plan->yearly_amount}}</span></h2>
-									<h3>From {{$currency_symbol}}{{round($subscription_plan->yearly_amount/12,2)}}<span>(per month)</span></h3>
+									<h2>
+										<sup>{{$currency_symbol}}</sup>
+										<span>{{$yearly_amount}}</span>
+									</h2>
+									<h3>
+										From {{$currency_symbol}}{{round($yearly_amount/12,2)}}
+										<span>(per month)</span></h3>
 									<div class="annual-commitment">Annual Commitment</div>
 								</div>
 								@endif
 								@if(!empty($subscription_plan->monthly_amount))
+								@php $monthly_amount = $promo_data->monthly_amount ?? $subscription_plan->monthly_amount; @endphp
+								@if(!empty($promo_data->monthly_amount))
+								<div class="discount-price monthly-element-{{$subscription_plan->id}} d-none">
+									<h3><span>{{$currency_symbol}}</span>{{$subscription_plan->monthly_amount}}</h3>
+								</div>
+								@endif
 								<div class="plan-price monthly-element-{{$subscription_plan->id}} d-none">
-									<h2><sup>{{$currency_symbol}}</sup><span>{{$subscription_plan->monthly_amount}}</span></h2>
+									<h2><sup>{{$currency_symbol}}</sup><span>{{$monthly_amount}}</span></h2>
 									<h3>&nbsp;<span>&nbsp;</span></h3>
 									<div class="annual-commitment">Monthly Commitment</div>
 								</div>

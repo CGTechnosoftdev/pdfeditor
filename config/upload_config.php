@@ -29,9 +29,8 @@ return [
         'folder' => 'form_file',
         'delete_previous' => true,
         'multiple' => false,
-        'placeholder' => 'default-form-picture.png',
         'new_file_name' => 'orignal_with_random',
-        'allowed_extention' => 'jpg,jpeg,png,svg,gif',
+        'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
     'template_file' => [
@@ -41,9 +40,19 @@ return [
         'folder' => 'template_file',
         'delete_previous' => true,
         'multiple' => false,
-        'placeholder' => 'default-form-picture.png',
         'new_file_name' => 'orignal_with_random',
-        'allowed_extention' => 'jpg,jpeg,png,svg,gif',
+        'allowed_extention' => 'pdf',
+        'max_allowed_size' => '2000'
+    ],
+    '360_legal_form' => [
+        'label' => 'Form',
+        'file_input' => 'form',
+        'disk' => 'public',
+        'folder' => '360_legal_form',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal_with_random',
+        'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
 

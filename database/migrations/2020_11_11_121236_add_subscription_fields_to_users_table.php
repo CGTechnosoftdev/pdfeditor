@@ -13,14 +13,14 @@ class AddSubscriptionFieldsToUsersTable extends Migration
      */
     public function up()
     {
-    	Schema::table('users', function (Blueprint $table) {
-    		$table->tinyInteger('subscription_status')->default(0)->comment('0=>No,1=>Yes,2=>Trail')->after('password');
-    		$table->bigInteger('subscription_plan_id')->unsigned()->nullable()->after('subscription_status');
-    		$table->decimal('subscription_plan_amount', 8, 2)->default(0.00)->nullable()->after('subscription_plan_id');
-    		$table->tinyInteger('subscription_plan_type')->nullable()->comment('1=>Monthly,2=>Yearly')->after('subscription_plan_amount');
-    		$table->string('stripe_customer_id',50)->nullable()->after('subscription_plan_type');
+        Schema::table('users', function (Blueprint $table) {
+            $table->tinyInteger('subscription_status')->default(0)->comment('0=>Inactive,1=>Active,2=>Expired,3=>Trail')->after('password');
+            $table->bigInteger('subscription_plan_id')->unsigned()->nullable()->after('subscription_status');
+            $table->decimal('subscription_plan_amount', 8, 2)->default(0.00)->nullable()->after('subscription_plan_id');
+            $table->tinyInteger('subscription_plan_type')->nullable()->comment('1=>Monthly,2=>Yearly')->after('subscription_plan_amount');
+            $table->string('stripe_customer_id', 50)->nullable()->after('subscription_plan_type');
             $table->foreign('subscription_plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
-    	});
+        });
     }
 
     /**
@@ -30,12 +30,12 @@ class AddSubscriptionFieldsToUsersTable extends Migration
      */
     public function down()
     {
-    	Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('subscription_status');
             $table->dropColumn('subscription_plan_id');
             $table->dropColumn('subscription_plan_amount');
             $table->dropColumn('subscription_plan_type');
             $table->dropColumn('stripe_customer_id');
-    	});
+        });
     }
 }

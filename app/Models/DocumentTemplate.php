@@ -14,7 +14,7 @@ class DocumentTemplate extends Model
 
     protected $fillable = ['document_type_id', 'name', 'template_file', 'keywords', 'is_popular'];
     protected $appends = [
-        'template_file_url', 'document_type_name'
+        'template_file_url', 'document_type_name', 'keywords_arr', 'is_popular_status'
     ];
     protected $dates = ['deleted_at'];
     public $timestamps = true;
@@ -27,9 +27,20 @@ class DocumentTemplate extends Model
     {
         return  $this->documentType->name;
     }
+    public function getIsPopularStatusAttribute()
+    {
+        $yes_no_arr = config('custom_config.yes_no_arr');
+        return  $yes_no_arr[$this->is_popular];
+    }
+    public function getKeywordsArrAttribute()
+    {
+        $keywords_arr = explode(", ", $this->keywords);
+        return  array_combine($keywords_arr, $keywords_arr);
+    }
 
     public static function saveData($dataArray, $model = array())
     {
+        $dataArray['keywords'] = (is_array($dataArray['keywords']) ? implode(", ", $dataArray['keywords']) : $dataArray['keywords']);
         $model = (empty($model) ? new self() : $model);
         $model->fill($dataArray);
         if ($model->save()) {

@@ -206,9 +206,6 @@ function changeDateFormat($date, $format = "")
 			case 'db':
 				$new_format = 'Y-m-d';
 				break;
-			case 'M d,Y':
-				$new_format = $format;
-				break;
 			default:
 				$new_format = config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT');
 				break;
@@ -280,7 +277,34 @@ function changeDateTimeFormat($datetime, $format = "")
 function addDaysToDate($days, $date = '')
 {
 	$date = $date ?? date('Y-m-d H:i:s');
+	$days = $days ?? 0;
 	return Carbon::parse($date)->addDays($days)->format('Y-m-d H:i:s');
+}
+/**
+ * [addDaysToDate description]
+ * @author Akash Sharma
+ * @date   2020-11-17
+ * @param  [type]     $days [description]
+ * @param  string     $date [description]
+ */
+function addMonthsToDate($months, $date = '')
+{
+	$date = $date ?? date('Y-m-d H:i:s');
+	$months = $months ?? 0;
+	return Carbon::parse($date)->addMonths($months)->format('Y-m-d H:i:s');
+}
+/**
+ * [addDaysToDate description]
+ * @author Akash Sharma
+ * @date   2020-11-17
+ * @param  [type]     $days [description]
+ * @param  string     $date [description]
+ */
+function addYearsToDate($years, $date = '')
+{
+	$date = $date ?? date('Y-m-d H:i:s');
+	$years = $years ?? 0;
+	return Carbon::parse($date)->addYears($years)->format('Y-m-d H:i:s');
 }
 
 /**
@@ -292,13 +316,15 @@ function addDaysToDate($days, $date = '')
  * @param             string        $suffix [description]
  * @return            [type]                [description]
  */
-function myCurrencyFormat($amount)
+function myCurrencyFormat($amount, $currency_attribute = '')
 {
 	$return = "0.00";
 	if (!is_nan($amount)) {
 		$return = number_format($amount, 2);
 	}
-	$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	if (empty($currency_attribute)) {
+		$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	}
 	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'), 'symbol', 'key');
 	return $currency_arr[$currency_attribute] . $return;
 }
@@ -311,7 +337,7 @@ function myCurrencyFormat($amount)
  */
 function encryptData($data)
 {
-	return $data;
+	return encrypt($data);
 }
 /**
  * [decryptData description]
@@ -322,5 +348,10 @@ function encryptData($data)
  */
 function decryptData($data)
 {
-	return $data;
+	$return = '';
+	try {
+		$return = decrypt($data);
+	} catch (Illuminate\Contracts\Encryption\DecryptException $e) {
+	}
+	return $return;
 }

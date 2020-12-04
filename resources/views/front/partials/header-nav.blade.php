@@ -24,15 +24,6 @@
             <a class="dropdown-item" href="#">Another action</a>
         </div>
     </li>
-    <!-- <li class="nav-item">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                </div>
-                            </li> -->
 </ul>
 <ul class="navbar-nav ml-auto login_signup">
     @if(!Auth::user())
@@ -47,7 +38,9 @@
         </form>
     </li>
     @endif
+    @if(!Auth::user() || empty(Auth::user()->lastSubscriptionDetail))
     <li class="nav-item">
         <a class="nav-link start-trial" href="{{ route('front.pricing') }}">Start Free Trial</a>
     </li>
+    @endif
 </ul>

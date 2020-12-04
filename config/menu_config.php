@@ -29,6 +29,13 @@ return [
             'permissions' => ['sub-admin-list'],
         ],
         [
+            'label' => 'User Management',
+            'icon' => 'users',
+            'route_name' => 'user.index',
+            'active_segments' => ['user'],
+            'permissions' => ['user-list'],
+        ],
+        [
             'label' => 'Subscription Plans',
             'icon' => 'money',
             'route_name' => 'subscription-plan.index',
@@ -36,7 +43,7 @@ return [
             'permissions' => ['subscription-plan-list'],
         ],
         [
-            'label' => 'Promo URL',
+            'label' => 'Promo URLs',
             'icon' => 'tag',
             'route_name' => 'promo-url.index',
             'active_segments' => ['promo-url'],
@@ -57,6 +64,13 @@ return [
             'permissions' => ['top-100-form-list'],
         ],
         [
+            'label' => 'Manage 360 Legal Forms',
+            'icon' => 'file',
+            'route_name' => 'legal-form.index',
+            'active_segments' => ['legal-form'],
+            'permissions' => ['360-legal-form-list'],
+        ],
+        [
             'label' => 'Email Template',
             'icon' => 'envelope',
             'route_name' => 'email-template.index',
@@ -71,14 +85,14 @@ return [
             'permissions' => ['general-setting-list'],
         ],
         [
-            'label' => 'Document Type',
+            'label' => 'Manage Document Template Types',
             'icon' => 'building',
             'route_name' => 'document-type.index',
             'active_segments' => ['document-type'],
             'permissions' => ['document-type-list'],
         ],
         [
-            'label' => 'Document Template',
+            'label' => 'Manage Document Templates',
             'icon' => 'building',
             'route_name' => 'document-template.index',
             'active_segments' => ['document-template'],

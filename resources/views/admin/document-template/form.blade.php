@@ -41,19 +41,22 @@
 
                     <div class="form-group {{ $errors->has('template_file') ? ' has-error' : '' }}">
                         <label for="name" class="control-label text-left control-label col-sm-4 required">
-                            Template File
+                            File
                         </label>
                         <div class="col-sm-8">
-                            {{ Form::file('template_file',old('template_file'),array('class'=>"form-control"))}}
-                            @if($errors->has('template_file'))
-                            <span class="help-block"><strong>{{ $errors->first('template_file') }}</strong></span>
-                            @endif
+                            <div class="button-wrap">
+                                <label class="new-button" for="template_file"> Browse</label>
+                                {{ Form::file('template_file',array('class'=>"form-control",'id'=>'form'))}}
+                                @if($errors->has('template_file'))
+                                <span class="help-block"><strong>{{ $errors->first('template_file') }}</strong></span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     @if(!empty($document_template->template_file))
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <a href="{{$document_template->template_file_url}}" target="_new" title="Template File">
+                            <a href="{{$document_template->template_file_url}}" target="_new" title="File">
                                 <i class="fa fa-file-pdf-o"></i>
                             </a>
                         </div>
@@ -64,7 +67,7 @@
                     <div class="form-group {{ $errors->has('keywords') ? ' has-error' : '' }}">
                         <label for="keywords" class="control-label text-left col-sm-4 required">Keywords</label>
                         <div class="col-sm-8">
-                            {{ Form::text('keywords',old('keywords'),['placeholder'=>'Enter keywords','class'=>"form-control"])}}
+                            {!! Form::select('keywords[]',($document_template->keywords_arr ?? []), ($document_template->keywords_arr ?? old('keywords_arr')), ['class'=>'form-control select2-token','multiple'=>true]) !!}
                             @if ($errors->has('keywords'))
                             <span class="help-block"><strong>{{ $errors->first('keywords') }}</strong></span>
                             @endif

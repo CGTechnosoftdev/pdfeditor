@@ -15,7 +15,7 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
             ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -29,7 +29,7 @@ return [
             ['data' => 'gender_name', 'name' => 'gender_name', 'label' => 'Gender', 'orderBy' => 'asc'],
             ['data' => 'contact_number', 'name' => 'contact_number', 'label' => 'Phone Number', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -39,7 +39,7 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
             ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -49,7 +49,7 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => 'S No.'],
             ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -60,7 +60,7 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => 'S No.'],
             ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -71,7 +71,7 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => 'S No.'],
             ['data' => 'question', 'name' => 'question', 'label' => 'Question', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -85,7 +85,7 @@ return [
             ['data' => 'formated_discount_percent', 'name' => 'formated_discount_percent', 'label' => 'Discount Percent', 'orderBy' => 'asc'],
             ['data' => 'max_team_member', 'name' => 'max_team_member', 'label' => 'Max Team Member', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -99,7 +99,7 @@ return [
             ['data' => 'formated_monthly_amount', 'name' => 'formated_monthly_amount', 'label' => 'Monthly Amount', 'orderBy' => 'asc'],
             ['data' => 'promo_url', 'name' => 'promo_url', 'label' => 'Promo URL', 'orderable' => false, 'searchable' => false],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -109,7 +109,21 @@ return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
             ['data' => 'title', 'name' => 'title', 'label' => 'Title', 'orderBy' => 'asc'],
             ['data' => 'subject', 'name' => 'subject', 'label' => 'Subject', 'orderBy' => 'asc'],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    'user' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'first_name', 'name' => 'first_name', 'label' => 'First Name', 'orderBy' => 'asc'],
+            ['data' => 'last_name', 'name' => 'last_name', 'label' => 'Last Name', 'orderBy' => 'asc'],
+            ['data' => 'contact_number', 'name' => 'contact_number', 'label' => 'Phone Number', 'orderBy' => 'asc'],
+            ['data' => 'plan_name', 'name' => 'plan_name', 'label' => 'Plan Name', 'orderBy' => 'asc'],
+            ['data' => 'subscription_status_name', 'name' => 'subscription_status_name', 'label' => 'Subscription Status', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -120,7 +134,7 @@ return [
             ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
             ['data' => 'uploaded_documents_count', 'name' => 'uploaded_documents_count', 'label' => 'Uploaded Documents', 'searchable' => false, 'orderable' => false],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]
     ],
@@ -131,8 +145,33 @@ return [
             ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
             ['data' => 'document_type_name', 'name' => 'document_type_name', 'label' => 'Document Type', 'orderBy' => 'asc'],
             ['data' => 'template_file_url', 'name' => 'template_file_url', 'label' => 'File', 'searchable' => false, 'orderable' => false],
+            ['data' => 'is_popular_status', 'name' => 'is_popular_status', 'label' => 'Is Popular', 'orderBy' => 'asc'],
             ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
-            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action']
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    '360-legal-form' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'form_url', 'name' => 'form_url', 'label' => 'Form', 'searchable' => false, 'orderable' => false],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    'user-billing-history' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'reference_id', 'name' => 'reference_id', 'label' => 'Transaction ID', 'orderBy' => 'asc'],
+            ['data' => 'transaction_date_time', 'name' => 'transaction_date_time', 'label' => 'Transaction Date/Time', 'orderBy' => 'asc'],
+            ['data' => 'payment_method', 'name' => 'payment_method', 'label' => 'Payment Method', 'orderBy' => 'asc'],
+            ['data' => 'plan_name', 'name' => 'plan_name', 'label' => 'Plan Name', 'orderBy' => 'asc'],
+            ['data' => 'plan_amount', 'name' => 'plan_amount', 'label' => 'Plan Amount', 'orderBy' => 'asc'],
+            ['data' => 'payment_status', 'name' => 'payment_status', 'label' => 'Payment Status', 'orderBy' => 'asc'],
         ],
         'order' => [[0, 'desc']]
     ],
@@ -140,14 +179,12 @@ return [
     'subscription-payment' => [
         'columns' => [
             ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
-            ['data' => 'start', 'name' => 'start', 'label' => 'Date Billed', 'orderBy' => 'asc'],
-            ['data' => 'end', 'name' => 'end', 'label' => 'Date Paid', 'orderBy' => 'asc'],
+            ['data' => 'date_billed', 'name' => 'date_billed', 'label' => 'Date Billed', 'orderBy' => 'asc'],
+            ['data' => 'date_paid', 'name' => 'date_paid', 'label' => 'Date Paid', 'orderBy' => 'asc'],
             ['data' => 'billing_period', 'name' => 'billing_period', 'label' => 'Billing Period', 'orderable' => false, 'orderBy' => 'asc'],
-            ['data' => 'amount', 'name' => 'amount', 'label' => 'Amount', 'orderable' => false, 'orderBy' => 'asc'],
+            ['data' => 'plan_amount', 'name' => 'plan_amount', 'label' => 'Amount', 'orderable' => false, 'orderBy' => 'asc'],
             ['data' => 'payment_status', 'name' => 'payment_status', 'label' => 'Payment Status', 'orderable' => false, 'orderBy' => 'asc'],
-            // ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action'],
-
-
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action'],
         ],
         'order' => [[0, 'desc']]
     ],

@@ -238,6 +238,13 @@ class LoginController extends Controller
         return $dataArray;
     }
 
+    public function loginAsUser($id)
+    {
+        $user = User::find($id);
+        $this->guard()->login($user);
+        return redirect()->intended($this->redirectPath());
+    }
+
     /**
      * Get the guard to be used during authentication.
      *

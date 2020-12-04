@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 
 class EmailTemplate extends Model
-{   	
+{
 	use SoftDeletes;
 	use BaseModelTrait;
 
-	protected $fillable = ['title','subject','content','status'];
+	protected $fillable = ['title', 'subject', 'content', 'status'];
 	protected $dates = ['deleted_at'];
 	public $timestamps = true;
 
@@ -23,13 +23,13 @@ class EmailTemplate extends Model
 	 * @param  array      $model     [description]
 	 * @return [type]                [description]
 	 */
-	public static function saveData($dataArray,$model=array())
-	{ 
+	public static function saveData($dataArray, $model = array())
+	{
 		$model = (empty($model) ? new self() : $model);
 		$model->fill($dataArray);
-		if($model->save()){
+		if ($model->save()) {
 			return $model;
-		}else{
+		} else {
 			return false;
 		}
 	}

@@ -71,6 +71,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 		//email-template
 		Route::resource('email-template', 'EmailTemplateController');
+
+		//user
+		Route::resource('user', 'UserController');
+		Route::post('user/save-note/{user}', 'UserController@saveNote')->name('user.save-note');
+		Route::post('user/update-plan/{user}', 'UserController@updatePlan')->name('user.update-plan');
+		Route::get('user/billing-history/{user}', 'UserController@billingHistory')->name('user.billing-history');
+
+		//email-template
+		Route::resource('legal-form', 'LegalFormController');
 	});
 });
 
@@ -78,37 +87,38 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 	Route::get("/", 'Front\HomeController@index')->name('home');
 	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
-	Route::get('/login', 'Front\LoginController@showLoginForm')->name('login');
-	Route::get('/forgot-password', 'Front\ForgotPasswordController@forgotPassword')->name('forgot.password');
-	Route::post('reset-password-with-token', 'Front\ForgotPasswordController@resetPassword')->name('resetpassword.email');
-	Route::get('/user-reset-password/{token}', 'Front\ResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
-	Route::post('reset-password-save', 'Front\ResetPasswordController@resetPasswordSave')->name('resetpassword.save');
+	Route::get('/login', 'Auth\FrontLoginController@showLoginForm')->name('login');
+	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
+	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
+	Route::get('/user-reset-password/{token}', 'Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
+	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
 
-	Route::get('/front-user-registration', 'Front\UserRegistrationController@registerUserFrm')->name('user.registration');
-	Route::post('/front-user-registration-save', 'Front\UserRegistrationController@registerUserSave')->name('user.registration.save');
+	Route::get('/front-user-registration', 'Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
+	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
 
 
 
 	Route::get('/front-user-email-verification/{token}', 'Front\UserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
 	Route::get('login/{provider}/callback', 'SocialController@Callback');
-	Route::get('/resend-verification-account', 'Front\ForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
-	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
+	Route::get('/resend-verification-account', 'Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
+	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
 
+	Route::get('/login-as-user/{id}', 'Auth\FrontLoginController@loginAsUser')->name('login-as-user');
 
-	Route::post('/login', 'Front\LoginController@login')->name('login');
 	Route::post('/logout', 'Front\LoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
-
-	Route::get('/subscription-payment', 'Front\SubscriptionPaymentController@index')->name('subscription-payment');
-	Route::get('/subscription-payment-view/{user_subscription}', 'Front\SubscriptionPaymentController@view')->name('subscription-payment.view');
-	Route::post('/subscription-payment-cancel/{user}', 'Front\SubscriptionPaymentController@cancelSubscription')->name('subscription-payment-cancel');
+	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
+
+		Route::get('/subscription-payment', 'SubscriptionPaymentController@index')->name('subscription-payment');
+		Route::get('/subscription-payment-view/{user_subscription}', 'SubscriptionPaymentController@view')->name('subscription-payment.view');
+		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
 	});
 });
 

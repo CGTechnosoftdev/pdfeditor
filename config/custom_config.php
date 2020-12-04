@@ -33,13 +33,21 @@ return [
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
+    'payment_status_arr' => [
+        '0' => 'Pending',
+        '1' => 'Success',
+        '2' => 'Failed',
+    ],
     'subscription_status_arr' => [
-        0 => 'Pending',
-        1 => 'Active',
-        2 => 'Expired',
-        3 => 'Expired',
-        4 => 'Cancelled',
-
+        '0' => 'Inactive',
+        '1' => 'Active',
+        '2' => 'Expired',
+        '3' => 'In Trail',
+        '4' => 'Cancelled',
+    ],
+    'active_subscription_status_arr' => [
+        '1' => 'Active',
+        '3' => 'In Trail',
     ],
     'model_arr' => [
         'user' => 'User',
@@ -54,17 +62,26 @@ return [
         'email-template' => 'EmailTemplate',
         'document_type' => 'DocumentType',
         'document_template' => 'DocumentTemplate',
+        'legal_form' => 'LegalForm',
 
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',
         'm/d/Y' => 'm/d/Y',
         'Y-m-d' => 'Y-m-d',
+        'M d,Y' => 'M d, Y',
     ],
     'js_date_format_arr' => [
         'd-m-Y' => 'dd-mm-yyyy',
         'm/d/Y' => 'dd/mm/yyyy',
         'Y-m-d' => 'yyyy/mm/dd',
+        'M d,Y' => 'M dd, yyyy',
+    ],
+    'daterangepicker_date_format_arr' => [
+        'd-m-Y' => 'DD-MM-YYYY',
+        'm/d/Y' => 'DD/MM/YYYY',
+        'Y-m-d' => 'YYYY/MM/DD',
+        'M d,Y' => 'MMM DD, YYYY',
     ],
     'time_format_arr' => [
         'h:i:s' => 'h:i:s',
@@ -75,7 +92,8 @@ return [
         '10' => '10',
         '25' => '25',
         '50' => '50',
-        '100' => '100'
+        '100' => '100',
+        '-1' => 'All'
     ],
     'currency_arr' => [
         [

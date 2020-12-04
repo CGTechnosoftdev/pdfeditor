@@ -58,8 +58,8 @@ class DocumentTemplateController extends AdminBaseController
         }
 
         $data_array = [
-            'title' => 'Document Template',
-            'heading' => 'Manage Document Template',
+            'title' => 'Document Templates',
+            'heading' => 'Manage Document Templates',
             'breadcrumb' => \Breadcrumbs::render('document-template.index'),
         ];
         $data_array['add_new_button'] = [

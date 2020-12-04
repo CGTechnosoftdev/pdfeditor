@@ -54,27 +54,27 @@ Breadcrumbs::for('business-category.edit', function ($trail, $id) {
 // Home > sub-admin
 Breadcrumbs::for('sub-admin.index', function ($trail) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Sub-Admin', route('sub-admin.index'));
+	$trail->push('Sub Admin', route('sub-admin.index'));
 });
 
 // Home > sub-admin > add
 Breadcrumbs::for('sub-admin.create', function ($trail) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Sub-Admin', route('sub-admin.index'));
-	$trail->push('Add Sub-Admin', route('sub-admin.create'));
+	$trail->push('Sub Admin', route('sub-admin.index'));
+	$trail->push('Add Sub Admin', route('sub-admin.create'));
 });
 
 // Home > sub-admin > updated
 Breadcrumbs::for('sub-admin.edit', function ($trail, $id) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Sub-Admin', route('sub-admin.index'));
-	$trail->push('Edit Sub-Admin', route('sub-admin.edit', $id));
+	$trail->push('Sub Admin', route('sub-admin.index'));
+	$trail->push('Edit Sub Admin', route('sub-admin.edit', $id));
 });
 
 // Home > sub-admin > show
 Breadcrumbs::for('sub-admin.show', function ($trail, $id, $name) {
 	$trail->push('Dashboard', route('dashboard'));
-	$trail->push('Sub-Admin', route('sub-admin.index'));
+	$trail->push('Sub Admin', route('sub-admin.index'));
 	$trail->push($name . ' Detail', route('sub-admin.edit', $id));
 });
 
@@ -214,6 +214,33 @@ Breadcrumbs::for('email-template.show', function ($trail, $id, $name) {
 	$trail->push($name . ' Detail', route('email-template.edit', $id));
 });
 
+// Home > user
+Breadcrumbs::for('user.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('User', route('user.index'));
+});
+
+// Home > user > add
+Breadcrumbs::for('user.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('User', route('user.index'));
+	$trail->push('Add User', route('user.create'));
+});
+
+// Home > user > updated
+Breadcrumbs::for('user.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('User', route('user.index'));
+	$trail->push('Edit User', route('user.edit', $id));
+});
+
+// Home > user > show
+Breadcrumbs::for('user.show', function ($trail, $id, $name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('User', route('user.index'));
+	$trail->push($name . ' Detail', route('user.edit', $id));
+});
+
 // Home > document-type
 Breadcrumbs::for('document-type.index', function ($trail) {
 	$trail->push('Dashboard', route('dashboard'));
@@ -253,4 +280,31 @@ Breadcrumbs::for('document-template.edit', function ($trail, $id) {
 	$trail->push('Dashboard', route('dashboard'));
 	$trail->push('Document Template', route('document-template.index'));
 	$trail->push('Edit Document Template', route('document-template.edit', $id));
+});
+
+// Home > 360-legal-form
+Breadcrumbs::for('legal-form.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('360 Legal Forms', route('legal-form.index'));
+});
+
+// Home > 360-legal-form > add
+Breadcrumbs::for('legal-form.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('360 Legal Forms', route('legal-form.index'));
+	$trail->push('Add 360 Legal Form', route('legal-form.create'));
+});
+
+// Home > 360-legal-form > updated
+Breadcrumbs::for('legal-form.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('360 Legal Forms', route('legal-form.index'));
+	$trail->push('Edit 360 Legal Form', route('legal-form.edit', $id));
+});
+
+// Home > 360-legal-form  > show
+Breadcrumbs::for('legal-form.show', function ($trail, $id, $name) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Legal Form', route('legal-form.index'));
+	$trail->push($name . ' Detail', route('legal-form.edit', $id));
 });

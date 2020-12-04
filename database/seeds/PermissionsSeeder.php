@@ -316,6 +316,34 @@ class PermissionsSeeder extends Seeder
 				'created_at' => date("Y-m-d H:i:s"),
 				'updated_at' => date("Y-m-d H:i:s"),
 			],
+			[
+				'name' => '360-legal-form-list',
+				'guard_name' => 'web',
+				'module' => '360 Legal Forms',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
+			[
+				'name' => '360-legal-form-create',
+				'guard_name' => 'web',
+				'module' => '360 Legal Forms',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
+			[
+				'name' => '360-legal-form-edit',
+				'guard_name' => 'web',
+				'module' => '360 Legal Forms',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
+			[
+				'name' => '360-legal-form-delete',
+				'guard_name' => 'web',
+				'module' => '360 Legal Forms',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
 		];
 		DB::table('permissions')->insert($initialData);
 	}
