@@ -32,7 +32,7 @@ class SubscriptionPaymentController extends FrontBaseController
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
-            $model = UserSubscription::query()->get();
+            $model = UserSubscription::query()->where(['user_id' => $user->id])->get();
             $table = Datatables()->of($model);
 
             $table->addIndexColumn();
