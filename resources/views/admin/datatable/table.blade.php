@@ -51,6 +51,8 @@ $paggingArray = config('custom_config.paging_limit_arr');
 	var sourceUrl = '{{ $data_table["data_source"] }}';
 	var columnsList = '{!! json_encode($data_table["data_column_config"]["columns"]) !!}';
 	var order = '{!! json_encode($data_table["data_column_config"]["order"]) !!}';
+	var lengthMenuKey = JSON.parse('{!! json_encode(array_keys($paggingArray)) !!}');
+	var lengthMenuValue = JSON.parse('{!! json_encode(array_values($paggingArray)) !!}');
 	$(document).ready(function() {
 		$.ajaxSetup({
 			headers: {
@@ -65,7 +67,7 @@ $paggingArray = config('custom_config.paging_limit_arr');
 				url: sourceUrl,
 				type: 'GET',
 				data: function(d) {
-					d.statusFilter = $("#status_dropdown").val()
+					d.rangeFilter = $("#daterange").val()
 				},
 				beforeSend: function() {
 					blockUI();
@@ -116,18 +118,16 @@ $paggingArray = config('custom_config.paging_limit_arr');
 				})
 			}
 		});
-		if (statusFilterView.length > 0) {
-			$(statusFilterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
+		if (filterView.length > 0) {
+			$(filterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
 		}
-
-		$(document).on('change', '#status_dropdown', function() {
+		$('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			table.draw();
 		});
-
-		// $('#searchForm').on('submit', function(e) {
-		// 	e.preventDefault();
-		// 	table.draw();
-		// });
+		$('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+			$(this).val('');
+			table.draw();
+		});
 	});
 </script>
 @append

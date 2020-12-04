@@ -15,8 +15,8 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        @include('front.partials.header-nav')
-                        <!-- <ul class="navbar-nav ml-auto">
+                        @include('front.partials.user-account-header-nav')
+                        <!--<ul class="navbar-nav ml-auto">
                                 <li class="dropdown user user-menu">
                                     <a href="##" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         <span><img src="../public/admin/dist/img/avatar.png" class="user-image" alt="PDFWriter Admin Image"></span>
@@ -28,11 +28,9 @@
                                         <a class="dropdown-item" href="#">Another action</a>
                                     </div>
                                 </li>
-                            </ul> -->
+                             </ul>-->
                     </div>
-
                 </nav>
-
             </div>
         </div>
     </div>

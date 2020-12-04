@@ -9,11 +9,19 @@ class UserPromo extends Model
 {
     use BaseModelTrait;
     protected $fillable = ['subscription_plan_amount', 'subscription_plan_id', 'subscription_plan_type', 'user_id', 'promo_url_id', 'valid_till', 'status'];
-
+    protected $appends = [
+        'plan_amount'
+    ];
 
     public function promoUrl()
     {
         return $this->belongsTo(PromoUrl::class, 'promo_url_id', 'id')->withTrashed();
+    }
+
+
+    public function getPlanAmountAttribute()
+    {
+        return myCurrencyFormat($this->subscription_plan_amount ?? '0.00');
     }
 
     /**

@@ -206,9 +206,6 @@ function changeDateFormat($date, $format = "")
 			case 'db':
 				$new_format = 'Y-m-d';
 				break;
-			case 'M d,Y':
-				$new_format = $format;
-				break;
 			default:
 				$new_format = config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT');
 				break;
@@ -319,13 +316,15 @@ function addYearsToDate($years, $date = '')
  * @param             string        $suffix [description]
  * @return            [type]                [description]
  */
-function myCurrencyFormat($amount)
+function myCurrencyFormat($amount, $currency_attribute = '')
 {
 	$return = "0.00";
 	if (!is_nan($amount)) {
 		$return = number_format($amount, 2);
 	}
-	$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	if (empty($currency_attribute)) {
+		$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	}
 	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'), 'symbol', 'key');
 	return $currency_arr[$currency_attribute] . $return;
 }
@@ -338,7 +337,7 @@ function myCurrencyFormat($amount)
  */
 function encryptData($data)
 {
-	return $data;
+	return encrypt($data);
 }
 /**
  * [decryptData description]
@@ -349,5 +348,10 @@ function encryptData($data)
  */
 function decryptData($data)
 {
-	return $data;
+	$return = '';
+	try {
+		$return = decrypt($data);
+	} catch (Illuminate\Contracts\Encryption\DecryptException $e) {
+	}
+	return $return;
 }

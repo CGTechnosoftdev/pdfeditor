@@ -105,21 +105,22 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
 
+	Route::get('/login-as-user/{id}', 'Front\LoginController@loginAsUser')->name('login-as-user');
+
 
 	Route::post('/login', 'Front\LoginController@login')->name('login');
 	Route::post('/logout', 'Front\LoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
-
-	Route::get('/subscription-payment', 'Front\SubscriptionPaymentController@index')->name('subscription-payment');
-	Route::get('/subscription-payment-view/{user_subscription}', 'Front\SubscriptionPaymentController@view')->name('subscription-payment.view');
-	Route::post('/subscription-payment-cancel/{user}', 'Front\SubscriptionPaymentController@cancelSubscription')->name('subscription-payment-cancel');
-
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
+
+		Route::get('/subscription-payment', 'SubscriptionPaymentController@index')->name('subscription-payment');
+		Route::get('/subscription-payment-view/{user_subscription}', 'SubscriptionPaymentController@view')->name('subscription-payment.view');
+		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
 	});
 });
 

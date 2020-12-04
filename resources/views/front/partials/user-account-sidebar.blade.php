@@ -2,35 +2,24 @@
  <nav id="sidebar">
      <div class="user-panel">
          <div class="image">
-             <img src="{{asset('public/front/images/user.jpg')}}" class="rounded-circle" alt="User Image">
+             <img src="{{Auth::user()->profile_picture_url}}" class="rounded-circle" alt="User Image">
          </div>
          <div class="info">
-             <p>bootstrap develop</p>
+             <p>{{Auth::user()->full_name}}</p>
              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
          </div>
      </div>
+     @if(!Auth::user() || empty(Auth::user()->lastSubscriptionDetail))
      <a href="#" class="free-trial">Sign Up Free Trial</a>
+     @endif
 
      <ul class="list-unstyled components">
-         <!-- <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li> -->
+
          <li>
              <a href="#"><span><img src="{{asset('public/front/images/account-card-details.svg')}}"></span>Account Information</a>
          </li>
-         <li class="active">
-             <a href="#"><span><img src="{{asset('public/front/images/payment.svg')}}"></span>Subscription & Payment</a>
+         <li class="">
+             <a href="{{route('front.subscription-payment')}}"><span><img src="{{asset('public/front/images/payment.svg')}}"></span>Subscription & Payment</a>
          </li>
          <li>
              <a href="#"><span><img src="{{asset('public/front/images/settings.svg')}}"></span>Settings</a>

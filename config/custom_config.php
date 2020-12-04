@@ -30,16 +30,25 @@ return [
         '3' => 'Other'
     ],
     'plan_type_arr' => [
+        '0' => 'Trial',
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
+    'payment_status_arr' => [
+        '0' => 'Pending',
+        '1' => 'Success',
+        '2' => 'Failed',
+    ],
     'subscription_status_arr' => [
-        0 => 'Pending',
-        1 => 'Active',
-        2 => 'Expired',
-        3 => 'Expired',
-        4 => 'Cancelled',
-
+        '0' => 'Inactive',
+        '1' => 'Active',
+        '2' => 'Expired',
+        '3' => 'In Trail',
+        '4' => 'Cancelled',
+    ],
+    'active_subscription_status_arr' => [
+        '1' => 'Active',
+        '3' => 'In Trail',
     ],
     'model_arr' => [
         'user' => 'User',

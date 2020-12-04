@@ -179,14 +179,12 @@ return [
     'subscription-payment' => [
         'columns' => [
             ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
-            ['data' => 'start', 'name' => 'start', 'label' => 'Date Billed', 'orderBy' => 'asc'],
-            ['data' => 'end', 'name' => 'end', 'label' => 'Date Paid', 'orderBy' => 'asc'],
+            ['data' => 'date_billed', 'name' => 'date_billed', 'label' => 'Date Billed', 'orderBy' => 'asc'],
+            ['data' => 'date_paid', 'name' => 'date_paid', 'label' => 'Date Paid', 'orderBy' => 'asc'],
             ['data' => 'billing_period', 'name' => 'billing_period', 'label' => 'Billing Period', 'orderable' => false, 'orderBy' => 'asc'],
-            ['data' => 'amount', 'name' => 'amount', 'label' => 'Amount', 'orderable' => false, 'orderBy' => 'asc'],
+            ['data' => 'plan_amount', 'name' => 'plan_amount', 'label' => 'Amount', 'orderable' => false, 'orderBy' => 'asc'],
             ['data' => 'payment_status', 'name' => 'payment_status', 'label' => 'Payment Status', 'orderable' => false, 'orderBy' => 'asc'],
-            // ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action'],
-
-
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Action'],
         ],
         'order' => [[0, 'desc']]
     ],

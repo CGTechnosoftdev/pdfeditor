@@ -22,8 +22,8 @@ Route::group(['as' => 'api.', 'middleware' => []], function () {
 	Route::post('/reset-password-api-save', 'Front\ResetPasswordController@resetPasswordSaveApi')->name('resetpassword.api.save');
 	Route::post('/reset-password-with-token-api', 'Front\ForgotPasswordController@resetPasswordNewApi')->name('resetpassword.api.email');
 	Route::post('login/{provider}', 'Front\LoginController@socialLoginApi');
-	Route::post('/subscription-payment-cancel-api/{user}', 'Front\SubscriptionPaymentController@cancelSubscriptionApi')->name('subscription-payment-api-cancel');
-	Route::get('/subscription-history-api/{user}', 'Front\SubscriptionPaymentController@subscriptionHistoryApi')->name('subscription-payment-api-history');
+	Route::post('/subscription-payment-cancel-api/{user}', 'Api\SubscriptionApiController@cancelSubscriptionApi')->name('subscription-payment-api-cancel');
+	Route::get('/subscription-history-api/{user}', 'Api\SubscriptionApiController@subscriptionHistoryApi')->name('subscription-payment-api-history');
 
 
 	Route::group([/*'namespace'=>'API',*/'middleware' => ['auth:api']], function () {
