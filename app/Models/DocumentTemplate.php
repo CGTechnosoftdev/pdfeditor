@@ -40,7 +40,7 @@ class DocumentTemplate extends Model
 
     public static function saveData($dataArray, $model = array())
     {
-        $dataArray['keywords'] = (is_array($dataArray['keywords']) ? implode(", ", $dataArray['keywords']) : $dataArray['keywords']);
+        $dataArray['keywords'] = (!empty($dataArray['keywords']) && is_array($dataArray['keywords']) ? implode(", ", $dataArray['keywords']) : $dataArray['keywords']);
         $model = (empty($model) ? new self() : $model);
         $model->fill($dataArray);
         if ($model->save()) {

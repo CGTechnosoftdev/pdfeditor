@@ -53,81 +53,87 @@ $paggingArray = config('custom_config.paging_limit_arr');
 	var order = '{!! json_encode($data_table["data_column_config"]["order"]) !!}';
 	var lengthMenuKey = JSON.parse('{!! json_encode(array_keys($paggingArray)) !!}');
 	var lengthMenuValue = JSON.parse('{!! json_encode(array_values($paggingArray)) !!}');
-	$(document).ready(function() {
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	if (filterView.length > 0) {
+		var buttons_arr = [{
+			"extend": "excel",
+			exportOptions: {
+				columns: ':visible'
 			}
-		});
-		let init_data = 1;
-		var table = $('#laravel_datatable').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax: {
-				url: sourceUrl,
-				type: 'GET',
-				data: function(d) {
-					d.rangeFilter = $("#daterange").val()
-				},
-				beforeSend: function() {
-					blockUI();
-				},
-				complete: function(response) {
-					if (init_data == 1) {
-						$('#daterange').daterangepicker({
-							opens: 'left',
-							locale: {
-								cancelLabel: 'Clear',
-								separator: " to ",
-								format: "{{ (config('custom_config.daterangepicker_date_format_arr')[config('general_settings.date_format')]) }}",
-							}
-						});
-						$('#daterange').val('');
-						init_data++;
+		}];
+	} else {
+		var buttons_arr = [];
+	}
+	var buttonsJson =
+		$(document).ready(function() {
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			let init_data = 1;
+			var table = $('#laravel_datatable').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: {
+					url: sourceUrl,
+					type: 'GET',
+					data: function(d) {
+						d.rangeFilter = $("#daterange").val()
+					},
+					beforeSend: function() {
+						blockUI();
+					},
+					complete: function(response) {
+						if (init_data == 1 && filterView.length > 0) {
+							$('#daterange').daterangepicker({
+								opens: 'left',
+								locale: {
+									cancelLabel: 'Clear',
+									separator: " to ",
+									format: "{{ (config('custom_config.daterangepicker_date_format_arr')[config('general_settings.date_format')]) }}",
+								}
+							});
+							$('#daterange').val('');
+							init_data++;
+						}
+						unblockUI();
 					}
-					unblockUI();
+				},
+				search: {
+					"regex": true
+				},
+				columns: JSON.parse(columnsList),
+				language: {
+					search: '',
+					searchPlaceholder: "Search"
+				},
+				dom: 'lfBrtip',
+				buttons: buttons_arr,
+				order: JSON.parse(order),
+				lengthMenu: [
+					lengthMenuKey,
+					lengthMenuValue
+				],
+				pageLength: "{{ Auth::user()->general_setting['paging_limit'] }}",
+				initComplete: function() {
+					var $buttons = $('.dt-buttons').hide();
+					$('.exportLink').on('click', function(e) {
+						e.preventDefault();
+						btnClass = $(this).attr('data-btn');
+						if (btnClass) $buttons.find(btnClass).click();
+					})
 				}
-			},
-			search: {
-				"regex": true
-			},
-			columns: JSON.parse(columnsList),
-			language: {
-				search: '',
-				searchPlaceholder: "Search"
-			},
-			dom: 'lfBrtip',
-			buttons: [{
-				"extend": "excel",
-				exportOptions: {
-					columns: ':visible'
-				}
-			}],
-			order: JSON.parse(order),
-			lengthMenu: [
-				lengthMenuKey,
-				lengthMenuValue
-			],
-			pageLength: "{{ Auth::user()->general_setting['paging_limit'] }}",
-			initComplete: function() {
-				var $buttons = $('.dt-buttons').hide();
-				$('.exportLink').on('click', function(e) {
-					e.preventDefault();
-					btnClass = $(this).attr('data-btn');
-					if (btnClass) $buttons.find(btnClass).click();
-				})
+			});
+			if (filterView.length > 0) {
+				$(filterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
 			}
+			$('#daterange').on('apply.daterangepicker', function(ev, picker) {
+				table.draw();
+			});
+			$('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+				$(this).val('');
+				table.draw();
+			});
 		});
-		if (filterView.length > 0) {
-			$(filterView).appendTo("#laravel_datatable_wrapper .dataTables_filter");
-		}
-		$('#daterange').on('apply.daterangepicker', function(ev, picker) {
-			table.draw();
-		});
-		$('#daterange').on('cancel.daterangepicker', function(ev, picker) {
-			$(this).val('');
-			table.draw();
-		});
-	});
 </script>
 @append

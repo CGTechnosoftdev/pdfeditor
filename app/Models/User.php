@@ -107,6 +107,11 @@ class User extends Authenticatable
         return $this->lastSubscriptionDetail->plan_amount ?? '';
     }
 
+    public function getSubscriptionStatusNameAttribute()
+    {
+        return $this->lastSubscriptionDetail->status_name ?? '';
+    }
+
     public function getUpcomingRenewalPlan()
     {
         if (!empty($this->subscriptionPlan)) {
@@ -120,11 +125,6 @@ class User extends Authenticatable
         return myCurrencyFormat($this->userPromo->subscription_plan_amount ?? $this->subscription_plan_amount);
     }
 
-    public function getSubscriptionStatusNameAttribute()
-    {
-        $subscrption_status_arr = config('custom_config.subscription_status_arr');
-        return  $subscrption_status_arr[$this->subscription_status] ?? '';
-    }
 
 
     /**
