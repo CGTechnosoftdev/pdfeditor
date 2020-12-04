@@ -85,29 +85,32 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['as' => 'front.', 'middleware' => []], function () {
 
-	Route::get("/", 'Front\FrontHomeController@index')->name('home');
-	Route::get("/#login", 'Front\FrontHomeController@index')->name('home.login');
-	Route::get('/login', 'Auth\FrontLoginController@showLoginForm')->name('login');
-	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
-	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
-	Route::get('/user-reset-password/{token}', 'Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
-	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
+	Route::get("/", 'Front\HomeController@index')->name('home');
+	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
+	Route::get('/login', 'Front\LoginController@showLoginForm')->name('login');
+	Route::get('/forgot-password', 'Front\ForgotPasswordController@forgotPassword')->name('forgot.password');
+	Route::post('reset-password-with-token', 'Front\ForgotPasswordController@resetPassword')->name('resetpassword.email');
+	Route::get('/user-reset-password/{token}', 'Front\ResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
+	Route::post('reset-password-save', 'Front\ResetPasswordController@resetPasswordSave')->name('resetpassword.save');
 
-	Route::get('/front-user-registration', 'Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
-	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
+	Route::get('/front-user-registration', 'Front\UserRegistrationController@registerUserFrm')->name('user.registration');
+	Route::post('/front-user-registration-save', 'Front\UserRegistrationController@registerUserSave')->name('user.registration.save');
 
-	Route::get('/front-user-email-verification/{token}', 'Auth\FrontUserRegistrationController@newUserVerification')->name('user.verification.save');
+	//User API	
+	//Route::post('/front-user-registration-api-save', 'Auth\FrontUserRegistrationController@registerUserSaveApi')->name('user.registration.api.save');
+	//Route::post('/reset-password-api-save', 'Auth\FrontResetPasswordController@resetPasswordSaveApi')->name('resetpassword.api.save');
+	//Route::post('reset-password-with-token-api', 'Auth\FrontForgotPasswordController@resetPasswordApi')->name('resetpassword.api.email');
+
+	Route::get('/front-user-email-verification/{token}', 'Front\UserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
 	Route::get('login/{provider}/callback', 'SocialController@Callback');
-	Route::get('/resend-verification-account', 'Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
-	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
+	Route::get('/resend-verification-account', 'Front\ForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
+	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
 
-	Route::get('/login-as-user/{id}', 'Auth\FrontLoginController@loginAsUser')->name('login-as-user');
 
-
-	Route::post('/login', 'Auth\FrontLoginController@login')->name('login');
-	Route::post('/logout', 'Auth\FrontLoginController@logout')->name('logout');
+	Route::post('/login', 'Front\LoginController@login')->name('login');
+	Route::post('/logout', 'Front\LoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 

@@ -17,8 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
 
-Route::group(['as'=>'api.','middleware'=>[]], function () {
-	Route::group([/*'namespace'=>'API',*/'middleware'=>['auth:api']], function () {
+Route::group(['as' => 'api.', 'middleware' => []], function () {
+	Route::post('/front-user-registration-api-save', 'Front\UserRegistrationController@registerUserSaveApi')->name('user.registration.api.save');
+	Route::post('/reset-password-api-save', 'Front\ResetPasswordController@resetPasswordSaveApi')->name('resetpassword.api.save');
+	Route::post('/reset-password-with-token-api', 'Front\ForgotPasswordController@resetPasswordNewApi')->name('resetpassword.api.email');
+	Route::post('login/{provider}', 'Front\LoginController@socialLoginApi');
+
+
+	Route::group([/*'namespace'=>'API',*/'middleware' => ['auth:api']], function () {
 		Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout');
 	});
 });

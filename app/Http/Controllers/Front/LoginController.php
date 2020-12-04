@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Socialite;
+use Auth;
+use DB;
+use App\Http\Controllers\Api\ApiBaseController;
 
 
-class FrontLoginController extends Controller
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -23,7 +27,9 @@ class FrontLoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
+    public $base_api_object;
+    public $social_err_messages;
+    public $social_validator_ob;
     /**
      * Where to redirect users after login.
      *
@@ -39,6 +45,7 @@ class FrontLoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->base_api_object = new ApiBaseController();
     }
 
 
@@ -104,6 +111,77 @@ class FrontLoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    public function validatSocialLoginApi(array $data)
+    {
+
+        $response_type = "success";
+        $validator = Validator::make($data, [
+
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'social_name' => ['required'],
+            'provider_id' => ['required'],
+            'provider' => ['required'],
+            'profile_picture' => [],
+
+        ]);
+        if ($validator->fails()) {
+
+            foreach ($validator->getMessageBag()->getMessages() as $field_name => $messages) {
+
+                $this->social_err_messages[$field_name] = $messages;
+            }
+
+            $response_type = "error";
+        } else {
+            $this->social_validator_ob = $validator;
+        }
+        return   $response_type;
+    }
+    protected function create(array $input_data)
+    {
+        return User::create([
+
+            'first_name '           =>  $input_data["social_name"],
+            'email'         => $input_data["email"],
+            'profile_picture'         => (!empty($input_data["profile_picture"]) ? $input_data["profile_picture"] : ''),
+            'provider_id'   => (!empty($input_data["provider_id"]) ? $input_data["provider_id"] : ''),
+            'provider'      => $input_data["provider"],
+        ]);
+    }
+
+    public function socialLoginApi($provider, Request $request)
+    {
+        $response_type = $this->validatSocialLoginApi($request->all());
+        if ($response_type == "success") {
+            $input_data = $this->social_validator_ob->validate();
+            $users       =   User::where(['email' => $input_data["email"]])->first();
+            if ($users) {
+                Auth::login($users);
+
+                $response_type = 'success';
+                $response_message = "Login Successfully";
+            } else {
+                $user = User::create([
+                    'first_name '           =>  $input_data["social_name"],
+                    'email'         => $input_data["email"],
+                    'profile_picture'         => (!empty($input_data["profile_picture"]) ? $input_data["profile_picture"] : ''),
+                    'provider_id'   => (!empty($input_data["provider_id"]) ? $input_data["provider_id"] : ''),
+                    'provider'      => $input_data["provider"],
+                ]);
+                $user->syncRoles(config('constant.USER_ROLE'));
+                Auth::login($user);
+                $response_type = 'success';
+                $response_message = "Login Successfully";
+            }
+        }
+
+        if ($response_type == "success") {
+            return    $this->base_api_object->sendSuccess([], $response_message);
+        } elseif ($response_type == "error") {
+            return    $this->base_api_object->sendError("Invalid Data", $this->social_err_messages);
+        }
     }
 
     public function logout(Request $request)

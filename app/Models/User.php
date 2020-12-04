@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     protected $appends = [
         'full_name', 'profile_picture_url', 'gender_name', 'role_name', 'status_name', 'general_setting', 'plan_name', 'plan_expiry', 'subscription_status_name'
-    ];
+                   ];
 
     protected $dates = ['deleted_at'];
     public $timestamps = true;
@@ -150,6 +150,7 @@ class User extends Authenticatable
     public function modelHasRole()
     {
         return $this->hasOne(ModelHasRole::class, 'model_id', 'id');
+<<<<<<< HEAD
     }
 
     /**
@@ -176,6 +177,8 @@ class User extends Authenticatable
     public function lastSubscriptionDetail()
     {
         return $this->hasOne(UserSubscription::class, 'user_id', 'id')->latest();
+=======
+>>>>>>> 84dff887b163fc9de975ea45b7002585e1b48a1c
     }
 
     /**
