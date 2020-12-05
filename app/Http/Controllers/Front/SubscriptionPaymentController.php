@@ -31,7 +31,9 @@ class SubscriptionPaymentController extends FrontBaseController
     public function index(Request $request)
     {
         $user = Auth::user();
-        $card_detail = $this->getCardDetail($user->stripe_customer_id);
+        if (!empty($user->stripe_customer_id)) {
+            $card_detail = $this->getCardDetail($user->stripe_customer_id);
+        }
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';

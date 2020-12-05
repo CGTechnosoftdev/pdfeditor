@@ -54,8 +54,8 @@ class PricingController extends FrontBaseController
 		$user = \Auth::user();
 		if ($user->subscription_status != config('constant.SUBSCRIPTION_STATUS_INACTIVE')) {
 			$response_type = 'success';
-			$response_message = "you are already subscribed,thank you!";
-			set_flash($response_type, $response_message, false);
+			$response_message = "We found you are already subscibed user, enjoy our services";
+			set_flash($response_type, $response_message);
 			return redirect()->route('front.dashboard');
 		}
 		$promo_data = Session::get('promo_data') ?? [];
