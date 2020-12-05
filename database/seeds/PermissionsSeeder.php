@@ -344,6 +344,35 @@ class PermissionsSeeder extends Seeder
 				'created_at' => date("Y-m-d H:i:s"),
 				'updated_at' => date("Y-m-d H:i:s"),
 			],
+
+			[
+				'name' => 'user-list',
+				'guard_name' => 'web',
+				'module' => 'User',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
+			[
+				'name' => 'user-create',
+				'guard_name' => 'web',
+				'module' => 'User',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
+			[
+				'name' => 'user-edit',
+				'guard_name' => 'web',
+				'module' => 'User',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
+			[
+				'name' => 'user-delete',
+				'guard_name' => 'web',
+				'module' => 'User',
+				'created_at' => date("Y-m-d H:i:s"),
+				'updated_at' => date("Y-m-d H:i:s"),
+			],
 		];
 		DB::table('permissions')->insert($initialData);
 	}

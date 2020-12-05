@@ -35,7 +35,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/dashboard';
     protected $redirectToAfterLogout = '/home';
     /**
      * Create a new controller instance.
@@ -238,11 +238,16 @@ class LoginController extends Controller
         return $dataArray;
     }
 
-    public function loginAsUser($id)
+    public function loginAsUser(User $user)
     {
-        $user = User::find($id);
-        $this->guard()->login($user);
-        return redirect()->intended($this->redirectPath());
+        $admin_user = auth()->guard('web')->user();
+        if ($user->hasRole(config('constant.USER_ROLE_NAME')) && ($admin_user->hasRole(config('constant.ADMIN_ROLE_NAME')) || $admin_user->hasPermissionTo('user-edit'))) {
+            $this->guard()->login($user);
+            return redirect()->intended($this->redirectPath());
+        } else {
+            set_flash('error', config('constant.FORBIDDEN_MESSAGE'));
+            return redirect()->route('dashboard');
+        }
     }
 
     /**

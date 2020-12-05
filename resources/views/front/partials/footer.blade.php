@@ -334,7 +334,7 @@
 
 								} else {
 									if (response.success) {
-										var url = "{{ session()->pull('url.intended') ?: URL::route('dashboard') }}";
+										var url = "{{ session()->pull('url.intended') ?: URL::route('front.dashboard') }}";
 										location.href = url;
 									}
 								}
