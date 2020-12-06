@@ -215,4 +215,16 @@ class User extends Authenticatable
 
         return $user;
     }
+
+    public static function renewalList($date)
+    {
+        $active_subscription_status = array_keys(config('custom_config.active_subscription_status_arr'));
+        $model = self::with('lastSubscriptionDetail', 'userPromo')
+            ->whereIn('subscription_status', $active_subscription_status)
+            ->where('status', config('constant.STATUS_ACTIVE'));
+        $model->whereHas('lastSubscriptionDetail', function ($q) use ($date) {
+            $q->where(\DB::raw('DATE(end)'), $date);
+        });
+        return $model->get();
+    }
 }

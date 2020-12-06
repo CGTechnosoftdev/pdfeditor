@@ -109,7 +109,7 @@ class PricingController extends FrontBaseController
 						'payment_method' => $payment_method ?? null,
 						'currency' => strtoupper($input_data['currency']),
 						'payment_log' => json_encode($payment_log),
-						'payment_status' => $payment_response['data']->status == "succeeded" ? config('constant.PAYMENT_STATUS_SUCCESS') : config('constant.PAYMENT_STATUS_FAILED'),
+						'payment_status' => config('constant.PAYMENT_STATUS_SUCCESS'),
 					];
 					$transaction_data = Transaction::saveData($transaction_data);
 				} else {

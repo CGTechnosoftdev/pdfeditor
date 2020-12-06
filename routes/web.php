@@ -87,23 +87,21 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
 	Route::get("home/#login", 'Front\HomeController@index')->name('home.login');
 	Route::get('/login', 'Front\LoginController@showLoginForm')->name('login');
-	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
-	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
-	Route::get('/user-reset-password/{token}', 'Auth\FrontResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
-	Route::post('reset-password-save', 'Auth\FrontResetPasswordController@resetPasswordSave')->name('resetpassword.save');
+	Route::get('/forgot-password', 'Front\ForgotPasswordController@forgotpassword')->name('forgot.password');
+	Route::post('reset-password-with-token', 'Front\ForgotPasswordController@resetPassword')->name('resetpassword.email');
+	Route::get('/user-reset-password/{token}', 'Front\ResetPasswordController@resetPasswordFrm')->name('reset.password.frm');
+	Route::post('reset-password-save', 'Front\ResetPasswordController@resetPasswordSave')->name('resetpassword.save');
 
-	Route::get('/front-user-registration', 'Auth\FrontUserRegistrationController@registerUserFrm')->name('user.registration');
-	Route::post('/front-user-registration-save', 'Auth\FrontUserRegistrationController@registerUserSave')->name('user.registration.save');
+	Route::get('/front-user-registration', 'Front\UserRegistrationController@registerUserFrm')->name('user.registration');
+	Route::post('/front-user-registration-save', 'Front\UserRegistrationController@registerUserSave')->name('user.registration.save');
 
 
 
 	Route::get('/front-user-email-verification/{token}', 'Front\UserRegistrationController@newUserVerification')->name('user.verification.save');
 	Route::get('login/{provider}', 'SocialController@redirect');
 	Route::get('login/{provider}/callback', 'SocialController@Callback');
-	Route::get('/resend-verification-account', 'Auth\FrontForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
-	Route::post('/resend-verification-account-submit', 'Auth\FrontForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
-
-
+	Route::get('/resend-verification-account', 'Front\ForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
+	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 	Route::get('/login-as-user/{user}', 'Front\LoginController@loginAsUser')->name('login-as-user');
 
 
@@ -125,5 +123,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	});
 });
 
+//Cron Jobs
+Route::get("renew-subscriptions", 'Front\HomeController@renewSubscriptions')->name('renew-subscriptions');
 
 // Route::get('/home', 'HomeController@index')->name('home');
