@@ -3988,3 +3988,273 @@ li {
 .payment-info-modal .modal-content input {
     font-size: 13px !important;
 }
+
+
+/****** General Settings Page Design ******/
+
+.content-container {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.content-container .main-heading {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.content-container .main-heading h1 {
+    font-size: 28px;
+    color: #333;
+    font-family: Poppins-Medium;
+}
+
+.contact-info {
+    width: 100%;
+    height: auto;
+    display: table;
+    justify-content: space-between;
+    border-radius: 9px;
+    background: #fff;
+    padding: 20px 30px;
+    align-items: center;
+    height: 100%;
+}
+
+.contact-info .icon {
+    min-width: 40px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.contact-info .icon img {
+    max-width: 20px;
+}
+
+.contact-info .info {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.contact-info .info span {
+    font-size: 15px;
+    font-family: Poppins-Light;
+}
+
+.contact-info .info p {
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-family: Poppins-Bold;
+}
+
+.contact-info .edit {
+    min-width: 40px;
+    text-align: right;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.contact-info .edit img {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.general-settings-tabs {
+    width: 100%;
+    height: auto;
+    float: left;
+    position: relative;
+}
+
+.general-settings-tabs h4 {
+    background: #F6F6F6;
+    cursor: pointer;
+    border-top: none;
+    padding: 15px;
+    margin: 0px;
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.general-settings-tabs h4:last-child {
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.general-settings-tabs .setting-tab-content {
+    position: absolute;
+    width: 66.66666666666667%;
+    right: 0;
+    top: 0;
+    padding: 30px;
+    height: auto;
+    min-height: 100%;
+    border-left: none;
+    display: none;
+    border-radius: 0px 9px 9px 0px;
+    background: #fff
+}
+
+.general-settings-tabs .setting-tab-content {}
+
+.general-settings-tabs .setting-tab-content:after,
+.general-settings-tabs .setting-tab-content:before {
+    content: "";
+    display: table;
+}
+
+.general-settings-tabs .setting-tab-content:after {
+    clear: both;
+}
+
+.general-settings-tabs .setting-tab-content li {
+    list-style: circle;
+}
+
+.general-settings-tabs .active+.setting-tab-content {
+    display: block;
+}
+
+.general-settings-tabs h4 {
+    position: relative;
+    width: 33.333333333333336%;
+    height: 20%;
+    display: block;
+}
+
+.general-settings-tabs .active {
+    background: #fff;
+    border: none;
+    border-radius: 9px 0px 0px 9px;
+    cursor: default;
+    border-right: none;
+    position: relative;
+}
+
+.general-settings-tabs .active::before {
+    content: "";
+    width: 5px;
+    height: calc(100% - 16px);
+    background: #FFA155;
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    border-radius: 10px;
+}
+
+.general-settings-tabs h4 span {
+    font-size: 13px;
+    font-family: Poppins-SemiBold;
+}
+
+.general-settings-tabs p {
+    font-size: 13px;
+    margin-bottom: 0px;
+    font-family: Poppins-Light;
+    color: #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.general-settings-tabs h4 .tab-icon {
+    width: 50px;
+    text-align: center;
+}
+
+.general-settings-tabs h4 .tab-content {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.general-settings-tabs h4 .tab-info {
+    width: 25px;
+    text-align: right;
+}
+
+.setting-tab-content .heading {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 25px;
+}
+
+.setting-tab-content .heading h6 {
+    font-size: 16px;
+    color: #333;
+    font-family: Poppins-Light;
+}
+
+.setting-tab-content .heading h5 {
+    font-size: 16px;
+    color: #333;
+    font-family: Poppins-SemiBold;
+}
+
+.setting-tab-content form .form-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.setting-tab-content form .form-group select {
+    font-size: 14px;
+    font-family: Poppins-Regular;
+}
+
+.timeformate {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.timeformate ul {
+    list-style-type: none;
+}
+
+.timeformate ul li {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.timeformate ul li span {
+    font-size: 14px;
+    font-family: Poppins-Regular;
+    border-radius: 5px;
+    border: solid 1px #E8E8E8;
+    background: #F8F8F8;
+    padding: 12px 20px;
+    cursor: pointer;
+    float: left;
+}
+
+.timeformate ul li.active span {
+    border: solid 1px #FFA155;
+    background: #FFA15514;
+    color: #FFA155;
+}
+
+.timeformate ul li.active::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: #FFA155;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    border-radius: 10px;
+    left: unset;
+}
+
+.timeformate ul li.active::after {
+    content: "\f00c";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    font-size: 8px;
+    right: 2px;
+    top: 0px;
+    color: #fff;
+}

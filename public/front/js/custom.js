@@ -134,3 +134,55 @@ $('.pricing-plans .col-md-4').on('click', function() {
         j.preventDefault();
     });
 })(jQuery);
+
+
+
+/************* General Settings Tabs *********/
+$('.general-settings-tabs h4').click(function(event) {
+    event.preventDefault();
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+
+    var ph = $(this).parent().height();
+    var ch = $(this).next().height();
+
+    if (ch > ph) {
+        $(this).parent().css({
+            'min-height': ch + 'px'
+        });
+    } else {
+        $(this).parent().css({
+            'height': 'auto'
+        });
+    }
+});
+
+function tabParentHeight() {
+    var ph = $('.general-settings-tabs').height();
+    var ch = $('.general-settings-tabs .setting-tab-content').height();
+    if (ch > ph) {
+        $('.general-settings-tabs').css({
+            'height': ch + 'px'
+        });
+    } else {
+        $(this).parent().css({
+            'height': 'auto'
+        });
+    }
+}
+
+$(window).resize(function() {
+    tabParentHeight();
+});
+
+$(document).resize(function() {
+    tabParentHeight();
+});
+tabParentHeight();
+
+
+
+/*************** Timeframe ************/
+$('.timeformate ul li').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});
