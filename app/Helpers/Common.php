@@ -80,6 +80,7 @@ function uploadFile($request, $file_config)
 		//Generate name
 		$fileNameWithExtension = $file->getClientOriginalName();
 		$fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+		$fileName = str_replace(array('\'', '"', ',', ';', '<', '>'), ' ', $fileName);
 		$extension = $file->getClientOriginalExtension();
 		switch ($fileConfigData['new_file_name'] ?? "") {
 			case 'orignal_with_random':

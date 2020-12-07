@@ -67,7 +67,15 @@ class User extends Authenticatable
 
     public function getProfilePictureUrlAttribute()
     {
-        return  getUploadedFile($this->profile_picture, 'profile_picture');
+        $url = parse_url($this->profile_picture);
+        $picture_url = "";
+        if (!empty($url['scheme']) && ($url['scheme'] == 'https' || $url['scheme'] == "http")) {
+            $picture_url = $this->profile_picture;
+        } else {
+            $picture_url = getUploadedFile($this->profile_picture, 'profile_picture');
+        }
+
+        return  $picture_url;
     }
 
     public function getGenderNameAttribute()

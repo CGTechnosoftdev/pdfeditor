@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\StripePaymentTrait;
 
 class SubscriptionPlan extends Model
 {
 
 	use SoftDeletes;
 	use BaseModelTrait;
+	use StripePaymentTrait;
 
 	protected $fillable = ['name', 'slug', 'yearly_amount', 'monthly_amount', 'discount_percent', 'max_team_member', 'description', 'feature_list'];
 
@@ -46,5 +48,16 @@ class SubscriptionPlan extends Model
 		} else {
 			return false;
 		}
+	}
+	public static function cancelSubscriptionProcess($user)
+	{
+		$user_data = [
+			'subscription_status' => config('constant.SUBSCRIPTION_STATUS_CANCELLED'),
+			'subscription_plan_id' => null,
+			'subscription_plan_amount' => 0.00,
+			'subscription_plan_type' => null,
+		];
+		$user_subscription = User::saveData($user_data, $user);
+		return $user_subscription;
 	}
 }

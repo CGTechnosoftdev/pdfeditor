@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Traits\StripePaymentTrait;
 use App\Http\Controllers\Api\ApiBaseController;
+use App\Models\SubscriptionPlan;
 
 class SubscriptionPaymentController extends FrontBaseController
 {
+    use StripePaymentTrait;
     /**
      * Create a new controller instance.
      *
@@ -18,7 +21,7 @@ class SubscriptionPaymentController extends FrontBaseController
     public function __construct()
     {
         //  $this->middleware('auth');
-        $this->base_api_object = new ApiBaseController();
+
     }
 
 
@@ -29,8 +32,11 @@ class SubscriptionPaymentController extends FrontBaseController
      */
     public function index(Request $request)
     {
+
         $user = Auth::user();
-        $filter_data = $request->input();
+        $card_detail = "";
+        if (!empty($user->stripe_customer_id))
+            $card_detail = $this->getCardDetail($user->stripe_customer_id);
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
@@ -47,9 +53,9 @@ class SubscriptionPaymentController extends FrontBaseController
         $data_array = [
             'title' => 'Subscription & Payment',
             'heading' => 'Manage Business Category',
-            'user' => $user
+            'user' => $user,
+            'card_detail' => $card_detail
         ];
-
         $user_promo = $user->userPromo;
         if (!empty($user->lastSubscriptionDetail)) {
             $data_array['current_plan_data'] = [
@@ -74,7 +80,8 @@ class SubscriptionPaymentController extends FrontBaseController
         ];
         return view('front.subscription-payment', $data_array);
     }
-    function view(UserSubscription $user_subscription)
+
+    public function view(UserSubscription $user_subscription)
     {
         if ($user_subscription->user_id != Auth::user()->id) {
             return abort(404);
@@ -86,16 +93,11 @@ class SubscriptionPaymentController extends FrontBaseController
         return view('front.subscription-payment-view', $data_array);
     }
 
-    function cancelSubscription()
+    public function cancelSubscription()
     {
         $user = Auth::user();
-        $user_data = [
-            'subscription_status' => config('constant.SUBSCRIPTION_STATUS_CANCELLED'),
-            'subscription_plan_id' => null,
-            'subscription_plan_amount' => 0.00,
-            'subscription_plan_type' => null,
-        ];
-        $user_subscription = User::saveData($user_data, $user);
+        $user_subscription = SubscriptionPlan::cancelSubscriptionProcess($user);
+
 
         if ($user_subscription) {
             $response_type = 'success';
@@ -108,74 +110,36 @@ class SubscriptionPaymentController extends FrontBaseController
         return redirect()->route('front.subscription-payment');
     }
 
-    function cancelSubscriptionApi(Request $request, User $user)
+
+
+    public function updateCard(Request $request)
     {
-        $userList = User::query()->where([['subscription_status', '=', '0'], ["id", "=", $user->id]])->get();
-        if (count($userList) > 0) {
-            return    $this->base_api_object->sendError('User Subscription already cancelled!');
-        }
+        $user = \Auth::user();
+        $input_data = $request->input();
+        \DB::beginTransaction();
 
-        $user_subscription = $this->cancelsubscriptionProcess($user);
-        if ($user_subscription) {
-            return    $this->base_api_object->sendSuccess([], 'User subscription cancel successfully!');
-        } else {
-            return    $this->base_api_object->sendError('User not canelled due to technical error!');
-        }
-    }
-
-    public function subscriptionHistoryApi(Request $request, User $user)
-    {
-
-
-
-        $limit = $request->all()["limit"] ?? 2;
-        $page = $request->all()["page"] ?? -1;
-
-        $skip = 0;
-        if (empty($page)) {
-            $page = 1;
-            $skip = 0;
-        } else {
-            $skip_multi = $page - 1;
-            $skip = $limit * $skip_multi;
-        }
-        $dataArray = array();
-        $recordsArray = array();
-        if ($page != -1)
-            $userSubscriptions = UserSubscription::query()->where("user_id", "=", $user->id)->skip($skip)->take($limit)->get();
-        else
-            $userSubscriptions = UserSubscription::query()->where("user_id", "=", $user->id)->get();
-        if (!empty($userSubscriptions)) {
-
-            foreach ($userSubscriptions as $index => $user_subObject) {
-                $recordsArray[$user_subObject->id]["start"] = changeDateFormat($user_subObject->start, "M d,Y");
-                $recordsArray[$user_subObject->id]["end"] = changeDateFormat($user_subObject->end, "M d,Y");
-
-                $myAmount = 0.00;
-                if (!empty($user_subObject->transaction->amount)) {
-                    $myAmount = myCurrencyFormat($user_subObject->transaction->amount);
+        try {
+            $card_token = $this->createCardToken($input_data);
+            if (!empty($card_token['success'])) {
+                $customer_update = $this->linkCardToCustomer($card_token['data']);
+                if (!empty($customer_update['success'])) {
+                    $response_type = 'success';
+                    $response_message = 'Card update successfully';
+                } else {
+                    $response_type = 'error';
+                    $response_message = $customer_update['message'];
                 }
-                $recordsArray[$user_subObject->id]["amount"] = $myAmount;
-
-                $status = null;
-                if (!empty($user_subObject->transaction_id)) {
-                    if ($user_subObject->transaction->payment_status == config("constant.PAYMENT_STATUS_PENDING"))
-                        $status = "Pending";
-                    elseif ($user_subObject->transaction->payment_status == config("constant.PAYMENT_STATUS_SUCCESS"))
-                        $status = "Success";
-                    elseif ($user_subObject->transaction->payment_status == config("constant.PAYMENT_STATUS_FAILED"))
-                        $status = "Fail";
-                }
-                $recordsArray[$user_subObject->id]["status"] = $status;
+            } else {
+                $response_type = 'error';
+                $response_message = $card_token['message'];
             }
-            $NoOrRecordsResults = UserSubscription::query()->where("user_id", "=", $user->id)->get();
-            $no_of_records = count($NoOrRecordsResults);
-
-            $dataArray = [
-                "data" => $recordsArray,
-                "no_of_records" => $no_of_records,
-            ];
+        } catch (Exception $e) {
+            \DB::rollback();
+            $response_type = 'error';
+            $response_message = $e->getMessage();
         }
-        return    $this->base_api_object->sendSuccess($dataArray, '');
+
+        set_flash($response_type, $response_message);
+        return redirect()->route('front.subscription-payment');
     }
 }

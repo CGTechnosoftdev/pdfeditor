@@ -14,6 +14,9 @@
 
 <!-- MatchHeight JavaScript -->
 <script type="text/javascript" src="{{ asset('public/front/js/jquery.matchHeight.js')}}"></script>
+<!-- Toastr -->
+<script src="{{ asset('public/admin/bower_components/toastr/toastr.min.js') }}"></script>
+@toastr_render
 
 <!-- Custom JavaScript -->
 <script src="{{ asset('public/front/js/user-account-custom.js') }}"></script>

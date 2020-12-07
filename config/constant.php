@@ -67,5 +67,6 @@ return [
     'SUBSCRIPTION_STATUS_CANCELLED' => 4,
 
     'DEFAULT_AMOUNT_TYPE' => 0,
+    'PAGE_NOT_DEFINE' => -1,
 
 ];

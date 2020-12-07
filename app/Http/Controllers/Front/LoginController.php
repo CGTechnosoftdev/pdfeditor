@@ -35,8 +35,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
-    protected $redirectToAfterLogout = '/';
+    protected $redirectTo = '/';
+    protected $redirectToAfterLogout = '/home';
     /**
      * Create a new controller instance.
      *
@@ -118,13 +118,11 @@ class LoginController extends Controller
 
         $response_type = "success";
         $validator = Validator::make($data, [
-
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'social_name' => ['required'],
             'provider_id' => ['required'],
             'provider' => ['required'],
             'profile_picture' => [],
-
         ]);
         if ($validator->fails()) {
 
@@ -154,31 +152,31 @@ class LoginController extends Controller
     public function socialLoginApi($provider, Request $request)
     {
         $response_type = $this->validatSocialLoginApi($request->all());
+        $dataArray = array();
         if ($response_type == "success") {
             $input_data = $this->social_validator_ob->validate();
-            $users       =   User::where(['email' => $input_data["email"]])->first();
-            if ($users) {
-                Auth::login($users);
 
-                $response_type = 'success';
-                $response_message = "Login Successfully";
-            } else {
+            $user       =   User::where(['email' => $input_data["email"]])->first();
+            if (!$user) {
                 $user = User::create([
-                    'first_name '           =>  $input_data["social_name"],
+                    'social_name'           =>  $input_data["social_name"],
                     'email'         => $input_data["email"],
                     'profile_picture'         => (!empty($input_data["profile_picture"]) ? $input_data["profile_picture"] : ''),
                     'provider_id'   => (!empty($input_data["provider_id"]) ? $input_data["provider_id"] : ''),
                     'provider'      => $input_data["provider"],
                 ]);
                 $user->syncRoles(config('constant.USER_ROLE'));
-                Auth::login($user);
+            }
+            $accessToken = $user->createToken('authToken')->accessToken;
+            if (!empty($accessToken)) {
                 $response_type = 'success';
                 $response_message = "Login Successfully";
+                $dataArray["access_token"] = $accessToken;
             }
         }
 
         if ($response_type == "success") {
-            return    $this->base_api_object->sendSuccess([], $response_message);
+            return    $this->base_api_object->sendSuccess($dataArray, $response_message);
         } elseif ($response_type == "error") {
             return    $this->base_api_object->sendError("Invalid Data", $this->social_err_messages);
         }

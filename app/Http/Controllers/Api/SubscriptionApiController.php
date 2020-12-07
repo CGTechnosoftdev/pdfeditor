@@ -6,23 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\StripePaymentTrait;
+use App\Models\SubscriptionPlan;
 
 class SubscriptionApiController extends ApiBaseController
 {
-    function cancelSubscriptionApi(User $user)
+    use StripePaymentTrait;
+
+    function cancelSubscriptionApi()
     {
+        $user = \Auth::user();
 
         $userList = User::query()->where([['subscription_status', '=', '0'], ["id", "=", $user->id]])->get();
         if (count($userList) > 0) {
             return    $this->sendError('User Subscription already cancelled!');
         }
-        $user_data = [
-            'subscription_status' => config('constant.SUBSCRIPTION_STATUS_CANCELLED'),
-            'subscription_plan_id' => null,
-            'subscription_plan_amount' => 0.00,
-            'subscription_plan_type' => null,
-        ];
-        $user_subscription = User::saveData($user_data, $user);
+
+        $user_subscription = SubscriptionPlan::cancelSubscriptionProcess($user);
 
         if ($user_subscription) {
             return    $this->sendSuccess([], 'User subscription cancel successfully!');
@@ -31,11 +31,14 @@ class SubscriptionApiController extends ApiBaseController
         }
     }
 
-    public function subscriptionHistoryApi(Request $request, User $user)
+    public function subscriptionHistoryApi(Request $request)
     {
 
-        $limit = $request->all()["limit"] ?? 2;
-        $page = $request->all()["page"] ?? -1;
+
+        $user = \Auth::user();
+        $page_not_define = config('constant.PAGE_NOT_DEFINE');
+        $limit = $request->all()["limit"] ?? config('general_settings.paging_limit');
+        $page = $request->all()["page"] ?? $page_not_define;
 
         $skip = 0;
         if (empty($page)) {
@@ -45,16 +48,17 @@ class SubscriptionApiController extends ApiBaseController
             $skip_multi = $page - 1;
             $skip = $limit * $skip_multi;
         }
+        $date_format = config('general_settings.date_format');
         $dataArray = array();
         $recordsArray = array();
-        if ($page != -1)
+        if ($page != $page_not_define)
             $userSubscriptions = UserSubscription::query()->where("user_id", "=", $user->id)->skip($skip)->take($limit)->get();
         else
             $userSubscriptions = UserSubscription::query()->where("user_id", "=", $user->id)->get();
         if (!empty($userSubscriptions)) {
             foreach ($userSubscriptions as $index => $user_subObject) {
-                $recordsArray[$user_subObject->id]["start"] = changeDateFormat($user_subObject->start, "M d,Y");
-                $recordsArray[$user_subObject->id]["end"] = changeDateFormat($user_subObject->end, "M d,Y");
+                $recordsArray[$user_subObject->id]["start"] = changeDateFormat($user_subObject->start, $date_format);
+                $recordsArray[$user_subObject->id]["end"] = changeDateFormat($user_subObject->end, $date_format);
 
                 $myAmount = 0.00;
                 if (!empty($user_subObject->transaction->amount)) {
@@ -82,5 +86,41 @@ class SubscriptionApiController extends ApiBaseController
             ];
         }
         return    $this->sendSuccess($dataArray, '');
+    }
+
+    function subscriptionPaymentMethodPostApi(Request $request)
+    {
+        $user = \Auth::user();
+
+        $input_data = $request->input();
+        \DB::beginTransaction();
+        try {
+            $card_token = $this->createCardToken($input_data);
+            if (!empty($card_token['success'])) {
+
+                $customer_update = $this->linkCardToCustomer($card_token['data']);
+
+                if (!empty($customer_update['success'])) {
+                    $response_type = 'success';
+                    $response_message = 'Card update successfully';
+                } else {
+                    $response_type = 'error';
+                    $response_message = $customer_update['message'];
+                }
+            } else {
+                $response_type = 'error';
+                $response_message = $card_token['message'];
+            }
+        } catch (Exception $e) {
+            \DB::rollback();
+            $response_type = 'error';
+            $response_message = $e->getMessage();
+        }
+
+        if ($response_type == "success") {
+            return    $this->sendSuccess([], $response_message);
+        } elseif ($response_type == "error") {
+            return    $this->sendError($response_message);
+        }
     }
 }
