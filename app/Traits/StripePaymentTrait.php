@@ -152,10 +152,10 @@ trait StripePaymentTrait
 	 * @date   2020-11-12
 	 * @return [type]     [description]
 	 */
-	public function chargePayment($data_array)
+	public function chargePayment($data_array, $user = [])
 	{
 		try {
-			$user = auth()->user();
+			$user = $user ?? auth()->user();
 			if (empty($user->stripe_customer_id)) {
 				$customer_response = $this->createCustomer($data_array);
 				if (!empty($customer_response['success'])) {

@@ -334,7 +334,8 @@
 
 								} else {
 									if (response.success) {
-										location.reload();
+										var url = "{{ session()->pull('url.intended') ?: URL::route('front.dashboard') }}";
+										location.href = url;
 									}
 								}
 							},

@@ -31,7 +31,6 @@ class UserRegistrationController extends Controller
 
 	public function registerUserFrm()
 	{
-
 		return view('auth.front-user-registration');
 	}
 	public function validator(array $data)
@@ -43,7 +42,7 @@ class UserRegistrationController extends Controller
 			'password' => ['required', 'string', 'min:8', 'regex:' . config('constant.PASSWORD_REGEX')],
 		]);
 	}
-	public function newUserVerification($token, FrontUserRegistrationFormRequest $request)
+	public function newUserVerification($token, Request $request)
 	{
 		$email = $request->email;
 

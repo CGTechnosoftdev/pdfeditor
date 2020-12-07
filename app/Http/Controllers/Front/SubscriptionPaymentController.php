@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserPromo;
 use App\Traits\StripePaymentTrait;
 use App\Http\Controllers\Api\ApiBaseController;
 use App\Models\SubscriptionPlan;
@@ -34,9 +35,10 @@ class SubscriptionPaymentController extends FrontBaseController
     {
 
         $user = Auth::user();
-        $card_detail = "";
-        if (!empty($user->stripe_customer_id))
+        $card_detail = [];
+        if (!empty($user->stripe_customer_id)) {
             $card_detail = $this->getCardDetail($user->stripe_customer_id);
+        }
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
             $status_button_template = 'admin.datatable.status';
@@ -97,7 +99,9 @@ class SubscriptionPaymentController extends FrontBaseController
     {
         $user = Auth::user();
         $user_subscription = SubscriptionPlan::cancelSubscriptionProcess($user);
-
+        if (!empty($user->userPromo)) {
+            $user->userPromo = UserPromo::saveData(['status' => config('constant.STATUS_INACTIVE')], $user->userPromo);
+        }
 
         if ($user_subscription) {
             $response_type = 'success';

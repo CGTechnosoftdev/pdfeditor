@@ -115,6 +115,11 @@ class User extends Authenticatable
         return $this->lastSubscriptionDetail->plan_amount ?? '';
     }
 
+    public function getSubscriptionStatusNameAttribute()
+    {
+        return $this->lastSubscriptionDetail->status_name ?? 'Inactive';
+    }
+
     public function getUpcomingRenewalPlan()
     {
         if (!empty($this->subscriptionPlan)) {
@@ -128,11 +133,6 @@ class User extends Authenticatable
         return myCurrencyFormat($this->userPromo->subscription_plan_amount ?? $this->subscription_plan_amount);
     }
 
-    public function getSubscriptionStatusNameAttribute()
-    {
-        $subscrption_status_arr = config('custom_config.subscription_status_arr');
-        return  $subscrption_status_arr[$this->subscription_status] ?? '';
-    }
 
 
     /**
@@ -222,5 +222,17 @@ class User extends Authenticatable
         }
 
         return $user;
+    }
+
+    public static function renewalList($date)
+    {
+        $active_subscription_status = array_keys(config('custom_config.active_subscription_status_arr'));
+        $model = self::with('lastSubscriptionDetail', 'userPromo')
+            ->whereIn('subscription_status', $active_subscription_status)
+            ->where('status', config('constant.STATUS_ACTIVE'));
+        $model->whereHas('lastSubscriptionDetail', function ($q) use ($date) {
+            $q->where(\DB::raw('DATE(end)'), $date);
+        });
+        return $model->get();
     }
 }

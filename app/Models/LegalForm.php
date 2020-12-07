@@ -34,7 +34,9 @@ class LegalForm extends Model
 
     public static function saveData($dataArray, $model = array())
     {
-        $dataArray['keywords'] = (is_array($dataArray['keywords']) ? implode(", ", $dataArray['keywords']) : $dataArray['keywords']);
+        if (!empty($dataArray['keywords'])) {
+            $dataArray['keywords'] = (is_array($dataArray['keywords']) ? implode(", ", $dataArray['keywords']) : $dataArray['keywords']);
+        }
         $model = (empty($model) ? new self() : $model);
         $model->fill($dataArray);
         if ($model->save()) {

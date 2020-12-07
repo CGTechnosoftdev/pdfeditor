@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes(['register' => false]);
 	Route::group(['namespace' => 'Admin', 'middleware' => ['auth:web', 'preventBackHistory']], function () {
@@ -85,8 +82,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['as' => 'front.', 'middleware' => []], function () {
 
-	// Route::get("/", 'Front\HomeController@index')->name('home');
+	Route::get("/", 'Front\HomeController@index')->name('home');
 	Route::get("home", 'Front\HomeController@index')->name('home');
+	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
 	Route::get("home/#login", 'Front\HomeController@index')->name('home.login');
 	Route::get('/login', 'Front\LoginController@showLoginForm')->name('login');
 	Route::get('/forgot-password', 'Front\ForgotPasswordController@forgotPassword')->name('forgot.password');
@@ -104,9 +102,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('login/{provider}/callback', 'SocialController@Callback');
 	Route::get('/resend-verification-account', 'Front\ForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
 	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
-
-
-	Route::get('/login-as-user/{id}', 'Front\LoginController@loginAsUser')->name('login-as-user');
+	Route::get('/login-as-user/{user}', 'Front\LoginController@loginAsUser')->name('login-as-user');
 
 
 	Route::post('/login', 'Front\LoginController@login')->name('login');
@@ -115,7 +111,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
-		Route::get('/', 'DashboardController@index')->name('dashboard');
+		// Route::get('/', 'DashboardController@index')->name('dashboard');
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
@@ -127,5 +123,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	});
 });
 
+//Cron Jobs
+Route::get("renew-subscriptions", 'Front\HomeController@renewSubscriptions')->name('renew-subscriptions');
 
 // Route::get('/home', 'HomeController@index')->name('home');

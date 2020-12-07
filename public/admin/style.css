@@ -748,3 +748,30 @@ table tr td button {
 .main-sidebar .sidebar .sidebar-menu li {
     white-space: normal;
 }
+
+.browse-file {
+    display: flex;
+    align-items: center;
+}
+
+.browse-file label {
+    display: inline-block;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #C9F3D8;
+    font-size: 14px;
+    color: #000;
+    font-weight: normal;
+    position: relative;
+    width: 100px;
+    text-align: center;
+}
+
+#file-chosen {
+    margin-left: 0.3rem;
+    font-family: sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

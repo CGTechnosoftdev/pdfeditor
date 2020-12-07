@@ -23,6 +23,8 @@ return [
     // User Roles
     'ADMIN_ROLE' => '1',
     'USER_ROLE' => '2',
+    'ADMIN_ROLE_NAME' => 'Admin',
+    'USER_ROLE_NAME' => 'User',
 
     'MODEL_TYPE' => 'App\User',
     'TOP_100_FORM' => 'TOP_100_FORM',
@@ -44,6 +46,7 @@ return [
     'MODEL_TYPE' => 'App\Models\User',
 
     'DEFAULT_PHONECODE' => 226,
+    'FORBIDDEN_MESSAGE' => "You are not authorize for this. Please contact administrator",
     'PASSWORD_REGEX_INSTRUCTION' => "8 Character minimum and must contain 1 uppercase,1 lowercase, 1 digit and 1 special character",
     'CVV_INSTRUCTION' => "The CVV/CVC code (Card Verification Value/Code) is located on the back of your credit/debit card on the right side of the white signature strip",
     'PASSWORD_REGEX' => '/(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$)/u',

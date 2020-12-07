@@ -27,9 +27,6 @@ class DocumentTemplateController extends AdminBaseController
             $status_button_template = 'admin.datatable.status';
             $model = DocumentTemplate::query()->get();
             $table = Datatables()->of($model);
-            if (!empty($filter_data['statusFilter'])) {
-                $model->where(['status' => $filter_data['statusFilter']]);
-            }
             $table->addIndexColumn();
             $table->editColumn('template_file_url', function ($row) {
                 return "<a href='" . $row->template_file_url . "' target='_blank'><i class='fa fa-file-pdf-o'></i></a>";

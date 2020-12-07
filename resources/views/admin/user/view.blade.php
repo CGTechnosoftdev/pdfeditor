@@ -124,10 +124,12 @@
 							Update Plan
 						</button>
 						@endif
+						@if(auth()->user()->can('user-edit'))
 						<a href="{{route('front.login-as-user',$user->id)}}" target="_blank">
 							<button class="btn btn-success">Login as User</button>
 
 						</a>
+						@endif
 					</div>
 				</div>
 			</div>
