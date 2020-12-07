@@ -26,7 +26,6 @@ class ApiAuthController extends ApiBaseController
      */
     public function logout(Request $request)
     {
-        dd(\Auth::user());
         try {
             $input_data = $request->input();
             $logout_type = $input_data['logout_devices'] ?? 'current';
