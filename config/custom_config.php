@@ -30,7 +30,6 @@ return [
         '3' => 'Other'
     ],
     'plan_type_arr' => [
-        '0' => 'Trial',
         '2' => 'Yearly',
         '1' => 'Monthly',
     ],
