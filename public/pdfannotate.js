@@ -20,6 +20,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 	this.fontWeight = 'normal';
 	var inst = this;
 
+
 	var loadingTask = PDFJS.getDocument(this.url);
 	loadingTask.promise.then(function (pdf) {
 		var scale = 1.3;

@@ -126,13 +126,25 @@ function showPdfData() {
 function openSignatureModal() {
     $('#signatureModal').modal('show');
 }
+/*Open Image Model */
+$(document).on("click", "#openImageModelId", function () {
 
-function openImageModal() {
     $("#new-img-save-png").show();
     $(".new-img-wrapper").hide();
+
+    getNewImages();
     document.getElementById('preview-image').src = "";
     $('#imageModal').modal('show');
-}
+
+});
+
+$(document).on("click", "img[id ^= 'old_images_']", function () {
+
+
+    pdf.addNewImage($(this).attr("src"));
+    $('#imageModal').modal('hide');
+});
+
 
 document.getElementById('clear').addEventListener('click', function () {
     signaturePad.clear();
@@ -174,6 +186,7 @@ document.getElementById('eraser_btn_id').addEventListener('click', function (eve
 document.getElementById('new-img-save-png').addEventListener('click', function () {
     const data = document.getElementById('preview-image').src;
     pdf.addNewImage(data);
+    $('#imageModal').modal('hide');
 });
 
 document.getElementById("use-sign").addEventListener('click', function () {
@@ -197,7 +210,19 @@ function selectSignature(event) {
     const preview = document.getElementById('preview-sign');
     const file = document.getElementById("signature-selector").files[0];
     const reader = new FileReader();
+
     reader.addEventListener("load", function () {
+
+        let mimeType = (reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/) ? reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0] : "");
+        var is_valid_image = false;
+        if (mimeType == 'image/jpeg' || mimeType == 'image/jpg' || mimeType == 'image/png') {
+            is_valid_image = true;
+        }
+
+        if (!is_valid_image) {
+            alert("File format is not valid,Please use jpg or png file format!");
+            return false;
+        }
         preview.src = reader.result;
     }, false);
     if (file) {
@@ -205,6 +230,40 @@ function selectSignature(event) {
     }
     $("#save-png").hide();
     $("#use-sign").show();
+}
+
+function getNewImages() {
+    //var imageContainer = document.getElementById("new_images");
+    //PreviewImagesContainer
+    //alert($("#newImageTemplateId").clone());
+
+    let myImages = [];
+    myImages = JSON.parse(localStorage.getItem("new_images")) || [];
+    var image_itmes = "";
+
+    if (myImages.length > 0)
+        $("#PreviousContainer").show();
+
+    for (var i = 0; i < myImages.length; i++) {
+        //alert(myImages[i]);
+        var ColumnTemplateHTML = $("#newImageTemplateId").html();
+
+        //ColumnTemplateHTML.replace("-imgItem-", "<img src='" + myImages[i] + "' id='old_images_" + i + "' width='50px' / >");
+        image_itmes += '<div class="col col-md-4">' + "<img src='" + myImages[i] + "' id='old_images_" + i + "' class='img-thumbnail' / ></div>";
+
+    }
+    $("#PreviousImageContainer").html(image_itmes);
+
+
+}
+
+
+function saveInLocalStorage(url) {
+    let myImages = [];
+
+    myImages = JSON.parse(localStorage.getItem("new_images")) || [];
+    myImages.push(url);
+    localStorage.setItem("new_images", JSON.stringify(myImages));
 }
 
 function selectImage(event) {
@@ -215,11 +274,11 @@ function selectImage(event) {
     const file = document.getElementById("image-selector").files[0];
     const reader = new FileReader();
     reader.addEventListener("load", function () {
-        let mimeType = reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+
+        let mimeType = (reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/) ? reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0] : "");
         var is_valid_image = false;
         if (mimeType == 'image/jpeg' || mimeType == 'image/jpg' || mimeType == 'image/png') {
             is_valid_image = true;
-
         }
 
         if (!is_valid_image) {
@@ -228,6 +287,8 @@ function selectImage(event) {
         }
 
         preview.src = reader.result;
+
+        saveInLocalStorage(reader.result);
     }, false);
     if (file) {
         reader.readAsDataURL(file);

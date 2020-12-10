@@ -62,7 +62,7 @@
         </div>
 
         <div class="tool">
-          <button class="tool-button"><i class="fa fa-picture-o" title="Image" onclick="openImageModal()"></i></button>
+          <button class="tool-button" id="openImageModelId"><i class="fa fa-picture-o" title="Image"></i></button>
         </div>
 
         <div class="tool">
@@ -263,7 +263,12 @@
         <div class="modal-body">
           <input type="file" name="newimage" value="" id="image-selector" onchange="selectImage(event)" />
 
+          <div id="PreviousContainer" style="display:none">
+            <h4>You can select previous selected image.</h4>
+            <div class="row" id="PreviousImageContainer">
 
+            </div>
+          </div>
           <div class="new-img-wrapper" style="display: none;">
             <img src="" height="200" width="150" alt="image preview" id="preview-image" />
           </div>
@@ -273,6 +278,11 @@
           <button type="button" class="btn btn-primary" id="new-img-save-png">Save & Use</button>
         </div>
       </div>
+    </div>
+  </div>
+  <div id="newImageTemplateId">
+    <div class="col col-md-3" style="display:none">
+      <div class="newImgItem">-imgItem-</div>
     </div>
   </div>
 
