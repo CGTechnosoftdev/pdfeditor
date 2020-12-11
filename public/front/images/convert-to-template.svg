@@ -1,1 +1,11 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" width="31.927" height="31.951" viewBox="0 0 31.927 31.951"><defs><style>.a{fill:#c1484a;}.b{fill:#486eb8;}</style></defs><path class="a" d="M-1009.4,253.887h8.593v31.951h-8.593Z" transform="translate(1009.402 -253.887)"/><path class="b" d="M-948.419,289.676h-10.589V274.4h10.589Z" transform="translate(980.347 -265.716)"/><path class="b" d="M-985.8,261.161v-7.242h21.926v7.242Z" transform="translate(995.792 -253.905)"/><path class="b" d="M-985.8,289.682V274.419h9.918v15.263Z" transform="translate(995.791 -265.725)"/><path class="b" d="M-985.8,320.37V313.8h21.927v6.57Z" transform="translate(995.793 -288.431)"/></svg>
+=======
+<svg id="Group_860" data-name="Group 860" xmlns="http://www.w3.org/2000/svg" width="31.927" height="31.951" viewBox="0 0 31.927 31.951">
+  <path id="Path_1570" data-name="Path 1570" d="M-1009.4,253.887h8.593v31.951h-8.593Z" transform="translate(1009.402 -253.887)" fill="#ffa155"/>
+  <path id="Path_1571" data-name="Path 1571" d="M-948.419,289.676h-10.589V274.4h10.589Z" transform="translate(980.347 -265.716)" fill="#1fcb5d"/>
+  <path id="Path_1572" data-name="Path 1572" d="M-985.8,261.161v-7.242h21.926v7.242Z" transform="translate(995.792 -253.905)" fill="#1fcb5d"/>
+  <path id="Path_1573" data-name="Path 1573" d="M-985.8,289.682V274.419h9.918v15.263Z" transform="translate(995.791 -265.725)" fill="#1fcb5d"/>
+  <path id="Path_1574" data-name="Path 1574" d="M-985.8,320.37V313.8h21.927v6.57Z" transform="translate(995.793 -288.431)" fill="#1fcb5d"/>
+</svg>
+>>>>>>> dae10f4721cef599e734f3a4e1e18e344b9dff7b

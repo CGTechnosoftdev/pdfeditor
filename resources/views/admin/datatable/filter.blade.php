@@ -1,0 +1,1 @@
+<div class="pull-right"><div class="input-group date"><input type="text" name="date-filter" class="form-control filter-element" id="daterange" value=""><div class="input-group-addon"><i class="fa fa-calendar"></i></div></div></div><button class="btn btn-success datatable-btn exportLink" data-btn=".buttons-excel">Download</button>
