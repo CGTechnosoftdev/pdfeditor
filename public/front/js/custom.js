@@ -24,36 +24,26 @@
 
 })(jQuery);
 
-// $("#menu-toggle").click(function(e) {
-//     e.preventDefault();
-//     $("#wrapper").toggleClass("active");
-// });
-
-$(document).ready(function() {
-    $('#sidebarCollapse').on('click', function() {
-        $('#sidebar').toggleClass('active');
-    });
-});
 
 // number count for stats, using jQuery animate
 
 $('.counting').each(function() {
     var $this = $(this),
-        countTo = $this.attr('data-count');
+    countTo = $this.attr('data-count');
 
     $({ countNum: $this.text() }).animate({
-            countNum: countTo
+        countNum: countTo
+    },
+
+    {
+
+        duration: 3000,
+        easing: 'linear',
+        step: function() {
+            $this.text(Math.floor(this.countNum));
         },
-
-        {
-
-            duration: 3000,
-            easing: 'linear',
-            step: function() {
-                $this.text(Math.floor(this.countNum));
-            },
-            complete: function() {
-                $this.text(this.countNum);
+        complete: function() {
+            $this.text(this.countNum);
                 //alert('finished');
             }
 
@@ -81,17 +71,17 @@ function hideNonVisibleDivs() {
     var i, divId, div;
     for (i = 0; i < divs.length; i++) {
         divId = divs[i];
-
+        
         div = document.getElementById(divId);
-
+        
         if (visibleDivId === divId) {
-
+            
             div.style.display = "block";
-
+            
         } else {
-
+            
             div.style.display = "none";
-
+            
         }
     }
 }
@@ -134,55 +124,3 @@ $('.pricing-plans .col-md-4').on('click', function() {
         j.preventDefault();
     });
 })(jQuery);
-
-
-
-/************* General Settings Tabs *********/
-$('.general-settings-tabs h4').click(function(event) {
-    event.preventDefault();
-    $(this).addClass('active');
-    $(this).siblings().removeClass('active');
-
-    var ph = $(this).parent().height();
-    var ch = $(this).next().height();
-
-    if (ch > ph) {
-        $(this).parent().css({
-            'min-height': ch + 'px'
-        });
-    } else {
-        $(this).parent().css({
-            'height': 'auto'
-        });
-    }
-});
-
-function tabParentHeight() {
-    var ph = $('.general-settings-tabs').height();
-    var ch = $('.general-settings-tabs .setting-tab-content').height();
-    if (ch > ph) {
-        $('.general-settings-tabs').css({
-            'height': ch + 'px'
-        });
-    } else {
-        $(this).parent().css({
-            'height': 'auto'
-        });
-    }
-}
-
-$(window).resize(function() {
-    tabParentHeight();
-});
-
-$(document).resize(function() {
-    tabParentHeight();
-});
-tabParentHeight();
-
-
-
-/*************** Timeframe ************/
-$('.timeformate ul li').on('click', function() {
-    $(this).addClass('active').siblings().removeClass('active');
-});
