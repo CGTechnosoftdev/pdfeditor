@@ -188,4 +188,27 @@ return [
         ],
         'order' => [[0, 'desc']]
     ],
+    'catalog-category' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'type_name', 'name' => 'type_name', 'label' => 'Catalog Type', 'orderBy' => 'asc'],
+            ['data' => 'parent_name', 'name' => 'parent_name', 'label' => 'Parent Category', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    'catalog-form' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'category_name', 'name' => 'category_name', 'label' => 'Category', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
 ];

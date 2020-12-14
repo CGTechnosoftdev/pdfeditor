@@ -308,3 +308,43 @@ Breadcrumbs::for('legal-form.show', function ($trail, $id, $name) {
 	$trail->push('Legal Form', route('legal-form.index'));
 	$trail->push($name . ' Detail', route('legal-form.edit', $id));
 });
+
+// Home > catalog-category
+Breadcrumbs::for('catalog-category.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Catagory', route('catalog-category.index'));
+});
+
+// Home > catalog-category > add
+Breadcrumbs::for('catalog-category.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Catagory', route('catalog-category.index'));
+	$trail->push('Add Catalog Catagory', route('catalog-category.create'));
+});
+
+// Home > catalog-category > updated
+Breadcrumbs::for('catalog-category.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Catagory', route('catalog-category.index'));
+	$trail->push('Edit Catalog Catagory', route('catalog-category.edit', $id));
+});
+
+// Home > catalog-form
+Breadcrumbs::for('catalog-form.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Form', route('catalog-form.index'));
+});
+
+// Home > catalog-form > add
+Breadcrumbs::for('catalog-form.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Form', route('catalog-form.index'));
+	$trail->push('Add Catalog Form', route('catalog-form.create'));
+});
+
+// Home > catalog-form > updated
+Breadcrumbs::for('catalog-form.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Form', route('catalog-form.index'));
+	$trail->push('Edit Catalog Form', route('catalog-form.edit', $id));
+});

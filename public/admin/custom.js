@@ -32,6 +32,7 @@ jQuery(document).ready(function() {
         tags: true,
         tokenSeparators: [',']
     });
+    $(".select2").select2();
 
     /*** Tool Tip ***/
     $('[data-toggle="tooltip"]').tooltip();

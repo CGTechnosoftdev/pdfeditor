@@ -77,6 +77,10 @@ Route::group(['prefix' => 'admin'], function () {
 
 		//email-template
 		Route::resource('legal-form', 'LegalFormController');
+		//Catalog
+		Route::resource('catalog-category', 'CatalogFormCategoryController');
+		Route::resource('catalog-form', 'CatalogFormController');
+		Route::post('/get/catalog-parent-categories', 'CatalogFormCategoryController@getParentCategories')->name('load-catalog-parent-categories');
 	});
 });
 
