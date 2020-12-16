@@ -246,4 +246,15 @@ return [
         ],
         'order' => [[0, 'desc']]
     ],
+    'tax-form-version' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'name', 'name' => 'name', 'label' => 'Name', 'orderBy' => 'asc'],
+            ['data' => 'form_url', 'name' => 'form_url', 'label' => 'Form', 'searchable' => false, 'orderable' => false],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
 ];

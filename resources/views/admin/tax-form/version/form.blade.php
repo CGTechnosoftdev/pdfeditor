@@ -10,46 +10,23 @@
 			<div class="box">
 				<!-- /.box-header -->
 				<div class="box-body">
-					@if(isset($tax_form))
-					{{ Form::model($tax_form,['route' => ['tax-form.update',$tax_form->id],'method'=>'put','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
+					@if(isset($tax_form_version))
+					{{ Form::model($tax_form_version,['route' => ['tax-form.version.update',$tax_form->id,$tax_form_version->id],'method'=>'put','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
 					@else
-					{{ Form::open(['route' => 'tax-form.store','method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
+					{{ Form::open(['route' => ['tax-form.version.store',$tax_form->id],'method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
 					@endif
 					{!! Form::token() !!}
 					<div class="row">
 						<div class="col-xs-12 col-lg-6 col-md-9">
-							<div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
-								<label for="category_id" class="control-label text-left col-sm-4">
-									Tax Category
-									<span class="required-label">*</span>
-								</label>
-								<div class="col-sm-8">
-									{!! Form::select('category_id',[''=>"Select"] + $category_arr, old('category_id'), ['class'=>'form-control']) !!}
-									@if ($errors->has('category_id'))
-									<span class="help-block"><strong>{{ $errors->first('category_id') }}</strong></span>
-									@endif
-								</div>
-							</div>
+
 							<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 								<label for="name" class="control-label text-left col-sm-4">Name
 									<span class="required-label">*</span>
 								</label>
 								<div class="col-sm-8">
-									{{ Form::text('name',old('name'),['placeholder'=>'Enter Name','class'=>"form-control",'id'=>'name']) }}
+									{{ Form::text('name',old('name'),['placeholder'=>'Enter Version Name','class'=>"form-control",'id'=>'name']) }}
 									@if ($errors->has('name'))
 									<span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
-									@endif
-								</div>
-							</div>
-							@if(!isset($tax_form))
-							<div class="form-group {{ $errors->has('version_name') ? ' has-error' : '' }}">
-								<label for="version_name" class="control-label text-left col-sm-4">Version Name
-									<span class="required-label">*</span>
-								</label>
-								<div class="col-sm-8">
-									{{ Form::text('version_name',old('version_name'),['placeholder'=>'Enter Version Name','class'=>"form-control",'id'=>'version_name']) }}
-									@if ($errors->has('version_name'))
-									<span class="help-block"><strong>{{ $errors->first('version_name') }}</strong></span>
 									@endif
 								</div>
 							</div>
@@ -57,7 +34,7 @@
 							<div class="form-group {{ $errors->has('form') ? ' has-error' : '' }}">
 								<label for="name" class="control-label text-left control-label col-sm-4 required">
 									Form
-									@if(empty($tax_form->form))
+									@if(empty($tax_form_version->form))
 									<span class="required-label">*</span>
 									@endif
 								</label>
@@ -76,7 +53,15 @@
 									@endif
 								</div>
 							</div>
-
+							@if(!empty($tax_form_version->form))
+							<div class="form-group">
+								<div class="col-sm-offset-4 col-sm-8">
+									<a href="{{$tax_form_version->form_url}}" target="_new" title="Form">
+										<i class="fa fa-file-pdf-o"></i>
+									</a>
+								</div>
+							</div>
+							@endif
 							<div class="form-group {{ $errors->has('fillable_printable_status') ? ' has-error' : '' }}">
 								<label for="fillable_printable_status" class="control-label text-left col-sm-4 required">Fillable Printable Status</label>
 								<div class="col-sm-8">
@@ -86,8 +71,17 @@
 									@endif
 								</div>
 							</div>
-							@endif
 
+							<div class="form-group {{ $errors->has('is_latest_version') ? ' has-error' : '' }}">
+								<label for="is_latest_version" class="control-label text-left col-sm-4 required">Is latest version?</label>
+								<div class="col-sm-8">
+									{{ Form::checkbox('is_latest_version',1,old('is_latest_version'),['class'=>'styled-checkbox','id'=>'is_latest_version']) }}
+									<label for="is_latest_version"></label>
+									@if ($errors->has('is_latest_version'))
+									<span class="help-block"><strong>{{ $errors->first('is_latest_version') }}</strong></span>
+									@endif
+								</div>
+							</div>
 							<div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
 								<label for="description" class="control-label text-left col-sm-4">Description</label>
 								<div class="col-sm-8">
@@ -97,30 +91,10 @@
 									@endif
 								</div>
 							</div>
-							@if(!isset($tax_form))
-							<div class="form-group {{ $errors->has('version_description') ? ' has-error' : '' }}">
-								<label for="version_description" class="control-label text-left col-sm-4">Version Description</label>
-								<div class="col-sm-8">
-									{{ Form::textarea('version_description',old('version_description'),['placeholder'=>'Description','class'=>"form-control",'id'=>'version_description']) }}
-									@if ($errors->has('version_description'))
-									<span class="help-block"><strong>{{ $errors->first('version_description') }}</strong></span>
-									@endif
-								</div>
-							</div>
-							@endif
-							<div class="form-group {{ $errors->has('keywords') ? ' has-error' : '' }}">
-								<label for="keywords" class="control-label text-left col-sm-4 required">Keywords</label>
-								<div class="col-sm-8">
-									{!! Form::select('keywords[]',($tax_form->keywords_arr ?? []), ($tax_form->keywords_arr ?? old('keywords_arr')), ['class'=>'form-control select2-token','multiple'=>true]) !!}
-									@if ($errors->has('keywords'))
-									<span class="help-block"><strong>{{ $errors->first('keywords') }}</strong></span>
-									@endif
-								</div>
-							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-4 col-sm-8">
-									{!! Form::submit((isset($tax_form)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
-									{!! Html::link(route('tax-form.index'),'Cancel',['class'=>'btn btn-default']) !!}
+									{!! Form::submit((isset($tax_form_version)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
+									{!! Html::link(route('tax-form.version.list',$tax_form->id),'Cancel',['class'=>'btn btn-default']) !!}
 								</div>
 							</div>
 						</div>
@@ -141,5 +115,5 @@
 
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\TaxFormFormRequest')->ignore('') !!}
+{!! JsValidator::formRequest('App\Http\Requests\TaxFormVersionFormRequest') !!}
 @endsection

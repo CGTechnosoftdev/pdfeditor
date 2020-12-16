@@ -408,3 +408,26 @@ Breadcrumbs::for('tax-form.edit', function ($trail, $id) {
 	$trail->push('Tax Form', route('tax-form.index'));
 	$trail->push('Edit Tax Form', route('tax-form.edit', $id));
 });
+
+// Home > tax-form > version
+Breadcrumbs::for('tax-form.version.list', function ($trail, $tax_form_id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
+});
+
+// Home > tax-form > version > add
+Breadcrumbs::for('tax-form.version.create', function ($trail, $tax_form_id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
+	$trail->push('Add Tax Form Version', route('tax-form.version.create', $tax_form_id));
+});
+
+// Home > tax-form > version > updated
+Breadcrumbs::for('tax-form.version.edit', function ($trail, $tax_form_id, $tax_form_version_id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
+	$trail->push('Edit Tax Form Version', route('tax-form.version.edit', [$tax_form_id, $tax_form_version_id]));
+});

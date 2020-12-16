@@ -131,8 +131,8 @@ class TaxFormCategoryController extends AdminBaseController
             'breadcrumb' => \Breadcrumbs::render('tax-category.edit', ['id' => $tax_category->id]),
             'tax_category' => $tax_category
         ];
-        $data_array['tax_type_arr'] = config('custom_config.tax_types');
-        $data_array['parent_category_arr'] = TaxFormCategory::getParentCategoryList(['type' => $tax_category->type])->pluck('name', 'id')->toArray();
+        $data_array['tax_type_arr'] = TaxFormType::dataList()->pluck('name', 'id')->toArray();
+        $data_array['parent_category_arr'] = TaxFormCategory::getParentCategoryList(['type_id' => $tax_category->type_id])->pluck('name', 'id')->toArray();
         return view('admin.tax-category.form', $data_array);
     }
 

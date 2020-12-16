@@ -24,10 +24,15 @@ class TaxFormFormRequest extends FormRequest
     public function rules()
     {
         $id = NULL;
-        $form_required = 'required';
+        $version_rules = [];
         if ($this->tax_form) {
             $id = $this->tax_form->id ?? $this->tax_form;
-            $form_required = 'nullable|sometimes';
+        } else {
+            $version_rules = [
+                'form' => 'required|mimes:pdf',
+                'version_description' => 'sometimes|nullable',
+                'version_name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2',
+            ];
         }
         $category_id = $this->category_id;
         $rules = [
@@ -35,8 +40,7 @@ class TaxFormFormRequest extends FormRequest
             'category_id' => 'required',
             'description' => 'sometimes|nullable',
             'keywords' => 'sometimes|nullable',
-            'form' => $form_required . '|mimes:pdf',
         ];
-        return $rules;
+        return $rules + $version_rules;
     }
 }
