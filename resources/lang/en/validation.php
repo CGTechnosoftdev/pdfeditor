@@ -150,6 +150,9 @@ return [
         'subscription_plan_id' => 'subscription plan',
         'document_type_id' => 'document type',
         'template_file' => 'file',
+        'parent_id' => 'parent',
+        'category_id' => 'category',
+        'type_id' => 'type',
     ],
 
 ];

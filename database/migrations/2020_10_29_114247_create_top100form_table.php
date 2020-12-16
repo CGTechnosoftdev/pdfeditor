@@ -23,8 +23,8 @@ class CreateTop100formTable extends Migration
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
-            $table->softDeletes(); 
-            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked'); 
+            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
 
 
@@ -34,12 +34,12 @@ class CreateTop100formTable extends Migration
             $table->bigInteger('type_id')->unsigned()->nullable();
             $table->string('name', 255);
             $table->string('form_file', 255);
-            $table->tinyInteger('fillable_printable_status')->default(1)->comment('0=>No,1=>Yes');                         
+            $table->tinyInteger('fillable_printable_status')->default(1)->comment('0=>No,1=>Yes');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
-            $table->softDeletes(); 
-            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked'); 
+            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
 
         Schema::create('faqs', function (Blueprint $table) {
@@ -47,15 +47,13 @@ class CreateTop100formTable extends Migration
             $table->string('faq_type', 255)->nullable();
             $table->bigInteger('type_id')->unsigned()->nullable();
             $table->string('question', 255);
-            $table->text('answer');            
+            $table->text('answer');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
-            $table->softDeletes(); 
-            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked'); 
+            $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
-
-
     }
 
     /**

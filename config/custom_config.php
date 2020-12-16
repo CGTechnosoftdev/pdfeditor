@@ -63,6 +63,11 @@ return [
         'document_type' => 'DocumentType',
         'document_template' => 'DocumentTemplate',
         'legal_form' => 'LegalForm',
+        'catalog-category' => 'CatalogFormCategory',
+        'catalog-form' => 'CatalogForm',
+        'tax-type' => 'TaxFormType',
+        'tax-category' => 'TaxFormCategory',
+        'tax-form' => 'TaxForm',
 
     ],
     'date_format_arr' => [
@@ -96,26 +101,26 @@ return [
         '-1' => 'All'
     ],
     'currency_arr' => [
-        [
-            'key' => 'CAD',
-            'label' => 'CAD',
-            'symbol' => '$',
-        ],
-        [
-            'key' => 'EUR',
-            'label' => 'EUR',
-            'symbol' => '€',
-        ],
-        [
-            'key' => 'GBP',
-            'label' => 'GBP',
-            'symbol' => '£',
-        ],
-        [
-            'key' => 'JPY',
-            'label' => 'JPY',
-            'symbol' => '¥',
-        ],
+        // [
+        //     'key' => 'CAD',
+        //     'label' => 'CAD',
+        //     'symbol' => '$',
+        // ],
+        // [
+        //     'key' => 'EUR',
+        //     'label' => 'EUR',
+        //     'symbol' => '€',
+        // ],
+        // [
+        //     'key' => 'GBP',
+        //     'label' => 'GBP',
+        //     'symbol' => '£',
+        // ],
+        // [
+        //     'key' => 'JPY',
+        //     'label' => 'JPY',
+        //     'symbol' => '¥',
+        // ],
         [
             'key' => 'USD',
             'label' => 'USD',
@@ -135,5 +140,11 @@ return [
         '0' => 'Default',
         '1' => 'Custom',
     ],
+    'catalog_types' => [
+        'form-catalog' => 'Form Catalog',
+        'document-catalog' => 'Document Catalog',
+        'medical-catalog' => 'Medical Catalog',
+        'legal-catalog' => 'Legal Catalog',
+    ]
 
 ];

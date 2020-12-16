@@ -85,41 +85,77 @@ return [
             'permissions' => ['general-setting-list'],
         ],
         [
-            'label' => 'Manage Document Template Types',
+            'label' => 'Document Template',
             'icon' => 'building',
-            'route_name' => 'document-type.index',
-            'active_segments' => ['document-type'],
-            'permissions' => ['document-type-list'],
+            'route_name' => '#',
+            'active_segments' => ['document-type', 'document-template'],
+            'permissions' => ['document-type-list', 'document-template-list'],
+            'child' => [
+                [
+                    'label' => 'Document Template Types',
+                    'icon' => 'list',
+                    'route_name' => 'document-type.index',
+                    'active_segments' => ['document-type'],
+                    'permission' => ['document-type-list'],
+                ], [
+                    'label' => 'Document Templates',
+                    'icon' => 'file',
+                    'route_name' => 'document-template.index',
+                    'active_segments' => ['document-template'],
+                    'permission' => ['document-template-list'],
+                ],
+            ]
         ],
         [
-            'label' => 'Manage Document Templates',
-            'icon' => 'building',
-            'route_name' => 'document-template.index',
-            'active_segments' => ['document-template'],
-            'permissions' => ['document-template-list'],
+            'label' => 'Catalog Forms',
+            'icon' => 'list-alt',
+            'route_name' => '#',
+            'active_segments' => ['catalog-category', 'catalog-form'],
+            'permissions' => ['catalog-category-list', 'catalog-form-list'],
+            'child' => [
+                [
+                    'label' => 'Catalog Category',
+                    'icon' => 'list',
+                    'route_name' => 'catalog-category.index',
+                    'active_segments' => ['catalog-category'],
+                    'permission' => ['catalog-category-list'],
+                ], [
+                    'label' => 'Catalog Form',
+                    'icon' => 'file',
+                    'route_name' => 'catalog-form.index',
+                    'active_segments' => ['catalog-form'],
+                    'permission' => ['catalog-form-list'],
+                ],
+            ]
         ],
-        // [
-        //     'label' => 'User',
-        //     'icon' => 'user',
-        //     'route_name' => 'roles.index',
-        //     'active_segments' => ['user','user-subscription'],
-        //     'permissions'=>['user-list','user-subscription'],
-        //     'child'=> [
-        //         [
-        //             'label' => 'Users',
-        //             'icon' => 'users',
-        //             'route_name' => 'roles.index',
-        //             'active_segments' => ['user'],
-        //             'permission'=>['user-list'],
-        //         ],
-        //         [
-        //             'label' => 'Subscriptions',
-        //             'icon' => 'lock',
-        //             'route_name' => 'roles.index',
-        //             'active_segments' => ['user-subscription'],
-        //             'permission'=>['user-subscription'],
-        //         ],
-        //     ]
-        // ],
+        [
+            'label' => 'Tax Forms',
+            'icon' => 'percent',
+            'route_name' => '#',
+            'active_segments' => ['tax-type', 'tax-category', 'tax-form'],
+            'permissions' => ['tax-type-list', 'tax-category-list', 'tax-form-list'],
+            'child' => [
+                [
+                    'label' => 'Tax Type',
+                    'icon' => 'list',
+                    'route_name' => 'tax-type.index',
+                    'active_segments' => ['tax-type'],
+                    'permission' => ['tax-type-list'],
+                ],
+                [
+                    'label' => 'Tax Category',
+                    'icon' => 'list',
+                    'route_name' => 'tax-category.index',
+                    'active_segments' => ['tax-category'],
+                    'permission' => ['tax-category-list'],
+                ], [
+                    'label' => 'Tax Form',
+                    'icon' => 'file',
+                    'route_name' => 'tax-form.index',
+                    'active_segments' => ['tax-form'],
+                    'permission' => ['tax-form-list'],
+                ],
+            ]
+        ],
     ],
 ];

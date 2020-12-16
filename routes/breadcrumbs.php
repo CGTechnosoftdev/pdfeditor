@@ -308,3 +308,126 @@ Breadcrumbs::for('legal-form.show', function ($trail, $id, $name) {
 	$trail->push('Legal Form', route('legal-form.index'));
 	$trail->push($name . ' Detail', route('legal-form.edit', $id));
 });
+
+// Home > catalog-category
+Breadcrumbs::for('catalog-category.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Catagory', route('catalog-category.index'));
+});
+
+// Home > catalog-category > add
+Breadcrumbs::for('catalog-category.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Catagory', route('catalog-category.index'));
+	$trail->push('Add Catalog Catagory', route('catalog-category.create'));
+});
+
+// Home > catalog-category > updated
+Breadcrumbs::for('catalog-category.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Catagory', route('catalog-category.index'));
+	$trail->push('Edit Catalog Catagory', route('catalog-category.edit', $id));
+});
+
+// Home > catalog-form
+Breadcrumbs::for('catalog-form.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Form', route('catalog-form.index'));
+});
+
+// Home > catalog-form > add
+Breadcrumbs::for('catalog-form.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Form', route('catalog-form.index'));
+	$trail->push('Add Catalog Form', route('catalog-form.create'));
+});
+
+// Home > catalog-form > updated
+Breadcrumbs::for('catalog-form.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Catalog Form', route('catalog-form.index'));
+	$trail->push('Edit Catalog Form', route('catalog-form.edit', $id));
+});
+
+// Home > tax-type
+Breadcrumbs::for('tax-type.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Type', route('tax-type.index'));
+});
+
+// Home > tax-type > add
+Breadcrumbs::for('tax-type.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Type', route('tax-type.index'));
+	$trail->push('Add Tax Type', route('tax-type.create'));
+});
+
+// Home > tax-type > updated
+Breadcrumbs::for('tax-type.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Type', route('tax-type.index'));
+	$trail->push('Edit Tax Type', route('tax-type.edit', $id));
+});
+
+// Home > tax-category
+Breadcrumbs::for('tax-category.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Catagory', route('tax-category.index'));
+});
+
+// Home > tax-category > add
+Breadcrumbs::for('tax-category.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Catagory', route('tax-category.index'));
+	$trail->push('Add Tax Catagory', route('tax-category.create'));
+});
+
+// Home > tax-category > updated
+Breadcrumbs::for('tax-category.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Catagory', route('tax-category.index'));
+	$trail->push('Edit Tax Catagory', route('tax-category.edit', $id));
+});
+
+// Home > tax-form
+Breadcrumbs::for('tax-form.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+});
+
+// Home > tax-form > add
+Breadcrumbs::for('tax-form.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Add Tax Form', route('tax-form.create'));
+});
+
+// Home > tax-form > updated
+Breadcrumbs::for('tax-form.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Edit Tax Form', route('tax-form.edit', $id));
+});
+
+// Home > tax-form > version
+Breadcrumbs::for('tax-form.version.list', function ($trail, $tax_form_id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
+});
+
+// Home > tax-form > version > add
+Breadcrumbs::for('tax-form.version.create', function ($trail, $tax_form_id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
+	$trail->push('Add Tax Form Version', route('tax-form.version.create', $tax_form_id));
+});
+
+// Home > tax-form > version > updated
+Breadcrumbs::for('tax-form.version.edit', function ($trail, $tax_form_id, $tax_form_version_id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Form', route('tax-form.index'));
+	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
+	$trail->push('Edit Tax Form Version', route('tax-form.version.edit', [$tax_form_id, $tax_form_version_id]));
+});

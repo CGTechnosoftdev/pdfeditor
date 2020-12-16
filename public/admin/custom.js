@@ -27,6 +27,7 @@ function copyToClipboard(element) {
 
 
 jQuery(document).ready(function() {
+    // $(".select2").select2();
     //Select2
     $(".select2-token").select2({
         tags: true,

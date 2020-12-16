@@ -55,6 +55,28 @@ return [
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
+    'catalog_form' => [
+        'label' => 'Form',
+        'file_input' => 'form',
+        'disk' => 'public',
+        'folder' => 'catalog_form',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal_with_random',
+        'allowed_extention' => 'pdf',
+        'max_allowed_size' => '2000'
+    ],
+    'tax_form' => [
+        'label' => 'Form',
+        'file_input' => 'form',
+        'disk' => 'public',
+        'folder' => 'tax_form',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal_with_random',
+        'allowed_extention' => 'pdf',
+        'max_allowed_size' => '2000'
+    ],
 
     'upload_types' => 'file_attachment'
 ];

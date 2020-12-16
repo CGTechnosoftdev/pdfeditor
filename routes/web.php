@@ -77,6 +77,22 @@ Route::group(['prefix' => 'admin'], function () {
 
 		//email-template
 		Route::resource('legal-form', 'LegalFormController');
+		//Catalog
+		Route::resource('catalog-category', 'CatalogFormCategoryController');
+		Route::resource('catalog-form', 'CatalogFormController');
+		Route::post('/get/catalog-parent-categories', 'CatalogFormCategoryController@getParentCategories')->name('load-catalog-parent-categories');
+		//Tax Form
+		Route::resource('tax-type', 'TaxFormTypeController');
+		Route::resource('tax-category', 'TaxFormCategoryController');
+		Route::resource('tax-form', 'TaxFormController');
+		Route::post('/get/tax-parent-categories', 'TaxFormCategoryController@getParentCategories')->name('load-tax-parent-categories');
+
+		Route::get('/tax-form/version/{tax_form}', 'TaxFormController@listVersion')->name('tax-form.version.list');
+		Route::get('/tax-form/version/create/{tax_form}', 'TaxFormController@createVersion')->name('tax-form.version.create');
+		Route::post('/tax-form/version/store/{tax_form}', 'TaxFormController@storeVersion')->name('tax-form.version.store');
+		Route::get('/tax-form/version/edit/{tax_form}/{tax_form_version}', 'TaxFormController@editVersion')->name('tax-form.version.edit');
+		Route::put('/tax-form/version/update/{tax_form}/{tax_form_version}', 'TaxFormController@updateVersion')->name('tax-form.version.update');
+		Route::delete('/tax-form/version/destroy/{tax_form}/{tax_form_version}', 'TaxFormController@destroyVersion')->name('tax-form.version.destroy');
 	});
 });
 
