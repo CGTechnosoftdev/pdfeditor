@@ -7,41 +7,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Support\Facades\Crypt;
 
-class CatalogForm extends Model
+class TaxFormVersion extends Model
 {
     use SoftDeletes;
     use BaseModelTrait;
 
-    protected $fillable = ['name', 'category_id', 'form', 'keywords', 'description', 'status'];
+    protected $fillable = ['name', 'tax_form_id', 'form', 'description', 'fillable_printable_status', 'status'];
 
     protected $appends = [
-        'form_url', 'category_name', 'keywords_arr'
+        'form_url'
     ];
 
     protected $dates = ['deleted_at'];
 
     public $timestamps = true;
 
-    public function category()
+    public function taxForm()
     {
-        return $this->belongsTo(CatalogFormCategory::class, "category_id", "id");
+        return $this->belongsTo(TaxForm::class, "tax_form_id", "id");
     }
 
     public function getFormUrlAttribute()
     {
-        return  getUploadedFile($this->form, 'catalog_form');
+        return  getUploadedFile($this->form, 'tax_form');
     }
 
-    public function getCategoryNameAttribute()
+    public function getTaxFormName()
     {
-        $category = $this->category;
-        return  $category->name . "(" . $category->parent_name . ")";
-    }
-
-    public function getKeywordsArrAttribute()
-    {
-        $keywords_arr = explode(", ", $this->keywords);
-        return  array_combine($keywords_arr, $keywords_arr);
+        return  $this->taxForm->name;
     }
 
     /**
@@ -54,9 +47,6 @@ class CatalogForm extends Model
      */
     public static function saveData($dataArray, $model = array())
     {
-        if (!empty($dataArray['keywords'])) {
-            $dataArray['keywords'] = (is_array($dataArray['keywords']) ? implode(", ", $dataArray['keywords']) : $dataArray['keywords']);
-        }
         $model = (empty($model) ? new self() : $model);
         $model->fill($dataArray);
         if ($model->save()) {

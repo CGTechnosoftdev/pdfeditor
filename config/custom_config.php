@@ -65,6 +65,9 @@ return [
         'legal_form' => 'LegalForm',
         'catalog-category' => 'CatalogFormCategory',
         'catalog-form' => 'CatalogForm',
+        'tax-type' => 'TaxFormType',
+        'tax-category' => 'TaxFormCategory',
+        'tax-form' => 'TaxForm',
 
     ],
     'date_format_arr' => [

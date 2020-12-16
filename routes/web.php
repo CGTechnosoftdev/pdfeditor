@@ -81,6 +81,11 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::resource('catalog-category', 'CatalogFormCategoryController');
 		Route::resource('catalog-form', 'CatalogFormController');
 		Route::post('/get/catalog-parent-categories', 'CatalogFormCategoryController@getParentCategories')->name('load-catalog-parent-categories');
+		//Tax Form
+		Route::resource('tax-type', 'TaxFormTypeController');
+		Route::resource('tax-category', 'TaxFormCategoryController');
+		Route::resource('tax-form', 'TaxFormController');
+		Route::post('/get/tax-parent-categories', 'TaxFormCategoryController@getParentCategories')->name('load-tax-parent-categories');
 	});
 });
 

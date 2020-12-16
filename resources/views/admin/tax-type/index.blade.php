@@ -25,6 +25,4 @@
 	<!-- /.row -->
 
 </section>
-
-
 @endsection

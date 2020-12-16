@@ -93,7 +93,7 @@ return [
             'child' => [
                 [
                     'label' => 'Document Template Types',
-                    'icon' => 'building',
+                    'icon' => 'list',
                     'route_name' => 'document-type.index',
                     'active_segments' => ['document-type'],
                     'permission' => ['document-type-list'],
@@ -108,14 +108,14 @@ return [
         ],
         [
             'label' => 'Catalog Forms',
-            'icon' => 'user',
+            'icon' => 'list-alt',
             'route_name' => '#',
             'active_segments' => ['catalog-category', 'catalog-form'],
             'permissions' => ['catalog-category-list', 'catalog-form-list'],
             'child' => [
                 [
                     'label' => 'Catalog Category',
-                    'icon' => 'users',
+                    'icon' => 'list',
                     'route_name' => 'catalog-category.index',
                     'active_segments' => ['catalog-category'],
                     'permission' => ['catalog-category-list'],
@@ -125,6 +125,35 @@ return [
                     'route_name' => 'catalog-form.index',
                     'active_segments' => ['catalog-form'],
                     'permission' => ['catalog-form-list'],
+                ],
+            ]
+        ],
+        [
+            'label' => 'Tax Forms',
+            'icon' => 'percent',
+            'route_name' => '#',
+            'active_segments' => ['tax-type', 'tax-category', 'tax-form'],
+            'permissions' => ['tax-type-list', 'tax-category-list', 'tax-form-list'],
+            'child' => [
+                [
+                    'label' => 'Tax Type',
+                    'icon' => 'list',
+                    'route_name' => 'tax-type.index',
+                    'active_segments' => ['tax-type'],
+                    'permission' => ['tax-type-list'],
+                ],
+                [
+                    'label' => 'Tax Category',
+                    'icon' => 'list',
+                    'route_name' => 'tax-category.index',
+                    'active_segments' => ['tax-category'],
+                    'permission' => ['tax-category-list'],
+                ], [
+                    'label' => 'Tax Form',
+                    'icon' => 'file',
+                    'route_name' => 'tax-form.index',
+                    'active_segments' => ['tax-form'],
+                    'permission' => ['tax-form-list'],
                 ],
             ]
         ],

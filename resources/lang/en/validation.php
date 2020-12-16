@@ -152,6 +152,7 @@ return [
         'template_file' => 'file',
         'parent_id' => 'parent',
         'category_id' => 'category',
+        'type_id' => 'type',
     ],
 
 ];

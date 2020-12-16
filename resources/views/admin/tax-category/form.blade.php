@@ -10,20 +10,20 @@
 			<div class="box">
 				<!-- /.box-header -->
 				<div class="box-body">
-					@if(isset($catalog_category))
-					{{ Form::model($catalog_category,['route' => ['catalog-category.update',$catalog_category->id],'method'=>'put','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
+					@if(isset($tax_category))
+					{{ Form::model($tax_category,['route' => ['tax-category.update',$tax_category->id],'method'=>'put','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
 					@else
-					{{ Form::open(['route' => 'catalog-category.store','method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
+					{{ Form::open(['route' => 'tax-category.store','method'=>'post','class'=>'form-horizontal','enctype'=>"multipart/form-data"]) }}
 					@endif
 					{!! Form::token() !!}
 					<div class="row">
 						<div class="col-xs-12 col-lg-6 col-md-9">
-							<div class="form-group {{ $errors->has('type') ? ' has-error' : '' }}">
-								<label for="type" class="control-label text-left col-sm-4">Catalog Type<span class="required-label">*</span></label>
+							<div class="form-group {{ $errors->has('type_id') ? ' has-error' : '' }}">
+								<label for="type_id" class="control-label text-left col-sm-4">Catalog Type<span class="required-label">*</span></label>
 								<div class="col-sm-8">
-									{!! Form::select('type',[''=>"Select"] + $catalog_type_arr, old('type'), ['class'=>'form-control','id'=>'catalog-type']) !!}
-									@if ($errors->has('type'))
-									<span class="help-block"><strong>{{ $errors->first('type') }}</strong></span>
+									{!! Form::select('type_id',[''=>"Select"] + $tax_type_arr, old('type_id'), ['class'=>'form-control','id'=>'tax-type']) !!}
+									@if ($errors->has('type_id'))
+									<span class="help-block"><strong>{{ $errors->first('type_id') }}</strong></span>
 									@endif
 								</div>
 							</div>
@@ -70,8 +70,8 @@
 
 							<div class="form-group">
 								<div class="col-sm-offset-4 col-sm-8">
-									{!! Form::submit((isset($catalog_category)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
-									{!! Html::link(route('catalog-category.index'),'Cancel',['class'=>'btn btn-default']) !!}
+									{!! Form::submit((isset($tax_category)) ? 'Update' : 'Save',['class'=>'btn btn-success']) !!}
+									{!! Html::link(route('tax-category.index'),'Cancel',['class'=>'btn btn-default']) !!}
 								</div>
 							</div>
 						</div>
@@ -92,21 +92,21 @@
 
 @endsection
 @section('additionaljs')
-{!! JsValidator::formRequest('App\Http\Requests\CatalogFormCategoryFormRequest') !!}
+{!! JsValidator::formRequest('App\Http\Requests\TaxFormCategoryFormRequest') !!}
 <script>
-	$('#catalog-type').change(function() {
+	$('#tax-type').change(function() {
 		blockUI();
-		var type = $(this).val();
+		var type_id = $(this).val();
 		$("#parent_categories option").remove();
 		$('#parent_categories').append($('<option>', {
 			value: '0',
 			text: 'Select'
 		}));
 		$.ajax({
-			url: '{{ route("load-catalog-parent-categories") }}',
+			url: '{{ route("load-tax-parent-categories") }}',
 			data: {
 				"_token": "{{ csrf_token() }}",
-				"type": type
+				"type_id": type_id
 			},
 			type: 'post',
 			dataType: 'json',

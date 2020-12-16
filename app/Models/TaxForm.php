@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Support\Facades\Crypt;
 
-class CatalogForm extends Model
+class TaxForm extends Model
 {
     use SoftDeletes;
     use BaseModelTrait;
 
-    protected $fillable = ['name', 'category_id', 'form', 'keywords', 'description', 'status'];
+    protected $fillable = ['name', 'category_id', 'keywords', 'latest_version_id', 'description', 'status'];
 
     protected $appends = [
         'form_url', 'category_name', 'keywords_arr'
@@ -24,18 +24,23 @@ class CatalogForm extends Model
 
     public function category()
     {
-        return $this->belongsTo(CatalogFormCategory::class, "category_id", "id");
+        return $this->belongsTo(TaxFormCategory::class, "category_id", "id");
+    }
+
+    public function latestVersion()
+    {
+        return $this->belongsTo(TaxFormVersion::class, "latest_version_id", "id");
     }
 
     public function getFormUrlAttribute()
     {
-        return  getUploadedFile($this->form, 'catalog_form');
+        return  $this->latestVersion->form_url;
     }
 
     public function getCategoryNameAttribute()
     {
         $category = $this->category;
-        return  $category->name . "(" . $category->parent_name . ")";
+        return  $category->name . (empty($category->parent_name) ? '' :  "(" . $category->parent_name . ")");
     }
 
     public function getKeywordsArrAttribute()
