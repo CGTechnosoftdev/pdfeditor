@@ -431,3 +431,24 @@ Breadcrumbs::for('tax-form.version.edit', function ($trail, $tax_form_id, $tax_f
 	$trail->push('Tax Form Version', route('tax-form.version.list', $tax_form_id));
 	$trail->push('Edit Tax Form Version', route('tax-form.version.edit', [$tax_form_id, $tax_form_version_id]));
 });
+
+
+// Home > tax-calendar
+Breadcrumbs::for('tax-calendar.index', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Calendar', route('tax-calendar.index'));
+});
+
+// Home > tax-calendar > add
+Breadcrumbs::for('tax-calendar.create', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Calendar', route('tax-calendar.index'));
+	$trail->push('Add Tax Calendar', route('tax-calendar.create'));
+});
+
+// Home > tax-calendar > updated
+Breadcrumbs::for('tax-calendar.edit', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Tax Calendar', route('tax-calendar.index'));
+	$trail->push('Edit Tax Calendar', route('tax-calendar.edit', $id));
+});

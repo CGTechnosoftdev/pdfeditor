@@ -93,6 +93,8 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::get('/tax-form/version/edit/{tax_form}/{tax_form_version}', 'TaxFormController@editVersion')->name('tax-form.version.edit');
 		Route::put('/tax-form/version/update/{tax_form}/{tax_form_version}', 'TaxFormController@updateVersion')->name('tax-form.version.update');
 		Route::delete('/tax-form/version/destroy/{tax_form}/{tax_form_version}', 'TaxFormController@destroyVersion')->name('tax-form.version.destroy');
+
+		Route::resource('tax-calendar', 'TaxCalendarController');
 	});
 });
 

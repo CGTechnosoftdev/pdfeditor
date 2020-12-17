@@ -257,4 +257,17 @@ return [
         ],
         'order' => [[0, 'desc']]
     ],
+    'tax-calendar' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'date', 'name' => 'date', 'label' => 'Date', 'orderBy' => 'asc'],
+            ['data' => 'tax_for_name', 'name' => 'tax_for_name', 'label' => 'Tax For', 'orderBy' => 'asc'],
+            ['data' => 'form_name', 'name' => 'form_name', 'label' => 'Linked Form', 'searchable' => false, 'orderable' => false],
+            ['data' => 'description', 'name' => 'description', 'label' => 'Description', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
 ];

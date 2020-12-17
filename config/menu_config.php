@@ -157,5 +157,12 @@ return [
                 ],
             ]
         ],
+        [
+            'label' => 'Tax Calendar',
+            'icon' => 'calendar',
+            'route_name' => 'tax-calendar.index',
+            'active_segments' => ['tax-calendar'],
+            'permissions' => ['tax-calendar-list'],
+        ],
     ],
 ];

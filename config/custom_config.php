@@ -68,6 +68,7 @@ return [
         'tax-type' => 'TaxFormType',
         'tax-category' => 'TaxFormCategory',
         'tax-form' => 'TaxForm',
+        'tax-calendar' => 'TaxCalendar',
 
     ],
     'date_format_arr' => [
@@ -145,6 +146,11 @@ return [
         'document-catalog' => 'Document Catalog',
         'medical-catalog' => 'Medical Catalog',
         'legal-catalog' => 'Legal Catalog',
-    ]
+    ],
+    'tax_for_arr' => [
+        '1' => 'Employer',
+        '2' => 'Freelancer',
+        '3' => 'Employee',
+    ],
 
 ];

@@ -153,6 +153,7 @@ return [
         'parent_id' => 'parent',
         'category_id' => 'category',
         'type_id' => 'type',
+        'type_form_id' => 'tax form',
     ],
 
 ];
