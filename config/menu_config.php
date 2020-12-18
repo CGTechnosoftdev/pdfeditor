@@ -114,13 +114,13 @@ return [
             'permissions' => ['catalog-category-list', 'catalog-form-list'],
             'child' => [
                 [
-                    'label' => 'Catalog Category',
+                    'label' => 'Catalog Categories',
                     'icon' => 'list',
                     'route_name' => 'catalog-category.index',
                     'active_segments' => ['catalog-category'],
                     'permission' => ['catalog-category-list'],
                 ], [
-                    'label' => 'Catalog Form',
+                    'label' => 'Catalog Forms',
                     'icon' => 'file',
                     'route_name' => 'catalog-form.index',
                     'active_segments' => ['catalog-form'],
@@ -136,20 +136,20 @@ return [
             'permissions' => ['tax-type-list', 'tax-category-list', 'tax-form-list'],
             'child' => [
                 [
-                    'label' => 'Tax Type',
+                    'label' => 'Tax Types',
                     'icon' => 'list',
                     'route_name' => 'tax-type.index',
                     'active_segments' => ['tax-type'],
                     'permission' => ['tax-type-list'],
                 ],
                 [
-                    'label' => 'Tax Category',
+                    'label' => 'Tax Categories',
                     'icon' => 'list',
                     'route_name' => 'tax-category.index',
                     'active_segments' => ['tax-category'],
                     'permission' => ['tax-category-list'],
                 ], [
-                    'label' => 'Tax Form',
+                    'label' => 'Tax Forms',
                     'icon' => 'file',
                     'route_name' => 'tax-form.index',
                     'active_segments' => ['tax-form'],

@@ -257,8 +257,8 @@ class TaxFormController extends AdminBaseController
         }
 
         $data_array = [
-            'title' => 'Tax Form Version ',
-            'heading' => 'Tax Form Version (' . $tax_form->name . ')',
+            'title' => 'Tax Form Versions (' . $tax_form->name . ')',
+            'heading' => 'Tax Form Versions (' . $tax_form->name . ')',
             'breadcrumb' => \Breadcrumbs::render('tax-form.version.list', $tax_form->id),
             'id' => $tax_form->id,
         ];

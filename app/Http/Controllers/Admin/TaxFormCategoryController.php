@@ -60,8 +60,8 @@ class TaxFormCategoryController extends AdminBaseController
         }
 
         $data_array = [
-            'title' => 'Tax Category',
-            'heading' => 'Tax Category',
+            'title' => 'Tax Categories',
+            'heading' => 'Tax Categories',
             'breadcrumb' => \Breadcrumbs::render('tax-category.index'),
             'add_css_heading' => ' add_custom_button_heading',
         ];
