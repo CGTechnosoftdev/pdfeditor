@@ -75,8 +75,12 @@
 							<div class="form-group {{ $errors->has('is_latest_version') ? ' has-error' : '' }}">
 								<label for="is_latest_version" class="control-label text-left col-sm-4 required">Is latest version?</label>
 								<div class="col-sm-8">
+									@if(empty($tax_form_version->is_latest_version))
 									{{ Form::checkbox('is_latest_version',1,old('is_latest_version'),['class'=>'styled-checkbox','id'=>'is_latest_version']) }}
 									<label for="is_latest_version"></label>
+									@else
+									<div class="form-control">Yes</div>
+									@endif
 									@if ($errors->has('is_latest_version'))
 									<span class="help-block"><strong>{{ $errors->first('is_latest_version') }}</strong></span>
 									@endif

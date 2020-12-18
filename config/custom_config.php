@@ -68,6 +68,7 @@ return [
         'tax-type' => 'TaxFormType',
         'tax-category' => 'TaxFormCategory',
         'tax-form' => 'TaxForm',
+        'tax-form-version' => 'TaxFormVersion',
         'tax-calendar' => 'TaxCalendar',
 
     ],
