@@ -183,6 +183,22 @@ document.getElementById('eraser_btn_id').addEventListener('click', function (eve
     pdf.eraseText();
 });
 
+document.getElementById('highlight_btn_id').addEventListener('click', function (event) {
+    event.preventDefault();
+    var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
+    $('.tool-button.active').removeClass('active');
+    $(element).addClass('active');
+    pdf.toggleHighlighter();
+});
+
+document.getElementById('blackout_btn_id').addEventListener('click', function (event) {
+    event.preventDefault();
+    var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
+    $('.tool-button.active').removeClass('active');
+    $(element).addClass('active');
+    pdf.toggleBlackout();
+});
+
 document.getElementById('new-img-save-png').addEventListener('click', function () {
     const data = document.getElementById('preview-image').src;
     pdf.addNewImage(data);

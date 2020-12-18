@@ -373,6 +373,95 @@ PDFAnnotate.prototype.eraseText = function (url) {
 
 };
 
+
+PDFAnnotate.prototype.toggleHighlighter = function (url) {
+	var inst = this;
+	var fabricObj = inst.fabricObjects[inst.active_canvas];
+	var o = fabricObj.getActiveObject();
+
+
+
+	var fontStyleOb = "";
+	if (o.selectionStart > -1) {
+
+		var objectColor = getStyle(o, 'fill');
+
+		fontStyleOb = o.getSelectionStyles()["textBackgroundColor"];
+
+		if (fontStyleOb === "yellow") {
+
+
+
+			var selectionStart = 2,
+				selectionEnd = 8;
+			o.setSelectionStyles({ textBackgroundColor: '', fill: objectColor }, selectionStart, selectionEnd);
+
+
+
+		}
+		else if (fontStyleOb != "yellow") {
+			//alert(" text decoration value "+o["textDecoration"]);
+
+			//o["fontStyle"]="italic";
+
+			var selectionStart = 2,
+				selectionEnd = 8;
+			o.setSelectionStyles({ textBackgroundColor: 'yellow' }, selectionStart, selectionEnd);
+			//text.set('fontWeight', 'bold');
+
+
+
+		}
+		o.set({ dirty: true });
+		fabricObj.renderAll();
+	}
+
+};
+
+PDFAnnotate.prototype.toggleBlackout = function (url) {
+	var inst = this;
+	var fabricObj = inst.fabricObjects[inst.active_canvas];
+	var o = fabricObj.getActiveObject();
+
+
+
+	var fontStyleOb = "";
+	if (o.selectionStart > -1) {
+
+		var objectColor = getStyle(o, 'fill');
+
+		fontStyleOb = o.getSelectionStyles()["textBackgroundColor"];
+
+		if (fontStyleOb === "black") {
+
+
+
+			var selectionStart = 2,
+				selectionEnd = 8;
+			o.setSelectionStyles({ textBackgroundColor: '', fill: objectColor }, selectionStart, selectionEnd);
+
+
+
+		}
+		else if (fontStyleOb != "black") {
+			//alert(" text decoration value "+o["textDecoration"]);
+
+			//o["fontStyle"]="italic";
+
+			var selectionStart = 2,
+				selectionEnd = 8;
+			o.setSelectionStyles({ textBackgroundColor: 'black', fill: 'black' }, selectionStart, selectionEnd);
+			//text.set('fontWeight', 'bold');
+
+
+
+		}
+		o.set({ dirty: true });
+		fabricObj.renderAll();
+	}
+
+};
+
 PDFAnnotate.prototype.addDrawSignature = function (url) {
 	var inst = this;
 	var fabricObj = inst.fabricObjects[inst.active_canvas];
@@ -555,4 +644,8 @@ PDFAnnotate.prototype.deletePage = function () {
 		if (confirm('Are you sure you want to delete page number ' + pageId + ' ?')) activePage.wrapperEl.remove();
 	}
 
+}
+function getStyle(object, styleName) {
+	var selecteItemOb = object;
+	return selecteItemOb[styleName];
 }
