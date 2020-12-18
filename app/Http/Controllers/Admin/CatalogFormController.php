@@ -155,6 +155,12 @@ class CatalogFormController extends AdminBaseController
     {
         try {
             $input_data = $request->input();
+            if (!empty($request->file('form'))) {
+                $upload_response = uploadFile($request, 'catalog_form');
+                if (!empty($upload_response['success'])) {
+                    $input_data['form'] = $upload_response['data'];
+                }
+            }
             $catalog_form = CatalogForm::saveData($input_data, $catalog_form);
             if ($catalog_form) {
                 $response_type = 'success';
