@@ -59,8 +59,8 @@ class CatalogFormCategoryController extends AdminBaseController
         }
 
         $data_array = [
-            'title' => 'Catalog Category',
-            'heading' => 'Catalog Category',
+            'title' => 'Catalog Categories',
+            'heading' => 'Catalog Categories',
             'breadcrumb' => \Breadcrumbs::render('catalog-category.index'),
             'add_css_heading' => ' add_custom_button_heading',
         ];
