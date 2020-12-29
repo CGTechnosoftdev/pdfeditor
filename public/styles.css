@@ -116,3 +116,9 @@ button.tool-button {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+.orientation_group img{
+    cursor: pointer;
+}
+.orientation_group img.active{
+    border: 2px solid #eac300 !important;
+}

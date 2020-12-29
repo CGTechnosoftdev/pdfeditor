@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
   <link href='https://fonts.googleapis.com/css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./pdfannotate.css">
   <link rel="stylesheet" href="./signature-pad.css">
@@ -28,7 +29,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>React App</title>
+  <title>PDF Writer</title>
 </head>
 
 <body>
@@ -62,8 +63,7 @@
         </div>
 
         <div class="tool">
-          <button class="tool-button"><i class="fa fa-picture-o" title="Image"
-              onclick="enableAddImage(event)"></i></button>
+          <button class="tool-button" id="openImageModelId"><i class="fa fa-picture-o" title="Image"></i></button>
         </div>
 
         <div class="tool">
@@ -91,14 +91,39 @@
         </div>
 
         <div class="tool">
-          <button class="tool-button" onclick="openSignatureModal(event)">
-            <img width="20px" src="signature.svg" alt="Add Signature" />
+          <button class="tool-button" id="eraser_btn_id"><i class="fa fa-eraser" title="Erase"></i></button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" id="highlight_btn_id"><i class="fa fa-eye" title="Highlighter"></i>
           </button>
         </div>
 
         <div class="tool">
-          <button class="tool-button" onclick="addDate(event)">
+          <button class="tool-button" id="blackout_btn_id"><i class="fa fa-eye" title="Blackout"></i></button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" title="Add Signature" onclick="openSignatureModal(event)">
+            <img width="20px" src="signature.svg" alt="Add Signature"/>
+          </button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" id="pick_date_button" title="Add Date">
             <img width="20px" src="date.svg" alt="Add Date" />
+          </button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" id="resize_canvas" title="Resize Page">
+            <img width="20px" src="date.svg" alt="Add Date" />
+          </button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" onclick="addDate(event)" title="Add Date">
+            <img width="20px" src="date.svg" />
           </button>
         </div>
 
@@ -141,10 +166,8 @@
         <div class="tool border-0">
           <select id="font-family" class="form-control">
             <option value="Arial">Arial</option>
-            <option value="Arial">Arial</option>
-            <option value="Arial">Arial</option>
-            <option value="Arial">Arial</option>
-            <option value="Arial">Arial</option>
+            <option value="Courier">Courier</option>
+            <option value="MS Gothic">MS Gothic</option>
           </select>
         </div>
 
@@ -185,6 +208,30 @@
             Delete Page
           </button>
         </div>
+        
+        <div class="tool">
+          <button class="tool-button" onclick="addWatermark()">
+            Add Watermark
+          </button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" title="Duplicate Page" onclick="duplicatePage()">
+            <i class="fa fa-copy"></i>
+          </button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" title="Move up" onclick="movePage('up')">
+            <i class="fa fa-long-arrow-up"></i>
+          </button>
+        </div>
+
+        <div class="tool">
+          <button class="tool-button" title="Move up" onclick="movePage('down')">
+            <i class="fa fa-long-arrow-down"></i>
+          </button>
+        </div>
 
       </div>
 
@@ -210,6 +257,33 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="watermarkModal" tabindex="-1" role="dialog" aria-labelledby="watermarkModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="watermarkModalLabel">Please enter text for watermark</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <input type="text" name="watermark" id="watermark" value=""/>
+          <div class="mt-3 orientation_group">
+            <h6>Choose Orientation</h6>
+            <input type="hidden" id="orientation" value="quarter" />
+            <img class="active" data-value="quarter" width="40px" src="turned-quarter.svg" style="border: 1px solid;"/>
+            <img width="40px" data-value="half" src="turned-half.svg" style="border: 1px solid;"/>
+            <img width="40px" data-value="normal" src="normal.svg" style="border: 1px solid;"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="submit">OK</button>
+        </div>
+    </div>
+  </div>
+</div>
 
   <div class="modal fade" id="signatureModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel"
     aria-hidden="true">
@@ -241,16 +315,121 @@
       </div>
     </div>
   </div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataModalLabel">Import Image</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="file" name="newimage" value="" id="image-selector" onchange="selectImage(event)" />
+          <div id="PreviousContainer" style="display:none">
+            <h4>You can select previous selected image.</h4>
+            <div class="row" id="PreviousImageContainer">
+            </div>
+          </div>
+          <div class="new-img-wrapper" style="display: none;">
+            <img src="" height="200" width="150" alt="image preview" id="preview-image" />
+          </div>
+          <img src="" height="200" id="drawed-signature" style="display: none;" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="new-img-save-png">Save & Use</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="newImageTemplateId">
+    <div class="col col-md-3" style="display:none">
+      <div class="newImgItem">-imgItem-</div>
+    </div>
+  </div>
+  <!--Select Date Model-->
+  <div class="modal fade" id="selectdateModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataModalLabel">Select Date</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body form-group">
+          <div class="alert  hide" id="select_date_msg_id"></div>
+          <div class="row">
+            <div class="col col-md-3"> <label class="label label-default">Date</label>
+            </div>
+            <div class="col col-md-6"><input type="text" name="date" id="dateid" class="form-control" /></div>
+          </div>
+          <div class="row">
+            <div class="col col-md-3"> <label>Header Or Footer</label>	
+            </div>
+            <div class="col col-md-6">
+              <select name="header_footer" id="header_footerid" class="form-control">
+                <option value="0">--Select--</option>
+                <option value="1">Header</option>
+                <option value="2">Footer</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-md-3"> <label>Align</label>	
+            </div>	
+            <div class="col col-md-6">	
+              <select name="text_align" id="text_alignid" class="form-control">	
+                <option value="0">--Select--</option>	
+                <option value="1">Left</option>	
+                <option value="2">Right</option>	
+                <option value="3">Center</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="new-date-select-button">Select</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="setpagesizeModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataModalLabel">Page Size</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body form-group">
+          <div class="alert  hide" id="setuppage_msg_id"></div>
+          <div class="row">
+            <div class="col col-md-3"> <label>Width</label>
+            </div>
+            <div class="col col-md-6">
+              <input type="number" name="page_width" id="page_widthid" class="form-control" value="" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-md-3"> <label>Height</label>
+            </div>
+            <div class="col col-md-6">
+              <input type="number" name="page_height" id="page_heightid" class="form-control" value="" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="new-width-height-button">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Select Date Model End-->
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -263,6 +442,7 @@
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="./arrow.fabric.js"></script>
 <script src="./pdfannotate.js"></script>
 <script src="./script.js"></script>
@@ -272,7 +452,16 @@
     setTimeout(() => {
       loadFromJson()
     }, 2000);
-  })
+    $('#dateid').datepicker({
+      format: "dd/mm/yyyy"
+    });
+  });
 </script>
+
+<style>
+    .datepicker.datepicker-dropdown {
+      top: 60px !important;
+    }
+  </style>
 
 </html>
