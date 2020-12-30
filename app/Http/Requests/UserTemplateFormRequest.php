@@ -34,12 +34,18 @@ class UserTemplateFormRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [];
-    }
+
     public function attributes()
     {
         return [];
+    }
+    public function messages()
+    {
+
+        return [
+
+            'name.required' => 'File filed is not valid,please check!',
+
+        ];
     }
 }

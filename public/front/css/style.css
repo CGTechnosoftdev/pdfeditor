@@ -5656,3 +5656,12 @@ table tr td button {
 .searchwith-legalform .input-group-text svg {
     color: #C1484A;
 }
+.show{
+    display:block;
+}
+.hide{
+    display:none;
+}
+#user_template_model .row{
+    margin-right:0px !important;
+}

@@ -38,15 +38,9 @@ class UserDocumentController extends FrontBaseController
 
 
             if ($validator->fails()) {
-                //$errorMessages = $validator->getMessageBag()->toArray();
-                // $validationObject = $validator->getMessageBag();
+
                 $errormessages = $validator->getMessageBag()->getMessages();
-                // $getMessageOb = new /GetValidationMesage();
-                //  $errormessages = $getMessageOb->getvalidationMessage($validationObject);
-                //echo '<pre>';
-                // print_r($errormessages);
-                //  echo '</pre>';
-                //  exit();
+
                 $errormsgHTML = "<ul>";
                 foreach ($errormessages as $errorIndex => $errorMsgArr) {
 
@@ -92,7 +86,7 @@ class UserDocumentController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        // set_flash($response_type, $response_message);
         // return redirect()->route('front.user-document.template-form');
         return response()->json(["return_type" => $response_type, 'message' => $response_message]);
     }
