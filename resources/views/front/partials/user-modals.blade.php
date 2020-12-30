@@ -203,81 +203,47 @@
  </div>
 
 
- <div class="modal fade more-options share-now" id="user_template_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title">Testing Only!</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                 </button>
-             </div>
-             <div class="modal-body">
-                 Test Model body here!
-             </div>
-         </div>
-     </div>
- </div>
+ @include('front.partials.forms.user-document-template-form')
+
  @section("additionaljs")
- <script src="http://malsup.github.com/jquery.form.js"></script>
+
  <script type="text/javascript">
      $("document").ready(function() {
-         alert("alert");
-         $(document).on("click", "#upload_template_id", function() {
+         $("#document-template-submit-id").click(function() {
+             $("#user_document_template_form_id").submit();
+         })
 
+         $("#user_document_template_form_id").submit(function(e) {
+             alert("submit");
 
-
-             $.ajax({
-                 url: "{{route('front.user-document.template-form')}}",
-                 type: "get",
-                 success: function(responseText) {
-                     // alert(responseText);
-                     $("#user_template_model .modal-body").html(responseText);
-                     $("#user_template_model").modal("show");
-
-                     $("#document-template-submit-id").click(function() {
-                         $("#user_document_template_form_id").submit();
-                     })
-
-                     $("#user_document_template_form_id").submit(function(e) {
-                         alert("submit");
-
-                         $.ajaxSetup({
-                             headers: {
-                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                             }
-                         });
-
-                         e.preventDefault();
-                         var formData = new FormData(this);
-                         $.ajax({
-                             type: 'POST',
-                             url: "{{ route('front.user-document.template-form-save')}}",
-                             data: formData,
-                             cache: false,
-                             contentType: false,
-                             processData: false,
-                             success: (data) => {
-                                 this.reset();
-                                 alert('File has been uploaded successfully');
-                                 console.log(data);
-                             },
-                             error: function(data) {
-                                 console.log(data);
-                             }
-                         });
-
-
-
-
-
-                     });
-
-
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                  }
              });
 
+             e.preventDefault();
+             var formData = new FormData(this);
+             $.ajax({
+                 type: 'POST',
+                 url: "{{ route('front.user-document.template-form-save')}}",
+                 data: formData,
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: (data) => {
+                     this.reset();
+                     alert('File has been uploaded successfully');
+                     console.log(data);
+                 },
+                 error: function(data) {
+                     console.log(data);
+                 }
+             });
+
+
          });
+
      });
  </script>
 

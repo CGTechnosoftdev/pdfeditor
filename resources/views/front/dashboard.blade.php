@@ -27,7 +27,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="#" id="upload_template_id">
+								<a href="#" id="upload_template_id" data-toggle="modal" data-target="#user_template_model">
 									<div class="link-img"><img src="{{ asset('public/front/images/upload-template.svg') }}"></div>
 									<span>Upload Template</span>
 								</a>

@@ -39,7 +39,7 @@ class UserDocumentController extends FrontBaseController
 
             if ($validator->fails()) {
                 //$errorMessages = $validator->getMessageBag()->toArray();
-                $validationObject = $validator->getMessageBag();
+                // $validationObject = $validator->getMessageBag();
                 $errormessages = $validator->getMessageBag()->getMessages();
                 // $getMessageOb = new /GetValidationMesage();
                 //  $errormessages = $getMessageOb->getvalidationMessage($validationObject);
@@ -49,6 +49,10 @@ class UserDocumentController extends FrontBaseController
                 //  exit();
                 $errormsgHTML = "<ul>";
                 foreach ($errormessages as $errorIndex => $errorMsgArr) {
+
+                    foreach ($errorMsgArr as $indder_index => $message) {
+                        $errormsgHTML .= '<li>' . $message . '</li>';
+                    }
                 }
                 $errormsgHTML .= '</ul>';
 
@@ -56,7 +60,7 @@ class UserDocumentController extends FrontBaseController
                 //  foreach($errorMessages as $error_index =>  )
                 return response()->json(array(
                     'return_type' => 'error',
-                    'message' => $errormessages
+                    'message' => $errormsgHTML
 
                 ), 400); // 400 being the HTTP code for an invalid request.
             }
