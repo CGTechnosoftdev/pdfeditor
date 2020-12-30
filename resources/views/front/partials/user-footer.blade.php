@@ -10,7 +10,7 @@
                 <li>
                     <a href="">
                         <div class="more-img">
-                            <img src="../public/front/images/open.svg">
+                            <img src="{{ asset('public/front/images/open.svg') }}">
                         </div>
                         <span>Open</span>
                     </a>
@@ -18,7 +18,7 @@
                 <li>
                     <a href="">
                         <div class="more-img">
-                            <img src="../public/front/images/save-as.svg">
+                            <img src="{{ asset('public/front/images/save-as.svg') }}">
                         </div>
                         <span>Save As</span>
                     </a>
@@ -26,7 +26,7 @@
                 <li>
                     <a href="">
                         <div class="more-img">
-                            <img src="../public/front/images/convert.svg">
+                            <img src="{{ asset('public/front/images/convert.svg') }}">
                         </div>
                         <span>Convert</span>
                     </a>
@@ -34,7 +34,7 @@
                 <li>
                     <a href="">
                         <div class="more-img">
-                            <img src="../public/front/images/print.svg">
+                            <img src="{{ asset('public/front/images/print.svg') }}">
                         </div>
                         <span>Print</span>
                     </a>
@@ -42,7 +42,7 @@
                 <li>
                     <a href="">
                         <div class="more-img">
-                            <img src="../public/front/images/convert-to-template.svg">
+                            <img src="{{ asset('public/front/images/convert-to-template.svg') }}">
                         </div>
                         <span>Convert to Template</span>
                     </a>
@@ -50,7 +50,7 @@
                 <li>
                     <a href="">
                         <div class="more-img">
-                            <img src="../public/front/images/signnow.svg">
+                            <img src="{{ asset('public/front/images/signnow.svg') }}">
                         </div>
                         <span>SignNow</span>
                     </a>
@@ -58,7 +58,7 @@
                 <li>
                     <a href="" data-toggle="modal" data-target="#share">
                         <div class="more-img">
-                            <img src="../public/front/images/signnow.svg">
+                            <img src="{{ asset('public/front/images/signnow.svg') }}">
                         </div>
                         <span>Share</span>
                     </a>
@@ -66,7 +66,7 @@
                 <li>
                     <a href="" data-toggle="modal" data-target="#linktofit">
                         <div class="more-img">
-                            <img src="../public/front/images/signnow.svg">
+                            <img src="{{ asset('public/front/images/signnow.svg') }}">
                         </div>
                         <span>LinkToFit</span>
                     </a>
@@ -74,7 +74,7 @@
             </ul>
             <a href="" class="more-btn" data-toggle="modal" data-target="#exampleModal">
                 <div class="more-img">
-                    <img src="../public/front/images/more.svg">
+                    <img src="{{ asset('public/front/images/more.svg') }}">
                 </div>
                 <span>More</span>
             </a>

@@ -8,7 +8,7 @@
                         <span></span>
                     </button>
 
-                    <a class="navbar-brand text-md-left" href="" target="_blank"><img src="../public/front/images/logo.png" alt=""></a>
+                    <a class="navbar-brand text-md-left" href="" target="_blank"><img src="{{ asset('public/front/images/logo.png') }}" alt=""></a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -66,7 +66,7 @@
                             </li>
                             <li class="dropdown user user-menu">
                                 <a href="##" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                                    <span><img src="../public/admin/dist/img/avatar.png" class="user-image" alt="PDFWriter Admin Image"></span>
+                                    <span><img src="{{ asset('public/admin/dist/img/avatar.png') }}" class="user-image" alt="PDFWriter Admin Image"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Action</a>
