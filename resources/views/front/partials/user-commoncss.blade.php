@@ -9,6 +9,7 @@
 <!-- upload Multi Files -->
 <link rel="stylesheet" href="{{ asset('public/front/css/dropzone.css') }}">
 <!-- Custom CSS -->
+<link rel="stylesheet" href="{{ asset('public/front/css/dropzone.css') }}">
 <link rel="stylesheet" href="{{ asset('public/front/css/style.css') }}">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="{{ asset('public/front/css/responsive.css') }}">

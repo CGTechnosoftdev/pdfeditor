@@ -11,12 +11,14 @@
     @yield('additionalcss')
 </head>
 
-<body>
-    @include('front.partials.user-header')
-    @yield('content')
-    @include('front.partials.user-footer')
-    @include('front.partials.user-commonjs')
-    @yield('additionaljs')
+<body class="dashboard3 sidebar-mini">
+    <div class="dashboard3-wrapper">
+        @include('front.partials.user-header')
+        @yield('content')
+        @include('front.partials.user-footer')
+        @include('front.partials.user-commonjs')
+        @yield('additionaljs')
+    </div>
 </body>
 
 </html>

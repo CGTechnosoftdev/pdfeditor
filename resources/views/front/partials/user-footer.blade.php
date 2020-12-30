@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" data-toggle="modal" data-target="#test_model">
                         <div class="more-img">
                             <img src="../public/front/images/signnow.svg">
                         </div>

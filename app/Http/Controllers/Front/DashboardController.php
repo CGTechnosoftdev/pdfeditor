@@ -14,7 +14,6 @@ class DashboardController extends FrontBaseController
     public function __construct()
     {
     }
-
     /**
      * Show the application dashboard.
      *
@@ -23,5 +22,9 @@ class DashboardController extends FrontBaseController
     public function index()
     {
         return view('front.dashboard');
+    }
+    public function templateForm()
+    {
+        return view('front.user-document.template-form');
     }
 }
