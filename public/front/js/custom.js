@@ -29,21 +29,21 @@
 
 $('.counting').each(function() {
     var $this = $(this),
-    countTo = $this.attr('data-count');
+        countTo = $this.attr('data-count');
 
     $({ countNum: $this.text() }).animate({
-        countNum: countTo
-    },
-
-    {
-
-        duration: 3000,
-        easing: 'linear',
-        step: function() {
-            $this.text(Math.floor(this.countNum));
+            countNum: countTo
         },
-        complete: function() {
-            $this.text(this.countNum);
+
+        {
+
+            duration: 3000,
+            easing: 'linear',
+            step: function() {
+                $this.text(Math.floor(this.countNum));
+            },
+            complete: function() {
+                $this.text(this.countNum);
                 //alert('finished');
             }
 
@@ -71,17 +71,17 @@ function hideNonVisibleDivs() {
     var i, divId, div;
     for (i = 0; i < divs.length; i++) {
         divId = divs[i];
-        
+
         div = document.getElementById(divId);
-        
+
         if (visibleDivId === divId) {
-            
+
             div.style.display = "block";
-            
+
         } else {
-            
+
             div.style.display = "none";
-            
+
         }
     }
 }
@@ -92,6 +92,48 @@ $(function() {
     $('.pricing-plans .plan-price').matchHeight();
 });
 
+/************* General Settings Tabs *********/
+$('.general-settings-tabs h4').click(function(event) {
+    event.preventDefault();
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+
+    var ph = $(this).parent().height();
+    var ch = $(this).next().height();
+
+    if (ch > ph) {
+        $(this).parent().css({
+            'min-height': ch + 'px'
+        });
+    } else {
+        $(this).parent().css({
+            'height': 'auto'
+        });
+    }
+});
+
+function tabParentHeight() {
+    var ph = $('.general-settings-tabs').height();
+    var ch = $('.general-settings-tabs .setting-tab-content').height();
+    if (ch > ph) {
+        $('.general-settings-tabs').css({
+            'height': ch + 'px'
+        });
+    } else {
+        $(this).parent().css({
+            'height': 'auto'
+        });
+    }
+}
+
+$(window).resize(function() {
+    tabParentHeight();
+});
+
+$(document).resize(function() {
+    tabParentHeight();
+});
+tabParentHeight();
 
 /****** Onlick add and remove class ******/
 
@@ -124,3 +166,33 @@ $('.pricing-plans .col-md-4').on('click', function() {
         j.preventDefault();
     });
 })(jQuery);
+
+
+
+$('.template-types li').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});
+
+
+///////////// Image Upload and Preview /////////////
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imageUpload").change(function() {
+    readURL(this);
+});
+
+
+/*************** Timeframe ************/
+$('.timeformate ul li').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});

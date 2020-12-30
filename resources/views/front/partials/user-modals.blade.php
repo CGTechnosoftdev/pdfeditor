@@ -8,43 +8,43 @@
                      <ul>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/email-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/email-icon.svg') }}"></div>
                                  <span>Email</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/fax.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/fax.svg') }}"></div>
                                  <span>Fax</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/notarize-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/notarize-icon.svg') }}"></div>
                                  <span>Notarize</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/send-to-irs-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/send-to-irs-icon.svg') }}"></div>
                                  <span>Send to IRS</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/send-via-usps.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/send-via-usps.svg') }}"></div>
                                  <span>Sebd via USPS</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/sms-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/sms-icon.svg') }}"></div>
                                  <span>SMS</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/download.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/download.svg') }}"></div>
                                  <span>Download</span>
                              </a>
                          </li>
@@ -55,31 +55,31 @@
                      <ul>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/share-document-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/share-document-icon.svg') }}"></div>
                                  <span>Share Documents</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/link-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/link-icon.svg') }}"></div>
                                  <span>LinkToFit</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/sell-my-form.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/sell-my-form.svg') }}"></div>
                                  <span>Sell My Form</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/send-for-review-icon.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/send-for-review-icon.svg') }}"></div>
                                  <span>Send for Review</span>
                              </a>
                          </li>
                          <li>
                              <a href="#">
-                                 <div class="link-img"><img src="../public/front/images/share-for-support.svg"></div>
+                                 <div class="link-img"><img src="{{ asset('public/front/images/share-for-support.svg') }}"></div>
                                  <span>Share for Support</span>
                              </a>
                          </li>
@@ -107,7 +107,7 @@
              <div class="modal-body">
                  <h6>Distribute your documents to be filled by anyone</h6>
                  <div class="shareable-file">
-                     <img src="../public/front/images/file-pdf.svg"> Get a Document Signed
+                     <img src="{{ asset('public/front/images/file-pdf.svg') }}"> Get a Document Signed
                  </div>
                  <div class="share-by">
                      <div class="publish-to-distribute">
@@ -150,7 +150,7 @@
              <div class="modal-body">
                  <h6>The documents to be shared:</h6>
                  <div class="shareable-file">
-                     <img src="../public/front/images/file-pdf.svg"> Get a Document Signed
+                     <img src="{{ asset('public/front/images/file-pdf.svg') }}"> Get a Document Signed
                  </div>
                  <div class="share-by">
                      <ul class="nav nav-tabs">
