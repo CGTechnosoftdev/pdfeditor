@@ -23,8 +23,4 @@ class DashboardController extends FrontBaseController
     {
         return view('front.dashboard');
     }
-    public function templateForm()
-    {
-        return view('front.user-document.template-form');
-    }
 }

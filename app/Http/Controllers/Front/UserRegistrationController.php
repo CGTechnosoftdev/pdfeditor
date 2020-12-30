@@ -35,7 +35,6 @@ class UserRegistrationController extends Controller
 	}
 	public function validator(array $data)
 	{
-
 		return Validator::make($data, [
 
 			'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

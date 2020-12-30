@@ -71,6 +71,8 @@ function uploadFile($request, $file_config)
 
 	$files = $request->file($fileConfigData['file_input']);
 
+
+
 	$files = (is_array($files) ? $files : array($files));
 	if (!empty($fileConfigData['file_input_subkey'])) {
 		$files = array_column($files, $fileConfigData['file_input_subkey']);

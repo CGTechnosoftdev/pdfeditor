@@ -6,6 +6,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class UserTemplateFormRequest extends FormRequest
 {
     /**
@@ -18,6 +19,9 @@ class UserTemplateFormRequest extends FormRequest
         return true;
     }
 
+
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,7 +30,16 @@ class UserTemplateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'form_file' => 'required|mimes:pdf',
+            'name' => 'required|mimes:pdf',
         ];
+    }
+
+    public function messages()
+    {
+        return [];
+    }
+    public function attributes()
+    {
+        return [];
     }
 }

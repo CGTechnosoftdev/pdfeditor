@@ -16,7 +16,11 @@
         @include('front.partials.user-header')
         @yield('content')
         @include('front.partials.user-footer')
-        <<<<<<< HEAD @include('front.partials.user-commonjs') @yield('additionaljs') </div>=======</div> @include('front.partials.user-commonjs') @yield('additionaljs')>>>>>>> 1387f7929e1a4d8fb3ec88337cdf7b4c52a6c7b8
+    </div>
+    </div>
+    @include('front.partials.user-commonjs')
+    @yield('additionaljs')
+
 </body>
 
 </html>

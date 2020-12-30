@@ -1,4 +1,4 @@
-@extends('layouts.user-account')
+@extends('layouts.front-user')
 @section("content")
 <div class="wrapper">
 	@include('front.partials.user-account-sidebar')
@@ -28,7 +28,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="#" id="upload_template_id">
 										<div class="link-img"><img src="{{ asset('public/front/images/upload-template.svg') }}"></div>
 										<span>Upload Template</span>
 									</a>

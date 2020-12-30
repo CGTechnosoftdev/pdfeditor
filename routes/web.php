@@ -125,6 +125,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
+
+
+
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 
 		// Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -137,8 +140,8 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
 		Route::post('/update-card', 'SubscriptionPaymentController@updateCard')->name('update-card');
 
-		Route::get('/user-document-template-form', 'Front\UserDocumentController@templateForm')->name('user-document.template-form');
-		Route::post('/user-document-template-form-save', 'Front\UserdocumentController@templateFormSave')->name('user-document.template-form-save');
+		Route::get('/user-document-template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
+		Route::post('/user-document-template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
 	});
 });
 
