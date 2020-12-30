@@ -40,15 +40,23 @@ class UserDocumentController extends FrontBaseController
             if ($validator->fails()) {
                 //$errorMessages = $validator->getMessageBag()->toArray();
                 $validationObject = $validator->getMessageBag();
-                $errormessages = array();
-                //  $getMessageOb = new \GetValidationMesage();
+                $errormessages = $validator->getMessageBag()->getMessages();
+                // $getMessageOb = new /GetValidationMesage();
                 //  $errormessages = $getMessageOb->getvalidationMessage($validationObject);
+                //echo '<pre>';
+                // print_r($errormessages);
+                //  echo '</pre>';
+                //  exit();
+                $errormsgHTML = "<ul>";
+                foreach ($errormessages as $errorIndex => $errorMsgArr) {
+                }
+                $errormsgHTML .= '</ul>';
 
                 $errorMessage = "<ul>";
                 //  foreach($errorMessages as $error_index =>  )
                 return response()->json(array(
                     'return_type' => 'error',
-                    'message' => $validator->getMessageBag()->toArray()
+                    'message' => $errormessages
 
                 ), 400); // 400 being the HTTP code for an invalid request.
             }
