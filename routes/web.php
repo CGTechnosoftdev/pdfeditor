@@ -101,8 +101,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['as' => 'front.', 'middleware' => []], function () {
 
-	Route::get("/", 'Front\FrontHomeController@index')->name('home');
-	Route::get("/#login", 'Front\FrontHomeController@index')->name('home.login');
+	Route::get("/", 'Front\HomeController@index')->name('home');
+	Route::get("/#login", 'Front\HomeController@index')->name('home.login');
 	Route::get('/login', 'Auth\FrontLoginController@showLoginForm')->name('login');
 	Route::get('/forgot-password', 'Auth\FrontForgotPasswordController@forgotpassword')->name('forgot.password');
 	Route::post('reset-password-with-token', 'Auth\FrontForgotPasswordController@resetPassword')->name('resetpassword.email');
@@ -135,7 +135,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
 
-		Route::get('/subscription-payment', 'SubscriptionPaymentController@index')->name('subscription-payment');
+		Route::get('/account/subscription-payment', 'SubscriptionPaymentController@index')->name('subscription-payment');
 		Route::get('/subscription-payment-view/{user_subscription}', 'SubscriptionPaymentController@view')->name('subscription-payment.view');
 		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
 		Route::post('/update-card', 'SubscriptionPaymentController@updateCard')->name('update-card');

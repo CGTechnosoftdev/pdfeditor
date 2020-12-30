@@ -38,7 +38,14 @@ class UserDocumentController extends FrontBaseController
 
 
             if ($validator->fails()) {
-                $errorMessages = $validator->getMessageBag()->toArray();
+                //$errorMessages = $validator->getMessageBag()->toArray();
+                $validationObject = $validator->getMessageBag();
+                $errormessages = array();
+                //  $getMessageOb = new \GetValidationMesage();
+                //  $errormessages = $getMessageOb->getvalidationMessage($validationObject);
+
+                $errorMessage = "<ul>";
+                //  foreach($errorMessages as $error_index =>  )
                 return response()->json(array(
                     'return_type' => 'error',
                     'message' => $validator->getMessageBag()->toArray()

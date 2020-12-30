@@ -8,7 +8,7 @@
                         <span></span>
                     </button>
 
-                    <a class="navbar-brand text-md-left" href="" target="_blank"><img src="{{ asset('public/front/images/logo.png') }}" alt=""></a>
+                    <a class="navbar-brand text-md-left" href="{{ route('front.home') }}" target="_blank"><img src="{{ asset('public/front/images/logo.png') }}" alt=""></a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,6 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Docs</a>
                                 <div class="dropdown-menu">
@@ -47,15 +46,14 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="{{route('front.dashboard')}}">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="{{ route('front.subscription-payment') }}">
+                                        Subscription Payment
+                                    </a>
                                 </div>
                             </li>
                             <li class="nav-item more">
@@ -66,7 +64,7 @@
                             </li>
                             <li class="dropdown user user-menu">
                                 <a href="##" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                                    <span><img src="{{ asset('public/admin/dist/img/avatar.png') }}" class="user-image" alt="PDFWriter Admin Image"></span>
+                                    <span><img src="{{Auth::user()->profile_picture_url}}" class="user-image" alt="PDFWriter Admin Image"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Action</a>

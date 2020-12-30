@@ -8,8 +8,12 @@
 <!-- OWL carousel JS -->
 <script src="{{ asset('public/front/js/owl.carousel.min.js') }}"></script>
 
+
 <script src="{{ asset('public/front/js/jquery.matchHeight.js') }}"></script>
 <script src="{{ asset('public/front/js/dashboard3.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('public/admin/bower_components/toastr/toastr.min.js') }}"></script>
+@toastr_render
 <script>
     $(".addnew-btn").click(function() {
         $(".addnew-dropdown").toggleClass("show");
