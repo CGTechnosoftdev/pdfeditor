@@ -1,5 +1,7 @@
 <?php
+
 use Carbon\Carbon;
+
 /**
  * [lang_trans description]
  * @Author            AkashSharma
@@ -9,8 +11,9 @@ use Carbon\Carbon;
  * @param             array         $extra_data         [extra data like variable to be set in language data]
  * @return            [type]                            [description]
  */
-function lang_trans($translating_string,$extra_data=array()){
-	return trans($translating_string,$extra_data);
+function lang_trans($translating_string, $extra_data = array())
+{
+	return trans($translating_string, $extra_data);
 }
 
 /**
@@ -21,10 +24,11 @@ function lang_trans($translating_string,$extra_data=array()){
  * @param             [type]        $flash_type    [description]
  * @param             [type]        $flash_message [description]
  */
-function set_flash($type,$message,$toastr=true){
-	if(!empty($toastr)){
-		toastr()->$type($message);    
-	}else{    
+function set_flash($type, $message, $toastr = true)
+{
+	if (!empty($toastr)) {
+		toastr()->$type($message);
+	} else {
 		Session::flash($type, $message);
 	}
 }
@@ -38,10 +42,10 @@ function set_flash($type,$message,$toastr=true){
  * @param  array      $data        [description]
  * @return [type]                  [description]
  */
-function interpretResponse($message,$status_code,$data=[])
+function interpretResponse($message, $status_code, $data = [])
 {
 	$success = false;
-	if($status_code == 200){
+	if ($status_code == 200) {
 		$success = true;
 	}
 	return response()->json([
@@ -61,38 +65,40 @@ function interpretResponse($message,$status_code,$data=[])
  * @param             [type]        $file_config [config data of file which already define in config/upload_config.php]
  * @return            [type]                     [return file name's as response with success status]
  */
-function uploadFile($request,$file_config){
-	$fileConfigData=config('upload_config.'.$file_config);
+function uploadFile($request, $file_config)
+{
+	$fileConfigData = config('upload_config.' . $file_config);
 
-	$files=$request->file($fileConfigData['file_input']);
-	
-	$files=(is_array($files) ? $files : array($files)); 
-	if(!empty($fileConfigData['file_input_subkey'])){
-		$files = array_column($files, $fileConfigData['file_input_subkey']);    
-	}       
-	$uploadedFiles=array();
-	foreach($files as $file){
-        //Generate name
-		$fileNameWithExtension=$file->getClientOriginalName();
-		$fileName=pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+	$files = $request->file($fileConfigData['file_input']);
+
+	$files = (is_array($files) ? $files : array($files));
+	if (!empty($fileConfigData['file_input_subkey'])) {
+		$files = array_column($files, $fileConfigData['file_input_subkey']);
+	}
+	$uploadedFiles = array();
+	foreach ($files as $file) {
+		//Generate name
+		$fileNameWithExtension = $file->getClientOriginalName();
+		$fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+		$fileName = str_replace(array('\'', '"', ',', ';', '<', '>'), ' ', $fileName);
 		$extension = $file->getClientOriginalExtension();
-		switch($fileConfigData['new_file_name'] ?? ""){
-			case 'orignal_with_random':            
-			$randomString=generateRandomString(5);
-			$newFileName=$fileName.'_'.$randomString.time().'.'.$extension;
-			break;
+		switch ($fileConfigData['new_file_name'] ?? "") {
+			case 'orignal_with_random':
+				$randomString = generateRandomString(5);
+				$newFileName = $fileName . '_' . $randomString . time() . '.' . $extension;
+				break;
 			case 'orignal':
-			$newFileName=$fileNameWithExtension;
-			break;
-			default:    
-			$randomString=generateRandomString(5);
-			$newFileName=$randomString.time().'.'.$extension;
+				$newFileName = $fileNameWithExtension;
+				break;
+			default:
+				$randomString = generateRandomString(5);
+				$newFileName = $randomString . time() . '.' . $extension;
 		}
 		//dd($fileConfigData['disk'].$fileConfigData['folder']."/".$newFileName);
-		Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder']."/".$newFileName,fopen($file,'r+'));
-		$uploadedFiles[]=$newFileName;
+		Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder'] . "/" . $newFileName, fopen($file, 'r+'));
+		$uploadedFiles[] = $newFileName;
 	}
-	$returnData=array('success'=>true,'data'=>(empty($fileConfigData['multiple'])) ? reset($uploadedFiles) : $uploadedFiles);
+	$returnData = array('success' => true, 'data' => (empty($fileConfigData['multiple'])) ? reset($uploadedFiles) : $uploadedFiles);
 	return $returnData;
 }
 
@@ -105,19 +111,19 @@ function uploadFile($request,$file_config){
  * @param             [type]        $file_config [requested file type config]
  * @return            [type]                     [url of file's]
  */
-function getUploadedFile($files,$file_config,$default_status=true){
-	$fileConfigData=config('upload_config.'.$file_config);
-	$sendMultiple=(is_array($files) ? true : false);    
-	$files=(is_array($files) ? $files : array($files));    
-	$filesUrl=array();
-	foreach($files as $file){
-		$file=$file ?: ((empty($default_status) ? '' : $fileConfigData['placeholder']));
-		if(!empty($file)){
-			$filesUrl[]=Storage::disk($fileConfigData['disk'])->url("public/".$fileConfigData['folder']."/".$file);
-		}else{
-			$filesUrl[]='';
+function getUploadedFile($files, $file_config, $default_status = true)
+{
+	$fileConfigData = config('upload_config.' . $file_config);
+	$sendMultiple = (is_array($files) ? true : false);
+	$files = (is_array($files) ? $files : array($files));
+	$filesUrl = array();
+	foreach ($files as $file) {
+		$file = $file ?: ((empty($default_status) ? '' : $fileConfigData['placeholder']));
+		if (!empty($file)) {
+			$filesUrl[] = Storage::disk($fileConfigData['disk'])->url("public/" . $fileConfigData['folder'] . "/" . $file);
+		} else {
+			$filesUrl[] = '';
 		}
-
 	}
 	return ((empty($sendMultiple)) ? reset($filesUrl) : $filesUrl);
 }
@@ -131,17 +137,18 @@ function getUploadedFile($files,$file_config,$default_status=true){
  * @param  string     $source_config      [description]
  * @return [type]                         [description]
  */
-function moveUploadedFile($file,$destination_config,$source_config='temporary'){
-	$destinationConfigData=config('upload_config.'.$destination_config);
-	$sourceConfigData=config('upload_config.'.$source_config);
-	$fullSourcePath = Storage::disk($sourceConfigData['disk'])->getDriver()->getAdapter()->applyPathPrefix($sourceConfigData['folder']."/".$file);
-	$fullDestinationPath=Storage::disk($destinationConfigData['disk'])->getDriver()->getAdapter()->applyPathPrefix($destinationConfigData['folder']."/".$file);
+function moveUploadedFile($file, $destination_config, $source_config = 'temporary')
+{
+	$destinationConfigData = config('upload_config.' . $destination_config);
+	$sourceConfigData = config('upload_config.' . $source_config);
+	$fullSourcePath = Storage::disk($sourceConfigData['disk'])->getDriver()->getAdapter()->applyPathPrefix($sourceConfigData['folder'] . "/" . $file);
+	$fullDestinationPath = Storage::disk($destinationConfigData['disk'])->getDriver()->getAdapter()->applyPathPrefix($destinationConfigData['folder'] . "/" . $file);
 
-	if(File::exists($fullSourcePath)){
+	if (File::exists($fullSourcePath)) {
 		return File::move($fullSourcePath, $fullDestinationPath);
-	}else{
+	} else {
 		return false;
-	}    
+	}
 }
 /**
  * [removeUploadedFile description]
@@ -151,9 +158,10 @@ function moveUploadedFile($file,$destination_config,$source_config='temporary'){
  * @param  [type]     $file_config [description]
  * @return [type]                  [description]
  */
-function removeUploadedFile($files,$file_config){
-	$fileConfigData=config('upload_config.'.$file_config);
-	return Storage::disk($fileConfigData['disk'])->delete($fileConfigData['folder']."/".$files);
+function removeUploadedFile($files, $file_config)
+{
+	$fileConfigData = config('upload_config.' . $file_config);
+	return Storage::disk($fileConfigData['disk'])->delete($fileConfigData['folder'] . "/" . $files);
 }
 
 
@@ -166,14 +174,15 @@ function removeUploadedFile($files,$file_config){
  * @param             string        $type     [type of string numeric/alpha/alphanumeric]
  * @return            [type]                  [random string]
  */
-function generateRandomString($strength = 16,$type='alphanumeric') {
-	$alphanumeric='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	$numeric='0123456789';
-	$alpha='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	$inputType=$$type;
+function generateRandomString($strength = 16, $type = 'alphanumeric')
+{
+	$alphanumeric = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$numeric = '0123456789';
+	$alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$inputType = $$type;
 	$inputLength = strlen($inputType);
 	$randomString = '';
-	for($i = 0; $i < $strength; $i++) {
+	for ($i = 0; $i < $strength; $i++) {
 		$randomCharacter = $inputType[mt_rand(0, $inputLength - 1)];
 		$randomString .= $randomCharacter;
 	}
@@ -190,17 +199,18 @@ function generateRandomString($strength = 16,$type='alphanumeric') {
  * @param             string        $format [format of date i.e. db/blank]
  * @return            [type]                [formated date]
  */
-function changeDateFormat($date,$format=""){
+function changeDateFormat($date, $format = "")
+{
 	$return = $date;
-	if(!empty($date)){
+	if (!empty($date)) {
 		switch ($format) {
 			case 'db':
-			$new_format='Y-m-d';
-			break;
+				$new_format = 'Y-m-d';
+				break;
 			default:
-			$new_format=config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT');
-			break;
-		}    
+				$new_format = config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT');
+				break;
+		}
 		return Carbon::parse($date)->format($new_format);
 	}
 	return $return;
@@ -215,18 +225,19 @@ function changeDateFormat($date,$format=""){
  * @param             string        $format [description]
  * @return            [type]                [description]
  */
-function changeTimeFormat($time,$format=""){
+function changeTimeFormat($time, $format = "")
+{
 	$return = $time;
-	if(!empty($time)){
+	if (!empty($time)) {
 		switch ($format) {
 			case 'db':
-			$new_format='H:i:s';
-			break;
+				$new_format = 'H:i:s';
+				break;
 			default:
-			$new_format=config('general_settings.time_format') ?? config('constant.PUBLIC_TIME_FORMAT');
-			break;
-		}  
-		return Carbon::parse($time)->format($new_format); 
+				$new_format = config('general_settings.time_format') ?? config('constant.PUBLIC_TIME_FORMAT');
+				break;
+		}
+		return Carbon::parse($time)->format($new_format);
 	}
 	return $return;
 }
@@ -240,18 +251,19 @@ function changeTimeFormat($time,$format=""){
  * @param             string        $format [description]
  * @return            [type]                [description]
  */
-function changeDateTimeFormat($datetime,$format=""){
+function changeDateTimeFormat($datetime, $format = "")
+{
 	$return = $datetime;
-	if(!empty($datetime)){
+	if (!empty($datetime)) {
 		switch ($format) {
 			case 'db':
-			$new_format='Y-m-d H:i:s';
-			break;
+				$new_format = 'Y-m-d H:i:s';
+				break;
 			default:
-			$new_format=(config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT'))." ".(config('general_settings.time_format') ?? config('constant.PUBLIC_TIME_FORMAT'));
-			break;
-		}    
-		return Carbon::parse($datetime)->format($new_format);   		
+				$new_format = (config('general_settings.date_format') ?? config('constant.PUBLIC_DATE_FORMAT')) . " " . (config('general_settings.time_format') ?? config('constant.PUBLIC_TIME_FORMAT'));
+				break;
+		}
+		return Carbon::parse($datetime)->format($new_format);
 	}
 	return $return;
 }
@@ -263,9 +275,37 @@ function changeDateTimeFormat($datetime,$format=""){
  * @param  [type]     $days [description]
  * @param  string     $date [description]
  */
-function addDaysToDate($days,$date=''){
+function addDaysToDate($days, $date = '')
+{
 	$date = $date ?? date('Y-m-d H:i:s');
+	$days = $days ?? 0;
 	return Carbon::parse($date)->addDays($days)->format('Y-m-d H:i:s');
+}
+/**
+ * [addDaysToDate description]
+ * @author Akash Sharma
+ * @date   2020-11-17
+ * @param  [type]     $days [description]
+ * @param  string     $date [description]
+ */
+function addMonthsToDate($months, $date = '')
+{
+	$date = $date ?? date('Y-m-d H:i:s');
+	$months = $months ?? 0;
+	return Carbon::parse($date)->addMonths($months)->format('Y-m-d H:i:s');
+}
+/**
+ * [addDaysToDate description]
+ * @author Akash Sharma
+ * @date   2020-11-17
+ * @param  [type]     $days [description]
+ * @param  string     $date [description]
+ */
+function addYearsToDate($years, $date = '')
+{
+	$date = $date ?? date('Y-m-d H:i:s');
+	$years = $years ?? 0;
+	return Carbon::parse($date)->addYears($years)->format('Y-m-d H:i:s');
 }
 
 /**
@@ -277,14 +317,17 @@ function addDaysToDate($days,$date=''){
  * @param             string        $suffix [description]
  * @return            [type]                [description]
  */
-function myCurrencyFormat($amount){
-	$return="0.00";
-	if(!is_nan($amount)){
-		$return=number_format($amount,2);
+function myCurrencyFormat($amount, $currency_attribute = '')
+{
+	$return = "0.00";
+	if (!is_nan($amount)) {
+		$return = number_format($amount, 2);
 	}
-	$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
-	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'),'symbol','key');
-	return $currency_arr[$currency_attribute].$return;
+	if (empty($currency_attribute)) {
+		$currency_attribute = config('general_settings.currency') ?? config('constant.DEFAULT_CURRNCY');
+	}
+	$currency_arr = \Arr::pluck(config('custom_config.currency_arr'), 'symbol', 'key');
+	return $currency_arr[$currency_attribute] . $return;
 }
 /**
  * [encryptData description]
@@ -293,8 +336,9 @@ function myCurrencyFormat($amount){
  * @param  [type]     $data [description]
  * @return [type]           [description]
  */
-function encryptData($data){
-	return $data;
+function encryptData($data)
+{
+	return encrypt($data);
 }
 /**
  * [decryptData description]
@@ -303,6 +347,12 @@ function encryptData($data){
  * @param  [type]     $data [description]
  * @return [type]           [description]
  */
-function decryptData($data){
-	return $data;
+function decryptData($data)
+{
+	$return = '';
+	try {
+		$return = decrypt($data);
+	} catch (Illuminate\Contracts\Encryption\DecryptException $e) {
+	}
+	return $return;
 }

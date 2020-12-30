@@ -23,6 +23,8 @@ return [
     // User Roles
     'ADMIN_ROLE' => '1',
     'USER_ROLE' => '2',
+    'ADMIN_ROLE_NAME' => 'Admin',
+    'USER_ROLE_NAME' => 'User',
 
     'MODEL_TYPE' => 'App\User',
     'TOP_100_FORM' => 'TOP_100_FORM',
@@ -36,6 +38,7 @@ return [
     'PAYMENT_STATUS_FAILED' => '2',
 
     'DEFAULT_CURRNCY' => "USD",
+    'USD_SYMBOL' => "$",
     'PUBLIC_DATE_FORMAT' => "d-m-Y",
     'PUBLIC_TIME_FORMAT' => "h:i A",
     'PUBLIC_DATE_TIME_FORMAT' => "d-m-Y h:i A",
@@ -43,6 +46,7 @@ return [
     'MODEL_TYPE' => 'App\Models\User',
 
     'DEFAULT_PHONECODE' => 226,
+    'FORBIDDEN_MESSAGE' => "You are not authorize for this. Please contact administrator",
     'PASSWORD_REGEX_INSTRUCTION' => "8 Character minimum and must contain 1 uppercase,1 lowercase, 1 digit and 1 special character",
     'CVV_INSTRUCTION' => "The CVV/CVC code (Card Verification Value/Code) is located on the back of your credit/debit card on the right side of the white signature strip",
     'PASSWORD_REGEX' => '/(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$)/u',
@@ -53,8 +57,19 @@ return [
 
     'SUBSCRIPTION_STATUS_NO' => 0,
     'SUBSCRIPTION_STATUS_YES' => 1,
-    'SUBSCRIPTION_STATUS_TRAIL' => 2,
+    'SUBSCRIPTION_STATUS_INACTIVE' => 0,
+    'SUBSCRIPTION_STATUS_ACTIVE' => 1,
+    'SUBSCRIPTION_STATUS_EXPIRED' => 2,
+    'SUBSCRIPTION_STATUS_TRAIL' => 3,
+    'SUBSCRIPTION_STATUS_CANCELLED' => 4,
+
+    'SUBSCRIPTION_STATUS_PENDING' => 0,
+    'SUBSCRIPTION_STATUS_ACTIVE' => 1,
+    'SUBSCRIPTION_STATUS_EXPIRED' => 2,
+    'SUBSCRIPTION_STATUS_FAILED' => 3,
+    'SUBSCRIPTION_STATUS_CANCELLED' => 4,
 
     'DEFAULT_AMOUNT_TYPE' => 0,
+    'PAGE_NOT_DEFINE' => -1,
 
 ];

@@ -1642,16 +1642,16 @@
         },
         {
             "name": "lcobucci/jwt",
-            "version": "3.3.3",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "c1123697f6a2ec29162b82f170dd4a491f524773"
+                "reference": "320b9f05741b24acbbaf1106ed267ff3817fd74d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/c1123697f6a2ec29162b82f170dd4a491f524773",
-                "reference": "c1123697f6a2ec29162b82f170dd4a491f524773",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/320b9f05741b24acbbaf1106ed267ff3817fd74d",
+                "reference": "320b9f05741b24acbbaf1106ed267ff3817fd74d",
                 "shasum": ""
             },
             "require": {
@@ -1666,6 +1666,9 @@
                 "phpunit/phpunit": "^5.7 || ^7.3",
                 "squizlabs/php_codesniffer": "~2.3"
             },
+            "suggest": {
+                "lcobucci/clock": "*"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1675,7 +1678,12 @@
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
-                }
+                },
+                "files": [
+                    "compat/class-aliases.php",
+                    "compat/json-exception-polyfill.php",
+                    "compat/lcobucci-clock-polyfill.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1703,7 +1711,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-08-20T13:22:28+00:00"
+            "time": "2020-11-25T01:46:26+00:00"
         },
         {
             "name": "league/event",
@@ -2551,16 +2559,16 @@
         },
         {
             "name": "proengsoft/laravel-jsvalidation",
-            "version": "4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/proengsoft/laravel-jsvalidation.git",
-                "reference": "380a4eff28b0cdf7b2ef7b5c183f719d09be3f79"
+                "reference": "af8aa3a6c108f66609372ee78f4e6571cd0d372c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/proengsoft/laravel-jsvalidation/zipball/380a4eff28b0cdf7b2ef7b5c183f719d09be3f79",
-                "reference": "380a4eff28b0cdf7b2ef7b5c183f719d09be3f79",
+                "url": "https://api.github.com/repos/proengsoft/laravel-jsvalidation/zipball/af8aa3a6c108f66609372ee78f4e6571cd0d372c",
+                "reference": "af8aa3a6c108f66609372ee78f4e6571cd0d372c",
                 "shasum": ""
             },
             "require": {
@@ -2628,7 +2636,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-07T20:39:04+00:00"
+            "time": "2020-11-22T20:07:40+00:00"
         },
         {
             "name": "psr/container",
@@ -3153,16 +3161,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.63.0",
+            "version": "v7.66.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "041ff35ff9341cbee87c2046ac42439d62ed0cf1"
+                "reference": "0dc50f42b06be83fe7029410616bda6e89c6d2be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/041ff35ff9341cbee87c2046ac42439d62ed0cf1",
-                "reference": "041ff35ff9341cbee87c2046ac42439d62ed0cf1",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/0dc50f42b06be83fe7029410616bda6e89c6d2be",
+                "reference": "0dc50f42b06be83fe7029410616bda6e89c6d2be",
                 "shasum": ""
             },
             "require": {
@@ -3206,7 +3214,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2020-11-17T23:28:46+00:00"
+            "time": "2020-11-24T16:33:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

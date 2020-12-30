@@ -566,10 +566,212 @@ table tr td button {
 .promo-url .modal-content .modal-body {
     padding-bottom: 30px;
 }
-.add_custom_button_heading a.btn{
-	min-width: 90px;
+
+.add_custom_button_heading a.btn {
+    min-width: 90px;
     background-color: #1fcb5d;
-	border-color: #17c455;
-	float:right;
-	color:#fff;
+    border-color: #17c455;
+    float: right;
+    color: #fff;
+}
+
+
+/**** Sunil Css ****/
+
+.content.full-content {
+    display: inline-block;
+    width: 100%;
+}
+
+.user-management {
+    width: 100%;
+    height: auto;
+    display: table;
+}
+
+.user-management .user-info {
+    display: table-cell;
+    width: 70%;
+    vertical-align: top;
+    padding: 25px 15px 15px 15px;
+}
+
+.user-management .recent-notes {
+    display: table-cell;
+    width: 30%;
+    vertical-align: top;
+    border-left: solid 2px #eee;
+}
+
+.notes-heading {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 15px 30px;
+    border-bottom: solid 1px #eee;
+}
+
+.notes-heading h4 {
+    margin: 0px;
+    color: #1FCB5D;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.notes-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 15px 15px 15px 30px;
+    overflow: auto;
+    max-height: 720px;
+}
+
+.notes-content ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+.notes-content ul li {
+    border-bottom: solid 1px #eee;
+    margin-bottom: 15px;
+}
+
+.notes-content ul li .date-time {
+    color: #B7B7B7;
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.notes-content ul li p {
+    color: #333333;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+
+/***** New Modal ******/
+
+.new-modal .modal-header {
+    background: #1FCB5D;
+    color: #fff;
+}
+
+.new-modal .modal-dialog {
+    height: 100%;
+    margin: 0px auto;
+}
+
+.new-modal .modal-dialog .modal-content {
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.new-modal .modal-body {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    padding: 30px;
+}
+
+.new-modal .modal-body .form-horizontal label {
+    text-align: left;
+}
+
+.date {
+    background: url("../../public/admin/dist/img/calendar.svg");
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 96% center;
+}
+
+
+/*** Date 2/12/2020 ***/
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #F1F1F1;
+    border: 1px solid #F1F1F1;
+    color: #BEBEBE;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    margin-right: 0px;
+    float: right;
+    margin-left: 4px;
+}
+
+.button-wrap {
+    position: relative;
+}
+
+.button-wrap input[type="file"] {
+    position: absolute;
+    z-index: 199;
+    top: 0px;
+    left: 0px;
+    font-size: 15px;
+    color: #ccc;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+}
+
+.new-button {
+    display: inline-block;
+    padding: 10px 28px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #C9F3D8;
+    font-size: 14px;
+    color: #000;
+    font-weight: normal;
+    z-index: 999999;
+    position: relative;
+    min-width: 105px;
+    text-align: center;
+}
+
+.dataTables_filter {
+    display: flex;
+}
+
+.datatable-btn {
+    margin-left: 5px;
+    height: 35px;
+}
+
+.main-sidebar .sidebar .sidebar-menu li {
+    white-space: normal;
+}
+
+.browse-file {
+    display: flex;
+    align-items: center;
+}
+
+.browse-file label {
+    display: inline-block;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #C9F3D8;
+    font-size: 14px;
+    color: #000;
+    font-weight: normal;
+    position: relative;
+    width: 100px;
+    text-align: center;
+}
+
+#file-chosen {
+    margin-left: 0.3rem;
+    font-family: sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

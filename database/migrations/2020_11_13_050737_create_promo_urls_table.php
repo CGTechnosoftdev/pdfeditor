@@ -19,7 +19,7 @@ class CreatePromoUrlsTable extends Migration
             $table->string('promotion_name');
             $table->integer('trail_days')->nullable();
             $table->tinyInteger('monthly_amount_type')->default(0)->comment('0=>Default,1=>Custom');
-            $table->decimal('monthly_amount', 8, 2)->default(0.00)->nullable();            
+            $table->decimal('monthly_amount', 8, 2)->default(0.00)->nullable();
             $table->integer('valid_for_months')->nullable();
             $table->tinyInteger('yearly_amount_type')->default(0)->comment('0=>Default,1=>Custom');
             $table->decimal('yearly_amount', 8, 2)->default(0.00)->nullable();

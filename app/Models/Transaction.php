@@ -8,7 +8,7 @@ use App\Traits\BaseModelTrait;
 class Transaction extends Model
 {
     use BaseModelTrait;
-    protected $fillable = ['user_id','reference_id','amount', 'payment_log' ,'payment_status'];
+    protected $fillable = ['user_id', 'reference_id', 'payment_method', 'currency', 'amount', 'payment_log', 'payment_status'];
 
     /**
      * [saveData description]
@@ -17,14 +17,14 @@ class Transaction extends Model
      * @param  [type]     $dataArray [description]
      * @return [type]                [description]
      */
-    public static function saveData($dataArray,$model=array())
-    { 
-    	$model = (empty($model) ? new self() : $model);
-    	$model->fill($dataArray);
-    	if($model->save()){
-    		return $model;
-    	}else{
-    		return false;
-    	}
+    public static function saveData($dataArray, $model = array())
+    {
+        $model = (empty($model) ? new self() : $model);
+        $model->fill($dataArray);
+        if ($model->save()) {
+            return $model;
+        } else {
+            return false;
+        }
     }
 }

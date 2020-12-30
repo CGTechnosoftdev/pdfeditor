@@ -14,10 +14,11 @@ class UpdateUserAlterTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-        $table->string('first_name',50)->nullable()->change();
-        $table->string('last_name',50)->nullable()->change();
-        $table->string('provider')->nullable();
-        $table->string('provider_id')->nullable();
+            $table->string('first_name', 50)->nullable()->change();
+            $table->string('last_name', 50)->nullable()->change();
+            $table->string('provider')->nullable();
+            $table->string('social_name', 50)->nullable();
+            $table->string('provider_id')->nullable();
         });
     }
 

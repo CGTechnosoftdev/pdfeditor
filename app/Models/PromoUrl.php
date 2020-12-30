@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
+use Illuminate\Support\Facades\Crypt;
 
 class PromoUrl extends Model
 {
@@ -25,16 +26,8 @@ class PromoUrl extends Model
 
 	public function getSubscriptionPlanNameAttribute()
 	{
-		return $this->subscription_plan->name;
+		return $this->subscriptionPlan->name;
 	}
-
-	// public function getMonthlyAmountAttribute(){
-	// 	return ($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount;
-	// } 
-
-	// public function getYearlyAmountAttribute(){
-	// 	return ($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount;
-	// }
 
 	public function getExpirationDateAttribute()
 	{
@@ -43,18 +36,18 @@ class PromoUrl extends Model
 
 	public function getFormatedMonthlyAmountAttribute()
 	{
-		return myCurrencyFormat(($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->monthly_amount : $this->monthly_amount);
+		return myCurrencyFormat(($this->monthly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscriptionPlan->monthly_amount : $this->monthly_amount);
 	}
 
 	public function getFormatedYearlyAmountAttribute()
 	{
-		return myCurrencyFormat(($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscription_plan->yearly_amount : $this->yearly_amount);
+		return myCurrencyFormat(($this->yearly_amount_type == config('constant.DEFAULT_AMOUNT_TYPE')) ? $this->subscriptionPlan->yearly_amount : $this->yearly_amount);
 	}
 
 	public function getPromoUrlAttribute()
 	{
 		$campaign_attr  = ['campaign_source', 'campaign_medium', 'campaign_name', 'campaign_term', 'campaign_content'];
-		$url = \URL::to('/promo-url/' . $this->id);
+		$url = route('front.promo-pricing', encryptData($this->id));
 		$append_arr = [];
 		foreach ($campaign_attr as $attr) {
 			if (!empty($this->$attr)) {
@@ -95,8 +88,18 @@ class PromoUrl extends Model
 	 * @date   2020-11-16
 	 * @return [type]     [description]
 	 */
-	public function subscription_plan()
+	public function subscriptionPlan()
 	{
 		return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id', 'id');
+	}
+
+	public static function getPromoForRedeem($id)
+	{
+		return self::where(['id' => $id])
+			->where(function ($query) {
+				$query->whereNull('expiration_date')
+					->orWhere('expiration_date', '>=', date('Y-m-d'));
+			})
+			->firstOrFail();
 	}
 }

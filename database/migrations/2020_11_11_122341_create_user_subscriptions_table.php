@@ -16,7 +16,7 @@ class CreateUserSubscriptionsTable extends Migration
         Schema::create('user_subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('subscription_plan_id')->unsigned();
-            $table->tinyInteger('subscription_plan_type')->nullable()->comment('0=>Trail,1=>Monthly,2=>Yearly');
+            $table->tinyInteger('subscription_plan_type')->nullable()->comment('1=>Monthly,2=>Yearly');
             $table->bigInteger('user_id')->unsigned();
             $table->dateTime('start');
             $table->dateTime('end');
@@ -25,7 +25,7 @@ class CreateUserSubscriptionsTable extends Migration
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->tinyInteger('status')->default(0)->comment('0=>Pending,1=>Active,2=>Expired,3=>Failed,4=>Cancelled');
+            $table->tinyInteger('status')->default(0)->comment('0=>Inactive,1=>Active,2=>Expired,3=>Trail,4=>Cancelled');
             $table->foreign('subscription_plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

@@ -21,9 +21,9 @@ class Authenticate extends Middleware
 
         $middleware = request()->route()->gatherMiddleware();
         $guard = config('auth.defaults.guard');
-        foreach($middleware as $m) {
-            if(preg_match("/auth:/",$m)) {
-                list($mid, $guard) = explode(":",$m);
+        foreach ($middleware as $m) {
+            if (preg_match("/auth:/", $m)) {
+                list($mid, $guard) = explode(":", $m);
             }
         }
         return route($guard == 'web' ? 'login' : 'front.home.login');

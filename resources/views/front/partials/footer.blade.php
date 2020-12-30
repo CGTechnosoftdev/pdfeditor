@@ -334,7 +334,8 @@
 
 								} else {
 									if (response.success) {
-										location.reload();
+										var url = "{{ session()->pull('url.intended') ?: URL::route('front.dashboard') }}";
+										location.href = url;
 									}
 								}
 							},
@@ -461,6 +462,7 @@
 				/* data: { email:$("#newemail").val(), password:$("#newpass").val(), _token:$("#newtoken").val() }, */
 				data: $('#forgotpasswordfrm_id').serialize(),
 				success: function(response) {
+
 					$("#ModelContainerId").html(response);
 					$('#forgotpasswordfrm_id').keydown(function(e) {
 
@@ -486,7 +488,7 @@
 							success: function(msg) {
 								if (msg.status) {
 									//  alert(msg.success);
-									$("#success_msg_id").html(msg.success);
+									$("#success_msg_id").html(msg.message);
 									$("#success_msg_id_container").removeClass("invisible");
 									$("#success_msg_id_container").addClass("visible");
 								} else {
