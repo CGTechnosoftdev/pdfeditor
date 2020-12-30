@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 <!-- upload Multi Files -->
 <link rel="stylesheet" href="{{ asset('public/front/css/dropzone.css') }}">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/toastr/toastr.min.css') }}">
 <!-- Custom CSS -->
-<link rel="stylesheet" href="{{ asset('public/front/css/dropzone.css') }}">
 <link rel="stylesheet" href="{{ asset('public/front/css/style.css') }}">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="{{ asset('public/front/css/responsive.css') }}">

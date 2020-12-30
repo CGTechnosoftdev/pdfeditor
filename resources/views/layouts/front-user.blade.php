@@ -7,16 +7,39 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ config('general_settings.site_title') ?? config('app.name', 'Laravel') }} | @yield('title')</title>
 
-    @include('front.partials.user-commoncss')
+    @include('front.partials.front-user-commoncss')
     @yield('additionalcss')
 </head>
+@php
+$account_page_status = (request()->segment(1)=='account') ? true : false;
+@endphp
 
-<body class="dashboard3 sidebar-mini" style="height: auto; min-height: 100%;">
+<body class="dashboard3 sidebar-mini">
     <div class="dashboard3-wrapper">
-        @include('front.partials.user-header')
-        @yield('content')
-        @include('front.partials.user-footer')
-        <<<<<<< HEAD @include('front.partials.user-commonjs') @yield('additionaljs') </div>=======</div> @include('front.partials.user-commonjs') @yield('additionaljs')>>>>>>> 1387f7929e1a4d8fb3ec88337cdf7b4c52a6c7b8
+        @include('front.partials.front-user-header')
+
+        @if(empty($account_page_status))
+        @include('front.partials.front-user-sidebar')
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
+        @else
+        <div class="wrapper">
+            @include('front.partials.front-user-account-sidebar')
+            <div id="content">
+                @yield('content')
+            </div>
+        </div>
+        @endif
+        @include('front.partials.front-user-footer')
+
+        @if(empty($account_page_status))
+        @include('front.partials.front-user-document-footer-menu')
+        @endif
+
+        @include('front.partials.front-user-commonjs')
+        @yield('additionaljs')
+    </div>
 </body>
 
 </html>

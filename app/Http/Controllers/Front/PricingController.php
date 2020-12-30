@@ -53,7 +53,7 @@ class PricingController extends FrontBaseController
 		$input_data = $request->input();
 		$user = \Auth::user();
 		if ($user->subscription_status != config('constant.SUBSCRIPTION_STATUS_INACTIVE')) {
-			$response_type = 'success';
+			$response_type = 'error';
 			$response_message = "We found you are already subscibed user, enjoy our services";
 			set_flash($response_type, $response_message);
 			return redirect()->route('front.dashboard');
@@ -163,7 +163,7 @@ class PricingController extends FrontBaseController
 			$response_type = 'error';
 			$response_message = $e->getMessage();
 		}
-		set_flash($response_type, $response_message, false);
+		set_flash($response_type, $response_message);
 		return ($response_type == 'success') ? redirect()->route('front.dashboard') : redirect()->route('front.payment-form', [$subscription_plan->id]);
 	}
 
