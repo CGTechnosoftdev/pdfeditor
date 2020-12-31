@@ -5579,6 +5579,7 @@ li {
 
 .searchwith-legalform .input-group-text svg {
     color: #C1484A;
+<<<<<<< HEAD
 }
 
 .heading-btns ul {
@@ -5714,4 +5715,6 @@ li {
 
 .create-folder .form-group label {
     font-size: 14px;
+=======
+>>>>>>> 56d11b3a3182d7949c0fe87a1c0deeb3599e5bcf
 }
