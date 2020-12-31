@@ -15,9 +15,10 @@ function loadFromJson() {
     pdf.loadFromJSON(jsonData);
 
 
-function addDateModel(event) {
-    $('#selectdateModal').modal('show');
-}}
+    function addDateModel(event) {
+        $('#selectdateModal').modal('show');
+    }
+}
 
 function addDate(event) {
     pdf.addDate(event);
@@ -29,8 +30,10 @@ function addPage() {
 
 $("#pick_date_button").click(function () {
     // $('#dataModal').modal('show');
+    $("#select_date_msg_id").html("");
     $("#select_date_msg_id").removeClass('show');
     $("#select_date_msg_id").removeClass('alert-success');
+    $("#select_date_msg_id").removeClass('alert-danger');
     $("#select_date_msg_id").addClass('hide');
     $('#selectdateModal').modal('show');
 });
@@ -58,7 +61,7 @@ $("#new-date-select-button").click(function (event) {
         var msgString = '<ul>';
         $.each(messages, function (index, value) {
             msgString += '<li>' + value + '</li>'
-        })	
+        })
         msgString += '</ul>';
         $("#select_date_msg_id").html(msgString);
         $("#select_date_msg_id").removeClass('hide');
@@ -72,12 +75,11 @@ $("#new-date-select-button").click(function (event) {
     var text_align = $("#text_alignid").val();
     pdf.addPickDate(dateVal, header_footer, text_align);
     $("#select_date_msg_id").html("Date added Successfully!");
-    $("#select_date_msg_id").removeClass('alert-danger');	
-    $("#select_date_msg_id").addClass('alert-success');	
+    $("#select_date_msg_id").removeClass('alert-danger');
+    $("#select_date_msg_id").addClass('alert-success');
     $("#select_date_msg_id").addClass('show');
-    setTimeout(function () {
-        $('#selectdateModal').modal('hide');
-    }, 3000);
+
+    $('#selectdateModal').modal('hide');
 });
 $("#resize_canvas").click(function (event) {
     //  pdf.resizePage(event);
@@ -131,7 +133,7 @@ function rotatePage() {
 }
 
 function deletePage() {
-    if(document.getElementsByClassName("canvas-container").length > 0){
+    if (document.getElementsByClassName("canvas-container").length > 0) {
         pdf.deletePage();
     }
 }
@@ -275,26 +277,26 @@ document.getElementById('eraser_btn_id').addEventListener('click', function (eve
     var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
     $('.tool-button.active').removeClass('active');
     $(element).addClass('active');
-    pdf.eraseText();	
+    pdf.eraseText();
 });
 document.getElementById('highlight_btn_id').addEventListener('click', function (event) {
     event.preventDefault();
     var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
     $('.tool-button.active').removeClass('active');
     $(element).addClass('active');
-    pdf.toggleHighlighter();	
+    pdf.toggleHighlighter();
 });
 document.getElementById('blackout_btn_id').addEventListener('click', function (event) {
     event.preventDefault();
     var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
     $('.tool-button.active').removeClass('active');
     $(element).addClass('active');
-    pdf.toggleBlackout();	
+    pdf.toggleBlackout();
 });
 document.getElementById('new-img-save-png').addEventListener('click', function () {
     const data = document.getElementById('preview-image').src;
     pdf.addNewImage(data);
-    $('#imageModal').modal('hide');	
+    $('#imageModal').modal('hide');
 });
 document.getElementById("use-sign").addEventListener('click', function () {
     const preview = document.getElementById('preview-sign');
@@ -317,7 +319,7 @@ function selectSignature(event) {
     const preview = document.getElementById('preview-sign');
     const file = document.getElementById("signature-selector").files[0];
     const reader = new FileReader();
-    reader.addEventListener("load", function () {   
+    reader.addEventListener("load", function () {
         let mimeType = (reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/) ? reader.result.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0] : "");
         var is_valid_image = false;
         if (mimeType == 'image/jpeg' || mimeType == 'image/jpg' || mimeType == 'image/png') {
