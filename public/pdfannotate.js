@@ -167,7 +167,7 @@ PDFAnnotate.prototype.enablePencil = function () {
 	if (inst.fabricObjects.length > 0) {
 		$.each(inst.fabricObjects, function (index, fabricObj) {
 			fabricObj.isDrawingMode = true;
-			fabricObj.freeDrawingBrush.color = 'black';
+			fabricObj.freeDrawingBrush.color = inst.color;
 		});
 	}
 }
@@ -339,9 +339,9 @@ PDFAnnotate.prototype.setBold = function () {
 	var o = inst.fabricObjects[inst.active_canvas].getActiveObject();
 	if(o){
 		o.set({ fontWeight: 'bold' });
-		fabricObj.renderAll().setActiveObject(o);
 	}
-	inst.active_tool = 1;
+	fabricObj.renderAll().setActiveObject(o);
+	enableSelector();
 }
 
 PDFAnnotate.prototype.removeBold = function () {

@@ -49,17 +49,17 @@
           <input type="number" class="form-control text-right" value="1" id="brush-size" max="50">
         </div>
 
-        <div class="tool border-0">
-          <button class="color-tool active" style="background-color: #212121;"></button>
+        <div class="tool border-0" style="width: 85px;">
+          <!-- <button class="color-tool active" style="background-color: #212121;"></button>
           <button class="color-tool" style="background-color: red;"></button>
           <button class="color-tool" style="background-color: blue;"></button>
           <button class="color-tool" style="background-color: green;"></button>
-          <button class="color-tool" style="background-color: yellow;"></button>
+          <button class="color-tool" style="background-color: yellow;"></button> -->
+          <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#000000" style="width:100%; height: 25px;">
         </div>
 
-        <div class="tool">
-          <button class="tool-button active"><i class="fa fa-hand-paper-o" title="Free Hand"
-              onclick="enableSelector(event)"></i></button>
+        <div class="tool" onclick="enableSelector(event)">
+          <button class="tool-button active"><i class="fa fa-hand-paper-o" title="Free Hand"></i></button>
         </div>
 
         <div class="tool">
@@ -67,7 +67,7 @@
         </div>
 
         <div class="tool">
-          <button class="tool-button"><i class="fa fa-pencil" title="Pencil" onclick="enablePencil(event)"></i></button>
+          <button onclick="enablePencil(event)" title="Pencil"class="tool-button"><i class="fa fa-pencil"></i></button>
         </div>
 
         <div class="tool">
@@ -75,36 +75,33 @@
               onclick="enableAddText(event)"></i></button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button"><i class="fa fa-long-arrow-right" title="Add Arrow"
-              onclick="enableAddArrow(event)"></i></button>
+        <div class="tool" onclick="enableAddArrow(event)">
+          <button title="Add Arrow" class="tool-button"><i class="fa fa-long-arrow-right"></i></button>
+        </div>
+
+        <div class="tool" onclick="changeFontWeight(event)">
+          <button title="Bold" class="tool-button" id="bold"><i class="fa fa-bold"></i></button>
+        </div>
+
+        <div class="tool" onclick="enableRectangle(event)">
+          <button title="Add rectangle" class="tool-button"><i class="fa fa-square-o" ></i></button>
         </div>
 
         <div class="tool">
-          <button class="tool-button" id="bold"><i class="fa fa-bold" title="Bold"
-              onclick="changeFontWeight(event)"></i></button>
+          <button title="Erase" class="tool-button" id="eraser_btn_id"><i class="fa fa-eraser"></i></button>
         </div>
 
         <div class="tool">
-          <button class="tool-button"><i class="fa fa-square-o" title="Add rectangle"
-              onclick="enableRectangle(event)"></i></button>
-        </div>
-
-        <div class="tool">
-          <button class="tool-button" id="eraser_btn_id"><i class="fa fa-eraser" title="Erase"></i></button>
-        </div>
-
-        <div class="tool">
-          <button class="tool-button" id="highlight_btn_id"><i class="fa fa-eye" title="Highlighter"></i>
+          <button class="tool-button" title="Highlighter" id="highlight_btn_id"><i class="fa fa-eye"></i>
           </button>
         </div>
 
         <div class="tool">
-          <button class="tool-button" id="blackout_btn_id"><i class="fa fa-eye" title="Blackout"></i></button>
+          <button title="Blackout" class="tool-button" id="blackout_btn_id"><i class="fa fa-eye"></i></button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" title="Add Signature" onclick="openSignatureModal(event)">
+        <div class="tool" onclick="openSignatureModal(event)">
+          <button class="tool-button" title="Add Signature">
             <img width="20px" src="signature.svg" alt="Add Signature"/>
           </button>
         </div>
@@ -121,15 +118,15 @@
           </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" onclick="addDate(event)" title="Add Date">
+        <div class="tool" onclick="addDate(event)">
+          <button class="tool-button" title="Add Date">
             <img width="20px" src="date.svg" />
           </button>
         </div>
 
-        <div class="float-right">
+        <div class="float-right" onclick="deleteSelectedObject(event)">
           <div class="tool border-0">
-            <button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i
+            <button class="btn btn-danger btn-sm"><i
                 class="fa fa-trash"></i></button>
           </div>
 
@@ -171,64 +168,64 @@
           </select>
         </div>
 
-        <div class="tool">
-          <button class="tool-button"> <i class="fa fa-italic" id="toggleitalicid"></i></button>
+        <div class="tool" id="toggleitalicid">
+          <button title="Italic" class="tool-button"> <i class="fa fa-italic"></i></button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button"> <i class="fa fa-underline" id="toggleunderline"></i> </button>
+        <div class="tool" id="toggleunderline">
+          <button title="Underline" class="tool-button"> <i class="fa fa-underline"></i> </button>
         </div>
 
-        <div class="tool">
-          <button onclick="addCrossIcon()" class="tool-button"> <i class="fa fa-times" title="Add Cross Icon"></i> </button>
+        <div class="tool" onclick="addCrossIcon()">
+          <button title="Add Cross Icon" class="tool-button"> <i class="fa fa-times"></i> </button>
         </div>
 
-        <div class="tool">
-          <button onclick="addCircleIcon()" class="tool-button"> <i class="fa fa-circle-o" title="Add Circle Icon"></i> </button>
+        <div class="tool" onclick="addCircleIcon()">
+          <button title="Add Circle Icon" class="tool-button"> <i class="fa fa-circle-o"></i> </button>
         </div>
 
-        <div class="tool">
-          <button onclick="addCheckIcon()" class="tool-button"> <i class="fa fa-check" title="Add Check Icon"></i> </button>
+        <div class="tool" onclick="addCheckIcon()">
+          <button title="Add Check Icon" class="tool-button"> <i class="fa fa-check"></i> </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" onclick="addPage()">
+        <div class="tool" onclick="addPage()">
+          <button class="tool-button">
             Add Page
           </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" title="Rotate Page" onclick="rotatePage()">
+        <div class="tool" onclick="rotatePage()">
+          <button class="tool-button" title="Rotate Page">
             <i class="fa fa-rotate-right"></i>
           </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" onclick="deletePage()">
+        <div class="tool" onclick="deletePage()">
+          <button class="tool-button">
             Delete Page
           </button>
         </div>
         
-        <div class="tool">
-          <button class="tool-button" onclick="addWatermark()">
+        <div class="tool" onclick="addWatermark()">
+          <button class="tool-button">
             Add Watermark
           </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" title="Duplicate Page" onclick="duplicatePage()">
+        <div class="tool" onclick="duplicatePage()">
+          <button class="tool-button" title="Duplicate Page">
             <i class="fa fa-copy"></i>
           </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" title="Move up" onclick="movePage('up')">
+        <div class="tool" onclick="movePage('up')">
+          <button class="tool-button" title="Move up">
             <i class="fa fa-long-arrow-up"></i>
           </button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" title="Move up" onclick="movePage('down')">
+        <div class="tool" onclick="movePage('down')">
+          <button class="tool-button" title="Move down">
             <i class="fa fa-long-arrow-down"></i>
           </button>
         </div>

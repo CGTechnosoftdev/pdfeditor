@@ -1,7 +1,6 @@
 const fileName = localStorage.getItem("pdfFile") ? localStorage.getItem("pdfFile") : 'blank';
 var pdf = new PDFAnnotate('pdf-container', fileName + ".pdf", {
     onPageUpdated: (page, oldData, newData) => {
-
     }
 });
 
@@ -132,7 +131,9 @@ function rotatePage() {
 }
 
 function deletePage() {
-    pdf.deletePage();
+    if(document.getElementsByClassName("canvas-container").length > 0){
+        pdf.deletePage();
+    }
 }
 
 function enableSelector(event) {
@@ -484,3 +485,8 @@ $(function () {
         pdf.setFontFamily(font_family);
     })
 });
+
+
+function clickColor(hex, seltop, selleft, html5) {
+    pdf.setColor(document.getElementById("html5colorpicker").value);
+}
