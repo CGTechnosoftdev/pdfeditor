@@ -88,7 +88,9 @@ $("#resize_canvas").click(function (event) {
     $('#setpagesizeModal').modal('show');
 });
 $("#new-width-height-button").click(function (event) {
-    var numchk = /^[0-9]+$/;
+    ///^\-?([0-9]+(\.[0-9]+)?|Infinity)$
+    //var numchk = /^[0-9]+$/;
+    var numchk = /^\-?([0-9]+(\.[0-9]+)?|Infinity)$/;
     var is_valid = true;
     var messages = [];
     var error_index = 0
