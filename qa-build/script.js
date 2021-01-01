@@ -30,6 +30,9 @@ function addPage() {
 
 $("#pick_date_button").click(function () {
     // $('#dataModal').modal('show');
+    $("#dateid").val('');
+    $('#header_footerid').prop('selectedIndex', 0);
+    $("#text_alignid").prop('selectedIndex', 0);
     $("#select_date_msg_id").html("");
     $("#select_date_msg_id").removeClass('show');
     $("#select_date_msg_id").removeClass('alert-success');
@@ -88,7 +91,9 @@ $("#resize_canvas").click(function (event) {
     $('#setpagesizeModal').modal('show');
 });
 $("#new-width-height-button").click(function (event) {
-    var numchk = /^[0-9]+$/;
+    ///^\-?([0-9]+(\.[0-9]+)?|Infinity)$
+    //var numchk = /^[0-9]+$/;
+    var numchk = /^\-?([0-9]+(\.[0-9]+)?|Infinity)$/;
     var is_valid = true;
     var messages = [];
     var error_index = 0

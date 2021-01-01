@@ -102,7 +102,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 				o.set({ textDecoration: '' });
 			}
 			else if (fontStyleOb != "underline") {
-				o.set({ textDecoration: 'underline' });
+				o.set({ textDecoration: 'underline  #000000', color: this.color });
 			}
 			o.set({ dirty: true });
 			fabricObj.renderAll();
@@ -681,7 +681,7 @@ PDFAnnotate.prototype.deletePage = function () {
 	pageId = pageId.match("page-(.*)-canvas")[1];
 	inst.fabricObjectsData.splice(inst.active_canvas, 1);
 	if (activePage) {
-		if (confirm('Are you sure you want to delete page number ' + pageId + ' ?')) activePage.wrapperEl.remove();
+		if (confirm('Are you sure you want to delete this page?')) activePage.wrapperEl.remove();
 	}
 }
 
