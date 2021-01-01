@@ -712,7 +712,7 @@ PDFAnnotate.prototype.addPickDate = function (date, header_footer, text_align) {
 			lockMovementY: true,
 		})
 		var textAlignVal = 0.5;
-		var verticalAlign = 0.45;
+		var verticalAlign = 0.5;
 		//width = context.measureText(inputText).width;
 		var context = fabricObj.getContext("2d");
 		var datewidth = context.measureText(date).width;
@@ -744,20 +744,22 @@ PDFAnnotate.prototype.addPickDate = function (date, header_footer, text_align) {
 			fontWeight: inst.fontWeight,
 			originX: 'center', originY: 'center',
 			left: leftAlignVal, top: verticalAlign * box_height,
+			lockMovementX: true,
+			lockMovementY: true,
 		});
 
 		var headerFooter = "top";
 		var top_margin = 0;
 		if (header_footer == 2) {
 			headerFooter = "bottom";
-			top_margin = canvas_height - box_height;
+			top_margin = canvas_height - (box_height - 5);
 		}
 		var group = new fabric.Group(
 			[rect, text], {
 			top: top_margin,
 		})
 
-		fabricObj.add(group).renderAll().setActiveObject(text);
+		fabricObj.add(group).renderAll().setActiveObject(rect);
 
 
 
