@@ -2536,6 +2536,7 @@ li {
     padding: 15px;
     color: #444;
     border-top: 1px solid #d2d6de;
+    font-size: 14px;
 }
 
 
@@ -5714,4 +5715,24 @@ li {
 
 .create-folder .form-group label {
     font-size: 14px;
+}
+
+.doc-date-and-dismiss .dropdown-menu {
+    padding: 0px;
+}
+
+.doc-date-and-dismiss .dropdown-menu a {
+    padding: 6px 10px;
+    font-size: 14px;
+    font-family: Poppins-Regular;
+}
+
+.doc-date-and-dismiss .dropdown-menu a i {
+    font-size: 14px;
+    margin-right: 3px;
+    min-width: 18px;
+}
+
+.dashboard3 ul.sidebar-menu.secound-menu a {
+    color: #98a2c5;
 }
