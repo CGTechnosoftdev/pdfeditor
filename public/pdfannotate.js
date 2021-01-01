@@ -18,12 +18,15 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 	this.container_id = container_id;
 	this.url = url;
 	this.fontWeight = 'normal';
+	this.last_deleted_page = 0;
+	this.main_page_numbers = 0;
 	var inst = this;
 
 	var loadingTask = PDFJS.getDocument(this.url);
 	loadingTask.promise.then(function (pdf) {
 		var scale = 1.3;
 		inst.number_of_pages = pdf.pdfInfo.numPages;
+		inst.main_page_numbers = pdf.pdfInfo.numPages;
 
 		for (var i = 1; i <= pdf.pdfInfo.numPages; i++) {
 			pdf.getPage(i).then(function (page) {
@@ -140,11 +143,11 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 				fontSize: inst.font_size,
 				selectable: true,
 				fontFamily: inst.fontFamily,
-				fontWeight: inst.fontWeight
+				fontWeight: 'normal'
 			});
 			fabricObj.add(text);
-			inst.active_tool = 0;
 		}
+		inst.active_tool = 0;
 	}
 }
 function getStyle(object, styleName) {
@@ -546,13 +549,20 @@ PDFAnnotate.prototype.resizePage = function (page_width, page_height) {
 }
 
 PDFAnnotate.prototype.addPage = function (pageNumber, jsonData) {
-	var inst = this;
+	console.log(jsonData);
+	var inst = this	
+	currentpageMatchingPageId = inst.active_canvas+1;
+	var loadingTask_pre = PDFJS.getDocument(this.url);
 	inst.number_of_pages = inst.number_of_pages + 1;
 	const current_cans = $(".canvas-container").length;
-	var loadingTask = pageNumber != "" ? PDFJS.getDocument(this.url) : PDFJS.getDocument("./blank.pdf");
+	// var loadingTask = pageNumber == "" || pageNumber > inst.main_page_numbers ? PDFJS.getDocument("./blank.pdf") :  PDFJS.getDocument(this.url);
+	var loadingTask = PDFJS.getDocument("./blank.pdf");
+	// if(inst.last_deleted_page == currentpageMatchingPageId){
+	// 	loadingTask = PDFJS.getDocument("./blank.pdf");
+	// }
 	loadingTask.promise.then(function (pdf) {
 		var scale = 1.3;
-		if (pageNumber == "") {
+		if (pageNumber == "" || pageNumber > inst.main_page_numbers) {
 			pageNumber = 1;
 		}
 		pageNumber = parseInt(pageNumber);
@@ -585,6 +595,13 @@ PDFAnnotate.prototype.addPage = function (pageNumber, jsonData) {
 								color: inst.color
 							}
 						});
+						fabric.util.enlivenObjects(jsonData.objects, function (enlivenedObjects) {
+							enlivenedObjects.forEach(function (obj, index) {
+								fabricObj.add(obj);
+							});
+							fabricObj.renderAll();
+						});
+						console.log("fabricObj", fabricObj.toJSON());
 						inst.fabricObjects.push(fabricObj);
 						var newindex = inst.fabricObjects.length;
 						if (typeof options.onPageUpdated == 'function') {
@@ -645,7 +662,7 @@ PDFAnnotate.prototype.addDate = function (event) {
 		fontSize: 16,
 		selectable: true,
 		fontFamily: inst.fontFamily,
-		fontWeight: inst.fontWeight
+		fontWeight: 'normal'
 	});
 	fabricObj.add(text).renderAll().setActiveObject(text);
 }
@@ -681,7 +698,10 @@ PDFAnnotate.prototype.deletePage = function () {
 	pageId = pageId.match("page-(.*)-canvas")[1];
 	inst.fabricObjectsData.splice(inst.active_canvas, 1);
 	if (activePage) {
-		if (confirm('Are you sure you want to delete this page?')) activePage.wrapperEl.remove();
+		if (confirm('Are you sure you want to delete this page?')) {
+			activePage.wrapperEl.remove();
+			inst.last_deleted_page = pageId;
+		}
 	}
 }
 
@@ -689,6 +709,7 @@ PDFAnnotate.prototype.duplicatePage = function () {
 	var inst = this;
 	var activePage = inst.fabricObjects[inst.active_canvas];
 	const pageData = activePage.toJSON();
+	console.log(pageData);
 	var pageId = activePage.lowerCanvasEl.getAttribute('id');
 	pageId = pageId.match("page-(.*)-canvas")[1];
 	this.addPage(pageId, pageData);
