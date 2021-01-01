@@ -1197,7 +1197,12 @@
         // });
 
         $('.content .single-document').click(function() {
-            $(this).addClass('active').siblings().removeClass('active');
+            $(this).toggleClass('active').siblings().removeClass('active');
+            if ($('.single-document').hasClass("active")) {
+                $('.footer-more-menus').addClass('active');
+            } else {
+                $('.footer-more-menus').removeClass('active');
+            }
         });
 
 
@@ -1209,9 +1214,9 @@
 
 
 
-        $('.content .single-document').click(function() {
-            $('.footer-more-menus').addClass('active').siblings().removeClass('active');
-        });
+        // $('.content .single-document').click(function() {
+        //     $('.footer-more-menus').addClass('active').siblings().removeClass('active');
+        // });
 
         // $('.content .single-document').click(function() {
         //     $('.footer-more-menus').toggleClass('active');
