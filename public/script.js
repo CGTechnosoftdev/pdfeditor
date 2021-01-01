@@ -453,6 +453,7 @@ function addWatermark() {
 
 $("#submit").click(function () {
     if ($("#watermark").val() == '') {
+        $("#watermark-msg").show();
         return;
     } else {
         var orientation_value = $(".orientation_group img.active").data('value');
@@ -460,6 +461,10 @@ $("#submit").click(function () {
         $("#watermarkModal").modal('hide');
         $("#watermark").val("");
     }
+})
+
+$("#watermark").on('keypress', function(){
+    $("#watermark-msg").hide();
 })
 
 $(".orientation_group img").on('click', function () {
