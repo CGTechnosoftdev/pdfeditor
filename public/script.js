@@ -30,6 +30,9 @@ function addPage() {
 
 $("#pick_date_button").click(function () {
     // $('#dataModal').modal('show');
+    $("#dateid").val('');
+    $('#header_footerid').prop('selectedIndex', 0);
+    $("#text_alignid").prop('selectedIndex', 0);
     $("#select_date_msg_id").html("");
     $("#select_date_msg_id").removeClass('show');
     $("#select_date_msg_id").removeClass('alert-success');

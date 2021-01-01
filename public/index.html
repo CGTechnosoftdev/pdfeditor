@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
   <link href='https://fonts.googleapis.com/css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./pdfannotate.css">
   <link rel="stylesheet" href="./signature-pad.css">
@@ -55,24 +56,24 @@
           <button class="color-tool" style="background-color: blue;"></button>
           <button class="color-tool" style="background-color: green;"></button>
           <button class="color-tool" style="background-color: yellow;"></button> -->
-          <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#000000" style="width:100%; height: 25px;">
+          <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#000000"
+            style="width:100%; height: 25px;">
         </div>
 
         <div class="tool" onclick="enableSelector(event)">
           <button class="tool-button active"><i class="fa fa-hand-paper-o" title="Free Hand"></i></button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button" id="openImageModelId"><i class="fa fa-picture-o" title="Image"></i></button>
+        <div class="tool" title="Image">
+          <button class="tool-button" id="openImageModelId"><i class="fa fa-picture-o"></i></button>
         </div>
 
         <div class="tool">
-          <button onclick="enablePencil(event)" title="Pencil"class="tool-button"><i class="fa fa-pencil"></i></button>
+          <button onclick="enablePencil(event)" title="Pencil" class="tool-button"><i class="fa fa-pencil"></i></button>
         </div>
 
-        <div class="tool">
-          <button class="tool-button"><i class="fa fa-font" title="Add Text"
-              onclick="enableAddText(event)"></i></button>
+        <div class="tool" title="Add Text">
+          <button class="tool-button"><i class="fa fa-font" onclick="enableAddText(event)"></i></button>
         </div>
 
         <div class="tool" onclick="enableAddArrow(event)">
@@ -84,7 +85,7 @@
         </div>
 
         <div class="tool" onclick="enableRectangle(event)">
-          <button title="Add rectangle" class="tool-button"><i class="fa fa-square-o" ></i></button>
+          <button title="Add rectangle" class="tool-button"><i class="fa fa-square-o"></i></button>
         </div>
 
         <div class="tool">
@@ -102,7 +103,7 @@
 
         <div class="tool" onclick="openSignatureModal(event)">
           <button class="tool-button" title="Add Signature">
-            <img width="20px" src="signature.svg" alt="Add Signature"/>
+            <img width="20px" src="signature.svg" alt="Add Signature" />
           </button>
         </div>
 
@@ -126,8 +127,7 @@
 
         <div class="float-right" onclick="deleteSelectedObject(event)">
           <div class="tool border-0">
-            <button class="btn btn-danger btn-sm"><i
-                class="fa fa-trash"></i></button>
+            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
           </div>
 
           <div class="tool border-0">
@@ -205,7 +205,7 @@
             Delete Page
           </button>
         </div>
-        
+
         <div class="tool" onclick="addWatermark()">
           <button class="tool-button">
             Add Watermark
@@ -256,31 +256,31 @@
   </div>
 
   <div class="modal fade" id="watermarkModal" tabindex="-1" role="dialog" aria-labelledby="watermarkModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="watermarkModalLabel">Please enter text for watermark</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="watermarkModalLabel">Please enter text for watermark</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="modal-body">
-          <input type="text" name="watermark" id="watermark" value=""/>
+          <input type="text" name="watermark" id="watermark" value="" />
           <div class="mt-3 orientation_group">
             <h6>Choose Orientation</h6>
             <input type="hidden" id="orientation" value="quarter" />
-            <img class="active" data-value="quarter" width="40px" src="turned-quarter.svg" style="border: 1px solid;"/>
-            <img width="40px" data-value="half" src="turned-half.svg" style="border: 1px solid;"/>
-            <img width="40px" data-value="normal" src="normal.svg" style="border: 1px solid;"/>
+            <img class="active" data-value="quarter" width="40px" src="turned-quarter.svg" style="border: 1px solid;" />
+            <img width="40px" data-value="half" src="turned-half.svg" style="border: 1px solid;" />
+            <img width="40px" data-value="normal" src="normal.svg" style="border: 1px solid;" />
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" id="submit">OK</button>
         </div>
+      </div>
     </div>
   </div>
-</div>
 
   <div class="modal fade" id="signatureModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel"
     aria-hidden="true">
@@ -293,15 +293,15 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="file" name="signature" value="" id="signature-selector" onchange="selectSignature(event)"  />
+          <input type="file" name="signature" value="" id="signature-selector" onchange="selectSignature(event)" />
           <button name="button" type="button" onclick="enableDrawingMode()" class="btn btn-primary">Draw</button>
           <div class="signature-wrapper">
             <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
           </div>
           <div class="img-wrapper" style="display: none;">
-            <img src="" height="200" width="150" alt="image preview" id="preview-sign"/>
+            <img src="" height="200" width="150" alt="image preview" id="preview-sign" />
           </div>
-          <img src="" height="200" id="drawed-signature" style="display: none;"/>
+          <img src="" height="200" id="drawed-signature" style="display: none;" />
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary clear" id="clear" data-action="clear">Clear</button>
@@ -313,7 +313,8 @@
     </div>
   </div>
 
-  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -361,10 +362,11 @@
           <div class="row">
             <div class="col col-md-3"> <label class="label label-default">Date</label>
             </div>
-            <div class="col col-md-6"><input type="text" name="date" id="dateid" class="form-control" /></div>
+            <div class="col col-md-6"><input type="text" name="date" id="dateid" class="form-control"
+                autocomplete="off" /></div>
           </div>
           <div class="row">
-            <div class="col col-md-3"> <label>Header Or Footer</label>	
+            <div class="col col-md-3"> <label>Header Or Footer</label>
             </div>
             <div class="col col-md-6">
               <select name="header_footer" id="header_footerid" class="form-control">
@@ -375,13 +377,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col col-md-3"> <label>Align</label>	
-            </div>	
-            <div class="col col-md-6">	
-              <select name="text_align" id="text_alignid" class="form-control">	
-                <option value="0">--Select--</option>	
-                <option value="1">Left</option>	
-                <option value="2">Right</option>	
+            <div class="col col-md-3"> <label>Align</label>
+            </div>
+            <div class="col col-md-6">
+              <select name="text_align" id="text_alignid" class="form-control">
+                <option value="0">--Select--</option>
+                <option value="1">Left</option>
+                <option value="2">Right</option>
                 <option value="3">Center</option>
               </select>
             </div>
@@ -450,15 +452,22 @@
       loadFromJson()
     }, 2000);
     $('#dateid').datepicker({
-      format: "dd/mm/yyyy"
+      format: "dd/mm/yyyy",
+      autoclose: true,
     });
+
+    $('.dateid').on('click', function (e) {
+      e.preventDefault();
+      $(this).attr("autocomplete", "off");
+    });
+
   });
 </script>
 
 <style>
-    .datepicker.datepicker-dropdown {
-      top: 60px !important;
-    }
-  </style>
+  .datepicker.datepicker-dropdown {
+    top: 60px !important;
+  }
+</style>
 
 </html>

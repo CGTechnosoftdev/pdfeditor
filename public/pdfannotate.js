@@ -102,7 +102,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 				o.set({ textDecoration: '' });
 			}
 			else if (fontStyleOb != "underline") {
-				o.set({ textDecoration: 'underline' });
+				o.set({ textDecoration: 'underline  #000000', color: this.color });
 			}
 			o.set({ dirty: true });
 			fabricObj.renderAll();
