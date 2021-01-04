@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
+use App\Models\UserDocument;
+use Auth;
 
 class DashboardController extends FrontBaseController
 {
@@ -21,6 +23,12 @@ class DashboardController extends FrontBaseController
      */
     public function index()
     {
-        return view('front.dashboard');
+        $user = Auth::user();
+        $data_array = [
+            'title' => 'Dashboard',
+        ];
+        $data_array['recent_documents'] = UserDocument::getUserRecent($user, config('constant.DOCUMENT_TYPE_FILE'));
+        $data_array['recent_templates'] = UserDocument::getUserRecent($user, config('constant.DOCUMENT_TYPE_TEMPLATE'));
+        return view('front.dashboard', $data_array);
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.front-user')
+@section('title',($title ?? ''))
 @section("content")
 
 <!-- Content Wrapper. Contains page content -->
@@ -12,13 +13,13 @@
 	<div class="heading-btns">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Document</a>
+				<a class="nav-link active" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="true">Document</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Templates</a>
+				<a class="nav-link" id="template-tab" data-toggle="tab" href="#template" role="tab" aria-controls="template" aria-selected="false">Templates</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Notifications</a>
+				<a class="nav-link" id="notification-tab" data-toggle="tab" href="#notification" role="tab" aria-controls="notification" aria-selected="false">Notifications</a>
 			</li>
 		</ul>
 		<div class="position-relative">
@@ -110,18 +111,20 @@
 	</div>
 </section>
 <div class="tab-content" id="myTabContent">
-	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+	<div class="tab-pane fade show active" id="document" role="tabpanel" aria-labelledby="document-tab">
 		<!-- Main content -->
 		<section class="content">
 			<div class="recent-documents">
 				<h4>Recent Documents</h4>
 			</div>
-
-			<div class="single-document">
-				<div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
+			@foreach($recent_documents as $row)
+			<div class="single-document" data-id="{{ $row->encrypted_id }}">
+				<div class="doc-img">
+					<img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
+				</div>
 				<div class="doc-content">
-					<h5>PDFwriter How To Guide</h5>
-					<div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
+					<h5>{{ $row->formatted_name }}</h5>
+					<div class="last-activity">Last activity: <strong>You opened {{ $row->name }}</strong></div>
 					<dtv class="tags">
 						<span class="tag badge badge-warning">GuideBook</span>
 						<a href="" class="add-tag">
@@ -156,12 +159,14 @@
 					</dtv>
 				</div>
 				<div class="doc-date-and-dismiss">
-					<div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+					<div class="doc-date">
+						<i class="fas fa-calendar-day"></i> {{ changeDateTimeFormat($row->updated_at) }}
+					</div>
 					<button><i class="fas fa-ellipsis-v"></i></button>
 				</div>
 			</div>
-
-			<div class="single-document free-trial-document">
+			@endforeach
+			<!-- <div class="single-document free-trial-document">
 				<div class="doc-img">
 					<h4><strong>Free</strong> Trial</h4>
 				</div>
@@ -187,247 +192,69 @@
 					<div class="start-days-trial">Start 30 Days Free Trial</div>
 					<button><i class="fas fa-times"></i></button>
 				</div>
-			</div>
-
-			<div class="single-document">
-				<div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
-				<div class="doc-content">
-					<h5>PDFwriter How To Guide</h5>
-					<div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-					<dtv class="tags">
-						<span class="tag badge badge-warning">GuideBook</span>
-						<span class="tag badge badge-primary">GuideBook</span>
-						<a href="" class="add-tag">
-							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-								<g>
-									<g>
-										<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z " />
-									</g>
-								</g>
-								<g>
-									<g>
-										<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z" />
-									</g>
-								</g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-							</svg> Add tag
-						</a>
-					</dtv>
-				</div>
-				<div class="doc-date-and-dismiss">
-					<div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
-				</div>
-			</div>
-
-			<div class="single-document">
-				<div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
-				<div class="doc-content">
-					<h5>PDFwriter How To Guide</h5>
-					<div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-					<dtv class="tags">
-						<span class="tag badge badge-warning">GuideBook</span>
-						<span class="tag badge badge-primary">GuideBook</span>
-						<a href="" class="add-tag">
-							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-								<g>
-									<g>
-										<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z " />
-									</g>
-								</g>
-								<g>
-									<g>
-										<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z" />
-									</g>
-								</g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-							</svg> Add tag
-						</a>
-					</dtv>
-				</div>
-				<div class="doc-date-and-dismiss">
-					<div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
-				</div>
-			</div>
-
-			<div class="single-document">
-				<div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
-				<div class="doc-content">
-					<h5>PDFwriter How To Guide</h5>
-					<div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-					<dtv class="tags">
-						<span class="tag badge badge-warning">GuideBook</span>
-						<span class="tag badge badge-primary">GuideBook</span>
-						<a href="" class="add-tag">
-							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-								<g>
-									<g>
-										<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z " />
-									</g>
-								</g>
-								<g>
-									<g>
-										<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z" />
-									</g>
-								</g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-							</svg> Add tag
-						</a>
-					</dtv>
-				</div>
-				<div class="doc-date-and-dismiss">
-					<div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
-				</div>
-			</div>
-
-
-			<div class="single-document">
-				<div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
-				<div class="doc-content">
-					<h5>PDFwriter How To Guide</h5>
-					<div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-					<dtv class="tags">
-						<span class="tag badge badge-warning">GuideBook</span>
-						<span class="tag badge badge-primary">GuideBook</span>
-						<a href="" class="add-tag">
-							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-								<g>
-									<g>
-										<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z " />
-									</g>
-								</g>
-								<g>
-									<g>
-										<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z" />
-									</g>
-								</g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-							</svg> Add tag
-						</a>
-					</dtv>
-				</div>
-				<div class="doc-date-and-dismiss">
-					<div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
-				</div>
-			</div>
-
-
-			<div class="single-document">
-				<div class="doc-img"><img src="{{ asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
-				<div class="doc-content">
-					<h5>PDFwriter How To Guide</h5>
-					<div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-					<dtv class="tags">
-						<span class="tag badge badge-warning">GuideBook</span>
-						<span class="tag badge badge-primary">GuideBook</span>
-						<a href="" class="add-tag">
-							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-								<g>
-									<g>
-										<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z " />
-									</g>
-								</g>
-								<g>
-									<g>
-										<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z" />
-									</g>
-								</g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-								<g> </g>
-							</svg> Add tag
-						</a>
-					</dtv>
-				</div>
-				<div class="doc-date-and-dismiss">
-					<div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
-				</div>
-			</div>
+			</div> -->
 		</section>
 		<!-- /.content -->
 
 	</div>
-	<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+	<div class="tab-pane fade" id="template" role="tabpanel" aria-labelledby="template-tab">
 		<!-- Main content -->
 		<section class="content">
 			<div class="recent-documents">
-				<h4>Tab 2</h4>
+				<h4>Recent Templates</h4>
 			</div>
+			@foreach($recent_templates as $row)
+			<div class="single-document" data-id="{{ $row->encrypted_id }}">
+				<div class="doc-img">
+					<img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
+				</div>
+				<div class="doc-content">
+					<h5>{{ $row->formatted_name }}</h5>
+					<div class="last-activity">Last activity: <strong>You opened {{ $row->name }}</strong></div>
+					<dtv class="tags">
+						<span class="tag badge badge-warning">GuideBook</span>
+						<a href="" class="add-tag">
+							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+								<g>
+									<g>
+										<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z " />
+									</g>
+								</g>
+								<g>
+									<g>
+										<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z" />
+									</g>
+								</g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+								<g> </g>
+							</svg> Add tag
+						</a>
+					</dtv>
+				</div>
+				<div class="doc-date-and-dismiss">
+					<div class="doc-date">
+						<i class="fas fa-calendar-day"></i> {{ changeDateTimeFormat($row->updated_at) }}
+					</div>
+					<button><i class="fas fa-ellipsis-v"></i></button>
+				</div>
+			</div>
+			@endforeach
 		</section>
 	</div>
-	<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+	<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
 		<!-- Main content -->
 		<section class="content">
 			<div class="recent-documents">

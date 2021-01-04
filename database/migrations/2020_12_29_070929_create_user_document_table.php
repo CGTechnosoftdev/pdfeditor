@@ -16,6 +16,7 @@ class CreateUserDocumentTable extends Migration
         Schema::create('user_documents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
+            $table->string('thumbnail', 255)->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('user_id');
             $table->text('data')->nullable();
@@ -24,6 +25,7 @@ class CreateUserDocumentTable extends Migration
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
     }
 

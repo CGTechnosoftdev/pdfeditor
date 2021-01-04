@@ -25,7 +25,7 @@ class UserDocumentController extends FrontBaseController
     public function uploadNew(UserDocumentUploadFormRequest $request)
     {
         $input_data = $request->input();
-        $user = \Auth::user();
+        $user = Auth::user();
         if (in_array($input_data['type'], [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')])) {
             $upload_response = uploadFile($request, 'user_template');
             if (!empty($upload_response['success'])) {
@@ -53,7 +53,7 @@ class UserDocumentController extends FrontBaseController
     public function getFromUrl(UserDocumentGetFormRequest $request)
     {
         $input_data = $request->input();
-        $user = \Auth::user();
+        $user = Auth::user();
         if (in_array($input_data['type'], [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')])) {
             $upload_response = uploadFile($input_data['url'], 'user_template', true);
             if (!empty($upload_response['success'])) {
@@ -78,10 +78,10 @@ class UserDocumentController extends FrontBaseController
         ), (($response_type == 'success') ? 200 : 422));
     }
 
-    public function addNewFolder(Request $request)
+    public function addNewFolder(UserAddFolderFormRequest $request)
     {
         $input_data = $request->input();
-        $user = \Auth::user();
+        $user = Auth::user();
         $input_data['user_id'] = $user['id'];
         $input_data['type'] = config('constant.DOCUMENT_TYPE_FOLDER');
         $add_new_folder = UserDocument::saveData($input_data);

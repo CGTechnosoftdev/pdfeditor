@@ -36,10 +36,4 @@
             }
         });
     });
-
-
-    $('.content .single-document').on('click', function() {
-        $(this).addClass('active').siblings().removeClass('active');
-        $('.footer-more-menus').addClass('active').siblings().removeClass('active');
-    });
 </script>
