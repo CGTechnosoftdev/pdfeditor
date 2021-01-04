@@ -72,4 +72,8 @@ return [
     'DEFAULT_AMOUNT_TYPE' => 0,
     'PAGE_NOT_DEFINE' => -1,
 
+    'DOCUMENT_TYPE_FILE' => 1,
+    'DOCUMENT_TYPE_TEMPLATE' => 2,
+    'DOCUMENT_TYPE_FOLDER' => 3
+
 ];

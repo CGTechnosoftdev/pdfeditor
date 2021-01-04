@@ -203,7 +203,9 @@
  </div>
 
 
- @include('front.partials.forms.user-document-template-form')
+ @include('front.partials.forms.upload-document-form')
+ @include('front.partials.forms.upload-template-form')
+ @include('front.partials.forms.add-folder-form')
 
  @section("additionaljs")
 

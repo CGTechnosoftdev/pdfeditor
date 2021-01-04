@@ -77,14 +77,14 @@ return [
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
-    'user_template_file' => [
-        'label' => 'User Template File',
-        'file_input' => 'name',
+    'user_template' => [
+        'label' => 'Template',
+        'file_input' => 'file',
         'disk' => 'public',
-        'folder' => 'user_document',
+        'folder' => 'user_template',
         'delete_previous' => true,
         'multiple' => false,
-        'new_file_name' => 'orignal_with_random',
+        'new_file_name' => 'orignal',
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserTemplateFormRequest;
+use App\Http\Requests\UserDocumentUploadFormRequest;
+use App\Http\Requests\UserDocumentGetFormRequest;
+use App\Http\Requests\UserAddFolderFormRequest;
 use App\Models\UserDocument;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,75 +21,78 @@ class UserDocumentController extends FrontBaseController
     public function __construct()
     {
     }
-    public function templateForm()
+
+    public function uploadNew(UserDocumentUploadFormRequest $request)
     {
-        echo '<br> route name ' . \Route::currentRouteName();
-        return view('front.user-document.template-form');
-    }
-    public function customValidate($data)
-    {
-        $request = new UserTemplateFormRequest();
-        $validator = Validator::make($data, $request->rules(), $request->messages(), $request->attributes());
-        return $validator;
-    }
-    public function templateFormSave(Request $request)
-    {
-        try {
-
-            $validator = $this->customValidate($request->all());
-
-
-            if ($validator->fails()) {
-
-                $errormessages = $validator->getMessageBag()->getMessages();
-
-                $errormsgHTML = "<ul>";
-                foreach ($errormessages as $errorIndex => $errorMsgArr) {
-
-                    foreach ($errorMsgArr as $indder_index => $message) {
-                        $errormsgHTML .= '<li>' . $message . '</li>';
-                    }
+        $input_data = $request->input();
+        $user = \Auth::user();
+        if (in_array($input_data['type'], [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')])) {
+            $upload_response = uploadFile($request, 'user_template');
+            if (!empty($upload_response['success'])) {
+                $input_data['user_id'] = $user['id'];
+                $input_data['name'] = $upload_response['data'];
+                $user_document_form = UserDocument::saveData($input_data);
+                if ($user_document_form) {
+                    $response_type = 'success';
+                    $response_message = 'Uploaded successfully';
+                } else {
+                    $response_type = 'error';
+                    $response_message = 'Error occoured, Please try again.';
                 }
-                $errormsgHTML .= '</ul>';
-
-                $errorMessage = "<ul>";
-                //  foreach($errorMessages as $error_index =>  )
-                return response()->json(array(
-                    'return_type' => 'error',
-                    'message' => $errormsgHTML
-
-                ), 400); // 400 being the HTTP code for an invalid request.
-            }
-
-            //$validator = Validator::make($request->all(), $request::rules());
-
-
-
-            $input_data = $request->input();
-
-            if (!empty($request->file('name'))) {
-
-                $upload_response = uploadFile($request, 'user_template_file');
-                if (!empty($upload_response['success'])) {
-                    $input_data['name'] = $upload_response['data'];
-                }
-            }
-            $input_data["user_id"] = Auth::user()->id;
-            $user_template_form = UserDocument::saveData($input_data);
-
-            if ($user_template_form) {
-                $response_type = 'success';
-                $response_message = 'User Template added successfully';
             } else {
                 $response_type = 'error';
-                $response_message = 'Error occoured, Please try again.';
+                $response_message = 'Unable to upload file, Please try again.';
             }
-        } catch (Exception $e) {
-            $response_type = 'error';
-            $response_message = $e->getMessage();
         }
-        // set_flash($response_type, $response_message);
-        // return redirect()->route('front.user-document.template-form');
-        return response()->json(["return_type" => $response_type, 'message' => $response_message]);
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message
+        ), (($response_type == 'success') ? 200 : 422));
+    }
+
+    public function getFromUrl(UserDocumentGetFormRequest $request)
+    {
+        $input_data = $request->input();
+        $user = \Auth::user();
+        if (in_array($input_data['type'], [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')])) {
+            $upload_response = uploadFile($input_data['url'], 'user_template', true);
+            if (!empty($upload_response['success'])) {
+                $input_data['user_id'] = $user['id'];
+                $input_data['name'] = $upload_response['data'];
+                $user_document_form = UserDocument::saveData($input_data);
+                if ($user_document_form) {
+                    $response_type = 'success';
+                    $response_message = 'Uploaded successfully';
+                } else {
+                    $response_type = 'error';
+                    $response_message = 'Error occoured, Please try again.';
+                }
+            } else {
+                $response_type = 'error';
+                $response_message = 'Unable to upload file, Please try again.';
+            }
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message
+        ), (($response_type == 'success') ? 200 : 422));
+    }
+
+    public function addNewFolder(Request $request)
+    {
+        $input_data = $request->input();
+        $user = \Auth::user();
+        $input_data['user_id'] = $user['id'];
+        $input_data['type'] = config('constant.DOCUMENT_TYPE_FOLDER');
+        $add_new_folder = UserDocument::saveData($input_data);
+        if ($add_new_folder) {
+            $response_type = 'success';
+            $response_message = 'Folder created successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Error occoured, Please try again.';
+        }
+        set_flash($response_type, $response_message);
+        return redirect()->back();
     }
 }

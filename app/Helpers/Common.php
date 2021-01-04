@@ -65,40 +65,43 @@ function interpretResponse($message, $status_code, $data = [])
  * @param             [type]        $file_config [config data of file which already define in config/upload_config.php]
  * @return            [type]                     [return file name's as response with success status]
  */
-function uploadFile($request, $file_config)
+function uploadFile($request, $file_config, $url_status = false)
 {
 	$fileConfigData = config('upload_config.' . $file_config);
-
-	$files = $request->file($fileConfigData['file_input']);
-
-
-
-	$files = (is_array($files) ? $files : array($files));
-	if (!empty($fileConfigData['file_input_subkey'])) {
-		$files = array_column($files, $fileConfigData['file_input_subkey']);
-	}
-	$uploadedFiles = array();
-	foreach ($files as $file) {
-		//Generate name
-		$fileNameWithExtension = $file->getClientOriginalName();
-		$fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-		$fileName = str_replace(array('\'', '"', ',', ';', '<', '>'), ' ', $fileName);
-		$extension = $file->getClientOriginalExtension();
-		switch ($fileConfigData['new_file_name'] ?? "") {
-			case 'orignal_with_random':
-				$randomString = generateRandomString(5);
-				$newFileName = $fileName . '_' . $randomString . time() . '.' . $extension;
-				break;
-			case 'orignal':
-				$newFileName = $fileNameWithExtension;
-				break;
-			default:
-				$randomString = generateRandomString(5);
-				$newFileName = $randomString . time() . '.' . $extension;
-		}
-		//dd($fileConfigData['disk'].$fileConfigData['folder']."/".$newFileName);
-		Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder'] . "/" . $newFileName, fopen($file, 'r+'));
+	if (!empty($url_status)) {
+		$newFileName = generateRandomString(5) . time() . '.pdf';
+		$contents = file_get_contents($request);
+		Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder'] . "/" . $newFileName, $contents);
 		$uploadedFiles[] = $newFileName;
+	} else {
+		$files = $request->file($fileConfigData['file_input']);
+		$files = (is_array($files) ? $files : array($files));
+		if (!empty($fileConfigData['file_input_subkey'])) {
+			$files = array_column($files, $fileConfigData['file_input_subkey']);
+		}
+		$uploadedFiles = array();
+		foreach ($files as $file) {
+			//Generate name
+			$fileNameWithExtension = $file->getClientOriginalName();
+			$fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+			$fileName = str_replace(array('\'', '"', ',', ';', '<', '>'), ' ', $fileName);
+			$extension = $file->getClientOriginalExtension();
+			switch ($fileConfigData['new_file_name'] ?? "") {
+				case 'orignal_with_random':
+					$randomString = generateRandomString(5);
+					$newFileName = $fileName . '_' . $randomString . time() . '.' . $extension;
+					break;
+				case 'orignal':
+					$newFileName = $fileNameWithExtension;
+					break;
+				default:
+					$randomString = generateRandomString(5);
+					$newFileName = $randomString . time() . '.' . $extension;
+			}
+			//dd($fileConfigData['disk'].$fileConfigData['folder']."/".$newFileName);
+			Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder'] . "/" . $newFileName, fopen($file, 'r+'));
+			$uploadedFiles[] = $newFileName;
+		}
 	}
 	$returnData = array('success' => true, 'data' => (empty($fileConfigData['multiple'])) ? reset($uploadedFiles) : $uploadedFiles);
 	return $returnData;
