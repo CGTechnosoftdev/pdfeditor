@@ -73,4 +73,8 @@ return [
     'PAGE_NOT_DEFINE' => -1,
     'UPLOAD_USER_TEMPLATE' => 2,
 
+    'DOCUMENT_TYPE_FILE' => 1,
+    'DOCUMENT_TYPE_TEMPLATE' => 2,
+    'DOCUMENT_TYPE_FOLDER' => 3
+
 ];

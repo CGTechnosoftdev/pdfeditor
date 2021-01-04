@@ -76,8 +76,13 @@
 <div class="modal fade more-options" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5>More Options</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
-                <h5>Send To</h5>
                 <div class="shareable-links">
                     <ul>
                         <li>
@@ -159,11 +164,73 @@
                         </li>
                     </ul>
                 </div>
+                <h5>Manage Documents</h5>
+                <div class="shareable-links">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/review-pdf.svg') }}"></div>
+                                <span>Rewrite PDF</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/rearrange.svg') }}"></div>
+                                <span>Rearrange</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/split.svg') }}"></div>
+                                <span>Split</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/clear.svg') }}"></div>
+                                <span>Clear</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/tag.svg') }}"></div>
+                                <span>Tag</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/fill-in-bulk.svg') }}"></div>
+                                <span>Fill In Bulk</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/extrack-in-bulk.svg') }}"></div>
+                                <span>Extract in Bulk</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/document-info.svg') }}"></div>
+                                <span>Document Info</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/protect.svg') }}"></div>
+                                <span>Protect</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="link-img"><img src="{{ asset('public/front/images/comment.svg') }}"></div>
+                                <span>Comment</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
 </div>
 

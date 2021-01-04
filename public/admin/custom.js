@@ -24,8 +24,6 @@ function copyToClipboard(element) {
     $temp.remove();
 }
 
-
-
 jQuery(document).ready(function() {
     // $(".select2").select2();
     //Select2

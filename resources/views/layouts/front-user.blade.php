@@ -9,6 +9,10 @@
 
     @include('front.partials.front-user-commoncss')
     @yield('additionalcss')
+    <script type="text/javascript">
+        var base_url = "{{url('')}}";
+        var csrf_token = "{{csrf_token()}}";
+    </script>
 </head>
 @php
 $account_page_status = (request()->segment(1)=='account') ? true : false;
