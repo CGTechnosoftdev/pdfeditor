@@ -11,12 +11,11 @@
                 <div class="alert  hide" id="userDocTempConId"></div>
                 {{ Form::open(['url' => '#','method'=>'post','class'=>'login-form','id' => 'user_document_template_form_id','enctype'=>"multipart/form-data"]) }}
                 <input type="hidden" name="_token" value="{{ csrf_token()}}">
-                {{ Form::hidden('type',2) }}
+                {{ Form::hidden('type',!empty($user_document_type)?$user_document_type:"") }}
                 <div class="row">
                     <div class="col col-md-3"><label>Template File:</label></div>
                     <div class="col col-md-6">{{ Form::file('name',null,array('placeholder'=>'File','class'=>"form-control name"))}}</div>
                     <div class="col col-md-3">
-
                     </div>
                 </div>
                 <div class="share-by">

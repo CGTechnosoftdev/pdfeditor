@@ -77,12 +77,12 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="recent_document_con_id">
 	<div class="recent-documents">
 		<h4>Recent Documents</h4>
 	</div>
-
-	<div class="single-document">
+	<input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
+	<div class="single-document" id="document_list_item_1">
 		<div class="doc-img"><img src="{{ asset('public/front/images/doc-img-1.png') }}" class="user-image" alt="PDFWriter Admin Image"></div>
 		<div class="doc-content">
 			<h5>PDFwriter How To Guide</h5>
@@ -126,7 +126,7 @@
 		</div>
 	</div>
 
-	<div class="single-document free-trial-document">
+	<div class="single-document free-trial-document" id="document_list_item_2">
 		<div class="doc-img">
 			<h4><strong>Free</strong> Trial</h4>
 		</div>

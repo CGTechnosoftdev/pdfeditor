@@ -71,5 +71,6 @@ return [
 
     'DEFAULT_AMOUNT_TYPE' => 0,
     'PAGE_NOT_DEFINE' => -1,
+    'UPLOAD_USER_TEMPLATE' => 2,
 
 ];

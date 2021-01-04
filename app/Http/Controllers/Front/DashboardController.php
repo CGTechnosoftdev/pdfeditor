@@ -21,6 +21,7 @@ class DashboardController extends FrontBaseController
      */
     public function index()
     {
-        return view('front.dashboard');
+        $data_array["user_document_type"] = config('constant.UPLOAD_USER_TEMPLATE');
+        return view('front.dashboard', $data_array);
     }
 }
