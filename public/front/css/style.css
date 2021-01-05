@@ -4264,6 +4264,7 @@ li {
 
 .general-settings-tabs .setting-tab-content li {
     list-style: circle;
+    position: relative;
 }
 
 .general-settings-tabs .active+.setting-tab-content {
@@ -4277,7 +4278,7 @@ li {
     display: block;
 }
 
-.general-settings-tabs .active {
+.general-settings-tabs h4.active {
     background: #fff;
     border: none;
     border-radius: 9px 0px 0px 9px;
@@ -4286,7 +4287,7 @@ li {
     position: relative;
 }
 
-.general-settings-tabs .active::before {
+.general-settings-tabs h4.active::before {
     content: "";
     width: 5px;
     height: calc(100% - 16px);
@@ -5212,10 +5213,11 @@ li {
 }
 
 .security-options .single-security-options .title {
-    max-width: 220px;
+    max-width: 250px;
     font-size: 14px;
     width: 100%;
     position: relative;
+    padding-right: 30px;
 }
 
 .security-options .single-security-options .title .tab-info {
@@ -5735,4 +5737,192 @@ li {
 
 .dashboard3 ul.sidebar-menu.secound-menu a {
     color: #98a2c5;
+}
+
+.add-document-names {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.add-document-names .add-tag-input {
+    width: 100%;
+    height: auto;
+    float: left;
+    position: relative;
+}
+
+.add-document-names .add-tag-input input {
+    font-size: 13px !important;
+}
+
+.add-document-names .add-tag-input button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 35px;
+    height: 35px;
+    background: #C6CEE2;
+    border-radius: 2px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-document-names .tags-list .tag {
+    margin-left: 8px;
+    background: #C6CEE2;
+    border-radius: 13px;
+    padding: 2px 10px;
+    display: inline-block;
+    font-size: 12px;
+    color: #fff;
+    margin-top: 8px;
+}
+
+.add-document-names .tags-list .tag [data-role="remove"] {
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.add-document-names .tags-list .tag::after {
+    content: "x";
+    padding: 0px 2px;
+}
+
+.connect-bank-account {
+    width: 100%;
+    height: auto;
+    float: left;
+    border-bottom: solid 1px #EBEBEB;
+    padding-bottom: 20px;
+}
+
+.connect-paypal-account {
+    width: 100%;
+    height: auto;
+    min-height: 72px;
+    display: flex;
+    padding: 15px;
+    border: solid 1px #EBEBEB;
+    border-radius: 7px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.connect-paypal-account.active {
+    background: #C1484A1A;
+    border-color: #C1484A4F;
+}
+
+.connect-paypal-account .connect-btn .btn {
+    border: solid 1px #C6CEE2;
+    background: transparent;
+    border-radius: 7px;
+    color: #486EB8;
+    font-size: 15px;
+    padding: 8px 20px;
+}
+
+.connect-bank-account .note {
+    font-size: 14px;
+    margin-top: 10px;
+    font-family: Poppins-Regular;
+}
+
+.connect-bank-account .note strong {
+    color: #c1484a;
+    text-transform: uppercase;
+    font-family: Poppins-Bold;
+}
+
+.single-security-options .timeformate .link-style li.active:before {
+    right: 10px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.single-security-options .timeformate .link-style li.active:after {
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.single-security-options .other-options textarea,
+.single-security-options .other-options input {
+    font-size: 13px;
+    font-family: Poppins-Light;
+}
+
+.single-security-options .other-options .timeformate.d-flex {
+    align-items: center;
+}
+
+.single-security-options .other-options .timeformate .create-html-btn {
+    font-size: 14px;
+    font-family: Poppins-Light;
+}
+
+.single-security-options.personalize-invitation-part {
+    align-items: normal;
+}
+
+.address-book-btn {
+    color: #486EB8;
+    font-size: 15px;
+    min-height: 45px;
+    background: transparent;
+    border: solid 1px #C6CEE2;
+    padding: 8px 20px;
+}
+
+.address-book-btn i {
+    margin-right: 6px;
+}
+
+.local-storage-part {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F8F8F8;
+    padding: 15px 25px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.local-storage-part .storage-icon {
+    min-width: 40px;
+}
+
+.local-storage-part .storage-icon img {
+    max-width: 22px;
+}
+
+.local-storage-part .storage-status {
+    width: 100%;
+}
+
+.local-storage-part .storage-status h5 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.local-storage-part .storage-status span {
+    font-size: 14px;
+    color: #98A2C5;
+}
+
+.local-storage-part .storage-btn {
+    min-width: 70px;
+}
+
+.local-storage-part .storage-btn .btn {
+    background: transparent;
+    padding: 0px;
+    color: #486EB8;
 }
