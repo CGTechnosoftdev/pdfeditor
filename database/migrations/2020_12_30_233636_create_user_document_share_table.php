@@ -29,6 +29,7 @@ class CreateUserDocumentShareTable extends Migration
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
 
         Schema::create('shared_user_documents', function (Blueprint $table) {
@@ -39,6 +40,7 @@ class CreateUserDocumentShareTable extends Migration
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
 
         Schema::create('shared_document_users', function (Blueprint $table) {
@@ -50,6 +52,7 @@ class CreateUserDocumentShareTable extends Migration
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->tinyInteger('status')->default(1)->comment('0=>Pending,1=>Active,2=>Inactive,3=>Blocked');
         });
     }
 
