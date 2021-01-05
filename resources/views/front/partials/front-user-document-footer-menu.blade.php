@@ -49,7 +49,7 @@
             </a>
         </li>
         <li>
-            <a href="" data-toggle="modal" data-target="#share">
+            <a href="#" id="sharemenu_itemid">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/signnow.svg') }}">
                 </div>

@@ -77,17 +77,16 @@ return [
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
-    'user_template' => [
+    'user_document' => [
         'label' => 'Template',
         'file_input' => 'file',
         'disk' => 'public',
-        'folder' => 'user_template',
+        'folder' => 'user_document',
         'delete_previous' => true,
         'multiple' => false,
         'new_file_name' => 'orignal',
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
-
     'upload_types' => 'file_attachment'
 ];

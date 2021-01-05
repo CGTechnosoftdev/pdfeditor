@@ -146,6 +146,12 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 		Route::get('/user-document-template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
 		Route::post('/user-document-template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
+		Route::get('/user-document-share-get/{user_document}', 'UserDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
+		Route::post('/user-document-email-share-save', 'UserDocumentController@userDocumentEmailShareSave')->name('user-document.user-document-email-share-save');
+		Route::post('/user-document-link-share-save', 'UserDocumentController@userDocumentLinkShareSave')->name('user-document.user-document-link-share-save');
+		Route::get('/user-document-advance-settings/{user_document}', 'UserDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
+		Route::get('/check-user-email-form', 'UserDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
+		Route::post('/user-document-advance-settings-save', 'UserDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
 	});
 });
 

@@ -38,6 +38,10 @@ return [
         '1' => 'Success',
         '2' => 'Failed',
     ],
+    'share_type' => [
+        '1' => 'Email',
+        '2' => 'Link'
+    ],
     'subscription_status_arr' => [
         '0' => 'Inactive',
         '1' => 'Active',
@@ -153,5 +157,34 @@ return [
         '2' => 'Freelancer',
         '3' => 'Employee',
     ],
+    'authentication_method' => [
+        'phone-number' => 'Phone Number',
+        'social-media' => 'Social Media',
+        'photo' => 'Photo',
+    ],
+    'user_advance_setting_templates' => [
+        'casual' => 'Casual',
+        'formal' => 'Formal',
+        'informal' => 'Informal',
+
+    ],
+    'user_advance_settings_automatic_reminder' => [
+        '1' => 'In 1 Day',
+        '2' => 'In 2 Day',
+        '3' => 'In 3 Day',
+        '4' => 'In 4 Day',
+        '5' => 'In 5 Day',
+        '6' => 'In 6 Day',
+        '7' => 'In 7 Day',
+    ],
+    'user_advance_settings_repeat_reminder' => [
+        '1' => 'In 1 Day',
+        '2' => 'In 2 Day',
+        '3' => 'In 3 Day',
+        '4' => 'In 4 Day',
+        '5' => 'In 5 Day',
+        '6' => 'In 6 Day',
+        '7' => 'In 7 Day',
+    ]
 
 ];
