@@ -5937,7 +5937,8 @@ li {
     opacity: 0;
 }
 
-.template-types.logo-type li.position-relative {
+
+/* .template-types.logo-type li.position-relative {
     padding: 0px;
     float: left;
 }
@@ -5948,4 +5949,62 @@ li {
     width: 100%;
     height: 100%;
     position: relative;
+} */
+
+.template-types.logo-type li .avatar-upload .avatar-preview {
+    width: 100%;
+    height: 70px!important;
+    height: auto;
+}
+
+.template-types.logo-type li .avatar-preview {
+    border-radius: 0px !important;
+}
+
+.template-types.logo-type li .avatar-upload .avatar-preview>div {
+    border-radius: 0px!important;
+}
+
+.template-types.logo-type li .avatar-edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.template-types.logo-type li.p-0 {
+    float: left;
+}
+
+.template-types.logo-type li.p-0 form {
+    position: relative;
+}
+
+.template-types.logo-type li.p-0 form .input-group {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    opacity: 0;
+}
+
+.template-types.logo-type li.p-0 form #img_contain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 15px;
+}
+
+#UploadLogo {
+    min-height: 70px;
+    line-height: 70px;
+}
+
+#UploadLogo span {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative;
+    float: left;
 }

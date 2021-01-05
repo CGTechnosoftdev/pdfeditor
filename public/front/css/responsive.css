@@ -10,7 +10,12 @@
     }
 }
 
-@media(max-width: 1300px) {}
+@media(max-width: 1300px) {
+    .single-security-options.personalize-invitation-part .avatar-preview {
+        width: 100px;
+        height: 100px;
+    }
+}
 
 @media(max-width: 1266px) {
     .signnow-part .dots-right,
