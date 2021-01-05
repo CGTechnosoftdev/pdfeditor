@@ -5926,3 +5926,26 @@ li {
     padding: 0px;
     color: #486EB8;
 }
+
+.template-types.logo-type li input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100px !important;
+    cursor: pointer;
+    width: 200px;
+    opacity: 0;
+}
+
+.template-types.logo-type li.position-relative {
+    padding: 0px;
+    float: left;
+}
+
+.template-types.logo-type li .upload-your-logo {
+    padding: 10px 15px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
