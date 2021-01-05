@@ -11,7 +11,7 @@ class SharedDocument extends Model
 
     use SoftDeletes;
     use BaseModelTrait;
-    protected $fillable = ['user_id', 'share_type', 'link', 'authentication_method', 'personalize_invitation_data', 'business_card_data', 'authenticate_reminder_duration', 'authenticate_reminder_repeat'];
+    protected $fillable = ['user_id', 'share_method', 'share_type', 'link', 'security_method', 'authentication_method', 'access_privileges', 'personalize_invitation_data', 'business_card_data', 'document_notification', 'reminder_duration', 'reminder_repeat'];
     protected $dates = ['deleted_at'];
     public $timestamps = true;
 

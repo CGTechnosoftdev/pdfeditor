@@ -31,7 +31,12 @@ class UserDocument extends Model
 
     public function getEncryptedIdAttribute()
     {
-        return $this->id;
+        return encryptData($this->id);
+    }
+
+    public function generateLink()
+    {
+        return route('front.document-link', $this->id);
     }
 
 

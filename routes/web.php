@@ -140,9 +140,12 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
 		Route::post('/update-card', 'SubscriptionPaymentController@updateCard')->name('update-card');
 
+		Route::post('/document/{unique_code}', 'UserDocumentController@index')->name('document-link');
 		Route::post('/user-document-upload-new', 'UserDocumentController@uploadNew')->name('upload-new-document');
 		Route::post('/user-document-get-from-url', 'UserDocumentController@getFromUrl')->name('get-url-document');
 		Route::post('/user-document-add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
+		Route::post('/user-document-add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
+		Route::post('/document-info', 'UserDocumentController@getDocumentInfo')->name('document-info');
 
 		Route::get('/user-document-template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
 		Route::post('/user-document-template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');

@@ -28,6 +28,10 @@ class UserDocumentController extends FrontBaseController
     {
     }
 
+    public function index()
+    {
+    }
+
     public function uploadNew(UserDocumentUploadFormRequest $request)
     {
         $input_data = $request->input();
@@ -101,6 +105,27 @@ class UserDocumentController extends FrontBaseController
         set_flash($response_type, $response_message);
         return redirect()->back();
     }
+
+    public function getDocumentInfo(Request $request)
+    {
+        $input_data = $request->input();
+        $document_id = decrypt($input_data['document'] ?? '');
+        $document = UserDocument::dataRow(['id' => $document_id]);
+        if (empty($document)) {
+            $response_type = 'error';
+            $response_message = 'Document not found';
+        } else {
+            $document['document_link'] = $document->generateLink();
+            $response_type = 'success';
+            $response_data = $document;
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' => $response_data ?? '',
+        ), (($response_type == 'success') ? 200 : 404));
+    }
+
     public function getDocumentDetail(UserDocument $user_document)
     {
         $fileUrl = "";
@@ -112,6 +137,7 @@ class UserDocumentController extends FrontBaseController
         ];
         return response()->json($documentDetailArray);
     }
+
     public function customEmailValidate($data)
     {
         $request = new SharedUserDocumentFormRequest();

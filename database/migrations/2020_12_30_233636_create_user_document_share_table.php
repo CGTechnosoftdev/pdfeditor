@@ -17,13 +17,11 @@ class CreateUserDocumentShareTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->tinyInteger('share_method')->comment('1=>Share,2=>LinkToFill,3=>SendForReview');
-            $table->tinyInteger('share_type')->comment('1=>Email,2=>Link');
             $table->text('link')->nullable();
             $table->text('security_method')->nullable();
             $table->text('authentication_method')->nullable();
             $table->text('access_privileges')->nullable();
             $table->text('personalize_invitation_data')->nullable();
-            $table->text('business_card_data')->nullable();
             $table->text('document_notification')->nullable();
             $table->integer('reminder_duration')->nullable();
             $table->integer('reminder_repeat')->nullable();

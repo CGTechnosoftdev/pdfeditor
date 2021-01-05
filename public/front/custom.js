@@ -1,6 +1,6 @@
 function blockUI() {
     $.blockUI({
-        baseZ: 2000
+        baseZ: 99999
     });
 }
 

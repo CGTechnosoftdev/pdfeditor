@@ -180,11 +180,28 @@
         });
 
         function getDocumentInfo(document) {
-            alert(document);
+            blockUI();
+            $.ajax({
+                url: "{{route('front.document-info')}}",
+                type: "post",
+                dataType: 'json',
+                // async: false,
+                data: {
+                    "_token": csrf_token,
+                    document: document,
+                },
+                success: function(result) {
+                    console.log(result);
+                },
+                complete: function() {
+                    $.unblockUI();
+                }
+            });
         }
         $(document).on('click', '.link-to-fill-button', function(e) {
             e.preventDefault();
             getDocumentInfo(selected_document);
+            $('#linktofill').modal('show');
         });
     });
 </script>
