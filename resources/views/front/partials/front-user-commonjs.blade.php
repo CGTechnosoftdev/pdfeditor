@@ -8,9 +8,13 @@
 <!-- OWL carousel JS -->
 <script src="{{ asset('public/front/js/owl.carousel.min.js') }}"></script>
 
-
 <script src="{{ asset('public/front/js/jquery.matchHeight.js') }}"></script>
+
 <script src="{{ asset('public/front/js/dashboard3.js') }}"></script>
+
+<script src="{{ asset('public/front/js/vue.min.js') }}"></script>
+
+<script src='https://cdn.jsdelivr.net/npm/bootstrap-colorpicker@3.0.3/dist/js/bootstrap-colorpicker.min.js'></script>
 <!-- Laravel Javascript Validation -->
 <script type="text/javascript" src="{{ asset('public/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <!-- Toastr -->
@@ -18,7 +22,9 @@
 @toastr_render
 <script type="text/javascript" src="{{ asset('public/front/js/dropzone.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/front/js/upload-multi-files.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/front/custom.js') }}"></script>
+
+<script src=' https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js'> </script>
+<script type="text/javascript" src="{{ asset('public/front/js/custom.js') }}"></script>
 <script>
     // $(".addnew-btn").click(function() {
     //     $(".addnew-dropdown").toggleClass("show");

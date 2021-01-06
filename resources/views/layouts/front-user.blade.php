@@ -37,7 +37,7 @@ $account_page_status = (request()->segment(1)=='account') ? true : false;
         @endif
         @include('front.partials.front-user-footer')
 
-        @if(empty($account_page_status))
+        @if(empty($account_page_status) && !empty($footer_menu))
         @include('front.partials.front-user-document-footer-menu')
         @endif
 

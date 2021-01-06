@@ -21,7 +21,7 @@ class UserDocument extends Model
 
     public function getFormattedNameAttribute()
     {
-        return $this->name;
+        return pathinfo($this->name, PATHINFO_FILENAME);;
     }
 
     public function getThumbnailUrlAttribute()
@@ -33,12 +33,6 @@ class UserDocument extends Model
     {
         return encryptData($this->id);
     }
-
-    public function generateLink()
-    {
-        return route('front.document-link', $this->id);
-    }
-
 
     public static function saveData($dataArray, $model = array())
     {

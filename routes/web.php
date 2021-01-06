@@ -147,6 +147,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/user-document-add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
 		Route::post('/document-info', 'UserDocumentController@getDocumentInfo')->name('document-info');
 
+		Route::post('/publish-link-to-fill', 'LinkToFillController@publishLink')->name('publish-link-to-fill');
+		Route::get('/advance-setting-link-to-fill/{user_document}', 'LinkToFillController@advanceSetting')->name('advance-link-to-fill');
+
 		Route::get('/user-document-template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
 		Route::post('/user-document-template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
 		Route::get('/user-document-share-get/{user_document}', 'UserDocumentController@getDocumentDetail')->name('user-document.user-document-detail');

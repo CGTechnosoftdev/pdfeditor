@@ -361,3 +361,30 @@ function decryptData($data)
 	}
 	return $return;
 }
+
+function generateFbShareUrl($url)
+{
+	return "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($url) . "&src=sdkpreparse";
+}
+
+function generateTwitterShareUrl($url)
+{
+	return "https://twitter.com/intent/tweet?url=" . urlencode($url) . "";
+}
+
+function generateUniqueLink($target_model, $column)
+{
+	$return = false;
+	$model = "App\Models\\" . $target_model;
+	while (empty($return)) {
+		$random_string = generateRandomString(5);
+		$url = route('front.document-link', $random_string);
+		$model = new $model;
+		$dataRow = $model->where([$column => $url])->first();
+		if (empty($dataRow)) {
+			$return = $url;
+			break;
+		}
+	}
+	return $return;
+}

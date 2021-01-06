@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 <!-- upload Multi Files -->
 <link rel="stylesheet" href="{{ asset('public/front/css/dropzone.css') }}">
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-colorpicker@3.0.3/dist/css/bootstrap-colorpicker.min.css'>
 <!-- Toastr -->
 <link rel="stylesheet" href="{{ asset('public/admin/bower_components/toastr/toastr.min.css') }}">
 <!-- Custom CSS -->

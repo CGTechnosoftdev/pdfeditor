@@ -40,7 +40,7 @@
 						<button class="btn" type="button" data-clipboard-demo="" data-clipboard-target="#copy-input">
 							<i class="fa fa-copy"></i>
 						</button>
-						</span>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 @section('additionaljs')
 <script src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js'></script>
 <script>
-	$(document).on('click','.show_promo_url',function(e){
+	$(document).on('click', '.show_promo_url', function(e) {
 		e.preventDefault();
 		var url = $(this).attr('data-link');
 		$('#copy-input').val(url);
