@@ -170,7 +170,9 @@
 @section('additionaljs')
 <script>
     $(document).ready(function() {
-        var selected_document = ''
+        var selected_document = '';
+        var selected_document_info = '';
+        var model_element = "#linktofill";
         $(document).on('click', '.content .single-document', function(e) {
             e.preventDefault();
             selected_document = $(this).attr('data-id');
@@ -185,24 +187,120 @@
                 url: "{{route('front.document-info')}}",
                 type: "post",
                 dataType: 'json',
-                // async: false,
+                async: false,
                 data: {
                     "_token": csrf_token,
                     document: document,
                 },
                 success: function(result) {
-                    console.log(result);
+                    selected_document_info = result.data;
                 },
                 complete: function() {
-                    $.unblockUI();
+                    unblockUI();
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+                    toastr.error(response.message);
+                    $(model_element).modal('hide');
                 }
             });
         }
         $(document).on('click', '.link-to-fill-button', function(e) {
             e.preventDefault();
+            $(model_element).find('.non-published').removeClass('invisible');
+            $(model_element).find('.published').addClass('invisible');
+            $(model_element).find('.published-link-div').addClass('disable-div');
             getDocumentInfo(selected_document);
-            $('#linktofill').modal('show');
+            if (selected_document_info) {
+                $(model_element).find('#document-preview').attr('src', selected_document_info.thumbnail_url);
+                $(model_element).find('#document-name').html(selected_document_info.formatted_name);
+                $(model_element).find('#publish-link').attr('data-document', selected_document_info.encrypted_id);
+                $(model_element).find('#advance-setting-link').attr('data-document', selected_document_info.encrypted_id);
+                $(model_element).modal('show');
+            }
         });
+
+        $(document).on('click', '#publish-link', function(e) {
+            e.preventDefault();
+            blockUI();
+            var document = $(this).attr('data-document');
+            $.ajax({
+                url: "{{route('front.publish-link-to-fill')}}",
+                type: "post",
+                dataType: 'json',
+                async: false,
+                data: {
+                    "_token": csrf_token,
+                    document: document,
+                },
+                success: function(response) {
+                    var response_data = response.data;
+                    $(model_element).find('#link-to-fill').val(response_data.publish_link);
+                    $(model_element).find('#facebook-share').attr('href', response_data.facebook_share_link);
+                    $(model_element).find('#twitter-share').attr('href', response_data.twitter_share_link);
+                    $(model_element).find('.non-published').addClass('invisible');
+                    $(model_element).find('.published').removeClass('invisible');
+                    $(model_element).find('.published-link-div').removeClass('disable-div');
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+                    $(model_element).modal('hide');
+                    toastr.error(response.message);
+                },
+                complete: function() {
+                    unblockUI();
+                },
+            });
+        });
+
+        $(document).on('click', '#advance-setting-link', function(e) {
+            e.preventDefault();
+            blockUI();
+            var document = $(this).attr('data-document');
+            var url = '{{ route("front.advance-link-to-fill", ":document") }}';
+            url = url.replace(':document', document);
+            window.location.replace(url);
+
+        });
+
+        var clipboardDemos = new Clipboard('[data-clipboard-demo]');
+
+        clipboardDemos.on('success', function(e) {
+            e.clearSelection();
+
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+
+            showTooltip(e.trigger, 'Copied!');
+        });
+
+        clipboardDemos.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+
+            showTooltip(e.trigger, fallbackMessage(e.action));
+        });
+
+        // tooltips.js
+
+        var btns = document.querySelectorAll('.btn');
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('mouseleave', clearTooltip);
+            btns[i].addEventListener('blur', clearTooltip);
+        }
+
+        function clearTooltip(e) {
+            e.currentTarget.setAttribute('class', 'btn');
+            e.currentTarget.removeAttribute('aria-label');
+        }
+
+        function showTooltip(elem, msg) {
+            elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+            elem.setAttribute('aria-label', msg);
+        }
+
     });
 </script>
 @append

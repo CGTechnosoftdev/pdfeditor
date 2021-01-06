@@ -8,32 +8,41 @@
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-             <div class="modal-body">
+             <div class="modal-body" id="link-to-fill-form">
                  <h6>Distribute your documents to be filled by anyone</h6>
                  <div class="shareable-file">
-                     <img src="{{ asset('public/front/images/file-pdf.svg') }}"> Get a Document Signed
+                     <img src="{{ asset('public/front/images/file-pdf.svg') }}" id="document-preview">
+                     <span id="document-name"></span>
                  </div>
-                 <div class="share-by">
+                 <div class="published-link-div disable-div">
                      <div class="publish-to-distribute">
                          <div class="form-group">
-                             <label for="public_distribute">Publish to distribute</label>
-                             <input type="text" class="form-control" id="public_distribute" placeholder="Not published yet">
+                             <label for="link_to_fill">Publish to distribute</label>
+                             <input type="text" class="form-control" name="publish_link" id="link-to-fill" placeholder="Not published yet">
                          </div>
-                         <button class="btn btn-outline-success"><i class="far fa-copy"></i> Copy Link</button>
+                         <button class="btn btn-outline-success" data-clipboard-demo="" data-clipboard-target="#link-to-fill"><i class="far fa-copy"></i> Copy Link</button>
                      </div>
                      <div class="share-with-social">
                          <div class="more-options"><span>OR</span></div>
                          <div class="social-btns">
-                             <a class="facebook" href=""><i class="fab fa-facebook-f"></i> Share on Facebook</a>
-                             <a class="twitter" href=""><i class="fab fa-twitter"></i> Share on Twitter</a>
+                             <a class="facebook" id="facebook-share" href="" target="_blank">
+                                 <i class="fab fa-facebook-f"></i> Share on Facebook
+                             </a>
+                             <a class="twitter" id="twitter-share" href="" target="_blank">
+                                 <i class="fab fa-twitter"></i> Share on Twitter
+                             </a>
                          </div>
-                         <p>Your document is <a href="">not published</a> yet</p>
+                         <p class="non-published">Your document is <a href="">not published</a> yet</p>
+                         <p class="published invisible">Your document is <a href="">published</a> now</p>
                      </div>
-                     <div class="share-link-btns">
-                         <div class="d-flex justify-content-between">
-                             <button class="btn btn-success">Publish</button>
-                             <button class="btn btn-outline-success">Advance Settings</button>
-                         </div>
+                 </div>
+                 <div class="share-link-btns">
+                     <div class="d-flex justify-content-between non-published">
+                         <button class="btn btn-success" id="publish-link" data-document="">Publish</button>
+                         <button class="btn btn-outline-success" id="advance-setting-link" data-document="">Advance Settings</button>
+                     </div>
+                     <div class="d-flex justify-content-between published invisible">
+                         <button class="btn btn-success" data-dismiss="modal">Done</button>
                      </div>
                  </div>
              </div>

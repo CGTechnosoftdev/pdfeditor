@@ -11,7 +11,7 @@ class SharedDocumentUser extends Model
 
     use SoftDeletes;
     use BaseModelTrait;
-    protected $fillable = ['name', 'email', 'shared_documents_id'];
+    protected $fillable = ['name', 'email', 'shared_documents_id', 'status'];
     protected $dates = ['deleted_at'];
     public $timestamps = true;
 

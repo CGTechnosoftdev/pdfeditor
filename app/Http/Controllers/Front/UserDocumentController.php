@@ -115,7 +115,6 @@ class UserDocumentController extends FrontBaseController
             $response_type = 'error';
             $response_message = 'Document not found';
         } else {
-            $document['document_link'] = $document->generateLink();
             $response_type = 'success';
             $response_data = $document;
         }
