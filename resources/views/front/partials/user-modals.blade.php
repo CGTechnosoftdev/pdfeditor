@@ -31,7 +31,7 @@
                  }
              });
              var user_document_id = $("#recent_document_select_item").val();
-             //  alert("get item info " + user_document_id);
+             alert("get item info " + user_document_id);
              $("#user_doc_id").val(user_document_id);
              $("#user_doc_id2").val(user_document_id);
              if (user_document_id != 0) {

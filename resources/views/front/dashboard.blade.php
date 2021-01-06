@@ -204,7 +204,7 @@
 				<h4>Recent Templates</h4>
 			</div>
 			@foreach($recent_templates as $row)
-			<div class="single-document" data-id="{{ $row->encrypted_id }}">
+			<div class="single-document" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
 				<div class="doc-img">
 					<img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
 				</div>
