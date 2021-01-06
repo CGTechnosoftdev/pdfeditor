@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="{{ asset('public/front/css/all.css') }}">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{ asset('public/front/css/bootstrap.min.css') }}">
+<!-- datepicker -->
+<link rel="stylesheet" href="{{ asset('public/admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
 <!-- OWL carousel CSS -->
 <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 <!-- upload Multi Files -->
