@@ -1,3 +1,12 @@
+function blockUI() {
+    $.blockUI({
+        baseZ: 99999
+    });
+}
+
+function unblockUI() {
+    $.unblockUI();
+}
 /*************** Navbar JS **************/
 (function($) {
     "use strict";
@@ -196,3 +205,9 @@ $("#imageUpload").change(function() {
 $('.timeformate ul li').on('click', function() {
     $(this).addClass('active').siblings().removeClass('active');
 });
+
+
+/******* ToolTip ********/
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+})
