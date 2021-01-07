@@ -82,6 +82,11 @@ select {
     border-color: #486EB8!important;
 }
 
+.custom-checkbox.red .custom-control-input:checked~.custom-control-label::before {
+    background: #C1484A !important;
+    border-color: #C1484A !important;
+}
+
 .custom-control-label::after {
     width: 18px;
     height: 18px;

@@ -16,7 +16,7 @@
     <!-- upload Multi Files -->
     <link rel="stylesheet" href="../public/front/css/dropzone.css">
 
-    <link href="../public/front/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <!-- Custom CSS -->
     <link href="../public/front/css/style.css" rel="stylesheet">
@@ -253,25 +253,10 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="title">
-                    <h2>Dashboard</h2>
-                    <span>Your last login: Nov 11, 2020 at 11:32 pm</span>
+                    <h2>Trash Bin</h2>
+                    <span>6 Items</span>
                 </div>
                 <div class="heading-btns">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Document</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Templates</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Notifications</a>
-                        </li>
-                    </ul>
-
-                    <!-- <button class="btn btn-warning">Document</button>
-                    <button class="btn btn-link">Templates</button>
-                    <button class="btn btn-link">Notifications</button> -->
                     <div class="position-relative">
                         <button class="btn btn-success addnew-btn"><i class="fas fa-plus"></i> Add New</button>
                         <div class="addnew-dropdown">
@@ -328,231 +313,235 @@
                     </div>
                 </div>
             </section>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <!-- Main content -->
-                    <section class="content">
-                        <div class="recent-documents">
-                            <h4>Recent Documents</h4>
-                        </div>
-
-                        <div class="single-document">
-                            <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                            <div class="doc-content">
-                                <h5>PDFwriter How To Guide</h5>
-                                <div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-                                <dtv class="tags">
-                                    <span class="tag badge badge-warning">GuideBook</span>
-                                    <a href="" class="add-tag" data-toggle="modal" data-target="#add-tag">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z "/> </g> </g> <g> <g> <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>                                        Add tag
-                                    </a>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-document free-trial-document">
-                            <div class="doc-img">
-                                <h4><strong>Free</strong> Trial</h4>
-                            </div>
-                            <div class="doc-content">
-                                <h5>Get PDFwriter For FREE. Fill and edit documents Signed.pdf</h5>
-                                <dtv class="tags">
-                                    <ul>
-                                        <li>Print</li>
-                                        <li>-</li>
-                                        <li>Save as</li>
-                                        <li>-</li>
-                                        <li>Email</li>
-                                        <li>-</li>
-                                        <li>E-Sign</li>
-                                        <li>-</li>
-                                        <li>Fax</li>
-                                        <li>-</li>
-                                        <li>Share</li>
-                                    </ul>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="start-days-trial">Start 30 Days Free Trial</div>
-                                <button><i class="fas fa-times"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="single-document">
-                            <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                            <div class="doc-content">
-                                <h5>PDFwriter How To Guide</h5>
-                                <div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-                                <dtv class="tags">
-                                    <span class="tag badge badge-warning">GuideBook</span>
-                                    <span class="tag badge badge-primary">GuideBook</span>
-                                    <a href="" class="add-tag">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z "/> </g> </g> <g> <g> <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>                                        Add tag
-                                    </a>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                        <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-document">
-                            <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                            <div class="doc-content">
-                                <h5>PDFwriter How To Guide</h5>
-                                <div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-                                <dtv class="tags">
-                                    <span class="tag badge badge-warning">GuideBook</span>
-                                    <span class="tag badge badge-primary">GuideBook</span>
-                                    <a href="" class="add-tag">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z "/> </g> </g> <g> <g> <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>                                        Add tag
-                                    </a>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop03" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop03">
-                                        <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-document">
-                            <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                            <div class="doc-content">
-                                <h5>PDFwriter How To Guide</h5>
-                                <div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-                                <dtv class="tags">
-                                    <span class="tag badge badge-warning">GuideBook</span>
-                                    <span class="tag badge badge-primary">GuideBook</span>
-                                    <a href="" class="add-tag">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z "/> </g> </g> <g> <g> <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>                                        Add tag
-                                    </a>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop3" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop3">
-                                        <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="single-document">
-                            <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                            <div class="doc-content">
-                                <h5>PDFwriter How To Guide</h5>
-                                <div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-                                <dtv class="tags">
-                                    <span class="tag badge badge-warning">GuideBook</span>
-                                    <span class="tag badge badge-primary">GuideBook</span>
-                                    <a href="" class="add-tag">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z "/> </g> </g> <g> <g> <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>                                        Add tag
-                                    </a>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop4">
-                                        <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="single-document">
-                            <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                            <div class="doc-content">
-                                <h5>PDFwriter How To Guide</h5>
-                                <div class="last-activity">Last activity: <strong>You opened PDFwriter How To Guide.pdf</strong></div>
-                                <dtv class="tags">
-                                    <span class="tag badge badge-warning">GuideBook</span>
-                                    <span class="tag badge badge-primary">GuideBook</span>
-                                    <a href="" class="add-tag">
-                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341 c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z "/> </g> </g> <g> <g> <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318 c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83 s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>                                        Add tag
-                                    </a>
-                                </dtv>
-                            </div>
-                            <div class="doc-date-and-dismiss">
-                                <div class="doc-date"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop5" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop5">
-                                        <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- /.content -->
-
+            <div class="short-by-section">
+                <div class="short-checkbox">
+                    <div class="custom-control custom-checkbox red mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="select-all">
+                        <label class="custom-control-label font-0" for="select-all">.</label>
+                    </div>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <!-- Main content -->
-                    <section class="content">
-                        <div class="recent-documents">
-                            <h4>Tab 2</h4>
-                        </div>
-                    </section>
+                <div class="short-by">
+                    <label for="folder">Short By :</label>
+                    <select id="folder" class="form-control my-dropdown">
+                            <option value="Option 1">Option 1</option>
+                            <option value="Option 2">Option 2</option>
+                            <option value="Option 3">Option 3</option>
+                            <option value="Option 4">Option 4</option>
+                            <option value="Option 5">Option 5</option>
+                        </select>
                 </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <!-- Main content -->
-                    <section class="content">
-                        <div class="recent-documents">
-                            <h4>Tab 3</h4>
-                        </div>
-                    </section>
+                <div class="short-btns">
+                    <ul>
+                        <li>
+                            <a href="#"><img src="../public/front/images/copy.svg"> Restore Selected</a>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../public/front/images/rename.svg"> Deleted Selected</a>
+                        </li>
+                    </ul>
+                    <div class="more-opt">
+                        <button><img src="../public/front/images/empty-trash.svg"> Empty Trash</button>
+                    </div>
+
                 </div>
             </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="recent-documents">
+                    <h4>Recent Documents</h4>
+                </div>
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                            <label class="custom-control-label font-0" for="customControlAutosizing">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color4 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
+                            <label class="custom-control-label font-0" for="customControlAutosizing2">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color3 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing3">
+                            <label class="custom-control-label font-0" for="customControlAutosizing3">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color1 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing4">
+                            <label class="custom-control-label font-0" for="customControlAutosizing4">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color8 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing5">
+                            <label class="custom-control-label font-0" for="customControlAutosizing5">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color6 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing6">
+                            <label class="custom-control-label font-0" for="customControlAutosizing6">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color5 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="single-document single-doc-signed">
+                    <div class="doc-dots">
+                        <div class="custom-control custom-checkbox red mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing7">
+                            <label class="custom-control-label font-0" for="customControlAutosizing7">.</label>
+                        </div>
+                    </div>
+                    <div class="doc-status color2 mx-2">
+                        <!--<span class="badge badge-primary"></span>--></div>
+                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
+                    <div class="doc-content">
+                        <h5>PDFwriter How To Guide</h5>
+                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
+                    </div>
+                    <div class="more-opt">
+                        <div class="btn-group">
+                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </div>
         <!-- /.content-wrapper -->
@@ -563,81 +552,6 @@
             <strong>Copyright &copy; 2017 <a href="#">PDFwriter</a>.</strong> All rights reserved.
         </footer>
 
-
-        <div class="footer-more-menus">
-            <ul>
-                <li>
-                    <a href="">
-                        <div class="more-img">
-                            <img src="../public/front/images/open.svg">
-                        </div>
-                        <span>Open</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="more-img">
-                            <img src="../public/front/images/save-as.svg">
-                        </div>
-                        <span>Save As</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="more-img">
-                            <img src="../public/front/images/convert.svg">
-                        </div>
-                        <span>Convert</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="more-img">
-                            <img src="../public/front/images/print.svg">
-                        </div>
-                        <span>Print</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="more-img">
-                            <img src="../public/front/images/convert-to-template.svg">
-                        </div>
-                        <span>Convert to Template</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="more-img">
-                            <img src="../public/front/images/signnow.svg">
-                        </div>
-                        <span>SignNow</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="" data-toggle="modal" data-target="#share">
-                        <div class="more-img">
-                            <img src="../public/front/images/share.svg">
-                        </div>
-                        <span>Share</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="" data-toggle="modal" data-target="#linktofit">
-                        <div class="more-img">
-                            <img src="../public/front/images/linktofit.svg">
-                        </div>
-                        <span>LinkToFit</span>
-                    </a>
-                </li>
-            </ul>
-            <a href="" class="more-btn" data-toggle="modal" data-target="#exampleModal">
-                <div class="more-img">
-                    <img src="../public/front/images/more.svg">
-                </div>
-                <span>More</span>
-            </a>
-        </div>
         <!-- Modal -->
         <div class="modal fade more-options" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -1157,9 +1071,9 @@
                     <div class="modal-body">
                         <div class="form-group select-tags-here">
                             <label for="name">Enter a name for your folder</label>
-                            <select id="single" class="js-states form-control" multiple>
-                                <option>Java sdlksad sakldasdlsa das d asd as das </option>
-                                <option>Javascript dfsd fdsf ds fsd fds fd sf</option>
+                            <select id="single" class="js-states form-control">
+                                <option>Java</option>
+                                <option>Javascript</option>
                                 <option>PHP</option>
                                 <option>Visual Basic</option>
                               </select>
@@ -1223,7 +1137,7 @@
     <script type="text/javascript" src="../public/front/js/dropzone.js"></script>
     <script type="text/javascript" src="../public/front/js/upload-multi-files.js"></script>
 
-    <script src="../public/front/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         $("#single").select2({
             placeholder: "Enter a tag",
@@ -1254,10 +1168,30 @@
             }
         });
 
+
         // /*************** Choose Color ************
 
         $('.tag-colors-here ul li').on('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
+        });
+
+        ///// Select All Checkbox //////
+
+        var selectAllItems = "#select-all";
+        var checkboxItem = ":checkbox";
+
+        $(selectAllItems).click(function() {
+
+            if (this.checked) {
+                $(checkboxItem).each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(checkboxItem).each(function() {
+                    this.checked = false;
+                });
+            }
+
         });
     </script>
 </body>

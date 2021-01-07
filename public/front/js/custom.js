@@ -179,7 +179,7 @@ $('.pricing-plans .col-md-4').on('click', function() {
 
 
 $('.template-types li').on('click', function() {
-    $(this).addClass('active').siblings().removeClass('active');
+    $(this).toggleClass('active').siblings().removeClass('active');
 });
 
 
