@@ -5242,6 +5242,17 @@ li {
     cursor: pointer;
 }
 
+.security-options .single-security-options .remove-password {
+    background: transparent;
+    border: solid 1px #C6CEE2;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #C1484A;
+    border-radius: 5px;
+    font-family: Poppins - Regular;
+    cursor: pointer;
+}
+
 .calendar {
     background: url("../images/calendar-today.svg");
     background-repeat: no-repeat;
