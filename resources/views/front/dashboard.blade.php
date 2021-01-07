@@ -117,6 +117,7 @@
 			<div class="recent-documents">
 				<h4>Recent Documents</h4>
 			</div>
+			<input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
 			@foreach($recent_documents as $row)
 			<div class="single-document" data-id="{{ $row->encrypted_id }}">
 				<div class="doc-img">
@@ -207,6 +208,7 @@
 			<div class="single-document" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
 				<div class="doc-img">
 					<img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
+
 				</div>
 				<div class="doc-content">
 					<h5>{{ $row->formatted_name }}</h5>

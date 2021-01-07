@@ -175,11 +175,169 @@
         var model_element = "#linktofill";
         $(document).on('click', '.content .single-document', function(e) {
             e.preventDefault();
+
             selected_document = $(this).attr('data-id');
+            var idArray = $(this).attr('id').split("document_list_item_");
+            $("#recent_document_select_item").val(idArray[1]);
+
             console.log($(this).attr('data-id'));
             $(this).addClass('active').siblings().removeClass('active');
             $('.footer-more-menus').addClass('active').siblings().removeClass('active');
         });
+
+        $("#sharemenu_itemid").click(function() {
+            // alert("ajax call is ");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var user_document_id = $("#recent_document_select_item").val();
+            //  alert("get item info " + user_document_id);
+            $("#user_doc_id").val(user_document_id);
+            $("#user_doc_id2").val(user_document_id);
+
+            if (user_document_id != 0) {
+                // getDocumentInfo(user_document_id);
+                // console.log(selected_document_info);
+
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ url('/user-document-share-get')}}/" + user_document_id,
+                    success: function(data) {
+                        $("#shareDocumentLinkId").html(data.document_name);
+                        $("#shareDocumentLinkId").attr("href", data.file_url);
+                        //user_document_id
+                        $("#cust_share").modal("show");
+
+                    }
+                });
+
+
+            }
+
+
+
+        });
+
+
+        $("a[id ^= 'share_by_link_']").click(function() {
+
+            var idArray = $(this).attr("id").split("share_by_link_");
+
+            if (idArray[1] == 1) {
+                $("#linkid").val("");
+            } else if (idArray[1] == 2) {
+                $("#linkid").val($("#shareDocumentLinkId").attr("href"));
+            }
+            $("#form_typeid").val(idArray[1])
+        });
+
+
+
+        $("#share_button_id").click(function(e) {
+            var share_type = $("#form_typeid").val();
+            if (share_type == 1) {
+
+                e.preventDefault();
+                var formData = new FormData($("#user_document_send_email_form_id")[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('front.user-document.user-document-email-share-save')}}",
+                    data: formData,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        // this.reset();
+                        console.log(JSON.stringify(data));
+                        //  var jsonData = $.parseJSON(data.responseText);
+                        // alert('File has been uploaded successfully');
+                        $("#userDocMsgConId").removeClass("hide");
+                        $("#userDocMsgConId").removeClass("alert-danger");
+                        $("#userDocMsgConId").addClass("alert-success");
+                        $("#userDocMsgConId").addClass("show");
+                        $("#userDocMsgConId").html(data.message);
+
+                        setTimeout(function() {
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
+                        }, 3000);
+
+                    },
+                    error: function(data) {
+                        var jsonData = $.parseJSON(data.responseText);
+                        $("#userDocMsgConId").removeClass("hide");
+                        $("#userDocMsgConId").removeClass("alert-success");
+                        $("#userDocMsgConId").addClass("alert-danger");
+                        $("#userDocMsgConId").addClass("show");
+                        $("#userDocMsgConId").html(jsonData.message);
+
+                        setTimeout(function() {
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
+                        }, 3000);
+                    }
+                });
+
+            } else if (share_type == 2) {
+
+
+                e.preventDefault();
+                var formData = new FormData($("#user_document_share_link_form_id")[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('front.user-document.user-document-link-share-save')}}",
+                    data: formData,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        // this.reset();
+                        console.log(JSON.stringify(data));
+                        //  var jsonData = $.parseJSON(data.responseText);
+                        // alert('File has been uploaded successfully');
+                        $("#userDocMsgConId").removeClass("hide");
+                        $("#userDocMsgConId").removeClass("alert-danger");
+                        $("#userDocMsgConId").addClass("alert-success");
+                        $("#userDocMsgConId").addClass("show");
+                        $("#userDocMsgConId").html(data.message);
+
+                        setTimeout(function() {
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
+                        }, 3000);
+
+                    },
+                    error: function(data) {
+                        var jsonData = $.parseJSON(data.responseText);
+                        $("#userDocTempConId").removeClass("hide");
+                        $("#userDocTempConId").removeClass("alert-success");
+                        $("#userDocTempConId").addClass("alert-danger");
+                        $("#userDocTempConId").addClass("show");
+                        $("#userDocTempConId").html(jsonData.message);
+
+                        setTimeout(function() {
+                            $("#userDocTempConId").removeClass("show");
+                            $("#userDocTempConId").addClass("hide");
+                        }, 3000);
+                    }
+                });
+
+            }
+
+        });
+
+
+        $("#advance_settings_id").click(function() {
+            var user_document_id = $("#recent_document_select_item").val();
+            alert("{{url('user-document-advance-settings')}}/" + user_document_id);
+            window.location.href = "{{url('user-document-advance-settings')}}/" + user_document_id;
+        });
+
+
 
         function getDocumentInfo(document) {
             blockUI();

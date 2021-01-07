@@ -6013,3 +6013,13 @@ li {
     pointer-events: none;
     opacity: 0.5;
 }
+.show{
+    display:block;
+}
+.hide{
+    display:none;
+}
+#emailnameFromContId ul li{
+    display: block;
+    width:100%;
+}

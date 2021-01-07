@@ -56,7 +56,7 @@
                                     <div class="form-group">
                                         <label for="public_link">Public Link</label>
                                         <!--<input type="text" class="form-control" id="public_link" value="https://example.com" placeholder="https://example.com">-->
-                                        {{form::text("link","https://example.com",array("class" => "form-control","placeholder" => "https://example.com"))}}
+                                        {{form::text("link","https://example.com",array("id" => "linkid","class" => "form-control","placeholder" => "https://example.com"))}}
                                     </div>
                                 </div>
                             </div>

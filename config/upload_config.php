@@ -88,5 +88,16 @@ return [
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
+    'business_card_picture' => [
+        'label' => 'Business Card Picture',
+        'file_input' => 'business_card_picture',
+        'disk' => 'public',
+        'folder' => 'business_card_picture',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal',
+        'allowed_extention' => 'jpg,jpeg,png,svg,gif',
+        'max_allowed_size' => '2000'
+    ],
     'upload_types' => 'file_attachment'
 ];
