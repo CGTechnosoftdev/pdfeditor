@@ -5,14 +5,14 @@
 <script src="{{ asset('public/front/js/bootstrap.min.js') }}"></script>
 <!-- BlockUI -->
 <script src="{{ asset('public/admin/bower_components/block-ui/jquery.blockUI.js') }}" type="text/javascript"></script>
+<!-- datepicker -->
+<script src="{{ asset('public/admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- OWL carousel JS -->
 <script src="{{ asset('public/front/js/owl.carousel.min.js') }}"></script>
 
 <script src="{{ asset('public/front/js/jquery.matchHeight.js') }}"></script>
 
 <script src="{{ asset('public/front/js/dashboard3.js') }}"></script>
-
-<script src="{{ asset('public/front/js/vue.min.js') }}"></script>
 
 <script src='https://cdn.jsdelivr.net/npm/bootstrap-colorpicker@3.0.3/dist/js/bootstrap-colorpicker.min.js'></script>
 <!-- Laravel Javascript Validation -->

@@ -205,13 +205,19 @@
                     type: 'GET',
                     url: "{{ url('/user-document-share-get')}}/" + user_document_id,
                     success: function(data) {
-                        $("#shareDocumentLinkId").html(data.document_name);
+                        console.log(data);
+
+                        $("#shareDocumentLinkId").html(data.response_data.formatted_name);
                         $("#shareDocumentLinkId").attr("href", data.file_url);
-                        //user_document_id
+                        $("#public_linkid").val(data.public_link);
+
                         $("#cust_share").modal("show");
 
                     }
                 });
+                // alert("id is " + user_document_id);
+                // getDocumentInfo(user_document_id);
+                // console.log(selected_document_info);
 
 
             }
@@ -228,7 +234,7 @@
             if (idArray[1] == 1) {
                 $("#linkid").val("");
             } else if (idArray[1] == 2) {
-                $("#linkid").val($("#shareDocumentLinkId").attr("href"));
+                $("#linkid").val($("#public_linkid").val());
             }
             $("#form_typeid").val(idArray[1])
         });
@@ -420,45 +426,6 @@
             window.location.replace(url);
 
         });
-
-        var clipboardDemos = new Clipboard('[data-clipboard-demo]');
-
-        clipboardDemos.on('success', function(e) {
-            e.clearSelection();
-
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
-
-            showTooltip(e.trigger, 'Copied!');
-        });
-
-        clipboardDemos.on('error', function(e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
-
-            showTooltip(e.trigger, fallbackMessage(e.action));
-        });
-
-        // tooltips.js
-
-        var btns = document.querySelectorAll('.btn');
-
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener('mouseleave', clearTooltip);
-            btns[i].addEventListener('blur', clearTooltip);
-        }
-
-        function clearTooltip(e) {
-            e.currentTarget.setAttribute('class', 'btn');
-            e.currentTarget.removeAttribute('aria-label');
-        }
-
-        function showTooltip(elem, msg) {
-            elem.setAttribute('class', 'btn tooltipped tooltipped-s');
-            elem.setAttribute('aria-label', msg);
-        }
-
     });
 </script>
 @append

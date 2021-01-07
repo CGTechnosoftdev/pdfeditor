@@ -27,10 +27,14 @@ class SharedDocumentController extends FrontBaseController
         $fileUrl = "";
         if (!empty($user_document->name))
             $fileUrl = getUploadedFile([$user_document->name], "user_document");
+        $document = UserDocument::dataRow(['id' => $user_document->id]);
+        $public_link = generateUniqueLink("UserDocument", "name");
         $documentDetailArray = [
             'id' => $user_document->id,
             'file_url' => $fileUrl,
             'document_name' => $user_document->name,
+            'response_data' => $document,
+            'public_link' => $public_link,
         ];
         return response()->json($documentDetailArray);
     }
@@ -228,7 +232,8 @@ class SharedDocumentController extends FrontBaseController
         $fileUrl = "";
         if (!empty($user_document->name))
             $fileUrl = getUploadedFile([$user_document->name], "user_document");
-
+        $document = UserDocument::dataRow(['id' => $user_document->id]);
+        $public_link = generateUniqueLink("UserDocument", "name");
         //authentication_method    
         $data_array["authentication_method"] = config('custom_config.authentication_method');
         $data_array["user_advance_setting_templates"] = config('custom_config.user_advance_setting_templates');
@@ -236,7 +241,9 @@ class SharedDocumentController extends FrontBaseController
         $data_array["user_advance_settings_repeat_reminder"] = config('custom_config.user_advance_settings_repeat_reminder');
         $data_array["fileUrl"] = $fileUrl[0];
         $data_array["document_name"] = $user_document->name;
+        $data_array["document_info"] = $document;
         $data_array["document_id"] = $user_document->id;
+        $data_array["public_link"] = $public_link;
 
 
 

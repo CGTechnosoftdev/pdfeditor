@@ -15,7 +15,7 @@
 <section class="content">
     {{ Form::open(['url' => 'user-document-advance-settings-save','method'=>'post','class'=>'login-form','id' => 'user_document_advance_setting_form_id','enctype'=>"multipart/form-data"]) }}
     {{form::hidden('user_document_id',$document_id)}}
-    {{form::hidden('user_document_name',$document_name,array("id" => "user_document_name_id"))}}
+    {{form::hidden('user_document_name',$document_info["formatted_name"],array("id" => "user_document_name_id"))}}
 
     <div class="advance-settings-part">
         <h3>
@@ -33,14 +33,14 @@
                             </div>
                             <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
                             <div class="doc-content">
-                                <h5><a href="<?= $fileUrl ?>" target="_blank"><?= !empty($document_name) ? $document_name : "" ?></a></h5>
+                                <h5><a href="<?= $fileUrl ?>" target="_blank"><?= !empty($document_info["formatted_name"]) ? $document_info["formatted_name"] : "" ?></a></h5>
                                 <!-- <h5>PDFwriter How To Guide</h5>
                                 <div class="last-activity">Last update: Nov 12, 2020</div> -->
                             </div>
-                            <div class="doc-date-and-dismiss">
+                            <!--<div class="doc-date-and-dismiss">
                                 <a href="" class="edit-fillable-btn"><i class="fas fa-edit"></i> Edit Fillable Fields</a>
                                 <button><i class="fas fa-times"></i></button>
-                            </div>
+                            </div> -->
                             <div></div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="public_link">Public Link</label>
-                                        {{form::hidden("publink_link_container",$fileUrl,array("id" => 'publink_link_containerid'))}}
+                                        {{form::hidden("publink_link_container",$public_link,array("id" => 'publink_link_containerid'))}}
                                         <input type="text" name="link" class="form-control" id="linkid" value="" placeholder="https://example.com">
                                     </div>
                                 </div>
@@ -169,9 +169,9 @@
                                 }
                             ?>
                                 <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="checkbox-<?= $checkbox_index ?>">
-                                    {{ Form::checkbox("authentication_method[$authenti_value]",$authenti_value,null, array('id'=>'authentication_methodid')) }}
-                                    <label class="custom-control-label" for="checkbox-1"><?= $authenticationField ?><?= $social_icons ?></label>
+                                    <input type="checkbox" class="d-none custom-control-input" id="checkbox-<?= $checkbox_index ?>">
+                                    {{ Form::checkbox("authentication_method[$authenti_value]",$authenti_value,null, array('id'=>'authentication_methodid-'.$checkbox_index,'class' => 'custom-control-input')) }}
+                                    <label class="custom-control-label" for="authentication_methodid-<?= $checkbox_index ?>"><?= $authenticationField ?><?= $social_icons ?></label>
                                 </div>
                             <?php
                                 $checkbox_index += 1;
@@ -203,13 +203,13 @@
                                     <div class="personalize-invitation-content">
                                         <p>Replace the default PDF Writer logo with your own (optional).</p>
                                         <!--template-types logo-type-->
-                                        <ul class="">
+                                        <ul class="template-types logo-type">
                                             <!--  <li>
                                             <img src="../public/front/images/add-new-logo.png">
                                         </li> -->
                                             <li>
                                                 <input type="checkbox" name="your_logo" value="1" />
-                                                <!--<img src="../public/front/images/logo-blue.png">-->
+                                                <img src="../public/front/images/logo-blue.png">
                                             </li>
 
                                         </ul>
@@ -224,16 +224,18 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-lg-10">
-                                    <div class="personalize-invitation-content">
-                                        <ul class="template-types">
+                                    <div class="personalize-invitation-content mb-0">
+                                        <ul class="template-types li-0">
                                             <?php
                                             foreach ($user_advance_setting_templates as $temp_sett_val => $temp_Caption) {
                                             ?> <li>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14.21" height="14.21" viewBox="0 0 14.21 14.21">
-                                                        <path d="M11.672,34.03H10.15V32.761A.761.761,0,0,0,9.389,32H.761A.761.761,0,0,0,0,32.761V45.449a.761.761,0,0,0,.761.761H9.389a.761.761,0,0,0,.761-.761V44.113l2.557-1.141a2.54,2.54,0,0,0,1.5-2.317V36.567A2.54,2.54,0,0,0,11.672,34.03Zm.507,6.625a.508.508,0,0,1-.3.463l-1.729.772V36.06h1.522a.508.508,0,0,1,.507.507ZM6.6,43.165a.508.508,0,0,1-.507-.508v-7.1a.507.507,0,0,1,1.015,0v7.1A.508.508,0,0,1,6.6,43.165Zm-3.045,0a.508.508,0,0,1-.507-.508v-7.1a.507.507,0,0,1,1.015,0v7.1A.508.508,0,0,1,3.552,43.165Z" transform="translate(0 -32)"></path>
-                                                    </svg>
-                                                    {{ Form::radio('select_template', $temp_sett_val , false) }}
-                                                    <span><?= $temp_Caption ?></span>
+                                                    <label for="test1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14.21" height="14.21" viewBox="0 0 14.21 14.21">
+                                                            <path d="M11.672,34.03H10.15V32.761A.761.761,0,0,0,9.389,32H.761A.761.761,0,0,0,0,32.761V45.449a.761.761,0,0,0,.761.761H9.389a.761.761,0,0,0,.761-.761V44.113l2.557-1.141a2.54,2.54,0,0,0,1.5-2.317V36.567A2.54,2.54,0,0,0,11.672,34.03Zm.507,6.625a.508.508,0,0,1-.3.463l-1.729.772V36.06h1.522a.508.508,0,0,1,.507.507ZM6.6,43.165a.508.508,0,0,1-.507-.508v-7.1a.507.507,0,0,1,1.015,0v7.1A.508.508,0,0,1,6.6,43.165Zm-3.045,0a.508.508,0,0,1-.507-.508v-7.1a.507.507,0,0,1,1.015,0v7.1A.508.508,0,0,1,3.552,43.165Z" transform="translate(0 -32)"></path>
+                                                        </svg>
+                                                        {{ Form::radio('select_template', $temp_sett_val , false) }}
+                                                        <span><?= $temp_Caption ?></span>
+                                                    </label>
                                                 </li>
                                             <?php
                                             }
@@ -443,8 +445,8 @@
                         $("#emailnameFromContId").addClass("show");
                         $("#emailnameFromContId").html(response_html.message);
                         setTimeout(function() {
-                            $("#emailnameFromContId").removeClass("show");
-                            $("#emailnameFromContId").addClass("hide");
+                            //  $("#emailnameFromContId").removeClass("show");
+                            //  $("#emailnameFromContId").addClass("hide");
                         }, 3000);
 
                     } else {

@@ -88,6 +88,28 @@ return [
         'allowed_extention' => 'pdf',
         'max_allowed_size' => '2000'
     ],
+    'link_to_fill_invitation_logo' => [
+        'label' => 'Template',
+        'file_input' => 'logo',
+        'disk' => 'public',
+        'folder' => 'link_to_fill',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal_with_random',
+        'allowed_extention' => 'png,jpg,jpeg',
+        'max_allowed_size' => '2000'
+    ],
+    'link_to_fill_business_card_image' => [
+        'label' => 'Template',
+        'file_input' => 'logo',
+        'disk' => 'public',
+        'folder' => 'link_to_fill',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal_with_random',
+        'allowed_extention' => 'png,jpg,jpeg',
+        'max_allowed_size' => '2000'
+    ],
     'business_card_picture' => [
         'label' => 'Business Card Picture',
         'file_input' => 'business_card_picture',
@@ -99,5 +121,6 @@ return [
         'allowed_extention' => 'jpg,jpeg,png,svg,gif',
         'max_allowed_size' => '2000'
     ],
+
     'upload_types' => 'file_attachment'
 ];

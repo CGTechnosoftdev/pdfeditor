@@ -29,6 +29,7 @@
                             {{ Form::open(['url' => '#','method'=>'post','class'=>'login-form','id' => 'user_document_send_email_form_id','enctype'=>"multipart/form-data"]) }}
                             {{ Form::hidden("user_document_id",0,array("id" => 'user_doc_id'))}}
                             {{ Form::hidden("share_type",1,array("id" => 'share_typeid1'))}}
+                            {{ Form::hidden("public_link",1,array("id" => 'public_linkid'))}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
