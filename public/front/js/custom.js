@@ -249,3 +249,11 @@ $('.timeformate ul li').on('click', function() {
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+$(function() {
+    //toggle two classes on button element
+    $('.treeview a').on('click', function() {
+        $('.dashboard3').toggleClass('sidebar-collapse');
+    });
+});

@@ -6185,7 +6185,7 @@ li {
     float: left;
 }
 
-.short-by-section .short-checkbox label {
+.short-by-section .short-checkbox label.font-0 {
     font-size: 0px;
 }
 
