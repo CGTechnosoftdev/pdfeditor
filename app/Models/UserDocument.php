@@ -11,7 +11,7 @@ class UserDocument extends Model
 
     use SoftDeletes;
     use BaseModelTrait;
-    protected $fillable = ['name', 'type', 'user_id', 'thumbnail'];
+    protected $fillable = ['name', 'type', 'user_id', 'thumbnail', 'trash'];
     protected $appends = [
         'formatted_name', 'thumbnail_url', 'encrypted_id'
     ];

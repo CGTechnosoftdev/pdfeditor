@@ -21,6 +21,7 @@ class CreateUserDocumentTable extends Migration
             $table->integer('user_id');
             $table->text('data')->nullable();
             $table->tinyInteger('type')->default(1)->comment('1=>File,2=>Template,3=>Folder');
+            $table->tinyInteger('trash')->default(1)->comment('1=>Not Trashed,2=>Trashed');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();

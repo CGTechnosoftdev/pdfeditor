@@ -158,6 +158,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/user-document-advance-settings/{user_document}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
 		Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
 		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
+		Route::get('/trash-list', 'TrashController@getTrashList')->name('get-trash-list');
+		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
+		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 	});
 });
 

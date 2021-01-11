@@ -83,5 +83,11 @@ return [
 
     'USER_CAN_EDIT_AND_SIGN' => 1,
     'USER_CAN_SIGN' => 2,
+    'TRASHED' => 2,
+    'NOT_TRASHED' => 1,
+    'RESTORE' => 3,
+    'RESTORE_FORM' => 1,
+    'DESTROY_FORM' => 2,
+
 
 ];
