@@ -118,8 +118,8 @@
 				<h4>Recent Documents</h4>
 			</div>
 			<input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
-			@foreach($recent_documents as $row)
-			<div class="single-document" data-id="{{ $row->encrypted_id }}">
+			@foreach($recent_documents as $key => $row)
+			<div class="single-document" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
 				<div class="doc-img">
 					<img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
 				</div>
@@ -163,7 +163,14 @@
 					<div class="doc-date">
 						<i class="fas fa-calendar-day"></i> {{ changeDateTimeFormat($row->updated_at) }}
 					</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
+					<button id="btnGroupDrop{{$key}}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-ellipsis-v"></i>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop{{$key}}">
+						<a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
+						<a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
+						<a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
+					</div>
 				</div>
 			</div>
 			@endforeach
@@ -204,7 +211,7 @@
 			<div class="recent-documents">
 				<h4>Recent Templates</h4>
 			</div>
-			@foreach($recent_templates as $row)
+			@foreach($recent_templates as $key => $row)
 			<div class="single-document" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
 				<div class="doc-img">
 					<img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
@@ -250,7 +257,14 @@
 					<div class="doc-date">
 						<i class="fas fa-calendar-day"></i> {{ changeDateTimeFormat($row->updated_at) }}
 					</div>
-					<button><i class="fas fa-ellipsis-v"></i></button>
+					<button id="btnGroupDrop{{$key}}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-ellipsis-v"></i>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop{{$key}}">
+						<a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
+						<a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
+						<a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
+					</div>
 				</div>
 			</div>
 			@endforeach

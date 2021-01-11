@@ -8,24 +8,24 @@ function unblockUI() {
     $.unblockUI();
 }
 // Copy
-var clipboardDemos = new Clipboard('[data-clipboard-demo]');
+// var clipboardDemos = new Clipboard('[data-clipboard-demo]');
 
-clipboardDemos.on('success', function(e) {
-    e.clearSelection();
+// clipboardDemos.on('success', function(e) {
+//     e.clearSelection();
 
-    console.info('Action:', e.action);
-    console.info('Text:', e.text);
-    console.info('Trigger:', e.trigger);
+//     console.info('Action:', e.action);
+//     console.info('Text:', e.text);
+//     console.info('Trigger:', e.trigger);
 
-    showTooltip(e.trigger, 'Copied!');
-});
+//     showTooltip(e.trigger, 'Copied!');
+// });
 
-clipboardDemos.on('error', function(e) {
-    console.error('Action:', e.action);
-    console.error('Trigger:', e.trigger);
+// clipboardDemos.on('error', function(e) {
+//     console.error('Action:', e.action);
+//     console.error('Trigger:', e.trigger);
 
-    showTooltip(e.trigger, fallbackMessage(e.action));
-});
+//     showTooltip(e.trigger, fallbackMessage(e.action));
+// });
 
 // tooltips.js
 
@@ -217,7 +217,7 @@ $('.pricing-plans .col-md-4').on('click', function() {
 
 
 $('.template-types li').on('click', function() {
-    $(this).addClass('active').siblings().removeClass('active');
+    $(this).toggleClass('active').siblings().removeClass('active');
 });
 
 
