@@ -5,10 +5,10 @@
 <section class="content-header">
     <div class="title">
         <h2>Trash Bin</h2>
-        <span>6 Items</span>
+        <span>{{$trash_count}} Items</span>
     </div>
     <div class="heading-btns">
-        <div class="position-relative">
+        <!-- <div class="position-relative">
             <button class="btn btn-success addnew-btn"><i class="fas fa-plus"></i> Add New</button>
             <div class="addnew-dropdown">
                 <div class="addnew-body">
@@ -55,11 +55,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
 
-        <div class="input-group input-group-joined input-group-solid ml-3">
+        <!--  <div class="input-group input-group-joined input-group-solid ml-3">
             <input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
                 <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
@@ -67,26 +67,29 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg></button>
             </div>
-        </div>
+        </div>-->
     </div>
 </section>
 <div class="short-by-section">
+    @if($trash_count>0)
     <div class="short-checkbox">
         <div class="custom-control custom-checkbox red mr-sm-2" id="selectAllId2">
             <input type="checkbox" class="custom-control-input" id="select-all">
-            <label class="custom-control-label font-0" for="select-all">.</label>
+            <label class="custom-control-label font-0" for="select-all">Select All</label>
         </div>
     </div>
     <div class="short-by">
-        <label for="folder">Short By :</label>
-        <select id="folder" class="form-control my-dropdown">
+        <label for="folder">Select All:</label>
+        <!-- <label for="folder">Short By :</label>
+         <select id="folder" class="form-control my-dropdown">
             <option value="Option 1">Option 1</option>
             <option value="Option 2">Option 2</option>
             <option value="Option 3">Option 3</option>
             <option value="Option 4">Option 4</option>
             <option value="Option 5">Option 5</option>
-        </select>
+        </select>-->
     </div>
+    @endif
     <div class="short-btns">
         <ul>
             <li>
@@ -96,25 +99,28 @@
                 <a href="#" id="delete_selectedId"><img src="{{asset('public/front/images/rename.svg')}}"> Deleted Selected</a>
             </li>
         </ul>
+        @if($trash_count>0)
         <div class="more-opt">
             <button id="empty_trashlistId"><img src="{{asset('public/front/images/empty-trash.svg')}}"> Empty Trash</button>
         </div>
+        @endif
 
     </div>
 </div>
 <!-- Main content -->
 <section class="content">
     <div class="recent-documents">
-        <h4>Recent Documents</h4>
+        <h4>{{ $empty_message}}</h4>
     </div>
-    {{ Form::open(['url' => '#','method'=>'post','class'=>'dropzone needsclick','id' => 'trash-formid','enctype'=>"multipart/form-data"]) }}
+    @if($trash_count>0)
+    {{ Form::open(['url' => '#','method'=>'post','class'=>'dropzone2 needsclick','id' => 'trash-formid','enctype'=>"multipart/form-data"]) }}
     {{Form::hidden('req_type',"",array('id' => 'trash_req_type_id'))}}
     @foreach($trash_items as $row)
     <div class="single-document single-doc-signed">
         <div class="doc-dots">
             <div class="custom-control custom-checkbox red mr-sm-2">
 
-                {{Form::checkbox("trash_items[$row->id]",1,$row->id,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing"))}}
+                {{Form::checkbox("trash_items[$row->id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing","checked" => false))}}
                 <label class="custom-control-label font-0" for="customControlAutosizing">.</label>
             </div>
         </div>
@@ -140,6 +146,7 @@
     </div>
     @endforeach
     {{ Form::close() }}
+    @endif
 
 
 
@@ -169,15 +176,20 @@
         });
         $("body").on("click", "#empty_trashlistId", function() {
 
-            var form = $("#trash-formid");
-            form.attr({
-                "action": "{{route('front.trash-empty-save')}}"
-            });
-            form.submit();
+            if (confirm("Are you sure you want to empty the trash list?")) {
+                var form = $("#trash-formid");
+                form.attr({
+                    "action": "{{route('front.trash-empty-save')}}"
+                });
+                form.submit();
+
+            }
+
 
         });
+
         $("#selectAllId2").change(function() {
-            alert("tt");
+            // alert("tt");
             $("input[id ^= 'customControlAutosizing']").each(function(key, val) {
                 if ($(this).attr("checked")) {
                     // alert("checked");
@@ -196,4 +208,5 @@
 
     });
 </script>
+
 @endsection
