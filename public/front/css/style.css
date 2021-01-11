@@ -82,6 +82,11 @@ select {
     border-color: #486EB8!important;
 }
 
+.custom-checkbox.red .custom-control-input:checked~.custom-control-label::before {
+    background: #C1484A !important;
+    border-color: #C1484A !important;
+}
+
 .custom-control-label::after {
     width: 18px;
     height: 18px;
@@ -5237,17 +5242,6 @@ li {
     cursor: pointer;
 }
 
-.security-options .single-security-options .remove-password {
-    background: transparent;
-    border: solid 1px #C6CEE2;
-    padding: 10px 20px;
-    font-size: 14px;
-    color: #C1484A;
-    border-radius: 5px;
-    font-family: Poppins - Regular;
-    cursor: pointer;
-}
-
 .calendar {
     background: url("../images/calendar-today.svg");
     background-repeat: no-repeat;
@@ -6262,26 +6256,6 @@ li {
     font-size: 14px;
     font-family: Poppins-Regular;
 }
-.personalize-invitation-content .template-types.li-0 li {
-    padding: 0px;
-}
-.personalize-invitation-content .template-types li label {
-    width: 100%;
-    margin: 0px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 14px;
-    font-family: Poppins-Regular;
-}
-.personalize-invitation-content .template-types li.active label {
-    color: #C1484A;
-}
-
-.personalize-invitation-content .template-types li label input {
-    opacity: 0;
-    position: absolute;
-}
-
 
 .setting-tab-content .template-types.li-0 li {
     padding: 0px;
@@ -6384,19 +6358,4 @@ li {
     height: 35px !important;
     border: none !important;
     width: 100% !important;
-}
-
-.show{
-    display:block;
-}
-.hide{
-    display:none;
-}
-#emailnameFromContId ul li{
-    clear:both;
-    width:100%;
-}
-#emailnameFromContId ul{
-    display: flow-root !important;
-    clear:both;
 }
