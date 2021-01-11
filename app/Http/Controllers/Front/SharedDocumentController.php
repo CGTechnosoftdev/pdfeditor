@@ -13,6 +13,8 @@ use App\Models\SharedDocument;
 use App\Models\SharedUserDocument;
 use App\Models\SharedDocumentUser;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CommonMail;
 
 
 use Auth;
@@ -60,45 +62,40 @@ class SharedDocumentController extends FrontBaseController
         if (!empty($input_data["link"]))
             $dataArray["link"] = $input_data["link"];
         else {
-            if (
-                !empty($input_data["select_template"]) || !empty($input_data["template_subject"]) || !empty($input_data["template_message"])
-                || !empty($input_data["first_name"])
-                || !empty($input_data["last_name"])
-                || !empty($input_data["job_title"])
-                || !empty($input_data["Company"])
-                || !empty($input_data["business_card_email"])
-                || !empty($input_data["phone_number"])
-                || !empty($input_data["fax_number"])
-                || !empty($input_data["Website"])
-                || !empty($input_data["user_advance_automatic_reminder"])
-                || !empty($input_data["user_advance_settings_repeat_reminder"])
-            ) {
-                // $personal_invitation_data["authentication_method"] = $input_data["authentication_method"];
-                $personal_invitation_data["first_name"] = $input_data["first_name"];
-                $personal_invitation_data["last_name"] = $input_data["last_name"];
-                $personal_invitation_data["job_title"] = $input_data["job_title"];
-                $personal_invitation_data["Company"] = $input_data["Company"];
-                $personal_invitation_data["business_card_email"] = $input_data["business_card_email"];
-                $personal_invitation_data["phone_number"] = $input_data["phone_number"];
-                $personal_invitation_data["fax_number"] = $input_data["fax_number"];
-                $personal_invitation_data["Website"] = $input_data["Website"];
-                $personal_invitation_data["user_advance_automatic_reminder"] = $input_data["user_advance_automatic_reminder"];
-                $personal_invitation_data["user_advance_settings_repeat_reminder"] = $input_data["user_advance_settings_repeat_reminder"];
-                if (!empty($input_data["your_logo"]))
-                    $personal_invitation_data["your_logo"] = $input_data["your_logo"];
-                //your_logo
 
-                if ($request->file("business_card_picture")) {
-                    $upload_response = uploadFile($request, 'business_card_picture');
-                    if (!empty($upload_response['success'])) {
-                        $personal_invitation_data["business_card_picture"] = $upload_response["data"];
-                    }
+            // $personal_invitation_data["authentication_method"] = $input_data["authentication_method"];
+            $personal_invitation_data["first_name"] = $input_data["first_name"];
+            $personal_invitation_data["last_name"] = $input_data["last_name"];
+            $personal_invitation_data["job_title"] = $input_data["job_title"];
+            $personal_invitation_data["Company"] = $input_data["Company"];
+            $personal_invitation_data["business_card_email"] = $input_data["business_card_email"];
+            $personal_invitation_data["phone_number"] = $input_data["phone_number"];
+            $personal_invitation_data["fax_number"] = $input_data["fax_number"];
+            $personal_invitation_data["Website"] = $input_data["Website"];
+            $personal_invitation_data["user_advance_automatic_reminder"] = $input_data["user_advance_automatic_reminder"];
+            $personal_invitation_data["user_advance_settings_repeat_reminder"] = $input_data["user_advance_settings_repeat_reminder"];
+            if (!empty($input_data["your_logo"]))
+                $personal_invitation_data["your_logo"] = $input_data["your_logo"];
+            //your_logo
+
+            if ($request->file("own_logo")) {
+                $upload_response = uploadFile($request, 'own_logo');
+                if (!empty($upload_response['success'])) {
+                    $personal_invitation_data["own_logo"] = $upload_response["data"];
                 }
-
-
-                $personalDataInvitationStr = json_encode($personal_invitation_data);
-                $dataArray["personalize_invitation_data"] = $personalDataInvitationStr;
             }
+
+            if ($request->file("business_card_picture")) {
+                $upload_response = uploadFile($request, 'business_card_picture');
+                if (!empty($upload_response['success'])) {
+                    $personal_invitation_data["business_card_picture"] = $upload_response["data"];
+                }
+            }
+
+
+            $personalDataInvitationStr = json_encode($personal_invitation_data);
+            $dataArray["personalize_invitation_data"] = $personalDataInvitationStr;
+
             if (!empty($input_data["authentication_method"])) {
                 $autenticationMethodsStr = implode(",", $input_data["authentication_method"]);
                 $dataArray["authentication_method"] = $autenticationMethodsStr;
@@ -149,14 +146,14 @@ class SharedDocumentController extends FrontBaseController
 
                 $errormessages = $validator->getMessageBag()->getMessages();
 
-                $errormsgHTML = "<ul>";
+                $errormsgHTML = "";
                 foreach ($errormessages as $errorIndex => $errorMsgArr) {
 
                     foreach ($errorMsgArr as $indder_index => $message) {
-                        $errormsgHTML .= '<li>' . $message . '</li>';
+                        $errormsgHTML .=  $message . '<br/>';
                     }
                 }
-                $errormsgHTML .= '</ul>';
+
                 //  foreach($errorMessages as $error_index =>  )
                 return response()->json(array(
                     'return_type' => 'error',
@@ -201,15 +198,14 @@ class SharedDocumentController extends FrontBaseController
             if ($validator->fails()) {
 
                 $errormessages = $validator->getMessageBag()->getMessages();
-
-                $errormsgHTML = "<ul>";
+                $errormsgHTML = "";
                 foreach ($errormessages as $errorIndex => $errorMsgArr) {
 
                     foreach ($errorMsgArr as $indder_index => $message) {
-                        $errormsgHTML .= '<li>' . $message . '</li>';
+                        $errormsgHTML .= $message . '<br/>';
                     }
                 }
-                $errormsgHTML .= '</ul>';
+
                 //  foreach($errorMessages as $error_index =>  )
                 return response()->json(array(
                     'return_type' => 'error',
@@ -220,7 +216,7 @@ class SharedDocumentController extends FrontBaseController
 
             return response()->json(array(
                 'return_type' => 'success',
-                'message' => 'email validation success!'
+                'message' => 'Email validation success!'
 
             ));
         }
@@ -246,8 +242,6 @@ class SharedDocumentController extends FrontBaseController
         $data_array["public_link"] = $public_link;
 
 
-
-
         return view('front.user-document.document-share-settings', $data_array);
     }
     public function saveAdvanceSettings(Request $request)
@@ -256,7 +250,27 @@ class SharedDocumentController extends FrontBaseController
             $input_data = $request->all();
             $is_valid = $this->saveInSharedTables($request, "multiple");
 
+
             if ($is_valid) {
+                //send email
+                if (!empty($input_data["user_email"]) && !empty($input_data["user_name"])) {
+                    foreach ($input_data["user_email"] as $userINfoIndex => $userEmail) {
+                        $userName = $input_data["user_name"][$userINfoIndex];
+                        $email_config = [
+                            'config_param' => 'email_verification',
+                            'content_data' => [
+                                'name' => $userName,
+                                'document_link' => $input_data["publink_link_container"],
+                            ],
+                        ];
+                        Mail::to($userEmail)->send(new CommonMail($email_config));
+                    }
+                }
+                if (!empty($input_data["email"]) && !empty($input_data["name"])) {
+                    $dataArray = array();
+                    $dataArray["name"] = $input_data["name"];
+                    $dataArray["email"] = $input_data["email"];
+                }
                 $response_type = 'success';
                 $response_message = 'Docuemnt shared successfully,Thank You!';
             } else {
@@ -281,14 +295,14 @@ class SharedDocumentController extends FrontBaseController
 
                 $errormessages = $validator->getMessageBag()->getMessages();
 
-                $errormsgHTML = "<ul>";
+                $errormsgHTML = "";
                 foreach ($errormessages as $errorIndex => $errorMsgArr) {
 
                     foreach ($errorMsgArr as $indder_index => $message) {
-                        $errormsgHTML .= '<li>' . $message . '</li>';
+                        $errormsgHTML .= $message . "<br/>";
                     }
                 }
-                $errormsgHTML .= '</ul>';
+
 
 
                 //  foreach($errorMessages as $error_index =>  )

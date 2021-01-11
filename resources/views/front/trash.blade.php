@@ -148,7 +148,6 @@
 @section('additionaljs')
 <script>
     $(document).ready(function() {
-
         $("body").on("click", "#restore_selectedId", function() {
             var req_type = "{{config('constant.RESTORE_FORM')}}";
             $("#trash_req_type_id").val(req_type);
@@ -157,7 +156,6 @@
                 "action": "{{route('front.trash-update-save')}}"
             });
             form.submit();
-
         });
 
         $("body").on("click", "#delete_selectedId", function() {
@@ -168,7 +166,6 @@
                 "action": "{{route('front.trash-update-save')}}"
             });
             form.submit();
-
         });
         $("body").on("click", "#empty_trashlistId", function() {
 
@@ -183,12 +180,12 @@
             alert("tt");
             $("input[id ^= 'customControlAutosizing']").each(function(key, val) {
                 if ($(this).attr("checked")) {
-                    alert("checked");
+                    // alert("checked");
                     $(this).attr({
                         "checked": false
                     });
                 } else {
-                    alert("unchecked");
+                    //  alert("unchecked");
                     $(this).attr({
                         "checked": true
                     });

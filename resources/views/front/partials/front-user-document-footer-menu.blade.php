@@ -398,7 +398,7 @@
 
         $("#advance_settings_id").click(function() {
             var user_document_id = $("#recent_document_select_item").val();
-            alert("{{url('user-document-advance-settings')}}/" + user_document_id);
+            // alert("{{url('user-document-advance-settings')}}/" + user_document_id);
             window.location.href = "{{url('user-document-advance-settings')}}/" + user_document_id;
         });
 

@@ -204,9 +204,12 @@
                                         <p>Replace the default PDF Writer logo with your own (optional).</p>
                                         <!--template-types logo-type-->
                                         <ul class="template-types logo-type">
-                                            <!--  <li>
-                                            <img src="../public/front/images/add-new-logo.png">
-                                        </li> -->
+                                            <li class="p-0">
+                                                <!-- <img src="../public/front/images/add-new-logo.png">-->
+                                                <div id="UploadLogo">
+                                                    <upload-gambar></upload-gambar>
+                                                </div>
+                                            </li>
                                             <li>
                                                 <input type="checkbox" name="your_logo" value="1" />
                                                 <img src="../public/front/images/logo-blue.png">
@@ -367,7 +370,7 @@
                                 <div class="col-md-7 col-lg-8">
                                     <div class="personalize-invitation-content">
 
-                                        {!! Form::select('user_advance_automatic_reminder', $user_advance_settings_automatic_reminder, array('id' => 'user_advance_automatic_reminderid','class' => 'my-dropdown')) !!}
+                                        {!! Form::select('user_advance_automatic_reminder', $user_advance_settings_automatic_reminder,null, array('id' => 'user_advance_automatic_reminderid','class' => 'my-dropdown')) !!}
                                         <span class="reminder-text">If your shared documents haven't been opened by 12/12/2020.</span>
                                     </div>
                                 </div>
@@ -380,7 +383,7 @@
                                 </div>
                                 <div class="col-md-7 col-lg-8">
                                     <div class="personalize-invitation-content">
-                                        {!! Form::select('user_advance_settings_repeat_reminder', $user_advance_settings_repeat_reminder, array('id' => 'user_advance_settings_repeat_reminderid','class' => 'my-dropdown')) !!}
+                                        {!! Form::select('user_advance_settings_repeat_reminder', $user_advance_settings_repeat_reminder,null, array('id' => 'user_advance_settings_repeat_reminderid','class' => 'my-dropdown')) !!}
 
                                         <span class="reminder-text">If the documents haven't been opened by 12/13/2020.</span>
                                     </div>
@@ -411,6 +414,7 @@
 
 @endsection
 @section('additionaljs')
+<script src="{{ asset('public/front/js/vue.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         $("a[id ^= 'advance_share_tabl_']").click(function() {
@@ -472,6 +476,39 @@
             });
 
         });
+
+        Vue.component('upload-gambar', {
+            template: `
+  <span @click="openUpload">
+  	<img ref="preview" :src="showImage" style="max-width: 200px; max-height: 70px">
+    <input ref="input" name="own_logo" @change="previewImage" type="file" id="file-field" accept="image/*" style="display: none"/>
+  </span>`,
+
+            data: () => {
+                return {
+                    showImage: "{{ asset('public/front/images/add-new-logo.png') }} "
+                }
+            },
+
+            methods: {
+                openUpload() {
+                    this.$refs.input.click()
+                },
+
+                previewImage() {
+                    var reader = new FileReader()
+                    reader.readAsDataURL(this.$refs.input.files[0])
+
+                    reader.onload = e => {
+                        this.showImage = e.target.result
+                    }
+                }
+            }
+        });
+        new Vue({
+            el: '#UploadLogo'
+        })
+
     });
 </script>
 @endsection

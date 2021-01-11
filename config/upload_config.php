@@ -121,6 +121,17 @@ return [
         'allowed_extention' => 'jpg,jpeg,png,svg,gif',
         'max_allowed_size' => '2000'
     ],
+    'own_logo' => [
+        'label' => 'Own Logo',
+        'file_input' => 'own_logo',
+        'disk' => 'public',
+        'folder' => 'business_card_picture',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal',
+        'allowed_extention' => 'jpg,jpeg,png,svg,gif',
+        'max_allowed_size' => '2000'
+    ],
 
     'upload_types' => 'file_attachment'
 ];
