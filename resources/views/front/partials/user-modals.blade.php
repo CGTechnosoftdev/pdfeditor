@@ -1,13 +1,5 @@
  @include('front.partials.forms.link-to-fill-basic-form')
-
-
  @include('front.partials.forms.user-document-share-form')
-
-
- @include('front.partials.forms.upload-document-form')
- @include('front.partials.forms.upload-template-form')
- @include('front.partials.forms.add-folder-form')
-
  @section("additionaljs")
 
  <script type="text/javascript">

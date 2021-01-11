@@ -6,16 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserDocumentUploadFormRequest;
 use App\Http\Requests\UserDocumentGetFormRequest;
 use App\Http\Requests\UserAddFolderFormRequest;
-//use App\Http\Requests\SharedUserDocumentFormRequest;
-//use App\Http\Requests\SharedDocumentFormRequest;
 use App\Models\UserDocument;
-//use App\Models\SharedDocument;
-//use App\Models\SharedUserDocument;
-//use App\Models\SharedDocumentUser;
-//use Illuminate\Support\Facades\Validator;
-
-
-use Auth;
+use DB, Auth, View, Response, Cookie, Hash;
 
 class UserDocumentController extends FrontBaseController
 {
@@ -30,6 +22,74 @@ class UserDocumentController extends FrontBaseController
 
     public function index()
     {
+        $user = Auth::user();
+        $data_array = [
+            'title' => 'My Documents',
+        ];
+        $data_array['folders_list'] = UserDocument::getFolderList($user->id)->pluck('name', 'encrypted_id')->toArray();
+        $data_array["footer_menu"] = true;
+        return view('front.user-document.list', $data_array);
+    }
+
+    public function getDocumentListData(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $document_params = [];
+        $document_params['user_id'] = $user->id;
+        $document_params['type'] = config('constant.DOCUMENT_TYPE_FILE');
+        $document_params['parent_id'] = $input_data['folder_name'] ?? null;
+        $document_params['search_text'] = $input_data['search_text'] ?? null;
+        $document_params['order_by'] = $input_data['sort_by'] ?? null;
+
+        $documents = UserDocument::getDocumentList($document_params);
+        $view = View::make('front.user-document.items-with-checkbox')->with('documents', $documents)->render();
+        $count = count($documents);
+        return Response::json(array('html' => $view, 'count' => $count));
+    }
+
+    public function encryptedDocumentList(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $data_array = [
+            'title' => 'Encrypted',
+        ];
+        if (!empty($input_data)) {
+            if (!empty($input_data['encryption_password']) && Hash::check($input_data['encryption_password'], $user->password)) {
+                Cookie::queue('encryption_success', strtotime(date("Ymdhis")), 1);
+            } else {
+                set_flash('error', 'Invalid Encryption Password');
+            }
+            return redirect()->route('front.encrypted-document-list');
+        } else {
+            $data_array["disable_encription"] = Cookie::get('encryption_success');
+        }
+
+        $data_array["footer_menu"] = true;
+        return view('front.user-document.encrypted-list', $data_array);
+    }
+
+    public function getEncryptedDocumentListData(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $document_params = [];
+        $document_params['user_id'] = $user->id;
+        $document_params['encrypted'] = true;
+        $document_params['type'] = config('constant.DOCUMENT_TYPE_FILE');
+        $document_params['parent_id'] = $input_data['folder_name'] ?? null;
+        $document_params['search_text'] = $input_data['search_text'] ?? null;
+        $document_params['order_by'] = $input_data['sort_by'] ?? null;
+
+        $documents = UserDocument::getDocumentList($document_params);
+        $view = View::make('front.user-document.items-with-checkbox')->with('documents', $documents)->render();
+        $count = count($documents);
+        return Response::json(array('html' => $view, 'count' => $count));
+    }
+
+    public function viewDocument()
+    {
     }
 
     public function uploadNew(UserDocumentUploadFormRequest $request)
@@ -40,7 +100,9 @@ class UserDocumentController extends FrontBaseController
             $upload_response = uploadFile($request, 'user_document');
             if (!empty($upload_response['success'])) {
                 $input_data['user_id'] = $user['id'];
-                $input_data['name'] = $upload_response['data'];
+                $input_data['name'] = pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
+                $input_data['file'] = $upload_response['data'];
+                $input_data['file_thumbnail'] = '';
                 $user_document_form = UserDocument::saveData($input_data);
                 if ($user_document_form) {
                     $response_type = 'success';

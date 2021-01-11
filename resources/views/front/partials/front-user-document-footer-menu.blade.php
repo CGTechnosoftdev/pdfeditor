@@ -234,7 +234,6 @@
         var model_element = "#linktofill";
         $(document).on('click', '.content .single-document', function(e) {
             e.preventDefault();
-
             selected_document = $(this).attr('data-id');
             var idArray = $(this).attr('id').split("document_list_item_");
             $("#recent_document_select_item").val(idArray[1]);

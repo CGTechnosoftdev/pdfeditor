@@ -77,14 +77,19 @@ return [
     'DOCUMENT_TYPE_TEMPLATE' => 2,
     'DOCUMENT_TYPE_FOLDER' => 3,
 
+    'DOCUMENT_ENCRYPTED_NO' => 0,
+    'DOCUMENT_ENCRYPTED_YES' => 1,
+
     'SHARE_METHOD_SHARE' => 1,
     'SHARE_METHOD_LINKTOFILL' => 2,
     'SHARE_METHOD_SENDFORREVIEW' => 3,
 
     'USER_CAN_EDIT_AND_SIGN' => 1,
     'USER_CAN_SIGN' => 2,
+
     'TRASHED' => 2,
     'NOT_TRASHED' => 1,
+
     'RESTORE' => 3,
     'RESTORE_FORM' => 1,
     'DESTROY_FORM' => 2,

@@ -11,7 +11,7 @@ class UserDocument extends Model
 
     use SoftDeletes;
     use BaseModelTrait;
-    protected $fillable = ['name', 'type', 'user_id', 'thumbnail', 'trash'];
+    protected $fillable = ['name', 'file', 'file_thumbnail', 'type', 'user_id', 'thumbnail', 'trash'];
     protected $appends = [
         'formatted_name', 'thumbnail_url', 'encrypted_id'
     ];
@@ -21,7 +21,7 @@ class UserDocument extends Model
 
     public function getFormattedNameAttribute()
     {
-        return pathinfo($this->name, PATHINFO_FILENAME);;
+        return $this->name;
     }
 
     public function getThumbnailUrlAttribute()
@@ -53,5 +53,60 @@ class UserDocument extends Model
             $model->where($condition);
         }
         return $model->orderBy('updated_at', 'DESC')->limit($limit)->get();
+    }
+
+    public static function getFolderList($user_id)
+    {
+        $condition = ['user_id' => $user_id, 'type' => config('constant.DOCUMENT_TYPE_FOLDER'), 'status' => config('constant.STATUS_ACTIVE')];
+        $model = self::query();
+        if (!empty($condition)) {
+            $model->where($condition);
+        }
+        return $model->orderBy('updated_at', 'DESC')->get();
+    }
+
+    public static function getDocumentList($data_array)
+    {
+        $document_type = [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')];
+        $condition = ['user_id' => $data_array['user_id'], 'status' => config('constant.STATUS_ACTIVE')];
+        if (!empty($data_array['parent_id'])) {
+            $condition['parent_id'] = $data_array['parent_id'];
+        }
+
+        if (!empty($data_array['trash'])) {
+            $condition['trash'] = config('constant.TRASHED');
+        } elseif (!empty($data_array['encrypted'])) {
+            $condition['encrypted'] = config('constant.DOCUMENT_ENCRYPTED_YES');
+        } else {
+            $condition['trash'] = config('constant.NOT_TRASHED');
+            $condition['encrypted'] = config('constant.DOCUMENT_ENCRYPTED_NO');
+        }
+
+        $model = self::query();
+        if (!empty($condition)) {
+            $model->where($condition);
+        }
+
+        if (!empty($data_array['type']) && in_array($data_array['type'], $document_type)) {
+            $model->where('type', $data_array['type']);
+        } else {
+            $model->whereIn('type', $document_type);
+        }
+
+        if (!empty($data_array['search_text'])) {
+            $model->where('name', 'like', '%' . $data_array['search_text'] . '%');
+        }
+
+        return $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC')->get();
+    }
+
+    public static function emptyTrashList()
+    {
+        $condition = ['trash' => config('constant.TRASHED')];
+        $model = UserDocument::query();
+        if (!empty($condition)) {
+            $model->where($condition);
+        }
+        return $model->delete();
     }
 }

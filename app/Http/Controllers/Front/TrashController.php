@@ -3,33 +3,24 @@
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
-use App\Models\Trash;
 use App\Models\UserDocument;
+use Auth;
 
 class TrashController extends FrontBaseController
 {
     public function getTrashList()
     {
-        $trashListArray = Trash::getTrashList();
-        $empty_message = "";
-        $is_trash_list_empty = 0;
-        $trash_count = count($trashListArray);
-
-        if ($trash_count == 0) {
-
-            $empty_message = "Trash list is empty";
-            $is_trash_list_empty = 1;
-        }
+        $user = Auth::user();
+        $document_params = [];
+        $document_params['user_id'] = $user->id;
+        $document_params['trash'] = true;
+        $trash_items = UserDocument::getDocumentList($document_params);
 
         $data_array = [
             'title' => 'Trash',
-            'empty_message' => $empty_message,
-            'is_trash_list_empty' => $is_trash_list_empty,
-            'trash_count' => $trash_count,
+            'trash_items' => $trash_items,
+            'trash_count' => count($trash_items)
         ];
-
-
-        $data_array['trash_items'] = $trashListArray;
         return view('front.trash', $data_array);
     }
     public function trashUpdate(Request $request)
@@ -84,15 +75,13 @@ class TrashController extends FrontBaseController
                 }
             }
         }
-
-
         set_flash($response_type, $response_message);
-        return redirect()->route("front.get-trash-list");
+        return redirect()->route("front.trash-list");
     }
     public function trashEmpty()
     {
 
-        if (Trash::emptyTrashList()) {
+        if (UserDocument::emptyTrashList()) {
             $response_type = 'success';
             $response_message = 'Trash List Empty successfully';
         } else {
@@ -102,6 +91,6 @@ class TrashController extends FrontBaseController
 
 
         set_flash($response_type, $response_message);
-        return redirect()->route("front.get-trash-list");
+        return redirect()->route("front.trash-list");
     }
 }

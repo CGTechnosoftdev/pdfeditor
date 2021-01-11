@@ -130,7 +130,6 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 	Route::group(['namespace' => 'Front', 'middleware' => ['auth:front_web', 'preventBackHistory']], function () {
 
-		// Route::get('/', 'DashboardController@index')->name('dashboard');
 		Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 		Route::get('/payment-form/{subscription_plan}', 'PricingController@showPaymentForm')->name('payment-form');
 		Route::post('/checkout/{subscription_plan}', 'PricingController@checkout')->name('checkout');
@@ -140,25 +139,36 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::delete('/cancel-subscription', 'SubscriptionPaymentController@cancelSubscription')->name('cancel-subscription');
 		Route::post('/update-card', 'SubscriptionPaymentController@updateCard')->name('update-card');
 
-		Route::post('/document/{unique_code}', 'UserDocumentController@index')->name('document-link');
-		Route::post('/user-document-upload-new', 'UserDocumentController@uploadNew')->name('upload-new-document');
-		Route::post('/user-document-get-from-url', 'UserDocumentController@getFromUrl')->name('get-url-document');
-		Route::post('/user-document-add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
-		Route::post('/user-document-add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
+
+		Route::post('/document/upload-new', 'UserDocumentController@uploadNew')->name('upload-new-document');
+		Route::post('/document/get-from-url', 'UserDocumentController@getFromUrl')->name('get-url-document');
+		Route::post('/document/add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
+		Route::post('/document/add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
 		Route::post('/document-info', 'UserDocumentController@getDocumentInfo')->name('document-info');
+		Route::get('/document/template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
+		Route::post('/document/template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
 
-		Route::post('/publish-link-to-fill', 'LinkToFillController@publishLink')->name('publish-link-to-fill');
-		Route::get('/advance-setting-link-to-fill/{user_document}', 'LinkToFillController@advanceSetting')->name('advance-link-to-fill');
+		Route::get('/document/list', 'UserDocumentController@index')->name('document-list');
+		Route::post('/document/list-data', 'UserDocumentController@getDocumentListData')->name('document-list-data');
+		Route::get('/document/encrypted-list', 'UserDocumentController@encryptedDocumentList')->name('encrypted-document-list');
+		Route::post('/document/encrypted-list', 'UserDocumentController@encryptedDocumentList')->name('encrypted-document-list');
+		Route::post('/document/encrypted-list-data', 'UserDocumentController@getEncryptedDocumentListData')->name('encrypted-document-list-data');
 
-		Route::get('/user-document-template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
-		Route::post('/user-document-template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
+		Route::post('/document/{unique_code}', 'UserDocumentController@viewDocument')->name('document-link');
+
+		Route::post('/link-to-fill/publish', 'LinkToFillController@publishLink')->name('publish-link-to-fill');
+		Route::get('/link-to-fill/advance-setting-/{user_document}', 'LinkToFillController@advanceSetting')->name('advance-link-to-fill');
+
+
+
 		Route::get('/user-document-share-get/{user_document}', 'SharedDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
 		Route::post('/user-document-email-share-save', 'SharedDocumentController@userDocumentEmailShareSave')->name('user-document.user-document-email-share-save');
 		Route::post('/user-document-link-share-save', 'SharedDocumentController@userDocumentLinkShareSave')->name('user-document.user-document-link-share-save');
 		Route::get('/user-document-advance-settings/{user_document}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
 		Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
 		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
-		Route::get('/trash-list', 'TrashController@getTrashList')->name('get-trash-list');
+
+		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 	});

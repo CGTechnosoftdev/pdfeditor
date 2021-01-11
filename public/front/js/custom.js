@@ -8,24 +8,24 @@ function unblockUI() {
     $.unblockUI();
 }
 // Copy
-// var clipboardDemos = new Clipboard('[data-clipboard-demo]');
+var clipboardDemos = new Clipboard('[data-clipboard-demo]');
 
-// clipboardDemos.on('success', function(e) {
-//     e.clearSelection();
+clipboardDemos.on('success', function(e) {
+    e.clearSelection();
 
-//     console.info('Action:', e.action);
-//     console.info('Text:', e.text);
-//     console.info('Trigger:', e.trigger);
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
 
-//     showTooltip(e.trigger, 'Copied!');
-// });
+    showTooltip(e.trigger, 'Copied!');
+});
 
-// clipboardDemos.on('error', function(e) {
-//     console.error('Action:', e.action);
-//     console.error('Trigger:', e.trigger);
+clipboardDemos.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
 
-//     showTooltip(e.trigger, fallbackMessage(e.action));
-// });
+    showTooltip(e.trigger, fallbackMessage(e.action));
+});
 
 // tooltips.js
 
@@ -44,6 +44,18 @@ function clearTooltip(e) {
 function showTooltip(elem, msg) {
     elem.setAttribute('class', 'btn tooltipped tooltipped-s');
     elem.setAttribute('aria-label', msg);
+}
+
+function delayTyping(callback, ms) {
+    var timer = 0;
+    return function() {
+        var context = this,
+            args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            callback.apply(context, args);
+        }, ms || 0);
+    };
 }
 /*************** Navbar JS **************/
 (function($) {

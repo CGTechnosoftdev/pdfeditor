@@ -6,8 +6,8 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">NAVIGATION</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active treeview">
-                <a href="#">
+            <li class="active">
+                <a href="{{ route('front.dashboard') }}">
                     <svg id="Group_827" data-name="Group 827" xmlns="http://www.w3.org/2000/svg" width="15.299" height="15.299" viewBox="0 0 15.299 15.299">
                         <path id="Path_1530" data-name="Path 1530" d="M300.014,399.85v-9.826h9.827v.158q0,4.276,0,8.552a1.087,1.087,0,0,1-1.111,1.114q-4.276,0-8.552,0Z" transform="translate(-294.542 -384.551)" fill="#486eb8" />
                         <path id="Path_1531" data-name="Path 1531" d="M284.989,379.357v-2.487c0-.251,0-.5,0-.751A1.088,1.088,0,0,1,286.112,375q4.378,0,8.757,0h4.284a1.092,1.092,0,0,1,1.134,1.126q0,1.554,0,3.107v.127Z" transform="translate(-284.989 -374.996)" fill="#c1484a" />
@@ -17,7 +17,7 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li class="treeview">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16.798" height="16.798" viewBox="0 0 16.798 16.798">
                         <g id="Group_884" data-name="Group 884" transform="translate(-326.632 -393.762)">
@@ -25,8 +25,15 @@
                             <path id="Path_1609" data-name="Path 1609" d="M328.16,396.454v12.22h12.22V410.2H328.16a1.527,1.527,0,0,1-1.528-1.523v-12.22Z" transform="translate(0 0.364)" fill="#c1484a" />
                         </g>
                     </svg>
-                    <span>Tests</span>
+                    <span>Documents</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{{ route('front.document-list') }}"><i class="fa fa-circle-o"></i>My Documents</a></li>
+                    <li><a href="{{ route('front.encrypted-document-list') }}"><i class="fa fa-circle-o"></i>Encrypted</a></li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#">
@@ -74,7 +81,7 @@
             </li>
 
             <li>
-                <a href="{{URL::to('/')}}/trash-list">
+                <a href="{{ route('front.trash-list') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15.748" height="18" viewBox="0 0 15.748 18">
                         <g id="Group_885" data-name="Group 885" transform="translate(-273.621 -393.372)">
                             <path id="Path_1610" data-name="Path 1610" d="M273.621,396.326v-.985a.842.842,0,0,1,.839-.844H278.4l.331-.658a.834.834,0,0,1,.753-.468H283.5a.843.843,0,0,1,.755.468l.331.658h3.937a.842.842,0,0,1,.844.839v.99a.423.423,0,0,1-.422.422H274.042A.423.423,0,0,1,273.621,396.326Z" transform="translate(0)" fill="#c1484a" />
