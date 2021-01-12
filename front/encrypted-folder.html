@@ -253,8 +253,8 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="title">
-                    <h2><span>Documents</span> > My Folder</h2>
-                    <span>6 Items</span>
+                    <h2><span>Documents</span> > Encrypted</h2>
+                    <!-- <span>6 Items</span> -->
                 </div>
                 <div class="heading-btns">
                     <div class="form-group folder-dropdown">
@@ -317,216 +317,25 @@
                         </div>
                     </div>
             </section>
-            <div class="short-by-section">
-                <div class="short-checkbox">
-                    <div class="custom-control custom-checkbox red mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="select-all">
-                        <label class="custom-control-label font-0" for="select-all">.</label>
-                    </div>
-                </div>
-                <div class="short-by">
-                    <label for="folder">Short By :</label>
-                    <select id="folder" class="form-control my-dropdown">
-                            <option value="Option 1">Option 1</option>
-                            <option value="Option 2">Option 2</option>
-                            <option value="Option 3">Option 3</option>
-                            <option value="Option 4">Option 4</option>
-                            <option value="Option 5">Option 5</option>
-                        </select>
-                </div>
-            </div>
             <!-- Main content -->
-            <section class="content">
-                <div class="recent-documents">
+            <section class="content encrypted-folder-center pt-4">
+                <!-- <div class="recent-documents">
                     <h4>Recent Documents</h4>
-                </div>
+                </div> -->
 
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                            <label class="custom-control-label font-0" for="customControlAutosizing">.</label>
-                        </div>
+                <div class="encrypted-folder">
+                    <div class="encrypted-folder-img">
+                        <img src="../public/front/images/encrypted-folder.svg">
                     </div>
-                    <div class="doc-status color4 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <div class="encrypted-folder-content">
+                        <h4>Encrypted Folder</h4>
+                        <p>Keep documents in the Encrypted Folder for additional security. Documents here won't appear in My Documents and require an additional password.</p>
 
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-                            <label class="custom-control-label font-0" for="customControlAutosizing2">.</label>
-                        </div>
-                    </div>
-                    <div class="doc-status color3 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing3">
-                            <label class="custom-control-label font-0" for="customControlAutosizing3">.</label>
-                        </div>
-                    </div>
-                    <div class="doc-status color1 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing4">
-                            <label class="custom-control-label font-0" for="customControlAutosizing4">.</label>
-                        </div>
-                    </div>
-                    <div class="doc-status color8 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing5">
-                            <label class="custom-control-label font-0" for="customControlAutosizing5">.</label>
-                        </div>
-                    </div>
-                    <div class="doc-status color6 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing6">
-                            <label class="custom-control-label font-0" for="customControlAutosizing6">.</label>
-                        </div>
-                    </div>
-                    <div class="doc-status color5 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="single-document single-doc-signed">
-                    <div class="doc-dots">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing7">
-                            <label class="custom-control-label font-0" for="customControlAutosizing7">.</label>
-                        </div>
-                    </div>
-                    <div class="doc-status color2 mx-2">
-                        <!--<span class="badge badge-primary"></span>--></div>
-                    <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
-                    <div class="doc-content">
-                        <h5>PDFwriter How To Guide</h5>
-                        <div class="last-activity"><i class="fas fa-calendar-day"></i> Nov 11, 2020 at 11:32 pm</div>
-                    </div>
-                    <div class="more-opt">
-                        <div class="btn-group">
-                            <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/edit-smart.svg" class="user-image" alt="PDFWriter Admin Image"> Open</a>
-                                <a class="dropdown-item" href="#"><img src="../public/front/images/quick-preview.svg" class="user-image" alt="PDFWriter Admin Image"> Quick Preview</a>
+                        <span>Enter your password for your Encrypted Folder.</span>
+                        <div class="input-group input-group-joined">
+                            <input class="form-control" type="password" placeholder="Password">
+                            <div class="input-group-append">
+                                <button class="btn btn-success">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -1263,11 +1072,10 @@
         $(function() {
             //toggle two classes on button element
             $('.treeview a').on('click', function() {
-                $('.dashboard3').toggleClass('sidebar-collapse');
+                $('.dashboard3').toggleClass('sidebar-collapse sticky');
             });
         });
     </script>
-
 </body>
 
 </html>
