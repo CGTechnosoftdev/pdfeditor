@@ -30,6 +30,9 @@ function addPage() {
 
 $("#pick_date_button").click(function () {
     // $('#dataModal').modal('show');
+    $("#dateid").val('');
+    $('#header_footerid').prop('selectedIndex', 0);
+    $("#text_alignid").prop('selectedIndex', 0);
     $("#select_date_msg_id").html("");
     $("#select_date_msg_id").removeClass('show');
     $("#select_date_msg_id").removeClass('alert-success');
@@ -83,12 +86,16 @@ $("#new-date-select-button").click(function (event) {
 });
 $("#resize_canvas").click(function (event) {
     //  pdf.resizePage(event);
+    $("#page_widthid").val("");
+    $("#page_heightid").val("");
     $("#setuppage_msg_id").removeClass('show');
     $("#setuppage_msg_id").addClass('hide');
     $('#setpagesizeModal').modal('show');
 });
 $("#new-width-height-button").click(function (event) {
-    var numchk = /^[0-9]+$/;
+    ///^\-?([0-9]+(\.[0-9]+)?|Infinity)$
+    //var numchk = /^[0-9]+$/;
+    var numchk = /^\-?([0-9]+(\.[0-9]+)?|Infinity)$/;
     var is_valid = true;
     var messages = [];
     var error_index = 0
@@ -295,8 +302,11 @@ document.getElementById('blackout_btn_id').addEventListener('click', function (e
 });
 document.getElementById('new-img-save-png').addEventListener('click', function () {
     const data = document.getElementById('preview-image').src;
-    pdf.addNewImage(data);
-    $('#imageModal').modal('hide');
+
+    if (data == "") {
+        pdf.addNewImage(data);
+        $('#imageModal').modal('hide');
+    }
 });
 document.getElementById("use-sign").addEventListener('click', function () {
     const preview = document.getElementById('preview-sign');
@@ -458,7 +468,7 @@ $("#submit").click(function () {
     }
 })
 
-$("#watermark").on('keypress', function(){
+$("#watermark").on('keypress', function () {
     $("#watermark-msg").hide();
 })
 
