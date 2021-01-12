@@ -45,6 +45,18 @@ function showTooltip(elem, msg) {
     elem.setAttribute('class', 'btn tooltipped tooltipped-s');
     elem.setAttribute('aria-label', msg);
 }
+
+function delayTyping(callback, ms) {
+    var timer = 0;
+    return function() {
+        var context = this,
+            args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            callback.apply(context, args);
+        }, ms || 0);
+    };
+}
 /*************** Navbar JS **************/
 (function($) {
     "use strict";
