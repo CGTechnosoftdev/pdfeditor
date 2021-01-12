@@ -133,7 +133,6 @@ class Top100FormController extends AdminBaseController
 	 */
 	public function edit(Top100Form $top_100_form)
 	{
-
 		$data_array = [
 			'title' => 'Edit Top100Form Category',
 			'heading' => 'Edit Top100Form Category',

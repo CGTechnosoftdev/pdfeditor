@@ -1,3 +1,62 @@
+function blockUI() {
+    $.blockUI({
+        baseZ: 99999
+    });
+}
+
+function unblockUI() {
+    $.unblockUI();
+}
+// Copy
+var clipboardDemos = new Clipboard('[data-clipboard-demo]');
+
+clipboardDemos.on('success', function(e) {
+    e.clearSelection();
+
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+
+    showTooltip(e.trigger, 'Copied!');
+});
+
+clipboardDemos.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+
+    showTooltip(e.trigger, fallbackMessage(e.action));
+});
+
+// tooltips.js
+
+var btns = document.querySelectorAll('.btn');
+
+for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('mouseleave', clearTooltip);
+    btns[i].addEventListener('blur', clearTooltip);
+}
+
+function clearTooltip(e) {
+    e.currentTarget.setAttribute('class', 'btn');
+    e.currentTarget.removeAttribute('aria-label');
+}
+
+function showTooltip(elem, msg) {
+    elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+    elem.setAttribute('aria-label', msg);
+}
+
+function delayTyping(callback, ms) {
+    var timer = 0;
+    return function() {
+        var context = this,
+            args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            callback.apply(context, args);
+        }, ms || 0);
+    };
+}
 /*************** Navbar JS **************/
 (function($) {
     "use strict";
@@ -29,21 +88,21 @@
 
 $('.counting').each(function() {
     var $this = $(this),
-    countTo = $this.attr('data-count');
+        countTo = $this.attr('data-count');
 
     $({ countNum: $this.text() }).animate({
-        countNum: countTo
-    },
-
-    {
-
-        duration: 3000,
-        easing: 'linear',
-        step: function() {
-            $this.text(Math.floor(this.countNum));
+            countNum: countTo
         },
-        complete: function() {
-            $this.text(this.countNum);
+
+        {
+
+            duration: 3000,
+            easing: 'linear',
+            step: function() {
+                $this.text(Math.floor(this.countNum));
+            },
+            complete: function() {
+                $this.text(this.countNum);
                 //alert('finished');
             }
 
@@ -71,17 +130,17 @@ function hideNonVisibleDivs() {
     var i, divId, div;
     for (i = 0; i < divs.length; i++) {
         divId = divs[i];
-        
+
         div = document.getElementById(divId);
-        
+
         if (visibleDivId === divId) {
-            
+
             div.style.display = "block";
-            
+
         } else {
-            
+
             div.style.display = "none";
-            
+
         }
     }
 }
@@ -92,6 +151,48 @@ $(function() {
     $('.pricing-plans .plan-price').matchHeight();
 });
 
+/************* General Settings Tabs *********/
+$('.general-settings-tabs h4').click(function(event) {
+    event.preventDefault();
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+
+    var ph = $(this).parent().height();
+    var ch = $(this).next().height();
+
+    if (ch > ph) {
+        $(this).parent().css({
+            'min-height': ch + 'px'
+        });
+    } else {
+        $(this).parent().css({
+            'height': 'auto'
+        });
+    }
+});
+
+function tabParentHeight() {
+    var ph = $('.general-settings-tabs').height();
+    var ch = $('.general-settings-tabs .setting-tab-content').height();
+    if (ch > ph) {
+        $('.general-settings-tabs').css({
+            'height': ch + 'px'
+        });
+    } else {
+        $(this).parent().css({
+            'height': 'auto'
+        });
+    }
+}
+
+$(window).resize(function() {
+    tabParentHeight();
+});
+
+$(document).resize(function() {
+    tabParentHeight();
+});
+tabParentHeight();
 
 /****** Onlick add and remove class ******/
 
@@ -124,3 +225,39 @@ $('.pricing-plans .col-md-4').on('click', function() {
         j.preventDefault();
     });
 })(jQuery);
+
+
+
+$('.template-types li').on('click', function() {
+    $(this).toggleClass('active').siblings().removeClass('active');
+});
+
+
+///////////// Image Upload and Preview /////////////
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imageUpload").change(function() {
+    readURL(this);
+});
+
+
+/*************** Timeframe ************/
+$('.timeformate ul li').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});
+
+
+/******* ToolTip ********/
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+})

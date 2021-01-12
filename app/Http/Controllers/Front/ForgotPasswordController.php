@@ -97,7 +97,6 @@ class ForgotPasswordController extends Controller
             DB::beginTransaction();
             try {
 
-
                 $link =  route('front.user.verification.save', [$token]) . "/" . '?email=' . urlencode($user->email);
 
 

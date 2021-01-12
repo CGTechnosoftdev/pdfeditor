@@ -22,8 +22,8 @@ class DashboardController extends AdminBaseController
      */
     public function index()
     {
-        $data_array = ['title'=>'Dashboard','heading'=>'Dashboard'];
-        return view('admin.dashboard',$data_array);
+        $data_array = ['title' => 'Dashboard', 'heading' => 'Dashboard'];
+        return view('admin.dashboard', $data_array);
     }
 
     /**
@@ -36,27 +36,27 @@ class DashboardController extends AdminBaseController
     public function changeStatus(Request $request)
     {
         $modelArr = config('custom_config.model_arr');
-        $activeStatus=config('constant.STATUS_ACTIVE');
-        $inactiveStatus=config('constant.STATUS_INACTIVE');
-        $responseType=false;
-        $responseMessage='Error occoured, Please try again.';
-        $responseData='';
+        $activeStatus = config('constant.STATUS_ACTIVE');
+        $inactiveStatus = config('constant.STATUS_INACTIVE');
+        $responseType = false;
+        $responseMessage = 'Error occoured, Please try again.';
+        $responseData = '';
         $inputData = $request->input();
-        if(!empty($inputData['type']) && !empty($inputData['id']) && isset($inputData['status']) && array_key_exists($inputData['type'], $modelArr)){
+        if (!empty($inputData['type']) && !empty($inputData['id']) && isset($inputData['status']) && array_key_exists($inputData['type'], $modelArr)) {
             $modelName = $modelArr[$inputData['type']];
-            $model = "App\Models\\".$modelArr[$inputData['type']];
+            $model = "App\Models\\" . $modelArr[$inputData['type']];
             $model = new $model;
-            $dataRow = $model->where(['id'=>$inputData['id'],'status'=>$inputData['status']])->first();
-            if(!empty($dataRow)){
-                $newStatus=($dataRow->status==$activeStatus) ? $inactiveStatus : $activeStatus;
-                $dataRow->status=$newStatus;
+            $dataRow = $model->where(['id' => $inputData['id'], 'status' => $inputData['status']])->first();
+            if (!empty($dataRow)) {
+                $newStatus = ($dataRow->status == $activeStatus) ? $inactiveStatus : $activeStatus;
+                $dataRow->status = $newStatus;
                 $dataRow->save();
 
-                $responseType=true;
-                $responseMessage='Status update successfully';
-                $responseData=$newStatus;
+                $responseType = true;
+                $responseMessage = 'Status update successfully';
+                $responseData = $newStatus;
             }
         }
-        return json_encode(['success'=>$responseType,'data'=>$responseData,'message'=>$responseMessage]);
+        return json_encode(['success' => $responseType, 'data' => $responseData, 'message' => $responseMessage]);
     }
 }
