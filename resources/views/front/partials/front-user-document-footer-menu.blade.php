@@ -243,6 +243,71 @@
             $('.footer-more-menus').addClass('active').siblings().removeClass('active');
         });
 
+
+
+
+        $("body").on("click", "a[id ^= 'move_to_trash_document_trigger_']", function() {
+            //alert($(this).attr("id"));
+            blockUI();
+            var idArray = $(this).attr("id").split("move_to_trash_document_trigger_");
+            $.ajax({
+                url: "{{route('front.move-to-trash-save')}}",
+                type: "post",
+                data: "_token={{ csrf_token() }}&req_type=move_to_trash&document_id=" + idArray[1],
+                success: function(ret_respone) {
+                    console.log(ret_respone);
+                    $.ajax({
+                        url: "{{route('front.encrypted-document-list-data')}}",
+                        type: "post",
+                        dataType: 'json',
+                        data: "_token={{csrf_token()}}&req_type=update_list&type={{config('constant.DOCUMENT_TYPE_FILE')}}",
+                        success: function(ret_object) {
+                            $("#document_list_containerid").html(ret_object.html);
+                        },
+                        complete: function() {
+                            unblockUI();
+                        },
+
+                    });
+                }
+            });
+        });
+
+        $("body").on("click", "a[id ^= 'move_to_trash_template_trigger_']", function() {
+
+            blockUI();
+            var idArray = $(this).attr("id").split("move_to_trash_template_trigger_");
+            $.ajax({
+                url: "{{route('front.move-to-trash-save')}}",
+                type: "post",
+                data: "_token={{ csrf_token() }}&req_type=move_to_trash&document_id=" + idArray[1],
+                success: function(ret_respone) {
+
+                    console.log(ret_respone);
+                    $.ajax({
+                        url: "{{route('front.encrypted-document-list-data')}}",
+                        type: "post",
+                        dataType: 'json',
+                        data: "_token={{csrf_token()}}&req_type=update_list&type={{config('constant.DOCUMENT_TYPE_TEMPLATE')}}",
+                        success: function(ret_object) {
+
+                            $("#template_list_containerid").html(ret_object.html);
+
+                        },
+                        error: function(err) {
+
+                            console.log(err);
+                        },
+                        complete: function() {
+                            unblockUI();
+                        },
+
+
+                    });
+                }
+            });
+        });
+
         $("#sharemenu_itemid").click(function() {
             // alert("ajax call is ");
             $.ajaxSetup({

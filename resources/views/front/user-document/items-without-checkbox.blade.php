@@ -50,11 +50,12 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop{{$key}}">
             <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
             <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-            <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
+            <a class="dropdown-item" href="#" id="{{ $item_container_id.$row->encrypted_id }}"><i class=" far fa-folder"></i> Move to trash</a>
         </div>
     </div>
 </div>
 @endforeach
+
 @else
 <h3>No item found</h3>
 @endif

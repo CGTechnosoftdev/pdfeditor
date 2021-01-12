@@ -169,8 +169,11 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
 
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
+		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
+
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
+		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
 	});
 });
 

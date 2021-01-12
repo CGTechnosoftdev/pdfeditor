@@ -47,7 +47,7 @@ class UserDocument extends Model
 
     public static function getUserRecent($user, $type, $limit = 5)
     {
-        $condition = ['user_id' => $user->id, 'type' => $type, 'status' => config('constant.STATUS_ACTIVE')];
+        $condition = ['trash' => config("constant.NOT_TRASHED"), 'user_id' => $user->id, 'type' => $type, 'status' => config('constant.STATUS_ACTIVE')];
         $model = self::query();
         if (!empty($condition)) {
             $model->where($condition);
@@ -86,6 +86,7 @@ class UserDocument extends Model
         if (!empty($condition)) {
             $model->where($condition);
         }
+
 
         if (!empty($data_array['type']) && in_array($data_array['type'], $document_type)) {
             $model->where('type', $data_array['type']);

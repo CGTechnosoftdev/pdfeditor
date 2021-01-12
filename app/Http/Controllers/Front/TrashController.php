@@ -4,29 +4,37 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Models\UserDocument;
-use Auth;
+use Auth, Response;
 
 class TrashController extends FrontBaseController
 {
-    public function getTrashList()
+    public function getTrashList(Request $request)
     {
+        $input_data = $request->all();
         $user = Auth::user();
         $document_params = [];
         $document_params['user_id'] = $user->id;
         $document_params['trash'] = true;
+        $document_params['search_text'] = $input_data['search_text'] ?? null;
+
         $trash_items = UserDocument::getDocumentList($document_params);
+
+
+        //dd($trash_items);
 
         $data_array = [
             'title' => 'Trash',
             'trash_items' => $trash_items,
-            'trash_count' => count($trash_items)
+            'trash_count' => count($trash_items),
+            'search_text' => $document_params['search_text'],
         ];
         return view('front.trash', $data_array);
     }
+
     public function trashUpdate(Request $request)
     {
         $dataArray = $request->all();
-        // dd($dataArray);
+
         $req_type = $dataArray["req_type"];
         $is_valid = 1;
 
@@ -92,5 +100,27 @@ class TrashController extends FrontBaseController
 
         set_flash($response_type, $response_message);
         return redirect()->route("front.trash-list");
+    }
+    public function moveToTrash(Request $request)
+    {
+        $input_data = $request->all();
+        if ($input_data["req_type"] == "move_to_trash") {
+            $is_valid = 1;
+            $document_id = decryptData($input_data["document_id"]);
+
+            if (!UserDocument::whereId($document_id)->update(['trash' => config('constant.TRASHED')])) {
+                $is_valid = 0;
+            }
+        }
+        if ($is_valid == 1) {
+            $response_type = 'success';
+            $response_message = 'Document move to trash successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Document move to trash failed!';
+        }
+
+        set_flash($response_type, $response_message);
+        return Response::json(array('response_type' => $response_type, 'response_message' => $response_message));
     }
 }
