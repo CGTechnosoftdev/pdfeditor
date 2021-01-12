@@ -27,7 +27,7 @@ class UserDocumentUploadFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|mimes:pdf,png,jpeg,jpg,doc,docx|size:25000',
+            'file' => 'required|mimes:pdf,png,jpeg,jpg,doc,docx|max:25000',
         ];
     }
 }
