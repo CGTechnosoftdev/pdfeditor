@@ -2444,13 +2444,13 @@ li {
     font-weight: 900;
     font-size: 14px;
     border: none;
-    position: relative;
-    top: 3px;
+    position: absolute;
+    top: 6px;
 }
 
 .dashboard3-wrapper .white-bg-nav .user-menu .dropdown-toggle::after {
     color: #fff;
-    top: -3px;
+    /* top: -3px; */
 }
 
 
@@ -2704,7 +2704,7 @@ li {
 .dashboard3 .sidebar-menu .treeview-menu>li.active>a,
 .dashboard3 .sidebar-menu .treeview-menu>li>a:hover {
     color: #333333;
-    background: #eaeaea;
+    background: #f5f5f5;
 }
 
 .dashboard3 .sidebar-form {
@@ -2897,7 +2897,7 @@ li {
     .sidebar-mini.sidebar-collapse .main-sidebar {
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
-        width: 82px !important;
+        width: 55px !important;
         z-index: 850;
     }
     .sidebar-mini.sidebar-collapse .sidebar-menu>li {
@@ -6436,7 +6436,8 @@ li {
     position: fixed !important;
     height: 86%;
     z-index: 999;
-    min-width: 184px;
+    min-width: 190px;
+    overflow: auto;
 }
 
 .dashboard3.sidebar-mini.sticky .treeview-menu {
@@ -6445,7 +6446,7 @@ li {
 
 .sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu {
     display: block!important;
-    left: 80px;
+    left: 55px;
     text-align: left;
 }
 
@@ -6455,14 +6456,23 @@ li {
 
 .sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu li a {
     padding: 10px;
+    /* display: block; */
+    display: flex;
+    justify-content: space-between;
 }
 
 .sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu h5 {
     padding: 10px;
     text-transform: uppercase;
     font-size: 13px;
+    color: #486eb8;
+    font-family: Poppins-Bold;
 }
 
 .dashboard3.sidebar-mini.sticky .content-wrapper {
-    margin-left: 260px !important;
+    margin-left: 245px !important;
+}
+
+.sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu li a:hover {
+    background: #f5f5f5;
 }
