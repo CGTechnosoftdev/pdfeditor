@@ -29,22 +29,22 @@ clipboardDemos.on('error', function(e) {
 
 // tooltips.js
 
-var btns = document.querySelectorAll('.btn');
+// var btns = document.querySelectorAll('.btn');
 
-for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('mouseleave', clearTooltip);
-    btns[i].addEventListener('blur', clearTooltip);
-}
+// for (var i = 0; i < btns.length; i++) {
+//     btns[i].addEventListener('mouseleave', clearTooltip);
+//     btns[i].addEventListener('blur', clearTooltip);
+// }
 
-function clearTooltip(e) {
-    e.currentTarget.setAttribute('class', 'btn');
-    e.currentTarget.removeAttribute('aria-label');
-}
+// function clearTooltip(e) {
+//     e.currentTarget.setAttribute('class', 'btn');
+//     e.currentTarget.removeAttribute('aria-label');
+// }
 
-function showTooltip(elem, msg) {
-    elem.setAttribute('class', 'btn tooltipped tooltipped-s');
-    elem.setAttribute('aria-label', msg);
-}
+// function showTooltip(elem, msg) {
+//     elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+//     elem.setAttribute('aria-label', msg);
+// }
 
 function delayTyping(callback, ms) {
     var timer = 0;
@@ -261,3 +261,11 @@ $('.timeformate ul li').on('click', function() {
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+$(function() {
+    //toggle two classes on button element
+    $('.treeview a').on('click', function() {
+        $('.dashboard3').toggleClass('sidebar-collapse');
+    });
+});
