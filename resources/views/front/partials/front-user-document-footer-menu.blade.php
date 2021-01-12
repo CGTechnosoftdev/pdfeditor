@@ -256,6 +256,7 @@
                 data: "_token={{ csrf_token() }}&req_type=move_to_trash&document_id=" + idArray[1],
                 success: function(ret_respone) {
                     console.log(ret_respone);
+                    toastr.success(ret_respone.response_message);
                     $.ajax({
                         url: "{{route('front.encrypted-document-list-data')}}",
                         type: "post",
@@ -282,7 +283,7 @@
                 type: "post",
                 data: "_token={{ csrf_token() }}&req_type=move_to_trash&document_id=" + idArray[1],
                 success: function(ret_respone) {
-
+                    toastr.success(ret_respone.response_message);
                     console.log(ret_respone);
                     $.ajax({
                         url: "{{route('front.encrypted-document-list-data')}}",

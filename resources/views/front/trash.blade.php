@@ -67,7 +67,7 @@
             <div class="custom-control custom-checkbox red mr-sm-2">
 
                 {{Form::checkbox("trash_items[$row->id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing".$row->id,"checked" => false))}}
-                <label class="custom-control-label font-0" for="customControlAutosizing" .$row->id>.</label>
+                <label class="custom-control-label font-0" for="customControlAutosizing{{$row->id}}">.</label>
             </div>
         </div>
         <div class="doc-status color4 mx-2">
@@ -154,21 +154,39 @@
 
 
 
-        $("#selectAllId2").change(function() {
-            // alert("tt");
-            $("input[id ^= 'customControlAutosizing']").each(function(key, val) {
-                if ($(this).attr("checked")) {
-                    // alert("checked");
-                    $(this).attr({
-                        "checked": false
-                    });
-                } else {
-                    //  alert("unchecked");
-                    $(this).attr({
-                        "checked": true
-                    });
-                }
-            })
+        /* $("#selectAllId2").change(function() {
+             // alert("tt");
+             $("input[id ^= 'customControlAutosizing']").each(function(key, val) {
+                 if ($(this).attr("checked")) {
+                     // alert("checked");
+                     $(this).attr({
+                         "checked": false
+                     });
+                 } else {
+                     //  alert("unchecked");
+                     $(this).attr({
+                         "checked": true
+                     });
+                 }
+             })
+         });*/
+
+
+        var selectAllItems = "#select-all";
+        var checkboxItem = ":checkbox";
+
+        $(selectAllItems).click(function() {
+
+            if (this.checked) {
+                $(checkboxItem).each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(checkboxItem).each(function() {
+                    this.checked = false;
+                });
+            }
+
         });
 
 
