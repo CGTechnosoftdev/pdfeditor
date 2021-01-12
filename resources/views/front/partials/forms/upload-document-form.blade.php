@@ -78,7 +78,7 @@
                 });
             },
             success: function(file, response) {
-                toastr.success(response.message);
+                location.reload();
             },
             error: function(file, response) {
                 if (response.errors['file'][0].length > 0) {
@@ -110,8 +110,7 @@
                     url: url,
                 },
                 success: function(result) {
-                    $('#document-link-url').val('');
-                    toastr.success(result.message);
+                    location.reload();
                 },
                 error: function(result, status, errorThrown) {
                     var response = result.responseJSON;

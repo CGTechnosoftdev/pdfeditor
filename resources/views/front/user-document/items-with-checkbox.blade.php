@@ -1,9 +1,9 @@
 @if(count($documents) > 0)
 @foreach($documents as $key => $row)
-<div class="single-document single-doc-signed" data-id="{{ $row->encrypted_id }}" id="document_list_item_{{ $row->id }}">
+<div class="single-document single-doc-signed document-container" data-id="{{ $row->encrypted_id }}" id="document_list_item_{{ $row->id }}">
     <div class="doc-dots">
         <div class="custom-control custom-checkbox red mr-sm-2">
-            <input type="checkbox" value="{{ $row->encrypted_id }}" class="custom-control-input" id="doc-checkbox-{{$key}}">
+            <input type="checkbox" value="{{ $row->encrypted_id }}" class="custom-control-input document-checkbox" id="doc-checkbox-{{$key}}">
             <label class="custom-control-label font-0" for="doc-checkbox-{{$key}}">.</label>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <h5>{{ $row->formatted_name }}</h5>
         <div class="last-activity"><i class="fas fa-calendar-day"></i>{{ changeDateTimeFormat($row->updated_at) }}</div>
     </div>
-    <div class="more-opt">
+    <div class="more-opt document-action-menu">
         <div class="btn-group">
             <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>

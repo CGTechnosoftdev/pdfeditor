@@ -101,26 +101,31 @@ class TrashController extends FrontBaseController
         set_flash($response_type, $response_message);
         return redirect()->route("front.trash-list");
     }
+
     public function moveToTrash(Request $request)
     {
-        $input_data = $request->all();
-        if ($input_data["req_type"] == "move_to_trash") {
-            $is_valid = 1;
-            $document_id = decryptData($input_data["document_id"]);
-
-            if (!UserDocument::whereId($document_id)->update(['trash' => config('constant.TRASHED')])) {
-                $is_valid = 0;
-            }
-        }
-        if ($is_valid == 1) {
+        $input_data = $request->input();
+        $document_arr = ((!empty($input_data['document']) && is_array($input_data['document'])) ? $input_data['document'] : [($input_data['document'] ?? '')]);
+        $document_arr = array_map(function ($item) {
+            return decrypt($item ?? '');
+        }, $document_arr);
+        $document_arr = array_filter($document_arr);
+        if (!empty($document_arr)) {
+            UserDocument::whereIn('id', $document_arr)->update(['trash' => config('constant.TRASHED')]);
             $response_type = 'success';
-            $response_message = 'Document move to trash successfully';
+            $response_message = 'Move to trash successfully';
         } else {
             $response_type = 'error';
-            $response_message = 'Document move to trash failed!';
+            $response_message = 'Error occoured, Please try again';
         }
 
-        set_flash($response_type, $response_message);
-        return Response::json(array('response_type' => $response_type, 'response_message' => $response_message));
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' => $response_data ?? '',
+        ), (($response_type == 'success') ? 200 : 422));
     }
 }

@@ -53,7 +53,7 @@
                 <a href="#"><img src="{{ asset('public/front/images/rename.svg') }}"> Rename</a>
             </li>
             <li>
-                <a href="#"><img src="{{ asset('public/front/images/trash-alt.svg') }}"> Move To Trash</a>
+                <a href="#" id="move-to-trash-selected"><img src="{{ asset('public/front/images/trash-alt.svg') }}"> Move To Trash</a>
             </li>
             <li>
                 <a href="#"><img src="{{ asset('public/front/images/move.svg') }}"> Move</a>
@@ -122,6 +122,24 @@
         $('#search_text').keyup(delayTyping(function(e) {
             getDocumentList();
         }, 500));
+
+        $(document).on('click', '#select-all', function(e) {
+            selectAllCheckbox('#select-all', '.document-checkbox');
+        })
+
+        $(document).on('click', '#move-to-trash-selected', function(e) {
+            e.preventDefault();
+            if ($('.document-checkbox:checked').length > 0) {
+                var selected_documents = [];
+                $('.document-checkbox:checked').each(function() {
+                    selected_documents.push($(this).val());
+                });
+                window.moveToTrash(selected_documents);
+            } else {
+                toastr.error('No document selected');
+            }
+        })
+
     });
 </script>
 @append

@@ -57,6 +57,18 @@ function delayTyping(callback, ms) {
         }, ms || 0);
     };
 }
+
+function selectAllCheckbox(parent_element, child_element) {
+    if ($(parent_element).is(':checked')) {
+        $(child_element).each(function() {
+            this.checked = true;
+        });
+    } else {
+        $(child_element).each(function() {
+            this.checked = false;
+        });
+    }
+}
 /*************** Navbar JS **************/
 (function($) {
     "use strict";

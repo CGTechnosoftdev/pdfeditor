@@ -130,6 +130,9 @@ class UserDocumentController extends FrontBaseController
                 $response_message = 'Unable to upload file, Please try again.';
             }
         }
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
+        }
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
             'message' => $response_message
@@ -159,6 +162,9 @@ class UserDocumentController extends FrontBaseController
                 $response_type = 'error';
                 $response_message = 'Unable to upload file, Please try again.';
             }
+        }
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
         }
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
