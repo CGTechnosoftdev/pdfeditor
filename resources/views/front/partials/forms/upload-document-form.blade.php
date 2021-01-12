@@ -40,7 +40,7 @@
                                     <div class="upload-doc-from-url">
                                         <img src="{{ asset('public/front/images/upload-doc-from-url.svg') }}">
                                         <h6>Upload Document from URL</h6>
-                                        <p>Insert an URL to a PDF up to 25 MB and upload it directly to PDF Writer.</p>
+                                        <p>Insert an URL to a PDF, document, image up to 25 MB and upload it directly to PDF Writer.</p>
                                     </div>
                                     <div class="form-group row">
                                         <div class=" col-md-8">
@@ -110,6 +110,7 @@
                     url: url,
                 },
                 success: function(result) {
+                    $('#document-link-url').val('');
                     toastr.success(result.message);
                 },
                 error: function(result, status, errorThrown) {

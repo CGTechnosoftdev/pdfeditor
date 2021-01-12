@@ -130,7 +130,9 @@ class UserDocumentController extends FrontBaseController
             $upload_response = uploadFile($input_data['url'], 'user_document', true);
             if (!empty($upload_response['success'])) {
                 $input_data['user_id'] = $user['id'];
-                $input_data['name'] = $upload_response['data'];
+                $input_data['name'] = pathinfo($input_data['url'], PATHINFO_FILENAME);
+                $input_data['file'] = $upload_response['data'];
+                $input_data['file_thumbnail'] = '';
                 $user_document_form = UserDocument::saveData($input_data);
                 if ($user_document_form) {
                     $response_type = 'success';
