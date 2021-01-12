@@ -17,6 +17,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
+                                <a class="nav-link" href="{{route('front.dashboard')}}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Docs</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Action</a>
@@ -46,9 +49,6 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('front.dashboard')}}">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('front.subscription-payment') }}">
@@ -67,10 +67,10 @@
                                     <span><img src="{{Auth::user()->profile_picture_url}}" class="user-image" alt="PDFWriter Admin Image"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{ route('front.logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         </ul>

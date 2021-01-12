@@ -2444,13 +2444,13 @@ li {
     font-weight: 900;
     font-size: 14px;
     border: none;
-    position: relative;
-    top: 3px;
+    position: absolute;
+    top: 6px;
 }
 
 .dashboard3-wrapper .white-bg-nav .user-menu .dropdown-toggle::after {
     color: #fff;
-    top: -3px;
+    /* top: -3px; */
 }
 
 
@@ -6185,7 +6185,7 @@ li {
     float: left;
 }
 
-.short-by-section .short-checkbox label {
+.short-by-section .short-checkbox label.font-0 {
     font-size: 0px;
 }
 
@@ -6360,9 +6360,113 @@ li {
     width: 100% !important;
 }
 
-.hide{
-    display:none !important;
+.content.encrypted-folder-center {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.show{
-    display:block !important;
+
+.encrypted-folder {
+    width: 100%;
+    max-width: 510px;
+    background: #fff;
+    box-shadow: 0px 5px 10px #0000;
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.encrypted-folder .input-group-joined {
+    border: none;
+}
+
+.encrypted-folder .input-group-joined .form-control {
+    border: none !important;
+    font-family: Poppins-light;
+    font-size: 14px !important;
+}
+
+.encrypted-folder-img {
+    width: 100%;
+    height: auto;
+    float: left;
+    text-align: center;
+}
+
+.encrypted-folder-img img {
+    max-width: 140px;
+    max-height: 100px;
+}
+
+.encrypted-folder-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-top: 10px;
+}
+
+.encrypted-folder-content h4 {
+    color: #486EB8;
+    font-size: 25px;
+    font-family: Poppins-Bold;
+    margin: 20px 0px;
+}
+
+.encrypted-folder-content p {
+    font-size: 16px;
+    font-family: Poppins-Regular;
+}
+
+.encrypted-folder-content span {
+    font-size: 16px;
+    font-family: Poppins-Bold;
+    margin-bottom: 15px;
+    display: block;
+    color: #333333;
+}
+
+.encrypted-folder .input-group-joined button {
+    border-radius: 5px !important;
+}
+
+.treeview-menu {
+    top: 70px !important;
+    position: fixed !important;
+    height: 86%;
+    z-index: 999;
+    min-width: 184px;
+}
+
+.dashboard3.sidebar-mini.sticky .treeview-menu {
+    display: block!important;
+}
+
+.sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu {
+    display: block!important;
+    left: 80px;
+    text-align: left;
+}
+
+.sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu li {
+    padding-left: 0px;
+}
+
+.sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu li a {
+    padding: 10px;
+}
+
+.sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu h5 {
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.dashboard3.sidebar-mini.sticky .content-wrapper {
+    margin-left: 260px !important;
+}
+
+.sidebar-menu li>a>.pull-right-container i {
+    line-height: 42px;
 }

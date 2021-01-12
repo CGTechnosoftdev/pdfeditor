@@ -73,20 +73,29 @@
 <section class="content" id="list-section">
 </section>
 @else
-<section class="content" id="list-section">
-    <div class="recent-documents">
-        {{ Form::open(['route' => 'front.encrypted-document-list','method'=>'post','id'=>'encryption_password_form','class'=>'form-horizontal']) }}
-        <div class="form-group">
-            <div class="col-sm-8">
+<section class="content encrypted-folder-center pt-4">
+    <!-- <div class="recent-documents">
+                    <h4>Recent Documents</h4>
+                </div> -->
+
+    <div class="encrypted-folder">
+        <div class="encrypted-folder-img">
+            <img src="../public/front/images/encrypted-folder.svg">
+        </div>
+        <div class="encrypted-folder-content">
+            <h4>Encrypted Folder</h4>
+            <p>Keep documents in the Encrypted Folder for additional security. Documents here won't appear in My Documents and require an additional password.</p>
+
+            <span>Enter your password for your Encrypted Folder.</span>
+            {{ Form::open(['route' => 'front.encrypted-document-list','method'=>'post','id'=>'encryption_password_form','class'=>'form-horizontal']) }}
+            <div class="input-group input-group-joined">
                 {{ Form::password('encryption_password',array('placeholder'=>'Enter Encryption Password','class'=>"form-control",'id'=>'encryption_password'))}}
+                <div class="input-group-append">
+                    {!! Form::submit('Submit',['class'=>'btn btn-success']) !!}
+                </div>
             </div>
+            {{ Form::close() }}
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-8">
-                {!! Form::submit('Submit',['class'=>'btn btn-success']) !!}
-            </div>
-        </div>
-        {{ Form::close() }}
     </div>
 </section>
 @endif
