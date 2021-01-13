@@ -76,6 +76,7 @@ class UserDocument extends Model
         if (!empty($data_array['trash'])) {
             $condition['trash'] = config('constant.TRASHED');
         } elseif (!empty($data_array['encrypted'])) {
+            $condition['trash'] = config('constant.NOT_TRASHED');
             $condition['encrypted'] = config('constant.DOCUMENT_ENCRYPTED_YES');
         } else {
             $condition['trash'] = config('constant.NOT_TRASHED');

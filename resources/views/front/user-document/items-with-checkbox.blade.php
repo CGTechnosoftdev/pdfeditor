@@ -16,15 +16,15 @@
         <h5>{{ $row->formatted_name }}</h5>
         <div class="last-activity"><i class="fas fa-calendar-day"></i>{{ changeDateTimeFormat($row->updated_at) }}</div>
     </div>
-    <div class="more-opt document-action-menu">
-        <div class="btn-group">
+    <div class="more-opt">
+        <div class="btn-group  document-action-menu">
             <button id="btnGroupDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
                 <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
                 <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-                <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
+                <a class="dropdown-item move-to-trash" href="#"><i class=" far fa-folder"></i> Move to trash</a>
             </div>
         </div>
     </div>

@@ -240,7 +240,7 @@
             $(this).addClass('active').siblings().removeClass('active');
             $('.footer-more-menus').addClass('active').siblings().removeClass('active');
         });
-        $('.document-action-menu').on('show.bs.dropdown', function() {
+        $(document).on('show.bs.dropdown', '.document-action-menu', function() {
             $(this).closest(".document-container").click();
         });
 
