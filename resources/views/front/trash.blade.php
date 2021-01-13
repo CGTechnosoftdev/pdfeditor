@@ -9,15 +9,19 @@
     </div>
     <div class="heading-btns">
         @include('front.partials.forms.add-new-dropdown')
+        {{ Form::open(['url' => '#','method'=>'post','class'=>'','id' => 'trash-searchformid','enctype'=>"multipart/form-data"]) }}
+
         <div class="input-group input-group-joined input-group-solid ml-3">
-            <input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
+            <!--<input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">-->
+            {{form::text('search_text',$search_text,['id'=>'trash_search_boxid','class' => 'form-control mr-sm-0','placeholder' => 'Search'])}}
             <div class="input-group-append">
-                <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                <button class="input-group-text" id="trash_search_triggerid"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg></button>
             </div>
         </div>
+        {{ Form::close() }}
     </div>
 </section>
 @if(!empty($trash_count))
@@ -62,8 +66,8 @@
         <div class="doc-dots">
             <div class="custom-control custom-checkbox red mr-sm-2">
 
-                {{Form::checkbox("trash_items[$row->id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing","checked" => false))}}
-                <label class="custom-control-label font-0" for="customControlAutosizing">.</label>
+                {{Form::checkbox("trash_items[$row->id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing".$row->id,"checked" => false))}}
+                <label class="custom-control-label font-0" for="customControlAutosizing{{$row->id}}">.</label>
             </div>
         </div>
         <div class="doc-status color4 mx-2">
@@ -131,21 +135,58 @@
 
         });
 
-        $("#selectAllId2").change(function() {
-            // alert("tt");
-            $("input[id ^= 'customControlAutosizing']").each(function(key, val) {
-                if ($(this).attr("checked")) {
-                    // alert("checked");
-                    $(this).attr({
-                        "checked": false
-                    });
-                } else {
-                    //  alert("unchecked");
-                    $(this).attr({
-                        "checked": true
-                    });
-                }
-            })
+        $("body").on("click", "#trash_search_triggerid", function() {
+
+            if ($("#trash_search_boxid").val() != "") {
+
+                var form = $("#trash-searchformid");
+                form.attr({
+                    "action": "{{route('front.trash-list')}}"
+                });
+                form.submit();
+            }
+
+
+
+
+
+        });
+
+
+
+        /* $("#selectAllId2").change(function() {
+             // alert("tt");
+             $("input[id ^= 'customControlAutosizing']").each(function(key, val) {
+                 if ($(this).attr("checked")) {
+                     // alert("checked");
+                     $(this).attr({
+                         "checked": false
+                     });
+                 } else {
+                     //  alert("unchecked");
+                     $(this).attr({
+                         "checked": true
+                     });
+                 }
+             })
+         });*/
+
+
+        var selectAllItems = "#select-all";
+        var checkboxItem = ":checkbox";
+
+        $(selectAllItems).click(function() {
+
+            if (this.checked) {
+                $(checkboxItem).each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $(checkboxItem).each(function() {
+                    this.checked = false;
+                });
+            }
+
         });
 
 

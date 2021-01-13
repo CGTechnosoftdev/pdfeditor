@@ -47,7 +47,10 @@
 				<h4>Recent Documents</h4>
 			</div>
 			<input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
-			@include('front.user-document.items-without-checkbox',['documents'=>$recent_documents])
+			<div id="document_list_containerid">
+				@include('front.user-document.items-without-checkbox',['documents'=>$recent_documents,'item_container_id' => 'move_to_trash_document_trigger_'])
+			</div>
+
 		</section>
 		<!-- /.content -->
 
@@ -58,7 +61,9 @@
 			<div class="recent-documents">
 				<h4>Recent Templates</h4>
 			</div>
-			@include('front.user-document.items-without-checkbox',['documents'=>$recent_templates])
+			<div id="template_list_containerid">
+				@include('front.user-document.items-without-checkbox',['documents'=>$recent_templates,'item_container_id' => 'move_to_trash_template_trigger_'])
+			</div>
 		</section>
 	</div>
 	<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">

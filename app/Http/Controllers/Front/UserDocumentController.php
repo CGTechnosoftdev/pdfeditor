@@ -81,12 +81,26 @@ class UserDocumentController extends FrontBaseController
         $document_params['parent_id'] = $input_data['folder_name'] ?? null;
         $document_params['search_text'] = $input_data['search_text'] ?? null;
         $document_params['order_by'] = $input_data['sort_by'] ?? null;
+        $req_type = "";
+        $item_container_id = 'move_to_trash_document_trigger_';
+        $routeStr = "front.user-document.items-with-checkbox";
+        if (!empty($input_data["req_type"]) && $input_data["req_type"] == "update_list") {
+            $req_type = $input_data["req_type"];
+            $routeStr = "front.user-document.items-without-checkbox";
+            $document_params['type'] = $input_data["type"];
+            $document_params['encrypted'] = false;
+            if ($document_params['type'] == config('constant.DOCUMENT_TYPE_TEMPLATE'))
+                $item_container_id = 'move_to_trash_template_trigger_';
+        }
+
 
         $documents = UserDocument::getDocumentList($document_params);
-        $view = View::make('front.user-document.items-with-checkbox')->with('documents', $documents)->render();
+        $view = View::make($routeStr)->with(['documents' => $documents, 'item_container_id' => $item_container_id])->render();
         $count = count($documents);
         return Response::json(array('html' => $view, 'count' => $count));
     }
+
+
 
     public function viewDocument()
     {
@@ -115,6 +129,9 @@ class UserDocumentController extends FrontBaseController
                 $response_type = 'error';
                 $response_message = 'Unable to upload file, Please try again.';
             }
+        }
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
         }
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
@@ -145,6 +162,9 @@ class UserDocumentController extends FrontBaseController
                 $response_type = 'error';
                 $response_message = 'Unable to upload file, Please try again.';
             }
+        }
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
         }
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
