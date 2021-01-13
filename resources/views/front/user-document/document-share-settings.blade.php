@@ -13,10 +13,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @if(Session::get('shar_form_validate'))
-    {{ $response_message=Session::get('shar_form_validate')}}
-    {{$response_message}}
-    @endif
+
     {{ Form::open(['url' => 'user-document-advance-settings-save','method'=>'post','class'=>'login-form','id' => 'user_document_advance_setting_form_id','enctype'=>"multipart/form-data"]) }}
     {{form::hidden('user_document_id',$document_id)}}
     {{form::hidden('user_document_name',$document_info["formatted_name"],array("id" => "user_document_name_id"))}}

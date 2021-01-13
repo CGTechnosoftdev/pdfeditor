@@ -31,15 +31,6 @@
     // });
 
     $(document).ready(function() {
-        $('.addnew-btn').click(function() {
-            $(".addnew-dropdown").slideToggle("slow");
-        });
 
-        $(document).mouseup(function(e) {
-            var popup = $(".addnew-dropdown");
-            if (!$('.addnew-btn').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
-                popup.hide(500);
-            }
-        });
     });
 </script>

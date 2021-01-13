@@ -373,7 +373,7 @@ function($) {
     var DataKey = 'lte.tree'
 
     var Default = {
-        animationSpeed: 500,
+        animationSpeed: 0,
         accordion: true,
         followLink: false,
         trigger: '.treeview a'

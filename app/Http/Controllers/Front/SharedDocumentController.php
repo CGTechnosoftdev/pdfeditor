@@ -288,7 +288,7 @@ class SharedDocumentController extends FrontBaseController
                 $data_array = [
                     'response_type' => $response_type, 'response_message' => $response_message
                 ];
-                \Session::put('shar_form_validate', $data_array);
+                //\Session::put('shar_form_validate', $data_array);
                 return redirect()->route('front.user-document.user-document-advance-settings', [$input_data["user_document_id"]]);
             }
 
