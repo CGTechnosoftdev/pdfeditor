@@ -30,10 +30,15 @@
                         <i class="fa fa-angle-down pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="{{ route('front.document-list') }}"><i class="fa fa-circle-o"></i>My Documents</a></li>
-                    <li><a href="{{ route('front.encrypted-document-list') }}"><i class="fa fa-circle-o"></i>Encrypted</a></li>
-                </ul>
+                <div class="treeview-menu" style="display: none;">
+                    <h5>Documents</h5>
+                    <ul>
+                        <li><a href="">My Documents <img class="icon" src="../public/front/images/file-plus.svg"></a></li>
+                        <li><a href="">Encrypted</a></li>
+
+
+                    </ul>
+                </div>
             </li>
             <li class="treeview">
                 <a href="#">
@@ -49,10 +54,7 @@
                         <i class="fa fa-angle-down pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href=""><i class="fa fa-circle-o"></i>List</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i>Add Doctors</a></li>
-                </ul>
+
             </li>
             <li>
                 <a href="#">
