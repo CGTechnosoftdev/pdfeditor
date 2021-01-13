@@ -156,7 +156,7 @@
                         </li>
                     </ul>
                 </div>
-                <h5>Manage Documents</h5>
+                <!-- <h5>Manage Documents</h5>
                 <div class="shareable-links">
                     <ul>
                         <li>
@@ -220,7 +220,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -229,84 +229,23 @@
 @section('additionaljs')
 <script>
     $(document).ready(function() {
-        var selected_document = '';
-        var selected_document_info = '';
+        window.selected_document = '';
+        window.selected_document_info = '';
         var model_element = "#linktofill";
-        $(document).on('click', '.content .single-document', function(e) {
-            e.preventDefault();
-            selected_document = $(this).attr('data-id');
+        // $(document).on('click', '.content .single-document', function(e) {
+        $(document).on('click', '.document-container', function(e) {
+            window.selected_document = $(this).attr('data-id');
             var idArray = $(this).attr('id').split("document_list_item_");
             $("#recent_document_select_item").val(idArray[1]);
-
-            console.log($(this).attr('data-id'));
             $(this).addClass('active').siblings().removeClass('active');
             $('.footer-more-menus').addClass('active').siblings().removeClass('active');
         });
-
-
-
-
-        $("body").on("click", "a[id ^= 'move_to_trash_document_trigger_']", function() {
-            //alert($(this).attr("id"));
-            blockUI();
-            var idArray = $(this).attr("id").split("move_to_trash_document_trigger_");
-            $.ajax({
-                url: "{{route('front.move-to-trash-save')}}",
-                type: "post",
-                data: "_token={{ csrf_token() }}&req_type=move_to_trash&document_id=" + idArray[1],
-                success: function(ret_respone) {
-                    console.log(ret_respone);
-                    toastr.success(ret_respone.response_message);
-                    $.ajax({
-                        url: "{{route('front.encrypted-document-list-data')}}",
-                        type: "post",
-                        dataType: 'json',
-                        data: "_token={{csrf_token()}}&req_type=update_list&type={{config('constant.DOCUMENT_TYPE_FILE')}}",
-                        success: function(ret_object) {
-                            $("#document_list_containerid").html(ret_object.html);
-                        },
-                        complete: function() {
-                            unblockUI();
-                        },
-
-                    });
-                }
-            });
+        $(document).on('show.bs.dropdown', '.document-action-menu', function() {
+            $(this).closest(".document-container").click();
         });
 
-        $("body").on("click", "a[id ^= 'move_to_trash_template_trigger_']", function() {
-
-            blockUI();
-            var idArray = $(this).attr("id").split("move_to_trash_template_trigger_");
-            $.ajax({
-                url: "{{route('front.move-to-trash-save')}}",
-                type: "post",
-                data: "_token={{ csrf_token() }}&req_type=move_to_trash&document_id=" + idArray[1],
-                success: function(ret_respone) {
-                    toastr.success(ret_respone.response_message);
-                    console.log(ret_respone);
-                    $.ajax({
-                        url: "{{route('front.encrypted-document-list-data')}}",
-                        type: "post",
-                        dataType: 'json',
-                        data: "_token={{csrf_token()}}&req_type=update_list&type={{config('constant.DOCUMENT_TYPE_TEMPLATE')}}",
-                        success: function(ret_object) {
-
-                            $("#template_list_containerid").html(ret_object.html);
-
-                        },
-                        error: function(err) {
-
-                            console.log(err);
-                        },
-                        complete: function() {
-                            unblockUI();
-                        },
-
-
-                    });
-                }
-            });
+        $(document).on('click', '.move-to-trash', function() {
+            window.moveToTrash(window.selected_document);
         });
 
         $("#sharemenu_itemid").click(function() {
@@ -323,7 +262,7 @@
 
             if (user_document_id != 0) {
                 // getDocumentInfo(user_document_id);
-                // console.log(selected_document_info);
+                // console.log(window.selected_document_info);
 
                 $.ajax({
                     type: 'GET',
@@ -341,7 +280,7 @@
                 });
                 // alert("id is " + user_document_id);
                 // getDocumentInfo(user_document_id);
-                // console.log(selected_document_info);
+                // console.log(window.selected_document_info);
 
 
             }
@@ -469,7 +408,7 @@
 
 
 
-        function getDocumentInfo(document) {
+        window.getDocumentInfo = function(document) {
             blockUI();
             $.ajax({
                 url: "{{route('front.document-info')}}",
@@ -481,7 +420,7 @@
                     document: document,
                 },
                 success: function(result) {
-                    selected_document_info = result.data;
+                    window.selected_document_info = result.data;
                 },
                 complete: function() {
                     unblockUI();
@@ -493,17 +432,40 @@
                 }
             });
         }
+
+        window.moveToTrash = function(document) {
+            blockUI();
+            $.ajax({
+                url: "{{route('front.move-to-trash-save')}}",
+                type: "post",
+                dataType: 'json',
+                data: {
+                    "_token": csrf_token,
+                    document: document,
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+                    toastr.error(response.message);
+                },
+                complete: function() {
+                    unblockUI();
+                }
+            });
+        }
         $(document).on('click', '.link-to-fill-button', function(e) {
             e.preventDefault();
             $(model_element).find('.non-published').removeClass('invisible');
             $(model_element).find('.published').addClass('invisible');
             $(model_element).find('.published-link-div').addClass('disable-div');
-            getDocumentInfo(selected_document);
-            if (selected_document_info) {
-                $(model_element).find('#document-preview').attr('src', selected_document_info.thumbnail_url);
-                $(model_element).find('#document-name').html(selected_document_info.formatted_name);
-                $(model_element).find('#publish-link').attr('data-document', selected_document_info.encrypted_id);
-                $(model_element).find('#advance-setting-link').attr('data-document', selected_document_info.encrypted_id);
+            window.getDocumentInfo(window.selected_document);
+            if (window.selected_document_info) {
+                $(model_element).find('#document-preview').attr('src', window.selected_document_info.thumbnail_url);
+                $(model_element).find('#document-name').html(window.selected_document_info.formatted_name);
+                $(model_element).find('#publish-link').attr('data-document', window.selected_document_info.encrypted_id);
+                $(model_element).find('#advance-setting-link').attr('data-document', window.selected_document_info.encrypted_id);
                 $(model_element).modal('show');
             }
         });

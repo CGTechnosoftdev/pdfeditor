@@ -16,8 +16,8 @@ class CreateUserDocumentTable extends Migration
         Schema::create('user_documents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->string('file', 255);
-            $table->string('file_thumbnail', 255);
+            $table->string('file', 255)->nullable();
+            $table->string('file_thumbnail', 255)->nullable();
             $table->string('thumbnail', 255)->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('user_id');

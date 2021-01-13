@@ -1,6 +1,6 @@
 @if(count($documents) > 0)
 @foreach($documents as $key => $row)
-<div class="single-document" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
+<div class="single-document document-container" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
     <div class="doc-img">
         <img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
     </div>
@@ -44,13 +44,15 @@
         <div class="doc-date">
             <i class="fas fa-calendar-day"></i> {{ changeDateTimeFormat($row->updated_at) }}
         </div>
-        <button id="btnGroupDrop{{$key}}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-ellipsis-v"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop{{$key}}">
-            <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
-            <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
-            <a class="dropdown-item" href="#" id="{{ $item_container_id.$row->encrypted_id }}"><i class=" far fa-folder"></i> Move to trash</a>
+        <div class="document-action-menu">
+            <button id="btnGroupDrop{{$key}}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop{{$key}}">
+                <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
+                <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
+                <a class="dropdown-item move-to-trash" href="#"><i class=" far fa-folder"></i> Move to trash</a>
+            </div>
         </div>
     </div>
 </div>
