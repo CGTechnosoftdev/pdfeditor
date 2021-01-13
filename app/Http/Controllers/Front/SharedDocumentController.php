@@ -62,43 +62,45 @@ class SharedDocumentController extends FrontBaseController
         if (!empty($input_data["link"]))
             $dataArray["link"] = $input_data["link"];
         else {
+            if ($insertType == "multiple") {
 
-            // $personal_invitation_data["authentication_method"] = $input_data["authentication_method"];
-            $personal_invitation_data["first_name"] = $input_data["first_name"];
-            $personal_invitation_data["last_name"] = $input_data["last_name"];
-            $personal_invitation_data["job_title"] = $input_data["job_title"];
-            $personal_invitation_data["Company"] = $input_data["Company"];
-            $personal_invitation_data["business_card_email"] = $input_data["business_card_email"];
-            $personal_invitation_data["phone_number"] = $input_data["phone_number"];
-            $personal_invitation_data["fax_number"] = $input_data["fax_number"];
-            $personal_invitation_data["Website"] = $input_data["Website"];
-            $personal_invitation_data["user_advance_automatic_reminder"] = $input_data["user_advance_automatic_reminder"];
-            $personal_invitation_data["user_advance_settings_repeat_reminder"] = $input_data["user_advance_settings_repeat_reminder"];
-            if (!empty($input_data["your_logo"]))
-                $personal_invitation_data["your_logo"] = $input_data["your_logo"];
-            //your_logo
+                // $personal_invitation_data["authentication_method"] = $input_data["authentication_method"];
+                $personal_invitation_data["first_name"] = $input_data["first_name"];
+                $personal_invitation_data["last_name"] = $input_data["last_name"];
+                $personal_invitation_data["job_title"] = $input_data["job_title"];
+                $personal_invitation_data["Company"] = $input_data["Company"];
+                $personal_invitation_data["business_card_email"] = $input_data["business_card_email"];
+                $personal_invitation_data["phone_number"] = $input_data["phone_number"];
+                $personal_invitation_data["fax_number"] = $input_data["fax_number"];
+                $personal_invitation_data["Website"] = $input_data["Website"];
+                $personal_invitation_data["user_advance_automatic_reminder"] = $input_data["user_advance_automatic_reminder"];
+                $personal_invitation_data["user_advance_settings_repeat_reminder"] = $input_data["user_advance_settings_repeat_reminder"];
+                if (!empty($input_data["your_logo"]))
+                    $personal_invitation_data["your_logo"] = $input_data["your_logo"];
+                //your_logo
 
-            if ($request->file("own_logo")) {
-                $upload_response = uploadFile($request, 'own_logo');
-                if (!empty($upload_response['success'])) {
-                    $personal_invitation_data["own_logo"] = $upload_response["data"];
+                if ($request->file("own_logo")) {
+                    $upload_response = uploadFile($request, 'own_logo');
+                    if (!empty($upload_response['success'])) {
+                        $personal_invitation_data["own_logo"] = $upload_response["data"];
+                    }
                 }
-            }
 
-            if ($request->file("business_card_picture")) {
-                $upload_response = uploadFile($request, 'business_card_picture');
-                if (!empty($upload_response['success'])) {
-                    $personal_invitation_data["business_card_picture"] = $upload_response["data"];
+                if ($request->file("business_card_picture")) {
+                    $upload_response = uploadFile($request, 'business_card_picture');
+                    if (!empty($upload_response['success'])) {
+                        $personal_invitation_data["business_card_picture"] = $upload_response["data"];
+                    }
                 }
-            }
 
 
-            $personalDataInvitationStr = json_encode($personal_invitation_data);
-            $dataArray["personalize_invitation_data"] = $personalDataInvitationStr;
+                $personalDataInvitationStr = json_encode($personal_invitation_data);
+                $dataArray["personalize_invitation_data"] = $personalDataInvitationStr;
 
-            if (!empty($input_data["authentication_method"])) {
-                $autenticationMethodsStr = implode(",", $input_data["authentication_method"]);
-                $dataArray["authentication_method"] = $autenticationMethodsStr;
+                if (!empty($input_data["authentication_method"])) {
+                    $autenticationMethodsStr = implode(",", $input_data["authentication_method"]);
+                    $dataArray["authentication_method"] = $autenticationMethodsStr;
+                }
             }
         }
         $SharedDocument = SharedDocument::saveData($dataArray);
@@ -148,7 +150,6 @@ class SharedDocumentController extends FrontBaseController
 
                 $errormsgHTML = "";
                 foreach ($errormessages as $errorIndex => $errorMsgArr) {
-
                     foreach ($errorMsgArr as $indder_index => $message) {
                         $errormsgHTML .=  $message . '<br/>';
                     }
