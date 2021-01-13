@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" id="download_item_trigger">
                                 <div class="link-img"><img src="{{ asset('public/front/images/download.svg') }}"></div>
                                 <span>Download</span>
                             </a>
@@ -248,6 +248,20 @@
             window.moveToTrash(window.selected_document);
         });
 
+        //download_item_trigger
+        $("#download_item_trigger").click(function() {
+            var user_document_id = $("#recent_document_select_item").val();
+            alert(user_document_id);
+            $.ajax({
+                url: "{{url('user-document-download')}}/" + user_document_id,
+                type: "get",
+                success: function(response) {
+                    console.log(response);
+                }
+
+            });
+        });
+
         $("#sharemenu_itemid").click(function() {
             // alert("ajax call is ");
             $.ajaxSetup({
@@ -366,31 +380,50 @@
                     success: (data) => {
                         // this.reset();
                         console.log(JSON.stringify(data));
-                        //  var jsonData = $.parseJSON(data.responseText);
-                        // alert('File has been uploaded successfully');
-                        $("#userDocMsgConId").removeClass("hide");
-                        $("#userDocMsgConId").removeClass("alert-danger");
-                        $("#userDocMsgConId").addClass("alert-success");
-                        $("#userDocMsgConId").addClass("show");
-                        $("#userDocMsgConId").html(data.message);
+                        if (data.return_type == "error") {
 
-                        setTimeout(function() {
-                            $("#userDocMsgConId").removeClass("show");
-                            $("#userDocMsgConId").addClass("hide");
-                        }, 3000);
+                            var jsonData = $.parseJSON(data.responseText);
+                            $("#userDocTempConId").removeClass("hide");
+                            $("#userDocTempConId").removeClass("alert-success");
+                            $("#userDocTempConId").addClass("alert-danger");
+                            $("#userDocTempConId").addClass("show");
+                            $("#userDocTempConId").html(jsonData.message);
 
-                    },
-                    error: function(data) {
-                        var jsonData = $.parseJSON(data.responseText);
-                        $("#userDocTempConId").removeClass("hide");
-                        $("#userDocTempConId").removeClass("alert-success");
-                        $("#userDocTempConId").addClass("alert-danger");
-                        $("#userDocTempConId").addClass("show");
-                        $("#userDocTempConId").html(jsonData.message);
+
+
+                        } else {
+
+                            //  var jsonData = $.parseJSON(data.responseText);
+                            // alert('File has been uploaded successfully');
+                            $("#userDocMsgConId").removeClass("hide");
+                            $("#userDocMsgConId").removeClass("alert-danger");
+                            $("#userDocMsgConId").addClass("alert-success");
+                            $("#userDocMsgConId").addClass("show");
+                            $("#userDocMsgConId").html(data.message);
+
+
+
+                        }
 
                         setTimeout(function() {
                             $("#userDocTempConId").removeClass("show");
                             $("#userDocTempConId").addClass("hide");
+                        }, 3000);
+
+
+                    },
+                    error: function(data) {
+
+                        var jsonData = $.parseJSON(data.responseText);
+                        $("#userDocMsgConId").removeClass("hide");
+                        $("#userDocMsgConId").removeClass("alert-success");
+                        $("#userDocMsgConId").addClass("alert-danger");
+                        $("#userDocMsgConId").addClass("show");
+                        $("#userDocMsgConId").html(jsonData.message);
+
+                        setTimeout(function() {
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
                         }, 3000);
                     }
                 });

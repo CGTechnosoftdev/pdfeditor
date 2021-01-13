@@ -6470,3 +6470,10 @@ li {
 .sidebar-menu li>a>.pull-right-container i {
     line-height: 42px;
 }
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}

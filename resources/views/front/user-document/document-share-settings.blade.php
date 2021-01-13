@@ -13,6 +13,10 @@
 
 <!-- Main content -->
 <section class="content">
+    @if(Session::get('shar_form_validate'))
+    {{ $response_message=Session::get('shar_form_validate')}}
+    {{$response_message}}
+    @endif
     {{ Form::open(['url' => 'user-document-advance-settings-save','method'=>'post','class'=>'login-form','id' => 'user_document_advance_setting_form_id','enctype'=>"multipart/form-data"]) }}
     {{form::hidden('user_document_id',$document_id)}}
     {{form::hidden('user_document_name',$document_info["formatted_name"],array("id" => "user_document_name_id"))}}
@@ -56,6 +60,7 @@
             <a class="" data-toggle="collapse" href="#recipients" aria-expanded="true" aria-controls="recipients">
                 <img class="icon" src="../public/front/images/add-user.svg"> Recipients <span><img src="../public/front/images/info-i.svg"></span></a>
         </h3>
+        {{form::hidden('form_type',config('constant.EMAIL_SHARE_FORM'),['id' => 'form_typeid'])}}
         <div class="collapse show" id="recipients">
             <div class="advance-settings-content">
                 <div class="share-by">
@@ -421,9 +426,11 @@
             var idArray = $(this).attr("id").split("advance_share_tabl_");
             if (idArray[1] == 1) {
                 $("#linkid").val("");
+                $("#form_typeid").val("{{config('constant.EMAIL_SHARE_FORM')}}");
                 $("#field_belongs_to_email_shareid").removeClass("hide");
                 $("#field_belongs_to_email_shareid").addClass("show");
             } else if (idArray[1] == 2) {
+                $("#form_typeid").val("{{config('constant.LINK_SHARE_FORM')}}");
                 $("#field_belongs_to_email_shareid").removeClass("show");
                 $("#field_belongs_to_email_shareid").addClass("hide");
                 $("#linkid").val($("#publink_link_containerid").val());

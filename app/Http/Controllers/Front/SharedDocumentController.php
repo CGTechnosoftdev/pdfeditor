@@ -15,7 +15,7 @@ use App\Models\SharedDocumentUser;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommonMail;
-
+use Carbon\Carbon;
 
 use Auth;
 
@@ -28,7 +28,7 @@ class SharedDocumentController extends FrontBaseController
     {
         $fileUrl = "";
         if (!empty($user_document->name))
-            $fileUrl = getUploadedFile([$user_document->name], "user_document");
+            $fileUrl = getUploadedFile([$user_document->file], "user_document");
         $document = UserDocument::dataRow(['id' => $user_document->id]);
         $public_link = generateUniqueLink("UserDocument", "name");
         $documentDetailArray = [
@@ -58,10 +58,11 @@ class SharedDocumentController extends FrontBaseController
         //dd($input_data);
         $dataArray["user_id"] = Auth::user()->id;
         // $dataArray["share_type"] = $input_data["share_type"];
-        $dataArray["share_method"] = 1;
-        if (!empty($input_data["link"]))
+        $dataArray["share_method"] = config('constant.SHARE_METHOD_SHARE');
+
+        if (!empty($input_data["link"])) {
             $dataArray["link"] = $input_data["link"];
-        else {
+        } else {
             if ($insertType == "multiple") {
 
                 // $personal_invitation_data["authentication_method"] = $input_data["authentication_method"];
@@ -166,8 +167,21 @@ class SharedDocumentController extends FrontBaseController
             $ret_type = $this->saveInSharedTables($request);
 
             if ($ret_type) {
+                $input_data = $request->all();
+                if (!empty($input_data["email"]) && !empty($input_data["name"])) {
+                    $userName = $input_data["name"];
+                    $userEmail = $input_data["email"];
+                    $email_config = [
+                        'config_param' => 'document_share',
+                        'content_data' => [
+                            'name' => $userName,
+                            'document_link' => $input_data["public_link"],
+                        ],
+                    ];
+                    Mail::to($userEmail)->send(new CommonMail($email_config));
+                }
                 $response_type = 'success';
-                $response_message = 'Docuemnt shared successfully,Thank You!';
+                $response_message = 'Document shared successfully,Thank You!';
             } else {
                 $response_type = 'error';
                 $response_message = 'Error occoured, Please try again.';
@@ -210,8 +224,7 @@ class SharedDocumentController extends FrontBaseController
                 //  foreach($errorMessages as $error_index =>  )
                 return response()->json(array(
                     'return_type' => 'error',
-                    'message' => $errormsgHTML
-
+                    'message' => $errormsgHTML,
                 )); // 400 being the HTTP code for an invalid request.
             }
 
@@ -249,6 +262,37 @@ class SharedDocumentController extends FrontBaseController
     {
         try {
             $input_data = $request->all();
+            $is_valid = 1;
+            if ($input_data["form_type"] == config('constant.LINK_SHARE_FORM')) {
+                if (empty($input_data["link"])) {
+                    $response_type = 'error';
+                    $response_message = 'Please check public link is empty!';
+                    $is_valid = 0;
+                }
+            } else  if ($input_data["form_type"] == config('constant.EMAIL_SHARE_FORM')) {
+                if (empty($input_data["user_email"])) {
+
+                    $response_type = 'error';
+                    $response_message = 'Please check email address not entered for share!';
+                    $is_valid = 0;
+                }
+
+                if (empty($input_data["user_name"])) {
+
+                    $response_type = 'error';
+                    $response_message = 'Please check email name not entered for share!';
+                    $is_valid = 0;
+                }
+            }
+            if ($is_valid == 0) {
+                $data_array = [
+                    'response_type' => $response_type, 'response_message' => $response_message
+                ];
+                \Session::put('shar_form_validate', $data_array);
+                return redirect()->route('front.user-document.user-document-advance-settings', [$input_data["user_document_id"]]);
+            }
+
+
             $is_valid = $this->saveInSharedTables($request, "multiple");
 
 
@@ -258,7 +302,7 @@ class SharedDocumentController extends FrontBaseController
                     foreach ($input_data["user_email"] as $userINfoIndex => $userEmail) {
                         $userName = $input_data["user_name"][$userINfoIndex];
                         $email_config = [
-                            'config_param' => 'email_verification',
+                            'config_param' => 'document_share',
                             'content_data' => [
                                 'name' => $userName,
                                 'document_link' => $input_data["publink_link_container"],
@@ -330,5 +374,39 @@ class SharedDocumentController extends FrontBaseController
             $response_message = $e->getMessage();
         }
         return response()->json(["return_type" => $response_type, 'message' => $response_message]);
+    }
+
+    public function documentDownload(UserDocument $user_document)
+    {
+        //  dd($user_document);
+        //$file = urldecode($_REQUEST["file"]); // Decode URL-encoded string
+        $fileUrl = "";
+        //        if (!empty($user_document->name))
+        //           $fileUrl = getUploadedFile([$user_document->file], "user_document");
+
+        $fileConfigData = config('upload_config.user_document');
+
+        $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
+        if (file_exists($filepath)) {
+
+            $file = ($filepath);
+
+            $filetype = filetype($file);
+
+            $filename = basename($file);
+
+            header("Content-Type: " . $filetype);
+
+            header("Content-Length: " . filesize($file));
+
+            header("Content-Disposition: attachment; filename=" . $user_document->file);
+
+            readfile($file);
+        }
+        exit();
+
+        // $filePath = Storage::disk('public')->path($user_document->file);
+
+
     }
 }

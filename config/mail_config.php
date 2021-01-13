@@ -66,7 +66,7 @@ return [
 	],
 	'document_share' => [
 		'source' => 'file',
-		'key' => 'renewal-success',
+		'key' => 'document_share',
 		'subject' => 'Shared Document',
 		'keywords' => [
 			"{[name]}",
