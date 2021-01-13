@@ -263,6 +263,7 @@ class SharedDocumentController extends FrontBaseController
         try {
             $input_data = $request->all();
             $is_valid = 1;
+
             if ($input_data["form_type"] == config('constant.LINK_SHARE_FORM')) {
                 if (empty($input_data["link"])) {
                     $response_type = 'error';
@@ -270,33 +271,26 @@ class SharedDocumentController extends FrontBaseController
                     $is_valid = 0;
                 }
             } else  if ($input_data["form_type"] == config('constant.EMAIL_SHARE_FORM')) {
-                if (empty($input_data["user_email"])) {
+                if (empty($input_data["user_email"]) || empty($input_data["user_name"])) {
 
                     $response_type = 'error';
-                    $response_message = 'Please check email address not entered for share!';
-                    $is_valid = 0;
-                }
-
-                if (empty($input_data["user_name"])) {
-
-                    $response_type = 'error';
-                    $response_message = 'Please check email name not entered for share!';
+                    $response_message = 'Please add email address and name to send share link!';
                     $is_valid = 0;
                 }
             }
+
             if ($is_valid == 0) {
-                $data_array = [
-                    'response_type' => $response_type, 'response_message' => $response_message
-                ];
-                //\Session::put('shar_form_validate', $data_array);
-                return redirect()->route('front.user-document.user-document-advance-settings', [$input_data["user_document_id"]]);
-            }
+                return response()->json(array(
+                    'return_type' => $response_type,
+                    'return_message' => $response_message,
 
+                ));
+            }
 
             $is_valid = $this->saveInSharedTables($request, "multiple");
 
 
-            if ($is_valid) {
+            if ($is_valid == 1) {
                 //send email
                 if (!empty($input_data["user_email"]) && !empty($input_data["user_name"])) {
                     foreach ($input_data["user_email"] as $userINfoIndex => $userEmail) {
@@ -328,7 +322,12 @@ class SharedDocumentController extends FrontBaseController
         }
         set_flash($response_type, $response_message);
         //  return view('front.dashboard');
-        return redirect()->route('front.dashboard');
+        // return redirect()->route('front.dashboard');
+        return response()->json(array(
+            'return_type' => $response_type,
+            'return_message' => $response_message,
+
+        )); // 400 being the HTTP code for an invalid request.
     }
 
     public function userDocumentLinkShareSave(Request $request)
@@ -389,19 +388,16 @@ class SharedDocumentController extends FrontBaseController
         $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
         if (file_exists($filepath)) {
 
-            $file = ($filepath);
-
-            $filetype = filetype($file);
-
-            $filename = basename($file);
-
-            header("Content-Type: " . $filetype);
-
-            header("Content-Length: " . filesize($file));
-
-            header("Content-Disposition: attachment; filename=" . $user_document->file);
-
-            readfile($file);
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filepath));
+            flush(); // Flush system output buffer
+            readfile($filepath);
+            die();
         }
         exit();
 

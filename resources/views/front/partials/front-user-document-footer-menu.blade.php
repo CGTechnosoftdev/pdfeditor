@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="download_item_trigger">
+                            <a href="#" class="download_item_trigger">
                                 <div class="link-img"><img src="{{ asset('public/front/images/download.svg') }}"></div>
                                 <span>Download</span>
                             </a>
@@ -249,17 +249,13 @@
         });
 
         //download_item_trigger
-        $("#download_item_trigger").click(function() {
+        $(".download_item_trigger").click(function() {
             var user_document_id = $("#recent_document_select_item").val();
-            alert(user_document_id);
-            $.ajax({
-                url: "{{url('user-document-download')}}/" + user_document_id,
-                type: "get",
-                success: function(response) {
-                    console.log(response);
-                }
+            var url = "{{url('user-document-download')}}/" + user_document_id;
+            //  alert(user_document_id);
+            //  window.location.href = "{{url('user-document-download')}}/" + user_document_id;
+            window.open(url, '_blank');
 
-            });
         });
 
         $("#sharemenu_itemid").click(function() {

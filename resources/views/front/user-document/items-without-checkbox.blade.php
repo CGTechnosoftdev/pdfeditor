@@ -52,6 +52,7 @@
                 <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
                 <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
                 <a class="dropdown-item move-to-trash" href="#"><i class=" far fa-folder"></i> Move to trash</a>
+                <a class="dropdown-item download_item_trigger" href="#"><i class=" far fa-folder"></i> Download</a>
             </div>
         </div>
     </div>
