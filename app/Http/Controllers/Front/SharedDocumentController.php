@@ -15,6 +15,7 @@ use App\Models\SharedDocumentUser;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommonMail;
+use App\Models\User;
 use Carbon\Carbon;
 
 use Auth;
@@ -24,8 +25,13 @@ class SharedDocumentController extends FrontBaseController
     public function __construct()
     {
     }
-    public function getDocumentDetail(UserDocument $user_document)
+    public function getDocumentDetail($user_document_encripted)
     {
+        $decript_documentId = decrypt($user_document_encripted);
+        $user_documentArray = UserDocument::where('id', $decript_documentId)->get();
+        if (count($user_documentArray) > 0)
+            $user_document = $user_documentArray[0];
+
         $fileUrl = "";
         if (!empty($user_document->name))
             $fileUrl = getUploadedFile([$user_document->file], "user_document");
@@ -109,7 +115,10 @@ class SharedDocumentController extends FrontBaseController
         //get shared user document
         $dataArray = array();
         $dataArray["shared_documents_id"] = $SharedDocument->id;
-        $dataArray["user_document_id"] = $input_data["user_document_id"];
+        if (strlen($input_data["user_document_id"]) > 6)
+            $dataArray["user_document_id"] = decrypt($input_data["user_document_id"]);
+        else
+            $dataArray["user_document_id"] = $input_data["user_document_id"];
         SharedUserDocument::saveData($dataArray);
 
         //save user info
@@ -236,8 +245,12 @@ class SharedDocumentController extends FrontBaseController
         }
     }
 
-    public function getAdvanceSettings(UserDocument $user_document)
+    public function getAdvanceSettings($user_document_encripted)
     {
+        $decript_documentId = decrypt($user_document_encripted);
+        $user_documentArray = UserDocument::where('id', $decript_documentId)->get();
+        if (count($user_documentArray) > 0)
+            $user_document = $user_documentArray[0];
 
         $fileUrl = "";
         if (!empty($user_document->name))
@@ -373,36 +386,5 @@ class SharedDocumentController extends FrontBaseController
             $response_message = $e->getMessage();
         }
         return response()->json(["return_type" => $response_type, 'message' => $response_message]);
-    }
-
-    public function documentDownload(UserDocument $user_document)
-    {
-        //  dd($user_document);
-        //$file = urldecode($_REQUEST["file"]); // Decode URL-encoded string
-        $fileUrl = "";
-        //        if (!empty($user_document->name))
-        //           $fileUrl = getUploadedFile([$user_document->file], "user_document");
-
-        $fileConfigData = config('upload_config.user_document');
-
-        $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
-        if (file_exists($filepath)) {
-
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($filepath) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($filepath));
-            flush(); // Flush system output buffer
-            readfile($filepath);
-            die();
-        }
-        exit();
-
-        // $filePath = Storage::disk('public')->path($user_document->file);
-
-
     }
 }

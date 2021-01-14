@@ -75,3 +75,4 @@
 @include('front.partials.forms.upload-document-form')
 @include('front.partials.forms.upload-template-form')
 @include('front.partials.forms.add-folder-form')
+@include('front.partials.forms.rename-document-form')

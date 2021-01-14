@@ -144,6 +144,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/document/get-from-url', 'UserDocumentController@getFromUrl')->name('get-url-document');
 		Route::post('/document/add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
 		Route::post('/document/add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
+		Route::post('/document/rename-document', 'UserDocumentController@renameDocumentSave')->name('rename-document-save');
 		Route::post('/document-info', 'UserDocumentController@getDocumentInfo')->name('document-info');
 		Route::get('/document/template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
 		Route::post('/document/template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
@@ -161,10 +162,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 
 
-		Route::get('/user-document-share-get/{user_document}', 'SharedDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
+		Route::get('/user-document-share-get/{user_document_encripted}', 'SharedDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
 		Route::post('/user-document-email-share-save', 'SharedDocumentController@userDocumentEmailShareSave')->name('user-document.user-document-email-share-save');
 		Route::post('/user-document-link-share-save', 'SharedDocumentController@userDocumentLinkShareSave')->name('user-document.user-document-link-share-save');
-		Route::get('/user-document-advance-settings/{user_document}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
+		Route::get('/user-document-advance-settings/{user_document_encripted}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
 		Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
 		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
 
@@ -174,7 +175,8 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
-		Route::get('/user-document-download/{user_document}', 'SharedDocumentController@documentDownload')->name('user-document.download');
+		Route::get('/user-document-download/{user_document_encripted}', 'UserDocumentController@documentDownload')->name('user-document.download');
+		Route::get('/user-document-print/{user_document_encripted}', 'UserDocumentController@documentPrint')->name('user-document.print');
 	});
 });
 

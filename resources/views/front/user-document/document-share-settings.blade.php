@@ -440,6 +440,7 @@
         $("#advance_frm_submit_id").click(
             function(e) {
                 e.preventDefault();
+                blockUI();
                 $.ajax({
                     url: "{{route('front.user-document.user-document-advance-settings-save')}}",
                     type: 'post',
@@ -463,6 +464,9 @@
                             window.location.href = "{{route('front.dashboard')}}"
                         }
 
+                    },
+                    complete: function() {
+                        unblockUI();
                     }
 
                 });
