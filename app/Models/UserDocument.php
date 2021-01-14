@@ -11,7 +11,7 @@ class UserDocument extends Model
 
     use SoftDeletes;
     use BaseModelTrait;
-    protected $fillable = ['name', 'file', 'file_thumbnail', 'type', 'user_id', 'thumbnail', 'trash'];
+    protected $fillable = ['name', 'file', 'file_thumbnail', 'type', 'user_id', 'thumbnail', 'trash', 'status'];
     protected $appends = [
         'formatted_name', 'thumbnail_url', 'encrypted_id'
     ];
@@ -32,6 +32,11 @@ class UserDocument extends Model
     public function getEncryptedIdAttribute()
     {
         return encryptData($this->id);
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(UserDocumentTag::class, 'user_document_id', 'id');
     }
 
     public static function saveData($dataArray, $model = array())

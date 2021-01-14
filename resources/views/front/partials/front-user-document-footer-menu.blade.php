@@ -225,13 +225,16 @@
         </div>
     </div>
 </div>
-@include('front.partials.user-modals')
+@include('front.partials.forms.link-to-fill-basic-form')
+@include('front.partials.forms.user-document-share-form')
+@include('front.partials.forms.add-new-tag-form')
 @section('additionaljs')
 <script>
     $(document).ready(function() {
         window.selected_document = '';
         window.selected_document_info = '';
-        var model_element = "#linktofill";
+        var link_to_fill_modal_element = "#linktofill";
+        var add_tags_modal_element = "#add-tag";
         // $(document).on('click', '.content .single-document', function(e) {
         $(document).on('click', '.document-container', function(e) {
             window.selected_document = $(this).attr('data-id');
@@ -241,6 +244,9 @@
             $('.footer-more-menus').addClass('active').siblings().removeClass('active');
         });
         $(document).on('show.bs.dropdown', '.document-action-menu', function() {
+            $(this).closest(".document-container").click();
+        });
+        $(document).on('click', '.document-action-menu', function() {
             $(this).closest(".document-container").click();
         });
 
@@ -428,7 +434,7 @@
                 error: function(data) {
                     var response = data.responseJSON;
                     toastr.error(response.message);
-                    $(model_element).modal('hide');
+                    $(link_to_fill_modal_element).modal('hide');
                 }
             });
         }
@@ -455,18 +461,43 @@
                 }
             });
         }
+
+        window.saveTags = function(document, tags) {
+            blockUI();
+            $.ajax({
+                url: "{{route('front.save-tags')}}",
+                type: "post",
+                dataType: 'json',
+                data: {
+                    "_token": csrf_token,
+                    document: document,
+                    tags: tags,
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+                    toastr.error(response.message);
+                },
+                complete: function() {
+                    unblockUI();
+                }
+            });
+        }
+
         $(document).on('click', '.link-to-fill-button', function(e) {
             e.preventDefault();
-            $(model_element).find('.non-published').removeClass('invisible');
-            $(model_element).find('.published').addClass('invisible');
-            $(model_element).find('.published-link-div').addClass('disable-div');
+            $(link_to_fill_modal_element).find('.non-published').removeClass('invisible');
+            $(link_to_fill_modal_element).find('.published').addClass('invisible');
+            $(link_to_fill_modal_element).find('.published-link-div').addClass('disable-div');
             window.getDocumentInfo(window.selected_document);
             if (window.selected_document_info) {
-                $(model_element).find('#document-preview').attr('src', window.selected_document_info.thumbnail_url);
-                $(model_element).find('#document-name').html(window.selected_document_info.formatted_name);
-                $(model_element).find('#publish-link').attr('data-document', window.selected_document_info.encrypted_id);
-                $(model_element).find('#advance-setting-link').attr('data-document', window.selected_document_info.encrypted_id);
-                $(model_element).modal('show');
+                $(link_to_fill_modal_element).find('#document-preview').attr('src', window.selected_document_info.thumbnail_url);
+                $(link_to_fill_modal_element).find('#document-name').html(window.selected_document_info.formatted_name);
+                $(link_to_fill_modal_element).find('#publish-link').attr('data-document', window.selected_document_info.encrypted_id);
+                $(link_to_fill_modal_element).find('#advance-setting-link').attr('data-document', window.selected_document_info.encrypted_id);
+                $(link_to_fill_modal_element).modal('show');
             }
         });
 
@@ -485,16 +516,16 @@
                 },
                 success: function(response) {
                     var response_data = response.data;
-                    $(model_element).find('#link-to-fill').val(response_data.publish_link);
-                    $(model_element).find('#facebook-share').attr('href', response_data.facebook_share_link);
-                    $(model_element).find('#twitter-share').attr('href', response_data.twitter_share_link);
-                    $(model_element).find('.non-published').addClass('invisible');
-                    $(model_element).find('.published').removeClass('invisible');
-                    $(model_element).find('.published-link-div').removeClass('disable-div');
+                    $(link_to_fill_modal_element).find('#link-to-fill').val(response_data.publish_link);
+                    $(link_to_fill_modal_element).find('#facebook-share').attr('href', response_data.facebook_share_link);
+                    $(link_to_fill_modal_element).find('#twitter-share').attr('href', response_data.twitter_share_link);
+                    $(link_to_fill_modal_element).find('.non-published').addClass('invisible');
+                    $(link_to_fill_modal_element).find('.published').removeClass('invisible');
+                    $(link_to_fill_modal_element).find('.published-link-div').removeClass('disable-div');
                 },
                 error: function(data) {
                     var response = data.responseJSON;
-                    $(model_element).modal('hide');
+                    $(link_to_fill_modal_element).modal('hide');
                     toastr.error(response.message);
                 },
                 complete: function() {
@@ -503,15 +534,34 @@
             });
         });
 
-        $(document).on('click', '#advance-setting-link', function(e) {
+        $(document).on('click', '#link-to-fill-advance-setting', function(e) {
             e.preventDefault();
             blockUI();
-            var document = $(this).attr('data-document');
             var url = '{{ route("front.advance-link-to-fill", ":document") }}';
-            url = url.replace(':document', document);
+            url = url.replace(':document', window.selected_document);
             window.location.replace(url);
 
         });
+
+        $(document).on('click', '.add-tag', function(e) {
+            e.preventDefault();
+            window.getDocumentInfo(window.selected_document);
+            if (window.selected_document_info) {
+                var tags_arr = window.selected_document_info.tags;
+                if (tags_arr.length > 0) {
+                    var tags_html = '';
+                    $.each(tags_arr, function(key, value) {
+                        tags_html += '<span class="tag badge" style="background-color:' + value.color + '">' + value.name + '&nbsp;<i class="fa fa-times remove_tag"></i></span>&nbsp;';
+                    });
+                    $('#added_tags').html(tags_html);
+                } else {
+                    $('#added_tags').html("No tags added");
+                }
+                $(add_tags_modal_element).modal('show');
+            }
+        });
+
+
     });
 </script>
 @append

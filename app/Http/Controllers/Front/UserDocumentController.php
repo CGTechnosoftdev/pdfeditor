@@ -7,6 +7,7 @@ use App\Http\Requests\UserDocumentUploadFormRequest;
 use App\Http\Requests\UserDocumentGetFormRequest;
 use App\Http\Requests\UserAddFolderFormRequest;
 use App\Models\UserDocument;
+use App\Models\UserDocumentTag;
 use DB, Auth, View, Response, Cookie, Hash;
 
 class UserDocumentController extends FrontBaseController
@@ -199,8 +200,47 @@ class UserDocumentController extends FrontBaseController
             $response_type = 'error';
             $response_message = 'Document not found';
         } else {
+            $return_document = [
+                "encrypted_id" => $document->id,
+                "formatted_name" => $document->formatted_name,
+                "thumbnail_url" => $document->thumbnail_url,
+                "tags" => $document->tags,
+            ];
             $response_type = 'success';
-            $response_data = $document;
+            $response_data = $return_document;
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' => $response_data ?? '',
+        ), (($response_type == 'success') ? 200 : 404));
+    }
+
+    public function saveTags(Request $request)
+    {
+        $input_data = $request->input();
+        $document_id = decrypt($input_data['document'] ?? '');
+        $document = UserDocument::dataRow(['id' => $document_id]);
+        if (empty($document)) {
+            $response_type = 'error';
+            $response_message = 'Document not found';
+        } else {
+            UserDocumentTag::where('user_document_id', $document->id)->delete();
+            if (!empty($input_data['tags'])) {
+                foreach ($input_data['tags'] as $tags) {
+                    $tag_data = [
+                        "user_document_id" => $document->id,
+                        "name" => $tags['name'],
+                        "color" => $tags['color'],
+                    ];
+                    UserDocumentTag::saveData($tag_data);
+                }
+            }
+            $response_type = 'success';
+            $response_message = "Tags save successfully";
+        }
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
         }
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,

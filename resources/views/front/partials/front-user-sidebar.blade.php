@@ -35,14 +35,8 @@
                     <ul>
                         <li><a href="{{ route('front.document-list') }}">My Documents <img class="icon" src="{{asset('public/front/images/file-plus.svg') }}"></a></li>
                         <li><a href="{{ route('front.encrypted-document-list') }}">Encrypted</a></li>
-
-                        <li><a href="{{ route('front.document-list') }}">My Documents<img class="icon" src="../public/front/images/file-plus.svg"></a></li>
-                        <li><a href="{{ route('front.encrypted-document-list') }}">Encrypted<img class="icon" src="../public/front/images/file-plus.svg"></a></li>
                     </ul>
                 </div>
-                <ul class="treeview-menu" style="display: none;">
-
-                </ul>
             </li>
             <li class="treeview">
                 <a href="#">

@@ -39,7 +39,7 @@
                  <div class="share-link-btns">
                      <div class="d-flex justify-content-between non-published">
                          <button class="btn btn-success" id="publish-link" data-document="">Publish</button>
-                         <button class="btn btn-outline-success" id="advance-setting-link" data-document="">Advance Settings</button>
+                         <button class="btn btn-outline-success" id="link-to-fill-advance-setting" data-document="">Advance Settings</button>
                      </div>
                      <div class="d-flex justify-content-between published invisible">
                          <button class="btn btn-success" data-dismiss="modal">Done</button>

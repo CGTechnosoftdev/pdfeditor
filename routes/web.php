@@ -143,16 +143,14 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/document/upload-new', 'UserDocumentController@uploadNew')->name('upload-new-document');
 		Route::post('/document/get-from-url', 'UserDocumentController@getFromUrl')->name('get-url-document');
 		Route::post('/document/add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
-		Route::post('/document/add-new-folder', 'UserDocumentController@addNewFolder')->name('add-new-folder');
 		Route::post('/document-info', 'UserDocumentController@getDocumentInfo')->name('document-info');
-		Route::get('/document/template-form', 'UserDocumentController@templateForm')->name('user-document.template-form');
-		Route::post('/document/template-form-save', 'UserDocumentController@templateFormSave')->name('user-document.template-form-save');
 
 		Route::get('/document/list', 'UserDocumentController@index')->name('document-list');
 		Route::post('/document/list-data', 'UserDocumentController@getDocumentListData')->name('document-list-data');
 		Route::get('/document/encrypted-list', 'UserDocumentController@encryptedDocumentList')->name('encrypted-document-list');
 		Route::post('/document/encrypted-list', 'UserDocumentController@encryptedDocumentList')->name('encrypted-document-list');
 		Route::post('/document/encrypted-list-data', 'UserDocumentController@getEncryptedDocumentListData')->name('encrypted-document-list-data');
+		Route::post('/document/save-tags', 'UserDocumentController@saveTags')->name('save-tags');
 
 		Route::post('/document/{unique_code}', 'UserDocumentController@viewDocument')->name('document-link');
 

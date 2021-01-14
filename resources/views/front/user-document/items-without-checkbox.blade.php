@@ -8,8 +8,10 @@
         <h5>{{ $row->formatted_name }}</h5>
         <div class="last-activity">Last activity: <strong>You opened {{ $row->name }}</strong></div>
         <dtv class="tags">
-            <span class="tag badge badge-warning">GuideBook</span>
-            <a href="" class="add-tag">
+            @foreach($row->tags as $tag)
+            <span class="tag badge" style="background-color: {{$tag->color}};">{{$tag->name}}</span>
+            @endforeach
+            <a href="" class="add-tag document-action-menu">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                     <g>
                         <g>
@@ -52,6 +54,7 @@
                 <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
                 <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
                 <a class="dropdown-item move-to-trash" href="#"><i class=" far fa-folder"></i> Move to trash</a>
+                <a class="dropdown-item add-tag" href="#"><i class=" fa fa-tag"></i> Tags</a>
             </div>
         </div>
     </div>
