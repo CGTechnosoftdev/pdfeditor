@@ -23,6 +23,8 @@ class DashboardController extends FrontBaseController
      */
     public function index(Request $request)
     {
+        // $path = "https://www.google.com/search?q=bocar+image&tbm=isch&source=iu&ictx=1&fir=Te26YTQfyvUIZM%252CpRnhJbXGMNDAKM%252C_&vet=1&usg=AI4_-kRrU57hlK8U0g4_KXKetP9Ht76Z9w&sa=X&ved=2ahUKEwjghbvWopbuAhX7yDgGHc4HBxUQ9QF6BAgLEAE#imgrc=Te26YTQfyvUIZM";
+        // dd(pathinfo($path, PATHINFO_FILENAME));
         $user = Auth::user();
         $active = "document";
         $input_data = $request->all();
