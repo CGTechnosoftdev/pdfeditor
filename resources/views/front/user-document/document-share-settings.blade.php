@@ -408,7 +408,7 @@
         <div class="advance-settings-btns">
 
             {{Form::submit('Submit',array('class' => 'share-btn' ,'id' => 'advance_frm_submit_id'))}}
-            <a href="#" class="my-doc-btn">My Docs</a>
+            <a href="{{route('front.document-list')}}" class="my-doc-btn">My Docs</a>
         </div>
 
     </div>

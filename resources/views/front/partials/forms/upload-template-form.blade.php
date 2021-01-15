@@ -129,7 +129,6 @@
                 msgEl.text(error_message);
                 msgEl.show();
                 msgEl.css("opacity", 1);
-                console.log(response);
                 toastr.error(error_message);
             }
         }

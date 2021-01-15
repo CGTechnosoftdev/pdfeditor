@@ -27,8 +27,9 @@ class SharedUserDocumentFormRequest extends FormRequest
     public function rules()
     {
         return [
+            'email' => 'required|email',
             'name' => 'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2,deleted_at,NULL',
-            'email' => 'required|email'
+
         ];
     }
 

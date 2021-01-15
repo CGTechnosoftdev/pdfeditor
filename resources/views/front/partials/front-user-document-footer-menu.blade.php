@@ -277,8 +277,9 @@
 
 
         });
-        //document_print_trigger
 
+
+        //document_print_trigger        
         $(document).on("click", ".document_print_trigger", function() {
 
             var user_document_id = $("#recent_document_select_item").val();
@@ -290,7 +291,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status == true) {
-                        var popupWin = window.open(response.fileurl, '_blank', 'width=300,height=300');
+                        var popupWin = window.open(response.fileurl, '_blank', 'width=600,height=400');
                         popupWin.print();
                         popupWin.close();
                     }
@@ -394,10 +395,12 @@
                         setTimeout(function() {
                             $("#userDocMsgConId").removeClass("show");
                             $("#userDocMsgConId").addClass("hide");
+                            $("#cust_share").modal("hide");
                         }, 3000);
 
                     },
                     complete: function() {
+                        document.getElementById("user_document_send_email_form_id").reset();
                         unblockUI();
                     },
                     error: function(data) {
@@ -460,6 +463,7 @@
                         setTimeout(function() {
                             $("#userDocTempConId").removeClass("show");
                             $("#userDocTempConId").addClass("hide");
+                            $("#cust_share").modal("hide");
                         }, 3000);
 
 

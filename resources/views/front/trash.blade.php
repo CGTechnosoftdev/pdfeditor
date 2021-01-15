@@ -66,7 +66,7 @@
         <div class="doc-dots">
             <div class="custom-control custom-checkbox red mr-sm-2">
 
-                {{Form::checkbox("trash_items[$row->id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing".$row->id,"checked" => false))}}
+                {{Form::checkbox("trash_items[$row->encrypted_id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing".$row->id,"checked" => false))}}
                 <label class="custom-control-label font-0" for="customControlAutosizing{{$row->id}}">.</label>
             </div>
         </div>
@@ -81,8 +81,8 @@
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                    <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Restore</a>
-                    <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>
+                    <a class="dropdown-item" href="#" data-id="{{$row->encrypted_id}}" id="restoreItem_{{$row->encrypted_id}}"><i class="far fa-edit"></i> Restore</a>
+                    <!--<a class="dropdown-item" href="#"><i class="far fa-copy"></i> Quick Preview</a>-->
                 </div>
             </div>
         </div>
@@ -107,6 +107,21 @@
                 "action": "{{route('front.trash-update-save')}}"
             });
             form.submit();
+        });
+
+        //user_document_encripted
+        //trash-single-restore-save
+        $(document).on("click", "a[id ^= 'restoreItem_']", function() {
+            var user_document_encripted = $(this).attr("data-id");
+            $.ajax({
+                url: "{{route('front.trash-single-restore-save')}}",
+                data: "_token={{csrf_token()}}&user_document_encripted=" + user_document_encripted,
+                type: "post",
+                success: function(response) {
+                    location.reload();
+                }
+            });
+
         });
 
         $("body").on("click", "#delete_selectedId", function() {

@@ -180,6 +180,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
+		Route::post('/trash-single-restore', 'TrashController@trashSingleRestore')->name('trash-single-restore-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
 		Route::get('/user-document-download/{user_document_encripted}', 'UserDocumentController@documentDownload')->name('user-document.download');
