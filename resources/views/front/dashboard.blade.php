@@ -46,7 +46,7 @@
 			<div class="recent-documents">
 				<h4>Recent Documents</h4>
 			</div>
-			<input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
+
 			<div id="document_list_containerid">
 				@include('front.user-document.items-without-checkbox',['documents'=>$recent_documents,'item_container_id' => 'move_to_trash_document_trigger_'])
 			</div>

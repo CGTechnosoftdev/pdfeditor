@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="#" class="document_print_trigger">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/print.svg') }}">
                 </div>
@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" class="download_item_trigger">
                                 <div class="link-img"><img src="{{ asset('public/front/images/download.svg') }}"></div>
                                 <span>Download</span>
                             </a>
@@ -228,6 +228,8 @@
 @include('front.partials.forms.link-to-fill-basic-form')
 @include('front.partials.forms.user-document-share-form')
 @include('front.partials.forms.add-new-tag-form')
+@include('front.partials.forms.rename-document-form')
+<input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
 @section('additionaljs')
 <script>
     $(document).ready(function() {
@@ -254,6 +256,60 @@
             window.moveToTrash(window.selected_document);
         });
 
+        //download_item_trigger
+        $(document).on("click", ".download_item_trigger", function() {
+            var user_document_id = $("#recent_document_select_item").val();
+            var url_to_call = "{{url('user-document-download')}}/" + user_document_id;
+            $.ajax({
+                url: url_to_call,
+                type: 'get',
+                data: '_token={{csrf_token()}}&is_document_exist_check=1',
+                success: function(response) {
+                    if (response.status) {
+                        //  alert("file exists");
+                        window.open(url_to_call, '_blank');
+                    } else {
+                        alert("Sorry,document dose not exists!");
+                    }
+
+                }
+            });
+
+
+        });
+        //document_print_trigger
+
+        $(document).on("click", ".document_print_trigger", function() {
+
+            var user_document_id = $("#recent_document_select_item").val();
+            var url_to_call = "{{url('user-document-print')}}/" + user_document_id;
+
+            $.ajax({
+                url: url_to_call,
+                type: 'get',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status == true) {
+                        var popupWin = window.open(response.fileurl, '_blank', 'width=300,height=300');
+                        popupWin.print();
+                        popupWin.close();
+                    }
+
+                }
+            });
+
+        });
+
+        $(document).on("click", ".document_rename_trigger", function() {
+            window.getDocumentInfo(window.selected_document);
+            if (window.selected_document_info) {
+                $("#document_rename_txt_id").val(window.selected_document_info.name);
+                $("#rename_doc_id").val(window.selected_document);
+                $('.rename-document').modal('show');
+            }
+
+        });
+
         $("#sharemenu_itemid").click(function() {
             // alert("ajax call is ");
             $.ajaxSetup({
@@ -268,7 +324,6 @@
 
             if (user_document_id != 0) {
                 // getDocumentInfo(user_document_id);
-                // console.log(window.selected_document_info);
 
                 $.ajax({
                     type: 'GET',
@@ -276,7 +331,7 @@
                     success: function(data) {
                         console.log(data);
 
-                        $("#shareDocumentLinkId").html(data.response_data.formatted_name);
+                        $("#shareDocumentLinkId").html(data.response_data.name);
                         $("#shareDocumentLinkId").attr("href", data.file_url);
                         $("#public_linkid").val(data.public_link);
 
@@ -315,6 +370,7 @@
             if (share_type == 1) {
 
                 e.preventDefault();
+                blockUI();
                 var formData = new FormData($("#user_document_send_email_form_id")[0]);
                 $.ajax({
                     type: 'POST',
@@ -341,6 +397,9 @@
                         }, 3000);
 
                     },
+                    complete: function() {
+                        unblockUI();
+                    },
                     error: function(data) {
                         var jsonData = $.parseJSON(data.responseText);
                         $("#userDocMsgConId").removeClass("hide");
@@ -361,6 +420,7 @@
 
                 e.preventDefault();
                 var formData = new FormData($("#user_document_share_link_form_id")[0]);
+                blockUI();
                 $.ajax({
                     type: 'POST',
                     url: "{{ route('front.user-document.user-document-link-share-save')}}",
@@ -372,31 +432,53 @@
                     success: (data) => {
                         // this.reset();
                         console.log(JSON.stringify(data));
-                        //  var jsonData = $.parseJSON(data.responseText);
-                        // alert('File has been uploaded successfully');
-                        $("#userDocMsgConId").removeClass("hide");
-                        $("#userDocMsgConId").removeClass("alert-danger");
-                        $("#userDocMsgConId").addClass("alert-success");
-                        $("#userDocMsgConId").addClass("show");
-                        $("#userDocMsgConId").html(data.message);
+                        if (data.return_type == "error") {
 
-                        setTimeout(function() {
-                            $("#userDocMsgConId").removeClass("show");
-                            $("#userDocMsgConId").addClass("hide");
-                        }, 3000);
+                            var jsonData = $.parseJSON(data.responseText);
+                            $("#userDocTempConId").removeClass("hide");
+                            $("#userDocTempConId").removeClass("alert-success");
+                            $("#userDocTempConId").addClass("alert-danger");
+                            $("#userDocTempConId").addClass("show");
+                            $("#userDocTempConId").html(jsonData.message);
 
-                    },
-                    error: function(data) {
-                        var jsonData = $.parseJSON(data.responseText);
-                        $("#userDocTempConId").removeClass("hide");
-                        $("#userDocTempConId").removeClass("alert-success");
-                        $("#userDocTempConId").addClass("alert-danger");
-                        $("#userDocTempConId").addClass("show");
-                        $("#userDocTempConId").html(jsonData.message);
+
+
+                        } else {
+
+                            //  var jsonData = $.parseJSON(data.responseText);
+                            // alert('File has been uploaded successfully');
+                            $("#userDocMsgConId").removeClass("hide");
+                            $("#userDocMsgConId").removeClass("alert-danger");
+                            $("#userDocMsgConId").addClass("alert-success");
+                            $("#userDocMsgConId").addClass("show");
+                            $("#userDocMsgConId").html(data.message);
+
+
+
+                        }
 
                         setTimeout(function() {
                             $("#userDocTempConId").removeClass("show");
                             $("#userDocTempConId").addClass("hide");
+                        }, 3000);
+
+
+                    },
+                    complete: function() {
+                        unblockUI();
+                    },
+                    error: function(data) {
+
+                        var jsonData = $.parseJSON(data.responseText);
+                        $("#userDocMsgConId").removeClass("hide");
+                        $("#userDocMsgConId").removeClass("alert-success");
+                        $("#userDocMsgConId").addClass("alert-danger");
+                        $("#userDocMsgConId").addClass("show");
+                        $("#userDocMsgConId").html(jsonData.message);
+
+                        setTimeout(function() {
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
                         }, 3000);
                     }
                 });
@@ -494,7 +576,7 @@
             window.getDocumentInfo(window.selected_document);
             if (window.selected_document_info) {
                 $(link_to_fill_modal_element).find('#document-preview').attr('src', window.selected_document_info.thumbnail_url);
-                $(link_to_fill_modal_element).find('#document-name').html(window.selected_document_info.formatted_name);
+                $(link_to_fill_modal_element).find('#document-name').html(window.selected_document_info.name);
                 $(link_to_fill_modal_element).find('#publish-link').attr('data-document', window.selected_document_info.encrypted_id);
                 $(link_to_fill_modal_element).find('#advance-setting-link').attr('data-document', window.selected_document_info.encrypted_id);
                 $(link_to_fill_modal_element).modal('show');

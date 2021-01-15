@@ -17,7 +17,6 @@ class CreateUserDocumentTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 255);
             $table->string('file', 255)->nullable();
-            $table->string('file_thumbnail', 255)->nullable();
             $table->string('thumbnail', 255)->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('user_id');

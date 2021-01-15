@@ -11,18 +11,12 @@ class UserDocument extends Model
 
     use SoftDeletes;
     use BaseModelTrait;
-    protected $fillable = ['name', 'file', 'file_thumbnail', 'type', 'user_id', 'thumbnail', 'trash', 'status'];
+    protected $fillable = ['name', 'file', 'type', 'user_id', 'thumbnail', 'trash', 'status'];
     protected $appends = [
-        'formatted_name', 'thumbnail_url', 'encrypted_id'
+        'thumbnail_url', 'encrypted_id'
     ];
     protected $dates = ['deleted_at'];
     public $timestamps = true;
-
-
-    public function getFormattedNameAttribute()
-    {
-        return $this->name;
-    }
 
     public function getThumbnailUrlAttribute()
     {

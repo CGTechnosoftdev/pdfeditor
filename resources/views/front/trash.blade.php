@@ -75,7 +75,7 @@
         </div>
         <div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png')}}" class="user-image" alt="PDFWriter Admin Image"></div>
         <div class="doc-content">
-            <h5>{{$row->formatted_name}}</h5>
+            <h5>{{$row->name}}</h5>
             <div class=" last-activity"><i class="fas fa-calendar-day"></i> {{ changeDateTimeFormat($row->updated_at) }}</div>
         </div>
         <div class="more-opt">

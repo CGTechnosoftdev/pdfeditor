@@ -13,9 +13,11 @@
 
 <!-- Main content -->
 <section class="content">
-    {{ Form::open(['url' => 'user-document-advance-settings-save','method'=>'post','class'=>'login-form','id' => 'user_document_advance_setting_form_id','enctype'=>"multipart/form-data"]) }}
+
+
+    {{ Form::open(['url' => '#','method'=>'post','class'=>'login-form','id' => 'user_document_advance_setting_form_id','enctype'=>"multipart/form-data"]) }}
     {{form::hidden('user_document_id',$document_id)}}
-    {{form::hidden('user_document_name',$document_info["formatted_name"],array("id" => "user_document_name_id"))}}
+    {{form::hidden('user_document_name',$document_info["name"],array("id" => "user_document_name_id"))}}
 
     <div class="advance-settings-part">
         <h3>
@@ -25,6 +27,7 @@
         </h3>
         <div class="collapse show" id="you-are-sharing">
             <div class="advance-settings-content">
+
                 <div class="row">
                     <div class="col-lg-10 col-md-8">
                         <div class="single-document single-doc-signed">
@@ -33,7 +36,7 @@
                             </div>
                             <div class="doc-img"><img src="../public/front/images/doc-img-1.png" class="user-image" alt="PDFWriter Admin Image"></div>
                             <div class="doc-content">
-                                <h5><a href="<?= $fileUrl ?>" target="_blank"><?= !empty($document_info["formatted_name"]) ? $document_info["formatted_name"] : "" ?></a></h5>
+                                <h5><a href="<?= $fileUrl ?>" target="_blank"><?= !empty($document_info["name"]) ? $document_info["name"] : "" ?></a></h5>
                                 <!-- <h5>PDFwriter How To Guide</h5>
                                 <div class="last-activity">Last update: Nov 12, 2020</div> -->
                             </div>
@@ -56,8 +59,10 @@
             <a class="" data-toggle="collapse" href="#recipients" aria-expanded="true" aria-controls="recipients">
                 <img class="icon" src="../public/front/images/add-user.svg"> Recipients <span><img src="../public/front/images/info-i.svg"></span></a>
         </h3>
+        {{form::hidden('form_type',config('constant.EMAIL_SHARE_FORM'),['id' => 'form_typeid'])}}
         <div class="collapse show" id="recipients">
             <div class="advance-settings-content">
+                <div class="alert hide" id="advance_share_cont_id"></div>
                 <div class="share-by">
                     <ul class="nav nav-tabs">
                         <li><a class="active" id="advance_share_tabl_1" data-toggle="tab" href="#email-link">Share by Email</a></li>
@@ -402,7 +407,7 @@
 
         <div class="advance-settings-btns">
 
-            {{Form::submit('Submit',array('class' => 'share-btn'))}}
+            {{Form::submit('Submit',array('class' => 'share-btn' ,'id' => 'advance_frm_submit_id'))}}
             <a href="#" class="my-doc-btn">My Docs</a>
         </div>
 
@@ -421,15 +426,53 @@
             var idArray = $(this).attr("id").split("advance_share_tabl_");
             if (idArray[1] == 1) {
                 $("#linkid").val("");
+                $("#form_typeid").val("{{config('constant.EMAIL_SHARE_FORM')}}");
                 $("#field_belongs_to_email_shareid").removeClass("hide");
                 $("#field_belongs_to_email_shareid").addClass("show");
             } else if (idArray[1] == 2) {
+                $("#form_typeid").val("{{config('constant.LINK_SHARE_FORM')}}");
                 $("#field_belongs_to_email_shareid").removeClass("show");
                 $("#field_belongs_to_email_shareid").addClass("hide");
                 $("#linkid").val($("#publink_link_containerid").val());
             }
 
         });
+        $("#advance_frm_submit_id").click(
+            function(e) {
+                e.preventDefault();
+                blockUI();
+                $.ajax({
+                    url: "{{route('front.user-document.user-document-advance-settings-save')}}",
+                    type: 'post',
+                    data: $('#user_document_advance_setting_form_id').serialize(),
+                    success: function(response) {
+                        // console.log(ret_html);
+                        if (response.return_type == "error") {
+
+                            $("#advance_share_cont_id").removeClass("hide");
+                            $("#advance_share_cont_id").removeClass("alert-success");
+                            $("#advance_share_cont_id").addClass("alert-danger");
+                            $("#advance_share_cont_id").addClass("show");
+                            $("#advance_share_cont_id").html(response.return_message);
+
+                            $('html, body').animate({
+                                scrollTop: $("#user_document_advance_setting_form_id").offset().top
+                            }, 2000);
+
+
+                        } else if (response.return_type == "success") {
+                            window.location.href = "{{route('front.dashboard')}}"
+                        }
+
+                    },
+                    complete: function() {
+                        unblockUI();
+                    }
+
+                });
+                //  return false;
+            }
+        );
         $("#add_recipient_id").click(function(e) {
             //emailnameFromContId
             e.preventDefault();

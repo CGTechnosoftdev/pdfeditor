@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserDocumentUploadFormRequest;
 use App\Http\Requests\UserDocumentGetFormRequest;
 use App\Http\Requests\UserAddFolderFormRequest;
+use App\Http\Requests\DocumentRenameFormRequest;
+
 use App\Models\UserDocument;
 use App\Models\UserDocumentTag;
 use DB, Auth, View, Response, Cookie, Hash;
@@ -117,7 +119,6 @@ class UserDocumentController extends FrontBaseController
                 $input_data['user_id'] = $user['id'];
                 $input_data['name'] = pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
                 $input_data['file'] = $upload_response['data'];
-                $input_data['file_thumbnail'] = '';
                 $user_document_form = UserDocument::saveData($input_data);
                 if ($user_document_form) {
                     $response_type = 'success';
@@ -150,7 +151,6 @@ class UserDocumentController extends FrontBaseController
                 $input_data['user_id'] = $user['id'];
                 $input_data['name'] = pathinfo($input_data['url'], PATHINFO_FILENAME);
                 $input_data['file'] = $upload_response['data'];
-                $input_data['file_thumbnail'] = '';
                 $user_document_form = UserDocument::saveData($input_data);
                 if ($user_document_form) {
                     $response_type = 'success';
@@ -191,6 +191,102 @@ class UserDocumentController extends FrontBaseController
         return redirect()->back();
     }
 
+    public function renameDocumentSave(DocumentRenameFormRequest $request)
+    {
+        $input_data = $request->input();
+        $user = Auth::user();
+        $is_valid = 0;
+        if (!empty($input_data["document_id"])) {
+            $input_data["document_id"] = decrypt($input_data["document_id"]);
+            $user_documentArray = UserDocument::where('id', $input_data["document_id"])->get();
+            if (count($user_documentArray) > 0) {
+                $user_document = $user_documentArray[0];
+                $data_array["name"] = $input_data["name"];
+                if (UserDocument::saveData($data_array, $user_document)) {
+                    $is_valid = 1;
+                }
+            }
+        }
+        if ($is_valid == 1) {
+
+            $dataArray = [
+                "status" => true,
+                'response_type' => 'success',
+                'message' => 'Document rename successfully',
+            ];
+        } else {
+
+            $dataArray = [
+                "status" => false,
+                'response_type' => 'error',
+                'message' => 'Error occoured, Please try again.',
+            ];
+        }
+        set_flash($dataArray["response_type"], $dataArray["message"]);
+        return redirect()->back();
+        //  return response()->json($dataArray, (($is_valid == 1) ? 200 : 422));
+    }
+    public function documentDownload($user_document_encripted, Request $request)
+    {
+        $fileConfigData = config('upload_config.user_document');
+        $decript_documentId = decrypt($user_document_encripted);
+        $user_document = UserDocument::where('id', $decript_documentId)->get();
+        $input_data = $request->all();
+        $is_valid = 1;
+        if (!empty($input_data["is_document_exist_check"]) && $input_data["is_document_exist_check"] == 1) {
+            if (count($user_document) > 0) {
+                $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document[0]->file);
+                if (!file_exists($filepath)) {
+                    $is_valid = 0;
+                }
+            }
+            if ($is_valid == 1) {
+                $dataArray = ["status" => true, "message" => "File is exists!"];
+            } else {
+                $dataArray = ["status" => false, "message" => "File is not exists!"];
+            }
+
+            return response()->json($dataArray, (($is_valid == 1) ? 200 : 422));
+        }
+
+
+        $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document[0]->file);
+        $ext = pathinfo($filepath, PATHINFO_EXTENSION);
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $user_document[0]->name . "." . $ext . '"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($filepath));
+        flush(); // Flush system output buffer
+        readfile($filepath);
+
+
+        exit();
+    }
+    public function documentPrint($user_document_encripted)
+    {
+
+
+        $fileConfigData = config('upload_config.user_document');
+        $decript_documentId = decrypt($user_document_encripted);
+        $user_documentArray = UserDocument::where('id', $decript_documentId)->get();
+        if (count($user_documentArray) > 0)
+            $user_document = $user_documentArray[0];
+
+        $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
+        $is_valid = 1;
+        if (file_exists($filepath)) {
+            $fileURL = \Storage::disk($fileConfigData['disk'])->url("public/" . $fileConfigData['folder'] . "/" . $user_document->file);
+            $dataArray = ['status' => true, 'message' => 'Document Found successfully.', 'fileurl' => $fileURL];
+        } else {
+            $dataArray = ['status' => false, 'message' => 'Document not found.'];
+            $is_valid = 0;
+        }
+        return response()->json($dataArray, (($is_valid == 1) ? 200 : 422));
+    }
+
     public function getDocumentInfo(Request $request)
     {
         $input_data = $request->input();
@@ -202,7 +298,7 @@ class UserDocumentController extends FrontBaseController
         } else {
             $return_document = [
                 "encrypted_id" => $document->id,
-                "formatted_name" => $document->formatted_name,
+                "name" => $document->name,
                 "thumbnail_url" => $document->thumbnail_url,
                 "tags" => $document->tags,
             ];

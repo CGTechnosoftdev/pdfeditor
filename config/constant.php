@@ -93,6 +93,8 @@ return [
     'RESTORE' => 3,
     'RESTORE_FORM' => 1,
     'DESTROY_FORM' => 2,
+    'EMAIL_SHARE_FORM' => 1,
+    'LINK_SHARE_FORM' => 2,
 
 
 ];

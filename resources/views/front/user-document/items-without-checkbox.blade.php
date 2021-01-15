@@ -1,11 +1,11 @@
 @if(count($documents) > 0)
 @foreach($documents as $key => $row)
-<div class="single-document document-container" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->id ?>">
+<div class="single-document document-container" data-id="{{ $row->encrypted_id }}" id="document_list_item_<?= $row->encrypted_id ?>">
     <div class="doc-img">
-        <img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->formatted_name }}">
+        <img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->name }}">
     </div>
     <div class="doc-content">
-        <h5>{{ $row->formatted_name }}</h5>
+        <h5>{{ $row->name }}</h5>
         <div class="last-activity">Last activity: <strong>You opened {{ $row->name }}</strong></div>
         <dtv class="tags">
             @foreach($row->tags as $tag)
@@ -55,6 +55,9 @@
                 <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
                 <a class="dropdown-item move-to-trash" href="#"><i class=" far fa-folder"></i> Move to trash</a>
                 <a class="dropdown-item add-tag" href="#"><i class=" fa fa-tag"></i> Tags</a>
+                <a class="dropdown-item download_item_trigger" href="#"><i class=" far fa-folder"></i> Download</a>
+                <a class="dropdown-item document_print_trigger" href="#"><i class=" far fa-folder"></i> Print</a>
+                <a class="dropdown-item document_rename_trigger" href="#"><i class=" far fa-folder"></i> Rename</a>
             </div>
         </div>
     </div>

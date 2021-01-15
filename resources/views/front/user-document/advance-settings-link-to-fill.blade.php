@@ -30,10 +30,10 @@
                                 <button><i class="fas fa-bars"></i></button>
                             </div>
                             <div class="doc-img">
-                                <img src="{{ $document->thumbnail_url }}" class="user-image" alt="{{ $document->formatted_name }}">
+                                <img src="{{ $document->thumbnail_url }}" class="user-image" alt="{{ $document->name }}">
                             </div>
                             <div class="doc-content">
-                                <h5>{{ $document->formatted_name }}</h5>
+                                <h5>{{ $document->name }}</h5>
                                 <div class="last-activity">Last update: {{ changeDateTimeFormat($document->updated_at) }}</div>
                             </div>
                             <!-- <div class="doc-date-and-dismiss">
