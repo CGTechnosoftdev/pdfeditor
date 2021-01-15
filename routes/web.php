@@ -155,10 +155,12 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 		Route::get('/document/smart-folder-list', 'UserDocumentController@smartFolderList')->name('smart-folder-list');
 		Route::post('/document/smart-folder-list-data', 'UserDocumentController@getSmartFolderListData')->name('smart-folder-list-data');
-		Route::post('/document/add-smart-folder', 'UserDocumentController@addSmartFolder')->name('add-smart-folder');
+		Route::post('/document/save-smart-folder', 'UserDocumentController@saveSmartFolder')->name('add-smart-folder');
+		Route::put('/document/save-smart-folder/{user_smart_folder}', 'UserDocumentController@saveSmartFolder')->name('update-smart-folder');
 		Route::post('/document/delete-smart-folder', 'UserDocumentController@deleteSmartFolder')->name('delete-smart-folder');
 		Route::get('/document/smart-folder/{user_smart_folder}', 'UserDocumentController@smartFolderDocuments')->name('smart-folder-documents');
 		Route::post('/document/smart-folder/{user_smart_folder}', 'UserDocumentController@smartFolderDocumentsList')->name('smart-folder-documents-list');
+		Route::get('/document/smart-folder-detail/{user_smart_folder}', 'UserDocumentController@smartFolderDetail')->name('smart-folder-detail');
 
 		Route::post('/document/{unique_code}', 'UserDocumentController@viewDocument')->name('document-link');
 

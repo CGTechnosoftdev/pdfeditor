@@ -7,8 +7,6 @@
             <label class="custom-control-label font-0" for="doc-checkbox-{{$key}}">.</label>
         </div>
     </div>
-    <div class="doc-status color8 mx-2">
-    </div>
     <div class="doc-img">
         <img src="{{ $row->thumbnail_url }}" class="user-image" alt="{{ $row->name }}">
     </div>

@@ -27,8 +27,11 @@ class DashboardController extends FrontBaseController
         $data_array = [
             'title' => 'Dashboard',
         ];
-        $data_array['recent_documents'] = UserDocument::getUserRecent($user, config('constant.DOCUMENT_TYPE_FILE'));
-        $data_array['recent_templates'] = UserDocument::getUserRecent($user, config('constant.DOCUMENT_TYPE_TEMPLATE'));
+
+        $document_params['user_id'] = $user->id;
+        $document_params['type'] = config('constant.DOCUMENT_TYPE_FILE');
+        $data_array['recent_documents'] = UserDocument::getDocumentList(['user_id' => $user->id, 'type' => config('constant.DOCUMENT_TYPE_FILE'), 'limit' => 5]);
+        $data_array['recent_templates'] = UserDocument::getDocumentList(['user_id' => $user->id, 'type' => config('constant.DOCUMENT_TYPE_TEMPLATE'), 'limit' => 5]);
         $data_array["user_document_type"] = config('constant.UPLOAD_USER_TEMPLATE');
         $data_array["footer_menu"] = true;
         return view('front.dashboard', $data_array);

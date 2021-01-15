@@ -99,7 +99,11 @@ class UserDocument extends Model
         if (!empty($data_array['search_text'])) {
             $model->where('name', 'like', '%' . $data_array['search_text'] . '%');
         }
-        return $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC')->get();
+        $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC');
+        if (!empty($data_array['limit'])) {
+            $model->limit($data_array['limit']);
+        }
+        return $model->get();
     }
 
     public static function emptyTrashList()

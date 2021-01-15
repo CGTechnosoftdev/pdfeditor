@@ -370,14 +370,14 @@ class UserDocumentController extends FrontBaseController
         return Response::json(array('html' => $view, 'count' => $count));
     }
 
-    public function addSmartFolder(SmartFolderFormRequest $request)
+    public function saveSmartFolder(SmartFolderFormRequest $request, UserSmartFolder $user_smart_folder)
     {
         $user = Auth::user();
         $input_data = $request->input();
         $input_data['user_id'] = $user->id;
-        if (UserSmartFolder::saveData($input_data)) {
+        if (UserSmartFolder::saveData($input_data, $user_smart_folder)) {
             $response_type = 'success';
-            $response_message = 'Smart folder added successfully';
+            $response_message = 'Smart folder saved successfully';
         } else {
             $response_type = 'error';
             $response_message = 'Error occoured, Please try again.';
@@ -415,7 +415,7 @@ class UserDocumentController extends FrontBaseController
     {
         $user = Auth::user();
         if ($user_smart_folder->user_id != $user->id) {
-            abort(404);
+            abort(404, "Not found");
         }
         $data_array = [
             'title' => 'Smart Folder (' . $user_smart_folder->name . ')',
@@ -423,6 +423,22 @@ class UserDocumentController extends FrontBaseController
         $data_array["user_smart_folder"] = $user_smart_folder;
         $data_array["footer_menu"] = true;
         return view('front.user-document.smart-folder-document-list', $data_array);
+    }
+
+    public function smartFolderDetail(UserSmartFolder $user_smart_folder)
+    {
+        $user = Auth::user();
+        if ($user_smart_folder->user_id != $user->id) {
+            abort(404, "Not found");
+        }
+        $response_data = [
+            "name" => $user_smart_folder->name,
+            "tags" => $user_smart_folder->tags_arr,
+        ];
+        return response()->json(array(
+            'success' => 'success',
+            'data' => $response_data,
+        ), 200);
     }
 
     public function smartFolderDocumentsList(UserSmartFolder $user_smart_folder, Request $request)

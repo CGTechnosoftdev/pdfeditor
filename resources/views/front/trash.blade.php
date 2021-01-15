@@ -70,9 +70,6 @@
                 <label class="custom-control-label font-0" for="customControlAutosizing{{$row->id}}">.</label>
             </div>
         </div>
-        <div class="doc-status color4 mx-2">
-            <!--<span class="badge badge-primary"></span>-->
-        </div>
         <div class="doc-img"><img src="{{asset('public/front/images/doc-img-1.png')}}" class="user-image" alt="PDFWriter Admin Image"></div>
         <div class="doc-content">
             <h5>{{$row->name}}</h5>
