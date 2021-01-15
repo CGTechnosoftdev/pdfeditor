@@ -26,7 +26,7 @@
 
 
 
-		<div class="input-group input-group-joined input-group-solid ml-3">
+		<!-- <div class="input-group input-group-joined input-group-solid ml-3">
 			<input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
 			<div class="input-group-append">
 				<button class="input-group-text">
@@ -36,7 +36,7 @@
 					</svg>
 				</button>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </section>
 <div class="tab-content" id="myTabContent">

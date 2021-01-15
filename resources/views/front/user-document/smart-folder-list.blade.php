@@ -7,7 +7,7 @@
         <span id="items-count">0 Items</span>
     </div>
     <div class="heading-btns">
-        <button class="btn btn-success" data-toggle="modal" data-target="#smart-folder-modal"><i class="fas fa-plus"></i> Create New Folder</button>
+        <button class="btn btn-success create-smart-folder"><i class="fas fa-plus"></i> Create New Folder</button>
         <div class="input-group input-group-joined input-group-solid ml-3">
             <input class="form-control mr-sm-0" id="search_text" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -29,9 +29,6 @@
     <div class="short-btns">
         <ul>
             <li>
-                <a href="#"><img src="{{ asset('public/front/images/rename.svg') }}"> Rename</a>
-            </li>
-            <li>
                 <a href="#" class="delete-selected"><img src="{{ asset('public/front/images/trash-alt.svg') }}"> Delete</a>
             </li>
         </ul>
@@ -46,16 +43,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add New Folder</h5>
+                <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            {{ Form::open(['route' => 'front.add-smart-folder','method'=>'post','class'=>'form-horizontal','id'=>'smart-folder-form']) }}
+            {{ Form::open(['method'=>'post','class'=>'form-horizontal','id'=>'smart-folder-form']) }}
+            <input name="_method" id="_method" type="hidden" value="PUT">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="name">Folder Name</label>
-                    {{ Form::text('name',old('name'),['placeholder'=>'Enter Folder Name','class'=>"form-control"]) }}
+                    {{ Form::text('name',old('name'),['placeholder'=>'Enter Folder Name','class'=>"form-control",'id'=>'name']) }}
                 </div>
                 <div class="form-group select-tags-here">
                     <label for="name">Enter tags to filter the documents</label>
@@ -124,6 +122,45 @@
             } else {
                 toastr.error('No document selected');
             }
+        });
+
+        $(document).on('click', ".create-smart-folder", function(e) {
+            $('#smart-folder-modal').find('.modal-title').html("Add Smart Folder");
+            $('#smart-folder-form').attr('action', "{{route('front.add-smart-folder')}}");
+            $('#smart-folder-form').find('#_method').val("POST");
+            $('#smart-folder-modal').modal('show');
+        });
+        $(document).on('click', ".update-smart-folder", function(e) {
+            e.preventDefault();
+            var folder_id = $(this).closest('.single-document').attr("data-folder");
+            var detail_url = '{{ route("front.smart-folder-detail", ":folder") }}';
+            var form_url = '{{ route("front.update-smart-folder", ":folder") }}';
+            detail_url = detail_url.replace(':folder', folder_id);
+            form_url = form_url.replace(':folder', folder_id);
+            blockUI();
+            $.ajax({
+                url: detail_url,
+                type: "get",
+                dataType: 'json',
+                success: function(response) {
+                    $('#smart-folder-modal').find('#name').val(response.data.name);
+                    $('#tags').val(response.data.tags);
+                    $('#tags').trigger('change');
+                    $('#smart-folder-form').attr('action', form_url);
+                    $('#smart-folder-form').find('#_method').val("PUT");
+                    $('#smart-folder-modal').find('.modal-title').html("Edit Smart Folder");
+                    $('#smart-folder-modal').modal('show');
+                    console.log(response);
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+                    toastr.error(response.message);
+                },
+                complete: function() {
+                    unblockUI();
+                }
+            });
+
         });
 
         $(document).on("click", ".delete-smart-folder", function(e) {

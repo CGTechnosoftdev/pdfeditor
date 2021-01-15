@@ -19,7 +19,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
                 <a class="dropdown-item" href="{{route('front.smart-folder-documents',$row->id)}}"><img src="{{ asset('public/front/images/edit-smart.svg') }}" class="user-image" alt="Open Smart Folder"> Open Folder</a>
-                <a class="dropdown-item" href="#"><img src="{{ asset('public/front/images/edit-smart.svg') }}" class="user-image" alt="Edit Smart Folder"> Edit Smart Folder</a>
+                <a class="dropdown-item update-smart-folder" href="#"><img src="{{ asset('public/front/images/edit-smart.svg') }}" class="user-image" alt="Edit Smart Folder"> Edit Smart Folder</a>
                 <a class="dropdown-item delete-smart-folder" href="#"><img src="{{ asset('public/front/images/trash-colored.svg') }}" class="user-image" alt="Delete Smart Folder"> Delete Smart Folder</a>
             </div>
         </div>

@@ -27,6 +27,9 @@ class SmartFolderFormRequest extends FormRequest
     public function rules()
     {
         $id = NULL;
+        if ($this->user_smart_folder) {
+            $id = $this->user_smart_folder->id;
+        }
         $user_id = \Auth::user()->id;
         $rules = [
             'name' =>  'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2|unique:user_smart_folders,name,' . $id . ',id,user_id,' . $user_id . ',deleted_at,NULL',
