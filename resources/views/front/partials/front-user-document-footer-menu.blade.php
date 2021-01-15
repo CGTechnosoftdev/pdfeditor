@@ -291,7 +291,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status == true) {
-                        var popupWin = window.open(response.fileurl, '_blank', 'width=300,height=300');
+                        var popupWin = window.open(response.fileurl, '_blank', 'width=600,height=400');
                         popupWin.print();
                         popupWin.close();
                     }
@@ -400,6 +400,7 @@
 
                     },
                     complete: function() {
+                        document.getElementById("user_document_send_email_form_id").reset();
                         unblockUI();
                     },
                     error: function(data) {
