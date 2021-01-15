@@ -577,6 +577,7 @@
             $(link_to_fill_modal_element).find('.non-published').removeClass('invisible');
             $(link_to_fill_modal_element).find('.published').addClass('invisible');
             $(link_to_fill_modal_element).find('.published-link-div').addClass('disable-div');
+            $(link_to_fill_modal_element).find('#link-to-fill').val('');
             window.getDocumentInfo(window.selected_document);
             if (window.selected_document_info) {
                 $(link_to_fill_modal_element).find('#document-preview').attr('src', window.selected_document_info.thumbnail_url);
