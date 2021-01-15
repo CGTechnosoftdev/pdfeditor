@@ -299,7 +299,7 @@ class UserDocumentController extends FrontBaseController
             $response_message = 'Document not found';
         } else {
             $return_document = [
-                "encrypted_id" => $document->id,
+                "encrypted_id" => $document->encrypted_id,
                 "name" => $document->name,
                 "thumbnail_url" => $document->thumbnail_url,
                 "tags" => $document->tags,
