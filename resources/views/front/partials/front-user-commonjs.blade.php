@@ -24,13 +24,5 @@
 <script type="text/javascript" src="{{ asset('public/front/js/upload-multi-files.js') }}"></script>
 
 <script src=' https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js'> </script>
+<script src="{{ asset('public/front/js/select2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/front/js/custom.js') }}"></script>
-<script>
-    // $(".addnew-btn").click(function() {
-    //     $(".addnew-dropdown").toggleClass("show");
-    // });
-
-    $(document).ready(function() {
-
-    });
-</script>

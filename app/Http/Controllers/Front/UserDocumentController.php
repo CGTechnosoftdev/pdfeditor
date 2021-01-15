@@ -7,9 +7,11 @@ use App\Http\Requests\UserDocumentUploadFormRequest;
 use App\Http\Requests\UserDocumentGetFormRequest;
 use App\Http\Requests\UserAddFolderFormRequest;
 use App\Http\Requests\DocumentRenameFormRequest;
+use App\Http\Requests\SmartFolderFormRequest;
 
 use App\Models\UserDocument;
 use App\Models\UserDocumentTag;
+use App\Models\UserSmartFolder;
 use DB, Auth, View, Response, Cookie, Hash;
 
 class UserDocumentController extends FrontBaseController
@@ -343,5 +345,102 @@ class UserDocumentController extends FrontBaseController
             'message' => $response_message ?? '',
             'data' => $response_data ?? '',
         ), (($response_type == 'success') ? 200 : 404));
+    }
+
+    public function smartFolderList()
+    {
+        $user = Auth::user();
+        $data_array = [
+            'title' => 'Smart Folders',
+        ];
+        $data_array['user_tags'] = UserDocumentTag::getUserTagsList($user->id);
+        return view('front.user-document.smart-folder-list', $data_array);
+    }
+
+    public function getSmartFolderListData(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $folder_params = [];
+        $folder_params['user_id'] = $user->id;
+        $folder_params['search_text'] = $input_data['search_text'] ?? null;
+        $folders = UserSmartFolder::getFolderList($folder_params);
+        $view = View::make('front.user-document.folders-with-checkbox')->with('documents', $folders)->render();
+        $count = count($folders);
+        return Response::json(array('html' => $view, 'count' => $count));
+    }
+
+    public function addSmartFolder(SmartFolderFormRequest $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $input_data['user_id'] = $user->id;
+        if (UserSmartFolder::saveData($input_data)) {
+            $response_type = 'success';
+            $response_message = 'Smart folder added successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Error occoured, Please try again.';
+        }
+        set_flash($response_type, $response_message);
+        return redirect()->back();
+    }
+
+    public function deleteSmartFolder(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $folder_arr = ((!empty($input_data['folders']) && is_array($input_data['folders'])) ? $input_data['folders'] : [($input_data['folders'] ?? '')]);
+        $folder_arr = array_filter($folder_arr);
+        if (!empty($folder_arr)) {
+            UserSmartFolder::where('user_id', $user->id)->whereIn('id', $folder_arr)->delete();
+            $response_type = 'success';
+            $response_message = 'Smart folder deleted successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Error occoured, Please try again';
+        }
+
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' => $response_data ?? '',
+        ), (($response_type == 'success') ? 200 : 422));
+    }
+
+    public function smartFolderDocuments(UserSmartFolder $user_smart_folder)
+    {
+        $user = Auth::user();
+        if ($user_smart_folder->user_id != $user->id) {
+            abort(404);
+        }
+        $data_array = [
+            'title' => 'Smart Folder (' . $user_smart_folder->name . ')',
+        ];
+        $data_array["user_smart_folder"] = $user_smart_folder;
+        $data_array["footer_menu"] = true;
+        return view('front.user-document.smart-folder-document-list', $data_array);
+    }
+
+    public function smartFolderDocumentsList(UserSmartFolder $user_smart_folder, Request $request)
+    {
+        $user = Auth::user();
+        if ($user_smart_folder->user_id != $user->id) {
+            abort(404);
+        }
+        $input_data = $request->input();
+        $document_params = [];
+        $document_params['user_id'] = $user->id;
+        $document_params['type'] = config('constant.DOCUMENT_TYPE_FILE');
+        $document_params['document_ids'] = $user_smart_folder->user_document_ids;
+        $document_params['search_text'] = $input_data['search_text'] ?? null;
+        $document_params['order_by'] = $input_data['sort_by'] ?? null;
+        $documents = UserDocument::getDocumentList($document_params);
+        $view = View::make('front.user-document.items-with-checkbox')->with('documents', $documents)->render();
+        $count = count($documents);
+        return Response::json(array('html' => $view, 'count' => $count));
     }
 }

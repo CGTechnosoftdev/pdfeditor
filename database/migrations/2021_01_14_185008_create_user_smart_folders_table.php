@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserDocumentTable extends Migration
+class CreateUserSmartFoldersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateUserDocumentTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_documents', function (Blueprint $table) {
+        Schema::create('user_smart_folders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 255);
-            $table->string('file', 255)->nullable();
-            $table->string('thumbnail', 255)->nullable();
-            $table->integer('parent_id')->nullable();
             $table->bigInteger('user_id');
-            $table->text('data')->nullable();
-            $table->tinyInteger('type')->default(1)->comment('1=>File,2=>Template,3=>Folder');
-            $table->tinyInteger('encrypted')->default(0)->comment('0=No,1=>Yes');
-            $table->tinyInteger('trash')->default(1)->comment('1=>Not Trashed,2=>Trashed');
+            $table->string('name', 255);
+            $table->string('tags', 255)->nullable();
+            $table->tinyInteger('tag_condition')->default(1)->comment('1=>Any Tag,2=>All Tag');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();
@@ -39,6 +34,6 @@ class CreateUserDocumentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_documents');
+        Schema::dropIfExists('user_smart_folders');
     }
 }

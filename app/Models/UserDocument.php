@@ -86,7 +86,9 @@ class UserDocument extends Model
         if (!empty($condition)) {
             $model->where($condition);
         }
-
+        if (!empty($data_array['document_ids'])) {
+            $model->whereIn('id', $data_array['document_ids']);
+        }
 
         if (!empty($data_array['type']) && in_array($data_array['type'], $document_type)) {
             $model->where('type', $data_array['type']);
@@ -97,7 +99,6 @@ class UserDocument extends Model
         if (!empty($data_array['search_text'])) {
             $model->where('name', 'like', '%' . $data_array['search_text'] . '%');
         }
-
         return $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC')->get();
     }
 

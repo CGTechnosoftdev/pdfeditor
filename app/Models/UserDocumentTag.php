@@ -15,6 +15,11 @@ class UserDocumentTag extends Model
     protected $dates = ['deleted_at'];
     public $timestamps = true;
 
+    public function userDocument()
+    {
+        return $this->belongsTo(UserDocument::class, 'user_document_id', 'id');
+    }
+
     public static function saveData($dataArray, $model = array())
     {
         $model = (empty($model) ? new self() : $model);
@@ -24,5 +29,12 @@ class UserDocumentTag extends Model
         } else {
             return false;
         }
+    }
+
+    public static function getUserTagsList($user_id)
+    {
+        return self::with('userDocument')->whereHas('userDocument', function ($q)  use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->select('name')->distinct()->get()->pluck('name', 'name')->toArray();
     }
 }
