@@ -3479,6 +3479,8 @@ li {
 .single-document .doc-content {
     width: 100%;
     padding-left: 15px;
+    word-break: break-all;
+    padding-right: 10px;
 }
 
 .single-document .doc-content h5 {
@@ -3491,6 +3493,7 @@ li {
     height: auto;
     float: left;
     font-size: 12px;
+
 }
 
 .single-document .doc-content .tags {

@@ -277,8 +277,9 @@
 
 
         });
-        //document_print_trigger
 
+
+        //document_print_trigger        
         $(document).on("click", ".document_print_trigger", function() {
 
             var user_document_id = $("#recent_document_select_item").val();
@@ -394,6 +395,7 @@
                         setTimeout(function() {
                             $("#userDocMsgConId").removeClass("show");
                             $("#userDocMsgConId").addClass("hide");
+                            $("#cust_share").modal("hide");
                         }, 3000);
 
                     },
@@ -460,6 +462,7 @@
                         setTimeout(function() {
                             $("#userDocTempConId").removeClass("show");
                             $("#userDocTempConId").addClass("hide");
+                            $("#cust_share").modal("hide");
                         }, 3000);
 
 

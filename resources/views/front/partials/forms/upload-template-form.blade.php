@@ -117,6 +117,8 @@
             },
             success: function(file, response) {
                 location.reload();
+                // window.location.href = window.location.href + "?active=template";
+                //  window.location.href = window.location.href.replace(/[\?#].*|$/, "?active=template");
             },
             error: function(file, response) {
                 if (response.errors['file'][0].length > 0) {

@@ -21,11 +21,16 @@ class DashboardController extends FrontBaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+        $active = "document";
+        $input_data = $request->all();
+
+
         $data_array = [
             'title' => 'Dashboard',
+
         ];
         $data_array['recent_documents'] = UserDocument::getUserRecent($user, config('constant.DOCUMENT_TYPE_FILE'));
         $data_array['recent_templates'] = UserDocument::getUserRecent($user, config('constant.DOCUMENT_TYPE_TEMPLATE'));

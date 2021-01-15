@@ -49,6 +49,7 @@ class TrashController extends FrontBaseController
             if ($req_type == config('constant.DESTROY_FORM')) {
                 if (!empty($dataArray["trash_items"])) {
                     foreach ($dataArray["trash_items"] as $trash_id => $trash_value) {
+                        $trash_id = decrypt($trash_id);
                         $user_document = UserDocument::find($trash_id);
 
                         if (!$user_document->delete()) {
@@ -57,34 +58,65 @@ class TrashController extends FrontBaseController
                     }
                     if ($is_valid == 1) {
                         $response_type = 'success';
-                        $response_message = 'Item deleted successfully';
+                        $response_message = 'Document deleted successfully';
                     } else {
                         $response_type = 'error';
-                        $response_message = 'Item not deleted successfully';
+                        $response_message = 'Document not deleted successfully';
                     }
                 }
             } else if ($req_type == config('constant.RESTORE_FORM')) {
                 if (!empty($dataArray["trash_items"])) {
                     foreach ($dataArray["trash_items"] as $trash_id => $trash_value) {
+                        $trash_id = decrypt($trash_id);
                         $user_document = UserDocument::find($trash_id);
                         //   dd($user_document);
-                        if (!UserDocument::whereId($trash_id)->update(['trash' => config('constant.NOT_TRASHED')])) {
+                        if (!$this->restoreOperation($trash_id)) {
                             $is_valid = 0;
                         }
                     }
 
                     if ($is_valid == 1) {
                         $response_type = 'success';
-                        $response_message = 'Item restore successfully';
+                        $response_message = 'Document restore successfully';
                     } else {
                         $response_type = 'error';
-                        $response_message = 'Item not sestore successfully';
+                        $response_message = 'Document not restore successfully';
                     }
                 }
             }
         }
         set_flash($response_type, $response_message);
         return redirect()->route("front.trash-list");
+    }
+    public function restoreOperation($trash_id)
+    {
+        return UserDocument::whereId($trash_id)->update(['trash' => config('constant.NOT_TRASHED')]);
+    }
+    public function trashSingleRestore(Request $request)
+    {
+        $input_data = $request->all();
+        $user_document_encripted = $input_data["user_document_encripted"];
+        $decript_documentId = decrypt($user_document_encripted);
+        $user_documentArray = UserDocument::where('id', $decript_documentId)->get();
+        if (count($user_documentArray) > 0)
+            $user_document = $user_documentArray[0];
+        $is_valid = 1;
+        if (!$this->restoreOperation($decript_documentId)) {
+            $is_valid = 0;
+        }
+        if ($is_valid == 1) {
+            $response_type = 'success';
+            $response_message = 'Document restore successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Document not restore successfully';
+        }
+        set_flash($response_type, $response_message);
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' => $response_data ?? '',
+        ), (($response_type == 'success') ? 200 : 422));
     }
     public function trashEmpty()
     {
