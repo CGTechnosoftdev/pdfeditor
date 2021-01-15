@@ -178,6 +178,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
+		Route::post('/trash-list-short-by', 'TrashController@getTrashList')->name('trash-list-short-by');
 
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-single-restore', 'TrashController@trashSingleRestore')->name('trash-single-restore-save');

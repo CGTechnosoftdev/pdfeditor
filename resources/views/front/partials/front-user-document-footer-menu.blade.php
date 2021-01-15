@@ -291,7 +291,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status == true) {
-                        var popupWin = window.open(response.fileurl, '_blank', 'width=600,height=400');
+                        var popupWin = window.open(response.fileurl, '_blank', 'width=800,height=600');
                         popupWin.print();
                         popupWin.close();
                     }

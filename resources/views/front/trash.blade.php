@@ -34,13 +34,25 @@
     </div>
     <div class="short-by">
         <label for="folder">Sort By :</label>
-        <select id="folder" class="form-control my-dropdown">
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
-        </select>
+
+        <div class="short-by">
+
+            <select id="trash_sort_by" class="form-control my-dropdown">
+                <option value="">--Select--</option>
+                @if($sort_by=="updated_at")
+                <option value="updated_at" selected>Modified-Newest</option>
+                @else
+                <option value="updated_at">Modified-Newest</option>
+                @endif
+                @if($sort_by=="created_at")
+                <option value="created_at" selected>Newest-Modified</option>
+                @else
+                <option value="created_at">Newest-Modified</option>
+                @endif
+
+            </select>
+        </div>
+
     </div>
     <div class="short-btns">
         <ul>
@@ -61,6 +73,7 @@
 <section class="content">
     {{ Form::open(['url' => '#','method'=>'post','class'=>'dropzone2 needsclick','id' => 'trash-formid','enctype'=>"multipart/form-data"]) }}
     {{Form::hidden('req_type',"",array('id' => 'trash_req_type_id'))}}
+    {{Form::hidden('sort_by',"",array('id' => 'sort_by_id'))}}
     @foreach($trash_items as $row)
     <div class="single-document single-doc-signed">
         <div class="doc-dots">
@@ -122,6 +135,12 @@
                 }
             });
 
+        });
+        //trash_sort_by
+        $(document).on("change", "#trash_sort_by", function() {
+
+            $("#sort_by_id").val($("#trash_sort_by").val());
+            $("#trash-formid").submit();
         });
 
         $("body").on("click", "#delete_selectedId", function() {

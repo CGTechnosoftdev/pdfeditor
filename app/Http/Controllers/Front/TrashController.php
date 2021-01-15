@@ -8,6 +8,11 @@ use Auth, Response;
 
 class TrashController extends FrontBaseController
 {
+    public function getTrashListOperation($searchArgu = array())
+    {
+        $trash_items = UserDocument::getDocumentList($searchArgu);
+        return $trash_items;
+    }
     public function getTrashList(Request $request)
     {
         $input_data = $request->all();
@@ -16,9 +21,19 @@ class TrashController extends FrontBaseController
         $document_params['user_id'] = $user->id;
         $document_params['trash'] = true;
         $document_params['search_text'] = $input_data['search_text'] ?? null;
+        $sort_by = "";
 
-        $trash_items = UserDocument::getDocumentList($document_params);
 
+
+        if (!empty($input_data["sort_by"])) {
+            $sort_by = $input_data["sort_by"];
+            $document_params["order_by"] = $sort_by;
+        }
+
+
+
+
+        $trash_items = $this->getTrashListOperation($document_params);
 
         //dd($trash_items);
 
@@ -27,8 +42,27 @@ class TrashController extends FrontBaseController
             'trash_items' => $trash_items,
             'trash_count' => count($trash_items),
             'search_text' => $document_params['search_text'],
+            'sort_by' => $sort_by,
         ];
         return view('front.trash', $data_array);
+    }
+
+    public function getTrashListShort(Request $request)
+    {
+        $input_data = $request->all();
+
+        $user = Auth::user();
+        $document_params = [];
+        $document_params['user_id'] = $user->id;
+        $document_params['trash'] = true;
+        $sort_by = $input_data["sort_by"];
+        $data_array["order_by"] = $sort_by;
+
+        $trash_items = $this->getTrashListOperation($document_params);
+        echo '<pre>';
+        print_r($input_data);
+        echo '</pre>';
+        exit();
     }
 
     public function trashUpdate(Request $request)
