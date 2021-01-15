@@ -94,7 +94,7 @@
                         </div>
                         <div class="share-link-btns">
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-success" data-dismiss="modal">Done</button>
+                                <button class="btn btn-success" id="modal-done" data-dismiss="modal">Done</button>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,8 @@
                 });
             },
             success: function(file, response) {
-                location.reload();
+                $('#modal-done').addClass('reload-page');
+                toastr.success(response.message);
             },
             error: function(file, response) {
                 if (response.errors['file'][0].length > 0) {
@@ -133,6 +134,10 @@
             }
         }
     );
+    $(document).on('click', '.reload-page', function(e) {
+        e.preventDefault();
+        location.reload();
+    })
     $(document).on('click', '#get-template-file', function(e) {
         e.preventDefault();
         blockUI();
