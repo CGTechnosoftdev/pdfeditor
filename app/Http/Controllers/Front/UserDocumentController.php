@@ -149,23 +149,29 @@ class UserDocumentController extends FrontBaseController
     {
         $input_data = $request->input();
         $user = Auth::user();
-        if (in_array($input_data['type'], [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')])) {
-            $upload_response = uploadFile($input_data['url'], 'user_document', true);
-            if (!empty($upload_response['success'])) {
-                $input_data['user_id'] = $user['id'];
-                $input_data['name'] = pathinfo($input_data['url'], PATHINFO_FILENAME);
-                $input_data['file'] = $upload_response['data'];
-                $user_document_form = UserDocument::saveData($input_data);
-                if ($user_document_form) {
-                    $response_type = 'success';
-                    $response_message = 'Uploaded successfully';
+        $content = @file_get_contents($input_data['url']);
+        if (empty($content)) {
+            $response_type = 'error';
+            $response_message = 'Invalid file url';
+        } else {
+            if (in_array($input_data['type'], [config('constant.DOCUMENT_TYPE_FILE'), config('constant.DOCUMENT_TYPE_TEMPLATE')])) {
+                $upload_response = uploadFile($input_data['url'], 'user_document', true);
+                if (!empty($upload_response['success'])) {
+                    $input_data['user_id'] = $user['id'];
+                    $input_data['name'] = pathinfo($input_data['url'], PATHINFO_FILENAME);
+                    $input_data['file'] = $upload_response['data'];
+                    $user_document_form = UserDocument::saveData($input_data);
+                    if ($user_document_form) {
+                        $response_type = 'success';
+                        $response_message = 'Uploaded successfully';
+                    } else {
+                        $response_type = 'error';
+                        $response_message = 'Error occoured, Please try again.';
+                    }
                 } else {
                     $response_type = 'error';
-                    $response_message = 'Error occoured, Please try again.';
+                    $response_message = 'Unable to upload file, Please try again.';
                 }
-            } else {
-                $response_type = 'error';
-                $response_message = 'Unable to upload file, Please try again.';
             }
         }
         if ($response_type == 'success') {

@@ -69,8 +69,8 @@ function uploadFile($request, $file_config, $url_status = false)
 {
 	$fileConfigData = config('upload_config.' . $file_config);
 	if (!empty($url_status)) {
-		$newFileName = generateRandomString(5) . time() . '.pdf';
-		$contents = file_get_contents($request);
+		$newFileName = generateRandomString(5) . time() . '.' . pathinfo($request, PATHINFO_EXTENSION);
+		$contents = @file_get_contents($request);
 		Storage::disk($fileConfigData['disk'])->put($fileConfigData['folder'] . "/" . $newFileName, $contents);
 		$uploadedFiles[] = $newFileName;
 	} else {
