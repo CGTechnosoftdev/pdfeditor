@@ -197,6 +197,17 @@ return [
         '#98A2C5' => '#98A2C5',
         '#4B77CE' => '#4B77CE',
         '#F2CF22' => '#F2CF22',
+    ],
+
+    'usps_delivery_methods' => [
+        1 => [
+            'name' => 'USPS First Class Mail',
+            'amount' => '5'
+        ],
+        2 => [
+            'name' => 'USPS Certified Mail',
+            'amount' => '10'
+        ]
     ]
 
 ];

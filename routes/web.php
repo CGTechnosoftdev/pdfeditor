@@ -165,7 +165,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/document/{unique_code}', 'UserDocumentController@viewDocument')->name('document-link');
 
 		Route::post('/link-to-fill/publish', 'LinkToFillController@publishLink')->name('publish-link-to-fill');
-		Route::get('/link-to-fill/advance-setting-/{user_document}', 'LinkToFillController@advanceSetting')->name('advance-link-to-fill');
+		Route::get('/link-to-fill/advance-setting/{user_document}', 'LinkToFillController@advanceSetting')->name('advance-link-to-fill');
+		Route::get('/send-via-usps/{user_document}', 'UserDocumentController@sendViaUsps')->name('send-via-usps');
+		Route::post('/send-via-usps/{user_document}', 'UserDocumentController@sendViaUsps')->name('send-via-usps');
 
 
 
@@ -175,6 +177,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/user-document-advance-settings/{user_document_encripted}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
 		Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
 		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
+
 
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');

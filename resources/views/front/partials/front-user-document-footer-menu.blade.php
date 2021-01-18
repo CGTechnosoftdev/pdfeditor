@@ -96,13 +96,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <div class="link-img"><img src="{{ asset('public/front/images/send-to-irs-icon.svg') }}"></div>
-                                <span>Send to IRS</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a href="#" class="send-via-usps-button">
                                 <div class="link-img"><img src="{{ asset('public/front/images/send-via-usps.svg') }}"></div>
                                 <span>Sebd via USPS</span>
                             </a>
@@ -586,6 +580,14 @@
                 $(link_to_fill_modal_element).find('#advance-setting-link').attr('data-document', window.selected_document_info.encrypted_id);
                 $(link_to_fill_modal_element).modal('show');
             }
+        });
+
+        $(document).on('click', '.send-via-usps-button', function(e) {
+            e.preventDefault();
+            blockUI();
+            var url = '{{ route("front.send-via-usps", ":document") }}';
+            url = url.replace(':document', window.selected_document);
+            window.location.replace(url);
         });
 
         $(document).on('click', '#publish-link', function(e) {

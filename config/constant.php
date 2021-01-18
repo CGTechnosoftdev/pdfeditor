@@ -97,4 +97,7 @@ return [
     'LINK_SHARE_FORM' => 2,
 
 
+    'DEFAULT_DELIVERY_METHOD' => 1
+
+
 ];

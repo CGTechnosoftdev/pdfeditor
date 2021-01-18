@@ -12,6 +12,8 @@ use App\Http\Requests\SmartFolderFormRequest;
 use App\Models\UserDocument;
 use App\Models\UserDocumentTag;
 use App\Models\UserSmartFolder;
+use App\Models\UspsRequest;
+use App\Models\UspsRequestDocument;
 use DB, Auth, View, Response, Cookie, Hash;
 
 class UserDocumentController extends FrontBaseController
@@ -458,5 +460,42 @@ class UserDocumentController extends FrontBaseController
         $view = View::make('front.user-document.items-with-checkbox')->with('documents', $documents)->render();
         $count = count($documents);
         return Response::json(array('html' => $view, 'count' => $count));
+    }
+
+    public function sendViaUsps($user_document, Request $request)
+    {
+        $user = Auth::user();
+        $document_id = decrypt($user_document ?? '');
+        $document = UserDocument::dataRow(['id' => $document_id]);
+        if (empty($document)) {
+            abort(404);
+        }
+        if ($request->isMethod('post')) {
+            $input_data = $request->input();
+            $input_data['user_id'] = $user->id;
+            $usps_request = UspsRequest::saveData($input_data);
+            if ($usps_request) {
+                $usps_document = [
+                    'usps_request_id' => $usps_request->id,
+                    'user_document_id' => $document->id,
+                ];
+                $usps_request = UspsRequestDocument::saveData($usps_document);
+                $response_type = 'success';
+                $response_message = 'Usps Request submitted successfully';
+            } else {
+                $response_type = 'error';
+                $response_message = 'Error occoured, Please try again.';
+            }
+            set_flash($response_type, $response_message);
+            return redirect()->route('front.dashboard');
+        }
+
+        $data_array = [
+            'title' => "Send via USPS",
+            'document' => $document,
+            'delivery_methods' => config('custom_config.usps_delivery_methods'),
+            'default_delivery_method' => config('constant.DEFAULT_DELIVERY_METHOD')
+        ];
+        return view('front.user-document.send-via-usps', $data_array);
     }
 }
