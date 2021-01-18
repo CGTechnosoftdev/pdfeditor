@@ -27,6 +27,24 @@ canvas, .canvas-container {
     padding-top: 20px;
 }
 
+#custom-pdf-container {
+    margin-top: 105px;
+    padding-left: 10px;
+    text-align: center;
+    background: #7f7f7f;
+    padding-top: 20px;
+    height: 500px;
+    width: 50%;
+}
+#from-content-pdf-form{
+    background: #3a2828;
+}
+.imgDraw{
+    width:150px;
+    height:150px;
+    border:1px solid;
+    position:absolute
+}
 button:focus {
     outline: 0;
 }

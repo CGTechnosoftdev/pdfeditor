@@ -2,7 +2,7 @@
  * PDFAnnotate v1.0.0
  * Author: Ravisha Heshan
  */
-
+// import canvas2pdf from 'canvas2pdf'
 var PDFAnnotate = function (container_id, url, options = {}) {
 	this.number_of_pages = 0;
 	this.pages_rendered = 0;
@@ -235,23 +235,144 @@ PDFAnnotate.prototype.changeFontSize = function (fontSize) {
 	fabricObj.renderAll().setActiveObject(o);
 }
 
-PDFAnnotate.prototype.savePdf = function () {
+PDFAnnotate.prototype.savePdf = async function () {
 	var inst = this;
 	var doc = new jsPDF();
-	$.each(inst.fabricObjects, function (index, fabricObj) {
-		if (index != 0) {
-			doc.addPage();
-			doc.setPage(index + 1);
+	var ctx = new canvas2pdf.PdfContext(blobStream());
+	console.log(ctx, inst)
+	// $.each(inst.fabricObjects, function (index, fabricObj) {
+	// 	if (index != 0) {
+	// 		doc.addPage();
+	// 		doc.setPage(index + 1);
+	// 	}
+	// 	// doc.addImage(fabricObj.toDataURL(), 'png', 0, 0);
+	// 	// doc.addSvg(fabricObj.toDataURL(), 'svg', 0, 0);
+	// 	console.log(fabricObj)
+	// });
+	ctx.fillStyle = 'black';
+	ctx.fillRect(100, 100, 100, 100);
+	// ctx.fontSize(40);
+	let formField = `<form action="/action_page.php">
+	<label for="fname">First name:</label><br>
+	<input type="text" id="fname" name="fname" value="John"><br>
+	<label for="lname">Last name:</label><br>
+	<input type="text" id="lname" name="lname" value="Doe"><br><br>
+	<input type="submit" value="Submit">
+  </form> `;
+	var image = new Image();
+	let customCanvasSeq = localStorage.getItem("customCanvasDataArr") && JSON.parse(localStorage.getItem("customCanvasDataArr")).length ? JSON.parse(localStorage.getItem("customCanvasDataArr")).length : null;
+	let customCanvasDataArr = localStorage.getItem("customCanvasDataArr") ? JSON.parse(localStorage.getItem("customCanvasDataArr")) : [];
+	image.crossOrigin = 'Anonymous';
+	image.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Tiger_in_Ranthambhore.jpg/220px-Tiger_in_Ranthambhore.jpg';
+	image.onload = function () {
+		console.log("end")
+		// doc.text(formField, 10, 10);
+		doc.addImage(image, 'png', 150, 50)
+		var specialElementHandlers = {
+			'#editor': function (element, renderer) {
+				return true;
+			}
+		};
+		// html2canvas(document.getElementById('custom-pdf-container'), {
+		// 	onrendered: function (canvasObj) {
+		// 		document.body.appendChild(canvasObj);
+		// 		let pdfConf = {
+		// 			pagesplit: false,
+		// 			background: '#fff',
+		// 		};
+		// 		doc.addHTML(canvasObj, 15, 15, pdfConf, function () {
+		// 			document.body.removeChild(canvasObj);
+		// 			alert("added");
+		// 			// pdf.addPage();
+		// 		});
+		// 	}
+		// });
+		// ctx.drawImage(image, 0, 0);
+		if (customCanvasSeq) {
+			let seq = 1;
+			$.each(customCanvasDataArr, function (index, imgObj) {
+				// let xPosDy = $('#divDraw_' + imgObj.seq).position() ? $('#divDraw_' + imgObj.seq).position().left : imgObj.xPos;
+				// let yPosDy = $('#divDraw_' + imgObj.seq).position() ? $('#divDraw_' + imgObj.seq).position().top : imgObj.yPos;
+				var parentPos = document.getElementById('custom-pdf-container').getBoundingClientRect()
+				var childPos = document.getElementById('imgDraw_' + imgObj.seq).getBoundingClientRect()
+				console.log(childPos.left - parentPos.left, childPos.top - parentPos.top, $('#divDraw_' + imgObj.seq), $('#divDraw_' + imgObj.seq).position())
+				// ctx.drawImage(imgObj.blog, childPos.left - parentPos.left, childPos.top - parentPos.top);
+				doc.addImage(imgObj.blog, 'png', childPos.left - parentPos.left, childPos.top - parentPos.top);
+				seq++;
+			});
 		}
-		doc.addImage(fabricObj.toDataURL(), 'png', 0, 0);
-	});
+		//inputBox
+		doc.text(40, 30, 'Input 1 :');
+		var inputForm1 = new TextField();
+		inputForm1.Rect = [40, 40, 120, 30];
+		inputForm1.V = "TextField 2, TextField 2, TextField 2, TextField 2, ";
+		inputForm1.T = "TestTextBox";
+		doc.addField(inputForm1);
+
+		//textField1
+		doc.text(40, 90, 'TextField 1 :');
+		var textField1 = new TextField();
+		textField1.Rect = [40, 100, 120, 30];
+		textField1.multiline = true;
+		textField1.V = "TextField 1, TextField 1, TextField 1, TextField 1, ";
+		textField1.T = "TestTextBox";
+		doc.addField(textField1);
+
+		//textField2
+		doc.text(40, 140, 'TextField 2 :');
+		var textField2 = new TextField();
+		textField2.Rect = [40, 150, 120, 30];
+		textField2.multiline = true;
+		textField2.V = "TextField 2, TextField 2, TextField 2, TextField 2, ";
+		textField2.T = "TestTextBox";
+		doc.addField(textField2);
+
+		//textField2
+		// doc.text(40, 180, 'DP 2 :');
+		// var combo = $("<select></select>").attr("id", "avava").attr("name", "dddsds");
+		// combo.append("<option>" + "el" + "</option>");
+		// combo.append("<option>" + "els" + "</option>");
+		// combo.append("<option>" + "el" + "</option>");
+		// combo.Rect = [40, 200, 120, 30];
+		// doc.addField(combo);
+
+		doc.setFontSize(12);
+		var radioGroup = new RadioButton();
+		radioGroup.value = "Test";
+		radioGroup.Subtype = "Form";
+		radioGroup.setAppearance(AcroForm.Appearance.RadioButton.Cross);
+		doc.addField(radioGroup);
+		var radioButton1 = radioGroup.createOption("Test");
+		radioButton1.Rect = [40, 200, 30, 10];
+		radioButton1.AS = "/Test";
+		var radioButton2 = radioGroup.createOption("Test2");
+		radioButton2.Rect = [40, 210, 30, 10];
+		var radioButton3 = radioGroup.createOption("Test3");
+		radioButton3.Rect = [40, 220, 20, 10];
+
+		// doc.fromHTML($('#custom-pdf-container').html(), 15, 15, {
+		// 	'width': 70,
+		// 	'elementHandlers': specialElementHandlers,
+		// }, function () {
+		// 	// doc.save("pdfFile" + '.pdf');
+		// });
+		doc.save("pdfFile" + '.pdf');
+		// ctx.fillText("<a>Here and There</a>", 50, 50);
+		// ctx.fillText(formField, 50, 500);
+		// ctx.stream.on('finish', function () {
+		// 	var blob = ctx.stream.toBlob('application/pdf');
+		// 	saveAs(blob, 'example.pdf', true);
+		// 	console.log("end")
+		// });
+		// ctx.end();
+	};
 	var d = new Date();
 	const hr = d.getHours();
 	const min = d.getMinutes();
 	const sec = d.getSeconds();
 	const fileName = "file" + hr + min + sec;
 	localStorage.setItem("pdfFile", fileName);
-	doc.save(fileName + '.pdf');
+	// doc.save(fileName + '.pdf');
 }
 
 PDFAnnotate.prototype.setBrushSize = function (size) {
@@ -550,8 +671,8 @@ PDFAnnotate.prototype.resizePage = function (page_width, page_height) {
 
 PDFAnnotate.prototype.addPage = function (pageNumber, jsonData) {
 	console.log(jsonData);
-	var inst = this	
-	currentpageMatchingPageId = inst.active_canvas+1;
+	var inst = this
+	currentpageMatchingPageId = inst.active_canvas + 1;
 	var loadingTask_pre = PDFJS.getDocument(this.url);
 	inst.number_of_pages = inst.number_of_pages + 1;
 	const current_cans = $(".canvas-container").length;

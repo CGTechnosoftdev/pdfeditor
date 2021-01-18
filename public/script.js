@@ -8,6 +8,10 @@ var canvas = document.getElementById('signature-pad');
 var signaturePad = new SignaturePad(canvas, {
     backgroundColor: 'transparent'
 });
+var customCanvas = document.getElementById('customDraw-pad');
+var customCanvasPad = new SignaturePad(customCanvas, {
+    backgroundColor: 'transparent'
+});
 
 const jsonData = localStorage.getItem("pdfData") ? JSON.parse(localStorage.getItem("pdfData")) : [];
 
@@ -236,6 +240,9 @@ function showPdfData() {
 function openSignatureModal() {
     $('#signatureModal').modal('show');
 }
+function openCustomDrawModal() {
+    $('#customDrawModal').modal('show');
+}
 
 /*Open Image Model */
 $(document).on("click", "#openImageModelId", function () {
@@ -279,6 +286,69 @@ document.getElementById('save-png').addEventListener('click', function () {
     pdf.addDrawSignature(data);
 });
 
+document.getElementById('custom-clear').addEventListener('click', function () {
+    customCanvasPad.clear();
+});
+
+document.getElementById('custom-undo').addEventListener("click", function (event) {
+    var data = customCanvasPad.toData();
+    if (data) {
+        data.pop();
+        customCanvasPad.fromData(data);
+    }
+});
+
+document.getElementById('custom-save-png').addEventListener('click', function () {
+    if (customCanvasPad.isEmpty()) {
+        return alert("Please draw first.");
+    }
+    var data = customCanvasPad.toDataURL('image/png');
+    customCanvasPad.clear();
+    // localStorage.setItem("customCanvasData", JSON.stringify(data));
+    $('#customDrawModal').modal('hide');
+
+    // let customCanvasSeq = localStorage.getItem("customCanvasDataArr") ? JSON.parse(localStorage.getItem("customCanvasDataArr")).length : 1;
+    let customCanvasDataArr = localStorage.getItem("customCanvasDataArr") ? JSON.parse(localStorage.getItem("customCanvasDataArr")) : [];
+    let customCanvasSeq = customCanvasDataArr && customCanvasDataArr.length ? customCanvasDataArr.length + 1 : 1
+    // $('#custom-pdf-container').prepend('<img pid="' + customCanvasSeq + '" class="imgDraw" id="imgDraw_' + customCanvasSeq + '" src="' + data + '" />')
+    var $element = $('<div class="draggableResizable" id="divDraw_' + customCanvasSeq + '"><img pid="' + customCanvasSeq + '" class="imgDraw" id="imgDraw_' + customCanvasSeq + '" src="' + data + '" />')
+    $("#custom-pdf-container").prepend($element);
+    $element.draggable().resizable();
+    var parentPos = document.getElementById('custom-pdf-container').getBoundingClientRect()
+    var childPos = document.getElementById('imgDraw_' + customCanvasSeq).getBoundingClientRect()
+    let newDrawData = {
+        pageNumber: 1,
+        xPos: childPos.left - parentPos.left,
+        yPos: childPos.top - parentPos.top,
+        seq: customCanvasSeq,
+        blog: data,
+    };
+    customCanvasDataArr.push(newDrawData);
+    console.log(newDrawData, customCanvasDataArr);
+    localStorage.setItem("customCanvasDataArr", JSON.stringify(customCanvasDataArr));
+    // var objectURL = URL.createObjectURL(data);
+});
+// get dragged image position
+// $('#custom-pdf-container').on('click', '#imgDraw_1', function(e) {
+/*Open Image Model */
+$(document).on("click", ".imgDraw", function (e) {
+    console.log("ddd", e, e.target.id, e.target.attributes.pid.value)
+
+});
+$('.draggableResizable').draggable({
+    start: function () {
+        console.log("dfdfd")
+        // coordinates('#box');
+    },
+    stop: function () {
+        // coordinates('#box');
+    }
+});
+// $(document).on("mousedown", ".imgDraw", function (e) {
+//     console.log(document.getElementById(e.target.id), e.target.id)
+//     document.getElementById(e.target.id).style.top = e.clientY + 'px';
+//     document.getElementById(e.target.id).style.left = e.clientX + 'px';
+// })
 document.getElementById('eraser_btn_id').addEventListener('click', function (event) {
     event.preventDefault();
     var element = ($(event.target).hasClass('tool-button')) ? $(event.target) : $(event.target).parents('.tool-button').first();
