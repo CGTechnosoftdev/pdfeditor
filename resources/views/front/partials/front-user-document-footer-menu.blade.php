@@ -137,7 +137,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" class="send-for-review-button">
                                 <div class="link-img"><img src="{{ asset('public/front/images/send-for-review-icon.svg') }}"></div>
                                 <span>Send for Review</span>
                             </a>
@@ -586,6 +586,14 @@
             e.preventDefault();
             blockUI();
             var url = '{{ route("front.send-via-usps", ":document") }}';
+            url = url.replace(':document', window.selected_document);
+            window.location.replace(url);
+        });
+
+        $(document).on('click', '.send-for-review-button', function(e) {
+            e.preventDefault();
+            blockUI();
+            var url = '{{ route("front.send-for-review", ":document") }}';
             url = url.replace(':document', window.selected_document);
             window.location.replace(url);
         });

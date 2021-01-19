@@ -260,8 +260,8 @@ class SharedDocumentController extends FrontBaseController
         //authentication_method    
         $data_array["authentication_method"] = config('custom_config.authentication_method');
         $data_array["user_advance_setting_templates"] = config('custom_config.user_advance_setting_templates');
-        $data_array["user_advance_settings_automatic_reminder"] = config('custom_config.user_advance_settings_automatic_reminder');
-        $data_array["user_advance_settings_repeat_reminder"] = config('custom_config.user_advance_settings_repeat_reminder');
+        $data_array["user_advance_settings_automatic_reminder"] = config('custom_config.automatic_reminder_duration_arr');
+        $data_array["user_advance_settings_repeat_reminder"] = config('custom_config.repeat_reminder_duration_arr');
         $data_array["fileUrl"] = $fileUrl[0];
         $data_array["document_name"] = $user_document->name;
         $data_array["document_info"] = $document;

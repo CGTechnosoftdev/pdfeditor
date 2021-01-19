@@ -118,6 +118,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/resend-verification-account', 'Front\ForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
 	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
+	Route::get('/login-as-user/{user}', 'Front\LoginController@loginAsUser')->name('login-as-user');
 
 
 	Route::post('/login', 'Front\LoginController@login')->name('login');
@@ -169,7 +170,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/send-via-usps/{user_document}', 'UserDocumentController@sendViaUsps')->name('send-via-usps');
 		Route::post('/send-via-usps/{user_document}', 'UserDocumentController@sendViaUsps')->name('send-via-usps');
 
-
+		Route::get('/send-for-review/generate-unique-link', 'SendForReviewController@generateUniqueLink')->name('send-for-review-generate-link');
+		Route::post('/send-for-review/add-recipient', 'SendForReviewController@addRecipient')->name('send-for-review-add-recipient');
+		Route::get('/send-for-review/{user_document}', 'SendForReviewController@index')->name('send-for-review');
+		Route::post('/send-for-review/{user_document}', 'SendForReviewController@saveSendForReview')->name('send-for-review-save');
 
 		Route::get('/user-document-share-get/{user_document_encripted}', 'SharedDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
 		Route::post('/user-document-email-share-save', 'SharedDocumentController@userDocumentEmailShareSave')->name('user-document.user-document-email-share-save');
