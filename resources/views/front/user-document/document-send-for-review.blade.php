@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header share-allert">
     <div class="title">
-        <h2>Share</h2>
+        <h2>{{$title}}</h2>
     </div>
     <div class="share-allert-text">
         <p>Share documents: Add recipients, set permissions and attach a personal message. We’ll send them an invitation to the shared workspace. You’ll be able to see all changes that are made.</p>
