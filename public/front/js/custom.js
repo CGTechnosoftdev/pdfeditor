@@ -8,43 +8,43 @@ function unblockUI() {
     $.unblockUI();
 }
 // Copy
-// var clipboardDemos = new Clipboard('[data-clipboard-demo]');
+var clipboardDemos = new Clipboard('[data-clipboard-demo]');
 
-// clipboardDemos.on('success', function(e) {
-//     e.clearSelection();
+clipboardDemos.on('success', function(e) {
+    e.clearSelection();
 
-//     console.info('Action:', e.action);
-//     console.info('Text:', e.text);
-//     console.info('Trigger:', e.trigger);
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
 
-//     showTooltip(e.trigger, 'Copied!');
-// });
+    showTooltip(e.trigger, 'Copied!');
+});
 
-// clipboardDemos.on('error', function(e) {
-//     console.error('Action:', e.action);
-//     console.error('Trigger:', e.trigger);
+clipboardDemos.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
 
-//     showTooltip(e.trigger, fallbackMessage(e.action));
-// });
+    showTooltip(e.trigger, fallbackMessage(e.action));
+});
 
 // tooltips.js
 
-var btns = document.querySelectorAll('.btn');
+// var btns = document.querySelectorAll('.btn');
 
-for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('mouseleave', clearTooltip);
-    btns[i].addEventListener('blur', clearTooltip);
-}
+// for (var i = 0; i < btns.length; i++) {
+//     btns[i].addEventListener('mouseleave', clearTooltip);
+//     btns[i].addEventListener('blur', clearTooltip);
+// }
 
-function clearTooltip(e) {
-    e.currentTarget.setAttribute('class', 'btn');
-    e.currentTarget.removeAttribute('aria-label');
-}
+// function clearTooltip(e) {
+//     e.currentTarget.setAttribute('class', 'btn');
+//     e.currentTarget.removeAttribute('aria-label');
+// }
 
-function showTooltip(elem, msg) {
-    elem.setAttribute('class', 'btn tooltipped tooltipped-s');
-    elem.setAttribute('aria-label', msg);
-}
+// function showTooltip(elem, msg) {
+//     elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+//     elem.setAttribute('aria-label', msg);
+// }
 
 function delayTyping(callback, ms) {
     var timer = 0;
@@ -68,6 +68,11 @@ function selectAllCheckbox(parent_element, child_element) {
             this.checked = false;
         });
     }
+}
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
 }
 /*************** Navbar JS **************/
 (function($) {
@@ -275,9 +280,21 @@ $(function() {
 })
 
 
+$('.addnew-btn').click(function() {
+    $(".addnew-dropdown").slideToggle("slow");
+});
+
+$(document).mouseup(function(e) {
+    var popup = $(".addnew-dropdown");
+    if (!$('.addnew-btn').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
+        popup.hide(500);
+    }
+});
+
 $(function() {
     //toggle two classes on button element
-    $('.treeview a').on('click', function() {
-        $('.dashboard3').toggleClass('sidebar-collapse');
+    $(document).on('click', '.treeview a', function() {
+        // $('.treeview a').on('click', function() {
+        $('.dashboard3').toggleClass('sidebar-collapse sticky');
     });
 });
