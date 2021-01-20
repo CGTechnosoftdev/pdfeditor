@@ -189,6 +189,14 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
 		Route::get('/user-document-download/{user_document_encripted}', 'UserDocumentController@documentDownload')->name('user-document.download');
 		Route::get('/user-document-print/{user_document_encripted}', 'UserDocumentController@documentPrint')->name('user-document.print');
+
+		Route::get('/address-book', 'AddressBookController@addressBookList')->name('address-book-list');
+		Route::post('/address/list-data', 'AddressBookController@getAddressListData')->name('address-list-data');
+		Route::post('/address-book-delete', 'AddressBookController@addressBookDelete')->name('address-book-delete-operation');
+		Route::post('/address-book-item-delete', 'AddressBookController@addressBookItemDelete')->name('address-book-item-delete');
+		Route::post('/address-book-item-add', 'AddressBookController@addressBookItemAdd')->name('address-book-item-add');
+		Route::get('/get-address-book-item-edit/{address_book}', 'AddressBookController@getaddressBookItemEdit')->name('get-address-book-item-edit');
+		Route::post('/address-book-item-edit/{address_book}', 'AddressBookController@addressBookItemEdit')->name('address-book-item-edit');
 	});
 });
 
