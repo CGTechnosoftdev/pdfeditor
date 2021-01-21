@@ -6749,3 +6749,7 @@ a.disabled {
     background: #dce0ea;
     color: #98a2c5!important;
 }
+
+.multi-active-tr .active {
+    background: #C1484A12;
+}

@@ -322,7 +322,7 @@
 
                 <div class="table-card">
                     <div class="table-responsive">
-                        <table class="table ">
+                        <table class="table multi-active-tr">
                             <thead>
                                 <tr>
                                     <th class="select-all" scope="col">
@@ -1267,6 +1267,14 @@
             $('.treeview a').on('click', function() {
                 $('.dashboard3').toggleClass('sidebar-collapse');
             });
+        });
+    </script>
+
+    <script>
+        ///*************** add and remove active class on tr ************///
+
+        $('.multi-active-tr tr').on('click', function() {
+            $(this).addClass('active').siblings().removeClass('active');
         });
     </script>
 
