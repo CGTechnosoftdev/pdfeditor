@@ -262,49 +262,7 @@
                     <button class="btn btn-link">Notifications</button> -->
                         <div class="position-relative">
                             <button class="btn btn-lightgray mr-2"><i class="fas fa-trash"></i> Delete</button>
-                            <button class="btn btn-success addnew-btn"><i class="fas fa-plus"></i> Add New</button>
-                            <div class="addnew-dropdown">
-                                <div class="addnew-body">
-                                    <h5>Upload or Create</h5>
-                                    <div class="shareable-links">
-                                        <ul>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#add-new-document">
-                                                    <div class="link-img"><img src="../public/front/images/upload.svg"></div>
-                                                    <span>Upload Document</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#add-new-template">
-                                                    <div class="link-img"><img src="../public/front/images/upload-template.svg"></div>
-                                                    <span>Upload Template</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="link-img"><img src="../public/front/images/create-document.svg"></div>
-                                                    <span>Create Document</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-toggle="modal" data-target="#add-new-folder">
-                                                    <div class="link-img"><img src="../public/front/images/new-folder.svg"></div>
-                                                    <span>New Folder</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h5>Search Our Libraries</h5>
-                                    <div class="searchwith-legalform">
-                                        <div class="input-group input-group-joined input-group-solid ml-3">
-                                            <input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
-                                            <div class="input-group-append">
-                                                <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button class="btn btn-success addnew-btn" data-toggle="modal" data-target="#add-new-contact"><i class="fas fa-plus"></i> Add New Contact</button>
                         </div>
 
 
@@ -1181,10 +1139,124 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade my-default-modal" id="add-new-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Contact</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="number">Phone Number</label>
+                                        <input type="text" class="form-control" id="number" placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fax">Fax</label>
+                                        <input type="text" class="form-control" id="fax" placeholder="Fax">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-success">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="w-100 d-flex justify-content-between align-items-center">
+                                <span>Or Import Contact From</span>
+                                <div class="social-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><img src="../public/front/images/mail-icon.svg"></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><img src="../public/front/images/outlook.svg"></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><img src="../public/front/images/yahoo.svg"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <!-- <div class="modal fade more-options share-now" id="add-new-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Contact</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row m-0">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="number">Phone Number</label>
+                                        <input type="text" class="form-control" id="number" placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fax">Fax</label>
+                                        <input type="text" class="form-control" id="fax" placeholder="Fax">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="share-link-btns">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-success">Publish</button>
+                                <button class="btn btn-outline-success">Advance Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
         </div>
-
-
-
     </div>
     <!-- JQuery -->
     <script type="text/javascript" src="../public/front/js/jquery-3.5.1.min.js"></script>

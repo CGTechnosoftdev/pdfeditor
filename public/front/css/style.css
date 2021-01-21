@@ -6753,3 +6753,36 @@ a.disabled {
 .multi-active-tr .active {
     background: #C1484A12;
 }
+
+.my-default-modal .modal-dialog {
+    max-width: 720px;
+}
+
+.my-default-modal .modal-dialog .modal-header {
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.my-default-modal .modal-dialog .modal-header h5 {
+    font-size: 16px;
+    color: #486EB8;
+}
+
+.my-default-modal .modal-footer .social-links ul li {
+    display: inline-block;
+}
+
+.my-default-modal .modal-footer .social-links ul li a {
+    padding: 4px 8px;
+}
+
+.my-default-modal .modal-footer .social-links ul li a img {
+    max-width: 90px;
+    max-height: 30px;
+}
+
+.my-default-modal .modal-footer h5 {
+    font-size: 16px;
+    color: #486EB8;
+}
