@@ -255,6 +255,7 @@ display: none;
         padding: 10px;
     }
     .content-wrapper {
+        width: 100%;
         min-height: 100%;
         float: left;
     }
