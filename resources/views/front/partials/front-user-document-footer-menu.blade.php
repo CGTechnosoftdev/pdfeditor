@@ -305,7 +305,15 @@
 
         });
 
-        $("#sharemenu_itemid").click(function() {
+        $(document).on('click', '#sharemenu_itemid', function(e) {
+            e.preventDefault();
+            blockUI();
+            var url = '{{ route("front.send-for-share", ":document") }}';
+            url = url.replace(':document', window.selected_document);
+            window.location.replace(url);
+        });
+
+        $("#sharemenu_itemid22").click(function() {
             // alert("ajax call is ");
             $.ajaxSetup({
                 headers: {

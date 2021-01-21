@@ -183,6 +183,12 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
 
 
+		Route::get('/send-for-share/generate-unique-link', 'SharedDocumentController@generateUniqueLink')->name('send-for-share-generate-link');
+		Route::post('/send-for-share/add-recipient', 'SharedDocumentController@addRecipient')->name('send-for-share-add-recipient');
+		Route::get('/send-for-share/{user_document}', 'SharedDocumentController@index')->name('send-for-share');
+		Route::post('/send-for-share/{user_document}', 'SharedDocumentController@saveSendForShare')->name('send-for-share-save');
+
+
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list-short-by', 'TrashController@getTrashList')->name('trash-list-short-by');
