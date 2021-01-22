@@ -6185,6 +6185,7 @@ li {
 .short-by-section .short-checkbox {
     width: auto;
     float: left;
+    padding-top: 6px;
 }
 
 .short-by-section .short-checkbox label.font-0 {
@@ -6196,6 +6197,7 @@ li {
     width: auto;
     float: left;
     align-items: center;
+    margin-top: 6px;
 }
 
 .short-by-section .short-by label {
@@ -6785,4 +6787,80 @@ a.disabled {
 .my-default-modal .modal-footer h5 {
     font-size: 16px;
     color: #486EB8;
+}
+
+.my-default-modal .modal-content {
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+}
+
+.my-default-modal .modal-content .form-group label {
+    font-size: 14px;
+}
+
+.my-default-modal .modal-content .form-group input {
+    font-size: 14px !important;
+    font-family: Poppins-Regular;
+}
+
+.tg-list-item.blue-radio .tgl-light:checked+.tgl-btn {
+    background: #486eb8;
+}
+
+.tgl+.tgl-btn.btn-sm::after,
+.tgl+.tgl-btn::before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 15px;
+    height: 15px;
+    top: -7px;
+    transform: translateY(-50%);
+}
+
+.tgl+.tgl-btn.btn-sm {
+    outline: 0;
+    display: block;
+    width: 35px!important;
+    height: 20px!important;
+}
+
+.doc-date.blue-text {
+    color: #486eb8 !important;
+    font-size: 14px !important;
+}
+
+.share-to li {
+    display: inline-block;
+    padding-right: 10px;
+    border-right: solid 1px #d3d7ea;
+    margin-right: 5px;
+}
+
+.share-to li:last-child {
+    display: inline-block;
+    padding-right: 0px;
+    border-right: none;
+    margin-right: 0px;
+}
+
+.share-to li a {
+    color: #333;
+}
+
+.single-doc-signed .doc-img.circle {
+    border-radius: 50%;
+    min-width: 50px;
+    max-height: 50px;
+}
+
+.single-document.sharelink-1 .doc-img {
+    width: 50px;
+    height: 50px;
+}
+
+.single-document.sharelink-1 .doc-img img {
+    max-width: 50px;
+    max-height: 50px;
 }
