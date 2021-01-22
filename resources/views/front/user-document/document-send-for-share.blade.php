@@ -447,33 +447,39 @@
 
         $(document).on('click', '#add-recipient', function(e) {
             e.preventDefault();
-            blockUI();
-            var email = $('#recipient_email').val();
-            var name = $('#recipient_name').val();
-            $.ajax({
-                url: "{{route('front.send-for-review-add-recipient')}}",
-                type: "post",
-                dataType: 'json',
-                data: {
-                    "_token": csrf_token,
-                    email: email,
-                    name: name
-                },
-                success: function(response) {
-                    $('.recipient-block').append(response.html);
-                    $('#recipient_email').val("");
-                    $('#recipient_name').val("");
-                    $('#add-recipient').addClass("disabled");
-                    $('#share_btn').attr('disabled', false);
-                },
-                error: function(data) {
-                    var response = data.responseJSON;
-                    toastr.error(response.message);
-                },
-                complete: function() {
-                    unblockUI();
-                },
-            });
+            alert($(this).hasClass("disabled"));
+            if ($(this).hasClass("disabled") == false) {
+
+                blockUI();
+                var email = $('#recipient_email').val();
+                var name = $('#recipient_name').val();
+                $.ajax({
+                    url: "{{route('front.send-for-share-add-recipient')}}",
+                    type: "post",
+                    dataType: 'json',
+                    data: {
+                        "_token": csrf_token,
+                        email: email,
+                        name: name
+                    },
+                    success: function(response) {
+                        $('.recipient-block').append(response.html);
+                        $('#recipient_email').val("");
+                        $('#recipient_name').val("");
+                        $('#add-recipient').addClass("disabled");
+                        $('#share_btn').attr('disabled', false);
+                    },
+                    error: function(data) {
+                        var response = data.responseJSON;
+                        toastr.error(response.message);
+                    },
+                    complete: function() {
+                        unblockUI();
+                    },
+                });
+
+            }
+
         })
 
         $(document).on('click', '.remove-recipient', function(e) {

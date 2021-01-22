@@ -305,7 +305,7 @@
 
         });
 
-        $(document).on('click', '#sharemenu_itemid', function(e) {
+        $(document).on('click', '#sharemenu_itemid55', function(e) {
             e.preventDefault();
             blockUI();
             var url = '{{ route("front.send-for-share", ":document") }}';
@@ -313,7 +313,7 @@
             window.location.replace(url);
         });
 
-        $("#sharemenu_itemid22").click(function() {
+        $("#sharemenu_itemid").click(function() {
             // alert("ajax call is ");
             $.ajaxSetup({
                 headers: {
@@ -496,8 +496,12 @@
 
         $("#advance_settings_id").click(function() {
             var user_document_id = $("#recent_document_select_item").val();
+
+            var url = '{{ route("front.send-for-share", ":document") }}';
+            url = url.replace(':document', window.selected_document);
             // alert("{{url('user-document-advance-settings')}}/" + user_document_id);
-            window.location.href = "{{url('user-document-advance-settings')}}/" + user_document_id;
+            //window.location.href = "{{url('user-document-advance-settings')}}/" + user_document_id;
+            window.location.href = url;
         });
 
 

@@ -144,10 +144,6 @@ class SharedDocumentController extends FrontBaseController
             }
         }
 
-
-
-
-
         return $is_valid;
     }
 
@@ -173,12 +169,17 @@ class SharedDocumentController extends FrontBaseController
 
                 ), 400); // 400 being the HTTP code for an invalid request.
             }
+            $input_data = $request->all();
 
             $ret_type = $this->saveInSharedTables($request);
 
             if ($ret_type) {
                 $input_data = $request->all();
                 if (!empty($input_data["email"]) && !empty($input_data["name"])) {
+
+
+
+
                     $userName = $input_data["name"];
                     $userEmail = $input_data["email"];
                     $email_config = [
@@ -191,7 +192,7 @@ class SharedDocumentController extends FrontBaseController
                     Mail::to($userEmail)->send(new CommonMail($email_config));
                 }
                 $response_type = 'success';
-                $response_message = 'Document shared successfully,Thank You!';
+                $response_message = 'Document shared successfully,Thank You!' . $userEmail . "#" . $userName;
             } else {
                 $response_type = 'error';
                 $response_message = 'Error occoured, Please try again.';
@@ -202,49 +203,7 @@ class SharedDocumentController extends FrontBaseController
         }
         return response()->json(["return_type" => $response_type, 'message' => $response_message]);
     }
-    public function customLinkValidate($data)
-    {
-        $request = new SharedDocumentFormRequest();
-        $validator = Validator::make($data, $request->rules(), $request->messages(), $request->attributes());
-        return $validator;
-    }
 
-    public function checkUserEmailForm(Request $request)
-    {
-        $input_array = $request->all();
-
-        $req_type = $input_array["req_type"];
-        if ($req_type == "check_email_name") {
-            $userInfoDataArray = array();
-            $userInfoDataArray["email"] = $input_array["email"];
-            $userInfoDataArray["name"] = $input_array["name"];
-
-            $validator = $this->customEmailValidate($userInfoDataArray);
-            if ($validator->fails()) {
-
-                $errormessages = $validator->getMessageBag()->getMessages();
-                $errormsgHTML = "";
-                foreach ($errormessages as $errorIndex => $errorMsgArr) {
-
-                    foreach ($errorMsgArr as $indder_index => $message) {
-                        $errormsgHTML .= $message . '<br/>';
-                    }
-                }
-
-                //  foreach($errorMessages as $error_index =>  )
-                return response()->json(array(
-                    'return_type' => 'error',
-                    'message' => $errormsgHTML,
-                )); // 400 being the HTTP code for an invalid request.
-            }
-
-            return response()->json(array(
-                'return_type' => 'success',
-                'message' => 'Email validation success!'
-
-            ));
-        }
-    }
 
 
 
