@@ -2,52 +2,38 @@
 @section('title',($title ?? ''))
 @section("content")
 <!-- Content Header (Page header) -->
+
+
 <section class="content-header">
     <div class="title">
-        <h2><?= $title ?></h2>
-
+        <h2>Address Book</h2>
     </div>
     <div class="heading-btns">
-        <button class="btn btn-success addnew-btn" id="add_new_address_btn"><i class="fas fa-plus"></i> Add New</button>
+        <div class="form-group folder-dropdown">
+            <!-- <button class="btn btn-warning">Document</button>
+                    <button class="btn btn-link">Templates</button>
+                    <button class="btn btn-link">Notifications</button> -->
+            <div class="position-relative">
+                <button class="btn btn-lightgray mr-2" id="delete_address_selectedId"><i class="fas fa-trash"></i> Delete</button>
+                <button class="btn btn-success addnew-btn" data-toggle="modal" id="add_new_address_btn" data-target="#add-new-contact"><i class="fas fa-plus"></i> Add New Contact</button>
+            </div>
 
 
-        <div class="input-group input-group-joined input-group-solid ml-3">
-            <!--<input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">-->
-            {{form::text('search_text',"",['id'=>'search_text','class' => 'form-control mr-sm-0','placeholder' => 'Search'])}}
-            <div class="input-group-append">
-                <button class="input-group-text" id="trash_search_triggerid"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg></button>
+
+            <div class="input-group input-group-joined input-group-solid ml-3">
+
+                {{Form::text('search_text',"",['id'=>'search_text','class' => 'form-control mr-sm-0','placeholder' => 'Search'])}}
+                <div class="input-group-append">
+                    <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg></button>
+                </div>
             </div>
         </div>
-
-    </div>
 </section>
 
-<div class="short-by-section">
-    <div class="short-checkbox">
-        <div class="custom-control custom-checkbox red mr-sm-2" id="selectAllId2">
-            <input type="checkbox" class="custom-control-input" id="select-all">
-            <label class="custom-control-label font-0" for="select-all">Select All</label>
-        </div>
-    </div>
 
-    <div class="short-btns">
-        <ul>
-            <li>
-                <a href="#" id="restore_selectedId"><img src="{{asset('public/front/images/copy.svg')}}"> Restore Selected</a>
-            </li>
-            <li>
-                <a href="#" id="delete_address_selectedId"><img src="{{asset('public/front/images/rename.svg')}}"> Deleted Selected</a>
-            </li>
-        </ul>
-        <div class="more-opt">
-            <button id="empty_trashlistId"><img src="{{asset('public/front/images/empty-trash.svg')}}"> Empty Trash</button>
-        </div>
-
-    </div>
-</div>
 <!-- Main content -->
 <section class="content">
     <section class="content" id="list-section">
@@ -99,21 +85,62 @@
             form.submit();
         });
 
+        $("#importGmailContactsid").click(function(e) {
+            e.preventDefault();
+            if (confirm("Do you want to import contacts from Google Account?")) {
+                window.location.href = $(this).attr("data-url");
+            }
+        });
+
         $("#add_new_address_btn").click(function() {
             $("#edit_email_address_btn_id").addClass("hide");
+            $("#edit_email_address_btn_id").removeClass("show");
             $("#add_email_address_btn_id").addClass("show");
+
             $("#addresslist_id").val("");
+            $("#name").val("");
+            $("#email").val("");
+            $("#phone").val("");
+            $("#fax").val("");
+            $(".add_Address .modal-title").html("Add New Contact");
             $(".add_Address").modal('show');
         });
-        $("body").on("click", "#add_email_address_btn_id", function() {
-
+        $("body").on("click", "#add_email_address_btn_id", function(e) {
+            e.preventDefault();
             var form = $("#email_address_add_form_id");
+            $("#edit_email_address_btn_id").addClass("hide");
+
+            $("#add_email_address_btn_id").addClass("show");
             $.ajax({
                 url: "{{route('front.address-book-item-add')}}",
                 type: "post",
                 data: form.serialize(),
                 success: function(response) {
                     console.log(response);
+                    $("#userDocMsgConId").removeClass("hide");
+                    $("#address_mg_box_id").removeClass("alert-danger");
+                    $("#address_mg_box_id").addClass("alert-success");
+                    $("#address_mg_box_id").addClass("show");
+                    $("#address_mg_box_id").html(response.message);
+                    getAddressList();
+                    setTimeout(function() {
+                        $("#address_mg_box_id").removeClass("show");
+                        $("#address_mg_box_id").addClass("hide");
+                        $("#add_Address").modal("hide");
+                    }, 3000);
+                },
+                error: function(data) {
+                    var jsonData = $.parseJSON(data.responseText);
+                    $("#address_mg_box_id").removeClass("hide");
+                    $("#address_mg_box_id").removeClass("alert-success");
+                    $("#address_mg_box_id").addClass("alert-danger");
+                    $("#address_mg_box_id").addClass("show");
+                    $("#address_mg_box_id").html(jsonData.message);
+
+                    setTimeout(function() {
+                        $("#address_mg_box_id").removeClass("show");
+                        $("#address_mg_box_id").addClass("hide");
+                    }, 3000);
                 }
 
 
@@ -122,11 +149,13 @@
         });
         $("body").on("click", "a[id ^= 'editAddressItem_']", function() {
             var id = $(this).attr("data-id");
-            alert("id is " + id);
+
             //addresslist_id
             $("#addresslist_id").val(id);
             $("#edit_email_address_btn_id").addClass("show");
             $("#add_email_address_btn_id").addClass("hide");
+            $("#add_email_address_btn_id").removeClass("show");
+            $(".add_Address .modal-title").html("Edit Contact");
             $(".add_Address").modal('show');
             $.ajax({
                 url: "{{url('get-address-book-item-edit')}}/" + id,
@@ -136,13 +165,14 @@
                     $("#email").val(response.message.email);
                     $("#phone").val(response.message.phone);
                     $("#fax").val(response.message.fax);
+
                 }
             });
 
         });
 
-        $("body").on("click", "#edit_email_address_btn_id", function() {
-
+        $("body").on("click", "#edit_email_address_btn_id", function(e) {
+            e.preventDefault();
             var form = $("#email_address_add_form_id");
             $.ajax({
                 url: "{{url('address-book-item-edit')}}/" + $("#addresslist_id").val(),
@@ -150,6 +180,30 @@
                 data: form.serialize(),
                 success: function(response) {
                     console.log(response);
+                    $("#userDocMsgConId").removeClass("hide");
+                    $("#address_mg_box_id").removeClass("alert-danger");
+                    $("#address_mg_box_id").addClass("alert-success");
+                    $("#address_mg_box_id").addClass("show");
+                    $("#address_mg_box_id").html(response.message);
+                    getAddressList();
+                    setTimeout(function() {
+                        $("#address_mg_box_id").removeClass("show");
+                        $("#address_mg_box_id").addClass("hide");
+                        $("#add_Address").modal("hide");
+                    }, 3000);
+                },
+                error: function(data) {
+                    var jsonData = $.parseJSON(data.responseText);
+                    $("#address_mg_box_id").removeClass("hide");
+                    $("#address_mg_box_id").removeClass("alert-success");
+                    $("#address_mg_box_id").addClass("alert-danger");
+                    $("#address_mg_box_id").addClass("show");
+                    $("#address_mg_box_id").html(jsonData.message);
+
+                    setTimeout(function() {
+                        $("#address_mg_box_id").removeClass("show");
+                        $("#address_mg_box_id").addClass("hide");
+                    }, 3000);
                 }
             });
 
