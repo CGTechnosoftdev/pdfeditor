@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Socialite;
+use Google_Client;
+use Google_Service_People;
 
 class LoginController extends Controller
 {
@@ -87,5 +90,35 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('web');
+    }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')
+            ->scopes(['openid', 'profile', 'email', Google_Service_People::CONTACTS_READONLY])
+            ->redirect();
+    }
+    public function handleProviderCallback(Request $request)
+    {
+        $user = Socialite::driver('google')->user();
+
+        // Set token for the Google API PHP Client
+        $google_client_token = [
+            'access_token' => $user->token,
+            'refresh_token' => $user->refreshToken,
+            'expires_in' => $user->expiresIn
+        ];
+
+        $client = new Google_Client();
+        $client->setApplicationName("Laravel");
+        $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
+        $client->setAccessToken(json_encode($google_client_token));
+
+        $service = new Google_Service_People($client);
+
+        $optParams = array('requestMask.includeField' => 'person.phone_numbers,person.names,person.email_addresses');
+        $results = $service->people_connections->listPeopleConnections('people/me', $optParams);
+
+        dd($results);
     }
 }
