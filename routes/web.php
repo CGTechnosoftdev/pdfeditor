@@ -199,6 +199,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/address-book-item-edit/{address_book}', 'AddressBookController@addressBookItemEdit')->name('address-book-item-edit');
 		Route::get('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
 		Route::post('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
+		Route::post('/yahoo-contacts', 'AddressBookController@getYahooContacts')->name('get-yahoo-contacts');
 	});
 });
 

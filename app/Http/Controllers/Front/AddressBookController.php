@@ -364,4 +364,8 @@ class AddressBookController extends FrontBaseController
         return view("google/getcontacts")->with('viewData', $viewData);
         // return redirect()->to('/home');
     }
+    public function getYahooContacts(Request $request)
+    {
+        dd($request->all());
+    }
 }
