@@ -37,7 +37,7 @@
              <a href="#"><span><img src="{{asset('public/front/images/custom-branding.svg')}}"></span>Custom Branding</a>
          </li>
          <li>
-             <a href="#"><span><img src="{{asset('public/front/images/address-book.svg')}}"></span>Address Book</a>
+             <a href="{{ route('front.address-book-list') }}"><span><img src="{{asset('public/front/images/address-book.svg')}}"></span>Address Book</a>
          </li>
          <li>
              <a href="#"><span><img src="{{asset('public/front/images/api.svg')}}"></span>API</a>

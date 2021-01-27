@@ -15,7 +15,9 @@
     </script>
 </head>
 @php
-$account_page_status = (request()->segment(1)=='account') ? true : false;
+
+
+$account_page_status = in_array(request()->segment(1),['address-book','account']);
 @endphp
 
 <body class="dashboard3 sidebar-mini">
