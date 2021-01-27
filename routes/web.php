@@ -191,7 +191,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/user-document-print/{user_document_encripted}', 'UserDocumentController@documentPrint')->name('user-document.print');
 
 		Route::get('/address-book', 'AddressBookController@addressBookList')->name('address-book-list');
-		Route::post('/address/list-data', 'AddressBookController@getAddressListData')->name('address-list-data');
+		Route::post('/address-book/list-data', 'AddressBookController@getAddressListData')->name('address-list-data');
 		Route::post('/address-book-delete', 'AddressBookController@addressBookDelete')->name('address-book-delete-operation');
 		Route::post('/address-book-item-delete', 'AddressBookController@addressBookItemDelete')->name('address-book-item-delete');
 		Route::post('/address-book-item-add', 'AddressBookController@addressBookItemAdd')->name('address-book-item-add');
