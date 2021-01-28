@@ -47,7 +47,7 @@
             blockUI();
             var search_text = $('#search_text').val();
             $.ajax({
-                url: "{{route('front.out-usps-mail-list-data')}}",
+                url: "{{route('front.out-share-list-data')}}",
                 type: "post",
                 dataType: 'json',
                 data: {
@@ -73,10 +73,19 @@
             selectAllCheckbox('#select-all', '.document-checkbox');
         })
 
+        $(document).on('click', '.stop-sharing', function(e) {
+            var item = $(this).closest(".single-document").attr('data-id');
+            if (item) {
+                stopSharing(item);
+            } else {
+                toastr.error('Error occoured, Please try again');
+            }
+        })
+
         $(document).on('click', '.delete-item', function(e) {
-            var request = $(this).closest(".single-document").attr('data-id');
-            if (request) {
-                deleteRequest(request);
+            var item = $(this).closest(".single-document").attr('data-id');
+            if (item) {
+                deleteRequest(item);
             } else {
                 toastr.error('Error occoured, Please try again');
             }
@@ -85,25 +94,48 @@
         $(document).on('click', '#delete-selected', function(e) {
             e.preventDefault();
             if ($('.document-checkbox:checked').length > 0) {
-                var selected_requests = [];
+                var selected_items = [];
                 $('.document-checkbox:checked').each(function() {
-                    selected_requests.push($(this).val());
+                    selected_items.push($(this).val());
                 });
-                deleteRequest(selected_requests);
+                deleteRequest(selected_items);
             } else {
                 toastr.error('No item selected');
             }
         })
 
-        function deleteRequest(requests) {
+        function deleteRequest(items) {
             blockUI();
             $.ajax({
-                url: "{{route('front.out-usps-mail-delete')}}",
+                url: "{{route('front.out-share-delete')}}",
                 type: "post",
                 dataType: 'json',
                 data: {
                     "_token": csrf_token,
-                    requests: requests,
+                    items: items,
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+                    toastr.error(response.message);
+                },
+                complete: function() {
+                    unblockUI();
+                }
+            });
+        }
+
+        function stopSharing(items) {
+            blockUI();
+            $.ajax({
+                url: "{{route('front.out-share-stop-sharing')}}",
+                type: "post",
+                dataType: 'json',
+                data: {
+                    "_token": csrf_token,
+                    items: items,
                 },
                 success: function(response) {
                     location.reload();

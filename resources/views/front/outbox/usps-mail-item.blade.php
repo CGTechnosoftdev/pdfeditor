@@ -1,5 +1,5 @@
-@if(count($documents) > 0)
-@foreach($documents as $key => $row)
+@if(count($items) > 0)
+@foreach($items as $key => $row)
 <div class="single-document single-doc-signed" data-id="{{ $row->id }}">
     <div class="doc-dots">
         <div class="custom-control custom-checkbox red mr-sm-2">
@@ -18,7 +18,7 @@
                 <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop2">
-                <a class="dropdown-item" href="#" id="delete-item"><i class="fa fa-trash"></i> Delete</a>
+                <a class="dropdown-item delete-item" href="#"><i class="fa fa-trash"></i> Delete</a>
             </div>
         </div>
     </div>

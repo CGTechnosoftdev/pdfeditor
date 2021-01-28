@@ -212,8 +212,18 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/yahoo-contacts', 'AddressBookController@getYahooContacts')->name('get-yahoo-contacts');
 
 		Route::get('/outbox/usps-mail-list', 'OutboxController@uspsMailList')->name('out-usps-mail-list');
-		Route::post('/outbox/usps-mail-list-data', 'OutboxController@getUspsMailListData')->name('out-usps-mail-list-data');
-		Route::post('/outbox/usps-request-delete', 'OutboxController@deleteUspsRequest')->name('out-usps-mail-delete');
+		Route::post('/outbox/usps-mail-list-data', 'OutboxController@uspsMailListData')->name('out-usps-mail-list-data');
+		Route::post('/outbox/usps-mail-delete', 'OutboxController@uspsMailDelete')->name('out-usps-mail-delete');
+
+		Route::get('/outbox/share-list', 'OutboxController@shareList')->name('out-share-list');
+		Route::post('/outbox/share-list-data', 'OutboxController@shareListData')->name('out-share-list-data');
+		Route::post('/outbox/share-delete', 'OutboxController@shareDelete')->name('out-share-delete');
+		Route::post('/outbox/share-stop-', 'OutboxController@shareStopSharing')->name('out-share-stop-sharing');
+
+		Route::get('/outbox/send-for-review-list', 'OutboxController@sendForReviewList')->name('out-send-for-review-list');
+		Route::post('/outbox/send-for-review-list-data', 'OutboxController@sendForReviewListData')->name('out-send-for-review-list-data');
+		Route::post('/outbox/send-for-review-delete', 'OutboxController@sendForReviewDelete')->name('out-send-for-review-delete');
+		Route::post('/outbox/send-for-review-stop-', 'OutboxController@sendForReviewStopSharing')->name('out-send-for-review-stop-sharing');
 	});
 });
 

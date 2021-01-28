@@ -61,8 +61,8 @@
                     <h5>Outbox</h5>
                     <ul>
                         <li><a href="{{ route('front.out-usps-mail-list') }}">USPS Mail</a></li>
-                        <li><a href="">Share</a></li>
-                        <li><a href="">Send for Review</a></li>
+                        <li><a href="{{ route('front.out-share-list') }}">Share</a></li>
+                        <li><a href="{{ route('front.out-send-for-review-list') }}">Send for Review</a></li>
                         <li><a href="">Link to Fill</a></li>
                     </ul>
                 </div>
