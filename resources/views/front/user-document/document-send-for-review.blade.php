@@ -1,4 +1,5 @@
 @extends('layouts.front-user')
+@section('title',($title ?? ''))
 @section("content")
 
 <!-- Content Header (Page header) -->
@@ -13,7 +14,7 @@
 
 <!-- Main content -->
 <section class="content">
-    {{ Form::open(['route' => ['front.send-for-review-save',$document->encrypted_id],'method'=>'post','id'=>'send-for-review-form','enctype'=>"multipart/form-data"]) }}
+    {{ Form::open(['route' => ['front.send-for-review-save',$document->encrypted_id],'method'=>'post','id'=>'send-for-review-form','enctype'=>"multipart/form-data" ,'autocomplete' => 'off']) }}
     <div class="advance-settings-part">
         <h3>
             <a class="" data-toggle="collapse" href="#you-are-sharing" aria-expanded="true" aria-controls="you-are-sharing">
@@ -72,13 +73,13 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="recipient_email" placeholder="Enter email">
+                                            <input type="email" class="form-control" id="recipient_email" placeholder="Enter email" autocomplete="autocomplete">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" class="form-control" id="recipient_name" placeholder="Enter Name">
+                                            <input type="text" class="form-control" id="recipient_name" placeholder="Enter Name" autocomplete="off" />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -308,7 +309,7 @@
 
         <h3 class="email-link-elements">
             <a class="" data-toggle="collapse" href="#reminders-for-recipients" aria-expanded="true" aria-controls="reminders-for-recipients">
-                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Authenticate Recipient <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
+                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Reminders for Recipient <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
             </a>
         </h3>
         <div class="collapse email-link-elements show" id="reminders-for-recipients">

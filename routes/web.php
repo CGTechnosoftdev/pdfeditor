@@ -177,7 +177,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 		Route::get('/user-document-share-get/{user_document_encripted}', 'SharedDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
 		Route::post('/user-document-email-share-save', 'SharedDocumentController@userDocumentEmailShareSave')->name('user-document.user-document-email-share-save');
+		Route::post('/user-document-check-business-card', 'SharedDocumentController@checkBusinessCard')->name('user-document.user-document-link-share-check-business-card');
 		Route::post('/user-document-link-share-save', 'SharedDocumentController@userDocumentLinkShareSave')->name('user-document.user-document-link-share-save');
+
 		//Route::get('/user-document-advance-settings/{user_document_encripted}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
 		//Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
 		//Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');

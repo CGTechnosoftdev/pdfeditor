@@ -4674,6 +4674,7 @@ li {
     float: left;
     border-right: solid 1px #F6F6F6;
     padding-right: 15px;
+    margin-top:20px;
 }
 
 .advance-settings-content .share-by .tab-content ul li:last-child {
@@ -6668,4 +6669,7 @@ li {
 a.disabled {
     cursor: not-allowed;
     pointer-events: all !important;
+}
+#send-for-share-form .form-group a{
+    margin-top:10px !important;
 }
