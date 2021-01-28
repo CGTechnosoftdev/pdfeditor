@@ -423,7 +423,9 @@
                 type: "post",
                 data: $("#send-for-share-form").serialize(),
                 success: function(response) {
-                    alert(response.status);
+                    //    alert(response.status);
+                    $("#send-for-share-form").submit();
+                    return true;
                 },
                 error: function(data) {
                     var response = data.responseJSON;
