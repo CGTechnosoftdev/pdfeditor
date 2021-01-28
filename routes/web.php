@@ -224,6 +224,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/outbox/send-for-review-list-data', 'OutboxController@sendForReviewListData')->name('out-send-for-review-list-data');
 		Route::post('/outbox/send-for-review-delete', 'OutboxController@sendForReviewDelete')->name('out-send-for-review-delete');
 		Route::post('/outbox/send-for-review-stop-', 'OutboxController@sendForReviewStopSharing')->name('out-send-for-review-stop-sharing');
+
+		Route::get('/outbox/link-to-fill-list', 'OutboxController@linkToFillList')->name('out-link-to-fill-list');
+		Route::post('/outbox/link-to-fill-list-data', 'OutboxController@linkToFillListData')->name('out-link-to-fill-list-data');
+		Route::post('/outbox/link-to-fill-delete', 'OutboxController@linkToFillDelete')->name('out-link-to-fill-delete');
 	});
 });
 

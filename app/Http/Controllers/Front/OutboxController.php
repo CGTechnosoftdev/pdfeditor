@@ -211,4 +211,54 @@ class OutboxController extends FrontBaseController
             'data' => $response_data ?? '',
         ), (($response_type == 'success') ? 200 : 422));
     }
+
+
+    public function linkToFillList()
+    {
+        $user = Auth::user();
+        $data_array = [
+            'title' => 'Link to Fill',
+        ];
+        return view('front.outbox.link-to-fill-list', $data_array);
+    }
+
+    public function linkToFillListData(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $params = [];
+        $params['user_id'] = $user->id;
+        $params['share_method'] = config('constant.SHARE_METHOD_LINKTOFILL');
+        $params['search_text'] = $input_data['search_text'] ?? null;
+        $params['order_by'] = $input_data['sort_by'] ?? null;
+
+        $items = SharedDocument::getSharedList($params);
+        $view = View::make('front.outbox.link-to-fill-item')->with('items', $items)->render();
+        $count = count($items);
+        return Response::json(array('html' => $view, 'count' => $count));
+    }
+
+    public function linkToFillDelete(Request $request)
+    {
+        $user = Auth::user();
+        $input_data = $request->input();
+        $items_arr = ((!empty($input_data['items']) && is_array($input_data['items'])) ? $input_data['items'] : [($input_data['items'] ?? '')]);
+        if (!empty($items_arr)) {
+            SharedDocument::whereIn('id', $items_arr)->where(['user_id' => $user->id])->delete();
+            $response_type = 'success';
+            $response_message = 'Deleted successfully';
+        } else {
+            $response_type = 'error';
+            $response_message = 'Error occoured, Please try again';
+        }
+
+        if ($response_type == 'success') {
+            set_flash("success", $response_message);
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' => $response_data ?? '',
+        ), (($response_type == 'success') ? 200 : 422));
+    }
 }
