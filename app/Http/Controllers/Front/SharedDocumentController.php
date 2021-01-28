@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserDocumentUploadFormRequest;
 use App\Http\Requests\UserDocumentGetFormRequest;
 use App\Http\Requests\UserAddFolderFormRequest;
+use App\Http\Requests\BusinessCardFormRequest;
 use App\Http\Requests\SharedUserDocumentFormRequest;
 use App\Http\Requests\SharedDocumentFormRequest;
 use App\Models\UserDocument;
@@ -256,6 +257,7 @@ class SharedDocumentController extends FrontBaseController
     public function index($user_document)
     {
         $user = Auth::user();
+
         $document_id = decrypt($user_document ?? '');
         $document = UserDocument::dataRow(['id' => $document_id]);
         if (empty($document)) {
@@ -274,9 +276,54 @@ class SharedDocumentController extends FrontBaseController
         return view('front.user-document.document-send-for-share', $data_array);
     }
 
+    public function customLinkValidate($data)
+    {
+        $request = new SharedDocumentFormRequest();
+        $validator = Validator::make($data, $request->rules(), $request->messages(), $request->attributes());
+        return $validator;
+    }
+
+    public function businessCardValidate($data)
+    {
+        $request = new BusinessCardFormRequest();
+        $validator = Validator::make($data, $request->rules(), $request->messages(), $request->attributes());
+        return $validator;
+    }
+
+    public function checkBusinessCard(Request $request)
+    {
+
+
+        $validator = $this->businessCardValidate($request->all()["personalize_invitation_data"]["business_card"]);
+        $response_type = true;
+        $response_message = "Business card entry valid!";
+        if ($validator->fails()) {
+
+            $errormessages = $validator->getMessageBag()->getMessages();
+
+            $errormsgHTML = "";
+            foreach ($errormessages as $errorIndex => $errorMsgArr) {
+
+                foreach ($errorMsgArr as $indder_index => $message) {
+                    $errormsgHTML .= $message . "<br/>";
+                }
+            }
+
+            $response_type = false;
+            $response_message = $errormsgHTML;
+        }
+
+        return response()->json(array(
+            'success' => $response_type,
+            'data' => $response_data ?? [],
+            'message' => $response_message ?? '',
+        ), ($response_type == 'success' ? 200 : 422));
+    }
+
     public function saveSendForShare($user_document, Request $request)
     {
         $user = Auth::user();
+
         $document_id = decrypt($user_document ?? '');
         $document = UserDocument::dataRow(['id' => $document_id]);
         if (empty($document)) {
@@ -336,12 +383,16 @@ class SharedDocumentController extends FrontBaseController
                         'notify_status' => $notify_status,
                         'document_operations' => $document_operations,
                     ]);
+                    $userName = "";
+                    if (!empty($user->first_name) && !empty($user->last_name)) {
+                        $userName = $user->first_name . " " . $user->last_name;
+                    }
                     if (!empty($notify_status)) {
                         $mail_data = [
                             'from' => $user->email,
                             'content_data' => [
                                 'recipient_name' => $name,
-                                'your_name' => $user->name,
+                                'your_name' => $userName,
                                 'your_email' => $user->email,
                             ],
                         ];

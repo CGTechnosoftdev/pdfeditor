@@ -1,4 +1,5 @@
 @extends('layouts.front-user')
+@section('title',($title ?? ''))
 @section("content")
 
 <!-- Content Header (Page header) -->
@@ -13,7 +14,7 @@
 
 <!-- Main content -->
 <section class="content">
-    {{ Form::open(['route' => ['front.send-for-share-save',$document->encrypted_id],'method'=>'post','id'=>'send-for-review-form','enctype'=>"multipart/form-data"]) }}
+    {{ Form::open(['route' => ['front.send-for-share-save',$document->encrypted_id],'method'=>'post','id'=>'send-for-share-form','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
     <div class="advance-settings-part">
         <h3>
             <a class="" data-toggle="collapse" href="#you-are-sharing" aria-expanded="true" aria-controls="you-are-sharing">
@@ -72,13 +73,13 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="recipient_email" placeholder="Enter email">
+                                            <input type="email" class="form-control" id="recipient_email" placeholder="Enter email" autocomplete="off" />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" class="form-control" id="recipient_name" placeholder="Enter Name">
+                                            <input type="text" class="form-control" id="recipient_name" placeholder="Enter Name" autocomplete="off" />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -255,6 +256,7 @@
                             </div>
                             <div class="col-md-7 col-lg-8">
                                 <div class="personalize-invitation-content">
+                                    <div class="alert" id="businessCardMsgBoxId"></div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -308,7 +310,7 @@
 
         <h3 class="email-link-elements">
             <a class="" data-toggle="collapse" href="#reminders-for-recipients" aria-expanded="true" aria-controls="reminders-for-recipients">
-                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Authenticate Recipient <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
+                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Reminders for Recipient <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
             </a>
         </h3>
         <div class="collapse email-link-elements show" id="reminders-for-recipients">
@@ -411,6 +413,44 @@
             $('#tabs a[href="#email-link"]').tab('show')
         });
 
+        $(document).on('click', '#share_btn', function(e) {
+            e.preventDefault();
+            var myform = document.getElementById("send-for-share-form");
+            var fd = new FormData(myform);
+
+            $.ajax({
+                url: "{{route('front.user-document.user-document-link-share-check-business-card')}}",
+                type: "post",
+                data: $("#send-for-share-form").serialize(),
+                success: function(response) {
+                    alert(response.status);
+                },
+                error: function(data) {
+                    var response = data.responseJSON;
+
+                    $("#businessCardMsgBoxId").removeClass("hide");
+                    $("#businessCardMsgBoxId").removeClass("alert-success");
+                    $("#businessCardMsgBoxId").addClass("alert-danger");
+                    $("#businessCardMsgBoxId").addClass("show");
+                    $("#businessCardMsgBoxId").html(response.message);
+                    $('html, body').animate({
+                        scrollTop: $("#personalize_invitation_data_message").offset().top
+                    }, 2000);
+
+                    setTimeout(function() {
+                        $("#businessCardMsgBoxId").removeClass("show");
+                        $("#businessCardMsgBoxId").addClass("hide");
+                    }, 6000);
+
+                    return false;
+                    //toastr.error(response.message);
+                }
+            });
+
+            // alert("submit");
+
+        });
+
         $(document).on('click', '#generate-link', function(e) {
             e.preventDefault();
             blockUI();
@@ -447,7 +487,7 @@
 
         $(document).on('click', '#add-recipient', function(e) {
             e.preventDefault();
-            alert($(this).hasClass("disabled"));
+
             if ($(this).hasClass("disabled") == false) {
 
                 blockUI();

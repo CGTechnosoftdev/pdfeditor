@@ -1,4 +1,5 @@
 @extends('layouts.front-user')
+@section('title',($title ?? ''))
 @section("content")
 
 <!-- Content Header (Page header) -->

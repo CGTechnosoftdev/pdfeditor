@@ -1,7 +1,7 @@
 <div class="recipients-user-info">
     <input type="hidden" name="recipient_data[name][]" value="{{$input_data['name']}}">
     <input type="hidden" name="recipient_data[email][]" value="{{$input_data['email']}}">
-    <div class="user-img"><img src="{{ asset('public/front/images/user.jpg') }}" class="user-image" alt="PDFWriter Admin Image"></div>
+    <div class="user-img"><img src="{{ asset('public/front/images/avatar.svg') }}" class="user-image" alt="PDFWriter Admin Image"></div>
     <div class="user-content">
         <h5>{{$input_data['name']}}</h5>
         <div class="last-activity">{{$input_data['email']}}</div>
