@@ -422,6 +422,8 @@
                                         <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Open</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-copy"></i> Duplicate</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-folder"></i> Move</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#document-info"><i class="far fa-folder"></i> Document Info</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#protect-document"><i class="far fa-folder"></i> Protect Document</a>
                                     </div>
                                 </div>
                             </div>
@@ -1208,6 +1210,148 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Document Info -->
+        <div class="modal fade my-default-modal" id="document-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Document Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="document-info-modal">
+                            <div class="document-info-left">
+                                <div class="row">
+                                    <h6 class="col-sm-5">Document</h6>
+                                    <div class="col-sm-7">
+                                        <p>Profit and loss statement</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Location</h6>
+                                    <div class="col-sm-7">
+                                        <p>DOCUMENTS / Unsorted</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Project ID</h6>
+                                    <div class="col-sm-7">
+                                        <p>8874586302</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Create By</h6>
+                                    <div class="col-sm-7">
+                                        <p><a href="mailto:johnsmith@gmil.com">johnsmith@gmil.com</a></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Created Date</h6>
+                                    <div class="col-sm-7">
+                                        <p>25/01/2021 at 12:59am</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Modified Date</h6>
+                                    <div class="col-sm-7">
+                                        <p>25/01/2021 at 12:59am</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Size</h6>
+                                    <div class="col-sm-7">
+                                        <p>62.32kb</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Page</h6>
+                                    <div class="col-sm-7">
+                                        <p>3</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-sm-5">Original</h6>
+                                    <div class="col-sm-7">
+                                        <p><a href="#">Link</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="document-info-right">
+                                <a href="">
+                                    <div class="more-img">
+                                        <img src="../public/front/images/open.svg">
+                                    </div>
+                                    <span>Open</span>
+                                </a>
+                                <a href="">
+                                    <div class="more-img">
+                                        <img src="../public/front/images/save-as.svg">
+                                    </div>
+                                    <span>Save As</span>
+                                </a>
+                                <a href="">
+                                    <div class="more-img">
+                                        <img src="../public/front/images/print.svg">
+                                    </div>
+                                    <span>Print</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Protect Document -->
+        <div class="modal fade my-default-modal" id="protect-document" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Protect Document</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="protect-document">
+                            <p>Add a password to your document as an additional security measure. You will need to enter this password every time you open the document.</p>
+                            <div class="publish-to-distribute">
+                                <div class="shareable-file">
+                                    <img src="../public/front/images/file-pdf.svg"> Get a Document Signed
+                                </div>
+                                <div class="add-single-doc-signed">
+                                    <a href=""><i class="fas fa-plus-circle"></i> Add Another Document</a>
+                                </div>
+                            </div>
+                            <div class="form-group password-security mt-3">
+                                <label for="email">Set Password</label>
+                                <div class="password-input">
+                                    <input id="password-field" type="password" class="form-control" name="password" value="secret">
+                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-success">Publish</button>
+                                <ul class="d-inline-flex">
+                                    <li><button class="btn"><i class="fa fa-question-circle"></i> help</button></li>
+                                    <li><button class="btn"><i class="fa fa-info-circle"></i> Feedback</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 
@@ -1277,6 +1421,22 @@
             $('.treeview a').on('click', function() {
                 $('.dashboard3').toggleClass('sidebar-collapse sticky');
             });
+        });
+    </script>
+
+
+    <!-- //*************  Password Toggle ************// -->
+
+    <script>
+        $(".toggle-password").click(function() {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
         });
     </script>
 </body>
