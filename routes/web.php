@@ -192,11 +192,11 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list-short-by', 'TrashController@getTrashList')->name('trash-list-short-by');
-
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-single-restore', 'TrashController@trashSingleRestore')->name('trash-single-restore-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
+
 		Route::get('/user-document-download/{user_document_encripted}', 'UserDocumentController@documentDownload')->name('user-document.download');
 		Route::get('/user-document-print/{user_document_encripted}', 'UserDocumentController@documentPrint')->name('user-document.print');
 
@@ -210,6 +210,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
 		Route::post('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
 		Route::post('/yahoo-contacts', 'AddressBookController@getYahooContacts')->name('get-yahoo-contacts');
+
+		Route::get('/outbox/usps-mail-list', 'OutboxController@uspsMailList')->name('out-usps-mail-list');
+		Route::post('/outbox/usps-mail-list-data', 'OutboxController@getUspsMailListData')->name('out-usps-mail-list-data');
+		Route::post('/outbox/usps-request-delete', 'OutboxController@deleteUspsRequest')->name('out-usps-mail-delete');
 	});
 });
 
