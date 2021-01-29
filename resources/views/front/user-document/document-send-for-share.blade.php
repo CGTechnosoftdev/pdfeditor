@@ -491,7 +491,22 @@
             } else {
                 $('#add-recipient').addClass("disabled");
             }
+
         })
+
+        $(document).on('keyup', '#recipient_name', function(e) {
+            if (isName($("#recipient_name").val())) {
+
+                $('#add-recipient').removeClass("disabled");
+
+            } else {
+
+                $('#add-recipient').addClass("disabled");
+
+            }
+
+        })
+
 
         $(document).on('click', '#add-recipient', function(e) {
             e.preventDefault();
