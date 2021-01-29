@@ -160,7 +160,7 @@
 
         <h3 class="email-link-elements">
             <a class="" data-toggle="collapse" href="#personalize_your_invitation" aria-expanded="true" aria-controls="personalize_your_invitation">
-                <img class="icon" src="{{ asset('public/front/images/authenticate-recipient.svg') }}"> Personalize Your Invitation <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
+                <img class="icon" src="{{ asset('public/front/images/user-card.svg') }}"> Personalize Your Invitation <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
             </a>
         </h3>
         <div class="collapse email-link-elements show" id="personalize_your_invitation">
@@ -309,7 +309,7 @@
 
         <h3 class="email-link-elements">
             <a class="" data-toggle="collapse" href="#reminders-for-recipients" aria-expanded="true" aria-controls="reminders-for-recipients">
-                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Reminders for Recipient <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
+                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Reminders for Recipients <span><img src="{{ asset('public/front/images/info-i.svg') }}"></span>
             </a>
         </h3>
         <div class="collapse email-link-elements show" id="reminders-for-recipients">
