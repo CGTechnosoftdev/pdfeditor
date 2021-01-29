@@ -229,6 +229,9 @@ display: none;
         float: left;
         display: block;
     }
+    .single-document.single-doc-signed {
+        display: flex;
+    }
     .single-document .doc-img {
         float: left;
     }
@@ -255,6 +258,7 @@ display: none;
         padding: 10px;
     }
     .content-wrapper {
+        width: 100%;
         min-height: 100%;
         float: left;
     }
@@ -264,6 +268,41 @@ display: none;
     }
     .dashboard3 .content-header .heading-btns {
         padding-top: 15px;
+    }
+    .single-document.sharelink-1 .doc-dots {
+        width: 25px;
+        float: left;
+    }
+    .single-document.sharelink-1 .doc-status {
+        width: 7px;
+        height: auto;
+        float: left;
+        margin-top: 15px;
+    }
+    .single-document.sharelink-1 .doc-img {
+        margin-right: 10px;
+    }
+    .single-document .doc-content {
+        width: auto;
+        float: left;
+    }
+    .single-document.sharelink-1 .doc-content {
+        margin-top: 10px;
+        padding-left: 0px;
+    }
+    .single-doc-signed .doc-img.circle {
+        border-radius: 50%;
+        min-width: 40px;
+        max-height: 40px;
+        width: 40px;
+        height: 40px;
+    }
+    .single-document.single-doc-signed .doc-content {
+        width: calc(100% - 75px);
+        float: right;
+    }
+    .advance-settings-content {
+        padding-left: 0px;
     }
 }
 
@@ -319,6 +358,51 @@ display: none;
     .heading-btns .shareable-links ul li a {
         padding: 3px !important;
         font-size: 12px;
+    }
+    .content-wrapper {
+        padding: 10px;
+    }
+    .document-info-modal {
+        flex-direction: column-reverse;
+    }
+    .document-info-left {
+        width: 100%;
+    }
+    .document-info-right {
+        width: 100%;
+        max-width: 100%;
+        border-left: none;
+        border-bottom: solid 1px #f7f7f7;
+        padding-left: 0px;
+        flex-direction: unset;
+        margin-bottom: 15px;
+    }
+    .document-info-right a {
+        margin-right: 10px;
+        margin-top: 0px;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+    .document-info-right a:last-child {
+        margin-right: 0px;
+        margin-top: 0px;
+    }
+    .my-default-modal .modal-dialog {
+        margin: 0px;
+    }
+    .my-default-modal .modal-dialog .modal-content {
+        border-radius: 0px;
+    }
+    .protect-document .publish-to-distribute {
+        flex-direction: column;
+    }
+    .protect-document .publish-to-distribute .shareable-file {
+        margin-right: 0;
+    }
+    .protect-document .publish-to-distribute .add-single-doc-signed {
+        margin-left: 0;
+        margin-top: 10px;
     }
 }
 

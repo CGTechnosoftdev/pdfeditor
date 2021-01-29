@@ -194,13 +194,51 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list-short-by', 'TrashController@getTrashList')->name('trash-list-short-by');
-
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-single-restore', 'TrashController@trashSingleRestore')->name('trash-single-restore-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
+
 		Route::get('/user-document-download/{user_document_encripted}', 'UserDocumentController@documentDownload')->name('user-document.download');
 		Route::get('/user-document-print/{user_document_encripted}', 'UserDocumentController@documentPrint')->name('user-document.print');
+
+		Route::get('/address-book', 'AddressBookController@addressBookList')->name('address-book-list');
+		Route::post('/address-book/list-data', 'AddressBookController@getAddressListData')->name('address-list-data');
+		Route::post('/address-book-delete', 'AddressBookController@addressBookDelete')->name('address-book-delete-operation');
+		Route::post('/address-book-item-delete', 'AddressBookController@addressBookItemDelete')->name('address-book-item-delete');
+		Route::post('/address-book-item-add', 'AddressBookController@addressBookItemAdd')->name('address-book-item-add');
+		Route::get('/get-address-book-item-edit/{address_book}', 'AddressBookController@getaddressBookItemEdit')->name('get-address-book-item-edit');
+		Route::post('/address-book-item-edit/{address_book}', 'AddressBookController@addressBookItemEdit')->name('address-book-item-edit');
+		Route::get('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
+		Route::post('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
+		Route::post('/yahoo-contacts', 'AddressBookController@getYahooContacts')->name('get-yahoo-contacts');
+
+		Route::get('/outbox/usps-mail-list', 'OutboxController@uspsMailList')->name('out-usps-mail-list');
+		Route::post('/outbox/usps-mail-list-data', 'OutboxController@uspsMailListData')->name('out-usps-mail-list-data');
+		Route::post('/outbox/usps-mail-delete', 'OutboxController@uspsMailDelete')->name('out-usps-mail-delete');
+
+		Route::get('/outbox/share-list', 'OutboxController@shareList')->name('out-share-list');
+		Route::post('/outbox/share-list-data', 'OutboxController@shareListData')->name('out-share-list-data');
+		Route::post('/outbox/share-delete', 'OutboxController@shareDelete')->name('out-share-delete');
+		Route::post('/outbox/share-stop-', 'OutboxController@shareStopSharing')->name('out-share-stop-sharing');
+
+		Route::get('/outbox/send-for-review-list', 'OutboxController@sendForReviewList')->name('out-send-for-review-list');
+		Route::post('/outbox/send-for-review-list-data', 'OutboxController@sendForReviewListData')->name('out-send-for-review-list-data');
+		Route::post('/outbox/send-for-review-delete', 'OutboxController@sendForReviewDelete')->name('out-send-for-review-delete');
+		Route::post('/outbox/send-for-review-stop-', 'OutboxController@sendForReviewStopSharing')->name('out-send-for-review-stop-sharing');
+
+		Route::get('/outbox/link-to-fill-list', 'OutboxController@linkToFillList')->name('out-link-to-fill-list');
+		Route::post('/outbox/link-to-fill-list-data', 'OutboxController@linkToFillListData')->name('out-link-to-fill-list-data');
+		Route::post('/outbox/link-to-fill-delete', 'OutboxController@linkToFillDelete')->name('out-link-to-fill-delete');
+
+		Route::get('/account/information', 'UserAccountController@accountInformation')->name('account-information');
+		Route::get('/account/additional-account-list', 'AdditionalAccountController@list')->name('additional-account-list');
+		Route::post('/account/additional-account-data', 'AdditionalAccountController@listData')->name('additional-account-list-data');
+		Route::post('/account/additional-account-delete', 'AdditionalAccountController@delete')->name('additional-account-delete');
+		Route::post('/account/additional-account-change-status', 'AdditionalAccountController@changeStatus')->name('additional-account-change-status');
+		Route::post('/account/additional-account-add', 'AdditionalAccountController@createAdditionalUser')->name('additional-account-add');
+		Route::post('/account/additional-account-update/{additional_user}', 'AdditionalAccountController@updateAdditionalUser')->name('additional-account-update');
+		Route::get('/account/additional-account-detail/{additional_user}', 'AdditionalAccountController@additionalAccountDetail')->name('additional-account-detail');
 	});
 });
 

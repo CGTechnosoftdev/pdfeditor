@@ -48,6 +48,8 @@ class CreateUserDocumentShareTable extends Migration
             $table->integer('shared_documents_id');
             $table->string('name', 50);
             $table->string('email', 50);
+            $table->tinyInteger('is_notify')->default(1)->comment('1=>Notify,2=>Do not notify');
+            $table->tinyInteger('can_edit')->default(1)->comment('1=>Edit,2=>Can not edit');
             $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();

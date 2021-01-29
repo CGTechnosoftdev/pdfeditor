@@ -98,7 +98,7 @@
                         <li>
                             <a href="#" class="send-via-usps-button">
                                 <div class="link-img"><img src="{{ asset('public/front/images/send-via-usps.svg') }}"></div>
-                                <span>Sebd via USPS</span>
+                                <span>Send via USPS</span>
                             </a>
                         </li>
                         <li>

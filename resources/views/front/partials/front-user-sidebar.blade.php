@@ -54,9 +54,16 @@
                     </span>
                 </a>
                 <div class="treeview-menu" style="display: none;">
-                    <h5>In out Box</h5>
+                    <h5>Inbox</h5>
                     <ul>
                         <li><a href="">Shared with me</a></li>
+                    </ul>
+                    <h5>Outbox</h5>
+                    <ul>
+                        <li><a href="{{ route('front.out-usps-mail-list') }}">USPS Mail</a></li>
+                        <li><a href="{{ route('front.out-share-list') }}">Share</a></li>
+                        <li><a href="{{ route('front.out-send-for-review-list') }}">Send for Review</a></li>
+                        <li><a href="{{ route('front.out-link-to-fill-list') }}">Link to Fill</a></li>
                     </ul>
                 </div>
             </li>

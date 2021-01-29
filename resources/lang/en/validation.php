@@ -154,6 +154,18 @@ return [
         'category_id' => 'category',
         'type_id' => 'type',
         'type_form_id' => 'tax form',
+        'from_name' => 'name',
+        'from_address_line_first' => 'address line first',
+        'from_address_line_second' => 'address line second',
+        'from_city' => 'city',
+        'from_state' => 'state',
+        'from_zip' => 'zip',
+        'to_name' => 'name',
+        'to_address_line_first' => 'address line first',
+        'to_address_line_second' => 'address line second',
+        'to_city' => 'city',
+        'to_state' => 'state',
+        'to_zip' => 'zip',
     ],
 
 ];
