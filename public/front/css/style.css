@@ -7177,3 +7177,6 @@ ul.tl li .timestamp {
     text-align: right;
     font-size: 12px;
 }
+.advance-settings-content .share-by .add-recept-btn {
+    margin-top: 15px;
+}
