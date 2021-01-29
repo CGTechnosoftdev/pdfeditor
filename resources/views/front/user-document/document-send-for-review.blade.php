@@ -448,6 +448,9 @@
 
         $(document).on('click', '#add-recipient', function(e) {
             e.preventDefault();
+            if ($(this).hasClass('disabled')) {
+                return false;
+            }
             blockUI();
             var email = $('#recipient_email').val();
             var name = $('#recipient_name').val();
