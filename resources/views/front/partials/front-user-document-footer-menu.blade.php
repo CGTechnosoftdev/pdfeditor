@@ -665,6 +665,9 @@
             }
         });
 
+        var input_elements = $('#user_document_send_email_form_id input');
+        input_elements.removeAttr('autocomplete');
+
 
     });
 </script>

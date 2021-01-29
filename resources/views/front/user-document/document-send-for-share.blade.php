@@ -114,7 +114,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <br>
-                                        <a class="btn btn-success mt-3" data-clipboard-demo="" data-clipboard-target="#public_link" onclick="return false;" href="">
+                                        <a class="btn btn-success mt-10" data-clipboard-demo="" data-clipboard-target="#public_link" onclick="return false;" href="">
                                             <i class="far fa-copy"></i> Copy Link
                                         </a>
                                     </div>
@@ -563,6 +563,9 @@
             $('#personalize_invitation_data_subject').val(selected_template.subject);
             $('#personalize_invitation_data_message').html(selected_template.message);
         }
+
+        var input_elements = $('#send-for-share-form input');
+        input_elements.removeAttr('autocomplete');
 
         ///////////// Image Upload and Preview /////////////
         Vue.component('upload-gambar', {
