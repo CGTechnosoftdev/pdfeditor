@@ -356,7 +356,9 @@ PDFAnnotate.prototype.savePdf = async function () {
 		// }, function () {
 		// 	// doc.save("pdfFile" + '.pdf');
 		// });
-		doc.save("pdfFile" + '.pdf');
+
+		// doc.save("pdfFile" + '.pdf');
+
 		// ctx.fillText("<a>Here and There</a>", 50, 50);
 		// ctx.fillText(formField, 50, 500);
 		// ctx.stream.on('finish', function () {
@@ -366,6 +368,8 @@ PDFAnnotate.prototype.savePdf = async function () {
 		// });
 		// ctx.end();
 	};
+
+
 	var d = new Date();
 	const hr = d.getHours();
 	const min = d.getMinutes();
@@ -373,8 +377,109 @@ PDFAnnotate.prototype.savePdf = async function () {
 	const fileName = "file" + hr + min + sec;
 	localStorage.setItem("pdfFile", fileName);
 	// doc.save(fileName + '.pdf');
-}
 
+	modifyPdf();
+}
+function fileToByteArray(file) {
+	return new Promise((resolve, reject) => {
+		try {
+			let reader = new FileReader();
+			let fileByteArray = [];
+			reader.readAsArrayBuffer(file);
+			reader.onloadend = (evt) => {
+				if (evt.target.readyState == FileReader.DONE) {
+					let arrayBuffer = evt.target.result,
+						array = new Uint8Array(arrayBuffer);
+					for (byte of array) {
+						fileByteArray.push(byte);
+					}
+				}
+				resolve(fileByteArray);
+			}
+		}
+		catch (e) {
+			reject(e);
+		}
+	})
+}
+async function modifyPdf() {
+	const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib
+	// Fetch an existing PDF document
+	const url = 'https://pdf-lib.js.org/assets/with_update_sections.pdf'
+	// const url = 'http://3.236.78.127/pdfFile.pdf'
+	const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+	console.log(existingPdfBytes)
+
+	let inputPDFFile = document.getElementById('input_pdf_file').files[0];
+	let pdfDoc = null;
+	if (inputPDFFile) {
+		let byteArray = await fileToByteArray(inputPDFFile);
+		console.log(new Uint8Array(byteArray))
+		// Load a PDFDocument from the existing PDF bytes
+		pdfDoc = await PDFDocument.load(new Uint8Array(byteArray))
+	} else {
+		// Create a new PDFDocument
+		pdfDoc = await PDFDocument.create()
+	}
+
+	// Embed the Helvetica font
+	const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+	let firstPage = null;
+	if (inputPDFFile) {
+		// Get the first page of the document
+		let pages = pdfDoc.getPages()
+		firstPage = pages[0]
+	} else {
+		// Add a blank page to the document
+		firstPage = pdfDoc.addPage([550, 750])
+	}
+
+
+	// Get the width and height of the first page
+	const { width, height } = firstPage.getSize()
+
+	// Draw a string of text diagonally across the first page
+	firstPage.drawText('Overlay text using pdf', {
+		x: 5,
+		y: height / 2 + 300,
+		size: 50,
+		font: helveticaFont,
+		color: rgb(0.95, 0.1, 0.1),
+		rotate: degrees(-45),
+	})
+
+	const form = pdfDoc.getForm();
+	const superheroField = form.createTextField('favorite.superhero_new')
+	// superheroField.setText('New field added in form')
+	superheroField.isFileSelector(true)
+	superheroField.enableFileSelection()
+	superheroField.addToPage(firstPage, { x: 55, y: 40 })
+
+	const personField = form.createOptionList('favorite.personal')
+	personField.addOptions([
+		'Julius Caesar',
+		'Ada Lovelace',
+		'Cleopatra',
+		'Aaron Burr',
+		'Mark Antony',
+	])
+	personField.select('Ada Lovelace')
+	personField.addToPage(firstPage, { x: 55, y: 70 })
+
+	// Serialize the PDFDocument to bytes (a Uint8Array)
+	const pdfBytes = await pdfDoc.save()
+
+	// Trigger the browser to download the PDF document
+	// console.log(pdfBytes)
+	// download(pdfBytes, "pdf-lib_modification_example.pdf", "application/pdf");
+
+	var blob = new Blob([pdfBytes], { type: "application/pdf" });
+	var link = document.createElement('a');
+	link.href = window.URL.createObjectURL(blob);
+	var fileName = "pdf-lib_modification_example.pdf";
+	link.download = fileName;
+	link.click();
+}
 PDFAnnotate.prototype.setBrushSize = function (size) {
 	var inst = this;
 	$.each(inst.fabricObjects, function (index, fabricObj) {
