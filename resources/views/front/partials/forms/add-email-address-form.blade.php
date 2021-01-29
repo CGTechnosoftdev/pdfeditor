@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-12">
                         <button class="btn btn-success" id="add_email_address_btn_id">Add</button>
-                        <button class="btn btn-success" id="edit_email_address_btn_id">Edit</button>
+                        <button class="btn btn-success" id="edit_email_address_btn_id">Update</button>
                     </div>
                 </div>
                 {{ Form::close() }}

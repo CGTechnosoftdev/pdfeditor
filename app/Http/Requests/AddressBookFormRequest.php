@@ -25,7 +25,8 @@ class AddressBookFormRequest extends FormRequest
         return [
             'name' => 'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2,deleted_at,NULL',
             'email' => 'required|email',
-
+            'phone' => 'nullable|regex:/^[0-9]{10,12}+$/',
+            'fax' => 'nullable|regex:/^[0-9]{7,12}+$/',
         ];
     }
 }

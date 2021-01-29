@@ -95,6 +95,7 @@ return [
     'DESTROY_FORM' => 2,
     'EMAIL_SHARE_FORM' => 1,
     'LINK_SHARE_FORM' => 2,
+    'MESSAGE_SHOW_TIME'  => 5000,
 
 
     'DEFAULT_DELIVERY_METHOD' => 1
