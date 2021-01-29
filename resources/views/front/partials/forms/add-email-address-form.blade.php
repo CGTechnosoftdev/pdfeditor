@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="alert" id="address_mg_box_id"></div>
-                {{ Form::open(['url' => '#','method'=>'post','class'=>'login-form','id' => 'email_address_add_form_id','enctype'=>"multipart/form-data"]) }}
+                {{ Form::open(['url' => '#','method'=>'post','class'=>'login-form','id' => 'email_address_add_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
                 {{Form::hidden('id',"",array('id' => 'addresslist_id'))}}
                 <div class="row">
                     <div class="col-md-6">
