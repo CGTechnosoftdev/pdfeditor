@@ -423,12 +423,18 @@
                 type: "post",
                 data: $("#send-for-share-form").serialize(),
                 success: function(response) {
-                    //    alert(response.status);
-                    $("#send-for-share-form").submit();
-                    return true;
+                    //    alert(response.success);
+                    if (response.success) {
+                        $("#send-for-share-form").submit();
+                        return true;
+                    }
                 },
                 error: function(data) {
                     var response = data.responseJSON;
+                    $.each(response.data, function(index, value) {
+
+                        $("#business_card_" + index).val("");
+                    })
 
                     $("#businessCardMsgBoxId").removeClass("hide");
                     $("#businessCardMsgBoxId").removeClass("alert-success");

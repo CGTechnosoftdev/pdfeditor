@@ -305,16 +305,11 @@
 
         });
 
-        $(document).on('click', '#sharemenu_itemid55', function(e) {
-            e.preventDefault();
-            blockUI();
-            var url = '{{ route("front.send-for-share", ":document") }}';
-            url = url.replace(':document', window.selected_document);
-            window.location.replace(url);
-        });
+
 
         $("#sharemenu_itemid").click(function() {
             // alert("ajax call is ");
+            $("a[id ^= 'share_by_link_1']").trigger("click");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -463,8 +458,8 @@
                         }
 
                         setTimeout(function() {
-                            $("#userDocTempConId").removeClass("show");
-                            $("#userDocTempConId").addClass("hide");
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
                             $("#cust_share").modal("hide");
                         }, 3000);
 
