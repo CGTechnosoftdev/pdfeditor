@@ -1,4 +1,4 @@
-<div class="modal fade add_Address" id="add-new-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade add_Address my-default-modal" id="add-new-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-12">
                         <button class="btn btn-success" id="add_email_address_btn_id">Add</button>
-                        <button class="btn btn-success" id="edit_email_address_btn_id">Edit</button>
+                        <button class="btn btn-success" id="edit_email_address_btn_id">Update</button>
                     </div>
                 </div>
                 {{ Form::close() }}

@@ -5,8 +5,8 @@ session_start();
  */
 
 // Fill in the next two constants
-define('OAUTH_CONSUMER_KEY', 'dj0yJmk9TUVmUDdlc1c2dDNIJmQ9WVdrOWNUTnRkMFV4WlZZbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTEw');
-define('OAUTH_CONSUMER_SECRET', '72d7c95c95977efb8e08294324d8215ff32f468c');
+define('OAUTH_CONSUMER_KEY', 'dj0yJmk9amduRmoxWHAzWlc3JmQ9WVdrOVNVRkVZamRDWlVJbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTAw');
+define('OAUTH_CONSUMER_SECRET', '5cf594d7d9023e04f853a58e99bab9136fd02812');
 
 //$progname = $argv[0];
 $debug = 0; // Set to 1 for verbose debugging output

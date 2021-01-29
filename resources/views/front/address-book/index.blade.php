@@ -126,8 +126,10 @@
                     setTimeout(function() {
                         $("#address_mg_box_id").removeClass("show");
                         $("#address_mg_box_id").addClass("hide");
-                        $("#add_Address").modal("hide");
-                    }, 3000);
+
+                        $(".add_Address").modal('hide');
+                    }, "{{$MESSAGE_SHOW_TIME}}");
+
                 },
                 error: function(data) {
                     var jsonData = $.parseJSON(data.responseText);
@@ -140,7 +142,7 @@
                     setTimeout(function() {
                         $("#address_mg_box_id").removeClass("show");
                         $("#address_mg_box_id").addClass("hide");
-                    }, 3000);
+                    }, "{{$MESSAGE_SHOW_TIME}}");
                 }
 
 
@@ -189,7 +191,7 @@
                     setTimeout(function() {
                         $("#address_mg_box_id").removeClass("show");
                         $("#address_mg_box_id").addClass("hide");
-                        $("#add_Address").modal("hide");
+                        $(".add_Address").modal('hide');
                     }, 3000);
                 },
                 error: function(data) {

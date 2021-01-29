@@ -38,6 +38,7 @@ class AddressBookController extends FrontBaseController
         $data_array = [
             'title' => 'Address List',
             'googleImportUrl' => $googleImportUrl,
+            'MESSAGE_SHOW_TIME' => config('constant.MESSAGE_SHOW_TIME'),
         ];
         return view('front.address-book.index', $data_array);
     }
