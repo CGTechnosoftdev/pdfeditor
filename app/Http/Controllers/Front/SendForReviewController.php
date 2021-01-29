@@ -108,7 +108,7 @@ class SendForReviewController extends FrontBaseController
                             'from' => $user->email,
                             'content_data' => [
                                 'recipient_name' => $name,
-                                'your_name' => $user->name,
+                                'your_name' => $user->full_name,
                                 'your_email' => $user->email,
                             ],
                         ];
