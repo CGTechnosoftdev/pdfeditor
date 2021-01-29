@@ -31,7 +31,7 @@ class CommonMail extends Mailable
      */
     public function build()
     {
-        $mail_config = $this->mail_config ?? config('mail_config.' . ($this->data['config_param'] ?? ''));
+        $mail_config = $this->mail_config ?: config('mail_config.' . ($this->data['config_param'] ?? ''));
         if (!empty($mail_config)) {
             $from = $this->data['from'] ?? config('mail.from');
             $content_data = $this->data['content_data'] ?? [];

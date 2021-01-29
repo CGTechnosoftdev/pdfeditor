@@ -388,3 +388,9 @@ function generateUniqueLink($target_model, $column)
 	}
 	return $return;
 }
+
+
+function getAccountId($id)
+{
+	return str_pad($id, 8, '0', STR_PAD_LEFT);
+}
