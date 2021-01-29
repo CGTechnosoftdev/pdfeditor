@@ -133,6 +133,30 @@ class User extends Authenticatable
         return myCurrencyFormat($this->userPromo->subscription_plan_amount ?? $this->subscription_plan_amount);
     }
 
+    public function getInitials()
+    {
+        $return = '';
+        //The strtoupper() function converts a string to uppercase.
+        $name  = strtoupper($this->full_name);
+        if (!empty($name)) {
+
+            //prefixes that needs to be removed from the name
+            $remove = ['.', 'MRS', 'MISS', 'MS', 'MASTER', 'DR', 'MR'];
+            $nameWithoutPrefix = str_replace($remove, " ", $name);
+
+            $words = explode(" ", $nameWithoutPrefix);
+
+            //this will give you the first word of the $words array , which is the first name
+            $firtsName = reset($words);
+
+            //this will give you the last word of the $words array , which is the last name
+            $lastName  = end($words);
+
+            $return = substr($firtsName, 0, 1) . substr($lastName, 0, 1);
+        }
+        return $return;
+    }
+
 
 
     /**
@@ -233,6 +257,28 @@ class User extends Authenticatable
         $model->whereHas('lastSubscriptionDetail', function ($q) use ($date) {
             $q->where(\DB::raw('DATE(end)'), $date);
         });
+        return $model->get();
+    }
+
+    public static function getAdditionalAccountList($data_array)
+    {
+        $condition = ['parent_id' => $data_array['user_id']];
+        $model = self::query()->whereIn('status', [config('constant.STATUS_ACTIVE'), config('constant.STATUS_INACTIVE')]);
+        if (!empty($condition)) {
+            $model->where($condition);
+        }
+        if (!empty($data_array['search_text'])) {
+            $model->where(function ($subQuery) use ($data_array) {
+                $subQuery->where('first_name', 'like', '%' . $data_array['search_text'] . '%');
+                $subQuery->orWhere('last_name', 'like', '%' . $data_array['search_text'] . '%');
+                $subQuery->orWhere('email_name', 'like', '%' . $data_array['search_text'] . '%');
+                $subQuery->orWhere('phone_name', 'like', '%' . $data_array['search_text'] . '%');
+            });
+        }
+        $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC');
+        if (!empty($data_array['limit'])) {
+            $model->limit($data_array['limit']);
+        }
         return $model->get();
     }
 }

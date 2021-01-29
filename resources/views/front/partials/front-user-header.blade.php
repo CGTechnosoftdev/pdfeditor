@@ -51,6 +51,9 @@
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ route('front.account-information') }}">
+                                        Account Information
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('front.subscription-payment') }}">
                                         Subscription Payment
                                     </a>

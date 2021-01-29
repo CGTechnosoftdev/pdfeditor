@@ -228,6 +228,15 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/outbox/link-to-fill-list', 'OutboxController@linkToFillList')->name('out-link-to-fill-list');
 		Route::post('/outbox/link-to-fill-list-data', 'OutboxController@linkToFillListData')->name('out-link-to-fill-list-data');
 		Route::post('/outbox/link-to-fill-delete', 'OutboxController@linkToFillDelete')->name('out-link-to-fill-delete');
+
+		Route::get('/account/information', 'UserAccountController@accountInformation')->name('account-information');
+		Route::get('/account/additional-account-list', 'AdditionalAccountController@list')->name('additional-account-list');
+		Route::post('/account/additional-account-data', 'AdditionalAccountController@listData')->name('additional-account-list-data');
+		Route::post('/account/additional-account-delete', 'AdditionalAccountController@delete')->name('additional-account-delete');
+		Route::post('/account/additional-account-change-status', 'AdditionalAccountController@changeStatus')->name('additional-account-change-status');
+		Route::post('/account/additional-account-add', 'AdditionalAccountController@createAdditionalUser')->name('additional-account-add');
+		Route::post('/account/additional-account-update/{additional_user}', 'AdditionalAccountController@updateAdditionalUser')->name('additional-account-update');
+		Route::get('/account/additional-account-detail/{additional_user}', 'AdditionalAccountController@additionalAccountDetail')->name('additional-account-detail');
 	});
 });
 

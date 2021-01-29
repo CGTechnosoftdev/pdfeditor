@@ -362,6 +362,48 @@ display: none;
     .content-wrapper {
         padding: 10px;
     }
+    .document-info-modal {
+        flex-direction: column-reverse;
+    }
+    .document-info-left {
+        width: 100%;
+    }
+    .document-info-right {
+        width: 100%;
+        max-width: 100%;
+        border-left: none;
+        border-bottom: solid 1px #f7f7f7;
+        padding-left: 0px;
+        flex-direction: unset;
+        margin-bottom: 15px;
+    }
+    .document-info-right a {
+        margin-right: 10px;
+        margin-top: 0px;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+    .document-info-right a:last-child {
+        margin-right: 0px;
+        margin-top: 0px;
+    }
+    .my-default-modal .modal-dialog {
+        margin: 0px;
+    }
+    .my-default-modal .modal-dialog .modal-content {
+        border-radius: 0px;
+    }
+    .protect-document .publish-to-distribute {
+        flex-direction: column;
+    }
+    .protect-document .publish-to-distribute .shareable-file {
+        margin-right: 0;
+    }
+    .protect-document .publish-to-distribute .add-single-doc-signed {
+        margin-left: 0;
+        margin-top: 10px;
+    }
 }
 
 @media(max-width: 480px) {
