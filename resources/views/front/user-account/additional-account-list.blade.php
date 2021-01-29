@@ -15,7 +15,7 @@
             </div>
 
             <div class="input-group input-group-joined input-group-solid ml-3">
-                <input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-0" id="search_text" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
                     <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                             <circle cx="11" cy="11" r="8"></circle>
