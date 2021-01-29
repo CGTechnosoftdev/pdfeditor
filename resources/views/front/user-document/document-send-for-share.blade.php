@@ -423,10 +423,18 @@
                 type: "post",
                 data: $("#send-for-share-form").serialize(),
                 success: function(response) {
-                    alert(response.status);
+                    //    alert(response.success);
+                    if (response.success) {
+                        $("#send-for-share-form").submit();
+                        return true;
+                    }
                 },
                 error: function(data) {
                     var response = data.responseJSON;
+                    $.each(response.data, function(index, value) {
+
+                        $("#business_card_" + index).val("");
+                    })
 
                     $("#businessCardMsgBoxId").removeClass("hide");
                     $("#businessCardMsgBoxId").removeClass("alert-success");
@@ -483,7 +491,22 @@
             } else {
                 $('#add-recipient').addClass("disabled");
             }
+
         })
+
+        $(document).on('keyup', '#recipient_name', function(e) {
+            if (isName($("#recipient_name").val())) {
+
+                $('#add-recipient').removeClass("disabled");
+
+            } else {
+
+                $('#add-recipient').addClass("disabled");
+
+            }
+
+        })
+
 
         $(document).on('click', '#add-recipient', function(e) {
             e.preventDefault();

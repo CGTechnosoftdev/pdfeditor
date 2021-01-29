@@ -180,20 +180,20 @@ class SharedDocumentController extends FrontBaseController
 
 
 
-
+                    $emailConfig = config("mail_config.document_share");
                     $userName = $input_data["name"];
                     $userEmail = $input_data["email"];
-                    $email_config = [
+                    $email_data = [
                         'config_param' => 'document_share',
                         'content_data' => [
                             'name' => $userName,
                             'document_link' => $input_data["public_link"],
                         ],
                     ];
-                    Mail::to($userEmail)->send(new CommonMail($email_config));
+                    Mail::to($userEmail)->send(new CommonMail($email_data, $emailConfig));
                 }
                 $response_type = 'success';
-                $response_message = 'Document shared successfully,Thank You!' . $userEmail . "#" . $userName;
+                $response_message = 'Document shared successfully,Thank You!';
             } else {
                 $response_type = 'error';
                 $response_message = 'Error occoured, Please try again.';
@@ -296,13 +296,17 @@ class SharedDocumentController extends FrontBaseController
 
         $validator = $this->businessCardValidate($request->all()["personalize_invitation_data"]["business_card"]);
         $response_type = true;
+        $response_data = array();
         $response_message = "Business card entry valid!";
         if ($validator->fails()) {
 
             $errormessages = $validator->getMessageBag()->getMessages();
 
+
+
             $errormsgHTML = "";
             foreach ($errormessages as $errorIndex => $errorMsgArr) {
+                $response_data[$errorIndex] = false;
 
                 foreach ($errorMsgArr as $indder_index => $message) {
                     $errormsgHTML .= $message . "<br/>";
