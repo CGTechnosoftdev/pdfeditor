@@ -40,7 +40,7 @@
         </div>
         <h3>
             <a class="" data-toggle="collapse" href="#recipients" aria-expanded="true" aria-controls="recipients">
-                <img class="icon" src="{{ asset('public/front/images/add-user.svg') }}"> Fill in the Address and Return Address Label </a>
+                <img class="icon" src="{{ asset('public/front/images/pin.svg') }}"> Fill in the Address and Return Address Label </a>
         </h3>
         <div class="collapse show" id="recipients">
             <div class="advance-settings-content">
@@ -121,7 +121,7 @@
 
         <h3>
             <a class="" data-toggle="collapse" href="#reminders-for-recipients" aria-expanded="true" aria-controls="reminders-for-recipients">
-                <img class="icon" src="{{ asset('public/front/images/bell.svg') }}"> Choose Delivery Method
+                <img class="icon" src="{{ asset('public/front/images/pin.svg') }}"> Choose Delivery Method
             </a>
         </h3>
         <div class="collapse show" id="reminders-for-recipients">
