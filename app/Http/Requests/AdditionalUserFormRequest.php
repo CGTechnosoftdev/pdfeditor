@@ -31,8 +31,8 @@ class AdditionalUserFormRequest extends FormRequest
             $id = $this->additional_user->id;
         }
         $rules = [
-            'first_name' => 'required|max:50|min:2|regex:/(^[a-zA-Z0-9 ]+$)/u',
-            'last_name' => 'required|max:50|min:2|regex:/(^[a-zA-Z0-9 ]+$)/u',
+            'first_name' => 'required|max:50|min:2|regex:/(^[a-zA-Z ]+$)/u',
+            'last_name' => 'required|max:50|min:2|regex:/(^[a-zA-Z ]+$)/u',
             'email' => 'required|email|unique:users,email,' . $id . ',id,deleted_at,NULL',
             'contact_number' => 'sometimes|nullable|digits:10|max:10|unique:users,contact_number,' . $id . ',id,deleted_at,NULL',
         ];

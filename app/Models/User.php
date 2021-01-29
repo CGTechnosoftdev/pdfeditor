@@ -271,8 +271,8 @@ class User extends Authenticatable
             $model->where(function ($subQuery) use ($data_array) {
                 $subQuery->where('first_name', 'like', '%' . $data_array['search_text'] . '%');
                 $subQuery->orWhere('last_name', 'like', '%' . $data_array['search_text'] . '%');
-                $subQuery->orWhere('email_name', 'like', '%' . $data_array['search_text'] . '%');
-                $subQuery->orWhere('phone_name', 'like', '%' . $data_array['search_text'] . '%');
+                $subQuery->orWhere('email', 'like', '%' . $data_array['search_text'] . '%');
+                $subQuery->orWhere('contact_number', 'like', '%' . $data_array['search_text'] . '%');
             });
         }
         $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC');
