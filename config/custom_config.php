@@ -168,7 +168,7 @@ return [
         'informal' => 'Informal',
 
     ],
-    'user_advance_settings_automatic_reminder' => [
+    'automatic_reminder_duration_arr' => [
         '1' => 'In 1 Day',
         '2' => 'In 2 Day',
         '3' => 'In 3 Day',
@@ -177,7 +177,7 @@ return [
         '6' => 'In 6 Day',
         '7' => 'In 7 Day',
     ],
-    'user_advance_settings_repeat_reminder' => [
+    'repeat_reminder_duration_arr' => [
         '1' => 'In 1 Day',
         '2' => 'In 2 Day',
         '3' => 'In 3 Day',
@@ -208,6 +208,50 @@ return [
             'name' => 'USPS Certified Mail',
             'amount' => '10'
         ]
+    ],
+
+    'document_operations' => [
+        '1' => 'Can View',
+        '2' => 'Can Edit',
+    ],
+    'notify_status' => [
+        '1' => "Notify",
+        '0' => "Don't Notify",
+    ],
+    'invitation_email_template' => [
+        '1' => [
+            'name' => 'Casual',
+            'subject' => '{[your_name]} has shared documents with you via PDFWriter',
+            'message' => "Hi {[recipient_name]}, 
+
+I've shared documents with you via PDFWriter. 
+
+Changes made to these documents will be visible to everyone they are shared with. 
+
+If you have any questions, email me at {[your_email]}",
+        ],
+        '2' => [
+            'name' => 'Formal',
+            'subject' => '{[your_name]} has shared documents with you',
+            'message' => "Dear {[recipient_name]}, 
+
+{[your_name]} has shared documents with you via PDFWriter. 
+
+Changes made to these documents will be visible to everyone they are shared with. 
+
+If you have any questions, contact {[your_email]}"
+        ],
+        '3' => [
+            'name' => 'Informal',
+            'subject' => '{[your_name]} has shared documents with you via PDFWriter',
+            'message' => "Hello {[recipient_name]},
+
+{[your_name]} has shared documents with you via PDFWriter. 
+
+Changes made to these documents will be visible to everyone they are shared with. 
+
+If you have any questions, contact {[your_email]}"
+        ],
     ]
 
 ];

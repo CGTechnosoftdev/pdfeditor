@@ -26,4 +26,22 @@ class UspsRequest extends Model
             return false;
         }
     }
+
+    public static function getRequestList($data_array)
+    {
+        $condition = ['user_id' => $data_array['user_id'], 'status' => config('constant.STATUS_ACTIVE')];
+
+        $model = self::query();
+        if (!empty($condition)) {
+            $model->where($condition);
+        }
+        if (!empty($data_array['search_text'])) {
+            $model->where('to_name', 'like', '%' . $data_array['search_text'] . '%');
+        }
+        $model->orderBy(($data_array['order_by'] ?? 'updated_at'), 'DESC');
+        if (!empty($data_array['limit'])) {
+            $model->limit($data_array['limit']);
+        }
+        return $model->get();
+    }
 }

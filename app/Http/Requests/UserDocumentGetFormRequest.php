@@ -27,8 +27,12 @@ class UserDocumentGetFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'url' => 'required|regex:/^https?:\/\/.*[\\\/].+\.[pdf|png|jpg|jpeg|doc|docx]{2,4}(?![^?])/u',
-            'url' => 'required',
+            // 'url' => 'required|url|regex:/^https?:\/\/.*[\\\/].+\.[pdf|png|jpg|jpeg|doc|docx]{2,4}(?![^?])/u',
+            'url' => [
+                'required',
+                'regex:/([a-zA-Z0-9\s_\\.\-\(\):])+\.(pdf|png|jpg|jpeg|doc|docx)($|[?&#])$/'
+            ],
+            // 'url' => 'required',
         ];
     }
 

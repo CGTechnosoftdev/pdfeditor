@@ -98,7 +98,7 @@
                         <li>
                             <a href="#" class="send-via-usps-button">
                                 <div class="link-img"><img src="{{ asset('public/front/images/send-via-usps.svg') }}"></div>
-                                <span>Sebd via USPS</span>
+                                <span>Send via USPS</span>
                             </a>
                         </li>
                         <li>
@@ -137,7 +137,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" class="send-for-review-button">
                                 <div class="link-img"><img src="{{ asset('public/front/images/send-for-review-icon.svg') }}"></div>
                                 <span>Send for Review</span>
                             </a>
@@ -305,8 +305,11 @@
 
         });
 
+
+
         $("#sharemenu_itemid").click(function() {
             // alert("ajax call is ");
+            $("a[id ^= 'share_by_link_1']").trigger("click");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -455,8 +458,8 @@
                         }
 
                         setTimeout(function() {
-                            $("#userDocTempConId").removeClass("show");
-                            $("#userDocTempConId").addClass("hide");
+                            $("#userDocMsgConId").removeClass("show");
+                            $("#userDocMsgConId").addClass("hide");
                             $("#cust_share").modal("hide");
                         }, 3000);
 
@@ -488,8 +491,12 @@
 
         $("#advance_settings_id").click(function() {
             var user_document_id = $("#recent_document_select_item").val();
+
+            var url = '{{ route("front.send-for-share", ":document") }}';
+            url = url.replace(':document', window.selected_document);
             // alert("{{url('user-document-advance-settings')}}/" + user_document_id);
-            window.location.href = "{{url('user-document-advance-settings')}}/" + user_document_id;
+            //window.location.href = "{{url('user-document-advance-settings')}}/" + user_document_id;
+            window.location.href = url;
         });
 
 
@@ -586,6 +593,14 @@
             e.preventDefault();
             blockUI();
             var url = '{{ route("front.send-via-usps", ":document") }}';
+            url = url.replace(':document', window.selected_document);
+            window.location.replace(url);
+        });
+
+        $(document).on('click', '.send-for-review-button', function(e) {
+            e.preventDefault();
+            blockUI();
+            var url = '{{ route("front.send-for-review", ":document") }}';
             url = url.replace(':document', window.selected_document);
             window.location.replace(url);
         });

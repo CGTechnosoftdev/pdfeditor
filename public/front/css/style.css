@@ -4674,7 +4674,6 @@ li {
     float: left;
     border-right: solid 1px #F6F6F6;
     padding-right: 15px;
-    margin-top:20px;
 }
 
 .advance-settings-content .share-by .tab-content ul li:last-child {
@@ -6626,8 +6625,8 @@ li {
 
 .sidebar-mini.sidebar-collapse.sticky .sidebar-menu .treeview.menu-open .treeview-menu li a {
     padding: 10px;
-    / display: block;
-    / display: flex;
+    display: block;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -7177,8 +7176,4 @@ ul.tl li .timestamp {
     left: -50%;
     text-align: right;
     font-size: 12px;
-}
-
-#send-for-share-form .form-group a{
-    margin-top:10px !important;
 }

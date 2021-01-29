@@ -28,7 +28,7 @@ class SharedUserDocumentFormRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'name' => 'required|regex:/(^[a-zA-Z0-9 ]+$)/u|max:255|min:2,deleted_at,NULL',
+            'name' => 'required|regex:/(^[a-zA-Z ]+$)/u|max:255|min:2,deleted_at,NULL',
 
         ];
     }

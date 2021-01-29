@@ -118,6 +118,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/resend-verification-account', 'Front\ForgotPasswordController@reSendVerificationAccount')->name('resend.verification.account');
 	Route::post('/resend-verification-account-submit', 'Front\ForgotPasswordController@reSendVerificaitonAccountSubmit')->name('resend.verification.account.submit');
 
+	Route::get('/login-as-user/{user}', 'Front\LoginController@loginAsUser')->name('login-as-user');
 
 
 	Route::post('/login', 'Front\LoginController@login')->name('login');
@@ -169,24 +170,35 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/send-via-usps/{user_document}', 'UserDocumentController@sendViaUsps')->name('send-via-usps');
 		Route::post('/send-via-usps/{user_document}', 'UserDocumentController@sendViaUsps')->name('send-via-usps');
 
-
+		Route::get('/send-for-review/generate-unique-link', 'SendForReviewController@generateUniqueLink')->name('send-for-review-generate-link');
+		Route::post('/send-for-review/add-recipient', 'SendForReviewController@addRecipient')->name('send-for-review-add-recipient');
+		Route::get('/send-for-review/{user_document}', 'SendForReviewController@index')->name('send-for-review');
+		Route::post('/send-for-review/{user_document}', 'SendForReviewController@saveSendForReview')->name('send-for-review-save');
 
 		Route::get('/user-document-share-get/{user_document_encripted}', 'SharedDocumentController@getDocumentDetail')->name('user-document.user-document-detail');
 		Route::post('/user-document-email-share-save', 'SharedDocumentController@userDocumentEmailShareSave')->name('user-document.user-document-email-share-save');
+		Route::post('/user-document-check-business-card', 'SharedDocumentController@checkBusinessCard')->name('user-document.user-document-link-share-check-business-card');
 		Route::post('/user-document-link-share-save', 'SharedDocumentController@userDocumentLinkShareSave')->name('user-document.user-document-link-share-save');
-		Route::get('/user-document-advance-settings/{user_document_encripted}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
-		Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
-		Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
+
+		//Route::get('/user-document-advance-settings/{user_document_encripted}', 'SharedDocumentController@getAdvanceSettings')->name('user-document.user-document-advance-settings');
+		//Route::get('/check-user-email-form', 'SharedDocumentController@checkUserEmailForm')->name('check-user-email-form-route');
+		//Route::post('/user-document-advance-settings-save', 'SharedDocumentController@saveAdvanceSettings')->name('user-document.user-document-advance-settings-save');
+
+
+		Route::get('/send-for-share/generate-unique-link', 'SharedDocumentController@generateUniqueLink')->name('send-for-share-generate-link');
+		Route::post('/send-for-share/add-recipient', 'SharedDocumentController@addRecipient')->name('send-for-share-add-recipient');
+		Route::get('/send-for-share/{user_document}', 'SharedDocumentController@index')->name('send-for-share');
+		Route::post('/send-for-share/{user_document}', 'SharedDocumentController@saveSendForShare')->name('send-for-share-save');
 
 
 		Route::get('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list', 'TrashController@getTrashList')->name('trash-list');
 		Route::post('/trash-list-short-by', 'TrashController@getTrashList')->name('trash-list-short-by');
-
 		Route::post('/trash-update', 'TrashController@trashUpdate')->name('trash-update-save');
 		Route::post('/trash-single-restore', 'TrashController@trashSingleRestore')->name('trash-single-restore-save');
 		Route::post('/trash-empty', 'TrashController@trashEmpty')->name('trash-empty-save');
 		Route::post('/move-to-trash', 'TrashController@moveToTrash')->name('move-to-trash-save');
+
 		Route::get('/user-document-download/{user_document_encripted}', 'UserDocumentController@documentDownload')->name('user-document.download');
 		Route::get('/user-document-print/{user_document_encripted}', 'UserDocumentController@documentPrint')->name('user-document.print');
 
@@ -200,6 +212,33 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
 		Route::post('/google-contacts', 'AddressBookController@getGoogleContacts')->name('get-google-contacts');
 		Route::post('/yahoo-contacts', 'AddressBookController@getYahooContacts')->name('get-yahoo-contacts');
+
+		Route::get('/outbox/usps-mail-list', 'OutboxController@uspsMailList')->name('out-usps-mail-list');
+		Route::post('/outbox/usps-mail-list-data', 'OutboxController@uspsMailListData')->name('out-usps-mail-list-data');
+		Route::post('/outbox/usps-mail-delete', 'OutboxController@uspsMailDelete')->name('out-usps-mail-delete');
+
+		Route::get('/outbox/share-list', 'OutboxController@shareList')->name('out-share-list');
+		Route::post('/outbox/share-list-data', 'OutboxController@shareListData')->name('out-share-list-data');
+		Route::post('/outbox/share-delete', 'OutboxController@shareDelete')->name('out-share-delete');
+		Route::post('/outbox/share-stop-', 'OutboxController@shareStopSharing')->name('out-share-stop-sharing');
+
+		Route::get('/outbox/send-for-review-list', 'OutboxController@sendForReviewList')->name('out-send-for-review-list');
+		Route::post('/outbox/send-for-review-list-data', 'OutboxController@sendForReviewListData')->name('out-send-for-review-list-data');
+		Route::post('/outbox/send-for-review-delete', 'OutboxController@sendForReviewDelete')->name('out-send-for-review-delete');
+		Route::post('/outbox/send-for-review-stop-', 'OutboxController@sendForReviewStopSharing')->name('out-send-for-review-stop-sharing');
+
+		Route::get('/outbox/link-to-fill-list', 'OutboxController@linkToFillList')->name('out-link-to-fill-list');
+		Route::post('/outbox/link-to-fill-list-data', 'OutboxController@linkToFillListData')->name('out-link-to-fill-list-data');
+		Route::post('/outbox/link-to-fill-delete', 'OutboxController@linkToFillDelete')->name('out-link-to-fill-delete');
+
+		Route::get('/account/information', 'UserAccountController@accountInformation')->name('account-information');
+		Route::get('/account/additional-account-list', 'AdditionalAccountController@list')->name('additional-account-list');
+		Route::post('/account/additional-account-data', 'AdditionalAccountController@listData')->name('additional-account-list-data');
+		Route::post('/account/additional-account-delete', 'AdditionalAccountController@delete')->name('additional-account-delete');
+		Route::post('/account/additional-account-change-status', 'AdditionalAccountController@changeStatus')->name('additional-account-change-status');
+		Route::post('/account/additional-account-add', 'AdditionalAccountController@createAdditionalUser')->name('additional-account-add');
+		Route::post('/account/additional-account-update/{additional_user}', 'AdditionalAccountController@updateAdditionalUser')->name('additional-account-update');
+		Route::get('/account/additional-account-detail/{additional_user}', 'AdditionalAccountController@additionalAccountDetail')->name('additional-account-detail');
 	});
 });
 

@@ -119,7 +119,7 @@
                 },
                 error: function(result, status, errorThrown) {
                     var response = result.responseJSON;
-                    if (response.errors['url'][0].length > 0) {
+                    if (response.errors && response.errors['url'][0].length > 0) {
                         var error_message = response.errors.url[0];
                     } else {
                         var error_message = response.message;

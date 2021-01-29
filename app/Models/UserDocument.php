@@ -86,7 +86,7 @@ class UserDocument extends Model
         if (!empty($condition)) {
             $model->where($condition);
         }
-        if (!empty($data_array['document_ids'])) {
+        if (isset($data_array['document_ids'])) {
             $model->whereIn('id', $data_array['document_ids']);
         }
 
