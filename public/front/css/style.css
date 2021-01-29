@@ -2365,6 +2365,8 @@ li {
 .list-unstyled.components {
     padding-top: 30px;
     border-top: solid 1px #eee;
+    float: left;
+    width: 100%;
 }
 
 #content {
@@ -3024,8 +3026,9 @@ li {
 .sidebar-menu li>a>.pull-right-container {
     position: absolute;
     right: 10px;
-    top: 0;
+    top: 50%;
     margin-top: 0;
+    transform: translateY(-50%);
 }
 
 .control-sidebar-bg {
@@ -6812,8 +6815,18 @@ a.disabled {
     background: #486eb8;
 }
 
-.tgl+.tgl-btn.btn-sm::after,
 .tgl+.tgl-btn::before {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 15px;
+    height: 15px;
+    top: -7px;
+    transform: translateY(-50%);
+}
+
+.tgl+.tgl-btn.btn-sm::after,
+.tgl+.tgl-btn.btn-sm::before {
     position: relative;
     display: block;
     content: "";
