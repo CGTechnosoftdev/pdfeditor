@@ -258,6 +258,16 @@
       </div>
     </div>
     <!-- <canvas id="the-canvas"></canvas> -->
+    <div>
+      <form id="fieldsForm">
+        Choose field:
+        <select id="selectField" onchange="eval(this.value);">
+        </select>
+        <h3>PDF Forms list...</h3>
+        <div id="dy-form"></div>
+      </form>
+    </div>
+
     <div id="the-pdf"></div>
     <div id="">
 
@@ -529,6 +539,9 @@
     });
 
   });
+  let pdfRotate = 0;
+  let pdfPageHeight = 0;
+  let pageNum = 1;
   function convertToBase64(inputPDFFile) {
     return new Promise((resolve, reject) => {
       try {
@@ -555,6 +568,154 @@
       }
     })
   }
+  function removeOptions(selectbox) {
+    var i;
+    for (i = selectbox.options.length - 1; i >= 0; i--) {
+      selectbox.remove(i);
+    }
+  }
+  /**
+       * If another page rendering in progress, waits until the rendering is
+       * finised. Otherwise, executes rendering immediately.
+       */
+  function queueRenderPage(num, xOffset, yOffset) {
+    if (pageRendering) {
+      pageNumPending = num;
+      pageLeftPending = xOffset;
+      pageTopPending = yOffset;
+    } else {
+      renderPage(num, xOffset, yOffset, false);
+    }
+  }
+  function addSelectBoxForPageAcroFieldsToForm(page) {
+    page.getAnnotations().then(
+      function (items) {
+        var selectField = document.getElementById("selectField");
+        removeOptions(selectField);
+        var optionsHTML = [];
+        if (items.length == 0) {
+          optionsHTML.push("<option value=\"console.log('no fields clicked - doing nothing');\">No fields</option>");
+        }
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          console.log("form fields work..", item)
+          switch (item.subtype) {
+            case 'Widget':
+              if (item.fieldType != 'Tx' && item.fieldType != 'Btn' && item.fieldType != 'Ch') {
+                break;
+              }
+              var fieldName;
+              if (item.fieldType == 'Tx') {
+                fieldName = 'Inputfield with key ' + item.fieldName + ' (position: ' + item.rect + ')';
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = item.fieldName;
+                input.value = item.fieldValue;
+                input.style.left = item.rect[0] + "px";
+                input.style.top = item.rect[1] + "px";
+                document.getElementById('dy-form').appendChild(input);
+              }
+              if (item.fieldType == 'Btn') {
+                if (item.fieldFlags == 32768) {
+                  fieldName = 'Radiobutton with key ' + item.fieldName + ' (position: ' + item.rect + ')';
+                  // create radio btn
+                  var radioHtml = '<input type="radio" name="' + item.fieldName + '"';
+                  if (item.fieldValue == item.buttonValue) {
+                    radioHtml += ' checked="checked"';
+                  }
+                  radioHtml += '/>';
+                  var radioFragment = document.createElement('div');
+                  radioFragment.innerHTML = radioHtml;
+                  document.getElementById('dy-form').appendChild(radioFragment);
+                } else if (item.flags & 65536) {
+                  fieldName = 'Pushbutton with key ' + item.fieldName + ' (position: ' + item.rect + ')';
+                  // create button
+                  var btn = document.createElement("BUTTON");
+                  btn.id = 'btn' + item.id;
+                  btn.setAttribute("value", item.fieldName);
+                  btn.setAttribute("text", item.fieldName);
+                  btn.style.fontSize = "14px";
+                  btn.style.backgroundColor = '#4CAF50';
+                  document.getElementById('dy-form').appendChild(btn);
+                } else {
+                  fieldName = 'Checkbox with key ' + item.fieldName + ' (position: ' + item.rect + ')';
+                  // create checkbox
+                  var checkbox = document.createElement('input');
+                  checkbox.type = "checkbox";
+                  checkbox.name = item.fieldName;
+                  checkbox.value = item.fieldValue;
+                  checkbox.checked = item.fieldValue == "Yes" ? true : false;
+                  checkbox.id = item.id;
+                  var label = document.createElement('label')
+                  label.htmlFor = item.id + "_label";
+                  label.appendChild(document.createTextNode(item.fieldName));
+                  document.getElementById('dy-form').appendChild(checkbox);
+                  document.getElementById('dy-form').appendChild(label);
+                }
+              }
+              if (item.fieldType == 'Ch') {
+                fieldName = 'Selectbox with key ' + item.fieldName + ' (position: ' + item.rect + ')';
+                let fieldValue = item.fieldValue.length ? item.fieldValue[0] : "";
+                console.log(fieldValue)
+                // var selectObj = document.getElementById('Select1').value;
+                var newDiv = document.createElement('div');
+                var html = '<select name="' + item.fieldName + '" value="' + fieldValue + '">';
+                if (item.options) {
+                  for (j = 0; j < item.options.length; j++) {
+                    let selectedVal = fieldValue == item.options[j].exportValue ? 'selected' : ''
+                    html += "<option value='" + item.options[j].exportValue + "' " + selectedVal + ">" + item.options[j].displayValue + "          </option>";
+                  }
+                }
+                html += '</select>';
+                newDiv.innerHTML = html;
+                document.getElementById('dy-form').appendChild(newDiv);
+              }
+
+            // x = item.rect[0];
+            // if (pdfRotate == 90) {
+            //   y = pdfPageWidth - item.rect[1];
+            // }
+            // else if (pdfRotate == 0) {
+            //   y = pdfPageHeight - item.rect[1];
+            // }
+            // else {
+            //   //TODO: other rotates
+            // }
+            // optionsHTML.push("<option value=\"queueRenderPage(" + pageNum + "," + x + "," + y + ");\">" + fieldName + "</option>");
+          }
+        }
+        selectField.innerHTML = optionsHTML.join('\n');
+      });
+  }
+  function logAcroFormsToConsoleFor(page) {
+    page.getAnnotations().then(
+      function (items) {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          switch (item.subtype) {
+            case 'Widget':
+              if (item.fieldType != 'Tx' && item.fieldType != 'Btn' && item.fieldType != 'Ch') {
+                break;
+              }
+              if (item.fieldType == 'Tx') {
+                console.log('found inputfield with key ' + item.fullName + ' (position: ' + item.rect + ')');
+              }
+              if (item.fieldType == 'Btn') {
+                if (item.flags & 32768) {
+                  console.log('found radio button with key ' + item.fullName + ' (position: ' + item.rect + ')');
+                } else if (item.flags & 65536) {
+                  console.log('found pushbutton with key ' + item.fullName + ' (position: ' + item.rect + ')');
+                } else {
+                  console.log('found checkbox with key ' + item.fullName + ' (position: ' + item.rect + ')');
+                }
+              }
+              if (item.fieldType == 'Ch') {
+                console.log('found select box with key ' + item.fullName + ' (position: ' + item.rect + ')');
+              }
+          }
+        }
+      });
+  }
   jQuery("#input_pdf_file").change(async function () {
     // alert(jQuery(this).val())
     // let inputPDFFile = document.getElementById('input_pdf_file').files[0];
@@ -564,21 +725,26 @@
     if (inputPDFFile && inputPDFFile.type == "application/pdf") {
       console.log(inputPDFFile)
       let byteArray = await fileToByteArray(inputPDFFile);
-      console.log(btoa(byteArray))
-      
+      // console.log(btoa(byteArray))
+
       var pdfjsLib = window['pdfjs-dist/build/pdf'];
       // The workerSrc property shall be specified.
       pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+      // CanvasRenderingContext2D.prototype.strokeText = function () { };
+      // CanvasRenderingContext2D.prototype.fillText = function () { };
+
       // Asynchronous download PDF
       var loadingTask = pdfjsLib.getDocument({ data: byteArray });
 
-      console.log(loadingTask)
+      // console.log(loadingTask)
       var thePdf = null;
       var scale = 1;
       loadingTask.promise.then(function (pdf) {
         // Get div#container and cache it for later use
         var container = document.getElementById("the-pdf");
-
+        container.innerHTML = "";
+        document.getElementById('dy-form').innerHTML = "";
         // Get div#container and cache it for later use
         // var container = document.getElementById("container");
 
@@ -587,9 +753,14 @@
 
           // Get desired page
           pdf.getPage(i).then(function (page) {
-
+            pageNum = i;
+            // console all forms list
+            // logAcroFormsToConsoleFor(page)
+            pdfRotate = page.rotate;
             var scale = 1.5;
             var viewport = page.getViewport({ scale: scale });
+            // var pdfViewBox = page.pageInfo.view;
+            // var viewport = new PDFJS.PageViewport(pdfViewBox, scale, page.rotate);
             var div = document.createElement("div");
 
             // Set id attribute with page-#{pdf_page_number} format
@@ -620,6 +791,7 @@
             // page.render(renderContext);
             var renderTask = page.render(renderContext);
             renderTask.promise.then(function () {
+              addSelectBoxForPageAcroFieldsToForm(page);
               page.getTextContent()
                 .then(function (textContent) {
                   // Create div which will hold text-fragments
@@ -666,6 +838,10 @@
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     // The workerSrc property shall be specified.
     pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+    CanvasRenderingContext2D.prototype.strokeText = function () { };
+    CanvasRenderingContext2D.prototype.fillText = function () { };
+
     // Asynchronous download PDF
     var loadingTask = pdfjsLib.getDocument(demoPdfUrl);
     // loadingTask.promise.then(function (pdf) {
