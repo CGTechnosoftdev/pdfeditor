@@ -7595,3 +7595,104 @@ ul.tl li .timestamp {
     color: #333;
     margin-bottom: 35px;
 }
+
+.branding-preview {
+    max-width: 560px;
+    margin: 0 auto;
+    border: solid 1px #D4D4D4;
+    display: inline-block;
+}
+
+.branding-preview .brand-content p {
+    font-size: 14px;
+    font-family: Poppins-Light;
+    text-align: left;
+}
+
+.branding-preview.brand1 {
+    grid-template-columns: 1fr 3fr;
+    display: grid;
+}
+
+.branding-preview.brand1 .brand-content {
+    padding: 20px 20px 0px 20px;
+    grid-column: 2;
+}
+
+.branding-preview.brand1 .brand-logo {
+    background: #98a2c5;
+}
+
+.branding-preview.brand1 .brand-content h4 {
+    text-align: left;
+    font-size: 14px;
+}
+
+.branding-preview .brand-footer {
+    border-top: solid 1px #ddd;
+    padding-top: 15px;
+    margin-top: 80px;
+}
+
+.branding-preview.brand2 {
+    padding: 20px;
+}
+
+.branding-preview.brand2 .brand-logo {
+    min-width: 120px;
+    min-height: 60px;
+    background: #98a2c5;
+    float: left;
+    border-radius: 5px;
+}
+
+.branding-preview.brand2 .brand-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-top: 50px;
+}
+
+.branding-preview.brand2 .brand-content h4 {
+    text-align: left;
+    font-size: 14px;
+}
+
+.branding-preview.brand3 .brand-content {
+    padding: 20px;
+}
+
+.branding-preview.brand3 .brand-logo {
+    width: 100%;
+    min-height: 100px;
+    background: #98a2c5;
+}
+
+.branding-preview.brand3 .brand-content h4 {
+    text-align: left;
+    font-size: 14px;
+}
+
+.grant-access-section p {
+    white-space: unset;
+    overflow: auto;
+    text-overflow: unset;
+}
+
+.grant-access-section button.btn {
+    background: #C1484A;
+    border-radius: 5px;
+    padding: 5px 15px;
+    color: #fff;
+    font-size: 14px;
+    height: 45px;
+}
+
+.timeformate ul li input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100% !important;
+    opacity: 0;
+}
