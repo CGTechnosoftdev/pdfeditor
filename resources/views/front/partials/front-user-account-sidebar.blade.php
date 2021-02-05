@@ -16,7 +16,7 @@
      <ul class="list-unstyled components">
 
          <li>
-             <a href="#"><span><img src="{{asset('public/front/images/account-card-details.svg')}}"></span>Account Information</a>
+             <a href="{{route('front.account-information')}}"><span><img src="{{asset('public/front/images/account-card-details.svg')}}"></span>Account Information</a>
          </li>
          <li class="">
              <a href="{{route('front.subscription-payment')}}"><span><img src="{{asset('public/front/images/payment.svg')}}"></span>Subscription & Payment</a>
