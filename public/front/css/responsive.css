@@ -121,6 +121,9 @@ display: none;
     .shareable-links ul {
         width: 100%;
     }
+    .aditional-account-info.personal-info .address-book-btn.d-inline-block {
+        margin-top: 0px;
+    }
 }
 
 @media(min-width: 768px) {}

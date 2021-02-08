@@ -199,97 +199,196 @@
                 <h4>Personal Information</h4>
             </div>
             <div class="card p-4">
-                <div class="aditional-account-info d-flex border-top-0">
+                <div class="aditional-account-info personal-info border-top-0">
                     <div class="aditional-account-content">
                         <h5>User Profile <span> <img src="../public/front/images/info-i.svg"></span></h5>
                     </div>
-                    <div class="aditional-account-btns">
-                        <a class="additional-btn" href=""><img src="../public/front/images/manage-aditional-account.svg"> Manage Additional Accounts</a>
-                    </div>
-                </div>
+                    <div class="profile-logo-upload-preview pb-3">
+                        <div class="profile-logo-upload">
+                            <h6>Upload Picture</h6>
+                            <button>
+                                <input type="file" id="dvd_image"> Change Picture
+                            </button>
+                        </div>
 
-                <div class="aditional-account-info">
-                    <div class="aditional-account-content">
-                        <h5>Internal Email <span> <img src="../public/front/images/info-i.svg"></span></h5>
-                        <p>All the documents sent to your PDF Writer's email address will automatically appear in your PDF Writer account In/Out Box.</p>
-                        <div class="publish-to-distribute">
-                            <div class="form-group mb-0">
-                                <input type="email" class="form-control" id="public_distribute" value="u1+358184956@pdfwriter.com" placeholder="Email Address">
+                        <div class="profile-logo-preview">
+                            <div class="preview hide">
+                                <img src="" class="image_to_upload" />
                             </div>
-                            <button class="btn btn-outline-success mt-0"><i class="far fa-copy"></i> Copy Email</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" class="form-control" id="last-name" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="aditional-account-content">
+                                <h5>Phone and Fax Number <span> <img src="../public/front/images/info-i.svg"></span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="phone-number">Phone Number</label>
+                                <input type="text" class="form-control" id="phone-number" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="fax-number">Fax Number</label>
+                                <input type="text" class="form-control" id="fax-number" placeholder="Fax Number">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <a class="address-book-btn d-inline-block" href=""> Get Fax Number</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="aditional-account-content">
+                                <h5>Company Information <span> <img src="../public/front/images/info-i.svg"></span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="company-name">Company Name</label>
+                                <input type="text" class="form-control" id="company-name" placeholder="Enter Company Name">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="job-title">Job Title</label>
+                                <input type="text" class="form-control" id="job-title" placeholder="Enter Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="aditional-account-content">
+                                <h5>Address <span> <img src="../public/front/images/info-i.svg"></span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="address-line1">Address Line 1</label>
+                                <input type="text" class="form-control" id="address-line1" placeholder="Address Line 1">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="address-line2">Address Line 2</label>
+                                <input type="text" class="form-control" id="address-line2" placeholder="Address Line 2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="address-line1">Country</label>
+                                <select id="inputState" class="form-control my-dropdown">
+                                    <option selected="">United State</option>
+                                    <option>United Kingdom</option>
+                                    <option>India</option>
+                                    <option>China</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="address-line2">State</label>
+                                <select id="inputState" class="form-control my-dropdown">
+                                    <option selected="">Alaska</option>
+                                    <option>Alaska</option>
+                                    <option>Alaska</option>
+                                    <option>Alaska</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="City">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="zip-code">Zip Code</label>
+                                <input type="text" class="form-control" id="zip-code" placeholder="Zip Code">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group border-top mt-3 pt-4">
+                                <button class="btn btn-success addnew-btn">Save</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="aditional-account-info d-flex">
-                    <div class="aditional-account-content">
-                        <h5>Inbound Fax Number <span> <img src="../public/front/images/info-i.svg"></span></h5>
-                        <p>Receive faxes online directly into your PDF Writer account.</p>
-                    </div>
-                    <div class="aditional-account-btns">
-                        <a class="additional-btn" href=""><img src="../public/front/images/fax-number.svg"> Get Fax Number</a>
-                    </div>
-                </div>
 
-                <div class="aditional-account-info">
-                    <div class="aditional-account-content">
-                        <h5>Inbound Fax Number <span> <img src="../public/front/images/info-i.svg"></span></h5>
-                    </div>
-                    <div class="document-statistics">
-                        <ul>
-                            <li>
-                                <img src="../public/front/images/all-docs.svg">
-                                <h6>All Documents</h6>
-                                <span>7</span>
-                            </li>
-                            <li>
-                                <img src="../public/front/images/fax.svg">
-                                <h6>Faxed</h6>
-                                <span>5</span>
-                            </li>
-                            <li>
-                                <img src="../public/front/images/encrypted.svg">
-                                <h6>Encrypted</h6>
-                                <span>4</span>
-                            </li>
-                            <li>
-                                <img src="../public/front/images/signnow_gray.svg">
-                                <h6>SignNow</h6>
-                                <span>1</span>
-                            </li>
-                            <li>
-                                <img src="../public/front/images/link-icon.svg">
-                                <h6>LinktoFill</h6>
-                                <span>7</span>
-                            </li>
-                            <li>
-                                <img src="../public/front/images/share-document-icon.svg">
-                                <h6>Share</h6>
-                                <span>2</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
-
-
         </div>
-    </div>
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="../public/front/js/jquery-3.5.1.min.js"></script>
-    <script src="../public/front/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../public/front/js/bootstrap.min.js"></script>
-    <!-- OWL carousel JS -->
-    <script src='../public/front/js/owl.carousel.min.js'></script>
+        <!-- JQuery -->
+        <script type="text/javascript" src="../public/front/js/jquery-3.5.1.min.js"></script>
+        <script src="../public/front/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../public/front/js/bootstrap.min.js"></script>
+        <!-- OWL carousel JS -->
+        <script src='../public/front/js/owl.carousel.min.js'></script>
 
-    <!-- MatchHeight JavaScript -->
-    <script type="text/javascript" src="../public/front/js/jquery.matchHeight.js"></script>
+        <!-- MatchHeight JavaScript -->
+        <script type="text/javascript" src="../public/front/js/jquery.matchHeight.js"></script>
 
-    <!-- Custom JavaScript -->
-    <script type="text/javascript" src="../public/front/js/custom.js"></script>
+        <!-- Custom JavaScript -->
+        <script type="text/javascript" src="../public/front/js/custom.js"></script>
 
+        <script>
+            (function() {
+                // Display the image to be uploaded.
+                $('#dvd_image').on('change', function(e) {
+                    return readURL(this);
+                });
+
+                this.readURL = function(input) {
+                    var reader;
+
+                    // Read the contents of the image file to be uploaded and display it.
+
+                    if (input.files && input.files[0]) {
+                        reader = new FileReader();
+                        reader.onload = function(e) {
+                            var $preview;
+                            $('.image_to_upload').attr('src', e.target.result);
+                            $preview = $('.preview');
+                            if ($preview.hasClass('hide')) {
+                                return $preview.toggleClass('hide');
+                            }
+                        };
+                        return reader.readAsDataURL(input.files[0]);
+                    }
+                };
+
+            }).call(this);
+        </script>
 
 </body>
 
