@@ -93,6 +93,23 @@ display: none;
     .desktop-img img {
         max-width: 60%;
     }
+    .start-header nav ul li a {
+        width: 100%;
+    }
+    .start-header nav ul li a+.dropdown-menu {
+        position: relative !important;
+        width: 100%;
+        background: transparent !important;
+        border: none;
+    }
+    .start-header nav ul li a+.dropdown-menu a {
+        color: #fff;
+        padding-left: 10px;
+    }
+    .start-header nav ul li a+.dropdown-menu a:hover {
+        background: #4c73c1 !important;
+        color: #fff;
+    }
 }
 
 @media(min-width: 992px) {}
