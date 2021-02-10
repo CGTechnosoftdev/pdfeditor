@@ -19,13 +19,11 @@ class CustomBrandingController extends FrontBaseController
         $user = Auth::user();
         $custom_brand_id = 0;
         $signature = array();
-        $custom_branding_model = CustomBranding::where(["users_id" => $user->id])->get();
+        $custom_branding_model = CustomBranding::where(["users_id" => $user->id])->first();
         if (!empty($custom_branding_model)) {
-            $custom_brand_id = $custom_branding_model[0]->id;
+            $custom_brand_id = $custom_branding_model->id;
 
-            $signature = json_decode($custom_branding_model[0]->signature, true);
-        } else {
-            $custom_branding_model[0] = 0;
+            $signature = json_decode($custom_branding_model->signature, true);
         }
         $template_style = config("custom_config.template_style");
         $template_viewArray = array();
@@ -33,15 +31,15 @@ class CustomBrandingController extends FrontBaseController
             $template_viewArray[$temp_index] = $view = View::make('mail.' . $templInfoArray["email_template"])->render();
         }
         $company_logo = "";
-        if (!empty($custom_branding_model[0]))
-            $company_logo = getUploadedFile($custom_branding_model[0]->company_logo, "company_logo");
+        if (!empty($custom_branding_model))
+            $company_logo = getUploadedFile($custom_branding_model->company_logo, "company_logo");
 
 
         $data_array = [
             'title' => "Custom Branding - Personalized Email Template",
             'user_id' => $user->id,
             'custom_brand_id' => $custom_brand_id,
-            'custom_branding_model' => $custom_branding_model[0],
+            'custom_branding_model' => $custom_branding_model,
             'signature' => $signature,
             'template_style' => $template_style,
             'template_viewArray' => $template_viewArray,
@@ -113,7 +111,7 @@ class CustomBrandingController extends FrontBaseController
             $input_data["signature"] = json_encode($signature);
             $input_data["users_id"] = $user->id;
 
-            if (empty($custom_branding_model)) {
+            if (empty($custom_branding_model[0])) {
                 $user = CustomBranding::saveData($input_data);
                 $response_message = 'Custom Branding inserted successfully';
             } else {

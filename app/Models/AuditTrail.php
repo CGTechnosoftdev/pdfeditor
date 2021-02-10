@@ -39,6 +39,8 @@ class AuditTrail extends Model
 
 
         if (!empty($data_array['search_text'])) {
+            $date_split_array = preg_split("/\-/", $data_array['search_text']);
+            $model->whereBetween('created_at', [date("Y-m-d", strtotime($date_split_array[0])), date("Y-m-d", strtotime($date_split_array[1]))]);
             //  $model->where('name', 'like', '%' . $data_array['search_text'] . '%');
         }
 
@@ -46,7 +48,10 @@ class AuditTrail extends Model
             $model->limit($data_array['limit']);
         }
         $model->orderBy('created_at', 'desc');
-
+        echo '<br> date-0' . strtotime($date_split_array[0] . " 00:00:00");
+        echo '<br/> date-1 ' . strtotime($date_split_array[1] . " 24:00:00");
+        echo $model->toSql();
+        exit();
         return $model->get();
     }
 }
