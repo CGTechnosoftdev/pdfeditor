@@ -85,5 +85,72 @@ return [
 		],
 
 	],
+	'upper-left-corner' => [
+		'source' => 'file',
+		'key' => 'upper-left-corner',
+		'subject' => 'Template Format1',
+		'keywords' => [
+			"{[name]}",
+
+			"{[title]}",
+			"{[company]}",
+			"{[email]}",
+			"{[phone]}",
+			"{[fax]}",
+		],
+
+	],
+	'left-banner' => [
+		'source' => 'file',
+		'key' => 'left-banner',
+		'subject' => 'Template Format2',
+		'keywords' => [
+			"{[name]}",
+			"{[title]}",
+			"{[company]}",
+			"{[email]}",
+			"{[phone]}",
+			"{[fax]}",
+		],
+
+	],
+	'top-banner' => [
+		'source' => 'file',
+		'key' => 'top-banner',
+		'subject' => 'Template Format3',
+		'keywords' => [
+			"{[name]}",
+			"{[title]}",
+			"{[company]}",
+			"{[email]}",
+			"{[phone]}",
+			"{[fax]}",
+		],
+
+	],
+	'email_reset_verification' => [
+		'source' => 'file',
+		'key' => 'reset-email',
+		'subject' => 'Email Reset verification',
+		'keywords' => [
+			"{[name]}",
+			"{[email]}",
+			"{[reset_button]}"
+		],
+
+	],
+	'phone_reset_verification' => [
+		'source' => 'file',
+		'key' => 'reset-phone',
+		'subject' => 'Phone Reset verification',
+		'keywords' => [
+			"{[name]}",
+			"{[email]}",
+			"{[reset_button]}"
+		],
+
+	],
+
+
 
 ];

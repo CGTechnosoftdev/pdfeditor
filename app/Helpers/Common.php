@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\AuditTrail;
+
 
 /**
  * [lang_trans description]
@@ -393,4 +395,41 @@ function generateUniqueLink($target_model, $column)
 function getAccountId($id)
 {
 	return str_pad($id, 8, '0', STR_PAD_LEFT);
+}
+
+function get_client_ip()
+{
+	$ipaddress = '';
+	if (getenv('HTTP_CLIENT_IP'))
+		$ipaddress = getenv('HTTP_CLIENT_IP');
+	else if (getenv('HTTP_X_FORWARDED_FOR'))
+		$ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+	else if (getenv('HTTP_X_FORWARDED'))
+		$ipaddress = getenv('HTTP_X_FORWARDED');
+	else if (getenv('HTTP_FORWARDED_FOR'))
+		$ipaddress = getenv('HTTP_FORWARDED_FOR');
+	else if (getenv('HTTP_FORWARDED'))
+		$ipaddress = getenv('HTTP_FORWARDED');
+	else if (getenv('REMOTE_ADDR'))
+		$ipaddress = getenv('REMOTE_ADDR');
+	else
+		$ipaddress = 'UNKNOWN';
+	return $ipaddress;
+}
+
+function addInAuditTrail($audit_number, $operation, $key_update_array = array())
+{
+	$audit_message_array = config("custom_config.audit_trail_message");
+	$audit_data_array["type"] = $audit_message_array[$audit_number]["type"];
+	$audit_data_array["ip_address"] = get_client_ip();
+	//for dynamic content of message update
+	$description = $audit_message_array[$audit_number]["operations"][$operation];
+	if (count($key_update_array) > 0) {
+		foreach ($key_update_array as $key_index => $keyValue) {
+			$description = str_replace($key_index, $keyValue, $description);
+		}
+	}
+
+	$audit_data_array["description"] = $description;
+	AuditTrail::saveData($audit_data_array);
 }

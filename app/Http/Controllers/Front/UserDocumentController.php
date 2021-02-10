@@ -14,6 +14,7 @@ use App\Models\UserDocumentTag;
 use App\Models\UserSmartFolder;
 use App\Models\UspsRequest;
 use App\Models\UspsRequestDocument;
+
 use DB, Auth, View, Response, Cookie, Hash;
 
 class UserDocumentController extends FrontBaseController
@@ -113,6 +114,7 @@ class UserDocumentController extends FrontBaseController
     {
     }
 
+
     public function uploadNew(UserDocumentUploadFormRequest $request)
     {
         $input_data = $request->input();
@@ -125,6 +127,10 @@ class UserDocumentController extends FrontBaseController
                 $input_data['file'] = $upload_response['data'];
                 $user_document_form = UserDocument::saveData($input_data);
                 if ($user_document_form) {
+                    $key_array["{document_name}"] = $input_data['name'];
+                    $audit_number_array = config("custom_config.audit_number");
+                    addInAuditTrail($audit_number_array["upload_create"], "document", $key_array);
+
                     $response_type = 'success';
                     $response_message = 'Uploaded successfully';
                 } else {
@@ -162,6 +168,10 @@ class UserDocumentController extends FrontBaseController
                     $input_data['file'] = $upload_response['data'];
                     $user_document_form = UserDocument::saveData($input_data);
                     if ($user_document_form) {
+                        $key_array["{document_name}"] = $input_data['name'];
+                        $audit_number_array = config("custom_config.audit_number");
+                        addInAuditTrail($audit_number_array["upload_create"], "file_url", $key_array);
+
                         $response_type = 'success';
                         $response_message = 'Uploaded successfully';
                     } else {
@@ -191,6 +201,9 @@ class UserDocumentController extends FrontBaseController
         $input_data['type'] = config('constant.DOCUMENT_TYPE_FOLDER');
         $add_new_folder = UserDocument::saveData($input_data);
         if ($add_new_folder) {
+
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["upload_create"], "add_folder");
             $response_type = 'success';
             $response_message = 'Folder created successfully';
         } else {
@@ -212,7 +225,12 @@ class UserDocumentController extends FrontBaseController
             if (count($user_documentArray) > 0) {
                 $user_document = $user_documentArray[0];
                 $data_array["name"] = $input_data["name"];
+                $old_document_name = $user_document->name;
                 if (UserDocument::saveData($data_array, $user_document)) {
+                    $key_array["{from_document}"] = $old_document_name;
+                    $key_array["{to_document}"] = $input_data['name'];
+                    $audit_number_array = config("custom_config.audit_number");
+                    addInAuditTrail($audit_number_array["rename"], "document", $key_array);
                     $is_valid = 1;
                 }
             }
@@ -259,6 +277,9 @@ class UserDocumentController extends FrontBaseController
             return response()->json($dataArray, (($is_valid == 1) ? 200 : 422));
         }
 
+        $key_array["{document_name}"] = $user_document[0]->name;
+        $audit_number_array = config("custom_config.audit_number");
+        addInAuditTrail($audit_number_array["download"], "document", $key_array);
 
         $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document[0]->file);
         $ext = pathinfo($filepath, PATHINFO_EXTENSION);
@@ -288,6 +309,11 @@ class UserDocumentController extends FrontBaseController
         $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
         $is_valid = 1;
         if (file_exists($filepath)) {
+
+            $key_array["{document_name}"] = $user_document[0]->name;
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["print"], "document", $key_array);
+
             $fileURL = \Storage::disk($fileConfigData['disk'])->url("public/" . $fileConfigData['folder'] . "/" . $user_document->file);
             $dataArray = ['status' => true, 'message' => 'Document Found successfully.', 'fileurl' => $fileURL];
         } else {
@@ -341,6 +367,9 @@ class UserDocumentController extends FrontBaseController
                     ];
                     UserDocumentTag::saveData($tag_data);
                 }
+                $key_array["{document_name}"] = $document->name;
+                $audit_number_array = config("custom_config.audit_number");
+                addInAuditTrail($audit_number_array["upload_create"], "tags_data", $key_array);
             }
             $response_type = 'success';
             $response_message = "Tags save successfully";
@@ -384,6 +413,9 @@ class UserDocumentController extends FrontBaseController
         $input_data = $request->input();
         $input_data['user_id'] = $user->id;
         if (UserSmartFolder::saveData($input_data, $user_smart_folder)) {
+
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["upload_create"], "save_smart_folder");
             $response_type = 'success';
             $response_message = 'Smart folder saved successfully';
         } else {
@@ -401,6 +433,8 @@ class UserDocumentController extends FrontBaseController
         $folder_arr = ((!empty($input_data['folders']) && is_array($input_data['folders'])) ? $input_data['folders'] : [($input_data['folders'] ?? '')]);
         $folder_arr = array_filter($folder_arr);
         if (!empty($folder_arr)) {
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["delete"], "smart_folder");
             UserSmartFolder::where('user_id', $user->id)->whereIn('id', $folder_arr)->delete();
             $response_type = 'success';
             $response_message = 'Smart folder deleted successfully';
@@ -485,6 +519,9 @@ class UserDocumentController extends FrontBaseController
                     'usps_request_id' => $usps_request->id,
                     'user_document_id' => $document->id,
                 ];
+                $key_array["{document_name}"] = $document->name;
+                $audit_number_array = config("custom_config.audit_number");
+                addInAuditTrail($audit_number_array["upload_create"], "usps_request", $key_array);
                 $usps_request = UspsRequestDocument::saveData($usps_document);
                 $response_type = 'success';
                 $response_message = 'Usps Request submitted successfully';

@@ -73,6 +73,10 @@ class LinkToFillController extends FrontBaseController
                     $publish_setting_data['document_notification'] = json_encode($input_data['document_notification']);
                 };
                 $publish_data += $publish_setting_data;
+
+                $audit_number_array = config("custom_config.audit_number");
+                addInAuditTrail($audit_number_array["upload_create"], "link_to_fill_publish");
+
                 $shared_document = SharedDocument::saveData($publish_data);
                 $shared_user_documents = SharedUserDocument::saveData(['user_document_id' => $document->id, 'shared_documents_id' => $shared_document->id]);
                 $facebook_share_link = generateFbShareUrl($publish_link);

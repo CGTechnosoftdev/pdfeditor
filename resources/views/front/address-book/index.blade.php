@@ -6,7 +6,7 @@
 
 <section class="content-header">
     <div class="title">
-        <h2>Address Book</h2>
+        <h2>{{$title}}</h2>
     </div>
     <div class="heading-btns">
         <div class="form-group folder-dropdown">
@@ -144,10 +144,7 @@
                         $("#address_mg_box_id").addClass("hide");
                     }, "{{$MESSAGE_SHOW_TIME}}");
                 }
-
-
             });
-
         });
         $("body").on("click", "a[id ^= 'editAddressItem_']", function() {
             var id = $(this).attr("data-id");
