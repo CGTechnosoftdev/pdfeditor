@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class AuditTrail extends Model
 {
@@ -40,7 +41,9 @@ class AuditTrail extends Model
 
         if (!empty($data_array['search_text'])) {
             $date_split_array = preg_split("/\-/", $data_array['search_text']);
-            $model->whereBetween('created_at', [date("Y-m-d", strtotime($date_split_array[0])), date("Y-m-d", strtotime($date_split_array[1]))]);
+            $model->whereBetween('created_at', ["STR_TO_DATE('" . date("Y-m-d", strtotime($date_split_array[0])) . ",' 00:00', '%Y-%m-%d %H:%i:%s')", "STR_TO_DATE('" . date("Y-m-d", strtotime($date_split_array[1])) . " 24:00','%Y-%m-%d %H:%i:%s')"]);
+            // $model->where(DB::raw("created_at", ">=", "STR_TO_DATE('" . date("Y-m-d", strtotime($date_split_array[0])) . ",' 00:00', '%Y-%m-%d %H:%i:%s')"));
+            // $model->where(DB::raw("created_at", "<=", "STR_TO_DATE('" . date("Y-m-d", strtotime($date_split_array[1])) . ",' 00:00', '%Y-%m-%d %H:%i:%s')"));
             //  $model->where('name', 'like', '%' . $data_array['search_text'] . '%');
         }
 
@@ -48,10 +51,15 @@ class AuditTrail extends Model
             $model->limit($data_array['limit']);
         }
         $model->orderBy('created_at', 'desc');
-        echo '<br> date-0' . strtotime($date_split_array[0] . " 00:00:00");
-        echo '<br/> date-1 ' . strtotime($date_split_array[1] . " 24:00:00");
-        echo $model->toSql();
-        exit();
+
+        /* $query = "
+        select * from `audit_trails` where (`created_by` = '" . $data_array['users_id'] . "' and `status` = '" . config('constant.STATUS_ACTIVE') . "')   and `audit_trails`.`deleted_at` is null order by `created_at` desc
+        ";
+        $results = \DB::select("
+        select * from `audit_trails` where (`created_by` = '" . $data_array['users_id'] . "' and `status` = '" . config('constant.STATUS_ACTIVE') . "')   and `audit_trails`.`deleted_at` is null order by `created_at` desc
+        ");
+        echo $query;
+        exit();*/
         return $model->get();
     }
 }

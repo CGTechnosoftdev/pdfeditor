@@ -31,7 +31,7 @@
              <a href="{{route('front.get-personal-information')}}"><span><img src="{{asset('public/front/images/user-circle.svg')}}"></span>Personal Information</a>
          </li>
          <li>
-             <a href="#"><span><img src="{{asset('public/front/images/audit-trial.svg')}}"></span>Audit Trail</a>
+             <a href="{{route('front.audit-trail-list')}}"><span><img src="{{asset('public/front/images/audit-trial.svg')}}"></span>Audit Trail</a>
          </li>
          <li>
              <a href="{{route('front.get-custom-branding')}}"><span><img src="{{asset('public/front/images/custom-branding.svg')}}"></span>Custom Branding</a>

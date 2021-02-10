@@ -160,6 +160,11 @@ class TrashController extends FrontBaseController
     {
 
         if (UserDocument::emptyTrashList()) {
+
+
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["trash"], "empty");
+
             $response_type = 'success';
             $response_message = 'Trash List Empty successfully';
         } else {

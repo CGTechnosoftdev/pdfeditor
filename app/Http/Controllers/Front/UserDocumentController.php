@@ -292,20 +292,15 @@ class UserDocumentController extends FrontBaseController
         header('Content-Length: ' . filesize($filepath));
         flush(); // Flush system output buffer
         readfile($filepath);
-
-
         exit();
     }
     public function documentPrint($user_document_encripted)
     {
-
-
         $fileConfigData = config('upload_config.user_document');
         $decript_documentId = decrypt($user_document_encripted);
         $user_documentArray = UserDocument::where('id', $decript_documentId)->get();
         if (count($user_documentArray) > 0)
             $user_document = $user_documentArray[0];
-
         $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
         $is_valid = 1;
         if (file_exists($filepath)) {

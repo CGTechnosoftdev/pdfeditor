@@ -319,27 +319,36 @@ If you have any questions, contact {[your_email]}"
             'type' => 'trash',
             'operations' => [
                 'move_to_trash' => 'You move the document in trash {document_name}.',
-                'restore' => 'You restore the document {document_name}',
+                'restore' => 'You restore the document {document_name}.',
+                'empty' => 'You empty the trash list.'
             ]
         ],
         '5' => [
             'type' => 'share',
             'operations' => [
-                'send_for_review' => 'You send the document for review {document_name}',
-                'share_document' => 'You shared the document {document_name}',
+                'send_for_review' => 'You send the document for review {document_name}.',
+                'share_document' => 'You shared the document {document_name}.',
             ]
         ],
         '6' => [
             'type' => 'download',
             'operations' => [
-                'document' => 'You download the document {document_name}',
+                'document' => 'You download the document {document_name}.',
 
             ]
         ],
         '7' => [
             'type' => 'print',
             'operations' => [
-                'document' => 'You print the document {document_name}',
+                'document' => 'You print the document {document_name}.',
+
+            ]
+        ],
+        '8' => [
+            'type' => 'account',
+            'operations' => [
+                'login' => 'You login the pdf-writer web application using {ip_address} at {login_time}.',
+                'logout' => 'You logout the pdf-writer web application {ip_address} at {logout_time}.',
 
             ]
         ],
@@ -352,6 +361,7 @@ If you have any questions, contact {[your_email]}"
         'share' => 5,
         'download' => 6,
         'print' => 7,
+        'account' => 8,
     ]
 
 
