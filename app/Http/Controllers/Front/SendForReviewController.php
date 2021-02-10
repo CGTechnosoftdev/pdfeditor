@@ -79,6 +79,10 @@ class SendForReviewController extends FrontBaseController
                 $share_setting_data['personalize_invitation_data'] = json_encode($input_data['personalize_invitation_data']);
             }
             $share_data += $share_setting_data;
+            $key_array["{document_name}"] = $document->name;
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["share"], "send_for_review");
+
             $shared_document = SharedDocument::saveData($share_data);
             $shared_user_documents = SharedUserDocument::saveData(['user_document_id' => $document->id, 'shared_documents_id' => $shared_document->id]);
             if (!empty($input_data['recipient_data'])) {

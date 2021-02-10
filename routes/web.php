@@ -239,6 +239,35 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/account/additional-account-add', 'AdditionalAccountController@createAdditionalUser')->name('additional-account-add');
 		Route::post('/account/additional-account-update/{additional_user}', 'AdditionalAccountController@updateAdditionalUser')->name('additional-account-update');
 		Route::get('/account/additional-account-detail/{additional_user}', 'AdditionalAccountController@additionalAccountDetail')->name('additional-account-detail');
+
+
+		Route::get('/account/personal-information', 'PersonalInformationController@getPersonalInformation')->name('get-personal-information');
+		Route::post('/account/personal-information-save/{user}', 'PersonalInformationController@savePersonalInformation')->name('personal-information-save');
+		Route::get('/account/custom-branding', 'CustomBrandingController@getCustomBranding')->name('get-custom-branding');
+		Route::post('/account/custom-branding-save', 'CustomBrandingController@customBrandingSave')->name('custom-branding-save');
+		Route::post('/account/custom-branding-test-email', 'CustomBrandingController@customBrandingTestEmail')->name('custom-branding-test-email');
+
+		Route::get('/account/get-general-settings', 'GeneralSettingsController@getGeneralSettings')->name('get-general-settings');
+		Route::post('/account/general-settings-email-reset-request/{user}', 'GeneralSettingsController@emailResetRequest')->name('general-settings-email-reset-request');
+		Route::post('/account/general-settings-phone-reset-request/{user}', 'GeneralSettingsController@phoneResetRequest')->name('general-settings-phone-reset-request');
+
+		Route::get('/account/general-settings-email-reset-update-request/{token}', 'GeneralSettingsController@emailResetUpdateRequest')->name('general-settings-email-reset-update-request');
+		Route::get('/account/general-settings-phone-reset-update-request/{token}', 'GeneralSettingsController@phoneResetUpdateRequest')->name('general-settings-phone-reset-update-request');
+
+		Route::post('/account/general-settings-email-update', 'GeneralSettingsController@emailUpdate')->name('general-settings-email-update');
+		Route::post('/account/general-settings-phone-update', 'GeneralSettingsController@phoneUpdate')->name('general-settings-phone-update');
+		Route::post('/account/general-settings-password-update', 'GeneralSettingsController@passwordUpdate')->name('general-settings-password-update');
+
+		Route::post('/account/general-settings-date_time-update', 'GeneralSettingsController@dateTimeUpdate')->name('general-settings-date_time-update');
+		Route::post('/account/general-settings-grant_access-update', 'GeneralSettingsController@grantAccessUpdate')->name('general-settings-grant_access-update');
+		Route::post('/account/general-settings-notification_preference-update', 'GeneralSettingsController@notificationPreferenceUpdate')->name('general-settings_notification_preference-update');
+		Route::post('/account/general-settings-hipaa_compliance-update', 'GeneralSettingsController@hipaaComplianceUpdate')->name('general-settings_hipaa_compliance-update');
+		Route::post('/account/general-settings-is_receive_encript_folder_password-update', 'GeneralSettingsController@encriptFolderPasswordUpdate')->name('general-settings-encript-folder-password-update');
+
+		Route::get('/audit-trail', 'AuditTrailController@auditTrailList')->name('audit-trail-list');
+		Route::post('/audit-trail/list-data', 'AuditTrailController@getAuditTrailData')->name('audit-trail-data');
+
+		//Route::post('/account/general-settings-save', 'GeneralSettingsController@saveGeneralSettings')->name('general-settings-save');
 	});
 });
 

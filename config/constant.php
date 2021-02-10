@@ -50,6 +50,7 @@ return [
     'PASSWORD_REGEX_INSTRUCTION' => "8 Character minimum and must contain 1 uppercase,1 lowercase, 1 digit and 1 special character",
     'CVV_INSTRUCTION' => "The CVV/CVC code (Card Verification Value/Code) is located on the back of your credit/debit card on the right side of the white signature strip",
     'PASSWORD_REGEX' => '/(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$)/u',
+    'PHONE_REGEX' => '/^[0-9,\-]{10,16}$/',
 
     'SUBSCRIPTION_PLAN_TYPE_TRAIL' => 0,
     'SUBSCRIPTION_PLAN_TYPE_MONTHLY' => 1,
