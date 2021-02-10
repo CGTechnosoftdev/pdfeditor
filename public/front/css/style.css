@@ -7470,7 +7470,8 @@ ul.tl li .timestamp {
 }
 
 .genrate_custom_branding ul {
-    column-count: 3;
+    /* column-count: 3; */
+    display: flex;
 }
 
 .genrate_custom_branding ul li {
@@ -7548,7 +7549,7 @@ ul.tl li .timestamp {
     align-items: center;
 }
 
-.template-company-logo-upload button {
+.template-company-logo-upload .choose-logo {
     padding: 12px 25px;
     border: none;
     border-radius: 5px;
@@ -7559,7 +7560,7 @@ ul.tl li .timestamp {
     position: relative;
 }
 
-.template-company-logo-upload button input {
+.template-company-logo-upload .choose-logo input {
     position: absolute;
     left: 0;
     top: 0;
