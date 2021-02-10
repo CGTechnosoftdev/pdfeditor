@@ -11,37 +11,37 @@
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="contact-info">
-                    <div class="icon"><img src="../public/front/images/email-outline.svg"></div>
+                    <div class="icon"><img src="{{asset('public/front/images/email-outline.svg')}}"></div>
                     <div class="info">
                         <span>Email Address</span>
                         <p>{{$user->email}}</p>
                     </div>
                     <div class="edit">
 
-                        <a id="general_seettings_email_frm_trigger_id" href="#"><img src="../public/front/images/edit-outline.svg"></a>
+                        <a id="general_seettings_email_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="contact-info">
-                    <div class="icon"><img src="../public/front/images/phone-outline.svg"></div>
+                    <div class="icon"><img src="{{asset('public/front/images/phone-outline.svg')}}"></div>
                     <div class="info">
                         <span>Phone Number </span>
                         <p>{{$user->contact_number}}</p>
                     </div>
                     <div class="edit">
-                        <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="../public/front/images/edit-outline.svg"></a>
+                        <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="contact-info">
-                    <div class="icon"><img src="../public/front/images/lock_outline.svg"></div>
+                    <div class="icon"><img src="{{asset('public/front/images/lock_outline.svg')}}"></div>
                     <div class="info">
                         <p>Change Password</p>
                     </div>
                     <div class="edit">
-                        <a id="general_seettings_password_frm_trigger_id" href="#"><img src="../public/front/images/arrow-right.svg"></a>
+                        <a id="general_seettings_password_frm_trigger_id" href="#"><img src="{{asset('public/front/images/arrow-right.svg')}}"></a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-4 col-md-3 col-form-label">Time zone</label>
                         <div class="col-sm-8 col-md-9">
-                            {{Form::select("timezone",$timezone_list,($general_settings->timezone??0),["id" => 'timezoneid'])}}
+                            {{Form::select("timezone",$timezone_list,($general_settings->timezone??0),["id" => 'timezoneid','class' => 'form-control my-dropdown'])}}
 
                         </div>
                     </div>
@@ -83,8 +83,9 @@
                             <div class="timeformate">
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
-                                    <li class="active"><span>{{$timeValue}}</span></li>
-                                    {{ Form::radio('time_format', $time_index , (($general_settings->time_format==$time_index)?true:false)) }}
+                                    <li class="{{(($general_settings->time_format==$time_index)?'active':'')}}"><span>{{$timeValue}}</span>
+                                        {{ Form::radio('time_format', $time_index , (($general_settings->time_format==$time_index)?true:false)) }}
+                                    </li>
                                     @endforeach
 
                                 </ul>
@@ -94,7 +95,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Date Format</label>
                         <div class="col-sm-9 col-md-9">
-                            {{Form::select('date_format',$date_time_arr,($general_settings->date_format??0),["id" => 'date_formatid'])}}
+                            {{Form::select('date_format',$date_time_arr,($general_settings->date_format??0),["id" => 'date_formatid','class' => 'form-control my-dropdown'])}}
                         </div>
                     </div>
                     <button class="btn btn-success" id="general_settings_time_date_btn_id">Update</button>
@@ -117,53 +118,116 @@
 
 
         <div class="setting-tab-content">
-            {{ Form::open(['url' => "#",'method'=>'post','class'=>'login-form','id' => 'general_settings_grant_access_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
-            {{Form::select('grant_access',$grant_access_arr,1)}}
-            <button class="btn btn-success" id="general_settings_grant_access_btn_id">Update</button>
-            {{ Form::close() }}
+            <div class="row">
+                <div class="col-md-7 col-sm-8">
+                    <div class="form-group row mb-3">
+                        <label for="staticEmail" class="col-sm-4 col-md-3 col-form-label">Grant Access</label>
+                        <div class="col-sm-8 col-md-9">
+                            {{ Form::open(['url' => "#",'method'=>'post','class'=>'login-form','id' => 'general_settings_grant_access_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
+                            <div class="grant-access-section">
+                                <p>For security and privacy purpose our support team can only view your subscription type, email address, and payment information. This setting allows you to grant temporary access to additional account information
+                                    to ensure prompt assistance with any technical issues. Support will not have access to the content of your documents.</p>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        {{Form::select('grant_access',$grant_access_arr,(!empty($general_settings->grant_access)?$general_settings->grant_access:1),['class' => 'form-control my-dropdown'])}}
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <button class="btn " id="general_settings_grant_access_btn_id">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ Form::close() }}
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
 
         </div>
 
 
         <h4>
             <div class="d-flex align-items-center">
-                <div class="tab-icon"><img src="../public/front/images/security.svg"></div>
+                <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
                 <div class="tab-content">
                     <span>Encripted Folder</span>
                     <p></p>
                 </div>
                 <div class="tab-info">
-                    <img src="../public/front/images/info-i.svg">
+                    <img src="{{asset('public/front/images/info-i.svg')}}">
                 </div>
             </div>
         </h4>
 
 
         <div class="setting-tab-content">
+            <div class="form-group row mb-3">
+                <label for="staticEmail" class="col-sm-4 col-md-3 col-form-label">Encrypted Folder</label>
+                <div class="col-sm-8 col-md-9">
+                    <div class="grant-access-section">
+                        <p>Store documents in the Encrypted Folder for additional security. Set or change the password to the Encrypted folder anytime. These documents won't appear in your Dashboard and will require an additional
+                            password to access.</p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button class="btn" id="general_settings_encript_folder_btn_id">Set Password</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-            <button class="btn btn-success" id="general_settings_encript_folder_btn_id">Update Encript Folder</button>
 
         </div>
 
 
         <h4>
             <div class="d-flex align-items-center">
-                <div class="tab-icon"><img src="../public/front/images/security.svg"></div>
+                <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
                 <div class="tab-content">
                     <span>HIPAA Compliance</span>
                     <p></p>
                 </div>
                 <div class="tab-info">
-                    <img src="../public/front/images/info-i.svg">
+                    <img src="{{asset('public/front/images/info-i.svg')}}">
                 </div>
             </div>
         </h4>
 
 
         <div class="setting-tab-content">
-            {{Form::hidden('hippa_compliance',((!empty($general_settings->hipaa_compliance)&& $general_settings->hipaa_compliance != 'NULL')??0),["id" => "hippa_complianceid" ])}}
-            <button class="btn btn-success" id="general_settings_hipaa_convi_btn_id">Update Hipaa</button>
+
+            <div class="row">
+                <div class="col-md-7 col-sm-8">
+                    <div class="form-group row mb-3">
+                        <!-- <label for="staticEmail" class="col-sm-6 col-md-5 col-form-label">Receive promotions and discounts</label> -->
+                        <div class="col-sm-6 col-md-7">
+                            <div class="grant-access-section">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="tg-list-item blue-radio">
+                                            {{Form::hidden('hippa_compliance',((!empty($general_settings->hipaa_compliance)&& $general_settings->hipaa_compliance != 'NULL')??0),["id" => "hippa_complianceid" ])}}
+                                            {{Form::checkbox('hippa_compliance_check',1,((!empty($general_settings->hipaa_compliance)&& $general_settings->hipaa_compliance != 'NULL')?true:false),['class' => 'tgl tgl-light', 'id' => 'general_settings_hipaa_convi_btn_id' ])}}
+                                            <!--<input class="tgl tgl-light" id="cb2" type="checkbox"> -->
+                                            <label class="tgl-btn" for="general_settings_hipaa_convi_btn_id"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<button class="btn btn-success" id="general_settings_hipaa_convi_btn_id">Update Hipaa</button>--->
         </div>
 
 
@@ -181,10 +245,70 @@
             </div>
         </h4>
         <div class="setting-tab-content">
-            Notification form
-            {{Form::hidden('notification_preference',((!empty($general_settings->notification_preference)&& $general_settings->notification_preference != 'NULL')??0),["id" => "notification_preference" ])}}
-            <button class="btn btn-success" id="general_settings_notification_btn_id">Update Notification</button>
+
+
+            <div class="row">
+                <div class="col-md-7 col-sm-8">
+                    <div class="form-group row mb-3">
+                        <label for="staticEmail" class="col-sm-6 col-md-5 col-form-label">Receive promotions and discounts</label>
+                        <div class="col-sm-6 col-md-7">
+                            <div class="grant-access-section">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="tg-list-item blue-radio">
+                                            {{Form::hidden('notification_preference',((!empty($general_settings->notification_preference)&& $general_settings->notification_preference != 'NULL')??0),["id" => "notification_preference" ])}}
+                                            {{Form::checkbox('notification_preference_check',1,((!empty($general_settings->notification_preference)&& $general_settings->notification_preference != 'NULL')?true:false),['class' => 'tgl tgl-light', 'id' => 'general_settings_notification_btn_id' ])}}
+                                            <!--<input class="tgl tgl-light" id="cb2" type="checkbox"> -->
+                                            <label class="tgl-btn" for="general_settings_notification_btn_id"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <h4>
+            <div class="d-flex align-items-center">
+                <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
+                <div class="tab-content">
+                    <span>Delete Account</span>
+                    <p></p>
+                </div>
+                <div class="tab-info">
+                    <img src="{{asset('public/front/images/info-i.svg')}}">
+                </div>
+            </div>
+        </h4>
+
+
+        <div class="setting-tab-content">
+            <div class="form-group row mb-3">
+                <!--<label for="staticEmail" class="col-sm-4 col-md-3 col-form-label">Delete Account</label>-->
+                <div class="col-sm-8 col-md-9">
+                    <div class="grant-access-section">
+                        <p><b>NOTE:</b>After your account has been deleted, all your files will be permanently deleted. There is no undo for this action.</p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button class="btn" id="delete_account_btn_id">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <!--Notification form
+
+            <button class="btn btn-success" id="general_settings_notification_btn_id">Update Notification</button>-->
+
         <!--<h4>
             <div class="d-flex align-items-center">
                 <div class="tab-icon"><img src="../public/front/images/card.svg"></div>
@@ -278,6 +402,12 @@
 {!! JsValidator::formRequest('App\Http\Requests\GeneralSettingsPhoneUpdateFormRequest','#general_settings_phone_form_id') !!}
 <script>
     $(document).ready(function() {
+        $("#delete_account_btn_id").click(function() {
+            if (confirm("Are you sure you want to delete account?")) {
+                window.location.href = "{{route('front.delete-user-account')}}";
+            }
+        });
+
         $("#general_seettings_email_frm_trigger_id").click(function() {
 
             $.ajax({
@@ -379,7 +509,7 @@
         });
 
         $('#general_settings_hipaa_convi_btn_id').click(function(e) {
-            e.preventDefault();
+
 
             var hippa_complianceid = $("#hippa_complianceid").val();
             if (hippa_complianceid == "")
@@ -416,11 +546,11 @@
                     toastr.error(response.message);
                 }
             });
-
+            // e.preventDefault();
         });
 
         $('#general_settings_notification_btn_id').click(function(e) {
-            e.preventDefault();
+
             var notification_preference = $("#notification_preference").val();
             if (notification_preference == "")
                 notification_preference = 0;

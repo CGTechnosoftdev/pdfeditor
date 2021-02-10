@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert" id="address_mg_box_id"></div>
+                <div class="alert p-0 mb-0" id="address_mg_box_id"></div>
                 {{ Form::open(['route' => ['front.general-settings-email-update'],'method'=>'post','class'=>'login-form','id' => 'general_settings_email_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
                 {{Form::hidden('id',"",array('id' => 'addresslist_id'))}}
                 {{Form::hidden('email_phone_token',($token??""),['id' => 'email_phone_token' ])}}
@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="number">Current Password</label>
-                            {{ Form::password('gs_email_current_password',null,array('id' => 'phone','class' => 'form-control','placeholder' => 'Phone')) }}
+                            {{ Form::password('gs_email_current_password',array('id' => 'phone','class' => 'form-control','placeholder' => 'Phone')) }}
                         </div>
                     </div>
 
@@ -40,9 +40,7 @@
                 {{ Form::close() }}
 
             </div>
-            <div class="modal-footer">
 
-            </div>
 
         </div>
     </div>

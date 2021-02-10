@@ -8,26 +8,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert" id="address_mg_box_id"></div>
+                <div class="alert p-0 mb-0" id="address_mg_box_id"></div>
                 {{ Form::open(['route' => ['front.general-settings-password-update'],'method'=>'post','class'=>'login-form','id' => 'general_settings_password_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
                 {{Form::hidden('id',"",array('id' => 'addresslist_id'))}}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="name">New Password</label>
-                            {{ Form::password('gs_password_new_password',null,array('id' => 'name','class' => 'form-control','placeholder' => 'Enter Name')) }}
+                            {{ Form::password('gs_password_new_password',array('id' => 'name','class' => 'form-control','placeholder' => 'Enter Name')) }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="email">Confirm Password</label>
-                            {{ Form::password('gs_password_confirm_password',null,array('id' => 'email','class' => 'form-control','placeholder' => 'Enter Email')) }}
+                            {{ Form::password('gs_password_confirm_password',array('id' => 'email','class' => 'form-control','placeholder' => 'Enter Email')) }}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="number">Current Password</label>
-                            {{ Form::password('gs_password_current_password',null,array('id' => 'phone','class' => 'form-control','placeholder' => 'Phone')) }}
+                            {{ Form::password('gs_password_current_password',array('id' => 'phone','class' => 'form-control','placeholder' => 'Phone')) }}
                         </div>
                     </div>
 
@@ -39,9 +39,7 @@
                 {{ Form::close() }}
 
             </div>
-            <div class="modal-footer">
 
-            </div>
 
         </div>
     </div>
