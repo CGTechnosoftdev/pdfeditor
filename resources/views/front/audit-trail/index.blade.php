@@ -19,7 +19,7 @@
                     <button class="btn btn-link">Templates</button>
                     <button class="btn btn-link">Notifications</button> -->
         <div class="position-relative">
-            <button class="btn btn-success"><i class="fas fa-download"></i> Download Report</button>
+            <button class="btn btn-success" id="download_audit_trailid"><i class="fas fa-download"></i> Download Report</button>
         </div>
 
     </div>
@@ -49,6 +49,10 @@
 
         $('.daterange2').daterangepicker();
         $('#search_text').val("");
+
+        $("#download_audit_trailid").click(function() {
+            window.location.href = "{{route('front.audit-trail-download')}}";
+        });
 
         function getAuditTrailList() {
             blockUI();

@@ -34,18 +34,51 @@ class AuditTrailController extends FrontBaseController
                 $audit_book_items_array[date_format($audit_item->created_at, "Y-m-d")][$audit_item->id]["date"] = $audit_item->created_at;
             }
         }
-
-
         $data_array = [
             'title' => 'Address List',
             'audit_trail_items' => $audit_book_items_array,
             'search_text' => $audit_trail_params['search_text'],
 
         ];
-
         //->with($data_array) 
         $view = View::make('front.audit-trail.item-list')->with($data_array)->render();
         $count = count($audit_book_items);
         return Response::json(array('html' => $view, 'count' => $count));
+    }
+    public function getAuditTrailDownload()
+    {
+        $user = Auth::user();
+        $audit_trail_result = AuditTrail::where(["created_by" => $user->id])->orderBy('created_at', 'desc')->get();
+        $row_index = 0;
+        $audit_CSV[$row_index] = array('Ip', 'Details', 'Date');
+        $row_index += 1;
+        if (count($audit_trail_result) > 0) {
+            foreach ($audit_trail_result as $audit_index => $audit_data) {
+
+                $audit_CSV[$row_index]["Ip"] = $audit_data->ip_address;
+                $audit_CSV[$row_index]["Details"] = $audit_data->description;
+                $audit_CSV[$row_index]["Date"] = $audit_data->created_at;
+                $row_index += 1;
+            }
+        }
+        $delimiter = ";";
+        $filename = "AuditTrail.csv";
+
+        $f = fopen('php://memory', 'w');
+        // loop over the input array
+        foreach ($audit_CSV as $line) {
+            // generate csv lines from the inner arrays
+            fputcsv($f, $line, $delimiter);
+        }
+        // reset the file pointer to the start of the file
+        fseek($f, 0);
+        // tell the browser it's going to be a csv file
+        header('Content-Type: application/csv');
+        // tell the browser we want to save it instead of displaying it
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+        // make php send the generated csv lines to the browser
+        fpassthru($f);
+
+        exit();
     }
 }

@@ -266,6 +266,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 
 		Route::get('/account/audit-trail', 'AuditTrailController@auditTrailList')->name('audit-trail-list');
 		Route::post('/audit-trail/list-data', 'AuditTrailController@getAuditTrailData')->name('audit-trail-data');
+		Route::get('/audit-trail/download', 'AuditTrailController@getAuditTrailDownload')->name('audit-trail-download');
 
 		//Route::post('/account/general-settings-save', 'GeneralSettingsController@saveGeneralSettings')->name('general-settings-save');
 	});
