@@ -264,7 +264,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/account/general-settings-hipaa_compliance-update', 'GeneralSettingsController@hipaaComplianceUpdate')->name('general-settings_hipaa_compliance-update');
 		Route::post('/account/general-settings-is_receive_encript_folder_password-update', 'GeneralSettingsController@encriptFolderPasswordUpdate')->name('general-settings-encript-folder-password-update');
 
-		Route::get('/audit-trail', 'AuditTrailController@auditTrailList')->name('audit-trail-list');
+		Route::get('/account/audit-trail', 'AuditTrailController@auditTrailList')->name('audit-trail-list');
 		Route::post('/audit-trail/list-data', 'AuditTrailController@getAuditTrailData')->name('audit-trail-data');
 
 		//Route::post('/account/general-settings-save', 'GeneralSettingsController@saveGeneralSettings')->name('general-settings-save');

@@ -95,7 +95,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{Form::text('phone',(!empty($signature["phone"])?$signature["phone"]:""),['placeholder' => 'email','id' => 'phone','class' => 'form-control'])}}
+                                {{Form::text('phone',(!empty($signature["phone"])?$signature["phone"]:""),['placeholder' => 'Phone','id' => 'phone','class' => 'form-control'])}}
                             </div>
                         </div>
 
@@ -240,8 +240,8 @@
 
 
 
-    $("#template_style_id").val("{{$custom_branding_model->template_style}}");
-    $("#template_style_for_email_id").val("{{$custom_branding_model->template_style}}");
+    $("#template_style_id").val("{{!empty($custom_branding_model->template_style)?$custom_branding_model->template_style:0}}");
+    $("#template_style_for_email_id").val("{{!empty($custom_branding_model->template_style)?$custom_branding_model->template_style:0}}");
 
     $("#emailContainer_" + $("#template_style_id").val()).addClass("show");
     $("#emailContainer_" + $("#template_style_id").val()).removeClass("hide");
@@ -264,10 +264,11 @@
         $("#send-test-email-form").submit();
     });
 
-    $("#template_type_{{$custom_branding_model->template_style}}").trigger("click");
+
+    $("#template_type_{{!empty($custom_branding_model->template_style)?$custom_branding_model->template_style:0}}").trigger("click");
     $("a[id ^= 'template_type_']").click(function() {
         var data_id = $(this).attr("data-id");
-        // alert(data_id);
+
         $("#template_style_for_email_id").val(data_id);
         $("#template_style_id").val(data_id);
         $("div[id ^= 'emailContainer_']").addClass("hide");

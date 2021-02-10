@@ -54,7 +54,6 @@ class AddressBookController extends FrontBaseController
             'title' => 'Address List',
             'address_book_items' => $address_book_items,
             'search_text' => $address_params['search_text'],
-
         ];
         $view = View::make('front.address-book.item-list')->with($data_array)->render();
         $count = count($address_book_items);

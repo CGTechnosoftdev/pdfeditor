@@ -11,7 +11,8 @@
     <div class="heading-btns">
         <div class="form-group folder-dropdown daterange">
             <label for="folder">Date Range</label>
-            <input type="text" name="date_range" class="daterange2">
+
+            {{Form::text('search_text',"",['id'=>'search_text','class' => 'form-control mr-sm-0 daterange2','placeholder' => 'Search'])}}
         </div>
 
         <!-- <button class="btn btn-warning">Document</button>
@@ -47,7 +48,7 @@
     $(document).ready(function() {
 
         $('.daterange2').daterangepicker();
-
+        $('#search_text').val("");
 
         function getAuditTrailList() {
             blockUI();
@@ -71,6 +72,11 @@
                 },
             });
         }
+
+        $('#search_text').change(function(e) {
+            getAuditTrailList();
+        });
+
         getAuditTrailList();
     });
 </script>

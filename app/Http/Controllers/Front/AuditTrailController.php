@@ -21,6 +21,7 @@ class AuditTrailController extends FrontBaseController
     {
         $user = Auth::user();
         $input_data = $request->all();
+
         $audit_trail_params = ['users_id' => $user->id];
         $audit_trail_params['search_text'] = $input_data['search_text'] ?? null;
         $audit_book_items = AuditTrail::getAuditTrail($audit_trail_params);
