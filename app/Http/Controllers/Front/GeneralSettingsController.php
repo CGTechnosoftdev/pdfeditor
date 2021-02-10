@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Timezone;
 use App\Models\GeneralSetting;
 use App\Models\EmailPhoneReset;
+use App\Models\UserDocument;
+use App\Models\AuditTrail;
 
 use DB;
 use Illuminate\Support\Str;
@@ -40,9 +42,6 @@ class GeneralSettingsController extends FrontBaseController
         $grant_access_arr = config('custom_config.grant_access_arr');
 
 
-
-
-        //time_format_arr
 
         $data_array = [
             'title' => "General Settings",
@@ -559,5 +558,62 @@ class GeneralSettingsController extends FrontBaseController
         }
         set_flash($response_type, $response_message);
         return redirect()->back();
+    }
+    function userAccountDelete()
+    {
+        $user = \Auth::user();
+        $input_data = $request->input();
+
+        DB::beginTransaction();
+        try {
+
+            $user_documents = UserDocument::where(["user_id" => $user->id])->get();
+            if (count($user_documents) > 0) {
+                foreach ($user_documents as $user_index => $user_document) {
+                    // $document_name = $user_document->file;
+
+                    $file = $user_document->file;
+                    $fileConfigData = config("upload_config.user_document");
+                    //Storage::disk($fileConfigData['disk'])->url("public/" . $fileConfigData['folder'] . "/" . $file);
+                    // $document_details = getUploadedFile("Sonu NDA_OFrGh1610428190.pdf", "user_document", true);
+                    $document_path = \Storage::disk('public')->path("public/" . $fileConfigData['folder'] . "/" . $file);
+                    unlink($document_path);
+                    $user_document->delete();
+                }
+            }
+
+            $audit_trail_result = AuditTrail::where(["created_by" => $user->id])->get();
+
+            if (count($audit_trail_result) > 0) {
+                foreach ($audit_trail_result as $audit_index => $audit_item_ob) {
+                    $audit_item_ob->delete();
+                }
+            }
+            $user->delete();
+
+
+            //  $update_data["password"] = \Hash::make($input_data["gs_password_new_password"]);
+            //  $user->folder_encript_password = \Hash::make($input_data["folder_encript_new_password"]);
+            //  $user->update();
+            //  dd($update_data["password"]);
+            //   $user = User::saveData($update_data, $user);
+
+            if ($user) {
+                DB::commit();
+
+                $response_type = 'success';
+                $response_message = 'Password updated successfully';
+            } else {
+                DB::rollback();
+                $response_type = 'error';
+                $response_message = 'Error occoured, Please try again.';
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+            $response_type = 'error';
+            $response_message = $e->getMessage();
+        }
+        set_flash($response_type, $response_message);
+        return redirect()->route('front.logout');
     }
 }
