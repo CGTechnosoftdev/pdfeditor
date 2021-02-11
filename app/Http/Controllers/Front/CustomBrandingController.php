@@ -31,7 +31,7 @@ class CustomBrandingController extends FrontBaseController
             $template_viewArray[$temp_index] = $view = View::make('mail.' . $templInfoArray["email_template"])->render();
         }
         $company_logo = "";
-        if (!empty($custom_branding_model))
+        if (!empty($custom_branding_model->company_logo))
             $company_logo = getUploadedFile($custom_branding_model->company_logo, "company_logo");
 
 
