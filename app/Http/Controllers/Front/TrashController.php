@@ -82,14 +82,21 @@ class TrashController extends FrontBaseController
 
             if ($req_type == config('constant.DESTROY_FORM')) {
                 if (!empty($dataArray["trash_items"])) {
+                    $document_names = "";
                     foreach ($dataArray["trash_items"] as $trash_id => $trash_value) {
                         $trash_id = decrypt($trash_id);
                         $user_document = UserDocument::find($trash_id);
+                        $document_names = $user_document->name . ",";
 
                         if (!$user_document->delete()) {
                             $is_valid = 0;
                         }
                     }
+                    $document_names = trim($document_names, ",");
+                    $key_array["{document_name}"] = $document_names;
+                    $audit_number_array = config("custom_config.audit_number");
+                    addInAuditTrail($audit_number_array["trash"], "delete", $key_array);
+
                     if ($is_valid == 1) {
                         $response_type = 'success';
                         $response_message = 'Document deleted successfully';

@@ -102,6 +102,7 @@ class CustomBrandingController extends FrontBaseController
             $signature["email"] = $input_data["email"];
             $signature["phone"] = $input_data["phone"];
             $signature["fax"] = $input_data["fax"];
+            $signature["website"] = $input_data["website"];
             $is_email_template = config("custom_config.is_use_email_template");
             $is_use_email_template = $is_email_template["yes"];
             if (empty($input_data["is_use_email_template"]))
