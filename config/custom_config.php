@@ -320,7 +320,8 @@ If you have any questions, contact {[your_email]}"
             'operations' => [
                 'move_to_trash' => 'You move the document in trash {document_name}.',
                 'restore' => 'You restore the document {document_name}.',
-                'empty' => 'You empty the trash list.'
+                'empty' => 'You empty the trash list.',
+                'delete' => 'You delete  item/items {document_name}.',
             ]
         ],
         '5' => [

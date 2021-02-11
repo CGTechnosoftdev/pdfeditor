@@ -47,7 +47,9 @@
 <script>
     $(document).ready(function() {
 
-        $('.daterange2').daterangepicker();
+        $('.daterange2').daterangepicker({
+            closeText: 'Clear',
+        });
         $('#search_text').val("");
 
         $("#download_audit_trailid").click(function() {

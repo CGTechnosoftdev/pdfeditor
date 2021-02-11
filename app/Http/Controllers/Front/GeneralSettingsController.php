@@ -559,7 +559,7 @@ class GeneralSettingsController extends FrontBaseController
         set_flash($response_type, $response_message);
         return redirect()->back();
     }
-    function userAccountDelete()
+    function userAccountDelete(Request $request)
     {
         $user = \Auth::user();
         $input_data = $request->input();
