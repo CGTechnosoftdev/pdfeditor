@@ -6,7 +6,7 @@
 <section class="content-header share-allert d-flex justify-content-between">
     <div class="title">
         <h2>{{$title}}</h2>
-        <span></span>
+        <span>Audit Trail is a record of the changes and actions in your PDF writer account.</span>
     </div>
     <div class="heading-btns">
         <div class="form-group folder-dropdown daterange">
@@ -49,6 +49,12 @@
 
         $('.daterange2').daterangepicker({
             closeText: 'Clear',
+        });
+
+        $('.folder-dropdown.daterange').on('cancel.daterangepicker', function(ev, picker) {
+            // alert("hello");
+            $(".daterange2").val('');
+            getAuditTrailList();
         });
         $('#search_text').val("");
 
