@@ -318,7 +318,7 @@ If you have any questions, contact {[your_email]}"
         '4' => [
             'type' => 'trash',
             'operations' => [
-                'move_to_trash' => 'You move the document in trash {document_name}.',
+                'move_to_trash' => 'You move  the document in trash {document_name}.',
                 'restore' => 'You restore the document {document_name}.',
                 'empty' => 'You empty the trash list.',
                 'delete' => 'You delete  item/items {document_name}.',
