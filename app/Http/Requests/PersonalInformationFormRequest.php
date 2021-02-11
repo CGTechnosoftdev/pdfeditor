@@ -27,9 +27,16 @@ class PersonalInformationFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'first_name'      => 'required|max:255|min:2',
-            'last_name'       => 'required|max:255|min:2',
+            'first_name'      => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+            'last_name'       => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
+            'contact_number' => 'nullable|regex:/(^(\d){10,12}?$)/u',
+            'fax_number' => 'nullable|regex:/(^(\d){7,12}?$)/u',
+            'company_name' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+            'company_job_title' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+            'zip_code' => 'nullable|regex:/(^(\d){5,6}?$)/u',
+
+
         ];
         return $rules;
     }

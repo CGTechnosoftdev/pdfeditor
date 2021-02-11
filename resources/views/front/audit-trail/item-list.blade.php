@@ -13,7 +13,7 @@
         <li>
             <span class="color1"><img src="{{asset('public/front/images/edit-file-white.svg')}}"></span>
             <div class="time">
-                <span>{{date_format($audit_info_array["date"],"h:i A")}}</span>
+                <span>{{date("h:i A",strtotime($audit_info_array["date"]))}}</span>
             </div>
             <div class="content">
                 {{$audit_info_array["description"]}}

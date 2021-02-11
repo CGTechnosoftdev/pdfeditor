@@ -7470,7 +7470,7 @@ ul.tl li .timestamp {
 }
 
 .genrate_custom_branding ul {
-    column-count: 3;
+    display: flex;
 }
 
 .genrate_custom_branding ul li {
@@ -7803,3 +7803,29 @@ ul.tl li .timestamp {
 #send-for-share-form .form-group a {
     margin-top:10px !important;
 }
+
+.template-company-logo-upload .choose-logo,.profile-logo-upload-preview .choose-logo {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    background: #C1484A;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+}
+
+.template-company-logo-upload .choose-logo input,.profile-logo-upload-preview .choose-logo input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100% !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.addnew-btn.text-white {
+    color: white !important;
+}
+ 

@@ -31,10 +31,10 @@ class BusinessCardFormRequest extends FormRequest
             'last_name' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'job_title' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'company' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
-            'email' => 'nullable|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+            'email' => 'nullable|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/',
             'phone_number' => 'nullable|regex:/^[0-9]{10,12}+$/',
             'fax_number' => 'nullable|regex:/^[0-9]{7,12}+$/',
-            'website' => 'nullable|regex:/^([a-z0-9\+_\-\:\/\/]+)(\.[a-z0-9\+_\-]+)*([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+            'website' => 'nullable|regex:/^([a-z0-9\+_\-\:\/\/]+)(\.[a-z0-9\+_\-]+)*([a-z0-9\-]+\.)+[a-z]{2,6}$/',
 
 
 

@@ -13,10 +13,11 @@
         <div class="profile-logo-upload-preview pb-3">
             <div class="profile-logo-upload">
                 <h6>Upload Picture</h6>
-                <a>
+                <div class="choose-logo">
                     <!--<input type="file" id="dvd_image"> -->
-                    {{ Form::file('profile_picture', ['id' => 'dvd_image','accept'=>".png, .jpg, .jpeg"]) }} Change Picture
-                </a>
+                    {{ Form::file('profile_picture', ['id' => 'dvd_image','accept'=>".png, .jpg, .jpeg"]) }}
+                    <img src="{{asset('public/front/images/upload-multiple.svg')}}"> &nbsp;Change Picture
+                </div>
             </div>
 
             <div class="profile-logo-preview">
@@ -114,7 +115,8 @@
                     {{Form::text('state',old('state'),['placeholder' => 'State','class' => 'form-control'])}}
                 </div>
             </div>
-
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="first-name">City</label>
