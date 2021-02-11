@@ -125,7 +125,7 @@ function getUploadedFile($files, $file_config, $default_status = true)
 	$files = (is_array($files) ? $files : array($files));
 	$filesUrl = array();
 	foreach ($files as $file) {
-		$file = $file ?: ((empty($default_status) ? '' : $fileConfigData['placeholder']));
+		$file = $file ?: ((empty($default_status) ? '' : (!empty($fileConfigData['placeholder']) ? $fileConfigData['placeholder'] : "")));
 		if (!empty($file)) {
 			$filesUrl[] = Storage::disk($fileConfigData['disk'])->url("public/" . $fileConfigData['folder'] . "/" . $file);
 		} else {
