@@ -83,8 +83,8 @@
                             <div class="timeformate">
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
-                                    <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$timeValue}}</span>
-                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format)&&$general_settings->time_format==$time_index)?true:false)) }}
+                                    <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
+                                        {{ Form::radio('time_format', $time_index , (($general_settings->time_format==$time_index)?true:false)) }}
                                     </li>
                                     @endforeach
 

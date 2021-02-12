@@ -100,8 +100,9 @@ return [
         'h:i A' => 'h:i A'
     ],
     'time_hours' => [
-        0 => '12 Hours',
-        1 => '24 Hours',
+        'h:i:s' => '12 Hours',
+        'H:i:s' => '24 Hours',
+        'h:i A' => '12 Hours ( Without Seconds)'
     ],
     'paging_limit_arr' => [
         '10' => '10',
@@ -363,6 +364,15 @@ If you have any questions, contact {[your_email]}"
         'download' => 6,
         'print' => 7,
         'account' => 8,
+    ],
+    'audit_trash_images' => [
+        'trash' => 'file-white.svg',
+        'upload_create' => 'edit-file-white.svg',
+        'account' => 'user-white.svg',
+        'share' => 'fileshare-white.svg',
+        'default'  => 'edit-file-white.svg',
+
+
     ]
 
 
