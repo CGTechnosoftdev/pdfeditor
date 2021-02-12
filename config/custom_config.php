@@ -372,7 +372,13 @@ If you have any questions, contact {[your_email]}"
         'share' => 'fileshare-white.svg',
         'default'  => 'edit-file-white.svg',
 
-
+    ],
+    'audit_trash_images_class' => [
+        'trash' => 5,
+        'upload_create' => 1,
+        'account' => 2,
+        'share' => 3,
+        'default'  => 1,
     ]
 
 
