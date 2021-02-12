@@ -89,11 +89,12 @@
                                     </li>
                                     @endforeach
 
+
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row cl">
                         <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Date Format</label>
                         <div class="col-sm-9 col-md-9">
                             {{Form::select('date_format',$date_time_arr,($general_settings->date_format??0),["id" => 'date_formatid','class' => 'form-control my-dropdown'])}}
