@@ -81,7 +81,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Time Format</label>
                         <div class="col-sm-8 col-md-9">
-                            <div class="timeformate">
+                            <div class="timeformate call">
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
