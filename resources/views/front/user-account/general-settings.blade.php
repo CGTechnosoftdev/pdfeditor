@@ -447,8 +447,7 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
-            alert("reset pone ");
-            $.ajax({
+              $.ajax({
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",
                 data: "_token={{csrf_token()}}",
