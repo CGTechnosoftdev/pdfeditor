@@ -1,6 +1,6 @@
 <div class="footer-more-menus">
     <ul>
-        <li>
+        <li class="openfoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/open.svg') }}">
@@ -8,7 +8,7 @@
                 <span>Open</span>
             </a>
         </li>
-        <li>
+        <li class="saveasfoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/save-as.svg') }}">
@@ -16,7 +16,7 @@
                 <span>Save As</span>
             </a>
         </li>
-        <li>
+        <li class="convertfoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/convert.svg') }}">
@@ -24,7 +24,7 @@
                 <span>Convert</span>
             </a>
         </li>
-        <li>
+        <li class="printfoot">
             <a href="#" class="document_print_trigger">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/print.svg') }}">
@@ -32,7 +32,7 @@
                 <span>Print</span>
             </a>
         </li>
-        <li>
+        <li class="templatefoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/convert-to-template.svg') }}">
@@ -40,7 +40,7 @@
                 <span>Convert to Template</span>
             </a>
         </li>
-        <li>
+        <li class="sharefoot">
             <a href="#" id="sharemenu_itemid">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/share.svg') }}">
@@ -48,7 +48,7 @@
                 <span>Share</span>
             </a>
         </li>
-        <li>
+        <li class="linktofillfoot">
             <a href="" class="link-to-fill-button">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/linktofill.svg') }}">

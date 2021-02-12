@@ -2370,7 +2370,8 @@ li {
 }
 
 #content {
-    width: 100%;
+    /* width: 100%; */
+    width: calc(100% - 250px);
     padding: 30px;
 }
 
@@ -2460,7 +2461,7 @@ li {
 
 .wrapper {
     height: 100%;
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px)!important;
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
@@ -2619,7 +2620,7 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     border-bottom: solid 1px #ddd;
 }
 
@@ -2628,7 +2629,7 @@ li {
 }
 
 .dashboard3 .content-header .title h2 {
-    margin-bottom: 0px;
+    margin-bottom: 15px;
     font-size: 25px;
     color: #333333;
 }
@@ -3435,6 +3436,7 @@ li {
 .dashboard3 .content-header .heading-btns {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .recent-documents {
@@ -3604,7 +3606,7 @@ li {
     border-radius: 30px 30px 0px 0px;
     align-items: center;
     position: fixed;
-    z-index: 1111;
+    z-index: 111;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
@@ -4038,6 +4040,47 @@ li {
 
 /*** Date 3/12/2020 ***/
 
+.paginations .dataTables_info {
+    float: left;
+    width: auto;
+}
+
+.paginations .dataTables_paginate {
+    border: none !important;
+    float: right;
+}
+
+.paginations .paginate_button {
+    border-radius: 20px !important;
+    border: none !important;
+    min-width: 30px !important;
+    display: inline-block;
+    text-align: center;
+    min-height: 30px;
+    color: #999;
+    line-height: 30px;
+    font-size: 16px;
+    padding: 0px 10px;
+}
+
+.paginations .paginate_button.current {
+    border-radius: 20px !important;
+    border: none !important;
+    background: #F3926B !important;
+    min-width: 30px !important;
+    display: inline-block;
+    text-align: center;
+    min-height: 30px;
+    color: #fff;
+    line-height: 30px;
+    font-size: 16px;
+}
+
+.paginations .previous,
+.paginations .next {
+    color: #999;
+}
+
 #laravel_datatable {
     width: 100% !important;
 }
@@ -4049,7 +4092,7 @@ li {
 .kt-form .paginate_button.current {
     border-radius: 20px !important;
     border: none !important;
-    background: #f00 !important;
+    background: #f00;
 }
 
 .kt-form .paginate_button.next.disabled {
@@ -4127,7 +4170,7 @@ li {
 }
 
 .payment-info-modal .modal-content h4 {
-    color: #1fcb5d;
+    color: #486EB8;
     font-size: 18px;
     margin-bottom: 15px;
 }
@@ -4639,6 +4682,10 @@ li {
 
 .single-document .doc-content h5 {
     margin-bottom: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .add-single-doc-signed {
@@ -7190,9 +7237,20 @@ ul.tl li .timestamp {
     text-align: right;
     font-size: 12px;
 }
+
 .advance-settings-content .share-by .add-recept-btn {
     margin-top: 15px;
 }
-.mt-10{
-    margin-top:10px;
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.more-opt .dropdown-menu.dropdown-menu-right {
+    background: #fff;
+}
+
+.create-new-card div.form-control {
+    font-size: 14px;
+    font-family: Poppins-Regular;
 }

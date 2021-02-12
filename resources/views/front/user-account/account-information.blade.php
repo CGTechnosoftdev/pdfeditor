@@ -23,7 +23,7 @@
         </ul>
     </div>
     @if(empty($user->parent_id))
-    <div class="aditional-account-info d-flex">
+    <div class="aditional-account-info d-md-flex">
         <div class="aditional-account-content">
             <h5>Additional Accounts Management <span> <img src="{{ asset('public/front/images/info-i.svg') }}"></span></h5>
             <p>Allow colleagues to enjoy PDF Writer's features with you by adding separate accounts for them.</p>
@@ -46,7 +46,7 @@
         </div>
     </div> -->
 
-    <div class="aditional-account-info d-flex">
+    <div class="aditional-account-info d-md-flex">
         <div class="aditional-account-content">
             <h5>Inbound Fax Number <span> <img src="{{ asset('public/front/images/info-i.svg') }}"></span></h5>
             <p>Receive faxes online directly into your PDF Writer account.</p>
