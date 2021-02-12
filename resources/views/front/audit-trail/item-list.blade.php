@@ -11,7 +11,7 @@
         </li>
         @foreach($day_wise_entry_array as $audit_id => $audit_info_array)
         <li>
-            <span class="color1"><img src="{{asset('public/front/images/'.$audit_info_array['icon_file'])}}"></span>
+            <span class="color{{$audit_info_array['class']}}"><img src="{{asset('public/front/images/'.$audit_info_array['icon_file'])}}"></span>
             <div class="time">
                 <span>{{changeTimeFormat(strtotime($audit_info_array["date"]),"h:i A")}}</span>
             </div>
