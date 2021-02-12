@@ -12,7 +12,7 @@
         </div>
         <div class="profile-logo-upload-preview pb-3">
             <div class="profile-logo-upload">
-                <h6>Upload Picture</h6>
+                <!--<h6>Upload Picture</h6>-->
                 <div class="choose-logo">
                     <!--<input type="file" id="dvd_image"> -->
                     {{ Form::file('profile_picture', ['id' => 'dvd_image','accept'=>".png, .jpg, .jpeg"]) }}
@@ -105,7 +105,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="first-name">Country</label>
-                    {{Form::select('countries_id',$countary_list,old('countries_id'),['placeholder' => 'Country','class' =>'form-control'])}}
+                    {{Form::select('countries_id',$countary_list,old('countries_id'),['placeholder' => 'Country','class' =>'form-control my-dropdown'])}}
                 </div>
             </div>
 

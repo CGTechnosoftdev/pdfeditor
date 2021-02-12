@@ -51,7 +51,7 @@
                     <div class="social-links">
                         <ul>
                             <li>
-                                <a href="#" data-url="{{$googleImportUrl}}" id="importGmailContactsid"><img src="{{asset('public/front/images/mail-icon.svg')}}"></a>
+                                <a href="#" data-url="{{!empty($googleImportUrl)?$googleImportUrl:''}}" id="importGmailContactsid"><img src="{{asset('public/front/images/mail-icon.svg')}}"></a>
                             </li>
 
                             <li>
