@@ -91,12 +91,13 @@ return [
 		'subject' => 'Template Format1',
 		'keywords' => [
 			"{[name]}",
-
 			"{[title]}",
 			"{[company]}",
 			"{[email]}",
 			"{[phone]}",
 			"{[fax]}",
+			"{[website]}",
+			"{[logo_url]}",
 		],
 
 	],
@@ -111,6 +112,8 @@ return [
 			"{[email]}",
 			"{[phone]}",
 			"{[fax]}",
+			"{[website]}",
+			"{[logo_url]}",
 		],
 
 	],
@@ -125,6 +128,8 @@ return [
 			"{[email]}",
 			"{[phone]}",
 			"{[fax]}",
+			"{[website]}",
+			"{[logo_url]}",
 		],
 
 	],

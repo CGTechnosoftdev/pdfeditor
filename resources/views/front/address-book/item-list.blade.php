@@ -1,84 +1,30 @@
-@if(count($address_book_items)>0)
-{{ Form::open(['url' => '#','method'=>'post','class'=>'dropzone2 needsclick','id' => 'addressbook-formid','enctype'=>"multipart/form-data"]) }}
-{{Form::hidden('sort_by',"",array('id' => 'sort_by_id'))}}
+@if(count($audit_trail_items)>0)
+<div class="timeline-container">
+    <ul id="first-list">
+        @foreach($audit_trail_items as $audit_date => $day_wise_entry_array)
+        <li class="month">
+            <div class="time">
+                <span class="day">Wed</span>
+                <span class="month">{{date("M",strtotime($audit_date))}}</span>
+            </div>
+            <span class="trial-date">{{date("d",strtotime($audit_date))}}</span>
+        </li>
+        @foreach($day_wise_entry_array as $audit_id => $audit_info_array)
+        <li>
+            <span class="color1"><img src="{{asset('public/front/images/'.$audit_info_array['icon_file'])}}"></span>
+            <div class="time">
+                <span>{{date("h:i A",strtotime($audit_info_array["date"]))}}</span>
+            </div>
+            <div class="content">
+                {{$audit_info_array["description"]}}
+            </div>
+        </li>
+        @endforeach
 
-<div class="table-card">
-    <div class="table-responsive">
-        <table class="table multi-active-tr">
-            <thead>
-                <tr>
-                    <th class="select-all" scope="col">
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="select-all">
-                            <label class="custom-control-label font-0" for="select-all">.</label>
-                        </div>
-                    </th>
-                    <th class="name" scope="col">Name</th>
-                    <th class="email" scope="col">Email</th>
-                    <th class="phone" scope="col">Phone</th>
-                    <th class="fax" scope="col">Fax</th>
-                    <th class="action" scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
+        @endforeach
 
-                @foreach($address_book_items as $row)
-                <tr>
-                    <td>
-                        <div class="custom-control custom-checkbox red mr-sm-2">
-                            {{Form::checkbox("address_book_item[$row->id]",1,false,array("value" => 1,"class" => "custom-control-input newcustom_trashList_$row->id","id" => "customControlAutosizing".$row->id,"checked" => false))}}
-                            <label class="custom-control-label font-0" for="customControlAutosizing{{$row->id}}">.</label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="name-icon color2">{{ (!empty($row->name)?substr($row->name,0,2):"")}}</div>
-                        <div class="usr-name"> {{$row->name}}</div>
-                    </td>
-                    <td>{{$row->email}}</td>
-                    <td>{{$row->phone}}</td>
-                    <td>{{$row->fax}}</td>
-                    <td>
-                        <a class="btn text-danger" href="#" data-id="{{$row->id}}" id="editAddressItem_{{$row->id}}"><i class="fas fa-pencil-alt"></i> </a>
-                        <a class="btn text-primary" href="#" data-id="{{$row->id}}" id="deleteAddressItem_{{$row->id}}"><i class="fas fa-trash"></i> </a>
-
-                    </td>
-                </tr>
-                @endforeach
-                {{ Form::close() }}
-                @else
-                <div class="recent-documents">
-                    <h4>No record found</h4>
-                </div>
-                @endif
-            </tbody>
-
-        </table>
-    </div>
+    </ul>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-
-
-
-        var selectAllItems = "#select-all";
-        var checkboxItem = ":checkbox";
-
-        $(selectAllItems).click(function() {
-
-            if (this.checked) {
-                $(checkboxItem).each(function() {
-                    this.checked = true;
-                });
-            } else {
-                $(checkboxItem).each(function() {
-                    this.checked = false;
-                });
-            }
-
-        });
-
-
-    });
-</script>
+@else
+No Item found in audit trail,thank you.
+@endif
