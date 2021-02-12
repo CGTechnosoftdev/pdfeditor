@@ -12,13 +12,16 @@
         </div>
         <div class="profile-logo-upload-preview pb-3">
             <div class="profile-logo-upload">
-                <!--<h6>Upload Picture</h6>-->
-                <div class="choose-logo">
+                <h6>Profile Picture</h6>
+                <div class="dvd_image">
                     <!--<input type="file" id="dvd_image"> -->
-                    {{ Form::file('profile_picture', ['id' => 'dvd_image','accept'=>".png, .jpg, .jpeg"]) }}
-                    <img src="{{asset('public/front/images/upload-multiple.svg')}}"> &nbsp;Change Picture
+                    <div class="input_div">
+                        {{ Form::file('profile_picture', ['id' => 'dvd_image','accept'=>".png, .jpg, .jpeg"]) }} Change Picture
+                    </div>
+                    <!--  <img src="{{asset('public/front/images/upload-multiple.svg')}}"> &nbsp;Change Picture-->
                 </div>
             </div>
+
 
             <div class="profile-logo-preview">
                 <div class="preview {{(!empty($profile_picture)?'':'hide')}}">

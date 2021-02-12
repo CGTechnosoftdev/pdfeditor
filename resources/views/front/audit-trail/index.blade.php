@@ -6,7 +6,7 @@
 <section class="content-header share-allert d-flex justify-content-between">
     <div class="title">
         <h2>{{$title}}</h2>
-        <span>Audit Trail is a record of the changes and actions in your PDF writer account.</span>
+        <span>Audit Trail is a record of the changes and actions in your PDF Writer account.</span>
     </div>
     <div class="heading-btns">
         <div class="form-group folder-dropdown daterange">
@@ -49,6 +49,7 @@
 
         $('.daterange2').daterangepicker({
             closeText: 'Clear',
+            maxDate: "{{date('m/d/Y',time())}}",
         });
 
         $('.folder-dropdown.daterange').on('cancel.daterangepicker', function(ev, picker) {
