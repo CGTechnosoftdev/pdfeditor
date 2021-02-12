@@ -4,16 +4,16 @@
         @foreach($audit_trail_items as $audit_date => $day_wise_entry_array)
         <li class="month">
             <div class="time">
-                <span class="day">Wed</span>
+                <span class="day">{{date("D",strtotime($audit_date))}}</span>
                 <span class="month">{{date("M",strtotime($audit_date))}}</span>
             </div>
             <span class="trial-date">{{date("d",strtotime($audit_date))}}</span>
         </li>
         @foreach($day_wise_entry_array as $audit_id => $audit_info_array)
         <li>
-            <span class="color1"><img src="{{asset('public/front/images/edit-file-white.svg')}}"></span>
+            <span class="color1"><img src="{{asset('public/front/images/'.$audit_info_array['icon_file'])}}"></span>
             <div class="time">
-                <span>{{date("h:i A",strtotime($audit_info_array["date"]))}}</span>
+                <span>{{changeTimeFormat(strtotime($audit_info_array["date"]),"h:i A")}}</span>
             </div>
             <div class="content">
                 {{$audit_info_array["description"]}}
