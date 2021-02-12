@@ -138,7 +138,7 @@
             <div class="col-md-6">
                 <div class="preview_custom_branding tabs-stage">
                     <h4>Preview</h4>
-
+                    {{Form::hidden("company_logo_url",$company_logo,["id" => "company_logo_url"])}}
                     @foreach($template_viewArray as $templateIndex => $templateView)
 
                     <div id="tab-{{$templateIndex+1}}" class="tab">
@@ -155,12 +155,13 @@
                                 <div class="brand-footer text-left">
                                     <div id="signature_block">
                                         <p class="mb-1" id="signature_firstname_view_{{$templateIndex}}"></p>
-                                        <p class="mb-1" id="signature_lastname_view_{{$templateIndex}}"></p>
+
                                         <p class="mb-1" id="signature_title_view_{{$templateIndex}}"></p>
                                         <p class="mb-1" id="signature_company_view_{{$templateIndex}}"></p>
                                         <p class="mb-1" id="signature_email_view_{{$templateIndex}}"></p>
                                         <p class="mb-1" id="signature_phone_view_{{$templateIndex}}"></p>
                                         <p class="mb-1" id="signature_fax_view_{{$templateIndex}}"></p>
+                                        <p class="mb-1" id="signature_website_view_{{$templateIndex}}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -178,6 +179,7 @@
                     {{Form::hidden('signature_email','',["id" => 'signature_email'])}}
                     {{Form::hidden('signature_phone','',["id" => 'signature_phone'])}}
                     {{Form::hidden('signature_fax','',["id" => 'signature_fax'])}}
+                    {{Form::hidden('signature_website','',["id" => 'signature_website'])}}
                     {{Form::hidden("template_style_for_email","0",["id" => "template_style_for_email_id"])}}
 
 
@@ -201,6 +203,9 @@
 {!! JsValidator::formRequest('App\Http\Requests\CustomBrandingFormRequest','#custom-branding-info-update-form') !!}
 <script>
     // Show the first tab by default
+    $("#company_logo_url_id").attr({
+        "src": $("#company_logo_url").val()
+    })
     $('.genrate_custom_branding ul li').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
     });
@@ -252,6 +257,11 @@
 
     $("#emailContainer_" + $("#template_style_id").val()).addClass("show");
     $("#emailContainer_" + $("#template_style_id").val()).removeClass("hide");
+    $("div[id ^= 'emailContainer_']").each(function(index, value) {
+        var id = $(this).attr("data-id");
+        $(this).html($("#emailContainer_" + id + " #email_content_part_id").html());
+
+    });
 
     function putSignatureinTemplate() {
         var tab_id = parseInt($("#template_style_for_email_id").val()) + 1;
@@ -262,6 +272,7 @@
         $("#signature_email").val($("#email").val());
         $("#signature_phone").val($("#phone").val());
         $("#signature_fax").val($("#fax").val());
+        $("#signature_website").val($("#website").val());
 
     }
 
@@ -285,12 +296,13 @@
     });
 
     $('#first_name').keyup(delayTyping(function(e) {
-        $("p[id ^= 'signature_firstname_view']").html($(this).val());
+        var last_name = $("#last_name").val();
+        $("p[id ^= 'signature_firstname_view']").html($(this).val() + " " + last_name);
     }, 500));
 
     $('#last_name').keyup(delayTyping(function(e) {
-
-        $("p[id ^= 'signature_lastname_view']").html($(this).val());
+        var first_name = $("#first_name").val();
+        $("p[id ^= 'signature_firstname_view']").html(first_name + " " + $(this).val());
 
     }, 500));
 
@@ -320,6 +332,11 @@
         $("p[id ^= 'signature_fax_view']").html($(this).val());
 
     }, 500));
+    $('#website').keyup(delayTyping(function(e) {
+
+        $("p[id ^= 'signature_website_view']").html($(this).val());
+
+    }, 500));
     $("#first_name").trigger("keyup");
     $("#last_name").trigger("keyup");
     $("#title").trigger("keyup");
@@ -327,5 +344,6 @@
     $("#email").trigger("keyup");
     $("#phone").trigger("keyup");
     $("#fax").trigger("keyup");
+    $("#website").trigger("keyup");
 </script>
 @append

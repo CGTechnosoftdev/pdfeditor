@@ -37,6 +37,7 @@ class GeneralSettingsController extends FrontBaseController
         $timezone_list = Timezone::getTimezoneList();
         $date_time_arr = config('custom_config.date_format_arr');
         $time_format_arr = config('custom_config.time_format_arr');
+        $time_hours = config('custom_config.time_hours');
         $general_settings = GeneralSetting::where(["user_id" => $user->id])->get();
         $on_off_arr = config('custom_config.on_off_arr');
         $grant_access_arr = config('custom_config.grant_access_arr');
@@ -54,6 +55,7 @@ class GeneralSettingsController extends FrontBaseController
             'general_settings' => (!empty($general_settings[0]) ? $general_settings[0] : []),
             'is_email_update' => false,
             'is_contact_number_update' => false,
+            'time_hours' => $time_hours,
         ];
 
         return view('front.user-account.general-settings', $data_array);
@@ -78,7 +80,7 @@ class GeneralSettingsController extends FrontBaseController
         $general_settings = GeneralSetting::where(["user_id" => $user->id])->get();
         $on_off_arr = config('custom_config.on_off_arr');
         $grant_access_arr = config('custom_config.grant_access_arr');
-
+        $time_hours = config('custom_config.time_hours');
 
 
 
@@ -94,6 +96,7 @@ class GeneralSettingsController extends FrontBaseController
             'user' => $user,
             'general_settings' => (!empty($general_settings[0]) ? $general_settings[0] : []),
             'is_email_update' => true,
+            'time_hours' => $time_hours,
             'is_contact_number_update' => false,
             'token' => $token,
         ];
@@ -120,7 +123,7 @@ class GeneralSettingsController extends FrontBaseController
         $general_settings = GeneralSetting::where(["user_id" => $user->id])->get();
         $on_off_arr = config('custom_config.on_off_arr');
         $grant_access_arr = config('custom_config.grant_access_arr');
-
+        $time_hours = config('custom_config.time_hours');
 
 
 
@@ -131,6 +134,7 @@ class GeneralSettingsController extends FrontBaseController
             'timezone_list' => $timezone_list,
             'date_time_arr' => $date_time_arr,
             'time_format_arr' => $time_format_arr,
+            'time_hours' => $time_hours,
             'on_off_arr' => $on_off_arr,
             'grant_access_arr' => $grant_access_arr,
             'user' => $user,
@@ -294,7 +298,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_message = $e->getMessage();
         }
         set_flash($response_type, $response_message);
-        return redirect()->back();
+        return redirect()->route("front.get-general-settings");
     }
     public function phoneUpdate(GeneralSettingsPhoneUpdateFormRequest $request)
     {
@@ -327,7 +331,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_message = $e->getMessage();
         }
         set_flash($response_type, $response_message);
-        return redirect()->back();
+        return redirect()->route("front.get-general-settings");
     }
     public function passwordUpdate(GeneralSettingsPasswordUpdateFormRequest $request)
     {
@@ -394,7 +398,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        // set_flash($response_type, $response_message);
         // return redirect()->back();
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
@@ -435,7 +439,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        // set_flash($response_type, $response_message);
         // return redirect()->back();
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
@@ -476,7 +480,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        // set_flash($response_type, $response_message);
         // return redirect()->back();
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
@@ -518,7 +522,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        //set_flash($response_type, $response_message);
         // return redirect()->back();
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
@@ -561,6 +565,7 @@ class GeneralSettingsController extends FrontBaseController
     }
     function userAccountDelete(Request $request)
     {
+
         $user = \Auth::user();
         $input_data = $request->input();
 
@@ -576,7 +581,7 @@ class GeneralSettingsController extends FrontBaseController
                     $fileConfigData = config("upload_config.user_document");
                     //Storage::disk($fileConfigData['disk'])->url("public/" . $fileConfigData['folder'] . "/" . $file);
                     // $document_details = getUploadedFile("Sonu NDA_OFrGh1610428190.pdf", "user_document", true);
-                    $document_path = \Storage::disk('public')->path("public/" . $fileConfigData['folder'] . "/" . $file);
+                    $document_path = \Storage::disk('public')->path($fileConfigData['folder'] . "/" . $file);
                     unlink($document_path);
                     $user_document->delete();
                 }
@@ -602,7 +607,7 @@ class GeneralSettingsController extends FrontBaseController
                 DB::commit();
 
                 $response_type = 'success';
-                $response_message = 'Password updated successfully';
+                $response_message = 'User deleted successfully';
             } else {
                 DB::rollback();
                 $response_type = 'error';
@@ -614,6 +619,20 @@ class GeneralSettingsController extends FrontBaseController
             $response_message = $e->getMessage();
         }
         set_flash($response_type, $response_message);
-        return redirect()->route('front.logout');
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, route('front.logout'));
+        curl_setopt($ch, CURLOPT_POST, 1);
+
+
+
+        // Receive server response ...
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        curl_close($ch);
+        return redirect()->route('front.home');
     }
 }

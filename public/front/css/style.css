@@ -4551,7 +4551,7 @@ li {
 
 .content-header.share-allert {
     background: #fff;
-    margin: -25px -25px 0px -25px;
+    margin: -10px -25px 0px -25px;
     padding: 25px;
     justify-content: start;
 }
@@ -7620,21 +7620,21 @@ ul.tl li .timestamp {
     text-align: left;
 }
 
-.branding-preview.brand1 {
+.branding-preview.brand2 {
     grid-template-columns: 1fr 3fr;
     display: grid;
 }
 
-.branding-preview.brand1 .brand-content {
+.branding-preview.brand2 .brand-content {
     padding: 20px 20px 0px 20px;
     grid-column: 2;
 }
 
-.branding-preview.brand1 .brand-logo {
+.branding-preview.brand2 .brand-logo {
     background: #98a2c5;
 }
 
-.branding-preview.brand1 .brand-content h4 {
+.branding-preview.brand2 .brand-content h4 {
     text-align: left;
     font-size: 14px;
 }
@@ -7645,11 +7645,11 @@ ul.tl li .timestamp {
     margin-top: 80px;
 }
 
-.branding-preview.brand2 {
+.branding-preview.brand1 {
     padding: 20px;
 }
 
-.branding-preview.brand2 .brand-logo {
+.branding-preview.brand1 .brand-logo {
     min-width: 120px;
     min-height: 60px;
     background: #98a2c5;
@@ -7657,14 +7657,14 @@ ul.tl li .timestamp {
     border-radius: 5px;
 }
 
-.branding-preview.brand2 .brand-content {
+.branding-preview.brand1 .brand-content {
     width: 100%;
     height: auto;
     float: left;
     margin-top: 50px;
 }
 
-.branding-preview.brand2 .brand-content h4 {
+.branding-preview.brand1 .brand-content h4 {
     text-align: left;
     font-size: 14px;
 }

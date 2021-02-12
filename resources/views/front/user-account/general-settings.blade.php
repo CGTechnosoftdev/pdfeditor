@@ -83,8 +83,8 @@
                             <div class="timeformate">
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
-                                    <li class="{{(($general_settings->time_format==$time_index)?'active':'')}}"><span>{{$timeValue}}</span>
-                                        {{ Form::radio('time_format', $time_index , (($general_settings->time_format==$time_index)?true:false)) }}
+                                    <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
+                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format)&&$general_settings->time_format==$time_index)?true:false)) }}
                                     </li>
                                     @endforeach
 
@@ -156,7 +156,7 @@
             <div class="d-flex align-items-center">
                 <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
                 <div class="tab-content">
-                    <span>Encripted Folder</span>
+                    <span>Encrypted Folder</span>
                     <p></p>
                 </div>
                 <div class="tab-info">
@@ -442,7 +442,7 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
-            alert("reset pone ");
+
             $.ajax({
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",

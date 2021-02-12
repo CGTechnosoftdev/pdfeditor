@@ -50,15 +50,20 @@ class CustomBrandingController extends FrontBaseController
     public function customBrandingTestEmail(Request $request)
     {
         try {
+            $user = Auth::user();
             $input_data = $request->all();
             // dd($input_data);
             $template_style = config("custom_config.template_style");
             $template_config_name = $template_style[$input_data["template_style_for_email"]]["email_template"];
-
+            //dd($template_config_name);
 
             $emailConfig = config("mail_config." . $template_config_name);
             $userName = $input_data["signature_first_name"] . " " . $input_data["signature_last_name"];
             $userEmail = $input_data["signature_email"];
+            $custom_branding_model = CustomBranding::where(["users_id" => $user->id])->first();
+            $company_logo = "";
+            if (!empty($custom_branding_model->company_logo))
+                $company_logo = getUploadedFile($custom_branding_model->company_logo, "company_logo");
 
             $email_data = [
                 'config_param' => $template_config_name,
@@ -69,6 +74,8 @@ class CustomBrandingController extends FrontBaseController
                     'email' => $input_data["signature_email"],
                     'phone' => $input_data["signature_phone"],
                     'fax' => $input_data["signature_fax"],
+                    'website' => $input_data["signature_website"],
+                    'logo_url' => $company_logo,
                 ],
             ];
             Mail::to($userEmail)->send(new CommonMail($email_data, $emailConfig));
