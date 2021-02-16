@@ -31,6 +31,7 @@
                     </div>
                     <div class="edit">
                         <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
+
                     </div>
                 </div>
             </div>
@@ -51,13 +52,13 @@
     <section class="general-settings-tabs">
         <h4 class="active">
             <div class="d-flex align-items-center">
-                <div class="tab-icon"><img src="../public/front/images/time-clock.svg"></div>
+                <div class="tab-icon"><img src="{{asset('public/front/images/time-clock.svg')}}"></div>
                 <div class="tab-content">
                     <span>Time &amp; Date Settings</span>
                     <p>Select your Timezone</p>
                 </div>
                 <div class="tab-info">
-                    <img src="../public/front/images/info-i.svg">
+                    <img src="{{asset('public/front/images/info-i.svg')}}">
                 </div>
             </div>
         </h4>
@@ -80,7 +81,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Time Format</label>
                         <div class="col-sm-8 col-md-9">
-                            <div class="timeformate">
+                            <div class="timeformate call">
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
@@ -88,11 +89,12 @@
                                     </li>
                                     @endforeach
 
+
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row cl">
                         <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Date Format</label>
                         <div class="col-sm-9 col-md-9">
                             {{Form::select('date_format',$date_time_arr,($general_settings->date_format??0),["id" => 'date_formatid','class' => 'form-control my-dropdown'])}}
@@ -105,13 +107,13 @@
         </div>
         <h4>
             <div class="d-flex align-items-center">
-                <div class="tab-icon"><img src="../public/front/images/security.svg"></div>
+                <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
                 <div class="tab-content">
                     <span>Authdentication &amp; Access Security</span>
                     <p>Account Access and Security</p>
                 </div>
                 <div class="tab-info">
-                    <img src="../public/front/images/info-i.svg">
+                    <img src="{{asset('public/front/images/info-i.svg')}}">
                 </div>
             </div>
         </h4>
@@ -234,13 +236,13 @@
 
         <h4>
             <div class="d-flex align-items-center">
-                <div class="tab-icon"><img src="../public/front/images/bell.svg"></div>
+                <div class="tab-icon"><img src="{{asset('public/front/images/bell.svg')}}"></div>
                 <div class="tab-content">
                     <span>Notification Preferences</span>
                     <p>Manage Email Notifications</p>
                 </div>
                 <div class="tab-info">
-                    <img src="../public/front/images/info-i.svg">
+                    <img src="{{asset('public/front/images/info-i.svg')}}">
                 </div>
             </div>
         </h4>
@@ -414,10 +416,14 @@
                 url: "{{route('front.general-settings-email-reset-request',[$user->id])}}",
                 type: "post",
                 data: "_token={{csrf_token()}}",
+                beforeSend: function() {
+                    $("#general_seettings_email_frm_trigger_id").addClass("disabled-link");
+                },
                 success: function(response) {
                     console.log("respone");
                     console.log(response);
                     toastr.success(response.message);
+                    $("#general_seettings_email_frm_trigger_id").removeClass("disabled-link");
                 },
                 error: function(data) {
                     var response = data.responseJSON;
@@ -447,10 +453,14 @@
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",
                 data: "_token={{csrf_token()}}",
+                beforeSend: function() {
+                    $("#general_seettings_phone_frm_trigger_id").addClass("disabled-link");
+                },
                 success: function(response) {
                     console.log("respone");
                     console.log(response);
                     toastr.success(response.message);
+                    $("#general_seettings_phone_frm_trigger_id").removeClass("disabled-link");
                 },
                 error: function(data) {
                     var response = data.responseJSON;

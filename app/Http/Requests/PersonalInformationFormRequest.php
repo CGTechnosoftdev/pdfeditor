@@ -35,7 +35,8 @@ class PersonalInformationFormRequest extends FormRequest
             'company_name' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'company_job_title' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'zip_code' => 'nullable|regex:/(^(\d){5,6}?$)/u',
-
+            'state'       => 'nullable|regex:/(^([a-zA-Z ]+)(\d+)?$)/u',
+            'city'       => 'nullable|regex:/(^([a-zA-Z ]+)(\d+)?$)/u',
 
         ];
         return $rules;

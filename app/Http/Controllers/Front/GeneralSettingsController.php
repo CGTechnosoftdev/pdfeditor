@@ -196,7 +196,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        //  set_flash($response_type, $response_message);
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
             'message' => $response_message ?? '',
@@ -259,7 +259,7 @@ class GeneralSettingsController extends FrontBaseController
             $response_type = 'error';
             $response_message = $e->getMessage();
         }
-        set_flash($response_type, $response_message);
+        //  set_flash($response_type, $response_message);
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
             'message' => $response_message ?? '',
