@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommonMail;
 use App\Models\User;
+
 use Carbon\Carbon;
 use Auth, DB, View, Response;
 
@@ -112,6 +113,7 @@ class SharedDocumentController extends FrontBaseController
                 }
             }
         }
+
         $SharedDocument = SharedDocument::saveData($dataArray);
 
         //get shared user document
@@ -121,6 +123,11 @@ class SharedDocumentController extends FrontBaseController
             $dataArray["user_document_id"] = decrypt($input_data["user_document_id"]);
         else
             $dataArray["user_document_id"] = $input_data["user_document_id"];
+
+        $document = UserDocument::dataRow(['id' => $dataArray["user_document_id"]]);
+        $audit_number_array = config("custom_config.audit_number");
+        $key_array["{document_name}"] = $document->name;
+        addInAuditTrail($audit_number_array["share"], "share_document", $key_array);
         SharedUserDocument::saveData($dataArray);
 
         //save user info
@@ -363,6 +370,10 @@ class SharedDocumentController extends FrontBaseController
                 $share_setting_data['personalize_invitation_data'] = json_encode($input_data['personalize_invitation_data']);
             }
             $share_data += $share_setting_data;
+
+            $key_array["{document_name}"] = $document->name;
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["share"], "share_document");
             $shared_document = SharedDocument::saveData($share_data);
             $shared_user_documents = SharedUserDocument::saveData(['user_document_id' => $document->id, 'shared_documents_id' => $shared_document->id]);
             if (!empty($input_data['recipient_data'])) {

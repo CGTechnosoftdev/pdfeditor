@@ -255,6 +255,9 @@ display: none;
         float: left;
         display: block;
     }
+    .single-document.sharelink-1 {
+        display: flex;
+    }
     .single-document.single-doc-signed {
         display: flex;
     }

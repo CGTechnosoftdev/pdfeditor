@@ -98,6 +98,10 @@ class LoginController extends Controller
 
             if ($request->ajax()) {
                 $response_array = $this->authenticated($request, $this->guard()->user());
+                $key_array["{ip_address}"] = get_client_ip();
+                $key_array["{login_time}"] = date("H:i", time());
+                $audit_number_array = config("custom_config.audit_number");
+                addInAuditTrail($audit_number_array["account"], "login", $key_array);
                 return response()->json([$response_array["return_type"] => true, 'message' => $response_array["message"]]);
             } else {
                 return $this->authenticated($request, $this->guard()->user())
@@ -184,7 +188,13 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+
+        $key_array["{ip_address}"] = get_client_ip();
+        $key_array["{logout_time}"] = date("H:i", time());
+        $audit_number_array = config("custom_config.audit_number");
+        addInAuditTrail($audit_number_array["account"], "logout", $key_array);
         $this->guard()->logout();
+
         return redirect($this->redirectToAfterLogout);
     }
 

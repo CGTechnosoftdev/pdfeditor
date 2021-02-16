@@ -132,6 +132,17 @@ return [
         'allowed_extention' => 'jpg,jpeg,png,svg,gif',
         'max_allowed_size' => '2000'
     ],
+    'company_logo' => [
+        'label' => 'Company Logo',
+        'file_input' => 'company_logo',
+        'disk' => 'public',
+        'folder' => 'user_document',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal',
+        'allowed_extention' => 'jpg,jpeg,png,svg,gif',
+        'max_allowed_size' => '2000'
+    ],
 
     'upload_types' => 'file_attachment'
 ];

@@ -59,9 +59,9 @@ class TrashController extends FrontBaseController
         $data_array["order_by"] = $sort_by;
 
         $trash_items = $this->getTrashListOperation($document_params);
-        echo '<pre>';
-        print_r($input_data);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($input_data);
+        // echo '</pre>';
         exit();
     }
 
@@ -82,14 +82,21 @@ class TrashController extends FrontBaseController
 
             if ($req_type == config('constant.DESTROY_FORM')) {
                 if (!empty($dataArray["trash_items"])) {
+                    $document_names = "";
                     foreach ($dataArray["trash_items"] as $trash_id => $trash_value) {
                         $trash_id = decrypt($trash_id);
                         $user_document = UserDocument::find($trash_id);
+                        $document_names = $user_document->name . ",";
 
                         if (!$user_document->delete()) {
                             $is_valid = 0;
                         }
                     }
+                    $document_names = trim($document_names, ",");
+                    $key_array["{document_name}"] = $document_names;
+                    $audit_number_array = config("custom_config.audit_number");
+                    addInAuditTrail($audit_number_array["trash"], "delete", $key_array);
+
                     if ($is_valid == 1) {
                         $response_type = 'success';
                         $response_message = 'Document deleted successfully';
@@ -132,8 +139,12 @@ class TrashController extends FrontBaseController
         $user_document_encripted = $input_data["user_document_encripted"];
         $decript_documentId = decrypt($user_document_encripted);
         $user_documentArray = UserDocument::where('id', $decript_documentId)->get();
-        if (count($user_documentArray) > 0)
+        if (count($user_documentArray) > 0) {
             $user_document = $user_documentArray[0];
+            $key_array["{document_name}"] = $user_document->name;
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["trash"], "restore", $key_array);
+        }
         $is_valid = 1;
         if (!$this->restoreOperation($decript_documentId)) {
             $is_valid = 0;
@@ -156,6 +167,11 @@ class TrashController extends FrontBaseController
     {
 
         if (UserDocument::emptyTrashList()) {
+
+
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["trash"], "empty");
+
             $response_type = 'success';
             $response_message = 'Trash List Empty successfully';
         } else {
@@ -177,6 +193,10 @@ class TrashController extends FrontBaseController
         }, $document_arr);
         $document_arr = array_filter($document_arr);
         if (!empty($document_arr)) {
+            $document = UserDocument::dataRow(['id' => $document_arr]);
+            $key_array["{document_name}"] = $document->name;
+            $audit_number_array = config("custom_config.audit_number");
+            addInAuditTrail($audit_number_array["trash"], "move_to_trash", $key_array);
             UserDocument::whereIn('id', $document_arr)->update(['trash' => config('constant.TRASHED')]);
             $response_type = 'success';
             $response_message = 'Move to trash successfully';

@@ -99,6 +99,11 @@ return [
         'H:i:s' => 'H:i:s',
         'h:i A' => 'h:i A'
     ],
+    'time_hours' => [
+        'h:i:s' => '12 Hours',
+        'H:i:s' => '24 Hours',
+        'h:i A' => '12 Hours ( Without Seconds)'
+    ],
     'paging_limit_arr' => [
         '10' => '10',
         '25' => '25',
@@ -252,6 +257,129 @@ Changes made to these documents will be visible to everyone they are shared with
 
 If you have any questions, contact {[your_email]}"
         ],
+    ],
+    'template_style'  => [
+        0 => [
+            'caption' => 'Upper-Left Corner',
+            'email_template' => 'upper-left-corner',
+        ],
+        1 => [
+            'caption' => 'Left Banner',
+            'email_template' => 'left-banner',
+        ],
+        2 => [
+            'caption' => 'Top Banner',
+            'email_template' => 'top-banner',
+        ],
+
+    ],
+    'is_use_email_template' => [
+        'yes' => 1,
+        'no' => 0,
+    ],
+    'grant_access_arr' => [
+        0 => 'closed',
+        1 => '3 days',
+        2 => '7 days',
+        3 => '30 days',
+    ],
+    'on_off_arr' => [
+        '1' => 'On',
+        '0' => 'Off'
+    ],
+    'audit_trail_message' => [
+        '1' => [
+            'type' => 'upload_create',
+            'operations' => [
+                'document' => 'You uploaded the document {document_name}.',
+                'file_url' => 'You create document from the  url {document_name}.',
+                'add_folder' => 'You create new folder.',
+                'tags_data' => 'You save tags data for {document_name}',
+                'save_smart_folder' => 'You save smart folder.',
+                'link_to_fill_publish' => 'You publish the link.',
+                'usps_request' => 'You submit USPS request for {document_name}',
+
+
+            ]
+        ],
+        '2' => [
+            'type' => 'rename',
+            'operations' => [
+                'document' => 'You rename the document {from_document} to {to_document}.',
+
+
+            ]
+        ],
+        '3' => [
+            'type' => 'delete',
+            'operations' => [
+                'smart_folder' => 'You delete the smart folder.',
+            ]
+        ],
+        '4' => [
+            'type' => 'trash',
+            'operations' => [
+                'move_to_trash' => 'You move  the document in trash {document_name}.',
+                'restore' => 'You restore the document {document_name}.',
+                'empty' => 'You empty the trash list.',
+                'delete' => 'You delete  item/items {document_name}.',
+            ]
+        ],
+        '5' => [
+            'type' => 'share',
+            'operations' => [
+                'send_for_review' => 'You send the document for review {document_name}.',
+                'share_document' => 'You shared the document {document_name}.',
+            ]
+        ],
+        '6' => [
+            'type' => 'download',
+            'operations' => [
+                'document' => 'You download the document {document_name}.',
+
+            ]
+        ],
+        '7' => [
+            'type' => 'print',
+            'operations' => [
+                'document' => 'You print the document {document_name}.',
+
+            ]
+        ],
+        '8' => [
+            'type' => 'account',
+            'operations' => [
+                'login' => 'You login the pdf-writer web application using {ip_address} at {login_time}.',
+                'logout' => 'You logout the pdf-writer web application {ip_address} at {logout_time}.',
+
+            ]
+        ],
+    ],
+    'audit_number' => [
+        'upload_create' => 1,
+        'rename' => 2,
+        'delete' => 3,
+        'trash' => 4,
+        'share' => 5,
+        'download' => 6,
+        'print' => 7,
+        'account' => 8,
+    ],
+    'audit_trash_images' => [
+        'trash' => 'file-white.svg',
+        'upload_create' => 'edit-file-white.svg',
+        'account' => 'user-white.svg',
+        'share' => 'fileshare-white.svg',
+        'default'  => 'edit-file-white.svg',
+
+    ],
+    'audit_trash_images_class' => [
+        'trash' => 5,
+        'upload_create' => 1,
+        'account' => 2,
+        'share' => 3,
+        'default'  => 1,
     ]
+
 
 ];
