@@ -7897,11 +7897,8 @@ ul.tl li .timestamp {
 
 .addnew-btn.text-white {
     color: white !important;
-    <<<<<<< HEAD
 }
 
-=======
-}
 .profile-logo-upload .input_div {
     padding: 10px 20px;
     position: relative;
@@ -7910,6 +7907,7 @@ ul.tl li .timestamp {
     border-radius: 4px;
     color: #486eb8;
 }
+
 .profile-logo-upload .input_div input {
     position: absolute;
     width: 100%;
@@ -7919,7 +7917,7 @@ ul.tl li .timestamp {
     opacity: 0;
     cursor: pointer;
 }
+
 .disabled-link {
     pointer-events: none;
 }
->>>>>>>6d5f09eab300472c244bbffd81ad285dd3686fa0
