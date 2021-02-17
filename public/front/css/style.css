@@ -875,6 +875,10 @@ li {
     color: #486EB8;
 }
 
+.red-color {
+    color: #C1484A;
+}
+
 .solve-pdf-problems .nav-link {
     width: 100%;
     color: #000 !important;
@@ -7799,4 +7803,364 @@ ul.tl li .timestamp {
 
 .aditional-account-info.personal-info {
     padding-top: 0px;
+}
+
+.search-part {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 25px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 17px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-part .search-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    max-width: 700px;
+}
+
+.search-part .search-content h3 {
+    font-size: 26px;
+    font-family: Poppins-bold;
+}
+
+.search-part .search-content p {
+    font-size: 16px;
+    font-family: Poppins-Regular;
+}
+
+.search-part .search-image {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.search-part .search-image img {
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-form {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.search-form .search-input {
+    width: 100%;
+    height: auto;
+    float: left;
+    position: relative;
+    padding-right: 15px;
+}
+
+.search-form .search-input img {
+    max-width: 18px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-btn {
+    width: 130px;
+}
+
+.search-form .search-input input {
+    width: 100%;
+    text-indent: 40px;
+    background: #F3F3F3;
+    border: none !important;
+    border-radius: 4px !important;
+    font-family: Poppins-Regular;
+}
+
+.search-btn button {
+    width: 100%;
+    background: #486EB8;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 5px;
+    cursor: pointer;
+}
+
+.search-results {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 50px 0px;
+}
+
+.search-results h2 {
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.search-bg {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.search-banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    float: left;
+    background-position: 50% 40px !important;
+    background-size: 100% !important;
+    background-repeat: no-repeat !important;
+}
+
+.search-banner .banner-content {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 140px auto 0 auto;
+    position: relative;
+    max-width: unset;
+}
+
+.search-result-card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    border: solid 1px #D9D9D9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.search-result-card .result-icon img {
+    max-width: 30px;
+    margin-right: 20px;
+}
+
+.search-result-card .result-content h5 {
+    font-size: 18px;
+    color: #333;
+    font-family: Poppins-Bold;
+}
+
+.search-result-card .result-content p {
+    font-size: 16px;
+    color: #787878;
+}
+
+.search-result-card .result-content a {
+    min-width: 140px;
+    background: #486EB8;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    padding: 12px 8px;
+    border-radius: 5px;
+}
+
+.pagination-part {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-top: 30px;
+}
+
+.pagination-part p {
+    color: #333333;
+    margin: 0px;
+    font-size: 14px;
+}
+
+.pagination-part nav ul li a {
+    margin: 0px 2px;
+    border-radius: 5px;
+    background: #ECECEC;
+    color: #8A8A8A;
+    font-size: 14px!important;
+}
+
+.pagination-part nav ul li.active a,
+.pagination-part nav ul li:hover a {
+    background: #486eb8!important;
+    border-color: #486eb8!important;
+    color: #fff;
+}
+
+.pagination-part nav ul li:first-child a,
+.pagination-part nav ul li:first-child:hover a,
+.pagination-part nav ul li:last-child a,
+.pagination-part nav ul li:last-child:hover a {
+    background: #C1484A!important;
+    border-color: #C1484A!important;
+    color: #fff!important;
+}
+
+.fillable-pdf-forms {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-bottom: -80px;
+}
+
+.fillable-pdf-forms-img {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.fillable-pdf-forms-img img {
+    width: 100%;
+}
+
+.fillable-pdf-forms-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 50px 35px;
+    background: #F1F5F6;
+    border-radius: 0px 30px 30px 0px;
+}
+
+.fillable-pdf-forms-content h2 {
+    font-size: 32px;
+    font-family: Poppins-Bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.fillable-pdf-forms-content p {
+    font-size: 16px;
+    color: #333;
+}
+
+.fillable-pdf-forms-content a {
+    background: #486EB8;
+    color: #fff;
+    min-width: 180px;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.find-fillable-forms h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 60px;
+    font-size: 32px;
+    font-family: Poppins-Bold;
+}
+
+.find-fillable-forms {
+    background-size: cover !important;
+    background-position: bottom !important;
+    counter-reset: section;
+}
+
+.find-fillable-forms .card::after {
+    counter-increment: section;
+    content: counters(section, ".") " ";
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    font-size: 68px;
+    font-family: Poppins-Bold;
+    color: #FFD1AB54;
+}
+
+
+/* .find-fillable-forms .card {
+    padding: 30px;
+} */
+
+.find-fillable-forms .card .about-fillable-form-list {
+    margin-bottom: 0px;
+}
+
+.find-fillable-forms .card h4 {
+    font-size: 23px;
+    font-family: Poppins-Bold;
+    line-height: 34px;
+}
+
+.about-fillable-form-list li {
+    padding-right: 0px !important;
+    padding-bottom: 15px;
+    font-size: 15px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.about-fillable-form-list li::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: #c1484a;
+    position: absolute;
+    left: 0;
+    top: 3px;
+    border-radius: 50%;
+}
+
+.about-fillable-form-list li::after {
+    content: "\f00c";
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: #fff;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 24px;
+}
+
+.drives-section .card ul.social-icons {
+    margin-bottom: 0px;
+}
+
+.drives-section .card ul.social-icons li {
+    padding-right: 15px;
+}
+
+.drives-section .card ul.social-icons a {
+    background: #eee;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 20px;
+    line-height: 30px;
+}
+
+.drives-section .card ul.social-icons a i {
+    font-size: 14px;
+}
+
+.drives-section .card ul.social-icons a.facebook {
+    color: #1B77F2;
+}
+
+.drives-section .card ul.social-icons a.linkedin {
+    color: #0273B1;
+}
+
+.drives-section .card ul.social-icons a.twitter {
+    color: #2BA6F2;
+}
+
+.drives-section .card ul.social-icons a.pinterest {
+    color: #FF4300;
 }

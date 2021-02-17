@@ -307,6 +307,16 @@ display: none;
     .advance-settings-content {
         padding-left: 0px;
     }
+    .search-part {
+        flex-direction: column-reverse;
+    }
+    .search-part .search-image {
+        padding-bottom: 30px;
+    }
+    .fillable-pdf-forms-content {
+        border-radius: 30px;
+        margin-top: 0;
+    }
 }
 
 @media(max-width: 640px) {
