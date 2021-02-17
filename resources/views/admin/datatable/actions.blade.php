@@ -14,6 +14,12 @@
 	<i class="fa fa-edit"></i>
 </a>
 @endif
+
+@if(array_key_exists('update_status',$buttons) && (empty($buttons['edit']['permission']) || auth()->user()->can($buttons['edit']['permission'])))
+<a class="dropdown-item" href="{{ route($buttons['update_status']['route_url'],$buttons['update_status']['route_param']) }}" title="Update Status">
+	<i class="fa fa-edit"></i>
+</a>
+@endif
 @if(array_key_exists('manage',$buttons) && (empty($buttons['manage']['permission']) || auth()->user()->can($buttons['manage']['permission'])))
 <a class="dropdown-item" href="{{ route($buttons['manage']['route_url'],$buttons['manage']['route_param']) }}" title="Manage Versions">
 	<i class="{{($buttons['manage']['icon'] ?? 'fa fa-gear')}}"></i>{{ lang_trans(($buttons['manage']['label'] ?? 'label.manage')) }}

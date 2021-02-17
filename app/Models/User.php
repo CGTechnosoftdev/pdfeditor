@@ -10,6 +10,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use App\Models\UserSubscription;
+use App\Models\UspsRequest;
 use League\OAuth2\Server\Exception\OAuthServerException;
 
 class User extends Authenticatable
@@ -282,5 +283,9 @@ class User extends Authenticatable
             $model->limit($data_array['limit']);
         }
         return $model->get();
+    }
+    public function uspsRequests()
+    {
+        return $this->hasMany(UspsRequest::class, "user_id", "id");
     }
 }

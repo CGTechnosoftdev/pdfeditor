@@ -270,4 +270,27 @@ return [
         ],
         'order' => [[0, 'desc']]
     ],
+    'usps-request' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'from_name', 'name' => 'from_name', 'label' => 'From Name', 'orderBy' => 'asc'],
+            ['data' => 'to_name', 'name' => 'to_name', 'label' => 'To Name', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+    'usps-request-status' => [
+        'columns' => [
+            ['data' => 'id', 'name' => 'id', 'visible' => false, 'searchable' => false],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false, 'label' => '#'],
+            ['data' => 'mail_status', 'name' => 'mail_status', 'label' => 'Mail Status', 'orderBy' => 'asc'],
+            ['data' => 'description', 'name' => 'description', 'label' => 'Description', 'orderBy' => 'asc'],
+            ['data' => 'status', 'name' => 'status', 'label' => 'Status', 'orderable' => false],
+            ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
+        ],
+        'order' => [[0, 'desc']]
+    ],
+
 ];

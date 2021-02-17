@@ -452,3 +452,40 @@ Breadcrumbs::for('tax-calendar.edit', function ($trail, $id) {
 	$trail->push('Tax Calendar', route('tax-calendar.index'));
 	$trail->push('Edit Tax Calendar', route('tax-calendar.edit', $id));
 });
+
+// Home > Usps-Mail-Request
+Breadcrumbs::for('usps-mail-request.list', function ($trail) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Usps Mail Request', route('usps-mail-request.list'));
+});
+
+
+
+// Home > Usps-mail-request > view
+Breadcrumbs::for('usps-mail-request.view', function ($trail, $id) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Usps Mail Request', route('usps-mail-request.list'));
+	$trail->push('View Usps Mail Request', route('usps-mail-request.view', $id));
+});
+
+// Home > Usps-mail-request > list status
+Breadcrumbs::for('usps-mail-request-list-status', function ($trail, $usps_request) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Usps Mail Request', route('usps-mail-request.list'));
+	$trail->push('Usps Mail Request List', route('usps-mail-request-list-status', $usps_request->id));
+});
+
+// Home > Usps-mail-request > add status
+Breadcrumbs::for('usps-mail-request-add-status', function ($trail, $usps_request) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Usps Mail Request', route('usps-mail-request.list'));
+	$trail->push('Add Status Usps Mail Request', route('usps-mail-request-add-status-get', $usps_request->id));
+});
+
+// Home > Usps-mail-request > update status
+Breadcrumbs::for('usps-mail-request-status-edit', function ($trail, $usps_request) {
+	$trail->push('Dashboard', route('dashboard'));
+	$trail->push('Usps Mail Request', route('usps-mail-request.list'));
+	$trail->push('Usps Mail Request Status', route('usps-mail-request-list-status', $usps_request->id));
+	$trail->push('Add Status Usps Mail Request', route('usps-mail-request-get-status', $usps_request->id));
+});
