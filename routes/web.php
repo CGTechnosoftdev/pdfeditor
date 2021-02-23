@@ -278,6 +278,11 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/audit-trail/download', 'AuditTrailController@getAuditTrailDownload')->name('audit-trail-download');
 		Route::get('/account/delete', 'GeneralSettingsController@userAccountDelete')->name('delete-user-account');
 
+		Route::post('/document/info/{user_document_token}', 'UserDocumentController@userDocumentInfo')->name('user-document-info');
+		Route::get('pdf-search', 'PdfGoogleSearchController@index')->name('google-pdf-search-get-form');
+		Route::post('pdf-search-apply', 'PdfGoogleSearchController@googlePdfSearch')->name('google-pdf-search-apply');
+
+
 		//Route::post('/account/general-settings-save', 'GeneralSettingsController@saveGeneralSettings')->name('general-settings-save');
 	});
 });

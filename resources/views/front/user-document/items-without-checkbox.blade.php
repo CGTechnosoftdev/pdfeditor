@@ -57,7 +57,8 @@
                 <a class="dropdown-item add-tag" href="#"><i class=" fa fa-tag"></i> Tags</a>
                 <a class="dropdown-item download_item_trigger" href="#"><i class=" far fa-folder"></i> Download</a>
                 <a class="dropdown-item document_print_trigger" href="#"><i class=" far fa-folder"></i> Print</a>
-                <a class="dropdown-item document_rename_trigger" href="#"><i class=" far fa-folder"></i> Rename</a>
+                <a class="dropdown-item document_rename_trigger" href="#"><i class=" far fa-folder"></i> Rename </a>
+                <a class="dropdown-item document_info_trigger" href="#"><i class=" far fa-folder"></i> Document Info </a>
             </div>
         </div>
     </div>
