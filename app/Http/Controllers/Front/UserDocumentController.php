@@ -536,4 +536,33 @@ class UserDocumentController extends FrontBaseController
         ];
         return view('front.user-document.send-via-usps', $data_array);
     }
+
+    public function userDocumentInfo($user_document_token)
+    {
+        $document_id = decrypt($user_document_token);
+        $user_document = UserDocument::query()->with('getDocumentUser')->where(["id" => $document_id])->first();
+        // dd($user_document);
+        $fileConfigData = config('upload_config.user_document');
+        $filepath = \Storage::disk($fileConfigData['disk'])->path("/" . $fileConfigData['folder'] . "/" . $user_document->file);
+
+        if (file_exists($filepath)) {
+            $response_type = true;
+            $key_array["name"] = $user_document->name;
+            $key_array["created_date"] = changeDateFormat($user_document->created_at);
+            $key_array["modified_date"] = changeDateFormat($user_document->updated_at);
+            $user_name = (!empty($user_document->getDocumentUser->first_name) && !empty($user_document->getDocumentUser->last_name)) ? $user_document->getDocumentUser->first_name . ' ' . $user_document->getDocumentUser->last_name : $user_document->getDocumentUser->email;
+            $key_array["created_by"] =  $user_name;
+            $key_array["file_size"] = convertToReadableSize(filesize($filepath));
+
+            //$userDo = UserDocument::query()->with('getDocumentUser')->where(["user_id" => $user_document->user_id]);
+        } else {
+            $response_type = false;
+            $response_message = "Document not found!";
+        }
+        return response()->json(array(
+            'success' => ($response_type == 'success') ? true : false,
+            'message' => $response_message ?? '',
+            'data' =>  $key_array ?? '',
+        ), (($response_type == 'success') ? 200 : 422));
+    }
 }

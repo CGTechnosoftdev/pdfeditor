@@ -183,7 +183,6 @@ class AddressBookController extends FrontBaseController
     }
     public function addressBookItemEdit(Request $request, AddressBook $address_book)
     {
-
         $user = Auth::user();
         $input_data = $request->all();
         $input_data["users_id"] = $user->id;
@@ -333,10 +332,8 @@ class AddressBookController extends FrontBaseController
                         $email = trim($accountDetail["email"]);
                         $name = trim($accountDetail["name"]);
                         $address_book = AddressBook::where(['email' => $email, 'users_id' => $user->id])->get();
-
                         if (count($address_book) > 0) {
                             $data_array["name"] = $name;
-
                             AddressBook::saveData($data_array, $address_book[0]);
                         } else {
                             $data_array["name"] = $name;
@@ -363,7 +360,6 @@ class AddressBookController extends FrontBaseController
 
         // session()->flash('success','Get all contact is system, thank you!');
         return view("google/getcontacts")->with('viewData', $viewData);
-        // return redirect()->to('/home');
     }
     public function getYahooContacts(Request $request)
     {

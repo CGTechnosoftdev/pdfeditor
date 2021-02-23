@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\UspsRequestDocument;
+use App\Models\User;
 
 class UspsRequest extends Model
 {
@@ -43,5 +45,13 @@ class UspsRequest extends Model
             $model->limit($data_array['limit']);
         }
         return $model->get();
+    }
+    public function uspsRequestDocuments()
+    {
+        return $this->hasMany(UspsRequestDocument::class, 'usps_request_id', 'id');
+    }
+    public function getUspsRequestUser()
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 }

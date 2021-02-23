@@ -74,7 +74,8 @@ return [
         'tax-form' => 'TaxForm',
         'tax-form-version' => 'TaxFormVersion',
         'tax-calendar' => 'TaxCalendar',
-
+        'usps-request' => 'UspsRequest',
+        'usps-request-status' => 'UspsMailStatus',
     ],
     'date_format_arr' => [
         'd-m-Y' => 'd-m-Y',
@@ -213,6 +214,11 @@ return [
             'name' => 'USPS Certified Mail',
             'amount' => '10'
         ]
+    ],
+    'usps_request_status' => [
+        0 => 'Dispatched',
+        1 => 'On the way',
+        2 => 'Delivered',
     ],
 
     'document_operations' => [

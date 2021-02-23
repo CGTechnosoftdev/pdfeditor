@@ -164,5 +164,12 @@ return [
             'active_segments' => ['tax-calendar'],
             'permissions' => ['tax-calendar-list'],
         ],
+        [
+            'label' => 'USPS Mail Requests',
+            'icon' => 'gears',
+            'route_name' => 'usps-mail-request.list',
+            'active_segments' => ['usps-request-list'],
+            'permissions' => ['usps-mail-request-list'],
+        ],
     ],
 ];
