@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Paystub Creator</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../public/front/css/all.css">
+    <!-- Bootstrap CSS -->
+    <link href="../public/front/css/bootstrap.min.css" rel="stylesheet">
+    <!-- OWL carousel CSS -->
+    <link rel='stylesheet' href='../public/front/css/owl.carousel.min.css'>
+
+    <!-- upload Multi Files -->
+    <link rel="stylesheet" href="../public/front/css/dropzone.css">
+
+    <!-- Custom CSS -->
+    <link href="../public/front/css/style.css" rel="stylesheet">
+    <!-- Responsive CSS -->
+    <link href="../public/front/css/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class="navigation-wrap start-header start-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md navbar-light">
+
+                        <a class="navbar-brand" href="" target="_blank"><img src="../public/front/images/logo.png" alt=""></a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">For Business</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Developers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Features</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Support</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Pricing</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </div>
+                                </li> -->
+                            </ul>
+                            <ul class="navbar-nav ml-auto login_signup">
+                                <li class="nav-item">
+                                    <a class="nav-link login" href="#" data-remote="myRemoteURL.do" data-toggle="modal" data-target="#exampleModal">Log in</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link start-trial" href="#">Start Free Trial</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="tex-calendar-banner" style="background-image: url(../public/front/images/tax-calendar-bg.png);">
+        <!-- <div class="banner-img">
+            <img src="../public/front/images/banner-bg.svg">
+        </div> -->
+        <div class="banner-content">
+            <div class="container">
+                <h6>IRS Tax Calendar 2019-2020:</h6>
+                <h1><strong>Do not forget</strong> tax due dates and filing deadlines</h1>
+                <p>Find out 2020 Tax Filing Deadlines in the calendar and fill out IRS Forms electronically. Easily download or send online.</p>
+                <a class="get-started-btn" href="">See your Tax Calendar</a>
+            </div>
+        </div>
+    </section>
+    <section class="tax-calendar-section">
+        <div class="container">
+            <div class="heading">
+                <h2>Find out when IRS tax days comes in this year and what forms fit your purposes</h2>
+                <p>Choose the tax paying category that applies to you</p>
+            </div>
+            <div class="tax-calendar-content">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="pills-company-tab" data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company" aria-selected="true">
+                            <h5>Employer</h5>
+                            <p>Must report incomes of all employees and independent contractors.</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-product-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product" aria-selected="false">
+                            <h5>Freelancer</h5>
+                            <p>You provide services on a contract basis & are not on the payroll of an employer.</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-news-tab" data-toggle="pill" href="#pills-news" role="tab" aria-controls="pills-news" aria-selected="false">
+                            <h5>Employee</h5>
+                            <p>You work part- or full-time for wages or salary & are on the payroll of an employer.</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab">
+                        <div class="container-fluid">
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>January 31</h3>
+                                    <p>Friday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>February 28</h3>
+                                    <p>Friday (to file on paper to the IRS)</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>March 16</h3>
+                                    <p>Monday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>March 16</h3>
+                                    <p>Monday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>April 15</h3>
+                                    <p>Wednesday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-product" role="tabpanel" aria-labelledby="pills-product-tab">
+                        <div class="container-fluid">
+
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>January 31</h3>
+                                    <p>Friday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>February 28</h3>
+                                    <p>Friday (to file on paper to the IRS)</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>March 16</h3>
+                                    <p>Monday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>April 15</h3>
+                                    <p>Wednesday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
+                        <div class="container-fluid">
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>February 28</h3>
+                                    <p>Friday (to file on paper to the IRS)</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>March 16</h3>
+                                    <p>Monday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>March 16</h3>
+                                    <p>Monday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+
+                            <div class="monthwise-content">
+                                <div class="heading">
+                                    <h3>April 15</h3>
+                                    <p>Wednesday</p>
+                                </div>
+                                <div class="single-date-tax">
+                                    <h5>Form W-2</h5>
+                                    <p><i class="fa fa-info-circle"></i> All Employers</p>
+                                    <a href="#">Create Form</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calendar-section">
+        <div class="container">
+            <div class="calendar-part">
+                <img src="../public/front/images/calendar.PNG">
+                <h4><strong>EFTPS users:</strong> Payments must be scheduled by 8 PM ET at least one calendar day before the tax due date. </h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="findout-tax-part">
+        <div class="container">
+            <div class="findout-tax-content">
+                <h2>Manage Tax Documents with Online Calendar</h2>
+                <p>Get ready for the 2020 Tax Season with pdfFiller. Find out 2020 Tax Filing Deadlines, fill out IRS Forms and see for yourself all the benefits of electronic document management.</p>
+                <p>When it comes to the tax season the main thing is to keep in mind all required documents and deadlines for submission.</p>
+                <p>Many taxpayers have already discovered that preparing paperwork requires more time and energy than you can actually afford. Moreover, it is much more convenient to keep all necessary documents electronically and access them whenever and
+                    wherever is needed using any internet connected device. Same thing concerns deadlines. Not to forget the due date for a particular form you have to be especially attentive or, and this seems to be more realistic way, to keep all necessary
+                    dates right in front of you.</p>
+
+                <h2>Find out your Tax Category and Fill Forms Online</h2>
+                <p>Get ready for the 2020 Tax Season with pdfFiller. Find out 2020 Tax Filing Deadlines, fill out IRS Forms and see for yourself all the benefits of electronic document management.</p>
+
+                <h2>Manage Tax Documents with Online Calendar</h2>
+                <p>Since there are several categories of taxpayers, you have to know what deadlines exactly apply to your category.</p>
+                <p>With the help of pdfFiller online calendar there is no longer any need to worry about the upcoming tax season. Monitor your personal due dates and prepare forms, all in one place</p>
+                <p>The Internal Revenue Service requires individuals to stick to the tax filing due date. Violation of the terms usually leads to penalties. By preparing documents without delay, a person will receive their refund sooner and without penalty.</p>
+                <p>To use the PDF Writer’s calendar for the 2020 tax season a person has to subscribe to receive notifications via email. This will remind to fill out required forms according to deadlines.</p>
+                <p>Create IRS tax forms and business calendars without losing deadlines. Try PDF Writer’s online calendar to manage your documents while on the go.</p>
+                <a href="#">Find out Tax Forms</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="solve-pdf-problems text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Solve all your <span class="green-color">PDF problems</span></h2>
+                </div>
+
+                <div class="col-12">
+                    <ul class="nav nav-tabs nav-justified" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#cc" role="tab" aria-controls="cc" aria-selected="true">
+                                <span>Convert & Compress</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#sm" role="tab" aria-controls="sm" aria-selected="false">
+                                <span>Split & Merge</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cf-pdf" role="tab" aria-controls="cf-pdf" aria-selected="false">
+                                <span>Convert from PDF</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#ve" role="tab" aria-controls="ve" aria-selected="false">
+                                <span>View & Edit</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#ctopdf" role="tab" aria-controls="ctopdf" aria-selected="false">
+                                <span>Convert to PDF</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#ss" role="tab" aria-controls="ss" aria-selected="false">
+                                <span>Sign and Security</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="pdf-issues tab-content mt-3">
+                        <div class="tab-pane active" id="cc" role="tabpanel" aria-labelledby="duck-tab">
+                            <ul class="d-flex justify-content-around">
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/pencil.svg">
+                                        </div><span>Edit PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/trash.svg">
+                                        </div><span>Delete Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/rotate-left-variant.svg">
+                                        </div><span>Rotate PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/pdf-reader.svg">
+                                        </div><span>PDF Reader</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/edit-split.svg">
+                                        </div><span>Edit & Split</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/page-numbring.svg">
+                                        </div>
+                                        <span>Page Numbering</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <img src="../public/front/images/watermark.svg">
+                                        </div>
+                                        <span>Watermark</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="sm" role="tabpanel" aria-labelledby="chicken-tab">
+                            <ul class="d-flex justify-content-around">
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Delete Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Rotate PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>PDF Reader</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit & Split</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Page Numbering</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Watermark</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="cf-pdf" role="tabpanel" aria-labelledby="kiwi-tab">
+                            <ul class="d-flex justify-content-around">
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Delete Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Rotate PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>PDF Reader</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit & Split</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Page Numbering</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Watermark</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="ve" role="tabpanel" aria-labelledby="emu-tab">
+                            <ul class="d-flex justify-content-around">
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Delete Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Rotate PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>PDF Reader</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit & Split</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Page Numbering</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Watermark</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="ctopdf" role="tabpanel" aria-labelledby="emu-tab">
+                            <ul class="d-flex justify-content-around">
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Delete Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Rotate PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>PDF Reader</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit & Split</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Page Numbering</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Watermark</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="ss" role="tabpanel" aria-labelledby="emu-tab">
+                            <ul class="d-flex justify-content-around">
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Delete Page</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Rotate PDF</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>PDF Reader</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div><span>Edit & Split</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Page Numbering</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="doc-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352"><defs></defs><path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)"/></svg>
+                                        </div>
+                                        <span>Watermark</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-part">
+        <img class="dots-circel" src="../public/front/images/footer-dots.svg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <h5>Features</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">About us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Leadership</a>
+                                </li>
+                                <li>
+                                    <a href="#">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#">Customre Stories</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Terms of Services</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#">GDPR Compilance</a>
+                                </li>
+                                <li>
+                                    <a href="#">User Reviews</a>
+                                </li>
+                                <li>
+                                    <a href="#">Partnership Program</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tax Guide</a>
+                                </li>
+                                <li>
+                                    <a href="#">Release Notes</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <h5>Forms Library</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Top 100 Forms</a>
+                                </li>
+                                <li>
+                                    <a href="#">PDF Search Engine</a>
+                                </li>
+                                <li>
+                                    <a href="#">A-Z Listing of Forms</a>
+                                </li>
+                                <li>
+                                    <a href="#">Forms Catalog</a>
+                                </li>
+                                <li>
+                                    <a href="#">Medical Forms</a>
+                                </li>
+                                <li>
+                                    <a href="#">Legal Catalog</a>
+                                </li>
+                                <li>
+                                    <a href="#">IRS Tex Forms</a>
+                                </li>
+                                <li>
+                                    <a href="#">Popular Search</a>
+                                </li>
+                                <li>
+                                    <a href="#">W-2 Form W9</a>
+                                </li>
+                                <li>
+                                    <a href="#">Form 1099-MISC</a>
+                                </li>
+                                <li>
+                                    <a href="#">DS11 DS82 1096</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tax Calendar</a>
+                                </li>
+                                <li>
+                                    <a href="#">Document Templates</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <h5>For Business</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Insurance</a>
+                                </li>
+                                <li>
+                                    <a href="#">Medical</a>
+                                </li>
+                                <li>
+                                    <a href="#">Real Estate</a>
+                                </li>
+                                <li>
+                                    <a href="#">Human Resources</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tax & Finance</a>
+                                </li>
+                            </ul>
+                            <h5>Developers</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Electronic Signature</a>
+                                </li>
+                                <li>
+                                    <a href="#">Leagl Documents Online</a>
+                                </li>
+                                <li>
+                                    <a href="#">SellMyForms.com</a>
+                                </li>
+                                <li>
+                                    <a href="#">airSlate workflows</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <h5>Support</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Faq</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tutorial Videos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pricing</a>
+                                </li>
+                            </ul>
+                            <h5>Legal</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Terms of Service</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <h5>Comparison</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Adobe Acrobat Alternative</a>
+                                </li>
+                                <li>
+                                    <a href="#">DocStoc is Shutting</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <h5>Developers</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">Get Started</a>
+                                </li>
+                                <li>
+                                    <a href="#">API Documentation</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <h5>Functions</h5>
+                            <ul>
+                                <li>
+                                    <a href="#">LinkToFill</a>
+                                </li>
+                                <li>
+                                    <a href="#">SendToSign</a>
+                                </li>
+                                <li>
+                                    <a href="#">Document Management</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Mobile App</h5>
+                            <ul class="mobile-app">
+                                <li>
+                                    <a href="#"><img src="../public/front/images/ios.svg"></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="../public/front/images/android.svg"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pdfwriter-logo">
+                                <img src="../public/front/images/pdfwritterlogo.svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>2020 &copy; Inc. All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Modal -->
+    <div class="account-popup modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> -->
+                <div class="modal-body">
+                    <div class="login-popup">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="alert alert-success alert-block" id="success_msg_id_container">
+                                        <strong id="success_msg_id">Please enter your credential to continue</strong>
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                    </div>
+                                </div>
+                                <form id="Menu1" class="login-form">
+                                    <div class="d-table">
+                                        <div class="d-table-cell align-middle">
+                                            <div class="heading">
+                                                <h3>Log in</h3>
+                                                <p>Please enter your credential to continue</p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="email-address">Email address</label>
+                                                    <input id="email-address" type="text" class="form-control email" placeholder="Email address">
+                                                </div>
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="password">Password</label>
+                                                    <input id="password" type="text" class="form-control password" placeholder="Password">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="d-flex w-100 mb-3 justify-content-between">
+                                                        <div class="custom-control custom-checkbox mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                                            <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
+                                                        </div>
+                                                        <div>
+                                                            <a href="#forgotpassword" onclick="toggleVisibility('Menu3');" class="forgot"> Forgot Password?</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#login" onclick="toggleVisibility('Menu1');" class="w-100 btn btn-secondary">Login</a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#register" onclick="toggleVisibility('Menu2');" class="w-100 btn btn-outline-secondary">Register</a>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="login-with-phone py-3 text-center">
+                                                        <a href="#"><i class="fas fa-mobile-alt"></i> Login with your phone</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="login-terms">
+                                                        <p>By clicking Login in, you agree to the <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a>, Including receipt of emails from us about our service.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="login-with-social d-flex w-100 mb-3 justify-content-between">
+                                                <div class="login-with-text">
+                                                    Login with Social Accounts
+                                                </div>
+                                                <div class="login-with">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#"><img src="../public/front/images/f-logo.svg"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><img src="../public/front/images/g-logo.svg"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <form id="Menu2" class="login-form" style="display: none;">
+                                    <div class="d-table">
+                                        <div class="d-table-cell align-middle">
+                                            <div class="heading">
+                                                <h3>Register</h3>
+                                                <p>Please enter the following details</p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="email-address">Email address</label>
+                                                    <input id="email-address" type="text" class="form-control email" placeholder="Email address">
+                                                </div>
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="password">Password</label>
+                                                    <input id="password" type="text" class="form-control password" placeholder="Password">
+                                                    <span class="required-value"><i class="fas fa-lock"></i> 6 Character minimum with no space</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="register" onclick="toggleVisibility('Menu2');" class="w-100 btn btn-secondary">Register</a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#login" onclick="toggleVisibility('Menu1');" class="w-100 btn btn-outline-secondary">Login</a>
+                                                </div>
+                                                <div class="col-md-12 mt-3">
+                                                    <div class="login-terms">
+                                                        <p>By clicking Login in, you agree to the <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a>, Including receipt of emails from us about our service.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="login-with-social d-flex w-100 mb-3 justify-content-between">
+                                                <div class="login-with-text">
+                                                    Register with Social Accounts
+                                                </div>
+                                                <div class="login-with">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#"><img src="../public/front/images/f-logo.svg"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><img src="../public/front/images/g-logo.svg"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <form id="Menu3" class="login-form" style="display: none;">
+                                    <div class="d-table">
+                                        <div class="d-table-cell align-middle">
+                                            <div class="heading">
+                                                <h3>Forgot Password</h3>
+                                                <p>Please enter email address</p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 input-group mb-3">
+                                                    <label class="w-100" for="email-address">Email address</label>
+                                                    <input id="email-address" type="text" class="form-control email" placeholder="Email address">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button class="w-100 btn btn-secondary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="login-with-social d-flex w-100 mb-3 justify-content-between">
+                                                <div class="login-with-text">
+                                                    Register with Social Accounts
+                                                </div>
+                                                <div class="login-with">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#"><img src="../public/front/images/f-logo.svg"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><img src="../public/front/images/g-logo.svg"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-7 pl-md-4">
+                                <div class="account-img">
+                                    <img src="../public/front/images/login-bg.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="../public/front/js/jquery-3.5.1.min.js"></script>
+    <script src="../public/front/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../public/front/js/bootstrap.min.js"></script>
+    <!-- OWL carousel JS -->
+    <script src='../public/front/js/owl.carousel.min.js'></script>
+
+    <script type="text/javascript" src="../public/front/js/dropzone.js"></script>
+    <script type="text/javascript" src="../public/front/js/upload-multi-files.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script type="text/javascript" src="../public/front/js/custom.js"></script>
+
+</body>
+
+</html>

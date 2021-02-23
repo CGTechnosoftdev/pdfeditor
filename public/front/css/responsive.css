@@ -93,6 +93,9 @@ display: none;
     .desktop-img img {
         max-width: 60%;
     }
+    .single-date-tax {
+        width: calc(33.33% - 10px);
+    }
 }
 
 @media(min-width: 992px) {}
@@ -317,6 +320,32 @@ display: none;
         border-radius: 30px;
         margin-top: 0;
     }
+    .tax-calendar-content ul {
+        max-width: 100%;
+        height: auto;
+        float: left;
+        padding: 15px;
+    }
+    .tax-calendar-content ul .nav-item {
+        width: 33.33%;
+    }
+    .tax-calendar-content .tab-content {
+        width: 100%;
+        float: right;
+        padding-top: 25px;
+    }
+    .tax-calendar-section .heading h2 {
+        font-size: 28px;
+    }
+    .tex-calendar-banner {
+        min-height: 550px;
+    }
+    .pdf-issues .d-flex.justify-content-around {
+        display: block !important;
+    }
+    .pdf-issues ul li {
+        width: 20%;
+    }
 }
 
 @media(max-width: 640px) {
@@ -349,6 +378,18 @@ display: none;
     }
     .drives-section .card {
         padding: 20px;
+    }
+    .findout-tax-content h2 {
+        font-size: 18px;
+    }
+    .findout-tax-content p {
+        font-size: 12px;
+    }
+    .findout-tax-content a {
+        font-size: 15px;
+    }
+    .solve-pdf-problems h2 {
+        font-size: 24px;
     }
 }
 
@@ -417,6 +458,21 @@ display: none;
         margin-left: 0;
         margin-top: 10px;
     }
+    .tax-calendar-content ul .nav-item {
+        width: 100%;
+    }
+    .single-date-tax {
+        width: calc(50% - 10px);
+    }
+    .tax-calendar-section .heading h2 {
+        font-size: 20px;
+    }
+    .pdf-issues ul li {
+        width: 33.33%;
+    }
+    .solve-pdf-problems .nav-link {
+        font-size: 13px;
+    }
 }
 
 @media(max-width: 480px) {
@@ -426,5 +482,15 @@ display: none;
     .addnew-dropdown {
         min-width: 290px;
         padding: 10px;
+    }
+    .single-date-tax {
+        width: 100%;
+        margin-right: 0px;
+    }
+    .pdf-issues ul li {
+        width: 50%;
+    }
+    .pdf-issues.tab-content ul li a {
+        font-size: 13px;
     }
 }

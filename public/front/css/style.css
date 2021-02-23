@@ -8164,3 +8164,266 @@ ul.tl li .timestamp {
 .drives-section .card ul.social-icons a.pinterest {
     color: #FF4300;
 }
+
+.tex-calendar-banner {
+    width: 100%;
+    height: auto;
+    min-height: 700px;
+    float: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tex-calendar-banner .banner-content {
+    padding-bottom: 40px;
+}
+
+.tex-calendar-banner .banner-content h6 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.tex-calendar-banner .banner-content h1 {
+    font-size: 32px;
+    color: #fff;
+    font-family: Poppins-Light;
+    margin-bottom: 20px;
+}
+
+.tex-calendar-banner .banner-content p {
+    font-size: 14px;
+    color: #fff;
+}
+
+.tax-calendar-section {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.tax-calendar-section .heading h2 {
+    font-size: 40px;
+    text-align: center;
+    font-family: Poppins-Bold;
+}
+
+.tax-calendar-section .heading p {
+    font-size: 16px;
+    color: #999;
+    text-align: center;
+}
+
+.tax-calendar-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    background: #F8F8F8;
+    position: relative;
+}
+
+.tax-calendar-content a.tax-tab {
+    /* float: left; */
+    display: table;
+    min-width: 200px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.tax-calendar-content .text {
+    float: right;
+    width: calc(100% - 200px);
+    min-height: 300px;
+    background: #fff;
+    padding: 15px;
+    right: 0;
+    top: 0;
+    position: relative;
+}
+
+.tax-calendar-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    border-radius: 15px 0px 0px 15px;
+}
+
+
+/* .single-date-tax {
+    width: 20%;
+    height: auto;
+    float: left;
+    border: solid 1px #eee;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+} */
+
+.single-date-tax {
+    width: calc(20% - 8px);
+    height: auto;
+    float: left;
+    border: solid 1px #eee;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+.single-date-tax:last-child {
+    margin-right: 0px;
+}
+
+.single-date-tax h5 {
+    font-size: 15px;
+    font-family: Poppins-Bold;
+    color: #333;
+}
+
+.single-date-tax p {
+    font-size: 13px;
+    color: #98A2C5;
+    margin-bottom: 0px;
+}
+
+.single-date-tax a {
+    background: #486eb8;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    display: block;
+    font-size: 14px;
+}
+
+.monthwise-content .heading h3 {
+    font-size: 20px;
+    color: #C1484A;
+    margin-bottom: 5px;
+}
+
+.monthwise-content .heading p {
+    font-size: 14px;
+    color: #98A2C5;
+    text-align: left;
+}
+
+.monthwise-content {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.findout-tax-part {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.findout-tax-content {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 50px;
+    text-align: center;
+    border-bottom: solid 1px #ddd;
+    margin-bottom: 50px;
+}
+
+.findout-tax-content h2 {
+    color: #C1484A;
+    font-size: 25px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.findout-tax-content p {
+    font-size: 14px;
+    font-family: Poppins-Regular;
+    text-align: left;
+}
+
+.findout-tax-content a {
+    display: inline-block;
+    background: #486EB8;
+    color: #fff;
+    font-size: 17px;
+    min-width: 180px;
+    padding: 10px 25px;
+    border-radius: 4px;
+    margin-top: 35px;
+}
+
+.tax-calendar-content ul {
+    max-width: 250px;
+    height: auto;
+    float: left;
+    padding: 15px;
+}
+
+.tax-calendar-content ul .nav-item {
+    width: 100%;
+}
+
+.tax-calendar-content ul .nav-item a {
+    padding: 15px !important;
+    border-radius: 10px;
+}
+
+.tax-calendar-content ul .nav-item a.active {
+    background: #fff;
+    box-shadow: 0px 5px 20px #ccc;
+}
+
+.tax-calendar-content ul li a h5 {
+    font-size: 15px;
+    color: #162623;
+}
+
+.tax-calendar-content ul .nav-item a.active h5 {
+    color: #C1484A;
+}
+
+.tax-calendar-content ul li a p {
+    font-size: 13px;
+    font-family: Poppins-Regular;
+    margin: 0px;
+    color: #162623;
+}
+
+.tax-calendar-content .tab-content {
+    background: #fff;
+    width: calc(100% - 250px);
+    float: right;
+}
+
+.tax-calendar-content .tab-content .tab-pane {
+    display: none !important;
+}
+
+.tax-calendar-content .tab-content .tab-pane.active {
+    display: block !important;
+}
+
+.calendar-section {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 50px;
+}
+
+.calendar-part {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.calendar-section .calendar-part img {
+    width: 100%;
+}
+
+.calendar-part h4 {
+    font-size: 18px;
+    text-align: center;
+}
