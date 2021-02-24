@@ -775,3 +775,16 @@ table tr td button {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.recent-notes.usps-notes {
+    width: 60%;
+    float: left;
+}
+.usps-management {
+    width: 40%;
+    float: left;
+}
+.usps-management .form-group{
+    width:100%;
+    float:left;
+}
