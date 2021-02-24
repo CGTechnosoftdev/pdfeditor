@@ -8256,3 +8256,21 @@ ul.tl li .timestamp {
     width:100%;
     padding-left: 20px;
 }
+.info-document .modal_middle_container{
+    width: 100%;
+    float: left;
+    overflow: hidden;
+    
+
+}
+.info-document .modal_middle_container label{
+   font-size:16px;
+}
+.info-document .modal_middle_container span{
+    font-size:14px;
+    font-family: Poppins-Regular;
+    
+}
+.info-document .modal-header{
+    padding-bottom:15px !important;
+}

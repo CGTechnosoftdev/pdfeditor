@@ -27,15 +27,20 @@ class UspsMailRequestController extends AdminBaseController
         $filter_data = $request->input();
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
-            $status_button_template = 'admin.datatable.status';
-            $model = UspsRequest::query();
+            // $status_button_template = 'admin.datatable.status';
+            $model = UspsRequest::query()->with('getUspsRequestUser');
             $table = Datatables()->of($model);
             if (!empty($filter_data['statusFilter'])) {
                 $model->where(['status' => $filter_data['statusFilter']]);
             }
             $table->addIndexColumn();
             $table->addColumn('action', '');
-            $table->addColumn('mail_status', '');
+            $table->addColumn('request_by', '');
+
+            $table->editColumn('request_by', function ($row) use ($action_button_template) {
+
+                return $row->getUspsRequestUser->first_name . " " . $row->getUspsRequestUser->last_name;
+            });
 
 
             $table->editColumn('action', function ($row) use ($action_button_template) {
@@ -46,7 +51,7 @@ class UspsMailRequestController extends AdminBaseController
                 return view($action_button_template, compact('buttons'));
             });
 
-            $table->editColumn('status', function ($row) use ($status_button_template) {
+            /*  $table->editColumn('status', function ($row) use ($status_button_template) {
                 $button_data = [
                     'id' => $row->id,
                     'type' => 'usps-request',
@@ -55,7 +60,7 @@ class UspsMailRequestController extends AdminBaseController
                     'permission' => 'usps-mail-request-update-status'
                 ];
                 return view($status_button_template, compact('button_data'));
-            });
+            }); */
 
             return $table->make(true);
         }
