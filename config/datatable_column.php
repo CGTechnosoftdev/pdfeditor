@@ -277,7 +277,7 @@ return [
             ['data' => 'request_by', 'name' => 'request_by', 'label' => 'User', 'orderBy' => 'asc'],
             ['data' => 'from_name', 'name' => 'from_name', 'label' => 'From Name', 'orderBy' => 'asc'],
             ['data' => 'to_name', 'name' => 'to_name', 'label' => 'To Name', 'orderBy' => 'asc'],
-
+            ['data' => 'created_at', 'name' => 'created_at', 'label' => 'Date', 'orderBy' => 'asc'],
             ['data' => 'action', 'name' => 'action', 'orderable' => false, 'label' => 'Actions']
         ],
         'order' => [[0, 'desc']]

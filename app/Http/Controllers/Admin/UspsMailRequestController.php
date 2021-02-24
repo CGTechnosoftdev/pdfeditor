@@ -36,6 +36,12 @@ class UspsMailRequestController extends AdminBaseController
             $table->addIndexColumn();
             $table->addColumn('action', '');
             $table->addColumn('request_by', '');
+            //created_at
+
+            $table->editColumn('created_at', function ($row) use ($action_button_template) {
+
+                return changeDateTimeFormat($row->created_at);
+            });
 
             $table->editColumn('request_by', function ($row) use ($action_button_template) {
 
@@ -46,12 +52,14 @@ class UspsMailRequestController extends AdminBaseController
             $table->editColumn('action', function ($row) use ($action_button_template) {
                 $buttons = [
                     'view' => ['route_url' => 'usps-mail-request.view', 'route_param' => [$row->id], 'permission' => 'permission:usps-mail-request-view'],
-                    'update_status' => ['route_url' => 'usps-mail-request-list-status', 'label' => '', 'route_param' => [$row->id], 'permission' => 'permission:usps-mail-request-list-status'],
+
                 ];
                 return view($action_button_template, compact('buttons'));
             });
 
-            /*  $table->editColumn('status', function ($row) use ($status_button_template) {
+            /*  
+            'update_status' => ['route_url' => 'usps-mail-request-list-status', 'label' => '', 'route_param' => [$row->id], 'permission' => 'permission:usps-mail-request-list-status'],
+            $table->editColumn('status', function ($row) use ($status_button_template) {
                 $button_data = [
                     'id' => $row->id,
                     'type' => 'usps-request',
@@ -80,6 +88,11 @@ class UspsMailRequestController extends AdminBaseController
     {
         $yes_no_arr = config("custom_config.yes_no_arr");
         $usps_delivery_methods = config("custom_config.usps_delivery_methods");
+        $usps_request_status = config('custom_config.usps_request_status');
+
+        $usps_entered_status = UspsMailStatus::query()->where("usps_requests_id", $usps_request->id)->orderBy('created_at', 'DESC')->get();
+        $request_user = UspsRequest::query()->with('getUspsRequestUser')->where('user_id', $usps_request->user_id)->first();
+
 
         $data_array = [
             'title' => 'View Usps Mail Request',
@@ -87,11 +100,24 @@ class UspsMailRequestController extends AdminBaseController
             'usps_request' => $usps_request,
             'yes_no_arr' => $yes_no_arr,
             'usps_delivery_methods' => $usps_delivery_methods,
+            'usps_request_status' => $usps_request_status,
+            'usps_entered_status' => $usps_entered_status,
+            'request_user' => $request_user,
+        ];
 
+        $data_array['back_button'] = [
+            'label' => 'Back',
+            'link'  => route('usps-mail-request.list'),
         ];
         $data_array['back_button'] = [
             'label' => 'Back',
             'link'  => route('usps-mail-request.list'),
+        ];
+        $data_array['add_new_button'] = [
+            'label' => 'Add Status',
+            'id' => 'add_new_status_button_id',
+            'link'    => "#",
+            'permission' => 'usps-mail-request-add-status',
         ];
         return view('admin.usps-mail-request.view', $data_array);
     }
@@ -131,7 +157,7 @@ class UspsMailRequestController extends AdminBaseController
             $response_message = $e->getMessage();
         }
         set_flash($response_type, $response_message);
-        return redirect()->route('usps-mail-request-list-status', [$usps_request->id]);
+        return redirect()->route('usps-mail-request.view', [$usps_request->id]);
     }
     public function statusList(UspsRequest $usps_request, Request $request)
     {
