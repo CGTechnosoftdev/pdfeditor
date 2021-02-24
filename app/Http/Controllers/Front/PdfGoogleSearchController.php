@@ -58,11 +58,12 @@ class PdfGoogleSearchController extends FrontBaseController
 
             $results = $service->cse->listCse($optParams);
 
-            //  echo '<pre>';
-            // print_r($results);
-            //echo '</pre>';
+            // echo '<pre>';
+            //  print_r($results);
+            // echo '</pre>';
 
-            $result_count = $results->queries->request[0]->count;
+            // $result_count = $results->queries->request[0]->count;
+            $result_count = count($results->getItems());
             $pages_array = array();
 
             if ($result_count > 0) {

@@ -52,7 +52,7 @@
 								<a href="#">Top 100 Forms</a>
 							</li>
 							<li>
-								<a href="#">PDF Search Engine</a>
+								<a href="{{route('front.google-pdf-search-get-form')}}">PDF Search Engine</a>
 							</li>
 							<li>
 								<a href="#">A-Z Listing of Forms</a>
