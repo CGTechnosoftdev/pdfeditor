@@ -8427,3 +8427,43 @@ ul.tl li .timestamp {
     font-size: 18px;
     text-align: center;
 }
+
+.fc-col-header {
+    background: #486eb8;
+    color: #fff;
+}
+
+.fc-prev-button.fc-button-primary,
+.fc-next-button.fc-button-primary,
+.fc-prev-button.fc-button-primary:hover,
+.fc-next-button.fc-button-primary:hover {
+    background: transparent;
+    border: none;
+    color: #75818c;
+}
+
+.fc .fc-toolbar-title {
+    color: #c1484a;
+}
+
+.fc .fc-daygrid-day-number {
+    color: #575757;
+}
+
+.fc-h-event {
+    background: #c1484a;
+    border-color: #c1484a;
+    width: auto;
+    float: left;
+    padding: 2px 5px;
+}
+
+#calendar {
+    padding: 40px 0px;
+}
+
+.fc-today-button.fc-button.fc-button-primary {
+    background: transparent;
+    border: none;
+    color: #666;
+}
