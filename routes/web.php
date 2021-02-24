@@ -135,6 +135,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
 
+	Route::get('pdf-search', 'Front\PdfGoogleSearchController@index')->name('google-pdf-search-get-form');
+	Route::post('pdf-search-apply', 'Front\PdfGoogleSearchController@googlePdfSearch')->name('google-pdf-search-apply');
+
 
 
 
@@ -279,8 +282,7 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::get('/account/delete', 'GeneralSettingsController@userAccountDelete')->name('delete-user-account');
 
 		Route::post('/document/info/{user_document_token}', 'UserDocumentController@userDocumentInfo')->name('user-document-info');
-		Route::get('pdf-search', 'PdfGoogleSearchController@index')->name('google-pdf-search-get-form');
-		Route::post('pdf-search-apply', 'PdfGoogleSearchController@googlePdfSearch')->name('google-pdf-search-apply');
+
 
 
 		//Route::post('/account/general-settings-save', 'GeneralSettingsController@saveGeneralSettings')->name('general-settings-save');
