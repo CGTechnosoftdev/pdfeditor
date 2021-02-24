@@ -13,8 +13,8 @@ class PdfGoogleSearchController extends FrontBaseController
     {
 
         $data_array = [
-            'title' => 'Welcome to the fillable PDF form libraryHeading',
-            'heading' => 'Welcome to the fillable PDF form libraryHeading',
+            'title' => 'Welcome to the PDFWriter form library',
+            'heading' => 'Welcome to the PDFWriter form library',
             'detail' => 'Choose from 25 million fillable PDF forms in the PDF writer online library. Fill out a fillable form, customize it to your needs, and send it to your customers and clients.',
         ];
         return view('front.pdf-search.index', $data_array);
@@ -37,31 +37,19 @@ class PdfGoogleSearchController extends FrontBaseController
                 $current_page = $input_data["page"];
             }
 
-            if (!empty($input_data["page"]) && $input_data["page"] > 1)
+            if (!empty($input_data["page"]) && $input_data["page"] > 1) {
                 $start = ($limit * ($input_data["page"] - 1)) + 1;
-
-
-
+            }
             $client = new Google_Client();
 
 
             $client->setApplicationName("My_App");
-
             $client->setDeveloperKey($GCSE_API_KEY);
 
-
-
             $service = new Google_Service_Customsearch($client);
-            //"fileType" => "pdf",
-            //, "start" => $current_page
             $optParams = array("q" => $pdf_search, "fileType" => "pdf",  "cx" => $GCSE_SEARCH_ENGINE_ID);
 
             $results = $service->cse->listCse($optParams);
-
-            //  echo '<pre>';
-            // print_r($results);
-            //echo '</pre>';
-
             $result_count = $results->queries->request[0]->count;
             $pages_array = array();
 
@@ -119,9 +107,7 @@ class PdfGoogleSearchController extends FrontBaseController
                 </nav>
             </div>
         </div>
-    </div>
-                
-                ';
+    </div>';
 
 
 
