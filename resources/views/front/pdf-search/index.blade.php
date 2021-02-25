@@ -12,8 +12,8 @@
         <div class="container">
             <div class="search-part">
                 <div class="search-content">
-                    <h3>Welcome to the <span class="green-color">fillable PDF form libraryHeading</span></h3>
-                    <p>Choose from 25 million fillable PDF forms in the PDF writer online library. Fill out a fillable form, customize it to your needs, and send it to your customers and clients.</p>
+                    <h3>{!!$heading!!}</h3>
+                    <p>{{$detail}}</p>
 
                     <!-- <form class="search-form">-->
                     {{ Form::open(['url' => '#','method'=>'post','class'=>'search-form']) }}
@@ -668,7 +668,7 @@
 
             $.ajax({
                 url: "{{route('front.google-pdf-search-apply')}}",
-                data: "_token={{csrf_token()}}&pdf_search=" + $("#pdf_search").val() + "&page=" + page_index,
+                data: "_token={{csrf_token()}}&pdf_search=" + $("#pdf_search").val() + "&index=" + page_index,
                 type: "post",
                 dataType: 'json',
                 success: function(response) {
@@ -676,9 +676,7 @@
                     $(".search-results .container").html(response.message);
                 },
                 error: function(xhr, errorType, exception) {
-
                     var jsonData = $.parseJSON(xhr.responseText);
-
                     toastr.error(jsonData.message);
                 }
             });
