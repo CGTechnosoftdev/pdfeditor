@@ -63,10 +63,10 @@
             </div>
         </h4>
         <div class="setting-tab-content">
-            <div class="heading">
+            <!-- <div class="heading">
                 <h6>Current Time:</h6>
                 <h5>12/01/20 12:00 AM Eastern Time (US &amp; Canada)</h5>
-            </div>
+            </div> -->
             {{ Form::open(['url' => "#",'method'=>'post','class'=>'login-form','id' => 'general_settings_date_time_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
 
             <div class="row">
@@ -85,7 +85,7 @@
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
-                                        {{ Form::radio('time_format', $time_index , (($general_settings->time_format==$time_index)?true:false)) }}
+                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?true:false)) }}
                                     </li>
                                     @endforeach
 
