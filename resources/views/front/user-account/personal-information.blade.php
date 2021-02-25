@@ -14,7 +14,7 @@
             <div class="profile-logo-upload">
                 <h6>Profile Picture</h6>
                 <div class="dvd_image">
-                    <!--<input type="file" id="dvd_image"> -->
+                    <!--<input type="file" id="dvd_image"> -->                  
                     <div class="input_div">
                         {{ Form::file('profile_picture', ['id' => 'dvd_image','accept'=>".png, .jpg, .jpeg"]) }} Change Picture
                     </div>

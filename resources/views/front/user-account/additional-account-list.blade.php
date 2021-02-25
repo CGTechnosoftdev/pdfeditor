@@ -50,7 +50,7 @@
                 </tbody>
             </table>
         </div>
-    </div>first_name
+    </div>
 </section>
 <!-- Modal -->
 <div class="modal fade my-default-modal" id="add-new-account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

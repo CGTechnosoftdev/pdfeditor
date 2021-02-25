@@ -16,10 +16,10 @@
                         <span>Email Address</span>
                         <p>{{$user->email}}</p>
                     </div>
-                    <div class="edit">
+                    <!-- <div class="edit">
 
                         <a id="general_seettings_email_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -27,12 +27,12 @@
                     <div class="icon"><img src="{{asset('public/front/images/phone-outline.svg')}}"></div>
                     <div class="info">
                         <span>Phone Number </span>
-                        <p>{{$user->contact_number}}</p>
+                        <p>{{$user->contact_number ?? "No number added"}}</p>
                     </div>
-                    <div class="edit">
+                    <!-- <div class="edit">
                         <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -63,10 +63,10 @@
             </div>
         </h4>
         <div class="setting-tab-content">
-            <div class="heading">
+            <!-- <div class="heading">
                 <h6>Current Time:</h6>
                 <h5>12/01/20 12:00 AM Eastern Time (US &amp; Canada)</h5>
-            </div>
+            </div> -->
             {{ Form::open(['url' => "#",'method'=>'post','class'=>'login-form','id' => 'general_settings_date_time_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
 
             <div class="row">
@@ -85,7 +85,7 @@
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
-                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format)&&$general_settings->time_format==$time_index)?true:false)) }}
+                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?true:false)) }}
                                     </li>
                                     @endforeach
 
@@ -158,7 +158,7 @@
             <div class="d-flex align-items-center">
                 <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
                 <div class="tab-content">
-                    <span>Encrypted Folder</span>
+                    <span>Encripted Folder</span>
                     <p></p>
                 </div>
                 <div class="tab-info">
@@ -448,7 +448,7 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
-
+            alert("reset pone ");
             $.ajax({
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",

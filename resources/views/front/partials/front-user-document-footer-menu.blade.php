@@ -1,6 +1,6 @@
 <div class="footer-more-menus">
     <ul>
-        <li>
+        <li class="openfoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/open.svg') }}">
@@ -8,7 +8,7 @@
                 <span>Open</span>
             </a>
         </li>
-        <li>
+        <li class="saveasfoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/save-as.svg') }}">
@@ -16,7 +16,7 @@
                 <span>Save As</span>
             </a>
         </li>
-        <li>
+        <li class="convertfoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/convert.svg') }}">
@@ -24,7 +24,7 @@
                 <span>Convert</span>
             </a>
         </li>
-        <li>
+        <li class="printfoot">
             <a href="#" class="document_print_trigger">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/print.svg') }}">
@@ -32,7 +32,7 @@
                 <span>Print</span>
             </a>
         </li>
-        <li>
+        <li class="templatefoot">
             <a href="">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/convert-to-template.svg') }}">
@@ -40,7 +40,7 @@
                 <span>Convert to Template</span>
             </a>
         </li>
-        <li>
+        <li class="sharefoot">
             <a href="#" id="sharemenu_itemid">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/share.svg') }}">
@@ -48,7 +48,7 @@
                 <span>Share</span>
             </a>
         </li>
-        <li>
+        <li class="linktofillfoot">
             <a href="" class="link-to-fill-button">
                 <div class="more-img">
                     <img src="{{ asset('public/front/images/linktofill.svg') }}">
@@ -223,6 +223,7 @@
 @include('front.partials.forms.user-document-share-form')
 @include('front.partials.forms.add-new-tag-form')
 @include('front.partials.forms.rename-document-form')
+@include('front.partials.document-detail-info')
 <input type="hidden" name="recent_document_select_item" id="recent_document_select_item" value="0" />
 @section('additionaljs')
 <script>
@@ -304,6 +305,35 @@
             }
 
         });
+        $(document).on("click", ".document_info_trigger", function() {
+
+
+            var url_to_call = "{{url('/document/info')}}/" + window.selected_document;
+
+            $.ajax({
+                url: url_to_call,
+                data: '_token={{csrf_token()}}',
+                dataType: 'json',
+                type: 'post',
+                success: function(response) {
+                    $(".info-document #document_name").html(response.data.name);
+                    $(".info-document #created_date").html(response.data.created_date);
+                    $(".info-document #modified_date").html(response.data.modified_date);
+                    $(".info-document #created_by").html(response.data.created_by);
+                    $(".info-document #file_size").html(response.data.file_size);
+
+                    $('.info-document').modal('show');
+                },
+                error: function(response) {
+                    var jsonData = $.parseJSON(response.responseText);
+                    // $(".modal_middle_container").html(jsonData.message);
+                    toastr.error(jsonData.message);
+                }
+
+            });
+
+        });
+
 
 
 

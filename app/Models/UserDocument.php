@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\BaseModelTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\UspsRequestDocument;
+use App\Models\User;
 
 class UserDocument extends Model
 {
@@ -114,5 +116,13 @@ class UserDocument extends Model
             $model->where($condition);
         }
         return $model->delete();
+    }
+    public function uspsRequestDocuments()
+    {
+        return $this->hasMany(UspsRequestDocument::class, 'user_document_id', "id");
+    }
+    public function getDocumentUser()
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 }

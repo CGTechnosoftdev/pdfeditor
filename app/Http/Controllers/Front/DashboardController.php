@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Models\UserDocument;
 use Auth;
+use Google_Service_Customsearch;
+use Google_Client;
 
 class DashboardController extends FrontBaseController
 {
@@ -28,7 +30,44 @@ class DashboardController extends FrontBaseController
         $user = Auth::user();
         $active = "document";
         $input_data = $request->all();
+        /* $start = 1;
+        $limit = 10;
+        if (!empty($input_data["page"]) && $input_data["page"] > 1)
+            $start = ($limit * ($input_data["page"] - 1)) + 1;
 
+        // echo '<br> heelo here!';
+
+        $GCSE_API_KEY = env('GCSE_API_KEY');
+        $GCSE_SEARCH_ENGINE_ID = env('GCSE_SEARCH_ENGINE_ID');
+
+
+        $client = new Google_Client();
+
+
+        $client->setApplicationName("My_App");
+
+        $client->setDeveloperKey($GCSE_API_KEY);
+
+        $service = new Google_Service_Customsearch($client);
+        //"fileType" => "pdf",
+        $optParams = array("q" => "pdf", "start" => $start, "cx" => $GCSE_SEARCH_ENGINE_ID);
+
+        $results = $service->cse->listCse($optParams);
+        $result_counts = $results->getItems();
+
+
+        echo '<pre>';
+        print_r($results);
+        echo '</pre>';
+        exit(); 
+
+        foreach ($results->getItems() as $k => $item) {
+            echo '<pre>';
+            print_r($item);
+            echo '</pre>';
+        }
+
+        exit();*/
 
         $data_array = [
             'title' => 'Dashboard',

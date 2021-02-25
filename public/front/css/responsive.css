@@ -35,6 +35,9 @@
     .dashboard3 .content-header .heading-btns {
         justify-content: space-between;
     }
+    .addnew-dropdown {
+        left: 0;
+    }
 }
 
 @media(max-width: 1024px) {
@@ -93,6 +96,23 @@ display: none;
     .desktop-img img {
         max-width: 60%;
     }
+    .start-header nav ul li a {
+        width: 100%;
+    }
+    .start-header nav ul li a+.dropdown-menu {
+        position: relative !important;
+        width: 100%;
+        background: transparent !important;
+        border: none;
+    }
+    .start-header nav ul li a+.dropdown-menu a {
+        color: #fff;
+        padding-left: 10px;
+    }
+    .start-header nav ul li a+.dropdown-menu a:hover {
+        background: #4c73c1 !important;
+        color: #fff;
+    }
 }
 
 @media(min-width: 992px) {}
@@ -120,6 +140,12 @@ display: none;
     }
     .shareable-links ul {
         width: 100%;
+    }
+    .dashboard3 .content-header .heading-btns .folder-dropdown {
+        display: block;
+        border: none;
+        margin: 0px;
+        padding: 0px;
     }
 }
 
@@ -229,6 +255,9 @@ display: none;
         float: left;
         display: block;
     }
+    .single-document.sharelink-1 {
+        display: flex;
+    }
     .single-document.single-doc-signed {
         display: flex;
     }
@@ -259,7 +288,8 @@ display: none;
     }
     .content-wrapper {
         width: 100%;
-        min-height: 100%;
+        height: auto;
+        /* min-height: 100%; */
         float: left;
     }
     .main-footer {
@@ -283,7 +313,7 @@ display: none;
         margin-right: 10px;
     }
     .single-document .doc-content {
-        width: auto;
+        width: calc(100% - 75px);
         float: left;
     }
     .single-document.sharelink-1 .doc-content {
@@ -303,6 +333,49 @@ display: none;
     }
     .advance-settings-content {
         padding-left: 0px;
+    }
+    .heading-btns .form-group.folder-dropdown {
+        width: calc(100% - 120px);
+        float: left;
+    }
+    .heading-btns .form-group.folder-dropdown+.position-relative {
+        display: inline-block;
+    }
+    .dashboard3 .content-header .title h2 {
+        font-size: 20px;
+    }
+    .encrypted-folder-content p {
+        font-size: 13px;
+    }
+    .encrypted-folder-content span {
+        font-size: 14px;
+    }
+    .encrypted-folder-content h4 {
+        font-size: 22px;
+    }
+    .encrypted-folder-img img {
+        max-width: 110px;
+        max-height: 80px;
+    }
+    .document-statistics ul li {
+        width: 33.33%;
+        border-left: solid 1px #ddd;
+        float: left;
+        margin-bottom: 15px;
+        min-height: 88px;
+    }
+    .document-statistics ul li:nth-child(2n) {
+        border-right: solid 1px #ddd;
+    }
+    .dashboard3.sidebar-mini.sidebar-open #sidebar {
+        margin-left: 0px;
+    }
+    #content {
+        width: 100%;
+        padding: 20px;
+    }
+    .dashboard3.sidebar-mini.sidebar-open #content {
+        width: calc(100% - 250px);
     }
 }
 
@@ -336,6 +409,16 @@ display: none;
     }
     .drives-section .card {
         padding: 20px;
+    }
+    .footer-more-menus ul li.linktofillfoot {
+        display: none;
+    }
+    .single-document .doc-content h5 {
+        font-size: 13px;
+        font-family: poppins-SemiBold;
+    }
+    .document-statistics ul {
+        display: block;
     }
 }
 
@@ -404,6 +487,25 @@ display: none;
         margin-left: 0;
         margin-top: 10px;
     }
+    .footer-more-menus ul li.linktofillfoot,
+    .footer-more-menus ul li.sharefoot,
+    .footer-more-menus ul li.templatefoot {
+        display: none;
+    }
+    .more-options .modal-body .shareable-links ul li {
+        width: 33.33%;
+    }
+    .encrypted-folder {
+        padding: 40px 20px;
+    }
+    .document-statistics ul {
+        display: block;
+    }
+    .document-statistics ul li {
+        width: 50%;
+        border-left: solid 1px #ddd;
+        float: left;
+    }
 }
 
 @media(max-width: 480px) {
@@ -413,5 +515,15 @@ display: none;
     .addnew-dropdown {
         min-width: 290px;
         padding: 10px;
+    }
+}
+
+@media(max-width: 360px) {
+    .footer-more-menus ul li.linktofillfoot {
+        display: none;
+    }
+    .more-btn {
+        padding: 10px;
+        min-width: 70px;
     }
 }

@@ -95,6 +95,15 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::put('/tax-form/version/update/{tax_form}/{tax_form_version}', 'TaxFormController@updateVersion')->name('tax-form.version.update');
 		Route::delete('/tax-form/version/destroy/{tax_form}/{tax_form_version}', 'TaxFormController@destroyVersion')->name('tax-form.version.destroy');
 
+		Route::get('/usps-mail-request', 'UspsMailRequestController@index')->name('usps-mail-request.list');
+		Route::get('/usps-mail-request-view/{usps_request}', 'UspsMailRequestController@uspsView')->name('usps-mail-request.view');
+		Route::get('/usps-mail-request-status-add/{usps_request}', 'UspsMailRequestController@addStatus')->name('usps-mail-request-add-status-get');
+		Route::get('/usps-mail-request-status/list/{usps_request}', 'UspsMailRequestController@statusList')->name('usps-mail-request-list-status');
+		Route::post('/usps-mail-request-status/add/{usps_request}', 'UspsMailRequestController@newStatusSave')->name('usps-mail-request-add-status');
+		Route::get('/usps-mail-request-status/edit/{usps_request}/{usps_mail_status}', 'UspsMailRequestController@getStatus')->name('usps-mail-request-get-status');
+		Route::put('/usps-mail-request-status/edit-save/{usps_request}/{usps_mail_status}', 'UspsMailRequestController@statusSave')->name('usps-mail-request-edit-status-save');
+		Route::delete('/usps-mail-request-status/delete/{usps_request}/{usps_mail_status}', 'UspsMailRequestController@deleteStatus')->name('usps-mail-request-delete-status');
+
 		Route::resource('tax-calendar', 'TaxCalendarController');
 	});
 });
@@ -125,6 +134,9 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 	Route::post('/logout', 'Front\LoginController@logout')->name('logout');
 	Route::get('/pricing', 'Front\PricingController@index')->name('pricing');
 	Route::get('/promo-pricing/{id}', 'Front\PricingController@promoPricing')->name('promo-pricing');
+
+	Route::get('pdf-search', 'Front\PdfGoogleSearchController@index')->name('google-pdf-search-get-form');
+	Route::post('pdf-search-apply', 'Front\PdfGoogleSearchController@googlePdfSearch')->name('google-pdf-search-apply');
 
 
 
@@ -268,6 +280,10 @@ Route::group(['as' => 'front.', 'middleware' => []], function () {
 		Route::post('/audit-trail/list-data', 'AuditTrailController@getAuditTrailData')->name('audit-trail-data');
 		Route::get('/audit-trail/download', 'AuditTrailController@getAuditTrailDownload')->name('audit-trail-download');
 		Route::get('/account/delete', 'GeneralSettingsController@userAccountDelete')->name('delete-user-account');
+
+		Route::post('/document/info/{user_document_token}', 'UserDocumentController@userDocumentInfo')->name('user-document-info');
+
+
 
 		//Route::post('/account/general-settings-save', 'GeneralSettingsController@saveGeneralSettings')->name('general-settings-save');
 	});

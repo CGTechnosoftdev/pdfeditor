@@ -26,7 +26,7 @@
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 @if(!empty($current_plan_data))
                 <div class="row">
-                    <div class="col-lg-4 col-md-5 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="plan-card">
                             <h4>Current Plan</h4>
                             <div class="plan-status account-plan">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="plan-card">
                             <h4>Current Account Status</h4>
                             <div class="plan-status {{$current_plan_data['plan_class']}}">
@@ -78,7 +78,7 @@
             <div class="tab-pane" id="tabs-2" role="tabpanel">
                 <div class="create-new-card">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="account-discription ">Billing Account Description</label>
                                 <div class="form-control">{{$user->full_name}}</div>
@@ -88,7 +88,7 @@
                                 <div class="form-control">{{$user->email}}</div>
                             </div>
                         </div>
-                        <div class="col-md-7 offset-md-1">
+                        <div class="col-lg-7 offset-lg-1">
                             <div class="user-card">
                                 <div class="name-and-type">
                                     <span class="card-holder-name">{{$card_detail['name']}}</span>
@@ -117,7 +117,7 @@
                                 <div class="kt-portlet">
                                     <div class="row">
                                         <div class="form-group validated col-lg-12">
-                                            <div class="kt-portlet__body">
+                                            <div class="kt-portlet__body paginations">
                                                 <div class="table-responsive">
                                                     <table class="table " id="laravel_datatable">
                                                         <thead>

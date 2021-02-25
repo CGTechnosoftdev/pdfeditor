@@ -10,7 +10,7 @@ function unblockUI() {
 // Copy
 var clipboardDemos = new Clipboard('[data-clipboard-demo]');
 
-clipboardDemos.on('success', function (e) {
+clipboardDemos.on('success', function(e) {
     e.clearSelection();
 
     console.info('Action:', e.action);
@@ -20,7 +20,7 @@ clipboardDemos.on('success', function (e) {
     showTooltip(e.trigger, 'Copied!');
 });
 
-clipboardDemos.on('error', function (e) {
+clipboardDemos.on('error', function(e) {
     console.error('Action:', e.action);
     console.error('Trigger:', e.trigger);
 
@@ -48,11 +48,11 @@ clipboardDemos.on('error', function (e) {
 
 function delayTyping(callback, ms) {
     var timer = 0;
-    return function () {
+    return function() {
         var context = this,
             args = arguments;
         clearTimeout(timer);
-        timer = setTimeout(function () {
+        timer = setTimeout(function() {
             callback.apply(context, args);
         }, ms || 0);
     };
@@ -60,11 +60,11 @@ function delayTyping(callback, ms) {
 
 function selectAllCheckbox(parent_element, child_element) {
     if ($(parent_element).is(':checked')) {
-        $(child_element).each(function () {
+        $(child_element).each(function() {
             this.checked = true;
         });
     } else {
-        $(child_element).each(function () {
+        $(child_element).each(function() {
             this.checked = false;
         });
     }
@@ -74,18 +74,19 @@ function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
 }
+
 function isName(email) {
     var regex = /(^([a-zA-Z ]+)(\d+)?$)/u;
     return regex.test(email);
 }
 
 /*************** Navbar JS **************/
-(function ($) {
+(function($) {
     "use strict";
 
-    $(function () {
+    $(function() {
         var header = $(".start-style");
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             var scroll = $(window).scrollTop();
 
             if (scroll >= 10) {
@@ -98,7 +99,7 @@ function isName(email) {
 
     //Animation
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('body.hero-anime').removeClass('hero-anime');
     });
 
@@ -108,22 +109,22 @@ function isName(email) {
 
 // number count for stats, using jQuery animate
 
-$('.counting').each(function () {
+$('.counting').each(function() {
     var $this = $(this),
         countTo = $this.attr('data-count');
 
     $({ countNum: $this.text() }).animate({
-        countNum: countTo
-    },
+            countNum: countTo
+        },
 
         {
 
             duration: 3000,
             easing: 'linear',
-            step: function () {
+            step: function() {
                 $this.text(Math.floor(this.countNum));
             },
-            complete: function () {
+            complete: function() {
                 $this.text(this.countNum);
                 //alert('finished');
             }
@@ -168,13 +169,13 @@ function hideNonVisibleDivs() {
 }
 
 /********** Match Height ***********/
-$(function () {
+$(function() {
     $('.pricing-plans .plan-ul').matchHeight();
     $('.pricing-plans .plan-price').matchHeight();
 });
 
 /************* General Settings Tabs *********/
-$('.general-settings-tabs h4').click(function (event) {
+$('.general-settings-tabs h4').click(function(event) {
     event.preventDefault();
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
@@ -207,18 +208,18 @@ function tabParentHeight() {
     }
 }
 
-$(window).resize(function () {
+$(window).resize(function() {
     tabParentHeight();
 });
 
-$(document).resize(function () {
+$(document).resize(function() {
     tabParentHeight();
 });
 tabParentHeight();
 
 /****** Onlick add and remove class ******/
 
-$('.pricing-plans .col-md-4').on('click', function () {
+$('.pricing-plans .col-md-4').on('click', function() {
     $(this).addClass('active').siblings().removeClass('active');
 });
 
@@ -227,10 +228,10 @@ $('.pricing-plans .col-md-4').on('click', function () {
 
 /********* FAQ *********/
 
-(function ($) {
+(function($) {
     $('.faq-accordion > li:eq(0) a').addClass('active').next().slideDown();
 
-    $('.faq-accordion a').click(function (j) {
+    $('.faq-accordion a').click(function(j) {
         var dropDown = $(this).closest('li').find('p');
 
         $(this).closest('.faq-accordion').find('p').not(dropDown).slideUp();
@@ -250,7 +251,7 @@ $('.pricing-plans .col-md-4').on('click', function () {
 
 
 
-$('.template-types li').on('click', function () {
+$('.template-types li').on('click', function() {
     $(this).toggleClass('active').siblings().removeClass('active');
 });
 
@@ -260,7 +261,7 @@ $('.template-types li').on('click', function () {
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
             $('#imagePreview').hide();
             $('#imagePreview').fadeIn(650);
@@ -268,38 +269,48 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#imageUpload").change(function () {
+$("#imageUpload").change(function() {
     readURL(this);
 });
 
 
 /*************** Timeframe ************/
-$('.timeformate ul li').on('click', function () {
+$('.timeformate ul li').on('click', function() {
     $(this).addClass('active').siblings().removeClass('active');
 });
 
 
 /******* ToolTip ********/
-$(function () {
+$(function() {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
 
-$('.addnew-btn').click(function () {
+$('.addnew-btn').click(function() {
     $(".addnew-dropdown").slideToggle("slow");
 });
 
-$(document).mouseup(function (e) {
+$(document).mouseup(function(e) {
     var popup = $(".addnew-dropdown");
     if (!$('.addnew-btn').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
         popup.hide(500);
     }
 });
 
-$(function () {
-    //toggle two classes on button element
-    $(document).on('click', '.treeview a', function () {
-        // $('.treeview a').on('click', function() {
+// $(function() {
+//     //toggle two classes on button element
+//     $(document).on('click', '.treeview a', function() {
+//         // $('.treeview a').on('click', function() {
+//         $('.dashboard3').toggleClass('sidebar-collapse sticky');
+//     });
+// });
+
+
+$('.treeview a').on('click', function() {
+    $('.dashboard3').toggleClass('sidebar-collapse sticky');
+    if ($('.dashboard3').hasClass('sidebar-collapse sticky')) {
+        $('.dashboard3').removeClass('sidebar-collapse sticky').addClass('sidebar-collapse sticky');
+    } else {
         $('.dashboard3').toggleClass('sidebar-collapse sticky');
-    });
+    }
 });
