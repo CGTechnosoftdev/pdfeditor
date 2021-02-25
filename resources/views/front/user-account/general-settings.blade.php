@@ -16,10 +16,10 @@
                         <span>Email Address</span>
                         <p>{{$user->email}}</p>
                     </div>
-                    <div class="edit">
+                    <!-- <div class="edit">
 
                         <a id="general_seettings_email_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -27,12 +27,12 @@
                     <div class="icon"><img src="{{asset('public/front/images/phone-outline.svg')}}"></div>
                     <div class="info">
                         <span>Phone Number </span>
-                        <p>{{$user->contact_number}}</p>
+                        <p>{{$user->contact_number ?? "No number added"}}</p>
                     </div>
-                    <div class="edit">
+                    <!-- <div class="edit">
                         <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-4 mb-4">
