@@ -52,6 +52,6 @@ class UspsRequest extends Model
     }
     public function getUspsRequestUser()
     {
-        return $this->belongsTo(User::class, "user_id", "id");
+        return $this->belongsTo(User::class, "user_id", "id")->withTrashed();
     }
 }

@@ -31,7 +31,7 @@
 
                         <div class="form-group ">
                             <div class="col-sm-12">
-                                <h4>From Address</h4>
+                                <h4 class="usps_address_heading">From Address</h4>
                             </div>
                         </div>
                         <div class="form-group ">
@@ -75,7 +75,7 @@
 
                         <div class="form-group ">
                             <div class="col-sm-12">
-                                <h4>To Address</h4>
+                                <h4 class="usps_address_heading">To Address</h4>
                             </div>
                         </div>
                         <div class="form-group ">
@@ -129,7 +129,7 @@
                 <div class="notes-heading">
                     <h4>Recent Status</h4>
                     <div class="notes-content">
-                        @if(!empty($usps_entered_status))
+                        @if(count($usps_entered_status)>0)
                         <ul>
                             @foreach($usps_entered_status as $usps_status)
                             <li>
