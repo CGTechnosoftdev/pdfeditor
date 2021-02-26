@@ -85,11 +85,7 @@
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
-<<<<<<< HEAD
-                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?true:false)) }}
-=======
                                         {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format)&&$general_settings->time_format==$time_index)?true:false)) }}
->>>>>>> 5b426eb33e441f986306f7144684ef7e63e8ebd2
                                     </li>
                                     @endforeach
 
@@ -432,15 +428,7 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-              $.ajax({
-=======
-=======
->>>>>>> 5b426eb33e441f986306f7144684ef7e63e8ebd2
-
             $.ajax({
->>>>>>> dev
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",
                 data: "_token={{csrf_token()}}",
