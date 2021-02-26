@@ -777,14 +777,20 @@ table tr td button {
 }
 
 .recent-notes.usps-notes {
-    width: 60%;
+    width: 40%;
     float: left;
 }
 .usps-management {
-    width: 40%;
+    width: 60%;
     float: left;
 }
 .usps-management .form-group{
     width:100%;
     float:left;
+}
+.usps_address_heading{
+    margin: 0px;
+color: #1FCB5D;
+font-size: 14px;
+font-weight: bold;
 }
