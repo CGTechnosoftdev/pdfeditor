@@ -429,8 +429,12 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
+<<<<<<< HEAD
+              $.ajax({
+=======
 
             $.ajax({
+>>>>>>> dev
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",
                 data: "_token={{csrf_token()}}",
