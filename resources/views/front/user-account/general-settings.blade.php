@@ -16,10 +16,10 @@
                         <span>Email Address</span>
                         <p>{{$user->email}}</p>
                     </div>
-                    <!-- <div class="edit">
+                    <div class="edit">
 
                         <a id="general_seettings_email_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -29,10 +29,10 @@
                         <span>Phone Number </span>
                         <p>{{$user->contact_number ?? "No number added"}}</p>
                     </div>
-                    <!-- <div class="edit">
+                    <div class="edit">
                         <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
 
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -411,31 +411,12 @@
         });
 
         $("#general_seettings_email_frm_trigger_id").click(function() {
+            $(".gs_email_update_modal").modal("show");
 
-            $.ajax({
-                url: "{{route('front.general-settings-email-reset-request',[$user->id])}}",
-                type: "post",
-                data: "_token={{csrf_token()}}",
-                beforeSend: function() {
-                    $("#general_seettings_email_frm_trigger_id").addClass("disabled-link");
-                },
-                success: function(response) {
-                    console.log("respone");
-                    console.log(response);
-                    toastr.success(response.message);
-                    $("#general_seettings_email_frm_trigger_id").removeClass("disabled-link");
-                },
-                error: function(data) {
-                    var response = data.responseJSON;
-                    toastr.error(response.message);
-                }
-
-            });
-            // $(".gs_email_update_modal").modal("show");
         });
         var is_email_update = "{{$is_email_update}}";
         if (is_email_update == true) {
-            $(".gs_email_update_modal").modal("show");
+
         }
         // alert(is_email_update);
 
@@ -448,7 +429,7 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
-            alert("reset pone ");
+
             $.ajax({
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",
