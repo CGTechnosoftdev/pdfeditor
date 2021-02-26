@@ -32,6 +32,15 @@
 
 </section>
 
+<input type="hidden" id="page" value="1" />
+<input type="hidden" id="max_page" value="10" />
+
+<!-- Your End of page message. Hidden by default -->
+<div id="end_of_page" class="center">
+    <hr />
+    <span>You've reached the end of the audit trail list.</span>
+</div>
+
 @endsection
 
 @section('additionaljs')
@@ -66,7 +75,7 @@
             window.location.href = "{{url('/audit-trail/download')}}?search_text=" + search_text;
         });
 
-        function getAuditTrailList() {
+        function getAuditTrailList(page = 1) {
             blockUI();
 
             var search_text = $('#search_text').val();
@@ -78,6 +87,7 @@
                 data: {
                     "_token": csrf_token,
                     search_text: search_text,
+                    "page": page,
                 },
                 success: function(response) {
                     $('#list-section').html(response.html);
@@ -94,6 +104,49 @@
         });
 
         getAuditTrailList();
+
+
+        var outerPane = $('#list-section'),
+            didScroll = false;
+
+        $(window).scroll(function() { //watches scroll of the window
+            didScroll = true;
+        });
+
+        //Sets an interval so your window.scroll event doesn't fire constantly. This waits for the user to stop scrolling for not even a second and then fires the pageCountUpdate function (and then the getPost function)
+        setInterval(function() {
+            if (didScroll) {
+                didScroll = false;
+                if (($(document).height() - $(window).height()) - $(window).scrollTop() < 10) {
+                    pageCountUpdate();
+                }
+            }
+        }, 250);
+
+        //This function runs when user scrolls. It will call the new posts if the max_page isn't met and will fade in/fade out the end of page message
+        function pageCountUpdate() {
+            var page = parseInt($('#page').val());
+            var max_page = parseInt($('#max_page').val());
+
+            if (page < max_page) {
+                $('#page').val(page + 1);
+                getPosts();
+                $('#end_of_page').hide();
+            } else {
+                $('#end_of_page').fadeIn();
+            }
+        }
+
+
+        //Ajax call to get your new posts
+        function getPosts() {
+            getAuditTrailList($('#page').val());
+            // alert($('#page').val());
+        } //end of getPosts function
+
+
+
+
     });
 </script>
 
