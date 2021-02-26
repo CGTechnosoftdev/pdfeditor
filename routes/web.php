@@ -97,12 +97,14 @@ Route::group(['prefix' => 'admin'], function () {
 
 		Route::get('/usps-mail-request', 'UspsMailRequestController@index')->name('usps-mail-request.list');
 		Route::get('/usps-mail-request-view/{usps_request}', 'UspsMailRequestController@uspsView')->name('usps-mail-request.view');
-		Route::get('/usps-mail-request-status-add/{usps_request}', 'UspsMailRequestController@addStatus')->name('usps-mail-request-add-status-get');
-		Route::get('/usps-mail-request-status/list/{usps_request}', 'UspsMailRequestController@statusList')->name('usps-mail-request-list-status');
 		Route::post('/usps-mail-request-status/add/{usps_request}', 'UspsMailRequestController@newStatusSave')->name('usps-mail-request-add-status');
+
+		/*Route::get('/usps-mail-request-status/list/{usps_request}', 'UspsMailRequestController@statusList')->name('usps-mail-request-list-status');
+		Route::get('/usps-mail-request-status-add/{usps_request}', 'UspsMailRequestController@addStatus')->name('usps-mail-request-add-status-get');
 		Route::get('/usps-mail-request-status/edit/{usps_request}/{usps_mail_status}', 'UspsMailRequestController@getStatus')->name('usps-mail-request-get-status');
 		Route::put('/usps-mail-request-status/edit-save/{usps_request}/{usps_mail_status}', 'UspsMailRequestController@statusSave')->name('usps-mail-request-edit-status-save');
 		Route::delete('/usps-mail-request-status/delete/{usps_request}/{usps_mail_status}', 'UspsMailRequestController@deleteStatus')->name('usps-mail-request-delete-status');
+		*/
 
 		Route::resource('tax-calendar', 'TaxCalendarController');
 	});

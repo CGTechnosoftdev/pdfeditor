@@ -12,8 +12,8 @@
         <div class="container">
             <div class="search-part">
                 <div class="search-content">
-                    <h3>Welcome to the <span class="green-color">fillable PDF form libraryHeading</span></h3>
-                    <p>Choose from 25 million fillable PDF forms in the PDF writer online library. Fill out a fillable form, customize it to your needs, and send it to your customers and clients.</p>
+                    <h3>{!!$heading!!}</h3>
+                    <p>{{$detail}}</p>
 
                     <!-- <form class="search-form">-->
                     {{ Form::open(['url' => '#','method'=>'post','class'=>'search-form']) }}
@@ -23,9 +23,12 @@
                         <img src="{{asset('public/front/images/search-icon.svg')}}">
                     </div>
                     <div class="search-btn">
-                        <button id="google_pdf_search_btn_id">Search</button>
+                        <button id="google_pdf_search_btn_id">SEARCH</button>
                     </div>
                     {{ Form::close() }}
+                    <div class="poweredby-google">
+                        <span>Powered By</span><img src="{{asset('public/front/images/google-logo.png')}}">
+                    </div>
                 </div>
                 <div class="search-image">
                     <img src="{{asset('public/front/images/search-banner-img.svg')}}">
@@ -225,10 +228,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pencil.svg')}}">
                                     </div><span>Edit PDF</span>
                                 </a>
                             </li>
@@ -236,10 +236,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/trash.svg')}}">
                                     </div><span>Delete Page</span>
                                 </a>
                             </li>
@@ -247,10 +244,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/rotate-left-variant.svg')}}">
                                     </div><span>Rotate PDF</span>
                                 </a>
                             </li>
@@ -258,10 +252,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pdf-reader.svg')}}">
                                     </div><span>PDF Reader</span>
                                 </a>
                             </li>
@@ -269,20 +260,14 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/edit-split.svg')}}">
                                     </div><span>Edit & Split</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/page-numbring.svg')}}">
                                     </div>
                                     <span>Page Numbering</span>
                                 </a>
@@ -290,10 +275,7 @@
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/watermark.svg')}}">
                                     </div>
                                     <span>Watermark</span>
                                 </a>
@@ -306,10 +288,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pencil.svg')}}">
                                     </div><span>Edit PDF</span>
                                 </a>
                             </li>
@@ -317,10 +296,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/trash.svg')}}">
                                     </div><span>Delete Page</span>
                                 </a>
                             </li>
@@ -328,10 +304,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/rotate-left-variant.svg')}}">
                                     </div><span>Rotate PDF</span>
                                 </a>
                             </li>
@@ -339,10 +312,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pdf-reader.svg')}}">
                                     </div><span>PDF Reader</span>
                                 </a>
                             </li>
@@ -350,20 +320,14 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/edit-split.svg')}}">
                                     </div><span>Edit & Split</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/page-numbring.svg')}}">
                                     </div>
                                     <span>Page Numbering</span>
                                 </a>
@@ -371,10 +335,7 @@
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/watermark.svg')}}">
                                     </div>
                                     <span>Watermark</span>
                                 </a>
@@ -387,10 +348,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pencil.svg')}}">
                                     </div><span>Edit PDF</span>
                                 </a>
                             </li>
@@ -398,10 +356,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/trash.svg')}}">
                                     </div><span>Delete Page</span>
                                 </a>
                             </li>
@@ -409,10 +364,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/rotate-left-variant.svg')}}">
                                     </div><span>Rotate PDF</span>
                                 </a>
                             </li>
@@ -420,10 +372,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pdf-reader.svg')}}">
                                     </div><span>PDF Reader</span>
                                 </a>
                             </li>
@@ -431,20 +380,14 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/edit-split.svg')}}">
                                     </div><span>Edit & Split</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/page-numbring.svg')}}">
                                     </div>
                                     <span>Page Numbering</span>
                                 </a>
@@ -452,10 +395,7 @@
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/watermark.svg')}}">
                                     </div>
                                     <span>Watermark</span>
                                 </a>
@@ -468,10 +408,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pencil.svg')}}">
                                     </div><span>Edit PDF</span>
                                 </a>
                             </li>
@@ -479,10 +416,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/trash.svg')}}">
                                     </div><span>Delete Page</span>
                                 </a>
                             </li>
@@ -490,10 +424,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/rotate-left-variant.svg')}}">
                                     </div><span>Rotate PDF</span>
                                 </a>
                             </li>
@@ -501,10 +432,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pdf-reader.svg')}}">
                                     </div><span>PDF Reader</span>
                                 </a>
                             </li>
@@ -512,20 +440,14 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/edit-split.svg')}}">
                                     </div><span>Edit & Split</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/page-numbring.svg')}}">
                                     </div>
                                     <span>Page Numbering</span>
                                 </a>
@@ -533,10 +455,7 @@
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/watermark.svg')}}">
                                     </div>
                                     <span>Watermark</span>
                                 </a>
@@ -549,10 +468,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pencil.svg')}}">
                                     </div><span>Edit PDF</span>
                                 </a>
                             </li>
@@ -560,10 +476,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/trash.svg')}}">
                                     </div><span>Delete Page</span>
                                 </a>
                             </li>
@@ -571,10 +484,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/rotate-left-variant.svg')}}">
                                     </div><span>Rotate PDF</span>
                                 </a>
                             </li>
@@ -582,10 +492,7 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/pdf-reader.svg')}}">
                                     </div><span>PDF Reader</span>
                                 </a>
                             </li>
@@ -593,20 +500,14 @@
                                 <a href="">
 
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/edit-split.svg')}}">
                                     </div><span>Edit & Split</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/page-numbring.svg')}}">
                                     </div>
                                     <span>Page Numbering</span>
                                 </a>
@@ -614,10 +515,7 @@
                             <li>
                                 <a href="">
                                     <div class="doc-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32.62" height="31.352" viewBox="0 0 32.62 31.352">
-                                            <defs></defs>
-                                            <path class="a" d="M3,20.454,12.6,26.8l6.705-5.618-9.6-5.98ZM12.6,3.6,3,9.943,9.705,15.2l9.6-5.98ZM35.62,9.943,26.016,3.6,19.31,9.218l9.6,5.98ZM19.31,21.179,26.016,26.8l9.6-6.343L28.915,15.2Zm0,2.175L12.6,28.971l-2.9-1.993v2.175l9.6,5.8,9.6-5.8V26.978l-2.9,1.993Z" transform="translate(-3 -3.6)" />
-                                        </svg>
+                                        <img src="{{asset('public/front/images/watermark.svg')}}">
                                     </div>
                                     <span>Watermark</span>
                                 </a>
@@ -668,7 +566,7 @@
 
             $.ajax({
                 url: "{{route('front.google-pdf-search-apply')}}",
-                data: "_token={{csrf_token()}}&pdf_search=" + $("#pdf_search").val() + "&page=" + page_index,
+                data: "_token={{csrf_token()}}&pdf_search=" + $("#pdf_search").val() + "&index=" + page_index,
                 type: "post",
                 dataType: 'json',
                 success: function(response) {
@@ -676,9 +574,7 @@
                     $(".search-results .container").html(response.message);
                 },
                 error: function(xhr, errorType, exception) {
-
                     var jsonData = $.parseJSON(xhr.responseText);
-
                     toastr.error(jsonData.message);
                 }
             });

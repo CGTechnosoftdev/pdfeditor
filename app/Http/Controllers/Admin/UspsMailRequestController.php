@@ -15,7 +15,7 @@ class UspsMailRequestController extends AdminBaseController
 {
     function __construct()
     {
-        //usps-mail-request-add-status
+
         $this->middleware('permission:usps-mail-request-list|usps-mail-request-create|usps-mail-request-edit|usps-mail-request-delete');
         $this->middleware('permission:usps-mail-request-view', ['only' => ['view']]);
         $this->middleware('permission:usps-mail-request-update', ['only' => ['updateStatus']]);
@@ -27,7 +27,7 @@ class UspsMailRequestController extends AdminBaseController
         $filter_data = $request->input();
         if (request()->ajax()) {
             $action_button_template = 'admin.datatable.actions';
-            // $status_button_template = 'admin.datatable.status';
+
             $model = UspsRequest::query()->with('getUspsRequestUser');
             $table = Datatables()->of($model);
             if (!empty($filter_data['statusFilter'])) {
@@ -36,7 +36,7 @@ class UspsMailRequestController extends AdminBaseController
             $table->addIndexColumn();
             $table->addColumn('action', '');
             $table->addColumn('request_by', '');
-            //created_at
+
 
             $table->editColumn('created_at', function ($row) use ($action_button_template) {
 
@@ -74,7 +74,7 @@ class UspsMailRequestController extends AdminBaseController
         }
         $data_array = [
             'title' => 'Usps Request',
-            'heading' => 'Manage Usps Request',
+            'heading' => 'Manage USPS Request',
             'breadcrumb' => \Breadcrumbs::render('usps-mail-request.list'),
         ];
 
@@ -95,8 +95,8 @@ class UspsMailRequestController extends AdminBaseController
 
 
         $data_array = [
-            'title' => 'View Usps Mail Request',
-            'heading' => 'View Usps Mail Request',
+            'title' => 'View USPS Mail Request',
+            'heading' => 'View USPS Mail Request',
             'usps_request' => $usps_request,
             'yes_no_arr' => $yes_no_arr,
             'usps_delivery_methods' => $usps_delivery_methods,
@@ -121,20 +121,7 @@ class UspsMailRequestController extends AdminBaseController
         ];
         return view('admin.usps-mail-request.view', $data_array);
     }
-    public function addStatus(UspsRequest $usps_request)
-    {
 
-        $usps_request_status = config('custom_config.usps_request_status');
-        /* 'breadcrumb' => \Breadcrumbs::render('usps-mail-request-list-status'), */
-        $data_array = [
-            'title' => 'Add Usps Status',
-            'heading' => 'Add Usps Status',
-            'usps_request' => $usps_request,
-            'usps_request_status' => $usps_request_status,
-
-        ];
-        return view('admin.usps-mail-request.form', $data_array);
-    }
     public function newStatusSave(UspsRequest $usps_request, UspsMailStatusRequestFormRequest $request)
     {
         $input_all = $request->all();
@@ -158,6 +145,22 @@ class UspsMailRequestController extends AdminBaseController
         }
         set_flash($response_type, $response_message);
         return redirect()->route('usps-mail-request.view', [$usps_request->id]);
+    }
+
+    /* 
+     public function addStatus(UspsRequest $usps_request)
+    {
+
+        $usps_request_status = config('custom_config.usps_request_status');
+        //'breadcrumb' => \Breadcrumbs::render('usps-mail-request-list-status'), 
+        $data_array = [
+            'title' => 'Add Usps Status',
+            'heading' => 'Add Usps Status',
+            'usps_request' => $usps_request,
+            'usps_request_status' => $usps_request_status,
+
+        ];
+        return view('admin.usps-mail-request.form', $data_array);
     }
     public function statusList(UspsRequest $usps_request, Request $request)
     {
@@ -234,7 +237,7 @@ class UspsMailRequestController extends AdminBaseController
 
         $usps_request_status = config('custom_config.usps_request_status');
 
-        /* 'breadcrumb' => \Breadcrumbs::render('usps-mail-request-list-status'), */
+        // 'breadcrumb' => \Breadcrumbs::render('usps-mail-request-list-status'), 
         $data_array = [
             'title' => 'Add Usps Status',
             'heading' => 'Add Usps Status',
@@ -280,5 +283,5 @@ class UspsMailRequestController extends AdminBaseController
         }
         set_flash($response_type, $response_message);
         return redirect()->route('usps-mail-request-list-status', [$usps_request->id]);
-    }
+    }*/
 }
