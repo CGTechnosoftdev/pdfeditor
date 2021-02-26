@@ -23,7 +23,7 @@
                         <img src="{{asset('public/front/images/search-icon.svg')}}">
                     </div>
                     <div class="search-btn">
-                        <button id="google_pdf_search_btn_id">Search</button>
+                        <button id="google_pdf_search_btn_id">SEARCH</button>
                     </div>
                     {{ Form::close() }}
                     <div class="poweredby-google">
