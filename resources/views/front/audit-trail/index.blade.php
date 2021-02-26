@@ -60,7 +60,10 @@
         $('#search_text').val("");
 
         $("#download_audit_trailid").click(function() {
-            window.location.href = "{{route('front.audit-trail-download')}}";
+            var search_text = $('#search_text').val();
+            search_text = search_text.replace(/\//g, "_");
+            //   alert("{{url('/audit-trail/download/')}}/" + search_text);
+            window.location.href = "{{url('/audit-trail/download')}}?search_text=" + search_text;
         });
 
         function getAuditTrailList() {

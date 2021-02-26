@@ -14,7 +14,7 @@ class PdfGoogleSearchController extends FrontBaseController
 
         $data_array = [
             'title' => 'Welcome to the PDFWriter form library',
-            'heading' => 'Welcome to the PDFWriter form library',
+            'heading' => 'Welcome to the <span class="green-color">PDFWriter form library</span>',
             'detail' => 'Choose from 25 million fillable PDF forms in the PDF writer online library. Fill out a fillable form, customize it to your needs, and send it to your customers and clients.',
         ];
         return view('front.pdf-search.index', $data_array);
@@ -33,31 +33,46 @@ class PdfGoogleSearchController extends FrontBaseController
             $limit = config("constant.PAGINATION_LIMIT");
             $no_of_pages = 0;
             $current_page = config("constant.PAGINATION_START_INDEX");
-            if (!empty($input_data["page"])) {
-                $current_page = $input_data["page"];
-            }
 
-            if (!empty($input_data["page"]) && $input_data["page"] > 1) {
-                $start = ($limit * ($input_data["page"] - 1)) + 1;
+
+            if (!empty($input_data["index"])) {
+                $start = $input_data["index"];
             }
             $client = new Google_Client();
+
 
 
             $client->setApplicationName("My_App");
             $client->setDeveloperKey($GCSE_API_KEY);
 
             $service = new Google_Service_Customsearch($client);
-            $optParams = array("q" => $pdf_search, "fileType" => "pdf",  "cx" => $GCSE_SEARCH_ENGINE_ID);
+            $optParams = array("q" => $pdf_search, "fileType" => "pdf", "start" => $start,  "cx" => $GCSE_SEARCH_ENGINE_ID);
 
             $results = $service->cse->listCse($optParams);
 
-            // echo '<pre>';
-            //  print_r($results);
-            // echo '</pre>';
 
-            // $result_count = $results->queries->request[0]->count;
-            $result_count = count($results->getItems());
+
+            //  $result_count = $results->queries->request[0]->totalResults;
+            $result_count = 0;
+            if (!empty($results->queries->request[0]->count))
+                $result_count = $results->queries->request[0]->count;
+            if (!empty($results->queries->previousPage[0]->startIndex))
+                $prev_page_index = $results->queries->previousPage[0]->startIndex;
+            if (!empty($results->queries->nextPage[0]->startIndex))
+                $next_page_index = $results->queries->nextPage[0]->startIndex;
+
+            $total_search_count = $results->searchInformation->totalResults;
+            if (empty($total_search_count) || $total_search_count == 0) {
+                $result_count = 0;
+            }
+
+            if ($result_count > 100) {
+                $result_count = 100;
+            }
+            // $result_count = count($results->getItems());
             $pages_array = array();
+
+
 
             if ($result_count > 0) {
 
@@ -70,16 +85,16 @@ class PdfGoogleSearchController extends FrontBaseController
                 $prev_button_html = "";
 
 
-                if ($current_page >= ($no_of_pages - 1)) {
-                    $next_button_html = ' <li class="page-item "><a href="#" class="page-link" id="pdf_page_' . config("constant.PAGINATION_START_INDEX") . '" data-id="' . config("constant.PAGINATION_START_INDEX")  . '">Next</a></li>';
+                if (!empty($next_page_index)) {
+                    $next_button_html = ' <li class="page-item "><a href="#" class="page-link" id="pdf_page_' . $next_page_index . '" data-id="' . $next_page_index  . '">Next</a></li>';
                 } else {
-                    $next_button_html = ' <li class="page-item "><a href="#" class="page-link" id="pdf_page_' . ($current_page + 1) . '" data-id="' . ($current_page + 1)  . '">Next</a></li>';
+                    $next_button_html = ' <li class="page-item disabled"><a href="#" class="page-link" id="" data-id="">Next</a></li>';
                 }
 
-                if ($current_page == config("constant.PAGINATION_START_INDEX")) {
+                if (empty($prev_page_index)) {
                     $prev_button_html = ' <li class="page-item disabled"><a href="#" class="page-link" id="" data-id="">Previous</a></li>';
                 } else {
-                    $prev_button_html = ' <li class="page-item "><a href="#" class="page-link"  id="pdf_page_' . ($current_page - 1) . '" data-id="' . ($current_page - 1)  . '">Previous</a></li>';
+                    $prev_button_html = ' <li class="page-item "><a href="#" class="page-link"  id="pdf_page_' . $prev_page_index . '" data-id="' . $prev_page_index  . '">Previous</a></li>';
                 }
 
                 $showing_index = $limit;
@@ -92,22 +107,12 @@ class PdfGoogleSearchController extends FrontBaseController
                 $pageination_html = '<div class="pagination-part">
                 <div class="row d-sm-flex align-items-center">
                     <div class="col-sm-6">
-                        <p>Showing ' . $showing_index . ' results of ' . $result_count . ' records</p>
+                        <p>Showing ' . $result_count . ' records</p>
                     </div>
                     <div class="col-sm-6">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-end">' . $prev_button_html;
-                for ($page_index = 1; $page_index <= $no_of_pages; $page_index++) {
-                    $active_class = "";
-                    if ($current_page == $page_index) {
-                        $active_class = " active";
-                    }
 
-                    $pageination_html .= '
-                    <li class="page-item ' . $active_class . '"><a href="#"  class="page-link" id="pdf_page_' . $page_index . '" data-id="' . $page_index  . '">' . $page_index . '</a>
-                    </li>
-                    ';
-                }
                 $pageination_html .= $next_button_html . '
                 </ul>
                 </nav>
@@ -121,8 +126,8 @@ class PdfGoogleSearchController extends FrontBaseController
                 $response_message = '<h2>Search Results for <span class="red-color">"' . $pdf_search . '"</span> in PDF Writer search engine</h2>';
                 $view_index = 1;
                 foreach ($results->getItems() as $k => $item) {
-                    if ($view_index >= $start && $view_index < ($start + $limit)) {
-                        $response_message .= '
+                    //   if ($view_index >= $start && $view_index < ($start + $limit)) {
+                    $response_message .= '
                     <div class="search-result-card">
                     <div class="result-icon">
                         <img src="' . asset('public/front/images/file.svg') . '">
@@ -134,11 +139,12 @@ class PdfGoogleSearchController extends FrontBaseController
                     </div>
                 </div>
                     ';
-                    }
+                    //  }
                     $view_index += 1;
                 }
                 $response_message .= $pageination_html;
             } else {
+
                 $response_message = "No search result found.";
             }
         } catch (Exception $e) {

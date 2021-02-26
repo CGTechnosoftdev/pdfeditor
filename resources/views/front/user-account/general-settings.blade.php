@@ -27,7 +27,7 @@
                     <div class="icon"><img src="{{asset('public/front/images/phone-outline.svg')}}"></div>
                     <div class="info">
                         <span>Phone Number </span>
-                        <p>{{$user->contact_number}}</p>
+                        <p>{{$user->contact_number ?? "No number added"}}</p>
                     </div>
                     <div class="edit">
                         <a id="general_seettings_phone_frm_trigger_id" href="#"><img src="{{asset('public/front/images/edit-outline.svg')}}"></a>
@@ -63,10 +63,10 @@
             </div>
         </h4>
         <div class="setting-tab-content">
-            <div class="heading">
+            <!-- <div class="heading">
                 <h6>Current Time:</h6>
                 <h5>12/01/20 12:00 AM Eastern Time (US &amp; Canada)</h5>
-            </div>
+            </div> -->
             {{ Form::open(['url' => "#",'method'=>'post','class'=>'login-form','id' => 'general_settings_date_time_form_id','enctype'=>"multipart/form-data","autocomplete" => 'off']) }}
 
             <div class="row">
@@ -85,7 +85,7 @@
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
-                                        {{ Form::radio('time_format', $time_index , (($general_settings->time_format==$time_index)?true:false)) }}
+                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?true:false)) }}
                                     </li>
                                     @endforeach
 
@@ -411,31 +411,12 @@
         });
 
         $("#general_seettings_email_frm_trigger_id").click(function() {
+            $(".gs_email_update_modal").modal("show");
 
-            $.ajax({
-                url: "{{route('front.general-settings-email-reset-request',[$user->id])}}",
-                type: "post",
-                data: "_token={{csrf_token()}}",
-                beforeSend: function() {
-                    $("#general_seettings_email_frm_trigger_id").addClass("disabled-link");
-                },
-                success: function(response) {
-                    console.log("respone");
-                    console.log(response);
-                    toastr.success(response.message);
-                    $("#general_seettings_email_frm_trigger_id").removeClass("disabled-link");
-                },
-                error: function(data) {
-                    var response = data.responseJSON;
-                    toastr.error(response.message);
-                }
-
-            });
-            // $(".gs_email_update_modal").modal("show");
         });
         var is_email_update = "{{$is_email_update}}";
         if (is_email_update == true) {
-            $(".gs_email_update_modal").modal("show");
+
         }
         // alert(is_email_update);
 
@@ -448,7 +429,12 @@
             $(".gs_password_update_modal").modal("show");
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
+<<<<<<< HEAD
               $.ajax({
+=======
+
+            $.ajax({
+>>>>>>> dev
                 url: "{{route('front.general-settings-phone-reset-request',[$user->id])}}",
                 type: "post",
                 data: "_token={{csrf_token()}}",

@@ -63,17 +63,42 @@ class GeneralSettingsController extends FrontBaseController
     public function emailResetUpdateRequest($token, Request $request)
     {
         //check token is valid or not
-        $EmailPhoneReset = EmailPhoneReset::where('token', $token)->get();
+        $email_phone_reset = EmailPhoneReset::where('token', $token)->first();
 
-        if (empty($EmailPhoneReset[0])) {
+        if (empty($email_phone_reset)) {
             $response_type = 'error';
             $response_message = 'Pasword Reset link is expired,Thank You!';
             set_flash($response_type, $response_message, false);
             return view('auth.passwords.front-modal-message');
         }
-
-
         $user = \Auth::user();
+
+        //update email address
+
+        $update_data["email"] = $email_phone_reset->email_phone;
+        $user = User::saveData($update_data, $user);
+
+
+        //delete the token entry
+        if (!empty($email_phone_reset->email_phone)) {
+
+            EmailPhoneReset::where('token', $token)->delete();
+        }
+
+
+
+        if ($user) {
+            DB::commit();
+
+            $response_type = 'success';
+            $response_message = 'Email updated successfully';
+        } else {
+            DB::rollback();
+            $response_type = 'error';
+            $response_message = 'Error occoured, Please try again.';
+        }
+        set_flash($response_type, $response_message);
+
         $timezone_list = Timezone::getTimezoneList();
         $date_time_arr = config('custom_config.date_format_arr');
         $time_format_arr = config('custom_config.time_format_arr');
@@ -150,52 +175,7 @@ class GeneralSettingsController extends FrontBaseController
     public function emailResetRequest(User $user)
     {
 
-        //generate token
-        //  $passwordToken = \DB::table('email_phone_reset')->where([["users_id", '=', $user->id], ["email_phone", '=', $user->email]])->first();
-        $EmailPhoneReset = EmailPhoneReset::where([["users_id", '=', $user->id], ["email_phone", '=', $user->email]])->get();
 
-        if (!empty($EmailPhoneReset[0])) {
-            $token = $EmailPhoneReset[0]->token;
-        } else {
-            $token = Str::random(60);
-            $token = hash('sha256', $token);
-            $data_array["email_phone"] = $user->email;
-            $data_array["users_id"] = $user->id;
-            $data_array["token"] = $token;
-
-            EmailPhoneReset::saveData($data_array);
-        }
-        //send email for verification
-        DB::beginTransaction();
-        try {
-
-            $link =  route('front.general-settings-email-reset-update-request', [$token]) . "/" . '?email=' . urlencode($user->email);
-
-
-            if ($user) {
-                DB::commit();
-                $email_config = [
-                    'config_param' => 'email_reset_verification',
-                    'content_data' => [
-                        'name' => $user->first_name,
-                        'email' => $user->email,
-                        'reset_button' => $link,
-
-                    ],
-                ];
-                Mail::to($user->email)->send(new CommonMail($email_config));
-                $response_type = 'success';
-                $response_message = 'Reset Email verification email send successfully,please check your email account.';
-            } else {
-                DB::rollback();
-                $response_type = 'error';
-                $response_message = 'Error occoured, Please try again.';
-            }
-        } catch (Exception $e) {
-            DB::rollback();
-            $response_type = 'error';
-            $response_message = $e->getMessage();
-        }
         //  set_flash($response_type, $response_message);
         return response()->json(array(
             'success' => ($response_type == 'success') ? true : false,
@@ -274,19 +254,44 @@ class GeneralSettingsController extends FrontBaseController
         DB::beginTransaction();
         try {
 
-            $update_data["email"] = $input_data["gs_email_new_email"];
+            $update_data["email"] = trim($input_data["gs_email_new_email"]);
+            //send email to new email address for varification 
 
-            //delete the token entry
-            if (!empty($input_data["email_phone_token"]))
-                EmailPhoneReset::where('token', $input_data["email_phone_token"])->delete();
+            //  $user = User::saveData($update_data, $user);
 
-            $user = User::saveData($update_data, $user);
+            //generate token
+            //  $passwordToken = \DB::table('email_phone_reset')->where([["users_id", '=', $user->id], ["email_phone", '=', $user->email]])->first();
+            $EmailPhoneReset = EmailPhoneReset::where([["users_id", '=', $user->id], ["email_phone", '=', $user->email]])->get();
+
+            if (!empty($EmailPhoneReset[0])) {
+                $token = $EmailPhoneReset[0]->token;
+            } else {
+                $token = Str::random(60);
+                $token = hash('sha256', $token);
+                $data_array["email_phone"] = $update_data["email"];
+                $data_array["users_id"] = $user->id;
+                $data_array["token"] = $token;
+
+                EmailPhoneReset::saveData($data_array);
+            }
+
+            $link =  route('front.general-settings-email-reset-update-request', [$token]) . "/" . '?email=' . urlencode($user->email);
+
 
             if ($user) {
                 DB::commit();
+                $email_config = [
+                    'config_param' => 'email_reset_verification',
+                    'content_data' => [
+                        'name' => $user->first_name,
+                        'email' => $update_data["email"],
+                        'reset_button' => $link,
 
+                    ],
+                ];
+                Mail::to($update_data["email"])->send(new CommonMail($email_config));
                 $response_type = 'success';
-                $response_message = 'Email updated successfully';
+                $response_message = 'Reset Email verification email send successfully,please check your email account.';
             } else {
                 DB::rollback();
                 $response_type = 'error';

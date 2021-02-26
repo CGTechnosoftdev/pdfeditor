@@ -19,7 +19,11 @@ class GeneralSettingsPasswordUpdateFormRequest extends FormRequest
     {
         $user = \Auth::user();
         $rules = [
-            'gs_password_new_password'      => 'required|min:8|max:32|regex:' . config('constant.PASSWORD_REGEX'),
+            'gs_password_new_password'      => ['required', 'min:8', 'max:32', 'regex:' . config('constant.PASSWORD_REGEX'), function ($attribute, $value, $fail) use ($user) {
+                if (\Hash::check($value, $user->password)) {
+                    return $fail(__('The current password is same with new password.'));
+                }
+            }],
             'gs_password_confirm_password' => 'required|required_with:gs_password_new_password|same:gs_password_new_password',
             'gs_password_current_password' => ['required', function ($attribute, $value, $fail) use ($user) {
                 if (!\Hash::check($value, $user->password)) {

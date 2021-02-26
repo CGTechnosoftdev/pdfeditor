@@ -73,10 +73,23 @@ class AuditTrailController extends FrontBaseController
         $count = count($audit_book_items);
         return Response::json(array('html' => $view, 'count' => $count));
     }
-    public function getAuditTrailDownload()
+    public function getAuditTrailDownload(Request $request)
     {
+        $input_data = $request->all();
+        $search_text = $input_data["search_text"];
+        $searchQuery = "";
+        if (!empty($search_text)) {
+            $search_text = preg_replace("/_/", "/", $search_text);
+            $date_split_array = preg_split("/\-/", $search_text);
+            $searchQuery .= " and  created_at between  STR_TO_DATE('" . date("Y-m-d", strtotime($date_split_array[0])) . " 00:00" . "', '%Y-%m-%d %H:%i:%s') and STR_TO_DATE('" . date("Y-m-d", strtotime($date_split_array[1])) . " 23:59:59" . "','%Y-%m-%d %H:%i:%s')";
+        }
+
         $user = Auth::user();
-        $audit_trail_result = AuditTrail::where(["created_by" => $user->id])->orderBy('created_at', 'desc')->get();
+        // $audit_trail_result = AuditTrail::where(["created_by" => $user->id])->orderBy('created_at', 'desc')->get();
+        $audit_trail_result = \DB::select("
+       select * from `audit_trails` where (`created_by` = '" . $user->id . "' and `status` = '" . config('constant.STATUS_ACTIVE') . "')  " . $searchQuery . "  and `audit_trails`.`deleted_at` is null order by `created_at` desc
+       ");
+
         $row_index = 0;
         $audit_CSV[$row_index] = array('Ip', 'Details', 'Date');
         $row_index += 1;

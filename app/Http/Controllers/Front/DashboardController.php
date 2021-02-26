@@ -30,7 +30,7 @@ class DashboardController extends FrontBaseController
         $user = Auth::user();
         $active = "document";
         $input_data = $request->all();
-        /* $start = 1;
+        /*  $start = 1;
         $limit = 10;
         if (!empty($input_data["page"]) && $input_data["page"] > 1)
             $start = ($limit * ($input_data["page"] - 1)) + 1;
@@ -50,7 +50,8 @@ class DashboardController extends FrontBaseController
 
         $service = new Google_Service_Customsearch($client);
         //"fileType" => "pdf",
-        $optParams = array("q" => "pdf", "start" => $start, "cx" => $GCSE_SEARCH_ENGINE_ID);
+        //, "start" => $start,
+        $optParams = array("q" => "bosten", "fileType" => "pdf", "start" => 1, "cx" => $GCSE_SEARCH_ENGINE_ID);
 
         $results = $service->cse->listCse($optParams);
         $result_counts = $results->getItems();
@@ -59,7 +60,7 @@ class DashboardController extends FrontBaseController
         echo '<pre>';
         print_r($results);
         echo '</pre>';
-        exit(); 
+        exit();
 
         foreach ($results->getItems() as $k => $item) {
             echo '<pre>';
@@ -67,7 +68,7 @@ class DashboardController extends FrontBaseController
             echo '</pre>';
         }
 
-        exit();*/
+        exit(); */
 
         $data_array = [
             'title' => 'Dashboard',
