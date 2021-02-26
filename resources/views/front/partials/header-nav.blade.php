@@ -8,6 +8,9 @@
     <li class="nav-item">
         <a class="nav-link" href="#">Developers</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link" href="#">Support</a>

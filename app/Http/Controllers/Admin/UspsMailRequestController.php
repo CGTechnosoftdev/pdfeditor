@@ -74,7 +74,7 @@ class UspsMailRequestController extends AdminBaseController
         }
         $data_array = [
             'title' => 'Usps Request',
-            'heading' => 'Manage Usps Request',
+            'heading' => 'Manage USPS Request',
             'breadcrumb' => \Breadcrumbs::render('usps-mail-request.list'),
         ];
 
@@ -95,8 +95,8 @@ class UspsMailRequestController extends AdminBaseController
 
 
         $data_array = [
-            'title' => 'View Usps Mail Request',
-            'heading' => 'View Usps Mail Request',
+            'title' => 'View USPS Mail Request',
+            'heading' => 'View USPS Mail Request',
             'usps_request' => $usps_request,
             'yes_no_arr' => $yes_no_arr,
             'usps_delivery_methods' => $usps_delivery_methods,

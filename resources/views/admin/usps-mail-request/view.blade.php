@@ -99,7 +99,7 @@
                         <div class="form-group ">
                             <label for="first_name" class="control-label text-left col-sm-3 required">City</label>
                             <div class="col-sm-9">
-                                {!! $usps_request->tocity !!}
+                                {!! $usps_request->to_city !!}
                             </div>
                         </div>
                         <div class="form-group ">

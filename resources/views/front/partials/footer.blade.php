@@ -61,6 +61,9 @@
 								<a href="#">Forms Catalog</a>
 							</li>
 							<li>
+								<a href="#">Document Catalog</a>
+							</li>
+							<li>
 								<a href="#">Medical Forms</a>
 							</li>
 							<li>
