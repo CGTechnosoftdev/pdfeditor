@@ -85,16 +85,19 @@
                                 <ul>
                                     @foreach($time_format_arr as $time_index => $timeValue)
                                     <li class="{{((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?'active':'')}}"><span>{{$time_hours[$timeValue]}}</span>
+<<<<<<< HEAD
                                         {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format) && $general_settings->time_format==$time_index)?true:false)) }}
+=======
+                                        {{ Form::radio('time_format', $time_index , ((!empty($general_settings->time_format)&&$general_settings->time_format==$time_index)?true:false)) }}
+>>>>>>> 5b426eb33e441f986306f7144684ef7e63e8ebd2
                                     </li>
                                     @endforeach
-
 
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row cl">
+                    <div class="form-group row">
                         <label for="inputPassword" class="col-sm-4 col-md-3 col-form-label">Date Format</label>
                         <div class="col-sm-9 col-md-9">
                             {{Form::select('date_format',$date_time_arr,($general_settings->date_format??0),["id" => 'date_formatid','class' => 'form-control my-dropdown'])}}
@@ -158,7 +161,7 @@
             <div class="d-flex align-items-center">
                 <div class="tab-icon"><img src="{{asset('public/front/images/security.svg')}}"></div>
                 <div class="tab-content">
-                    <span>Encripted Folder</span>
+                    <span>Encrypted Folder</span>
                     <p></p>
                 </div>
                 <div class="tab-info">
@@ -430,8 +433,11 @@
         });
         $("#general_seettings_phone_frm_trigger_id").click(function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
               $.ajax({
 =======
+=======
+>>>>>>> 5b426eb33e441f986306f7144684ef7e63e8ebd2
 
             $.ajax({
 >>>>>>> dev
