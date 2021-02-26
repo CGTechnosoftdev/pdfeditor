@@ -80,7 +80,11 @@ class AuditTrailController extends FrontBaseController
         //->with($data_array) 
         $view = View::make('front.audit-trail.item-list')->with($data_array)->render();
         $count = count($audit_book_items);
-        return Response::json(array('html' => $view, 'count' => $count));
+        $max_page = 1;
+        if ($count > 0) {
+            $max_page = ceil($count / $limit);
+        }
+        return Response::json(array('html' => $view, 'max_page' => $max_page));
     }
     public function getAuditTrailDownload(Request $request)
     {

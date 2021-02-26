@@ -91,6 +91,8 @@
                 },
                 success: function(response) {
                     $('#list-section').html(response.html);
+
+                    $("#max_page").val(parseInt(response.max_page));
                     // $('#items-count').html(response.count + " Items");
                 },
                 complete: function() {
@@ -132,6 +134,10 @@
                 $('#page').val(page + 1);
                 getPosts();
                 $('#end_of_page').hide();
+            } else if (page == max_page) {
+                getPosts();
+                $('#end_of_page').fadeIn();
+
             } else {
                 $('#end_of_page').fadeIn();
             }
