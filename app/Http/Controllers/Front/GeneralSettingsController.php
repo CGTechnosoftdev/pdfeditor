@@ -67,7 +67,7 @@ class GeneralSettingsController extends FrontBaseController
 
         if (empty($email_phone_reset)) {
             $response_type = 'error';
-            $response_message = 'Pasword Reset link is expired,Thank You!';
+            $response_message = 'Email Reset link is expired,Thank You!';
             set_flash($response_type, $response_message, false);
             return view('auth.passwords.front-modal-message');
         }
