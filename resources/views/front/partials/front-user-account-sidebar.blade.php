@@ -15,13 +15,13 @@
 
      <ul class="list-unstyled components">
 
-         <li>
+         <li class="{{ request()->is('account/information') ? 'active' : '' }}">
              <a href="{{route('front.account-information')}}"><span><img src="{{asset('public/front/images/account-card-details.svg')}}"></span>Account Information</a>
          </li>
-         <li class="{{ request()->is('account/get-general-settings') ? 'active' : '' }}">
+         <li class="{{ request()->is('account/subscription-payment') ? 'active' : '' }}">
              <a href="{{route('front.subscription-payment')}}"><span><img src="{{asset('public/front/images/payment.svg')}}"></span>Subscription & Payment</a>
          </li>
-         <li class="{{ request()->is('address-book') ? 'active' : '' }}">
+         <li class="{{ request()->is('account/get-general-settings') ? 'active' : '' }}">
              <a href="{{route('front.get-general-settings')}}"><span><img src="{{asset('public/front/images/settings.svg')}}"></span>Settings</a>
          </li>
          <li>
