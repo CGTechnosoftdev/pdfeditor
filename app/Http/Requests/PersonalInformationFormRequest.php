@@ -30,7 +30,7 @@ class PersonalInformationFormRequest extends FormRequest
             'first_name'      => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'last_name'       => 'required|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'profile_picture' => 'nullable|mimes:jpeg,jpg,png|max:2000',
-            'contact_number' => 'nullable|regex:/(^(\d){10,12}?$)/u',
+            'contact_number' => 'nullable|regex:/(^(\d){10,14}?$)/u',
             'fax_number' => 'nullable|regex:/(^(\d){7,12}?$)/u',
             'company_name' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'company_job_title' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
@@ -43,6 +43,9 @@ class PersonalInformationFormRequest extends FormRequest
     }
     public function messages()
     {
-        return [];
+        return [
+            'contact_number.regex' => 'Please enter phone number degits between 10 to 14',
+            'fax_number.regex' => 'Please enter fax number degits between 7 to 12',
+        ];
     }
 }

@@ -18,25 +18,25 @@
          <li>
              <a href="{{route('front.account-information')}}"><span><img src="{{asset('public/front/images/account-card-details.svg')}}"></span>Account Information</a>
          </li>
-         <li class="">
+         <li class="{{ request()->is('account/get-general-settings') ? 'active' : '' }}">
              <a href="{{route('front.subscription-payment')}}"><span><img src="{{asset('public/front/images/payment.svg')}}"></span>Subscription & Payment</a>
          </li>
-         <li>
+         <li class="{{ request()->is('address-book') ? 'active' : '' }}">
              <a href="{{route('front.get-general-settings')}}"><span><img src="{{asset('public/front/images/settings.svg')}}"></span>Settings</a>
          </li>
          <li>
              <a href="#"><span><img src="{{asset('public/front/images/integrations.svg')}}"></span>Integrations</a>
          </li>
-         <li>
+         <li class="{{ request()->is('account/personal-information') ? 'active' : '' }}">
              <a href="{{route('front.get-personal-information')}}"><span><img src="{{asset('public/front/images/user-circle.svg')}}"></span>Personal Information</a>
          </li>
-         <li>
+         <li class="{{ request()->is('account/audit-trail') ? 'active' : '' }}">
              <a href="{{route('front.audit-trail-list')}}"><span><img src="{{asset('public/front/images/audit-trial.svg')}}"></span>Audit Trail</a>
          </li>
-         <li>
+         <li class="{{ request()->is('account/custom-branding') ? 'active' : '' }}">
              <a href="{{route('front.get-custom-branding')}}"><span><img src="{{asset('public/front/images/custom-branding.svg')}}"></span>Custom Branding</a>
          </li>
-         <li>
+         <li class="{{ request()->is('address-book') ? 'active' : '' }}">
              <a href="{{ route('front.address-book-list') }}"><span><img src="{{asset('public/front/images/address-book.svg')}}"></span>Address Book</a>
          </li>
          <li>

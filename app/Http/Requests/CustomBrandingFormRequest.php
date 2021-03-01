@@ -28,7 +28,7 @@ class CustomBrandingFormRequest extends FormRequest
             'title' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'company' => 'nullable|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
             'email' => 'nullable|email',
-            'phone' => 'nullable|regex:/(^(\d){10,12}?$)/u',
+            'phone' => 'nullable|regex:/(^(\d){10,14}?$)/u',
             'fax' => 'nullable|regex:/(^(\d){7,12}?$)/u',
             'website' => 'nullable|regex:/^([a-z0-9\+_\-\:\/\/]+)(\.[a-z0-9\+_\-]+)*([a-z0-9\-]+\.)+[a-z]{2,6}$/',
 
@@ -37,6 +37,9 @@ class CustomBrandingFormRequest extends FormRequest
     }
     public function messages()
     {
-        return [];
+        return [
+            'phone.regex' => 'Please enter phone number degits between 10 to 14',
+            'fax.regex' => 'Please enter fax number degits between 7 to 12',
+        ];
     }
 }
