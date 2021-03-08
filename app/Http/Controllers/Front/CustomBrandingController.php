@@ -59,7 +59,8 @@ class CustomBrandingController extends FrontBaseController
 
             $emailConfig = config("mail_config." . $template_config_name);
             $userName = $input_data["signature_first_name"] . " " . $input_data["signature_last_name"];
-            $userEmail = $input_data["signature_email"];
+            ///  $userEmail = $input_data["signature_email"];
+            $userEmail = $user->email;
             $custom_branding_model = CustomBranding::where(["users_id" => $user->id])->first();
             $company_logo = "";
             if (!empty($custom_branding_model->company_logo))
@@ -106,7 +107,7 @@ class CustomBrandingController extends FrontBaseController
             $signature["last_name"] = $input_data["last_name"];
             $signature["title"] = $input_data["title"];
             $signature["company"] = $input_data["company"];
-            $signature["email"] = $input_data["email"];
+            $signature["email"] = !empty($input_data["email"]) ? $input_data["email"] : "";
             $signature["phone"] = $input_data["phone"];
             $signature["fax"] = $input_data["fax"];
             $signature["website"] = $input_data["website"];
