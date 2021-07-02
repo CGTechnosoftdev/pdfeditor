@@ -49,7 +49,6 @@ class ApiAuthController extends ApiBaseController
                     $current_token->revoke();
                     break;
             }
-
             return $this->sendSuccess([], 'Logged out successfully!');
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), [], 401);

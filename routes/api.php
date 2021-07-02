@@ -23,6 +23,13 @@ Route::group(['as' => 'api.', 'middleware' => []], function () {
 	Route::post('/reset-password-with-token-api', 'Front\ForgotPasswordController@resetPasswordNewApi')->name('resetpassword.api.email');
 	Route::post('login/{provider}', 'Front\LoginController@socialLoginApi');
 
+	Route::get('/get-document-annotation-data/{id}', 'Api\UserDocumentsController@getDocumentAnnotationData')->name('get-document-annotation-data');
+
+	Route::post('/upload-document-file', 'Api\UserDocumentsController@uploadDocumentFile')->name('upload-document-file');
+
+
+	Route::post('/save-document-annotation-data', 'Api\UserDocumentsController@saveDocumentAnnotationData')->name('save-document-annotation-data');
+
 
 
 	Route::group([/*'namespace'=>'API',*/'middleware' => ['auth:api']], function () {

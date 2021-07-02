@@ -143,6 +143,16 @@ return [
         'allowed_extention' => 'jpg,jpeg,png,svg,gif',
         'max_allowed_size' => '2000'
     ],
-
+    'document_file' => [
+        'label' => 'Template',
+        'file_input' => 'file',
+        'disk' => 'public',
+        'folder' => 'document_file',
+        'delete_previous' => true,
+        'multiple' => false,
+        'new_file_name' => 'orignal_with_random',
+        'allowed_extention' => 'png,jpeg,jpg',
+        'max_allowed_size' => '2500'
+    ],
     'upload_types' => 'file_attachment'
 ];

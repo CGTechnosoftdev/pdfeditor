@@ -125,4 +125,19 @@ class UserDocument extends Model
     {
         return $this->belongsTo(User::class, "user_id", "id");
     }
+
+    public function getFileUrl()
+    {
+        $url = parse_url($this->file);
+        $picture_url = "";
+        if (!empty($url['scheme']) && ($url['scheme'] == 'https' || $url['scheme'] == "http")) {
+            $picture_url = $this->file;
+        } else {
+            $picture_url = getUploadedFile($this->file, 'user_document');
+        }
+
+        return  $picture_url;
+    }
+
+
 }
